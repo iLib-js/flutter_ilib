@@ -1,6 +1,6 @@
 # flutter_ilib
 
-A new Flutter plugin project.
+A wrapper plugin to use iLib conveniently in Flutter apps
 
 ## Getting Started
 
@@ -13,3 +13,18 @@ For help getting started with Flutter development, view the
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
+
+## TEST
+### Run the Unit Test
+On Linux, you need to export an environment variable called LIBQUICKJSC_TEST_PATH pointing to the file `libquickjs_c_bridge_plugin.so` by executing the provided shell script.
+```
+./test/set_LIBQUICKJSC_TEST_PATH.sh
+flutter test test/flutter_ilib_test.dart
+```
+
+### Excute the example
+```
+cd example
+flutter build linux --release
+flutter run -d linux --release
+```

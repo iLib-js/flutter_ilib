@@ -1,7 +1,8 @@
 name: flutter_ilib
-description: "A new Flutter plugin project."
+description: "A wrapper plugin to use iLib conveniently in Flutter apps"
 version: 0.0.1
-homepage:
+homepage: https://github.com/iLib-js/flutter_ilib
+repository: https://github.com/iLib-js/flutter_ilib
 
 environment:
   sdk: '>=3.3.0 <4.0.0'
