@@ -6,7 +6,7 @@ This plugin uses the [flutter_js](https://pub.dev/packages/flutter_js) to make t
 
 ## TEST
 ### Run the Unit Test
-On Linux, you need to export an environment variable called LIBQUICKJSC_TEST_PATH pointing to the file `libquickjs_c_bridge_plugin.so` by executing the provided shell script.
+On Linux, you need to export an environment variable called `LIBQUICKJSC_TEST_PATH` pointing to the file `libquickjs_c_bridge_plugin.so` by executing the provided shell script.
 ```
 ./test/set_LIBQUICKJSC_TEST_PATH.sh
 flutter test test/flutter_ilib_test.dart
