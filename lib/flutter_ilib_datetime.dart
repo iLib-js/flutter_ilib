@@ -56,7 +56,7 @@ class DateOptions {
     String sec = '$second';
 
     if (datetime != null) {
-      y = '${datetime?.year}';
+      y = '${datetime!.year}';
       m = '${datetime!.month}';
       d = '${datetime!.day}';
       h = '${datetime!.hour}';

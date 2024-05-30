@@ -5,7 +5,7 @@ homepage: https://github.com/iLib-js/flutter_ilib
 repository: https://github.com/iLib-js/flutter_ilib
 
 environment:
-  sdk: '>=3.3.0 <4.0.0'
+  sdk: '>=3.1.5 <4.0.0'
   flutter: '>=3.3.0'
 
 dependencies:
