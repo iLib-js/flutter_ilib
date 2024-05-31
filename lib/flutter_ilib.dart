@@ -3,8 +3,8 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_js/flutter_js.dart';
 
-import 'flutter_ilib_datetime.dart';
-export 'flutter_ilib_datetime.dart';
+import 'flutter_ilib_datefmt.dart';
+export 'flutter_ilib_datefmt.dart';
 
 class FlutterIlib {
   FlutterIlib() {
@@ -53,6 +53,7 @@ class FlutterIlib {
     String dateFmtOptionData = fmtOptions.toJsonString();
 
     String jscode = """new DateFmt($dateFmtOptionData).format(DateFactory($dateOptionData))""";
+    //print(jscode);
     return evaluateILib(jscode);
   }
 

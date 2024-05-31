@@ -1,23 +1,21 @@
 class DateFormatOptions {
   String? locale;
-  String? length;
   String? type;
-  String? calendar;
+  String? length;
   String? timezone;
   bool? useNative;
 
   DateFormatOptions(
     {
-      this.locale = 'en-US',
-      this.length = 'short',
-      this.type = 'date',
-      this.calendar = 'gregorian',
+      this.locale,
+      this.length,
+      this.type,
       this.timezone = 'local',
-      this.useNative = false
+      this.useNative
     } 
   );
 
-  toJsonString() => '{locale: "$locale", length: "$length", useNative: $useNative, type: "$type", calendar: "$calendar", timezone: "$timezone"}';
+  toJsonString() => '{locale: "$locale", length: "$length", useNative: $useNative, type: "$type", timezone: "$timezone"}';
 }
 
 class DateOptions {
@@ -30,7 +28,8 @@ class DateOptions {
   String? second;
   String? unixtime;
   String? timezone;
-  DateTime? datetime;
+  String? type;
+  DateTime? dateTime;
 
   DateOptions(
     {
@@ -43,7 +42,8 @@ class DateOptions {
       this.second,
       this.unixtime,
       this.timezone,
-      this.datetime
+      this.dateTime,
+      this.type
     }
   );
 
@@ -55,15 +55,14 @@ class DateOptions {
     String min = '$minute';
     String sec = '$second';
 
-    if (datetime != null) {
-      y = '${datetime!.year}';
-      m = '${datetime!.month}';
-      d = '${datetime!.day}';
-      h = '${datetime!.hour}';
-      min = '${datetime!.minute}';
-      sec = '${datetime!.second}';
+    if (dateTime != null) {
+      y = '${dateTime!.year}';
+      m = '${dateTime!.month}';
+      d = '${dateTime!.day}';
+      h = '${dateTime!.hour}';
+      min = '${dateTime!.minute}';
+      sec = '${dateTime!.second}';
     }
-    
-    return '{year:"$y", month:"$m", day:"$d", hour:"$h", minute:"$min", second:"$sec"}';
+    return '{year:$y, month:$m, day:$d, hour:$h, minute:$min, second:$sec}';
   }
 }

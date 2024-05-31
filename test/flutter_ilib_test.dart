@@ -3,7 +3,7 @@ import 'package:flutter_ilib/flutter_ilib.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-
+  print("Testing [flutter_ilib_test.dart] file.");
   late FlutterIlib flutterIlibPlugin;
   setUp(() {
     flutterIlibPlugin = FlutterIlib();
@@ -17,27 +17,17 @@ void main() {
     expect(await flutterIlibPlugin.getCLDRVersion(), '44.1');
   });
 
-  test('getDateTimeFormat_datetime_full_ko_KR', () async {
-    DateOptions dateOptions = DateOptions(year:'2024', month: '3',day:'23', hour: '10', minute: '42');
-    DateFormatOptions fmtOptions = DateFormatOptions(locale: "ko-KR", length: "full", type: "datetime");
-    expect(await flutterIlibPlugin.getDateTimeFormat(dateOptions, fmtOptions), '2024년 3월 23일 오전 10:42');
-  });
+  test('evaluateILib', () async {
+    String jscode1 = 'new LocaleInfo("ko-KR").getCalendar()';
+    String jscode2 = 'new LocaleInfo("es-ES").getCalendar()';
+    String jscode3 = 'new LocaleInfo("th-TH").getCalendar()';
+    String jscode4 = 'new LocaleInfo("fa-IR").getCalendar()';
+    String jscode5 = 'new LocaleInfo("am-ET").getCalendar()';
 
-  test('getDateTimeFormat_datetime_short_ko_KR', () async {
-    DateOptions dateOptions = DateOptions(year:'2024', month: '3',day:'23', hour: '10', minute: '42');
-    DateFormatOptions fmtOptions = DateFormatOptions(locale: "ko-KR", length: "short", type: "datetime");
-    expect(await flutterIlibPlugin.getDateTimeFormat(dateOptions, fmtOptions), '24. 3. 23. 오전 10:42');
-  });
-
-  test('getDateTimeFormat_date_full_ko_KR', () async {
-    DateOptions dateOptions = DateOptions(year:'2024', month: '3',day:'23', hour: '10', minute: '42');
-    DateFormatOptions fmtOptions = DateFormatOptions(locale: "ko-KR", length: "full");
-    expect(await flutterIlibPlugin.getDateTimeFormat(dateOptions, fmtOptions), '2024년 3월 23일');
-  });
-
-  test('getDateTimeFormat_date_short_ko_KR', () async {
-    DateOptions dateOptions = DateOptions(year:'2024', month: '3',day:'23', hour: '10', minute: '42');
-    DateFormatOptions fmtOptions = DateFormatOptions(locale: "ko-KR", length: "short");
-    expect(await flutterIlibPlugin.getDateTimeFormat(dateOptions, fmtOptions), '24. 3. 23.');
+    expect(await flutterIlibPlugin.evaluateILib(jscode1), 'gregorian');
+    expect(await flutterIlibPlugin.evaluateILib(jscode2), 'gregorian');
+    expect(await flutterIlibPlugin.evaluateILib(jscode3), 'thaisolar');
+    expect(await flutterIlibPlugin.evaluateILib(jscode4), 'persian');
+    expect(await flutterIlibPlugin.evaluateILib(jscode5), 'ethiopic');
   });
 }
