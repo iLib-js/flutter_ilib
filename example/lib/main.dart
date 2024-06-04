@@ -150,7 +150,7 @@ class _MyAppState extends State<MyApp> {
   }
   dynamic getDateTimeFormat(dynamic curlo) async {
     DateTime currentTime = DateTime.now();
-    DateOptions dateOptions = DateOptions(datetime: currentTime);
+    DateOptions dateOptions = DateOptions(dateTime: currentTime);
     //DateOptions dateOptions = DateOptions(year:'2024', month: '3',day:'23', hour: '10', minute: '42');
     
     DateFormatOptions fmtOptions = DateFormatOptions(locale: curlo, length: "full", type: "datetime");
