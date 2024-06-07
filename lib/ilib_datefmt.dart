@@ -1,86 +1,46 @@
-import 
-class DateFormat {
-  DateFormatOptions? options;
+import 'init_ilib.dart' as init_ilib;
+import 'package:flutter_js/flutter_js.dart';
+import 'flutter_ilib_datefmt.dart';
+export 'flutter_ilib_datefmt.dart';
 
-  DateFormat(){
-    // constructor
-  }
+class DateFmt {
+  // DateFormatOptions? options;
+  // String? locale;
+  // String? type;
+  // String? length;
+  // String? timezone;
+  // bool? useNative;
 
-  String? format(DateTime date) {
-    String result;
-    print("format");
+  // DateFmt(DateFormatOptions options) {
+  //   // constructor
+  //   locale = options.locale;
+  //   type = options.type;
+  //   length = options.length;
+  //   timezone = options.timezone;
+  //   useNative = options.useNative;
+  // }
 
-    String jscode1 = 'new DateFmt(${this.options.toJsonString}).format(${date.getTime()})';
-    return flutterIlibPlugin.evaluateILib(jscode1);
-  }
+  Future<String?> format(DateOptions date) async {
+    //String result;
+    JavascriptRuntime aa = await init_ilib.initializeiLib();
+    //String jscode1 =
+    //    'new DateFmt(${options.toJsonString()}).format(${date.getTime()})';
+    //String jscode1 = """ilib.getVersion()""";
+    //date.year
+    //String bb =
+    //'year:"2024", month:"3", day:"23", hour:"10", minute:"42", second:"11"';
 
-}
+    String cc = date.toJsonString();
+    String jscode1 =
+        'new DateFmt({locale:"ko-KR",length:"full"}).format(DateFactory($cc))';
 
-class DateFormatOptions {
-  String? locale;
-  String? type;
-  String? length;
-  String? timezone;
-  bool? useNative;
+    //print(date.year);
+    print("./////////////");
+    print(jscode1);
+    String result = aa.evaluate(jscode1).stringResult;
 
-  DateFormatOptions(
-    {
-      this.locale,
-      this.length,
-      this.type,
-      this.timezone = 'local',
-      this.useNative
-    } 
-  );
+    print(result);
 
-  toJsonString() => '{locale: "$locale", length: "$length", useNative: $useNative, type: "$type", timezone: "$timezone"}';
-}
-
-class DateOptions {
-  String? locale;
-  String? year;
-  String? month;
-  String? day;
-  String? hour;
-  String? minute;
-  String? second;
-  String? unixtime;
-  String? timezone;
-  String? type;
-  DateTime? dateTime;
-
-  DateOptions(
-    {
-      this.locale,
-      this.year,
-      this.month,
-      this.day,
-      this.hour,
-      this.minute,
-      this.second,
-      this.unixtime,
-      this.timezone,
-      this.dateTime,
-      this.type
-    }
-  );
-
-  String toJsonString() {
-    String y = '$year';
-    String m = '$month';
-    String d = '$day';
-    String h = '$hour';
-    String min = '$minute';
-    String sec = '$second';
-
-    if (dateTime != null) {
-      y = '${dateTime!.year}';
-      m = '${dateTime!.month}';
-      d = '${dateTime!.day}';
-      h = '${dateTime!.hour}';
-      min = '${dateTime!.minute}';
-      sec = '${dateTime!.second}';
-    }
-    return '{year:$y, month:$m, day:$d, hour:$h, minute:$min, second:$sec}';
+    return result;
   }
 }

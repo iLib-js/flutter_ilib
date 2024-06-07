@@ -6,16 +6,14 @@ class DateFormatOptions {
   bool? useNative;
 
   DateFormatOptions(
-    {
-      this.locale,
+      {this.locale,
       this.length,
       this.type,
       this.timezone = 'local',
-      this.useNative
-    } 
-  );
+      this.useNative});
 
-  toJsonString() => '{locale: "$locale", length: "$length", useNative: $useNative, type: "$type", timezone: "$timezone"}';
+  toJsonString() =>
+      '{locale: "$locale", length: "$length", useNative: $useNative, type: "$type", timezone: "$timezone"}';
 }
 
 class DateOptions {
@@ -32,8 +30,7 @@ class DateOptions {
   DateTime? dateTime;
 
   DateOptions(
-    {
-      this.locale,
+      {this.locale,
       this.year,
       this.month,
       this.day,
@@ -43,9 +40,7 @@ class DateOptions {
       this.unixtime,
       this.timezone,
       this.dateTime,
-      this.type
-    }
-  );
+      this.type});
 
   String toJsonString() {
     String y = '$year';

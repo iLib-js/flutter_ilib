@@ -1,10 +1,11 @@
-
-
 import 'package:flutter/services.dart';
 import 'package:flutter_js/flutter_js.dart';
 
-import 'flutter_ilib_datefmt.dart';
+//import 'flutter_ilib_datefmt.dart';
 export 'flutter_ilib_datefmt.dart';
+
+//import 'ilib_datefmt.dart' show DateFmt;
+export 'ilib_datefmt.dart' show DateFmt;
 
 class FlutterIlib {
   FlutterIlib() {
@@ -12,8 +13,8 @@ class FlutterIlib {
   }
   bool _iLibPrepared = false;
   final JavascriptRuntime _jsRuntime = getJavascriptRuntime();
-  final Future<String> _ilib =
-    rootBundle.loadString("packages/flutter_ilib/assets/js/ilib-standard-flutter-compiled.js");
+  final Future<String> _ilib = rootBundle.loadString(
+      "packages/flutter_ilib/assets/js/ilib-standard-flutter-compiled.js");
 
   Future<void> _init() async {
     if (_iLibPrepared) return;
@@ -22,7 +23,6 @@ class FlutterIlib {
       final jsiLibFile = await _ilib;
       _jsRuntime.evaluate(jsiLibFile);
       _iLibPrepared = true;
-
     } on PlatformException catch (e) {
       print('Failed to init js engine: ${e.details}');
     }
@@ -32,6 +32,11 @@ class FlutterIlib {
     await _init();
     JsEvalResult jsEvalResult = _jsRuntime.evaluate(jscode);
     return jsEvalResult.stringResult;
+  }
+
+  Future<JavascriptRuntime> getJSEngine() async {
+    await _init();
+    return _jsRuntime;
   }
 
   // iLib Version
@@ -48,14 +53,16 @@ class FlutterIlib {
     return ret;
   }
 
-  Future<String> getDateTimeFormat(DateOptions dateOptions, DateFormatOptions fmtOptions) async {
+  /*Future<String> getDateTimeFormat(
+      DateOptions dateOptions, DateFormatOptions fmtOptions) async {
     String dateOptionData = dateOptions.toJsonString();
     String dateFmtOptionData = fmtOptions.toJsonString();
 
-    String jscode = """new DateFmt($dateFmtOptionData).format(DateFactory($dateOptionData))""";
+    String jscode =
+        """new DateFmt($dateFmtOptionData).format(DateFactory($dateOptionData))""";
     //print(jscode);
     return evaluateILib(jscode);
-  }
+  }*/
 
   // Future<String?> getPlatformVersion() {
   //   return FlutterIlibPlatform.instance.getPlatformVersion();
