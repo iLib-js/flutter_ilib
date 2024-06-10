@@ -48,15 +48,15 @@ class _MyAppState extends State<MyApp> {
       iLibCLDRVersion = 'Failed to get iLib CLDR version.';
     }
 
-    String platformVersion;
+    //String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
-    try {
+    /*try {
       platformVersion =
           await _flutterIlibPlugin.getPlatformVersion() ?? 'Unknown platform version';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
-    }
+    }*/
 
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
@@ -64,7 +64,7 @@ class _MyAppState extends State<MyApp> {
     if (!mounted) return;
 
     setState(() {
-      _platformVersion = platformVersion;
+      //_platformVersion = platformVersion;
       _iLibVersion = iLibVersion;
       _iLibCLDRVersion = iLibCLDRVersion;
     });
