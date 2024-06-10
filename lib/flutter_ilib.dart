@@ -3,8 +3,7 @@ library flutter_ilib;
 import 'package:flutter_js/flutter_js.dart';
 import 'ilib_init.dart' as init_ilib;
 
-export 'ilib_options.dart';
-export 'ilib_datefmt.dart' show IlibDateFmt;
+export 'ilib_datefmt.dart';
 
 class FlutterIlib {
   JavascriptRuntime _jsRuntime = getJavascriptRuntime();

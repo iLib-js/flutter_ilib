@@ -1,9 +1,7 @@
 import 'ilib_init.dart' as init_ilib;
 import 'package:flutter_js/flutter_js.dart';
-import 'ilib_options.dart';
-export 'ilib_options.dart';
 
-class IlibDateFmt {
+class ILibDateFmt {
   // DateFormatOptions? options;
   String? locale;
   String? type;
@@ -11,7 +9,7 @@ class IlibDateFmt {
   String? timezone;
   bool? useNative;
 
-  IlibDateFmt(DateFormatOptions options) {
+  ILibDateFmt(ILibDateFmtOptions options) {
     // constructor
     locale = options.locale;
     type = options.type;
@@ -21,7 +19,7 @@ class IlibDateFmt {
   }
   toJsonString() => '{locale: "$locale", length: "$length", useNative: $useNative, type: "$type", timezone: "$timezone"}';
 
-  Future<String?> format(DateOptions date) async {
+  Future<String?> format(ILibDateOptions date) async {
     JavascriptRuntime ilibJS = await init_ilib.initializeiLib();
     String formatOptions = toJsonString();
     String dateOptions = date.toJsonString();
@@ -40,5 +38,67 @@ class IlibDateFmt {
         'new DateFmt($formatOptions).getClock()';
     String result = ilibJS.evaluate(jscode1).stringResult;
     return result;
+  }
+}
+
+class ILibDateFmtOptions {
+  String? locale;
+  String? type;
+  String? length;
+  String? timezone;
+  bool? useNative;
+
+  ILibDateFmtOptions({
+      this.locale,
+      this.length,
+      this.type,
+      this.timezone = 'local',
+      this.useNative
+    });
+}
+
+class ILibDateOptions {
+  String? locale;
+  String? year;
+  String? month;
+  String? day;
+  String? hour;
+  String? minute;
+  String? second;
+  String? unixtime;
+  String? timezone;
+  String? type;
+  DateTime? dateTime;
+
+  ILibDateOptions(
+      {this.locale,
+      this.year,
+      this.month,
+      this.day,
+      this.hour,
+      this.minute,
+      this.second,
+      this.unixtime,
+      this.timezone,
+      this.dateTime,
+      this.type});
+
+  String toJsonString() {
+    String y = '$year';
+    String m = '$month';
+    String d = '$day';
+    String h = '$hour';
+    String min = '$minute';
+    String sec = '$second';
+
+    if (dateTime != null) {
+      y = '${dateTime!.year}';
+      m = '${dateTime!.month}';
+      d = '${dateTime!.day}';
+      h = '${dateTime!.hour}';
+      min = '${dateTime!.minute}';
+      sec = '${dateTime!.second}';
+    }
+    return '{year:$y, month:$m, day:$d, hour:$h, minute:$min, second:$sec}';
   }
 }

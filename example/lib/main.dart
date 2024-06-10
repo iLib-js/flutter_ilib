@@ -151,12 +151,12 @@ class _MyAppState extends State<MyApp> {
   dynamic getDateTimeFormat(dynamic curlo) async {
     //DateTime currentTime = DateTime.now();
     //DateOptions dateOptions = DateOptions(dateTime: currentTime);
-    DateOptions dateOptions = DateOptions(year:'2024', month: '3',day:'23', hour: '10', minute: '42');
+    ILibDateOptions dateOptions = ILibDateOptions(year:'2024', month: '3',day:'23', hour: '10', minute: '42');
     
-    DateFormatOptions fmtOptions = DateFormatOptions(locale: curlo, length: "full", type: "datetime", useNative: false);
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: curlo, length: "full", type: "datetime", useNative: false);
 
     curLocale = curlo;
-    IlibDateFmt fmt = IlibDateFmt(fmtOptions);
+    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     return fmt.format(dateOptions);
   }
 }
