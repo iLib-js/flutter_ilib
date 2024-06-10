@@ -16,9 +16,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
+  // String _platformVersion = 'Unknown';
   String _iLibVersion = 'Unknown iLib';
   String _iLibCLDRVersion = 'CLDR';
+  String _currentTime = 'Now';
   final _flutterIlibPlugin = FlutterIlib();
 
   String ilibresult = "result";
@@ -48,15 +49,23 @@ class _MyAppState extends State<MyApp> {
       iLibCLDRVersion = 'Failed to get iLib CLDR version.';
     }
 
-    //String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    // We also handle the message potentially returning null.
-    /*try {
-      platformVersion =
-          await _flutterIlibPlugin.getPlatformVersion() ?? 'Unknown platform version';
+    String currentTime;
+    try {
+      currentTime =
+          await getDateTimeFormatNow('ko-KR') ?? 'Now';
     } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }*/
+      currentTime = 'Failed to get iLib DatFmt.';
+    }
+
+    // String platformVersion;
+    // // Platform messages may fail, so we use a try/catch PlatformException.
+    // // We also handle the message potentially returning null.
+    // try {
+    //   platformVersion =
+    //       await _flutterIlibPlugin.getPlatformVersion() ?? 'Unknown platform version';
+    // } on PlatformException {
+    //   platformVersion = 'Failed to get platform version.';
+    // }
 
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
@@ -67,6 +76,7 @@ class _MyAppState extends State<MyApp> {
       //_platformVersion = platformVersion;
       _iLibVersion = iLibVersion;
       _iLibCLDRVersion = iLibCLDRVersion;
+      _currentTime = currentTime;
     });
   }
   static const textStyle =
@@ -89,10 +99,13 @@ class _MyAppState extends State<MyApp> {
             children: <Widget>[
 
               Text('iLib Version: $_iLibVersion', style: textStyle ),
-              Text('iLib CLDR Version: $_iLibCLDRVersion\n', style: textStyle ),
+              Text('iLib CLDR Version: $_iLibCLDRVersion', style: textStyle ),
+              Text(_currentTime, style: textStyle ),
+              const SizedBox(height: 20,),
 
               Text( curLocale, style: textStyle ),
               Text( ilibresult, style: textStyle ),
+              const SizedBox(height: 20,),
 
               Wrap(
                 alignment: WrapAlignment.center,
@@ -148,14 +161,22 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
+
   dynamic getDateTimeFormat(dynamic curlo) async {
-    //DateTime currentTime = DateTime.now();
-    //DateOptions dateOptions = DateOptions(dateTime: currentTime);
-    ILibDateOptions dateOptions = ILibDateOptions(year:'2024', month: '3',day:'23', hour: '10', minute: '42');
+    ILibDateOptions dateOptions = ILibDateOptions(dateTime: DateTime.parse('2024-03-23 10:42'));
     
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: curlo, length: "full", type: "datetime", useNative: false);
 
     curLocale = curlo;
+    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    return fmt.format(dateOptions);
+  }
+
+  dynamic getDateTimeFormatNow(dynamic curlo) async {
+    ILibDateOptions dateOptions = ILibDateOptions(dateTime: DateTime.now());
+    
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: curlo, length: "full", type: "datetime");
+
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     return fmt.format(dateOptions);
   }
