@@ -162,21 +162,17 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  dynamic getDateTimeFormat(dynamic curlo) async {
-    ILibDateOptions dateOptions = ILibDateOptions(dateTime: DateTime.parse('2024-03-23 10:42'));
-    
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: curlo, length: "full", type: "datetime", useNative: false);
-
+  dynamic getDateTimeFormat(String curlo) async {
     curLocale = curlo;
+    ILibDateOptions dateOptions = ILibDateOptions(dateTime: DateTime.parse('2024-03-23 10:42'));
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: curlo, length: "full", type: "datetime", useNative: false);
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     return fmt.format(dateOptions);
   }
 
-  dynamic getDateTimeFormatNow(dynamic curlo) async {
+  dynamic getDateTimeFormatNow(String curlo) async {
     ILibDateOptions dateOptions = ILibDateOptions(dateTime: DateTime.now());
-    
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: curlo, length: "full", type: "datetime");
-
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     return fmt.format(dateOptions);
   }

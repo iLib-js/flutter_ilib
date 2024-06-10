@@ -1,8 +1,7 @@
-import 'ilib_init.dart' as init_ilib;
+import 'ilib_init.dart';
 import 'package:flutter_js/flutter_js.dart';
 
 class ILibDateFmt {
-  // DateFormatOptions? options;
   String? locale;
   String? type;
   String? length;
@@ -20,7 +19,7 @@ class ILibDateFmt {
   toJsonString() => '{locale: "$locale", length: "$length", useNative: $useNative, type: "$type", timezone: "$timezone"}';
 
   Future<String?> format(ILibDateOptions date) async {
-    JavascriptRuntime ilibJS = await init_ilib.initializeiLib();
+    JavascriptRuntime ilibJS = await initializeiLib();
     String formatOptions = toJsonString();
     String dateOptions = date.toJsonString();
 
@@ -32,7 +31,7 @@ class ILibDateFmt {
   }
 
   Future<String?> getClock() async {
-    JavascriptRuntime ilibJS = await init_ilib.initializeiLib();
+    JavascriptRuntime ilibJS = await initializeiLib();
     String formatOptions = toJsonString();
     String jscode1 =
         'new DateFmt($formatOptions).getClock()';

@@ -24,10 +24,10 @@ void main() {
     String jscode4 = 'new LocaleInfo("fa-IR").getCalendar()';
     String jscode5 = 'new LocaleInfo("am-ET").getCalendar()';
 
-    expect(await flutterIlibPlugin.evaluateILib(jscode1), 'gregorian');
-    expect(await flutterIlibPlugin.evaluateILib(jscode2), 'gregorian');
-    expect(await flutterIlibPlugin.evaluateILib(jscode3), 'thaisolar');
-    expect(await flutterIlibPlugin.evaluateILib(jscode4), 'persian');
-    expect(await flutterIlibPlugin.evaluateILib(jscode5), 'ethiopic');
+    expect(await evaluateILib(jscode1), 'gregorian');
+    expect(await evaluateILib(jscode2), 'gregorian');
+    expect(await evaluateILib(jscode3), 'thaisolar');
+    expect(await evaluateILib(jscode4), 'persian');
+    expect(await evaluateILib(jscode5), 'ethiopic');
   });
 }
