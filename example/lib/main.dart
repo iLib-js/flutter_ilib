@@ -149,13 +149,14 @@ class _MyAppState extends State<MyApp> {
     );
   }
   dynamic getDateTimeFormat(dynamic curlo) async {
-    DateTime currentTime = DateTime.now();
-    DateOptions dateOptions = DateOptions(dateTime: currentTime);
-    //DateOptions dateOptions = DateOptions(year:'2024', month: '3',day:'23', hour: '10', minute: '42');
+    //DateTime currentTime = DateTime.now();
+    //DateOptions dateOptions = DateOptions(dateTime: currentTime);
+    DateOptions dateOptions = DateOptions(year:'2024', month: '3',day:'23', hour: '10', minute: '42');
     
-    DateFormatOptions fmtOptions = DateFormatOptions(locale: curlo, length: "full", type: "datetime");
+    DateFormatOptions fmtOptions = DateFormatOptions(locale: curlo, length: "full", type: "datetime", useNative: false);
 
     curLocale = curlo;
-    return _flutterIlibPlugin.getDateTimeFormat(dateOptions, fmtOptions);
+    IlibDateFmt fmt = IlibDateFmt(fmtOptions);
+    return fmt.format(dateOptions);
   }
 }
