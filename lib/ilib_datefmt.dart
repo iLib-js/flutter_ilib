@@ -5,42 +5,32 @@ export 'flutter_ilib_datefmt.dart';
 
 class DateFmt {
   // DateFormatOptions? options;
-  // String? locale;
-  // String? type;
-  // String? length;
-  // String? timezone;
-  // bool? useNative;
+  String? locale;
+  String? type;
+  String? length;
+  String? timezone;
+  bool? useNative;
 
-  // DateFmt(DateFormatOptions options) {
-  //   // constructor
-  //   locale = options.locale;
-  //   type = options.type;
-  //   length = options.length;
-  //   timezone = options.timezone;
-  //   useNative = options.useNative;
-  // }
+  DateFmt(DateFormatOptions options) {
+    // constructor
+    locale = options.locale;
+    type = options.type;
+    length = options.length;
+    timezone = options.timezone;
+    useNative = options.useNative;
+  }
+  String toJsonString(){
+    return '{locale: "$locale", length: "$length", useNative: $useNative, type: "$type", timezone: "$timezone"}';
+  }
 
   Future<String?> format(DateOptions date) async {
-    //String result;
-    JavascriptRuntime aa = await init_ilib.initializeiLib();
-    //String jscode1 =
-    //    'new DateFmt(${options.toJsonString()}).format(${date.getTime()})';
-    //String jscode1 = """ilib.getVersion()""";
-    //date.year
-    //String bb =
-    //'year:"2024", month:"3", day:"23", hour:"10", minute:"42", second:"11"';
-
-    String cc = date.toJsonString();
+    JavascriptRuntime ilibJS = await init_ilib.initializeiLib();
+    String formatOptions = toJsonString();
+    String dateOptions = date.toJsonString();
     String jscode1 =
-        'new DateFmt({locale:"ko-KR",length:"full"}).format(DateFactory($cc))';
+        'new DateFmt($formatOptions).format(DateFactory($dateOptions))';
 
-    //print(date.year);
-    print("./////////////");
-    print(jscode1);
-    String result = aa.evaluate(jscode1).stringResult;
-
-    print(result);
-
+    String result = ilibJS.evaluate(jscode1).stringResult;
     return result;
   }
 }

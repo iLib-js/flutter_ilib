@@ -5,15 +5,13 @@ class DateFormatOptions {
   String? timezone;
   bool? useNative;
 
-  DateFormatOptions(
-      {this.locale,
+  DateFormatOptions({
+      this.locale,
       this.length,
       this.type,
       this.timezone = 'local',
-      this.useNative});
-
-  toJsonString() =>
-      '{locale: "$locale", length: "$length", useNative: $useNative, type: "$type", timezone: "$timezone"}';
+      this.useNative
+    });
 }
 
 class DateOptions {
