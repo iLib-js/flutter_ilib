@@ -8,26 +8,26 @@ void main() {
   setUp(() {
     flutterIlibPlugin = FlutterIlib();
   });
+  group('Basic', () {
+    test('getVersion', () async {
+      expect(await flutterIlibPlugin.getVersion(), '14.21.0');
+    });
+    test('getCLDRVersion', () async {
+      expect(await flutterIlibPlugin.getCLDRVersion(), '44.1');
+    });
 
-  test('getVersion', () async {
-    expect(await flutterIlibPlugin.getVersion(), '14.21.0');
-  });
+    test('evaluateILib', () async {
+      String jscode1 = 'new LocaleInfo("ko-KR").getCalendar()';
+      String jscode2 = 'new LocaleInfo("es-ES").getCalendar()';
+      String jscode3 = 'new LocaleInfo("th-TH").getCalendar()';
+      String jscode4 = 'new LocaleInfo("fa-IR").getCalendar()';
+      String jscode5 = 'new LocaleInfo("am-ET").getCalendar()';
 
-  test('getCLDRVersion', () async {
-    expect(await flutterIlibPlugin.getCLDRVersion(), '44.1');
-  });
-
-  test('evaluateILib', () async {
-    String jscode1 = 'new LocaleInfo("ko-KR").getCalendar()';
-    String jscode2 = 'new LocaleInfo("es-ES").getCalendar()';
-    String jscode3 = 'new LocaleInfo("th-TH").getCalendar()';
-    String jscode4 = 'new LocaleInfo("fa-IR").getCalendar()';
-    String jscode5 = 'new LocaleInfo("am-ET").getCalendar()';
-
-    expect(await evaluateILib(jscode1), 'gregorian');
-    expect(await evaluateILib(jscode2), 'gregorian');
-    expect(await evaluateILib(jscode3), 'thaisolar');
-    expect(await evaluateILib(jscode4), 'persian');
-    expect(await evaluateILib(jscode5), 'ethiopic');
+      expect(await evaluateILib(jscode1), 'gregorian');
+      expect(await evaluateILib(jscode2), 'gregorian');
+      expect(await evaluateILib(jscode3), 'thaisolar');
+      expect(await evaluateILib(jscode4), 'persian');
+      expect(await evaluateILib(jscode5), 'ethiopic');
+    });
   });
 }

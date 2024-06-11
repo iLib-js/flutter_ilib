@@ -6,17 +6,23 @@ class ILibDateFmt {
   String? type;
   String? length;
   String? timezone;
-  bool? useNative;
+  String? calendar;
+  String? date;
+  String? time;
+  bool? useNative = false;
 
   ILibDateFmt(ILibDateFmtOptions options) {
     // constructor
-    locale = options.locale;
-    type = options.type;
-    length = options.length;
-    timezone = options.timezone;
+    locale = options.locale ?? "en-US";
+    type = options.type ?? "short";
+    calendar = options.calendar ?? "gregorian";
+    length = options.length ?? "short";
+    timezone = options.timezone ?? "local";
+    date = options.date ?? "dmy";
+    date = options.time ?? "ahm";
     useNative = options.useNative;
   }
-  toJsonString() => '{locale: "$locale", length: "$length", useNative: $useNative, type: "$type", timezone: "$timezone"}';
+  toJsonString() => '{locale: "$locale", length: "$length", calendar: "$calendar", useNative: $useNative, type: "$type", timezone: "$timezone"}';
 
   Future<String> format(ILibDateOptions date) async {
     String result = "";
@@ -25,7 +31,6 @@ class ILibDateFmt {
     String dateOptions = date.toJsonString();
     String jscode1 =
         'new DateFmt($formatOptions).format(DateFactory($dateOptions))';
-
     result = ilibJS.evaluate(jscode1).stringResult;
     return result;
   }
@@ -44,29 +49,36 @@ class ILibDateFmt {
 
 class ILibDateFmtOptions {
   String? locale;
-  String? type;
   String? length;
+  String? type;
+  String? calendar;
   String? timezone;
+  String? date;
+  String? time;
   bool? useNative;
 
   ILibDateFmtOptions({
       this.locale,
       this.length,
       this.type,
+      this.calendar,
       this.timezone = 'local',
-      this.useNative
+      this.useNative,
+      this.date,
+      this.time
     });
 }
 
 class ILibDateOptions {
   String? locale;
-  String? year;
-  String? month;
-  String? day;
-  String? hour;
-  String? minute;
-  String? second;
-  String? unixtime;
+  int? year;
+  int? month;
+  int? day;
+  int? hour;
+  int? minute;
+  int? second;
+  int? millisecond;
+  int? unixtime;
   String? timezone;
   String? type;
   DateTime? dateTime;
@@ -79,10 +91,12 @@ class ILibDateOptions {
       this.hour,
       this.minute,
       this.second,
+      this.millisecond,
       this.unixtime,
       this.timezone,
       this.dateTime,
-      this.type});
+      this.type}
+  );
 
   String toJsonString() {
     String y = '$year';
@@ -91,6 +105,7 @@ class ILibDateOptions {
     String h = '$hour';
     String min = '$minute';
     String sec = '$second';
+    String milsec = '$millisecond';
 
     if (dateTime != null) {
       y = '${dateTime!.year}';
@@ -99,7 +114,8 @@ class ILibDateOptions {
       h = '${dateTime!.hour}';
       min = '${dateTime!.minute}';
       sec = '${dateTime!.second}';
+      milsec = '${dateTime!.millisecond}';
     }
-    return '{year:$y, month:$m, day:$d, hour:$h, minute:$min, second:$sec}';
+    return '{year:$y, month:$m, day:$d, hour:$h, minute:$min, second:$sec, millisecond:$milsec}';
   }
 }
