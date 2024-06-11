@@ -18,24 +18,26 @@ class ILibDateFmt {
   }
   toJsonString() => '{locale: "$locale", length: "$length", useNative: $useNative, type: "$type", timezone: "$timezone"}';
 
-  Future<String?> format(ILibDateOptions date) async {
+  Future<String> format(ILibDateOptions date) async {
+    String result = "";
     JavascriptRuntime ilibJS = await initializeiLib();
     String formatOptions = toJsonString();
     String dateOptions = date.toJsonString();
-
     String jscode1 =
         'new DateFmt($formatOptions).format(DateFactory($dateOptions))';
 
-    String result = ilibJS.evaluate(jscode1).stringResult;
+    result = ilibJS.evaluate(jscode1).stringResult;
     return result;
   }
 
-  Future<String?> getClock() async {
+  Future<String> getClock() async {
+    String result = "";
     JavascriptRuntime ilibJS = await initializeiLib();
     String formatOptions = toJsonString();
     String jscode1 =
         'new DateFmt($formatOptions).getClock()';
-    String result = ilibJS.evaluate(jscode1).stringResult;
+
+    result = ilibJS.evaluate(jscode1).stringResult;
     return result;
   }
 }

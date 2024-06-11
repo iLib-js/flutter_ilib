@@ -10,6 +10,7 @@ Future<JavascriptRuntime> initializeiLib() async {
   try {
     final jsiLibFile = await _ilib;
     if (_iLibPrepared==false) {
+      //print("!!!!");
       _jsRuntime.evaluate(jsiLibFile);
       _iLibPrepared = true;
     }
