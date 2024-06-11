@@ -4,6 +4,7 @@ import 'ilib_utils.dart';
 export 'ilib_utils.dart';
 export 'ilib_init.dart';
 export 'ilib_datefmt.dart';
+export 'ilib_localeinfo.dart';
 
 class FlutterIlib {
   Future<String> getVersion() async {
