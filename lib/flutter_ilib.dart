@@ -1,8 +1,9 @@
 library flutter_ilib;
 
-export 'ilib_datefmt.dart';
 import 'ilib_utils.dart';
 export 'ilib_utils.dart';
+export 'ilib_init.dart';
+export 'ilib_datefmt.dart';
 
 class FlutterIlib {
   Future<String> getVersion() async {
