@@ -31,7 +31,6 @@ class ILibDateFmt {
     String dateOptions = date.toJsonString();
     String jscode1 =
         'new DateFmt($formatOptions).format(DateFactory($dateOptions))';
-    print(jscode1);
     result = ilibJS.evaluate(jscode1).stringResult;
     return result;
   }
