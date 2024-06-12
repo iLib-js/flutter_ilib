@@ -14,15 +14,16 @@ class ILibDateFmt {
   ILibDateFmt(ILibDateFmtOptions options) {
     // constructor
     locale = options.locale ?? "en-US";
-    type = options.type ?? "short";
+    type = options.type ?? "date";
     calendar = options.calendar ?? "gregorian";
     length = options.length ?? "short";
     timezone = options.timezone ?? "local";
     date = options.date ?? "dmy";
-    date = options.time ?? "ahm";
+    time = options.time ?? "ahm";
     useNative = options.useNative ?? false;
   }
-  toJsonString() => '{locale: "$locale", length: "$length", calendar: "$calendar", useNative: $useNative, type: "$type", timezone: "$timezone"}';
+  toJsonString() =>
+      '{locale: "$locale", length: "$length", calendar: "$calendar", useNative: $useNative, type: "$type", date: "$date", time: "$time", timezone: "$timezone"}';
 
   Future<String> format(ILibDateOptions date) async {
     String result = "";
@@ -31,6 +32,7 @@ class ILibDateFmt {
     String dateOptions = date.toJsonString();
     String jscode1 =
         'new DateFmt($formatOptions).format(DateFactory($dateOptions))';
+    //print(jscode1);
     result = ilibJS.evaluate(jscode1).stringResult;
     return result;
   }
@@ -39,8 +41,7 @@ class ILibDateFmt {
     String result = "";
     JavascriptRuntime ilibJS = await initializeiLib();
     String formatOptions = toJsonString();
-    String jscode1 =
-        'new DateFmt($formatOptions).getClock()';
+    String jscode1 = 'new DateFmt($formatOptions).getClock()';
 
     result = ilibJS.evaluate(jscode1).stringResult;
     return result;
@@ -57,16 +58,15 @@ class ILibDateFmtOptions {
   String? time;
   bool? useNative;
 
-  ILibDateFmtOptions({
-      this.locale,
+  ILibDateFmtOptions(
+      {this.locale,
       this.length,
       this.type,
       this.calendar,
       this.timezone = 'local',
       this.useNative,
       this.date,
-      this.time
-    });
+      this.time});
 }
 
 class ILibDateOptions {
@@ -95,8 +95,7 @@ class ILibDateOptions {
       this.unixtime,
       this.timezone,
       this.dateTime,
-      this.type}
-  );
+      this.type});
 
   String toJsonString() {
     String y = '$year';
