@@ -1,0 +1,28 @@
+{
+    "id": "com.flutter.app.flutter_ilib_example",
+    "version": "1.0.0",
+    "vendor": "LG Electronics",
+    "type": "flutter",
+    "main": "/usr/palm/applications/com.flutter.app.flutter_ilib_example/",
+    "title": "flutter_ilib example app",
+    "icon": "icon.png",
+    "iconColor": "#ffffff",
+    "largeIcon": "icon.png",
+    "handlesRelaunch": true,
+    "visible": true,
+    "defaultWindowType": "card",
+    "trustLevel": "default",
+    "resolution": "1920x1080",
+    "locationHint":"west",
+    "noSplashOnLaunch":true,
+    "spinnerOnLaunch": false,
+    "transparent":false,
+    "uiRevision":2,
+    "requiredPermissions": [
+        "applications",
+        "applications.launcher",
+        "applications.operation",
+        "settings",
+        "system"
+    ]
+}

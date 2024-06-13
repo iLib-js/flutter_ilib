@@ -5,7 +5,27 @@ import 'package:flutter/services.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 
 void main() {
-  runApp(const MyApp());
+  runZonedGuarded<Future<void>>(
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
+
+      await initializeiLib();
+
+      FlutterError.onError = (FlutterErrorDetails details) {
+        FlutterError.presentError(details);
+        debugPrint(
+          'FlutterError.onError : ${details.exceptionAsString()}, stackTrace: ${details.stack}',
+        );
+      };
+
+      runApp(const MyApp());
+    },
+    (Object error, StackTrace stackTrace) {
+      debugPrint(
+        'runZonedGuarded : ${error.toString()}, stackTrace: $stackTrace',
+      );
+    },
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -79,9 +99,13 @@ class _MyAppState extends State<MyApp> {
       _currentTime = currentTime;
     });
   }
-  static const textStyle =
-    TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
-  
+
+static const textStyle =
+    TextStyle(fontSize: 30, fontWeight: FontWeight.bold, fontFamily: 'NanumGothic',);
+
+static const buttonTextStyle =
+  TextStyle(fontSize: 20, fontFamily: 'NanumGothic',);
+
 @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -120,7 +144,7 @@ class _MyAppState extends State<MyApp> {
                         ilibresult = result;
                       });
                     },
-                    child: const Text("en-US")),
+                    child: const Text('en-US', style: buttonTextStyle)),
                   ElevatedButton(
                     onPressed: () async {
                       final result = await getDateTimeFormat('en-GB');
@@ -128,7 +152,7 @@ class _MyAppState extends State<MyApp> {
                         ilibresult = result;
                       });
                     },
-                    child: const Text('en-GB')),
+                    child: const Text('en-GB', style: buttonTextStyle)),
                   ElevatedButton(
                     onPressed: () async {
                       final result = await getDateTimeFormat('ko-KR');
@@ -136,7 +160,7 @@ class _MyAppState extends State<MyApp> {
                         ilibresult = result;
                       });
                     },
-                    child: const Text('ko-KR')),
+                    child: const Text('ko-KR', style: buttonTextStyle)),
                   ElevatedButton(
                     onPressed: () async {
                       final result = await getDateTimeFormat('fa-IR');
@@ -144,7 +168,7 @@ class _MyAppState extends State<MyApp> {
                         ilibresult = result;
                       });
                     },
-                    child: const Text('fa-IR')),
+                    child: const Text('fa-IR', style: buttonTextStyle)),
                   ElevatedButton(
                     onPressed: () async {
                       final result = await getDateTimeFormat('am-ET');
@@ -152,7 +176,7 @@ class _MyAppState extends State<MyApp> {
                         ilibresult = result;
                       });
                     },
-                    child: const Text('am-ET')),
+                    child: const Text('am-ET', style: buttonTextStyle)),
                 ],
               ),
             ],

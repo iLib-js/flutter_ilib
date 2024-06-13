@@ -1,0 +1,13 @@
+{
+    "exeName":"/usr/bin/flutter-service",
+    "allowedNames": ["*"],
+    "type": "regular",
+    "trustLevel": "oem",
+    "permissions": [
+        {
+            "service":"@SERVICE_NAME@",
+            "inbound":["*"],
+            "outbound":["*"]
+        }
+    ]
+}

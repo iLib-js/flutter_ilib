@@ -1,0 +1,4 @@
+{
+  "runtime_mode": "@FLUTTER_RUN_MODE@",
+  "flutter_framework_version": "@FLUTTER_FRAMEWORK_VERSION@"
+}
