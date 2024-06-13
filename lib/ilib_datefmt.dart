@@ -35,7 +35,7 @@ class ILibDateFmt {
     defaultCal = ilibJS.evaluate(jscode0).stringResult;
     defaultTZ = ilibJS.evaluate(jscode1).stringResult;
 
-    if ((calendar == null) && calendar != defaultCal) calendar = defaultCal;
+    calendar ??= defaultCal;
     timezone ??= defaultTZ;
   }
 
@@ -126,7 +126,7 @@ class ILibDateOptions {
     locale ??= "en-US";
     String jscode0 = 'new LocaleInfo("$locale").getCalendar()';
     String defaultCal = ilibJS.evaluate(jscode0).stringResult;
-    if ((calendar == null) && calendar != defaultCal) calendar = defaultCal;
+    calendar ??= defaultCal;
   }
   String toJsonString() {
     String y = '$year';
