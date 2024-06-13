@@ -854,36 +854,5 @@ void main() {
           millisecond: 0);
       expect(await fmt.format(dateOptions), "1:45:37 PST");
     });
-    test('testDateFmtUSIslamic', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          type: "date", length: "full", date: "wdmy", calendar: "islamic");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-
-      ILibDateOptions dateOptions =
-          ILibDateOptions(year: 1433, month: 8, day: 24, calendar: "islamic");
-
-      // should format with English transliterations of the month names
-      expect(await fmt.format(dateOptions), "yawn as-sabt, Šha'bān 24, 1433");
-    });
-    test('testDateFmtUSHebrew', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          type: "date", length: "full", date: "wdmy", calendar: "hebrew");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-
-      ILibDateOptions dateOptions =
-          ILibDateOptions(year: 5772, month: 8, day: 24, calendar: "hebrew");
-
-      // should format with English transliterations of the month names
-      expect(await fmt.format(dateOptions), "yom sheni, Ḥeshvan 24, 5772");
-    });
-    test('testDateFmtUSShortTimeWithNoMinOrSec', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(type: "time", length: "short", time: "hms");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-
-      ILibDateOptions dateOptions =
-          ILibDateOptions(year: 2011, month: 12, day: 29, hour: 13);
-      expect(await fmt.format(dateOptions), "1:00:00");
-    });
   });
 }

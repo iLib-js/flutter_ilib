@@ -645,8 +645,7 @@ void main() {
           hour: 13,
           minute: 45,
           second: 37,
-          millisecond: 0,
-          timezone: "Europe/Madrid");
+          millisecond: 0);
       expect(await fmt.format(dateOptions), "13:45 CEST");
     });
     test('ShortTimeComponentsHMAZ_es_ES', () async {
@@ -665,8 +664,7 @@ void main() {
           hour: 13,
           minute: 45,
           second: 37,
-          millisecond: 0,
-          timezone: "Europe/Madrid");
+          millisecond: 0);
       expect(await fmt.format(dateOptions), "13:45 CEST");
     });
     test('ShortTimeComponentsHMSA_es_ES', () async {
@@ -702,8 +700,7 @@ void main() {
           hour: 13,
           minute: 45,
           second: 37,
-          millisecond: 0,
-          timezone: "Europe/Madrid");
+          millisecond: 0);
       expect(await fmt.format(dateOptions), "13:45:37 CEST");
     });
     test('ShortTimeComponentsHMSAZ_es_ES', () async {
@@ -722,8 +719,7 @@ void main() {
           hour: 13,
           minute: 45,
           second: 37,
-          millisecond: 0,
-          timezone: "Europe/Madrid");
+          millisecond: 0);
       expect(await fmt.format(dateOptions), "13:45:37 CEST");
     });
     test('FullTimeComponentsS', () async {
@@ -855,8 +851,7 @@ void main() {
           hour: 13,
           minute: 45,
           second: 37,
-          millisecond: 0,
-          timezone: "Europe/Madrid");
+          millisecond: 0);
       expect(await fmt.format(dateOptions), "13:45 CEST");
     });
     test('FullTimeComponentsHMAZ_es_ES', () async {
@@ -876,8 +871,7 @@ void main() {
           hour: 13,
           minute: 45,
           second: 37,
-          millisecond: 0,
-          timezone: "Europe/Madrid");
+          millisecond: 0);
       expect(await fmt.format(dateOptions), "13:45 CEST");
     });
     test('FullTimeComponentsHMSA_es_ES', () async {
@@ -913,8 +907,7 @@ void main() {
           hour: 13,
           minute: 45,
           second: 37,
-          millisecond: 0,
-          timezone: "Europe/Madrid");
+          millisecond: 0);
       expect(await fmt.format(dateOptions), "13:45:37 CEST");
     });
     test('FullTimeComponentsHMSAZ_es_ES', () async {
@@ -934,8 +927,7 @@ void main() {
           hour: 13,
           minute: 45,
           second: 37,
-          millisecond: 0,
-          timezone: "Europe/Madrid");
+          millisecond: 0);
       expect(await fmt.format(dateOptions), "13:45:37 CEST");
     });
     test('WithTimeZoneAndNoDST_es_ES', () async {
@@ -955,8 +947,7 @@ void main() {
           hour: 13,
           minute: 45,
           second: 37,
-          millisecond: 0,
-          timezone: "Europe/Madrid");
+          millisecond: 0);
       expect(await fmt.format(dateOptions), "13:45:37 CET");
     });
   });

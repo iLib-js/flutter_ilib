@@ -645,8 +645,7 @@ void main() {
           hour: 13,
           minute: 45,
           second: 37,
-          millisecond: 0,
-          timezone: "Europe/London");
+          millisecond: 0);
       expect(await fmt.format(dateOptions), "13:45 GMT/BST");
     });
     test('testDateFmtGBShortTimeComponentsHMAZ', () async {
@@ -665,8 +664,7 @@ void main() {
           hour: 13,
           minute: 45,
           second: 37,
-          millisecond: 0,
-          timezone: "Europe/London");
+          millisecond: 0);
       expect(await fmt.format(dateOptions), "13:45 GMT/BST");
     });
     test('testDateFmtGBShortTimeComponentsHMSA', () async {
@@ -701,8 +699,7 @@ void main() {
           hour: 13,
           minute: 45,
           second: 37,
-          millisecond: 0,
-          timezone: "Europe/London");
+          millisecond: 0);
       expect(await fmt.format(dateOptions), "13:45:37 GMT/BST");
     });
     test('testDateFmtGBShortTimeComponentsHMSAZ', () async {
@@ -721,8 +718,7 @@ void main() {
           hour: 13,
           minute: 45,
           second: 37,
-          millisecond: 0,
-          timezone: "Europe/London");
+          millisecond: 0);
       expect(await fmt.format(dateOptions), "13:45:37 GMT/BST");
     });
     test('testDateFmtGBFullTimeComponentsS', () async {
@@ -854,8 +850,7 @@ void main() {
           hour: 13,
           minute: 45,
           second: 37,
-          millisecond: 0,
-          timezone: "Europe/London");
+          millisecond: 0);
       expect(await fmt.format(dateOptions), "13:45 GMT/BST");
     });
     test('testDateFmtGBFullTimeComponentsHMAZ', () async {
@@ -875,8 +870,7 @@ void main() {
           hour: 13,
           minute: 45,
           second: 37,
-          millisecond: 0,
-          timezone: "Europe/London");
+          millisecond: 0);
       expect(await fmt.format(dateOptions), "13:45 GMT/BST");
     });
     test('testDateFmtGBFullTimeComponentsHMSA', () async {
@@ -912,8 +906,7 @@ void main() {
           hour: 13,
           minute: 45,
           second: 37,
-          millisecond: 0,
-          timezone: "Europe/London");
+          millisecond: 0);
       expect(await fmt.format(dateOptions), "13:45:37 GMT/BST");
     });
     test('testDateFmtGBFullTimeComponentsHMSAZ', () async {
@@ -933,8 +926,7 @@ void main() {
           hour: 13,
           minute: 45,
           second: 37,
-          millisecond: 0,
-          timezone: "Europe/London");
+          millisecond: 0);
       expect(await fmt.format(dateOptions), "13:45:37 GMT/BST");
     });
     test('testDateFmtGBWithTimeZoneAndNoDST', () async {
@@ -954,8 +946,7 @@ void main() {
           hour: 13,
           minute: 45,
           second: 37,
-          millisecond: 0,
-          timezone: "Europe/London");
+          millisecond: 0);
       expect(await fmt.format(dateOptions), "13:45:37 GMT/BST");
     });
   });

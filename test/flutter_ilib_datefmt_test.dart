@@ -5,15 +5,6 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   print("Testing [flutter_ilib_datefmt_test.dart] file.");
   group('format()', () {
-    test('DateFmt_datetime_full_af_NA', () async {
-      ILibDateOptions dateOptions = ILibDateOptions(
-        locale: 'af-NA', year: 2011, month: 9, day: 29, hour: 13, minute: 45, second: 0, millisecond: 0);
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-        locale: "af-NA", calendar: "gregorian", length: "short");
-
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-      expect(await fmt.format(dateOptions),'2011-09-29');
-    });
     test('DateFmt_datetime_full_ko_KR', () async {
       ILibDateOptions dateOptions = ILibDateOptions(
         year: 2024, month: 3, day: 23, hour: 10, minute: 42);

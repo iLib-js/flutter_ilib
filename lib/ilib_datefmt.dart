@@ -9,19 +9,36 @@ class ILibDateFmt {
   String? calendar;
   String? date;
   String? time;
+  String? defaultCal;
+  String? defaultTZ;
   bool? useNative;
 
   ILibDateFmt(ILibDateFmtOptions options) {
     // constructor
     locale = options.locale ?? "en-US";
     type = options.type ?? "date";
-    calendar = options.calendar ?? "gregorian";
     length = options.length ?? "short";
-    timezone = options.timezone ?? "local";
     date = options.date ?? "dmy";
     time = options.time ?? "ahm";
+    calendar = options.calendar;
+    timezone = options.timezone;
     useNative = options.useNative ?? false;
+
+    _init();
   }
+
+  _init() async{
+    JavascriptRuntime ilibJS = await initializeiLib();
+
+    String jscode0 = 'new LocaleInfo("$locale").getCalendar()';
+    String jscode1 = 'new LocaleInfo("$locale").getTimeZone()';
+    defaultCal = ilibJS.evaluate(jscode0).stringResult;
+    defaultTZ = ilibJS.evaluate(jscode1).stringResult;
+
+    if (calendar != defaultCal) calendar = defaultCal;
+    timezone ??= defaultTZ;
+  }
+
   toJsonString() =>
       '{locale: "$locale", length: "$length", calendar: "$calendar", useNative: $useNative, type: "$type", date: "$date", time: "$time", timezone: "$timezone"}';
 
@@ -29,18 +46,16 @@ class ILibDateFmt {
     String result = "";
     JavascriptRuntime ilibJS = await initializeiLib();
 
-    String jscode0 = 'new LocaleInfo("$locale").getCalendar()';
-    String defaultCal = ilibJS.evaluate(jscode0).stringResult;
-    if (calendar != defaultCal) calendar = defaultCal;
     if (date.calendar != defaultCal) date.calendar = defaultCal;
+    date.timezone ??= defaultTZ;
 
     String formatOptions = toJsonString();
     String dateOptions = date.toJsonString();
 
-    String jscode1 =
+    String jscode2 =
         'new DateFmt($formatOptions).format(DateFactory($dateOptions))';
-    //print(jscode1);
-    result = ilibJS.evaluate(jscode1).stringResult;
+    //print(jscode2);
+    result = ilibJS.evaluate(jscode2).stringResult;
     return result;
   }
 
@@ -49,7 +64,6 @@ class ILibDateFmt {
     JavascriptRuntime ilibJS = await initializeiLib();
     String formatOptions = toJsonString();
     String jscode1 = 'new DateFmt($formatOptions).getClock()';
-
     result = ilibJS.evaluate(jscode1).stringResult;
     return result;
   }
@@ -70,7 +84,7 @@ class ILibDateFmtOptions {
       this.length,
       this.type,
       this.calendar,
-      this.timezone = 'local',
+      this.timezone,
       this.useNative,
       this.date,
       this.time});
@@ -104,8 +118,8 @@ class ILibDateOptions {
       this.timezone,
       this.calendar,
       this.dateTime,
-      this.type});
-
+      this.type}
+    );
   String toJsonString() {
     String y = '$year';
     String m = '$month';
@@ -125,9 +139,6 @@ class ILibDateOptions {
       milsec = '${dateTime!.millisecond}';
     }
     locale ??= 'en-US';
-    timezone ??= 'local';
-    calendar ??= 'gregorian';
-
     return '{locale:"$locale", year:$y, month:$m, day:$d, hour:$h, minute:$min, second:$sec, millisecond:$milsec, timezone:"$timezone", calendar:"$calendar"}';
   }
 }
