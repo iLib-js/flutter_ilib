@@ -85,21 +85,6 @@ void main() {
           millisecond: 0);
       expect(await fmt.format(dateOptions), "오후 1:45");
     });
-    test('testDateFmtSimpleTime_ko_KR_Intl_ahm', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ko-KR", type: "time");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-
-      ILibDateOptions dateOptions = ILibDateOptions(
-          year: 2011,
-          month: 9,
-          day: 29,
-          hour: 13,
-          minute: 45,
-          second: 10,
-          millisecond: 0);
-      expect(await fmt.format(dateOptions), "오후 1:45");
-    });
 
     test('testDateFmtSimpleTimeMedium_ko_KR', () async {
       ILibDateFmtOptions fmtOptions =

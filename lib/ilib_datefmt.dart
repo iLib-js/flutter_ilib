@@ -22,7 +22,7 @@ class ILibDateFmt {
     time = options.time ?? "ahm";
     calendar = options.calendar;
     timezone = options.timezone;
-    useNative = options.useNative ?? false;
+    useNative = options.useNative ?? true;
 
     _init();
   }
@@ -35,7 +35,7 @@ class ILibDateFmt {
     defaultCal = ilibJS.evaluate(jscode0).stringResult;
     defaultTZ = ilibJS.evaluate(jscode1).stringResult;
 
-    if (calendar != defaultCal) calendar = defaultCal;
+    if ((calendar == null) && calendar != defaultCal) calendar = defaultCal;
     timezone ??= defaultTZ;
   }
 
@@ -46,7 +46,6 @@ class ILibDateFmt {
     String result = "";
     JavascriptRuntime ilibJS = await initializeiLib();
 
-    if (date.calendar != defaultCal) date.calendar = defaultCal;
     date.timezone ??= defaultTZ;
 
     String formatOptions = toJsonString();
@@ -119,7 +118,16 @@ class ILibDateOptions {
       this.calendar,
       this.dateTime,
       this.type}
-    );
+    ){
+      _init();
+    }
+  _init() async{
+    JavascriptRuntime ilibJS = await initializeiLib();
+    locale ??= "en-US";
+    String jscode0 = 'new LocaleInfo("$locale").getCalendar()';
+    String defaultCal = ilibJS.evaluate(jscode0).stringResult;
+    if ((calendar == null) && calendar != defaultCal) calendar = defaultCal;
+  }
   String toJsonString() {
     String y = '$year';
     String m = '$month';
@@ -138,7 +146,7 @@ class ILibDateOptions {
       sec = '${dateTime!.second}';
       milsec = '${dateTime!.millisecond}';
     }
-    locale ??= 'en-US';
+
     return '{locale:"$locale", year:$y, month:$m, day:$d, hour:$h, minute:$min, second:$sec, millisecond:$milsec, timezone:"$timezone", calendar:"$calendar"}';
   }
 }
