@@ -38,9 +38,7 @@ class ILibDateFmt {
       'timezone': "$timezone"
     };
     paramInfo.forEach((key,value) {
-      if (value != 'null'){
-        result += '$key:"$value",';
-      }
+      if (value != 'null')result += '$key:"$value",';
     });
     completeOption = '{$result useNative:$useNative}';
 
@@ -149,9 +147,7 @@ class ILibDateOptions {
     };
 
     paramInfo.forEach((key,value) {
-      if (value != 'null'){
-        result += '$key:"$value",';
-      }
+      if (value != 'null')result += '$key:"$value",';
     });
 
     Map<String, int?> datetimeInfo = {
@@ -164,9 +160,7 @@ class ILibDateOptions {
       'millisecond': milsec,
     };
     datetimeInfo.forEach((key,value) {
-        if (value != null){
-          result += '$key:$value,';
-        }
+      if (value != null)result += '$key:$value,';
     });
     result = result.isNotEmpty ? result.substring(0, result.length-1): result;
     completeOption = result.isNotEmpty ? '{$result}': "";
