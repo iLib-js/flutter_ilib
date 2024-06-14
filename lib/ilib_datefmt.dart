@@ -28,16 +28,16 @@ class ILibDateFmt {
     String result = "";
     String completeOption = "";
 
-    Map<String, String> paramList = {
-        'locale': "$locale",
-        'type': "$type",
-        'length': "$length",
-        'date': "$date",
-        'time': "$time",
-        'calendar': "$calendar",
-        'timezone': "$timezone"
+    Map<String, String> paramInfo = {
+      'locale': "$locale",
+      'type': "$type",
+      'length': "$length",
+      'date': "$date",
+      'time': "$time",
+      'calendar': "$calendar",
+      'timezone': "$timezone"
     };
-    paramList.forEach((key,value) {
+    paramInfo.forEach((key,value) {
       if (value != 'null'){
         result += '$key:"$value", ';
       }
@@ -53,8 +53,7 @@ class ILibDateFmt {
     String formatOptions = toJsonString();
     String dateOptions = date.toJsonString();
 
-    String jscode2 =
-        'new DateFmt($formatOptions).format(DateFactory($dateOptions))';
+    String jscode2 = 'new DateFmt($formatOptions).format(DateFactory($dateOptions))';
     //print(jscode2);
     result = ilibJS.evaluate(jscode2).stringResult;
     return result;
@@ -80,15 +79,16 @@ class ILibDateFmtOptions {
   String? time;
   bool? useNative;
 
-  ILibDateFmtOptions(
-      {this.locale,
-      this.length,
-      this.type,
-      this.calendar,
-      this.timezone,
-      this.useNative,
-      this.date,
-      this.time});
+  ILibDateFmtOptions({
+    this.locale,
+    this.length,
+    this.type,
+    this.calendar,
+    this.timezone,
+    this.useNative,
+    this.date,
+    this.time
+  });
 }
 
 class ILibDateOptions {
@@ -106,21 +106,20 @@ class ILibDateOptions {
   String? calendar;
   DateTime? dateTime;
 
-  ILibDateOptions(
-      {this.locale,
-      this.year,
-      this.month,
-      this.day,
-      this.hour,
-      this.minute,
-      this.second,
-      this.millisecond,
-      this.unixtime,
-      this.timezone,
-      this.calendar,
-      this.dateTime,
-      this.type}
-    );
+  ILibDateOptions({this.locale,
+    this.year,
+    this.month,
+    this.day,
+    this.hour,
+    this.minute,
+    this.second,
+    this.millisecond,
+    this.unixtime,
+    this.timezone,
+    this.calendar,
+    this.dateTime,
+    this.type
+  });
 
   String toJsonString() {
     int? y = year;
@@ -130,6 +129,8 @@ class ILibDateOptions {
     int? min = minute;
     int? sec = second;
     int? milsec = millisecond;
+    String result = "";
+    String completeOption = "";
 
     if (dateTime != null) {
       y = dateTime!.year;
@@ -140,15 +141,14 @@ class ILibDateOptions {
       sec = dateTime!.second;
       milsec = dateTime!.millisecond;
     }
-    String result = "";
-    String completeOption = "";
-    Map<String, String> paramList = {
+
+    Map<String, String> paramInfo = {
       'locale' : "$locale",
       'timezone' : "$timezone",
       'calendar' : "$calendar",
     };
 
-    paramList.forEach((key,value) {
+    paramInfo.forEach((key,value) {
       if (value != 'null'){
         result += '$key:"$value",';
       }
