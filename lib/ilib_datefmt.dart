@@ -14,40 +14,42 @@ class ILibDateFmt {
   bool? useNative;
 
   ILibDateFmt(ILibDateFmtOptions options) {
-    // constructor
-    locale = options.locale ?? "en-US";
-    type = options.type ?? "date";
-    length = options.length ?? "short";
-    date = options.date ?? "dmy";
-    time = options.time ?? "ahm";
+    locale = options.locale;
+    type = options.type;
+    length = options.length;
+    date = options.date;
+    time = options.time;
     calendar = options.calendar;
     timezone = options.timezone;
     useNative = options.useNative ?? true;
-
-    _init();
   }
 
-  _init() async{
-    JavascriptRuntime ilibJS = await initializeiLib();
+  String toJsonString() {
+    String result = "";
+    String completeOption = "";
 
-    String jscode0 = 'new LocaleInfo("$locale").getCalendar()';
-    String jscode1 = 'new LocaleInfo("$locale").getTimeZone()';
-    defaultCal = ilibJS.evaluate(jscode0).stringResult;
-    defaultTZ = ilibJS.evaluate(jscode1).stringResult;
+    Map<String, String> paramList = {
+        'locale': "$locale",
+        'type': "$type",
+        'length': "$length",
+        'date': "$date",
+        'time': "$time",
+        'calendar': "$calendar",
+        'timezone': "$timezone"
+    };
+    paramList.forEach((key,value) {
+      if (value != 'null'){
+        result += '$key:"$value", ';
+      }
+    });
+    completeOption = '{$result useNative:$useNative}';
 
-    calendar ??= defaultCal;
-    timezone ??= defaultTZ;
+    return completeOption;
   }
-
-  toJsonString() =>
-      '{locale: "$locale", length: "$length", calendar: "$calendar", useNative: $useNative, type: "$type", date: "$date", time: "$time", timezone: "$timezone"}';
 
   Future<String> format(ILibDateOptions date) async {
     String result = "";
     JavascriptRuntime ilibJS = await initializeiLib();
-
-    date.timezone ??= defaultTZ;
-
     String formatOptions = toJsonString();
     String dateOptions = date.toJsonString();
 
@@ -118,35 +120,56 @@ class ILibDateOptions {
       this.calendar,
       this.dateTime,
       this.type}
-    ){
-      _init();
-    }
-  _init() async{
-    JavascriptRuntime ilibJS = await initializeiLib();
-    locale ??= "en-US";
-    String jscode0 = 'new LocaleInfo("$locale").getCalendar()';
-    String defaultCal = ilibJS.evaluate(jscode0).stringResult;
-    calendar ??= defaultCal;
-  }
+    );
+
   String toJsonString() {
-    String y = '$year';
-    String m = '$month';
-    String d = '$day';
-    String h = '$hour';
-    String min = '$minute';
-    String sec = '$second';
-    String milsec = '$millisecond';
+    int? y = year;
+    int? m = month;
+    int? d = day;
+    int? h = hour;
+    int? min = minute;
+    int? sec = second;
+    int? milsec = millisecond;
 
     if (dateTime != null) {
-      y = '${dateTime!.year}';
-      m = '${dateTime!.month}';
-      d = '${dateTime!.day}';
-      h = '${dateTime!.hour}';
-      min = '${dateTime!.minute}';
-      sec = '${dateTime!.second}';
-      milsec = '${dateTime!.millisecond}';
+      y = dateTime!.year;
+      m = dateTime!.month;
+      d = dateTime!.day;
+      h = dateTime!.hour;
+      min = dateTime!.minute;
+      sec = dateTime!.second;
+      milsec = dateTime!.millisecond;
     }
+    String result = "";
+    String completeOption = "";
+    Map<String, String> paramList = {
+      'locale' : "$locale",
+      'timezone' : "$timezone",
+      'calendar' : "$calendar",
+    };
 
-    return '{locale:"$locale", year:$y, month:$m, day:$d, hour:$h, minute:$min, second:$sec, millisecond:$milsec, timezone:"$timezone", calendar:"$calendar"}';
+    paramList.forEach((key,value) {
+      if (value != 'null'){
+        result += '$key:"$value",';
+      }
+    });
+
+    Map<String, int?> datetimeInfo = {
+      'year': y,
+      'month': m,
+      'day': d,
+      'hour': h,
+      'minute': min,
+      'second': sec,
+      'millisecond': milsec,
+    };
+    datetimeInfo.forEach((key,value) {
+        if (value != null){
+          result += '$key:$value, ';
+        }
+    });
+    result = result.substring(0, result.length -2);
+    completeOption = '{$result}';
+    return completeOption;
   }
 }
