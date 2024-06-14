@@ -39,7 +39,7 @@ class ILibDateFmt {
     };
     paramInfo.forEach((key,value) {
       if (value != 'null'){
-        result += '$key:"$value", ';
+        result += '$key:"$value",';
       }
     });
     completeOption = '{$result useNative:$useNative}';
@@ -165,11 +165,11 @@ class ILibDateOptions {
     };
     datetimeInfo.forEach((key,value) {
         if (value != null){
-          result += '$key:$value, ';
+          result += '$key:$value,';
         }
     });
-    result = result.substring(0, result.length -2);
-    completeOption = '{$result}';
+    result = result.isNotEmpty ? result.substring(0, result.length-1): result;
+    completeOption = result.isNotEmpty ? '{$result}': "";
     return completeOption;
   }
 }
