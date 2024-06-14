@@ -3,7 +3,7 @@ import 'package:flutter_ilib/flutter_ilib.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  print("Testing [datefmt_en_GB_test.dart] file.");
+  print("Testing [datefmt_fa_IR_test.dart] file.");
   group('format()', () {
     test('SimpleShort_fa_IR', () async {
         ILibDateFmtOptions fmtOptions =
