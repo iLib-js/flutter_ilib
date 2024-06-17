@@ -21,7 +21,7 @@ class ILibDateFmt {
     time = options.time;
     calendar = options.calendar;
     timezone = options.timezone;
-    useNative = options.useNative ?? true;
+    useNative = options.useNative;
   }
 
   String toJsonString() {
@@ -40,7 +40,13 @@ class ILibDateFmt {
     paramInfo.forEach((key,value) {
       if (value != 'null')result += '$key:"$value",';
     });
-    completeOption = '{$result useNative:$useNative}';
+
+    if (useNative != null){
+      result +='useNative:$useNative,';
+    }
+
+    result = result.isNotEmpty ? result.substring(0, result.length-1): result;
+    completeOption = '{$result}';
 
     return completeOption;
   }
