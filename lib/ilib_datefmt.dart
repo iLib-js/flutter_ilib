@@ -9,8 +9,6 @@ class ILibDateFmt {
   String? calendar;
   String? date;
   String? time;
-  String? defaultCal;
-  String? defaultTZ;
   bool? useNative;
 
   ILibDateFmt(ILibDateFmtOptions options) {
@@ -149,6 +147,7 @@ class ILibDateOptions {
     Map<String, String> paramInfo = {
       'locale' : "$locale",
       'timezone' : "$timezone",
+      'type' : "$type",
       'calendar' : "$calendar",
     };
 
