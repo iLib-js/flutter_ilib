@@ -61,13 +61,13 @@ class ILibDateFmt {
     return result;
   }
 
-  Future<String> getClock() async {
-    String result = "";
+  Future<int> getClock() async {
+    String resultStr = "";
     JavascriptRuntime ilibJS = await initializeiLib();
     String formatOptions = toJsonString();
     String jscode1 = 'new DateFmt($formatOptions).getClock()';
-    result = ilibJS.evaluate(jscode1).stringResult;
-    return result;
+    resultStr = ilibJS.evaluate(jscode1).stringResult;
+    return int.parse(resultStr);
   }
 }
 

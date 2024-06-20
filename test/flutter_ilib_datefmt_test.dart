@@ -56,17 +56,17 @@ void main() {
     test('getClock_ko_KR', () async {
       ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: "ko-KR", length: "full");
       ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-      expect(await fmt.getClock(),'12');
+      expect(await fmt.getClock(), 12);
     });
     test('getClock_en_US', () async {
       ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: "en-US", length: "full");
       ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-      expect(await fmt.getClock(),'12');
+      expect(await fmt.getClock(), 12);
     });
     test('getClock_en_GB', () async {
       ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: "en-GB", length: "full");
       ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-      expect(await fmt.getClock(),'24');
+      expect(await fmt.getClock(), 24);
     });
   });
 }
