@@ -3,7 +3,7 @@ import 'package:flutter_ilib/flutter_ilib.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  print("Testing [weekdayTranslation_test.dart] file.");
+  print("Testing [datefmt_WeekdayTranslation_test.dart] file.");
 
   group('testWeekdayTranslation_ar_EG', () {
     Map<int, String> expectedResult = {
@@ -18,8 +18,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ar-EG", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-        test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+         test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ar_EG_long', () {
@@ -35,8 +35,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ar-EG", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ar_EG_medium', () { 
@@ -52,11 +52,11 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ar-EG", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
-  group('testWeekdayTranslation_ar_EG_short', ()
+  group('testWeekdayTranslation_ar_EG_short', () {
     Map<int, String> expectedResult = {
       0:"ح",
       1:"ن",
@@ -64,13 +64,13 @@ void main() {
       3:"ر",
       4:"خ",
       5:"ج",
-      6:"س"
+      6:"س",
     };
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ar-EG", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ar_IQ', () {
@@ -86,8 +86,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ar-IQ", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ar_IQ_long', () {
@@ -103,8 +103,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ar-IQ", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ar_IQ_medium', () {
@@ -120,8 +120,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ar-IQ", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ar_IQ_short', () {
@@ -137,8 +137,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ar-IQ", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ar_MA', () {
@@ -154,8 +154,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ar-MA", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ar_MA_long', () {
@@ -171,8 +171,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ar-MA", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ar_MA_medium', () {
@@ -188,8 +188,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ar-MA", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ar_MA_short', () {
@@ -205,8 +205,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ar-MA", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_as_IN', () {
@@ -222,8 +222,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"as-IN", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_as_IN_long', () {
@@ -239,8 +239,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"as-IN", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_as_IN_medium', () {
@@ -256,8 +256,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"as-IN", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_as_IN_short', () {
@@ -269,12 +269,12 @@ void main() {
       4:"ব",
       5:"শ",
       6:"শ",
-    },
+    };
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"as-IN", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_bg_BG', () {
@@ -287,11 +287,11 @@ void main() {
       5:"петък",
       6:"събота"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"bg-BG", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"bg-BG", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_bg_BG_long', () {
@@ -304,11 +304,11 @@ void main() {
       5:"пт",
       6:"сб"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"bg-BG", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"bg-BG", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_bg_BG_medium', () {
@@ -321,11 +321,11 @@ void main() {
       5:"пт",
       6:"сб"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"bg-BG", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"bg-BG", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_bg_BG_short', () {
@@ -338,11 +338,11 @@ void main() {
       5:"п",
       6:"с",
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"bg-BG", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"bg-BG", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_bn_IN', () {
@@ -358,8 +358,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"bn-IN", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_bn_IN_long', () {
@@ -375,8 +375,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"bn-IN", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_bn_IN_medium', () {
@@ -392,8 +392,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"bn-IN", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_bn_IN_short', () {
@@ -409,8 +409,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"bn-IN", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_bs_Latn_BA', () {
@@ -423,11 +423,11 @@ void main() {
       5:"petak",
       6:"subota"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"bs-Latn-BA", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"bs-Latn-BA", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_bs_Latn_BA_long', () {
@@ -443,8 +443,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"bs-Latn-BA", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_bs_Latn_BA_medium', () {
@@ -460,12 +460,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"bs-Latn-BA", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_bs_Latn_BA_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"n",
       1:"p",
       2:"u",
@@ -477,8 +477,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"bs-Latn-BA", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_bs_Latn_ME', () {
@@ -494,8 +494,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"bs-Latn-ME", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_bs_Latn_ME_long', () {
@@ -511,8 +511,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"bs-Latn-ME", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_bs_Latn_ME_medium', () {
@@ -528,8 +528,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"bs-Latn-ME", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_bs_Latn_ME_short', () {    
@@ -545,8 +545,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"bs-Latn-ME", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_cs_CZ', () {
@@ -559,11 +559,11 @@ void main() {
       5:"pátek",
       6:"sobota"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"cs-CZ", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"cs-CZ", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_cs_CZ_long', () {
@@ -576,11 +576,11 @@ void main() {
       5:"pá",
       6:"so"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"cs-CZ", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"cs-CZ", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_cs_CZ_medium', () {
@@ -593,11 +593,11 @@ void main() {
       5:"pá",
       6:"so"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"cs-CZ", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"cs-CZ", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_cs_CZ_short', () {
@@ -610,11 +610,11 @@ void main() {
       5:"P",
       6:"S"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"cs-CZ", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"cs-CZ", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_da_DK', () {
@@ -627,11 +627,11 @@ void main() {
       5:"fredag",
       6:"lørdag"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"da-DK", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"da-DK", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_da_DK_long', () {
@@ -644,11 +644,11 @@ void main() {
       5:"fre",
       6:"lør"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"da-DK", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"da-DK", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_da_DK_medium', () {
@@ -661,11 +661,11 @@ void main() {
       5:"fr",
       6:"lø"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"da-DK", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"da-DK", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_da_DK_short', () {
@@ -678,11 +678,11 @@ void main() {
       5:"F",
       6:"L"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"da-DK", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"da-DK", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_de_AT', () {
@@ -695,11 +695,11 @@ void main() {
       5:"Freitag",
       6:"Samstag"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-AT", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-AT", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_de_AT_long', () {
@@ -712,11 +712,11 @@ void main() {
       5:"Fr",
       6:"Sa"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-AT", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-AT", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_de_AT_medium', () {
@@ -729,11 +729,11 @@ void main() {
       5:"Fr.",
       6:"Sa."
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-AT", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-AT", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_de_AT_short', () {
@@ -746,11 +746,11 @@ void main() {
       5:"F",
       6:"S"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-AT", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-AT", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_de_CH', () {
@@ -763,11 +763,11 @@ void main() {
       5:"Freitag",
       6:"Samstag"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-CH", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-CH", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_de_CH_long', () {
@@ -780,11 +780,11 @@ void main() {
       5:"Fr",
       6:"Sa"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-CH", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-CH", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_de_CH_medium', () {
@@ -796,12 +796,12 @@ void main() {
       4:"Do",
       5:"Fr",
       6:"Sa"
-    }
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-CH", date:"w", length: "medium", useNative:false, timezone:"local"})
+    };
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-CH", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_de_CH_short', () {
@@ -814,11 +814,11 @@ void main() {
       5:"F",
       6:"S"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-CH", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-CH", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_de_DE', () {
@@ -831,11 +831,11 @@ void main() {
       5:"Freitag",
       6:"Samstag"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-DE", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-DE", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_de_DE_long', () {
@@ -848,11 +848,11 @@ void main() {
       5:"Fr",
       6:"Sa"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-DE", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-DE", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_de_DE_medium', () {
@@ -865,11 +865,11 @@ void main() {
       5:"Fr.",
       6:"Sa."
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-DE", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-DE", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_de_DE_short', () {
@@ -882,11 +882,11 @@ void main() {
       5:"F",
       6:"S"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-DE", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-DE", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_de_LU', () {
@@ -899,11 +899,11 @@ void main() {
       5:"Freitag",
       6:"Samstag"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-LU", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-LU", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_de_LU_long', () {
@@ -916,11 +916,11 @@ void main() {
       5:"Fr",
       6:"Sa"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-LU", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-LU", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_de_LU_medium', () {
@@ -933,11 +933,11 @@ void main() {
       5:"Fr.",
       6:"Sa."
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-LU", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-LU", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_de_LU_short', () {
@@ -949,12 +949,12 @@ void main() {
       4:"D",
       5:"F",
       6:"S"
-    },
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-LU", date:"w", length: "short", useNative:false, timezone:"local"})
+    };
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"de-LU", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_el_CY', () {
@@ -967,11 +967,11 @@ void main() {
       5:"Παρασκευή",
       6:"Σάββατο"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"el-CY", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"el-CY", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_el_CY_long', () {
@@ -984,11 +984,11 @@ void main() {
       5:"Παρ",
       6:"Σάβ"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"el-CY", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"el-CY", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_el_CY_medium', () {
@@ -1001,11 +1001,11 @@ void main() {
       5:"Πα",
       6:"Σά"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"el-CY", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"el-CY", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_el_CY_short', () {
@@ -1018,11 +1018,11 @@ void main() {
       5:"Π",
       6:"Σ"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"el-CY", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"el-CY", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_el_GR', () {
@@ -1035,11 +1035,11 @@ void main() {
       5:"Παρασκευή",
       6:"Σάββατο"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"el-GR", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"el-GR", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_el_GR_long', () {
@@ -1052,11 +1052,11 @@ void main() {
       5:"Παρ",
       6:"Σάβ"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"el-GR", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"el-GR", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_el_GR_medium', () {
@@ -1069,11 +1069,11 @@ void main() {
       5:"Πα",
       6:"Σά"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"el-GR", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"el-GR", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_el_GR_short', () {
@@ -1086,11 +1086,11 @@ void main() {
       5:"Π",
       6:"Σ"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"el-GR", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"el-GR", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_AM', () {
@@ -1103,11 +1103,11 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-AM", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-AM", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_AM_long', () {
@@ -1123,8 +1123,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-AM", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_AM_medium', () {
@@ -1140,8 +1140,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-AM", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_AM_short', () {
@@ -1157,8 +1157,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-AM", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_AU', () {
@@ -1171,11 +1171,11 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-AU", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-AU", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_AU_long', () {
@@ -1191,8 +1191,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-AU", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_AU_medium', () {
@@ -1208,8 +1208,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-AU", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_AU_short', () {
@@ -1225,8 +1225,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-AU", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_AZ', () {
@@ -1239,11 +1239,11 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-AZ", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-AZ", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
       ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-        test(num, () async => expect(await fmt.format(dateOptions), expected));
+         test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_AZ_long', () {
@@ -1259,8 +1259,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-AZ", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_AZ_medium', () {
@@ -1276,8 +1276,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-AZ", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_AZ_short', () {
@@ -1293,8 +1293,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-AZ", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_CA', () {
@@ -1307,11 +1307,11 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-CA", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-CA", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_CA_long', () {
@@ -1327,8 +1327,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-CA", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_CA_medium', () {
@@ -1344,8 +1344,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-CA", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_CA_short', () {
@@ -1361,8 +1361,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-CA", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_GB', () {
@@ -1375,11 +1375,11 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-GB", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-GB", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_GB_long', () {
@@ -1395,8 +1395,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-GB", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_GB_medium', () {
@@ -1412,8 +1412,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-GB", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_GB_short', () {
@@ -1429,8 +1429,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-GB", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_GH', () {
@@ -1443,11 +1443,11 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-GH", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-GH", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_GH_long', () {
@@ -1463,8 +1463,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-GH", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_GH_medium', () {
@@ -1480,8 +1480,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-GH", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_GH_short', () {
@@ -1497,8 +1497,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-GH", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_HK', () {
@@ -1511,11 +1511,11 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-HK", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-HK", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_HK_long', () {
@@ -1531,8 +1531,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-HK", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_HK_medium', () {
@@ -1548,8 +1548,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-HK", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_HK_short', () {
@@ -1565,8 +1565,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-HK", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_IE', () {
@@ -1579,11 +1579,11 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-IE", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-IE", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_IE_long', () {
@@ -1599,8 +1599,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-IE", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_IE_medium', () {
@@ -1616,8 +1616,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-IE", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_IE_short', () {
@@ -1633,12 +1633,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-IE", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_IN', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Sunday",
       1:"Monday",
       2:"Tuesday",
@@ -1647,11 +1647,11 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-IN", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-IN", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_IN_long', () {
@@ -1667,8 +1667,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-IN", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_IN_medium', () {
@@ -1684,8 +1684,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-IN", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_IN_short', () {
@@ -1701,8 +1701,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-IN", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_IS', () {
@@ -1715,11 +1715,11 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-IS", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-IS", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_IS_long', () {  
@@ -1735,8 +1735,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-IS", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_IS_medium', () {    
@@ -1752,8 +1752,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-IS", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_IS_short', () {  
@@ -1769,8 +1769,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-IS", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_JP', () {
@@ -1783,11 +1783,11 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-JP", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-JP", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_JP_long', () {
@@ -1803,8 +1803,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-JP", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_JP_medium', () {
@@ -1820,8 +1820,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-JP", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_JP_short', () {
@@ -1837,8 +1837,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-JP", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_KE', () {
@@ -1851,11 +1851,11 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-KE", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-KE", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_KE_long', () {
@@ -1871,8 +1871,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-KE", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_KE_medium', () {
@@ -1888,8 +1888,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-KE", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_KE_short', () {
@@ -1905,8 +1905,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-KE", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_KR', () {
@@ -1919,11 +1919,11 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-KR", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-KR", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_KR_long', () {
@@ -1939,11 +1939,11 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-KR", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
-  group('testWeekdayTranslation_en_KR_medium', () {g
+  group('testWeekdayTranslation_en_KR_medium', () {
     Map<int, String> expectedResult = {
       0:"Su",
       1:"Mo",
@@ -1957,8 +1957,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-KR", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_KR_short', () {  
@@ -1974,8 +1974,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-KR", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_LK', () {
@@ -1988,13 +1988,14 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-LK", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-LK", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
+  group('testWeekdayTranslation_en_LK_long', () {
     Map<int, String> expectedResult = {
       0:"Sun",
       1:"Mon",
@@ -2007,8 +2008,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-LK", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_LK_medium', () {
@@ -2024,11 +2025,11 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-LK", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
-  group('testWeekdayTranslation_en_LK', () {
+  group('testWeekdayTranslation_en_LK_short', () {
     Map<int, String> expectedResult = {
       0:"S",
       1:"M",
@@ -2038,11 +2039,11 @@ void main() {
       5:"F",
       6:"S"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-LK", date:"w", length: "medium", useNative:false, timezone:"local");
-        for (i=0; i < 7; i++) {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-LK", date:"w", length: "short", useNative:false, timezone:"local");
-            value[i] = fmt.format(DateFactory({year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-LK", date:"w", length: "short", useNative:false, timezone:"local");
+    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    expectedResult.forEach((int num, String expected) {      
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_MM', () {
@@ -2055,11 +2056,11 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-MM", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-MM", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_MM_long', () {
@@ -2075,8 +2076,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-MM", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_MM_medium', () {
@@ -2092,8 +2093,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-MM", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_MM_short', () {
@@ -2109,8 +2110,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-MM", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_MW', () {
@@ -2123,11 +2124,11 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-MW", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-MW", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_MW_long', () {
@@ -2143,8 +2144,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-MW", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_MW_medium', () {
@@ -2160,8 +2161,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-MW", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_MW_short', () {
@@ -2177,8 +2178,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-MW", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_MY', () {
@@ -2191,11 +2192,11 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-MY", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-MY", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_MY_long', () {
@@ -2211,8 +2212,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-MY", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_MY_medium', () {
@@ -2228,8 +2229,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-MY", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_MY_short', () {
@@ -2245,8 +2246,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-MY", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_NG', () {
@@ -2259,11 +2260,11 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-NG", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-NG", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });    
   group('testWeekdayTranslation_en_NG_long', () {
@@ -2279,8 +2280,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-NG", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_NG_medium', () {
@@ -2296,8 +2297,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-NG", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_NG_short', () {
@@ -2313,8 +2314,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-NG", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_NZ', () {
@@ -2327,11 +2328,11 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-NZ", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-NZ", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_NZ_long', () {
@@ -2347,8 +2348,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-NZ", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_NZ_medium', () {
@@ -2364,8 +2365,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-NZ", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_NZ_short', () {
@@ -2381,8 +2382,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-NZ", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_PH', () {
@@ -2395,11 +2396,11 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-PH", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-PH", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_PH_long', () {
@@ -2415,8 +2416,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-PH", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_PH_medium', () {
@@ -2432,8 +2433,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-PH", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_PH_short', () {
@@ -2449,8 +2450,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-PH", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_PR', () {
@@ -2463,11 +2464,11 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-PR", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-PR", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_PR_long', () {
@@ -2483,8 +2484,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-PR", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_PR_medium', () {
@@ -2500,8 +2501,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-PR", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_PR_short', () {
@@ -2517,8 +2518,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-PR", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_SG', () {
@@ -2531,11 +2532,11 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-SG", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-SG", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_SG_long', () {
@@ -2551,8 +2552,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-SG", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_SG_medium', () {
@@ -2568,8 +2569,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-SG", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_SG_short', () {
@@ -2585,8 +2586,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-SG", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_US', () {
@@ -2599,11 +2600,11 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-US", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-US", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_US_long', () {
@@ -2619,8 +2620,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-US", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_US_medium', () {
@@ -2636,8 +2637,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-US", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_US_short', () {
@@ -2653,8 +2654,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-US", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_UG', () {
@@ -2667,11 +2668,11 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-UG", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-UG", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_UG_long', () {
@@ -2687,8 +2688,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-UG", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_UG_medium', () {
@@ -2704,8 +2705,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-UG", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_UG_short', () {
@@ -2721,8 +2722,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-UG", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_ZA', () {
@@ -2735,11 +2736,11 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-ZA", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-ZA", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_ZA_long', () {
@@ -2755,8 +2756,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-ZA", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_ZA_medium', () {
@@ -2772,8 +2773,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-ZA", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_ZA_short', () {
@@ -2789,8 +2790,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-ZA", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_ZM', () {
@@ -2803,11 +2804,11 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-ZM", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-ZM", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_ZM_long', () {
@@ -2823,8 +2824,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-ZM", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_ZM_medium', () {
@@ -2840,8 +2841,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-ZM", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_ZM_short', () {
@@ -2857,8 +2858,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-ZM", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_AR', () {
@@ -2871,11 +2872,11 @@ void main() {
       5:"viernes",
       6:"sábado"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-AR", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-AR", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_AR_long', () {
@@ -2891,8 +2892,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-AR", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_AR_medium', () {
@@ -2908,8 +2909,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-AR", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_AR_short', () {
@@ -2925,8 +2926,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-AR", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_BO', () {
@@ -2939,11 +2940,11 @@ void main() {
       5:"viernes",
       6:"sábado"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-BO", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-BO", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_BO_long', () {
@@ -2959,8 +2960,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-BO", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_BO_medium', () {
@@ -2976,8 +2977,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-BO", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_BO_short', () {
@@ -2993,8 +2994,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-BO", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_CL', () {
@@ -3007,11 +3008,11 @@ void main() {
       5:"viernes",
       6:"sábado"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-CL", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-CL", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_CL_long', () {
@@ -3027,8 +3028,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-CL", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_CL_medium', () {
@@ -3044,8 +3045,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-CL", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_CL_short', () {
@@ -3061,8 +3062,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-CL", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_CO', () {
@@ -3075,11 +3076,11 @@ void main() {
       5:"viernes",
       6:"sábado"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-CO", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-CO", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_CO_long', () {
@@ -3095,8 +3096,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-CO", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_CO_medium', () {
@@ -3112,8 +3113,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-CO", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_CO_short', () {
@@ -3129,8 +3130,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-CO", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_DO', () {
@@ -3143,11 +3144,11 @@ void main() {
       5:"viernes",
       6:"sábado"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-DO", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-DO", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_DO_long', () {
@@ -3163,8 +3164,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-DO", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_DO_medium', () {
@@ -3180,8 +3181,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-DO", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_DO_short', () {
@@ -3197,8 +3198,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-DO", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_EC', () {
@@ -3211,11 +3212,11 @@ void main() {
       5:"viernes",
       6:"sábado"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-EC", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-EC", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_EC_long', () {
@@ -3231,8 +3232,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-EC", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_EC_medium', () {
@@ -3248,8 +3249,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-EC", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_EC_short', () {
@@ -3265,8 +3266,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-EC", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_ES', () {
@@ -3279,11 +3280,11 @@ void main() {
       5:"viernes",
       6:"sábado"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-ES", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-ES", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_ES_long', () {
@@ -3299,8 +3300,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-ES", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_ES_medium', () {
@@ -3316,8 +3317,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-ES", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_ES_short', () {
@@ -3333,8 +3334,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-ES", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_GT', () {
@@ -3347,11 +3348,11 @@ void main() {
       5:"viernes",
       6:"sábado"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-GT", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-GT", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_GT_long', () {
@@ -3367,8 +3368,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-GT", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_GT_medium', () {
@@ -3384,8 +3385,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-GT", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_GT_short', () {
@@ -3401,8 +3402,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-GT", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_HN', () {
@@ -3415,11 +3416,11 @@ void main() {
       5:"viernes",
       6:"sábado"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-HN", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-HN", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_HN_long', () {
@@ -3435,8 +3436,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-HN", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_HN_medium', () {
@@ -3452,8 +3453,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-HN", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_HN_short', () {
@@ -3469,8 +3470,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-HN", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_MX', () {
@@ -3483,11 +3484,11 @@ void main() {
       5:"viernes",
       6:"sábado"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-MX", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-MX", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_MX_long', () {
@@ -3503,8 +3504,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-MX", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_MX_medium', () {
@@ -3520,8 +3521,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-MX", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_MX_short', () {
@@ -3537,8 +3538,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-MX", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_NI', () {
@@ -3551,11 +3552,11 @@ void main() {
       5:"viernes",
       6:"sábado"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-NI", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-NI", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_NI_long', () {
@@ -3571,8 +3572,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-NI", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_NI_medium', () {
@@ -3588,8 +3589,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-NI", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_NI_short', () {
@@ -3605,8 +3606,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-NI", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_PA', () {
@@ -3619,11 +3620,11 @@ void main() {
       5:"viernes",
       6:"sábado"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-PA", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-PA", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_PA_long', () {
@@ -3639,8 +3640,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-PA", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_PA_medium', () {
@@ -3656,8 +3657,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-PA", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_PA_short', () {
@@ -3673,8 +3674,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-PA", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_PE', () {
@@ -3687,11 +3688,11 @@ void main() {
       5:"viernes",
       6:"sábado"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-PE", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-PE", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_PE_long', () {
@@ -3707,8 +3708,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-PE", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_PE_medium', () {
@@ -3724,8 +3725,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-PE", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_PE_short', () {
@@ -3741,8 +3742,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-PE", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_PR', () {
@@ -3755,11 +3756,11 @@ void main() {
       5:"viernes",
       6:"sábado"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-PR", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-PR", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_PR_long', () {
@@ -3775,8 +3776,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-PR", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_PR_medium', () {
@@ -3792,8 +3793,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-PR", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_PR_short', () {
@@ -3809,8 +3810,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-PR", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_PY', () {
@@ -3823,11 +3824,11 @@ void main() {
       5:"viernes",
       6:"sábado"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-PY", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-PY", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_PY_long', () {
@@ -3843,8 +3844,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-PY", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_PY_medium', () {
@@ -3860,8 +3861,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-PY", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_PY_short', () {
@@ -3877,8 +3878,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-PY", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_SV', () {
@@ -3891,11 +3892,11 @@ void main() {
       5:"viernes",
       6:"sábado"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-SV", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-SV", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_SV_long', () {
@@ -3911,8 +3912,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-SV", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_SV_medium', () {
@@ -3928,8 +3929,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-SV", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_SV_short', () {
@@ -3945,8 +3946,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-SV", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_US', () {
@@ -3959,11 +3960,11 @@ void main() {
       5:"viernes",
       6:"sábado"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-US", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-US", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_US_long', () {
@@ -3979,8 +3980,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-US", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_US_medium', () {
@@ -3996,8 +3997,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-US", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_US_short', () {
@@ -4013,8 +4014,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-US", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_UY', () {
@@ -4027,11 +4028,11 @@ void main() {
       5:"viernes",
       6:"sábado"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-UY", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-UY", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_UY_long', () {
@@ -4047,8 +4048,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-UY", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_UY_medium', () {
@@ -4062,10 +4063,10 @@ void main() {
       6:"SA"
     };
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-UY", date:"w", length: "medium", useNative:false, timezone:"local");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_UY_short', () {
@@ -4079,10 +4080,10 @@ void main() {
       6:"S"
     };
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-UY", date:"w", length: "short", useNative:false, timezone:"local");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_VE', () {
@@ -4095,11 +4096,11 @@ void main() {
       5:"viernes",
       6:"sábado"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-VE", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-VE", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_VE_long', () {
@@ -4115,8 +4116,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-VE", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_VE_medium', () {
@@ -4132,8 +4133,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-VE", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_VE_short', () {
@@ -4149,8 +4150,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-VE", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_et_EE', () {
@@ -4163,11 +4164,11 @@ void main() {
       5:"reede",
       6:"laupäev"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"et-EE", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"et-EE", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
     group('testWeekdayTranslation_et_EE_long', () {
@@ -4183,8 +4184,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"et-EE", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_et_EE_medium', () {
@@ -4200,8 +4201,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"et-EE", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_et_EE_short', () {
@@ -4217,96 +4218,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"et-EE", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
-  group('testWeekdayTranslation_fa_AF', () {
-    Map<int, String> expectedResult = {
-      0:"یکشنبه",
-      1:"دوشنبه",
-      2:"سه‌شنبه",
-      3:"چهارشنبه",
-      4:"پنجشنبه",
-      5:"جمعه",
-      6:"شنبه"
-    };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fa-AF", date:"w", length: "full", useNative:false, timezone: "Etc/UTC"});
-    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-    expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+1, type:"persian", timezone: "Etc/UTC"}));
-     test(num, () async => expect(await fmt.format(dateOptions), expected));
-    });
-  });
-    group('testWeekdayTranslation_fa_AF', () {
-    Map<int, String> expectedResult = {
-      0:"یکشنبه",
-      1:"دوشنبه",
-      2:"سه‌شنبه",
-      3:"چهارشنبه",
-      4:"پنجشنبه",
-      5:"جمعه",
-      6:"شنبه"
-    };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fa-AF", date:"w", length: "full", useNative:false, timezone: "Etc/UTC"});
-    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-    expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"persian-algo", timezone: "Etc/UTC"}));
-     test(num, () async => expect(await fmt.format(dateOptions), expected));
-    });
-  });
-    group('testWeekdayTranslation_fa_AF_long', () {
-    Map<int, String> expectedResult = {
-      0:"یکشنبه",
-      1:"دوشنبه",
-      2:"سه‌شنبه",
-      3:"چهارشنبه",
-      4:"پنجشنبه",
-      5:"جمعه",
-      6:"شنبه"
-    };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fa-AF", date:"w", length: "long", useNative:false, timezone: "Etc/UTC"});
-    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-    expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"persian-algo", timezone: "Etc/UTC"}));
-     test(num, () async => expect(await fmt.format(dateOptions), expected));
-    });
-  });
-    group('testWeekdayTranslation_fa_AF_medium', () {
-    Map<int, String> expectedResult = {
-      0:"۱ش",
-      1:"۲ش",
-      2:"۳ش",
-      3:"۴ش",
-      4:"۵ش",
-      5:"ج",
-      6:"ش"
-    };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fa-AF", date:"w", length: "medium", useNative:false, timezone: "Etc/UTC"});
-    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-    expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"persian-algo", timezone: "Etc/UTC"}));
-     test(num, () async => expect(await fmt.format(dateOptions), expected));
-    });
-  });
-    group('testWeekdayTranslation_fa_AF_short', () {
-    Map<int, String> expectedResult = {
-      0:"ی",
-      1:"د",
-      2:"س",
-      3:"چ",
-      4:"پ",
-      5:"ج",
-      6:"ش"
-    };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fa-AF", date:"w", length: "short", useNative:false, timezone: "Etc/UTC"});
-    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-    expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"persian-algo", timezone: "Etc/UTC"}));
-     test(num, () async => expect(await fmt.format(dateOptions), expected));
-    });
-  });
-    group('testWeekdayTranslation_fa_IR', () {
+ 
+  group('testWeekdayTranslation_fa_IR', () {
      Map<int, String> expectedResult = {
       0:"یکشنبه",
       1:"دوشنبه",
@@ -4316,14 +4233,14 @@ void main() {
       5:"جمعه",
       6:"شنبه"
       };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fa-IR", date:"w", length: "full", useNative:false, timezone: "Etc/UTC"});
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fa-IR", date:"w", length: "full", useNative:false, timezone: "Etc/UTC");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:i+1, type:"persian", timezone: "Etc/UTC"}));
-   test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+1, type:"persian", timezone: "Etc/UTC");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
-      group('testWeekdayTranslation_fa_IR_long', () {
+  group('testWeekdayTranslation_fa_IR_long', () {
     Map<int, String> expectedResult = {
       0:"یکشنبه",
       1:"دوشنبه",
@@ -4333,48 +4250,14 @@ void main() {
       5:"جمعه",
       6:"شنبه"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fa-IR", date:"w", length: "full", useNative:false, timezone: "Etc/UTC"});
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fa-IR", date:"w", length: "full", useNative:false, timezone: "Etc/UTC");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"persian-algo", timezone: "Etc/UTC"}));
-    test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"persian-algo", timezone: "Etc/UTC");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
-    group('testWeekdayTranslation_fa_IR_long', () {
-    Map<int, String> expectedResult = {
-      0:"یکشنبه",
-      1:"دوشنبه",
-      2:"سه‌شنبه",
-      3:"چهارشنبه",
-      4:"پنجشنبه",
-      5:"جمعه",
-      6:"شنبه"
-    };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fa-IR", date:"w", length: "long", useNative:false, timezone: "Etc/UTC"});
-    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-    expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"persian-algo", timezone: "Etc/UTC"}));
-    test(num, () async => expect(await fmt.format(dateOptions), expected));
-    });
-  });
-    group('testWeekdayTranslation_fa_IR_medium', () {
-    Map<int, String> expectedResult = {
-      0:"۱ش",
-      1:"۲ش",
-      2:"۳ش",
-      3:"۴ش",
-      4:"۵ش",
-      5:"ج",
-      6:"ش"
-    };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fa-IR", date:"w", length: "medium", useNative:false, timezone: "Etc/UTC"});
-    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-    expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"persian-algo", timezone: "Etc/UTC"}));
-    test(num, () async => expect(await fmt.format(dateOptions), expected));
-    });
-  });
-    group('testWeekdayTranslation_fa_IR_short', () {
+  group('testWeekdayTranslation_fa_IR_short', () {
     Map<int, String> expectedResult = {
       0:"ی",
       1:"د",
@@ -4384,15 +4267,14 @@ void main() {
       5:"ج",
       6:"ش"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fa-IR", date:"w", length: "short", useNative:false, timezone: "Etc/UTC"});
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fa-IR", date:"w", length: "short", useNative:false, timezone: "Etc/UTC");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"persian-algo", timezone: "Etc/UTC"}));
-        }
-    test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"persian-algo", timezone: "Etc/UTC");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
-    group('testWeekdayTranslation_fi_FI', () {
+  group('testWeekdayTranslation_fi_FI', () {
     Map<int, String> expectedResult = {
       0:"sunnuntai",
       1:"maanantai",
@@ -4402,15 +4284,14 @@ void main() {
       5:"perjantai",
       6:"lauantai"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fi-FI", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fi-FI", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-        }
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   }); 
-    group('testWeekdayTranslation_fi_FI_long', () {
+  group('testWeekdayTranslation_fi_FI_long', () {
     Map<int, String> expectedResult = {
       0:"su",
       1:"ma",
@@ -4423,8 +4304,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fi-FI", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_fi_FI_medium', () {
@@ -4440,8 +4321,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fi-FI", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
     group('testWeekdayTranslation_fi_FI_short', () {
@@ -4457,8 +4338,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fi-FI", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_fr_BE', () {
@@ -4471,11 +4352,11 @@ void main() {
       5:"vendredi",
       6:"samedi"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fr-BE", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fr-BE", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_fr_BE_long', () {
@@ -4491,8 +4372,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fr-BE", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_fr_BE_medium', () {
@@ -4508,8 +4389,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fr-BE", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_fr_BE_short', () {
@@ -4525,8 +4406,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fr-BE", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_fr_CA', () {
@@ -4539,11 +4420,11 @@ void main() {
       5:"vendredi",
       6:"samedi"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fr-CA", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fr-CA", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_fr_CA_long', () {
@@ -4559,8 +4440,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fr-CA", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_fr_CA_medium', () {
@@ -4576,8 +4457,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fr-CA", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_fr_CA_short', () {
@@ -4589,12 +4470,12 @@ void main() {
       4:"J",
       5:"V",
       6:"S",
-    },
+    };
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fr-CA", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_fr_CA', () {
@@ -4607,11 +4488,11 @@ void main() {
       5:"vendredi",
       6:"samedi"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fr-CA", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fr-CA", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_fr_CA_long', () {
@@ -4627,8 +4508,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fr-CA", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_fr_CA_medium', () {
@@ -4644,8 +4525,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fr-CA", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_fr_CA_short', () {
@@ -4661,8 +4542,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fr-CA", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_fr_FR', () {
@@ -4675,11 +4556,11 @@ void main() {
       5:"vendredi",
       6:"samedi"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fr-FR", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fr-FR", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_fr_FR_long', () {
@@ -4695,8 +4576,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fr-FR", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_fr_FR_medium', () {
@@ -4712,8 +4593,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fr-FR", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_fr_FR_short', () {
@@ -4729,8 +4610,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fr-FR", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_fr_LU', () {
@@ -4743,11 +4624,11 @@ void main() {
       5:"vendredi",
       6:"samedi"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fr-LU", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fr-LU", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_fr_LU_long', () {
@@ -4763,8 +4644,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fr-LU", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_fr_LU_medium', () {
@@ -4780,8 +4661,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fr-LU", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_fr_LU_short', () {
@@ -4797,8 +4678,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"fr-LU", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ga_IE', () {
@@ -4811,11 +4692,11 @@ void main() {
       5:"Dé hAoine",
       6:"Dé Sathairn"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ga-IE", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ga-IE", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ga_IE_long', () {
@@ -4831,8 +4712,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ga-IE", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ga_IE_medium', () {
@@ -4848,8 +4729,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ga-IE", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ga_IE_short', () {
@@ -4865,8 +4746,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ga-IE", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_gu_IN', () {
@@ -4880,10 +4761,10 @@ void main() {
       6:"શનિવાર"
     };
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"gu-IN", date:"w", length: "full", useNative:false, timezone:"local");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_gu_IN_long', () {
@@ -4899,8 +4780,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"gu-IN", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_gu_IN_medium', () {
@@ -4916,8 +4797,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"gu-IN", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_gu_IN_short', () {
@@ -4933,12 +4814,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"gu-IN", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_he_IL', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"יום ראשון",
       1:"יום שני",
       2:"יום שלישי",
@@ -4948,10 +4829,10 @@ void main() {
       6:"יום שבת"
     };
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"he-IL", date:"w", length: "full", useNative:false, timezone:"local");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_he_IL_long', () {
@@ -4967,8 +4848,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"he-IL", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_he_IL_medium', () {
@@ -4984,8 +4865,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"he-IL", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_he_IL_short', () {
@@ -5001,8 +4882,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"he-IL", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_hi_IN', () {
@@ -5018,8 +4899,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"hi-IN", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_hi_IN_long', () {
@@ -5035,8 +4916,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"hi-IN", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_hi_IN_medium', () {
@@ -5052,8 +4933,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"hi-IN", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_hi_IN_short', () {
@@ -5069,8 +4950,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"hi-IN", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_hr_HR', () {
@@ -5083,11 +4964,11 @@ void main() {
       5:"petak",
       6:"subota"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"hr-HR", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"hr-HR", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
     group('testWeekdayTranslation_hr_HR_long', () {
@@ -5100,11 +4981,11 @@ void main() {
       5:"pet",
       6:"sub"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"hr-HR", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"hr-HR", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_hr_HR_medium', () {
@@ -5117,11 +4998,11 @@ void main() {
       5:"pet",
       6:"sub"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"hr-HR", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"hr-HR", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_hr_HR_short', () {
@@ -5134,11 +5015,11 @@ void main() {
       5:"p",
       6:"s"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"hr-HR", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"hr-HR", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_hr_ME', () {
@@ -5151,11 +5032,11 @@ void main() {
       5:"petak",
       6:"subota"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"hr-ME", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"hr-ME", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_hr_ME_long', () {
@@ -5168,11 +5049,11 @@ void main() {
       5:"pet",
       6:"sub"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"hr-ME", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"hr-ME", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_hr_ME_medium', () {
@@ -5185,11 +5066,11 @@ void main() {
       5:"pet",
       6:"sub"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"hr-ME", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"hr-ME", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_hr_ME_short', () {
@@ -5202,11 +5083,11 @@ void main() {
       5:"p",
       6:"s"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"hr-ME", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"hr-ME", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_hr_HU', () {
@@ -5219,11 +5100,11 @@ void main() {
       5:"petak",
       6:"subota"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"hr-HU", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"hr-HU", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_hr_HU_long', () {
@@ -5236,11 +5117,11 @@ void main() {
       5:"pet",
       6:"sub"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"hr-HU", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"hr-HU", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_hr_HU_medium', () {
@@ -5253,11 +5134,11 @@ void main() {
       5:"pet",
       6:"sub"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"hr-HU", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"hr-HU", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_hr_HU_short', () {
@@ -5270,11 +5151,11 @@ void main() {
       5:"p",
       6:"s"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"hr-HU", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"hr-HU", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_id_ID', () {
@@ -5287,11 +5168,11 @@ void main() {
       5:"Jumat",
       6:"Sabtu"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"id-ID", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"id-ID", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_id_ID_long', () {
@@ -5304,11 +5185,11 @@ void main() {
       5:"Jum",
       6:"Sab"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"id-ID", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"id-ID", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_id_ID_medium', () {
@@ -5321,11 +5202,11 @@ void main() {
       5:"Jum",
       6:"Sab"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"id-ID", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"id-ID", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_id_ID_short', () {
@@ -5338,11 +5219,11 @@ void main() {
       5:"J",
       6:"S"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"id-ID", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"id-ID", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_is_IS', () {
@@ -5355,11 +5236,11 @@ void main() {
       5:"föstudagur",
       6:"laugardagur"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"is-IS", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"is-IS", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_is_IS_long', () {
@@ -5372,11 +5253,11 @@ void main() {
       5:"fös.",
       6:"lau."
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"is-IS", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"is-IS", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_is_IS_medium', () {
@@ -5389,11 +5270,11 @@ void main() {
       5:"fö.",
       6:"la."
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"is-IS", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"is-IS", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_is_IS_short', () {
@@ -5406,11 +5287,11 @@ void main() {
       5:"F",
       6:"L"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"is-IS", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"is-IS", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_it_CH', () {
@@ -5423,11 +5304,11 @@ void main() {
       5:"venerdì",
       6:"sabato"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"it-CH", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"it-CH", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_it_CH_long', () {
@@ -5440,11 +5321,11 @@ void main() {
       5:"ven",
       6:"sab"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"it-CH", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"it-CH", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_it_CH_medium', () {
@@ -5457,11 +5338,11 @@ void main() {
       5:"ven",
       6:"sab"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"it-CH", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"it-CH", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_it_CH_short', () {
@@ -5474,11 +5355,11 @@ void main() {
       5:"V",
       6:"S"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"it-CH", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"it-CH", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_it_IT', () {
@@ -5491,11 +5372,11 @@ void main() {
       5:"venerdì",
       6:"sabato"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"it-IT", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"it-IT", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_it_IT_long', () {
@@ -5508,11 +5389,11 @@ void main() {
       5:"ven",
       6:"sab"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"it-IT", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"it-IT", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_it_IT_medium', () {
@@ -5525,11 +5406,11 @@ void main() {
       5:"ven",
       6:"sab"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"it-IT", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"it-IT", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_it_IT_short', () {
@@ -5542,11 +5423,11 @@ void main() {
       5:"V",
       6:"S"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"it-IT", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"it-IT", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ja_JP', () {
@@ -5559,11 +5440,11 @@ void main() {
       5:"金曜日",
       6:"土曜日"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ja-JP", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ja-JP", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ja_JP_long', () {
@@ -5576,11 +5457,11 @@ void main() {
       5:"金",
       6:"土"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ja-JP", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ja-JP", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ja_JP_medium', () {
@@ -5593,11 +5474,11 @@ void main() {
       5:"金",
       6:"土"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ja-JP", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ja-JP", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ja_JP_short', () {
@@ -5610,11 +5491,11 @@ void main() {
       5:"金",
       6:"土"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ja-JP", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ja-JP", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_kk_KZ', () {
@@ -5627,15 +5508,15 @@ void main() {
       5:"жұма",
       6:"сенбі"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"kk-KZ", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"kk-KZ", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_kk_KZ_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"жс",
       1:"дс",
       2:"сс",
@@ -5644,11 +5525,11 @@ void main() {
       5:"жм",
       6:"сб"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"kk-KZ", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"kk-KZ", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_kk_KZ_medium', () {
@@ -5661,15 +5542,15 @@ void main() {
       5:"жм",
       6:"сб"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"kk-KZ", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"kk-KZ", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_kk_KZ_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Ж",
       1:"Д",
       2:"С",
@@ -5678,15 +5559,15 @@ void main() {
       5:"Ж",
       6:"С"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"kk-KZ", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"kk-KZ", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_kn_IN', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"ಭಾನುವಾರ",
       1:"ಸೋಮವಾರ",
       2:"ಮಂಗಳವಾರ",
@@ -5696,14 +5577,14 @@ void main() {
       6:"ಶನಿವಾರ"
     };
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"kn-IN", date:"w", length: "full", useNative:false, timezone:"local");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_kn_IN_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"ಭಾನು",
       1:"ಸೋಮ",
       2:"ಮಂಗಳ",
@@ -5713,14 +5594,14 @@ void main() {
       6:"ಶನಿ"
     };
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"kn-IN", date:"w", length: "long", useNative:false, timezone:"local");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_kn_IN_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"ಭಾನು",
       1:"ಸೋಮ",
       2:"ಮಂಗಳ",
@@ -5730,14 +5611,14 @@ void main() {
       6:"ಶನಿ"
     };
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"kn-IN", date:"w", length: "medium", useNative:false, timezone:"local");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_kn_IN_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"ಭಾ",
       1:"ಸೋ",
       2:"ಮಂ",
@@ -5747,14 +5628,14 @@ void main() {
       6:"ಶ"
     };
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"kn-IN", date:"w", length: "short", useNative:false, timezone:"local");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ko_KR', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"일요일",
       1:"월요일",
       2:"화요일",
@@ -5763,15 +5644,15 @@ void main() {
       5:"금요일",
       6:"토요일"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ko-KR", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ko-KR", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ko_KR_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"일",
       1:"월",
       2:"화",
@@ -5780,14 +5661,15 @@ void main() {
       5:"금",
       6:"토"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ko-KR", date:"w", length: "long", useNative:false, timezone:"local"})
-        expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ko-KR", date:"w", length: "long", useNative:false, timezone:"local");
+    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    expectedResult.forEach((int num, String expected) {
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ko_KR_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"일",
       1:"월",
       2:"화",
@@ -5796,15 +5678,15 @@ void main() {
       5:"금",
       6:"토"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ko-KR", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ko-KR", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ko_KR_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"일",
       1:"월",
       2:"화",
@@ -5813,15 +5695,15 @@ void main() {
       5:"금",
       6:"토"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ko-KR", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ko-KR", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ku_Arab_IQ', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"یەکشەممە",
       1:"دووشەممە",
       2:"سێشەممە",
@@ -5831,14 +5713,14 @@ void main() {
       6:"شەممە"
     };
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ku-Arab-IQ", date:"w", length: "full", useNative:false, timezone:"local");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ku_Arab_IQ_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"یەکشەممە",
       1:"دووشەممە",
       2:"سێشەممە",
@@ -5850,8 +5732,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ku-Arab-IQ", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ku_Arab_IQ_medium', () {
@@ -5867,8 +5749,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ku-Arab-IQ", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ku_Arab_IQ_short', () {
@@ -5884,12 +5766,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ku-Arab-IQ", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_lt_LT', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"sekmadienis",
       1:"pirmadienis",
       2:"antradienis",
@@ -5898,15 +5780,15 @@ void main() {
       5:"penktadienis",
       6:"šeštadienis"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"lt-LT", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"lt-LT", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_lt_LT_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"sk",
       1:"pr",
       2:"an",
@@ -5915,15 +5797,15 @@ void main() {
       5:"pn",
       6:"št"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"lt-LT", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"lt-LT", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_lt_LT_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Sk",
       1:"Pr",
       2:"An",
@@ -5932,15 +5814,15 @@ void main() {
       5:"Pn",
       6:"Št"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"lt-LT", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"lt-LT", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_lt_LT_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"S",
       1:"P",
       2:"A",
@@ -5949,15 +5831,15 @@ void main() {
       5:"P",
       6:"Š"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"lt-LT", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"lt-LT", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_lv_LV', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Svētdiena",
       1:"Pirmdiena",
       2:"Otrdiena",
@@ -5966,15 +5848,15 @@ void main() {
       5:"Piektdiena",
       6:"Sestdiena"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"lv-LV", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"lv-LV", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_lv_LV_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Svētd.",
       1:"Pirmd.",
       2:"Otrd.",
@@ -5983,15 +5865,15 @@ void main() {
       5:"Piektd.",
       6:"Sestd."
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"lv-LV", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"lv-LV", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_lv_LV_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Sv",
       1:"Pr",
       2:"Ot",
@@ -6000,15 +5882,15 @@ void main() {
       5:"Pk",
       6:"Se"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"lv-LV", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"lv-LV", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_lv_LV_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"S",
       1:"P",
       2:"O",
@@ -6017,15 +5899,15 @@ void main() {
       5:"P",
       6:"S"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"lv-LV", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"lv-LV", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_mk_MK', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"недела",
       1:"понеделник",
       2:"вторник",
@@ -6034,15 +5916,15 @@ void main() {
       5:"петок",
       6:"сабота"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"mk-MK", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"mk-MK", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_mk_MK_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"нед.",
       1:"пон.",
       2:"вто.",
@@ -6051,15 +5933,15 @@ void main() {
       5:"пет.",
       6:"саб."
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"mk-MK", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"mk-MK", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_mk_MK_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"нед.",
       1:"пон.",
       2:"вто.",
@@ -6068,15 +5950,15 @@ void main() {
       5:"пет.",
       6:"саб."
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"mk-MK", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"mk-MK", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_mk_MK_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"н",
       1:"п",
       2:"в",
@@ -6085,15 +5967,15 @@ void main() {
       5:"п",
       6:"с"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"mk-MK", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"mk-MK", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ml_IN', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"ഞായറാഴ്‌ച",
       1:"തിങ്കളാഴ്‌ച",
       2:"ചൊവ്വാഴ്‌ച",
@@ -6103,14 +5985,14 @@ void main() {
       6:"ശനിയാഴ്‌ച"
     };
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ml-IN", date:"w", length: "full", useNative:false, timezone:"local");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ml_IN_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"ഞായർ",
       1:"തിങ്കൾ",
       2:"ചൊവ്വ",
@@ -6120,14 +6002,14 @@ void main() {
       6:"ശനി"
     };
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ml-IN", date:"w", length: "long", useNative:false, timezone:"local");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ml_IN_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"ഞാ",
       1:"തി",
       2:"ചൊ",
@@ -6137,14 +6019,14 @@ void main() {
       6:"ശ"
     };
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ml-IN", date:"w", length: "medium", useNative:false, timezone:"local");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ml_IN_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"ഞാ",
       1:"തി",
       2:"ചൊ",
@@ -6154,14 +6036,14 @@ void main() {
       6:"ശ"
     };
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ml-IN", date:"w", length: "short", useNative:false, timezone:"local");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_mr_IN', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"रविवार",
       1:"सोमवार",
       2:"मंगळवार",
@@ -6171,14 +6053,14 @@ void main() {
       6:"शनिवार"
     };
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"mr-IN", date:"w", length: "full", useNative:false, timezone:"local");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_mr_IN_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"रवि",
       1:"सोम",
       2:"मंगळ",
@@ -6188,14 +6070,14 @@ void main() {
       6:"शनि"
     };
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"mr-IN", date:"w", length: "long", useNative:false, timezone:"local");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_mr_IN_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"र",
       1:"सो",
       2:"मं",
@@ -6207,8 +6089,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"mr-IN", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_mr_IN_short', () {
@@ -6224,8 +6106,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"mr-IN", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ms_MY', () {
@@ -6238,11 +6120,11 @@ void main() {
       5:"Jumaat",
       6:"Sabtu"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ms-MY", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ms-MY", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ms_MY_long', () {
@@ -6255,11 +6137,11 @@ void main() {
       5:"Jum",
       6:"Sab"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ms-MY", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ms-MY", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ms_MY_medium', () {
@@ -6272,11 +6154,11 @@ void main() {
       5:"Ju",
       6:"Sa"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ms-MY", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ms-MY", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ms_MY_short', () {
@@ -6289,11 +6171,11 @@ void main() {
       5:"J",
       6:"S"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ms-MY", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ms-MY", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_nb_NO', () {
@@ -6306,11 +6188,11 @@ void main() {
       5:"fredag",
       6:"lørdag"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"nb-NO", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"nb-NO", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_nb_NO_long', () {
@@ -6323,11 +6205,11 @@ void main() {
       5:"fre.",
       6:"lør."
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"nb-NO", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"nb-NO", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_nb_NO_medium', () {
@@ -6340,11 +6222,11 @@ void main() {
       5:"fr.",
       6:"lø."
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"nb-NO", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"nb-NO", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_nb_NO_short', () {
@@ -6357,11 +6239,11 @@ void main() {
       5:"F",
       6:"L"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"nb-NO", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"nb-NO", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_nl_BE', () {
@@ -6374,11 +6256,11 @@ void main() {
       5:"vrijdag",
       6:"zaterdag"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"nl-BE", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"nl-BE", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
 
@@ -6392,11 +6274,11 @@ void main() {
       5:"vr",
       6:"za"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"nl-BE", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"nl-BE", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_nl_BE_medium', () {
@@ -6409,11 +6291,11 @@ void main() {
       5:"vr",
       6:"za"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"nl-BE", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"nl-BE", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_nl_BE_short', () {
@@ -6426,11 +6308,11 @@ void main() {
       5:"V",
       6:"Z"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"nl-BE", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"nl-BE", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_nl_NL', () {
@@ -6443,11 +6325,11 @@ void main() {
       5:"vrijdag",
       6:"zaterdag"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"nl-NL", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"nl-NL", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_nl_NL_long', () {
@@ -6460,11 +6342,11 @@ void main() {
       5:"vr",
       6:"za"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"nl-NL", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"nl-NL", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_nl_NL_medium', () {
@@ -6477,11 +6359,11 @@ void main() {
       5:"vr",
       6:"za"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"nl-NL", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"nl-NL", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_nl_NL_short', () {
@@ -6494,11 +6376,11 @@ void main() {
       5:"V",
       6:"Z"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"nl-NL", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"nl-NL", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_pa_Guru_IN', () {
@@ -6514,8 +6396,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pa-Guru-IN", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_pa_Guru_IN_long', () {
@@ -6531,8 +6413,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pa-Guru-IN", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_pa_Guru_IN_medium', () {
@@ -6548,8 +6430,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pa-Guru-IN", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_pa_Guru_IN_short', () {
@@ -6565,8 +6447,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pa-Guru-IN", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_pl_PL', () {
@@ -6579,11 +6461,11 @@ void main() {
       5:"piątek",
       6:"sobota"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pl-PL", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pl-PL", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_pl_PL_long', () {
@@ -6596,11 +6478,11 @@ void main() {
       5:"pt.",
       6:"sob."
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pl-PL", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pl-PL", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_pl_PL_medium', () {
@@ -6613,11 +6495,11 @@ void main() {
       5:"pią",
       6:"sob"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pl-PL", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pl-PL", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_pl_PL_short', () {
@@ -6630,15 +6512,15 @@ void main() {
       5:"P",
       6:"S"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pl-PL", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pl-PL", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_pt_BR', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"domingo",
       1:"segunda-feira",
       2:"terça-feira",
@@ -6647,11 +6529,11 @@ void main() {
       5:"sexta-feira",
       6:"sábado"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-BR", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-BR", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_pt_BR_long', () {
@@ -6664,11 +6546,11 @@ void main() {
       5:'sex.',
       6:'sáb.'
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-BR", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-BR", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_pt_BR_medium', () {
@@ -6681,11 +6563,11 @@ void main() {
       5:'sex.',
       6:'sáb.'
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-BR", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-BR", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_pt_BR_short', () {
@@ -6698,15 +6580,15 @@ void main() {
       5:"S",
       6:"S"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-BR", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-BR", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_pt_PT', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"domingo",
       1:"segunda-feira",
       2:"terça-feira",
@@ -6715,11 +6597,11 @@ void main() {
       5:"sexta-feira",
       6:"sábado"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-PT", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-PT", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
     group('testWeekdayTranslation_pt_PT_long', () {
@@ -6732,11 +6614,11 @@ void main() {
       5:"sexta",
       6:"sábado"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-PT", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-PT", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_pt_PT_medium', () {
@@ -6749,11 +6631,11 @@ void main() {
       5:'sex.',
       6:'sáb.'
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-PT", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-PT", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_pt_PT_short', () {
@@ -6766,15 +6648,15 @@ void main() {
       5:"S",
       6:"S"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-PT", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-PT", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ro_RO', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"duminică",
       1:"luni",
       2:"marți",
@@ -6783,15 +6665,15 @@ void main() {
       5:"vineri",
       6:"sâmbătă"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ro-RO", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ro-RO", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ro_RO_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"dum.",
       1:"lun.",
       2:"mar.",
@@ -6800,15 +6682,15 @@ void main() {
       5:"vin.",
       6:"sâm."
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ro-RO", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ro-RO", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ro_RO_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"du.",
       1:"lu.",
       2:"ma.",
@@ -6817,15 +6699,15 @@ void main() {
       5:"vi.",
       6:"sâ."
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ro-RO", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ro-RO", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ro_RO_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"D",
       1:"L",
       2:"M",
@@ -6834,15 +6716,15 @@ void main() {
       5:"V",
       6:"S"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ro-RO", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ro-RO", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_sr_Cyrl_RS', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"недеља",
       1:"понедељак",
       2:"уторак",
@@ -6851,15 +6733,15 @@ void main() {
       5:"петак",
       6:"субота"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sr-Cyrl-RS", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sr-Cyrl-RS", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_sr_Cyrl_RS_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"нед",
       1:"пон",
       2:"уто",
@@ -6868,15 +6750,15 @@ void main() {
       5:"пет",
       6:"суб"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sr-Cyrl-RS", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sr-Cyrl-RS", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_sr_Cyrl_RS_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"не",
       1:"по",
       2:"ут",
@@ -6885,15 +6767,15 @@ void main() {
       5:"пе",
       6:"су"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sr-Cyrl-RS", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sr-Cyrl-RS", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_sr_Cyrl_RS_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"н",
       1:"п",
       2:"у",
@@ -6902,15 +6784,15 @@ void main() {
       5:"п",
       6:"с"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sr-Cyrl-RS", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sr-Cyrl-RS", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_sr_Latn_RS', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"nedelja",
       1:"ponedeljak",
       2:"utorak",
@@ -6919,15 +6801,15 @@ void main() {
       5:"petak",
       6:"subota"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sr-Latn-RS", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sr-Latn-RS", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_sr_Latn_RS_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"ned",
       1:"pon",
       2:"uto",
@@ -6936,11 +6818,11 @@ void main() {
       5:"pet",
       6:"sub"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sr-Latn-RS", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sr-Latn-RS", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_sr_Latn_RS_medium', () {
@@ -6953,15 +6835,15 @@ void main() {
       5:"pe",
       6:"su"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sr-Latn-RS", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sr-Latn-RS", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_sr_Latn_RS_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"n",
       1:"p",
       2:"u",
@@ -6970,15 +6852,15 @@ void main() {
       5:"p",
       6:"s"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sr-Latn-RS", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sr-Latn-RS", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ru_BY', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"воскресенье",
       1:"понедельник",
       2:"вторник",
@@ -6987,11 +6869,11 @@ void main() {
       5:"пятница",
       6:"суббота"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-BY", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-BY", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ru_BY_long', () {
@@ -7004,11 +6886,11 @@ void main() {
       5:"пт",
       6:"сб"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-BY", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-BY", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ru_BY_medium', () {
@@ -7021,11 +6903,11 @@ void main() {
       5:"пт",
       6:"сб"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-BY", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-BY", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ru_BY_short', () {
@@ -7038,11 +6920,11 @@ void main() {
       5:"П",
       6:"С"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-BY", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-BY", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ru_KG', () {
@@ -7055,11 +6937,11 @@ void main() {
       5:"пятница",
       6:"суббота"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-KG", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-KG", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ru_KG_long', () {
@@ -7072,11 +6954,11 @@ void main() {
       5:"пт",
       6:"сб"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-KG", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-KG", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ru_KG_medium', () {
@@ -7089,11 +6971,11 @@ void main() {
       5:"пт",
       6:"сб"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-KG", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-KG", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ru_KG_short', () {
@@ -7106,11 +6988,11 @@ void main() {
       5:"П",
       6:"С"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-KG", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-KG", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ru_KZ', () {
@@ -7123,15 +7005,15 @@ void main() {
       5:"пятница",
       6:"суббота"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-KZ", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-KZ", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ru_KZ_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"вс",
       1:"пн",
       2:"вт",
@@ -7140,11 +7022,11 @@ void main() {
       5:"пт",
       6:"сб"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-KZ", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-KZ", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ru_KZ_medium', () {
@@ -7157,11 +7039,11 @@ void main() {
       5:"пт",
       6:"сб"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-KZ", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-KZ", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ru_KZ_short', () {
@@ -7174,11 +7056,11 @@ void main() {
       5:"П",
       6:"С"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-KZ", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-KZ", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ru_GE', () {
@@ -7191,11 +7073,11 @@ void main() {
       5:"пятница",
       6:"суббота"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-GE", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-GE", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ru_GE_long', () {
@@ -7208,15 +7090,15 @@ void main() {
       5:"пт",
       6:"сб"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-GE", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-GE", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ru_GE_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"вс",
       1:"пн",
       2:"вт",
@@ -7225,15 +7107,15 @@ void main() {
       5:"пт",
       6:"сб"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-GE", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-GE", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ru_GE_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"В",
       1:"П",
       2:"В",
@@ -7242,15 +7124,15 @@ void main() {
       5:"П",
       6:"С"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-GE", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-GE", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ru_RU', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"воскресенье",
       1:"понедельник",
       2:"вторник",
@@ -7259,15 +7141,15 @@ void main() {
       5:"пятница",
       6:"суббота"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-RU", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-RU", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ru_RU_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"вс",
       1:"пн",
       2:"вт",
@@ -7276,15 +7158,15 @@ void main() {
       5:"пт",
       6:"сб"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-RU", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-RU", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ru_RU_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"вс",
       1:"пн",
       2:"вт",
@@ -7293,15 +7175,15 @@ void main() {
       5:"пт",
       6:"сб"
       };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-RU", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-RU", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ru_RU_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"В",
       1:"П",
       2:"В",
@@ -7310,15 +7192,15 @@ void main() {
       5:"П",
       6:"С"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-RU", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-RU", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ru_UA', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"воскресенье",
       1:"понедельник",
       2:"вторник",
@@ -7327,15 +7209,15 @@ void main() {
       5:"пятница",
       6:"суббота"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-UA", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-UA", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ru_UA_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"вс",
       1:"пн",
       2:"вт",
@@ -7344,15 +7226,15 @@ void main() {
       5:"пт",
       6:"сб"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-UA", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-UA", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ru_UA_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"вс",
       1:"пн",
       2:"вт",
@@ -7361,15 +7243,15 @@ void main() {
       5:"пт",
       6:"сб"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-UA", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-UA", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ru_UA_short', () {
-      Map<int, String> expectedResult = { 
+    Map<int, String> expectedResult = { 
       0:"В",
       1:"П",
       2:"В",
@@ -7378,15 +7260,15 @@ void main() {
       5:"П",
       6:"С"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-UA", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ru-UA", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
     test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });  
     group('testWeekdayTranslation_sk_SK', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"nedeľa",
       1:"pondelok",
       2:"utorok",
@@ -7395,15 +7277,15 @@ void main() {
       5:"piatok",
       6:"sobota"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sk-SK", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sk-SK", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_sk_SK_long', () {
-       Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"ne",
       1:"po",
       2:"ut",
@@ -7412,16 +7294,15 @@ void main() {
       5:"pi",
       6:"so"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sk-SK", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sk-SK", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
-   
-    group('testWeekdayTranslation_sk_SK_medium', () {
-       Map<int, String> expectedResult = {
+  group('testWeekdayTranslation_sk_SK_medium', () {
+    Map<int, String> expectedResult = {
       0:"ne",
       1:"po",
       2:"ut",
@@ -7430,16 +7311,15 @@ void main() {
       5:"pi",
       6:"so"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sk-SK", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sk-SK", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
-   
-    group('testWeekdayTranslation_sk_SK_short', () {
-      Map<int, String> expectedResult = {
+  group('testWeekdayTranslation_sk_SK_short', () {
+    Map<int, String> expectedResult = {
       0:"n",
       1:"p",
       2:"u",
@@ -7448,15 +7328,15 @@ void main() {
       5:"p",
       6:"s"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sk-SK", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sk-SK", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_sl_SI', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"nedelja",
       1:"ponedeljek",
       2:"torek",
@@ -7465,15 +7345,15 @@ void main() {
       5:"petek",
       6:"sobota"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sl-SI", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sl-SI", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_sl_SI_long_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"ned.",
       1:"pon.",
       2:"tor.",
@@ -7482,15 +7362,15 @@ void main() {
       5:"pet.",
       6:"sob."
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sl-SI", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sl-SI", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_sl_SI', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"ned.",
       1:"pon.",
       2:"tor.",
@@ -7499,15 +7379,15 @@ void main() {
       5:"pet.",
       6:"sob."
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sl-SI", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sl-SI", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_sl_SI_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"n",
       1:"p",
       2:"t",
@@ -7516,15 +7396,15 @@ void main() {
       5:"p",
       6:"s"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sl-SI", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sl-SI", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_sq_AL', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"e diel",
       1:"e hënë",
       2:"e martë",
@@ -7533,15 +7413,15 @@ void main() {
       5:"e premte",
       6:"e shtunë"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sq-AL", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sq-AL", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_sq_AL_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"die",
       1:"hën",
       2:"mar",
@@ -7550,15 +7430,15 @@ void main() {
       5:"pre",
       6:"sht"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sq-AL", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sq-AL", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_sq_AL_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"die",
       1:"hën",
       2:"mar",
@@ -7567,15 +7447,15 @@ void main() {
       5:"pre",
       6:"sht"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sq-AL", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sq-AL", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_sq_AL_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"d",
       1:"h",
       2:"m",
@@ -7584,15 +7464,15 @@ void main() {
       5:"p",
       6:"sh"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sq-AL", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sq-AL", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_sq_ME', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"e diel",
       1:"e hënë",
       2:"e martë",
@@ -7601,15 +7481,15 @@ void main() {
       5:"e premte",
       6:"e shtunë"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sq-ME", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sq-ME", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_sq_ME_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"die",
       1:"hën",
       2:"mar",
@@ -7618,15 +7498,15 @@ void main() {
       5:"pre",
       6:"sht"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sq-ME", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sq-ME", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_sq_ME_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"die",
       1:"hën",
       2:"mar",
@@ -7635,15 +7515,15 @@ void main() {
       5:"pre",
       6:"sht"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sq-ME", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sq-ME", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_sq_ME_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"d",
       1:"h",
       2:"m",
@@ -7652,15 +7532,15 @@ void main() {
       5:"p",
       6:"sh"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sq-ME", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sq-ME", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_sv_FI', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"söndag",
       1:"måndag",
       2:"tisdag",
@@ -7669,15 +7549,15 @@ void main() {
       5:"fredag",
       6:"lördag"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sv-FI", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sv-FI", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_sv_FI_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"sön",
       1:"mån",
       2:"tis",
@@ -7686,15 +7566,15 @@ void main() {
       5:"fre",
       6:"lör"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sv-FI", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sv-FI", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_sv_FI_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"sö",
       1:"må",
       2:"ti",
@@ -7703,15 +7583,15 @@ void main() {
       5:"fr",
       6:"lö"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sv-FI", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sv-FI", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_sv_FI_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"S",
       1:"M",
       2:"T",
@@ -7720,15 +7600,15 @@ void main() {
       5:"F",
       6:"L"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sv-FI", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sv-FI", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_sv_SE', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"söndag",
       1:"måndag",
       2:"tisdag",
@@ -7737,15 +7617,15 @@ void main() {
       5:"fredag",
       6:"lördag"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sv-SE", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sv-SE", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_sv_SE_long', () {
-       Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"sön",
       1:"mån",
       2:"tis",
@@ -7754,16 +7634,15 @@ void main() {
       5:"fre",
       6:"lör"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sv-SE", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sv-SE", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
-   
-    group('testWeekdayTranslation_sv_SE_medium', () {
-      Map<int, String> expectedResult = {
+  group('testWeekdayTranslation_sv_SE_medium', () {
+    Map<int, String> expectedResult = {
       0:"sö",
       1:"må",
       2:"ti",
@@ -7772,15 +7651,15 @@ void main() {
       5:"fr",
       6:"lö"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sv-SE", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sv-SE", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_sv_SE_short', () {
-       Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"S",
       1:"M",
       2:"T",
@@ -7788,17 +7667,16 @@ void main() {
       4:"T",
       5:"F",
       6:"L",
-    },
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sv-SE", date:"w", length: "short", useNative:false, timezone:"local"})
+    };
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"sv-SE", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
-   
-    group('testWeekdayTranslation_ta_IN', () {
-      Map<int, String> expectedResult = {
+  group('testWeekdayTranslation_ta_IN', () {
+    Map<int, String> expectedResult = {
       0:"ஞாயிறு",
       1:"திங்கள்",
       2:"செவ்வாய்",
@@ -7808,14 +7686,14 @@ void main() {
       6:"சனி"
     };
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ta-IN", date:"w", length: "full", useNative:false, timezone:"local");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ta_IN_long_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"ஞாயி.",
       1:"திங்.",
       2:"செவ்.",
@@ -7827,12 +7705,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ta-IN", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ta_IN_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"ஞா",
       1:"தி",
       2:"செ",
@@ -7844,12 +7722,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ta-IN", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ta_IN_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"ஞா",
       1:"தி",
       2:"செ",
@@ -7861,12 +7739,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ta-IN", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_te_IN', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"ఆదివారం",
       1:"సోమవారం",
       2:"మంగళవారం",
@@ -7878,12 +7756,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"te-IN", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_te_IN_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"ఆది",
       1:"సోమ",
       2:"మంగళ",
@@ -7895,12 +7773,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"te-IN", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_te_IN_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"ఆది",
       1:"సోమ",
       2:"మం",
@@ -7912,12 +7790,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"te-IN", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_te_IN_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"ఆ",
       1:"సో",
       2:"మ",
@@ -7929,12 +7807,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"te-IN", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_th_TH', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"วันอาทิตย์",
       1:"วันจันทร์",
       2:"วันอังคาร",
@@ -7943,13 +7821,15 @@ void main() {
       5:"วันศุกร์",
       6:"วันเสาร์"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"th-TH", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"th-TH", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:i+4, type:"thaisolar"}));
-    
-    group('testWeekdayTranslation_th_TH_long', () {
-      Map<int, String> expectedResult = {
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+4, type:"thaisolar");
+    test(num, () async => expect(await fmt.format(dateOptions), expected));
+    });
+  });
+  group('testWeekdayTranslation_th_TH_long', () {
+    Map<int, String> expectedResult = {
       0:"อา.",
       1:"จ.",
       2:"อ.",
@@ -7958,13 +7838,15 @@ void main() {
       5:"ศ.",
       6:"ส."
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"th-TH", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"th-TH", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:i+4, type:"thaisolar"}));
-    
-    group('testWeekdayTranslation_th_TH_medium', () {
-      Map<int, String> expectedResult = {
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+4, type:"thaisolar");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
+    });
+  });
+  group('testWeekdayTranslation_th_TH_medium', () {
+    Map<int, String> expectedResult = {
       0:"อา.",
       1:"จ.",
       2:"อ.",
@@ -7973,13 +7855,15 @@ void main() {
       5:"ศ.",
       6:"ส."
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"th-TH", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"th-TH", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:i+4, type:"thaisolar"}));
-    
-    group('testWeekdayTranslation_th_TH_short', () {
-      Map<int, String> expectedResult = {
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+4, type:"thaisolar");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
+    });
+  });
+  group('testWeekdayTranslation_th_TH_short', () {
+    Map<int, String> expectedResult = {
       0:"อา",
       1:"จ",
       2:"อ",
@@ -7988,13 +7872,15 @@ void main() {
       5:"ศ",
       6:"ส"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"th-TH", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"th-TH", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:i+4, type:"thaisolar"}));
-    
-    group('testWeekdayTranslation_tr_AM', () {
-      Map<int, String> expectedResult = {
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+4, type:"thaisolar");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
+    });
+  });
+  group('testWeekdayTranslation_tr_AM', () {
+    Map<int, String> expectedResult = {
       0:"Pazar",
       1:"Pazartesi",
       2:"Salı",
@@ -8003,15 +7889,15 @@ void main() {
       5:"Cuma",
       6:"Cumartesi"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-AM", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-AM", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_tr_AM_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Paz",
       1:"Pzt",
       2:"Sal",
@@ -8020,15 +7906,15 @@ void main() {
       5:"Cum",
       6:"Cmt"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-AM", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-AM", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_tr_AM_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Pa",
       1:"Pt",
       2:"Sa",
@@ -8037,15 +7923,15 @@ void main() {
       5:"Cu",
       6:"Ct"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-AM", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-AM", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_tr_AM_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"P",
       1:"P",
       2:"S",
@@ -8054,15 +7940,15 @@ void main() {
       5:"C",
       6:"C"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-AM", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-AM", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_tr_AZ', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Pazar",
       1:"Pazartesi",
       2:"Salı",
@@ -8071,15 +7957,15 @@ void main() {
       5:"Cuma",
       6:"Cumartesi"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-AZ", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-AZ", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_tr_AZ_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Paz",
       1:"Pzt",
       2:"Sal",
@@ -8088,15 +7974,15 @@ void main() {
       5:"Cum",
       6:"Cmt"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-AZ", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-AZ", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_tr_AZ_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Pa",
       1:"Pt",
       2:"Sa",
@@ -8105,15 +7991,15 @@ void main() {
       5:"Cu",
       6:"Ct"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-AZ", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-AZ", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_tr_AZ_short', () {
-       Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"P",
       1:"P",
       2:"S",
@@ -8122,16 +8008,15 @@ void main() {
       5:"C",
       6:"C"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-AZ", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-AZ", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
-   
-    group('testWeekdayTranslation_tr_CY', () {
-      Map<int, String> expectedResult = {
+  group('testWeekdayTranslation_tr_CY', () {
+    Map<int, String> expectedResult = {
       0:"Pazar",
       1:"Pazartesi",
       2:"Salı",
@@ -8140,15 +8025,15 @@ void main() {
       5:"Cuma",
       6:"Cumartesi"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-CY", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-CY", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_tr_CY_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Paz",
       1:"Pzt",
       2:"Sal",
@@ -8157,15 +8042,15 @@ void main() {
       5:"Cum",
       6:"Cmt"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-CY", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-CY", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_tr_CY_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Pa",
       1:"Pt",
       2:"Sa",
@@ -8174,15 +8059,15 @@ void main() {
       5:"Cu",
       6:"Ct"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-CY", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-CY", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_tr_CY_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"P",
       1:"P",
       2:"S",
@@ -8191,15 +8076,15 @@ void main() {
       5:"C",
       6:"C"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-CY", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-CY", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_tr_TR', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Pazar",
       1:"Pazartesi",
       2:"Salı",
@@ -8208,15 +8093,15 @@ void main() {
       5:"Cuma",
       6:"Cumartesi"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-TR", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-TR", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_tr_TR_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Paz",
       1:"Pzt",
       2:"Sal",
@@ -8225,15 +8110,15 @@ void main() {
       5:"Cum",
       6:"Cmt"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-TR", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-TR", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_tr_TR_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Pa",
       1:"Pt",
       2:"Sa",
@@ -8242,15 +8127,15 @@ void main() {
       5:"Cu",
       6:"Ct"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-TR", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-TR", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_tr_TR_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"P",
       1:"P",
       2:"S",
@@ -8258,16 +8143,16 @@ void main() {
       4:"P",
       5:"C",
       6:"C",
-    },
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-TR", date:"w", length: "short", useNative:false, timezone:"local"})
+    };
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"tr-TR", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_uk_UA', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"неділя",
       1:"понеділок",
       2:"вівторок",
@@ -8276,15 +8161,15 @@ void main() {
       5:"пʼятниця",
       6:"субота"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"uk-UA", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"uk-UA", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_uk_UA_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"нд",
       1:"пн",
       2:"вт",
@@ -8293,15 +8178,15 @@ void main() {
       5:"пт",
       6:"сб"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"uk-UA", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"uk-UA", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_uk_UA_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"нд",
       1:"пн",
       2:"вт",
@@ -8310,15 +8195,15 @@ void main() {
       5:"пт",
       6:"сб"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"uk-UA", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"uk-UA", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_uk_UA_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Н",
       1:"П",
       2:"В",
@@ -8327,15 +8212,15 @@ void main() {
       5:"П",
       6:"С"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"uk-UA", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"uk-UA", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ur_IN', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"اتوار",
       1:"پیر",
       2:"منگل",
@@ -8347,12 +8232,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ur-IN", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ur_IN_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"اتوار",
       1:"پیر",
       2:"منگل",
@@ -8364,12 +8249,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ur-IN", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ur_IN_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"اتوار",
       1:"پیر",
       2:"منگل",
@@ -8381,12 +8266,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ur-IN", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ur_IN_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:'S',
       1:'M',
       2:'T',
@@ -8394,16 +8279,16 @@ void main() {
       4:'T',
       5:'F',
       6:'S'
-    }
+    };
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ur-IN", date:"w", length: "short", useNative:false, timezone:"local");
-      expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    expectedResult.forEach((int num, String expected) {
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
-    ,
-    group('testWeekdayTranslation_uz_Latn_UZ', () {
-      Map<int, String> expectedResult = {
+  group('testWeekdayTranslation_uz_Latn_UZ', () {
+    Map<int, String> expectedResult = {
       0:"yakshanba",
       1:"dushanba",
       2:"seshanba",
@@ -8412,15 +8297,15 @@ void main() {
       5:"juma",
       6:"shanba"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"uz-Latn-UZ", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"uz-Latn-UZ", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_uz_Latn_UZ_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Yak",
       1:"Dush",
       2:"Sesh",
@@ -8429,15 +8314,15 @@ void main() {
       5:"Jum",
       6:"Shan"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"uz-Latn-UZ", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"uz-Latn-UZ", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_uz_Latn_UZ_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Ya",
       1:"Du",
       2:"Se",
@@ -8446,15 +8331,15 @@ void main() {
       5:"Ju",
       6:"Sh"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"uz-Latn-UZ", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"uz-Latn-UZ", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_uz_Latn_UZ_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Y",
       1:"D",
       2:"S",
@@ -8463,32 +8348,32 @@ void main() {
       5:"J",
       6:"S"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"uz-Latn-UZ", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"uz-Latn-UZ", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_vi_VN', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Chủ Nhật",
       1:"Thứ Hai",
       2:"Thứ Ba",
-      3: "Thứ Tư",
+      3:"Thứ Tư",
       4:"Thứ Năm",
       5:"Thứ Sáu",
       6:"Thứ Bảy"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"vi-VN", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"vi-VN", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_vi_VN_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"CN",
       1:"Th 2",
       2:"Th 3",
@@ -8497,15 +8382,15 @@ void main() {
       5:"Th 6",
       6:"Th 7"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"vi-VN", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"vi-VN", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_vi_VN_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"CN",
       1:"T2",
       2:"T3",
@@ -8514,15 +8399,15 @@ void main() {
       5:"T6",
       6:"T7"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"vi-VN", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"vi-VN", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_vi_VN_short', () {
-       Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"CN",
       1:"T2",
       2:"T3",
@@ -8531,16 +8416,15 @@ void main() {
       5:"T6",
       6:"T7"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"vi-VN", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"vi-VN", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
-   
-    group('testWeekdayTranslation_zh_Hans_CN', () {
-      Map<int, String> expectedResult = {
+  group('testWeekdayTranslation_zh_Hans_CN', () {
+    Map<int, String> expectedResult = {
       0:"星期日",
       1:"星期一",
       2:"星期二",
@@ -8549,15 +8433,15 @@ void main() {
       5:"星期五",
       6:"星期六"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"zh-Hans-CN", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"zh-Hans-CN", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_zh_Hans_CN_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"周日",
       1:"周一",
       2:"周二",
@@ -8566,15 +8450,15 @@ void main() {
       5:"周五",
       6:"周六"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"zh-Hans-CN", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"zh-Hans-CN", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_zh_Hans_CN_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"周日",
       1:"周一",
       2:"周二",
@@ -8583,15 +8467,15 @@ void main() {
       5:"周五",
       6:"周六"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"zh-Hans-CN", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"zh-Hans-CN", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_zh_Hans_CN_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"日",
       1:"一",
       2:"二",
@@ -8600,15 +8484,15 @@ void main() {
       5:"五",
       6:"六"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"zh-Hans-CN", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"zh-Hans-CN", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_zh_Hant_HK', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"星期日",
       1:"星期一",
       2:"星期二",
@@ -8617,15 +8501,15 @@ void main() {
       5:"星期五",
       6:"星期六"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"zh-Hans-HK", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"zh-Hans-HK", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_zh_Hant_HK_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"周日",
       1:"周一",
       2:"周二",
@@ -8634,15 +8518,15 @@ void main() {
       5:"周五",
       6:"周六"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"zh-Hans-HK", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"zh-Hans-HK", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_zh_Hant_HK_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"周日",
       1:"周一",
       2:"周二",
@@ -8651,15 +8535,15 @@ void main() {
       5:"周五",
       6:"周六"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"zh-Hans-HK", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"zh-Hans-HK", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_zh_Hant_HK_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"日",
       1:"一",
       2:"二",
@@ -8668,15 +8552,15 @@ void main() {
       5:"五",
       6:"六"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"zh-Hans-HK", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"zh-Hans-HK", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_zh_Hant_TW', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"星期日",
       1:"星期一",
       2:"星期二",
@@ -8685,15 +8569,15 @@ void main() {
       5:"星期五",
       6:"星期六"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"zh-Hant-TW", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"zh-Hant-TW", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
     group('testWeekdayTranslation_zh_Hant_TW_long', () {
-       Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"週日",
       1:"週一",
       2:"週二",
@@ -8702,16 +8586,15 @@ void main() {
       5:"週五",
       6:"週六"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"zh-Hant-TW", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"zh-Hant-TW", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
-   
-    group('testWeekdayTranslation_zh_Hant_TW_medium', () {
-      Map<int, String> expectedResult = {
+  group('testWeekdayTranslation_zh_Hant_TW_medium', () {
+    Map<int, String> expectedResult = {
       0:"日",
       1:"一",
       2:"二",
@@ -8720,11 +8603,11 @@ void main() {
       5:"五",
       6:"六"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"zh-Hant-TW", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"zh-Hant-TW", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
     group('testWeekdayTranslation_zh_Hant_TW_short', () { 
@@ -8737,11 +8620,11 @@ void main() {
       5:"五",
       6:"六"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"zh-Hant-TW", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"zh-Hant-TW", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_GE', () {
@@ -8754,24 +8637,15 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-GE", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-GE", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
+  group('testWeekdayTranslation_en_GE_long', () {
     Map<int, String> expectedResult = {
-      0:"Sunday",
-      1:"Monday",
-      2:"Tuesday",
-      3:"Wednesday",
-      4:"Thursday",
-      5:"Friday",
-      6:"Saturday"
-    };
-    group('testWeekdayTranslation_en_GE_long', () {
-      Map<int, String> expectedResult = {
       0:"Sun",
       1:"Mon",
       2:"Tue",
@@ -8783,12 +8657,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-GE", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_GE_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Su",
       1:"Mo",
       2:"Tu",
@@ -8800,12 +8674,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-GE", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_GE_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"S",
       1:"M",
       2:"T",
@@ -8817,8 +8691,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-GE", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_CN', () {
@@ -8831,15 +8705,15 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-CN", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-CN", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_CN_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Sun",
       1:"Mon",
       2:"Tue",
@@ -8851,12 +8725,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-CN", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_CN_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Su",
       1:"Mo",
       2:"Tu",
@@ -8868,12 +8742,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-CN", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_CN_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"S",
       1:"M",
       2:"T",
@@ -8885,12 +8759,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-CN", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_MX', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Sunday",
       1:"Monday",
       2:"Tuesday",
@@ -8899,15 +8773,15 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-MX", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-MX", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_MX_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Sun",
       1:"Mon",
       2:"Tue",
@@ -8919,12 +8793,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-MX", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_MX_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Su",
       1:"Mo",
       2:"Tu",
@@ -8936,12 +8810,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-MX", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_MX_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"S",
       1:"M",
       2:"T",
@@ -8953,12 +8827,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-MX", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_TW', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Sunday",
       1:"Monday",
       2:"Tuesday",
@@ -8967,15 +8841,15 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-TW", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-TW", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_TW_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Sun",
       1:"Mon",
       2:"Tue",
@@ -8987,12 +8861,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-TW", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_TW_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Su",
       1:"Mo",
       2:"Tu",
@@ -9004,12 +8878,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-TW", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_TW_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"S",
       1:"M",
       2:"T",
@@ -9021,8 +8895,8 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-TW", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_mn_MN', () {
@@ -9035,15 +8909,15 @@ void main() {
       5:"Баасан",
       6:"Бямба"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"mn-MN", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"mn-MN", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_mn_MN_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Ня",
       1:"Да",
       2:"Мя",
@@ -9052,15 +8926,15 @@ void main() {
       5:"Ба",
       6:"Бя"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"mn-MN", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"mn-MN", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_mn_MN_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Ня",
       1:"Да",
       2:"Мя",
@@ -9069,15 +8943,15 @@ void main() {
       5:"Ба",
       6:"Бя"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"mn-MN", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"mn-MN", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_mn_MN_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Ня",
       1:"Да",
       2:"Мя",
@@ -9086,15 +8960,15 @@ void main() {
       5:"Ба",
       6:"Бя"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"mn-MN", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"mn-MN", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_ES', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"domingo",
       1:"lunes",
       2:"martes",
@@ -9103,15 +8977,15 @@ void main() {
       5:"viernes",
       6:"sábado"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-ES", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-ES", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_ES_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"dom",
       1:"lun",
       2:"mar",
@@ -9123,12 +8997,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-ES", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_ES_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"DO",
       1:"LU",
       2:"MA",
@@ -9140,12 +9014,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-ES", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_es_ES_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"D",
       1:"L",
       2:"M",
@@ -9157,12 +9031,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"es-ES", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_af_ZA', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Sondag",
       1:"Maandag",
       2:"Dinsdag",
@@ -9171,15 +9045,15 @@ void main() {
       5:"Vrydag",
       6:"Saterdag"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"af-ZA", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"af-ZA", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_af_ZA_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"So.",
       1:"Ma.",
       2:"Di.",
@@ -9188,15 +9062,15 @@ void main() {
       5:"Vr.",
       6:"Sa."
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"af-ZA", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"af-ZA", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_af_ZA_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"So.",
       1:"Ma.",
       2:"Di.",
@@ -9205,15 +9079,15 @@ void main() {
       5:"Vr.",
       6:"Sa."
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"af-ZA", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"af-ZA", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_af_ZA_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"S",
       1:"M",
       2:"D",
@@ -9222,11 +9096,11 @@ void main() {
       5:"V",
       6:"S"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"af-ZA", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"af-ZA", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_am_ET', () {
@@ -9239,13 +9113,14 @@ void main() {
       5:"ዓርብ",
       6:"ቅዳሜ"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"am-ET", date:"w", length: "full", useNative:false, timezone: "Africa/Addis_Ababa"})
-      expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:i+8, hour: 12, type:"ethiopic", timezone: "Africa/Addis_Ababa");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"am-ET", date:"w", length: "full", useNative:false, timezone: "Africa/Addis_Ababa");
+    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    expectedResult.forEach((int num, String expected) {
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+8, hour: 12, type:"ethiopic", timezone: "Africa/Addis_Ababa");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
-    group('testWeekdayTranslation_am_ET_long', () {
+  group('testWeekdayTranslation_am_ET_long', () {
     Map<int, String> expectedResult = {
       0:"እሑድ",
       1:"ሰኞ",
@@ -9255,10 +9130,11 @@ void main() {
       5:"ዓርብ",
       6:"ቅዳሜ"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"am-ET", date:"w", length: "long", useNative:false, timezone: "Africa/Addis_Ababa"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"am-ET", date:"w", length: "long", useNative:false, timezone: "Africa/Addis_Ababa");
+    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:i+8, hour: 12, type:"ethiopic", timezone: "Africa/Addis_Ababa");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+8, hour: 12, type:"ethiopic", timezone: "Africa/Addis_Ababa");
+        test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
     group('testWeekdayTranslation_am_ET_medium', () {
@@ -9271,13 +9147,14 @@ void main() {
       5:"ዓ",
       6:"ቅ"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"am-ET", date:"w", length: "medium", useNative:false, timezone: "Africa/Addis_Ababa"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"am-ET", date:"w", length: "medium", useNative:false, timezone: "Africa/Addis_Ababa");
+    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:i+8, hour: 12, type:"ethiopic", timezone: "Africa/Addis_Ababa");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+8, hour: 12, type:"ethiopic", timezone: "Africa/Addis_Ababa");
+        test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
-    group('testWeekdayTranslation_am_ET_short', () {
+  group('testWeekdayTranslation_am_ET_short', () {
     Map<int, String> expectedResult = {
       0:"እ",
       1:"ሰ",
@@ -9287,14 +9164,15 @@ void main() {
       5:"ዓ",
       6:"ቅ"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"am-ET", date:"w", length: "short", useNative:false, timezone: "Africa/Addis_Ababa"})
-      expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:i+8, hour: 12, type:"ethiopic", timezone: "Africa/Addis_Ababa");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"am-ET", date:"w", length: "short", useNative:false, timezone: "Africa/Addis_Ababa");
+    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    expectedResult.forEach((int num, String expected) {
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+8, hour: 12, type:"ethiopic", timezone: "Africa/Addis_Ababa");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
-  })
-    group('testWeekdayTranslation_ha_Latn_NG', () {
-      Map<int, String> expectedResult = {
+  });
+  group('testWeekdayTranslation_ha_Latn_NG', () {
+    Map<int, String> expectedResult = {
       0:"Lahadi",
       1:"Litinin",
       2:"Talata",
@@ -9303,15 +9181,15 @@ void main() {
       5:"Jummaʼa",
       6:"Asabar"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ha-Latn-NG", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ha-Latn-NG", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ha_Latn_NG_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Lah",
       1:"Lit",
       2:"Tal",
@@ -9320,15 +9198,15 @@ void main() {
       5:"Jum",
       6:"Asa"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ha-Latn-NG", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ha-Latn-NG", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ha_Latn_NG_medium', () {
-       Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Lh",
       1:"Li",
       2:"Ta",
@@ -9337,16 +9215,15 @@ void main() {
       5:"Ju",
       6:"As"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ha-Latn-NG", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ha-Latn-NG", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
-   
-    group('testWeekdayTranslation_ha_Latn_NG_short', () {
-      Map<int, String> expectedResult = {
+  group('testWeekdayTranslation_ha_Latn_NG_short', () {
+    Map<int, String> expectedResult = {
       0:"L",
       1:"L",
       2:"T",
@@ -9354,16 +9231,16 @@ void main() {
       4:"A",
       5:"J",
       6:"A"
-    },
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ha-Latn-NG", date:"w", length: "short", useNative:false, timezone:"local"})
+    };
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ha-Latn-NG", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_or_IN', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"ରବିବାର",
       1:"ସୋମବାର",
       2:"ମଙ୍ଗଳବାର",
@@ -9375,12 +9252,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"or-IN", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_or_IN_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"ରବି",
       1:"ସୋମ",
       2:"ମଙ୍ଗଳ",
@@ -9392,12 +9269,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"or-IN", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_or_IN_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"ରବି",
       1:"ସୋମ",
       2:"ମଙ୍ଗଳ",
@@ -9409,12 +9286,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"or-IN", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_or_IN_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"ର",
       1:"ସୋ",
       2:"ମ",
@@ -9426,12 +9303,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"or-IN", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_az_Latn_AZ', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"bazar",
       1:"bazar ertəsi",
       2:"çərşənbə axşamı",
@@ -9440,15 +9317,15 @@ void main() {
       5:"cümə",
       6:"şənbə"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"az-Latn-AZ", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"az-Latn-AZ", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_az_Latn_AZ_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"B.",
       1:"B.E.",
       2:"Ç.A.",
@@ -9457,15 +9334,15 @@ void main() {
       5:"C.",
       6:"Ş."
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"az-Latn-AZ", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"az-Latn-AZ", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_az_Latn_AZ_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"B.",
       1:"B.E.",
       2:"Ç.A.",
@@ -9474,15 +9351,15 @@ void main() {
       5:"C.",
       6:"Ş."
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"az-Latn-AZ", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"az-Latn-AZ", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_az_Latn_AZ_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"7",
       1:"1",
       2:"2",
@@ -9491,15 +9368,15 @@ void main() {
       5:"5",
       6:"6"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"az-Latn-AZ", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"az-Latn-AZ", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_km_KH', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"អាទិត្យ",
       1:"ចន្ទ",
       2:"អង្គារ",
@@ -9508,15 +9385,15 @@ void main() {
       5:"សុក្រ",
       6:"សៅរ៍"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"km-KH", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"km-KH", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_km_KH_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"អាទិត្យ",
       1:"ចន្ទ",
       2:"អង្គារ",
@@ -9525,15 +9402,15 @@ void main() {
       5:"សុក្រ",
       6:"សៅរ៍"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"km-KH", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"km-KH", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_km_KH_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"អា",
       1:"ច",
       2:"អ",
@@ -9542,15 +9419,15 @@ void main() {
       5:"សុ",
       6:"ស"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"km-KH", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"km-KH", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_km_KH_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"អ",
       1:"ច",
       2:"អ",
@@ -9559,15 +9436,15 @@ void main() {
       5:"ស",
       6:"ស"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"km-KH", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"km-KH", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_si_LK', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"ඉරිදා",
       1:"සඳුදා",
       2:"අඟහරුවාදා",
@@ -9576,15 +9453,15 @@ void main() {
       5:"සිකුරාදා",
       6:"සෙනසුරාදා"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"si-LK", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"si-LK", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_si_LK_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"ඉරිදා",
       1:"සඳුදා",
       2:"අඟහ",
@@ -9593,15 +9470,15 @@ void main() {
       5:"සිකු",
       6:"සෙන"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"si-LK", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"si-LK", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_si_LK_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"ඉරි",
       1:"සඳු",
       2:"අඟ",
@@ -9610,15 +9487,15 @@ void main() {
       5:"සිකු",
       6:"සෙන"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"si-LK", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"si-LK", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_si_LK_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"ඉ",
       1:"ස",
       2:"අ",
@@ -9627,15 +9504,15 @@ void main() {
       5:"සි",
       6:"සෙ"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"si-LK", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"si-LK", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ar_AE', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"الأحد",
       1:"الاثنين",
       2:"الثلاثاء",
@@ -9647,12 +9524,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ar-AE", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ar_AE_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"الأحد",
       1:"الاثنين",
       2:"الثلاثاء",
@@ -9664,12 +9541,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ar-AE", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ar_AE_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"أحد",
       1:"إثنين",
       2:"ثلاثاء",
@@ -9681,12 +9558,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ar-AE", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ar_AE_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"ح",
       1:"ن",
       2:"ث",
@@ -9698,12 +9575,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ar-AE", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ar_SA', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"الأحد",
       1:"الاثنين",
       2:"الثلاثاء",
@@ -9715,12 +9592,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ar-SA", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ar_SA_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"الأحد",
       1:"الاثنين",
       2:"الثلاثاء",
@@ -9732,12 +9609,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ar-SA", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ar_SA_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"أحد",
       1:"إثنين",
       2:"ثلاثاء",
@@ -9749,12 +9626,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ar-SA", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ar_SA_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"ح",
       1:"ن",
       2:"ث",
@@ -9766,12 +9643,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ar-SA", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_PK', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Sunday",
       1:"Monday",
       2:"Tuesday",
@@ -9780,15 +9657,15 @@ void main() {
       5:"Friday",
       6:"Saturday"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-PK", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-PK", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_PK_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Sun",
       1:"Mon",
       2:"Tue",
@@ -9800,12 +9677,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-PK", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_PK_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Su",
       1:"Mo",
       2:"Tu",
@@ -9817,12 +9694,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-PK", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_en_PK_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"S",
       1:"M",
       2:"T",
@@ -9834,12 +9711,12 @@ void main() {
     ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"en-PK", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-        ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ms_Latn_SG', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Ahad",
       1:"Isnin",
       2:"Selasa",
@@ -9848,15 +9725,15 @@ void main() {
       5:"Jumaat",
       6:"Sabtu"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ms-Latn-SG", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ms-Latn-SG", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ms_Latn_SG_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Ahd",
       1:"Isn",
       2:"Sel",
@@ -9865,15 +9742,15 @@ void main() {
       5:"Jum",
       6:"Sab"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ms-Latn-SG", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ms-Latn-SG", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ms_Latn_SG_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"Ah",
       1:"Is",
       2:"Se",
@@ -9882,15 +9759,15 @@ void main() {
       5:"Ju",
       6:"Sa"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ms-Latn-SG", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ms-Latn-SG", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_ms_Latn_SG_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"A",
       1:"I",
       2:"S",
@@ -9899,15 +9776,15 @@ void main() {
       5:"J",
       6:"S"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ms-Latn-SG", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"ms-Latn-SG", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_pt_AO', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"domingo",
       1:"segunda-feira",
       2:"terça-feira",
@@ -9916,15 +9793,15 @@ void main() {
       5:"sexta-feira",
       6:"sábado"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-AO", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-AO", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_pt_AO_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"domingo",
       1:"segunda",
       2:"terça",
@@ -9933,15 +9810,15 @@ void main() {
       5:"sexta",
       6:"sábado"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-AO", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-AO", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_pt_AO_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:'dom.',
       1:'seg.',
       2:'ter.',
@@ -9950,15 +9827,15 @@ void main() {
       5:'sex.',
       6:'sáb.'
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-AO", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-AO", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_pt_AO_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"D",
       1:"S",
       2:"T",
@@ -9967,15 +9844,15 @@ void main() {
       5:"S",
       6:"S"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-AO", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-AO", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_pt_GQ', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"domingo",
       1:"segunda-feira",
       2:"terça-feira",
@@ -9984,15 +9861,15 @@ void main() {
       5:"sexta-feira",
       6:"sábado"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-GQ", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-GQ", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_pt_GQ_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"domingo",
       1:"segunda",
       2:"terça",
@@ -10001,15 +9878,15 @@ void main() {
       5:"sexta",
       6:"sábado"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-GQ", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-GQ", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_pt_GQ_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:'dom.',
       1:'seg.',
       2:'ter.',
@@ -10017,16 +9894,16 @@ void main() {
       4:'qui.',
       5:'sex.',
       6:'sáb.'
-    }
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-GQ", date:"w", length: "medium", useNative:false, timezone:"local"})
+    };
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-GQ", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_pt_GQ_short', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"D",
       1:"S",
       2:"T",
@@ -10035,15 +9912,15 @@ void main() {
       5:"S",
       6:"S"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-GQ", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-GQ", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_pt_CV', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"domingo",
       1:"segunda-feira",
       2:"terça-feira",
@@ -10052,15 +9929,15 @@ void main() {
       5:"sexta-feira",
       6:"sábado"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-CV", date:"w", length: "full", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-CV", date:"w", length: "full", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_pt_CV_long', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:"domingo",
       1:"segunda",
       2:"terça",
@@ -10069,15 +9946,15 @@ void main() {
       5:"sexta",
       6:"sábado"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-CV", date:"w", length: "long", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-CV", date:"w", length: "long", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_pt_CV_medium', () {
-      Map<int, String> expectedResult = {
+    Map<int, String> expectedResult = {
       0:'dom.',
       1:'seg.',
       2:'ter.',
@@ -10086,11 +9963,11 @@ void main() {
       5:'sex.',
       6:'sáb.'
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-CV", date:"w", length: "medium", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-CV", date:"w", length: "medium", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
   group('testWeekdayTranslation_pt_CV_short', () {
@@ -10103,11 +9980,12 @@ void main() {
       5:"S",
       6:"S"
     };
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-CV", date:"w", length: "short", useNative:false, timezone:"local"})
+    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale:"pt-CV", date:"w", length: "short", useNative:false, timezone:"local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     expectedResult.forEach((int num, String expected) {
-    ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
-       test(num, () async => expect(await fmt.format(dateOptions), expected));
+      ILibDateOptions dateOptions = ILibDateOptions(year: 2015, month: 8, day:num+2, type:"gregorian");
+      test(num, () async => expect(await fmt.format(dateOptions), expected));
     });
   });
+});
 }

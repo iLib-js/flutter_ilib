@@ -3,7 +3,7 @@ import 'package:flutter_ilib/flutter_ilib.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  print("Testing [flutter_ilib_datefmt_test.dart] file.");
+  print("Testing [datefmt_MonthTranslation_test.dart.dart] file.");
 
     group('testMonthTranslate_ar_EG', () {
       Map<int, String> expectedResult = {
