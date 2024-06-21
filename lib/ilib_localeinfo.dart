@@ -7,28 +7,28 @@ class ILibLocaleInfo {
   ILibLocaleInfo(String lo) {
     locale = lo;
   }
-  Future<String> getFirstDayOfWeek() async {
+  Future<int> getFirstDayOfWeek() async {
     JavascriptRuntime ilibJS = await initializeiLib();
     String jscode1 =
         'new LocaleInfo("$locale").getFirstDayOfWeek()';
     String result = ilibJS.evaluate(jscode1).stringResult;
-    return result;
+    return int.parse(result);
   }
 
-  Future<String> getWeekEndStart() async {
+  Future<int> getWeekEndStart() async {
     JavascriptRuntime ilibJS = await initializeiLib();
     
     String jscode1 =
         'new LocaleInfo("$locale").getWeekEndStart()';
     String result = ilibJS.evaluate(jscode1).stringResult;
-    return result;
+    return int.parse(result);
   }
-  Future<String> getWeekEndEnd() async {
+  Future<int> getWeekEndEnd() async {
     JavascriptRuntime ilibJS = await initializeiLib();
     
     String jscode1 =
         'new LocaleInfo("$locale").getWeekEndEnd()';
     String result = ilibJS.evaluate(jscode1).stringResult;
-    return result;
+    return int.parse(result);
   }
 }
