@@ -20,7 +20,7 @@ void main() {
           second: 0,
           millisecond: 0);
       expect(await fmt.format(dateOptions), "2011/9/29");
-    }); 
+    });
     test('testDateFmtSimpleMedium_zh_Hans_CN  ', () async {
       ILibDateFmtOptions fmtOptions =
           ILibDateFmtOptions(locale: "zh-Hans-CN", length: "medium");

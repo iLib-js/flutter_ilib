@@ -179,7 +179,8 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "29 de septiembre de 2011, 1:45 p.m.");
+      expect(
+          await fmt.format(dateOptions), "29 de septiembre de 2011, 1:45 p.m.");
     });
     test('DateTimeSimpleFull_es_US', () async {
       ILibDateFmtOptions fmtOptions =
@@ -195,7 +196,8 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "29 de septiembre de 2011, 1:45 p.m.");
+      expect(
+          await fmt.format(dateOptions), "29 de septiembre de 2011, 1:45 p.m.");
     });
     test('TypeDate_es_US', () async {
       ILibDateFmtOptions fmtOptions =
