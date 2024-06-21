@@ -7,15 +7,15 @@ export 'ilib_datefmt.dart';
 export 'ilib_localeinfo.dart';
 
 class FlutterIlib {
-  Future<String> getVersion() async {
+  Future<String?> getVersion() async {
     String jscode = """ilib.getVersion()""";
-    String ret = await evaluateILib(jscode);
+    String? ret = await evaluateILib(jscode);
     return ret;
   }
 
-  Future<String> getCLDRVersion() async {
+  Future<String?> getCLDRVersion() async {
     String jscode = """ilib.getCLDRVersion()""";
-    String ret = await evaluateILib(jscode);
+    String? ret = await evaluateILib(jscode);
     return ret;
   }
 }
