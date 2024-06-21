@@ -4,12 +4,12 @@ A wrapper plugin to use [iLib](https://github.com/iLib-js/iLib) conveniently in 
 This plugin uses the [flutter_js](https://pub.dev/packages/flutter_js) to make the javascript file in the Flutter application work properly.
 
 ## General
-We provide `evaluateIlib()` to use any class of APIs from ILib.  
+We provide `evaluateILib()` to use any class of APIs from ILib.  
 To give a more efficient way, we provide some classes that can be easily used in a Flutter app.   
 Currently, We have  `ILibDateFmt` and `ILibLocaleInfo` classes.
 We have a plan to provide more classes and methods.  
 
-#### evaluateIlib() 
+#### evaluateILib() 
 ```dart
 import 'package:flutter_ilib/flutter_ilib.dart';
 
