@@ -19,7 +19,7 @@ await evaluateILib(jscode1)
 // 'gregorian'
 ```
 
-#### DateFormatting
+#### class ILibDateFmt
 - Class: ILibDateOptions  
 - Class: ILibDateFmtOptions  
 - Class: ILibDateFmt
@@ -44,7 +44,7 @@ ILibDateOptions dateOptions = ILibDateOptions(
 await fmt.format(dateOptions), "24. 6. 27."
 ```
 
-#### LocaleInfo
+#### class ILibLocaleInfo
 - Class: ILibLocaleInfo
    - Methods:  `getFirstDayOfWeek()`, `getWeekEndStart()`, `getWeekEndStart()` 
 
