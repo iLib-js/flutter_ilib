@@ -16,13 +16,10 @@ await evaluateILib(jscode1)
 To find a more efficient way, we provide some classes that can be easily used in a Flutter app. We will provide more classes and methods.
 
 #### DateFormatting
-Class: 
-  ILibDateOptions  
+Class: ILibDateOptions  
 Class: ILibDateFmtOptions  
-
-Class ILibDateFmt
- - Methods  `format()`  
- - Methods  `getClock()`  
+Class: ILibDateFmt
+ - Methods:  `format()`, `getClock()`  
 
 ```dart
 import 'package:flutter_ilib/flutter_ilib.dart';
@@ -44,10 +41,8 @@ await fmt.format(dateOptions), "24. 6. 27."
 ```
 
 #### LocaleInfo
-Class ILibLocaleInfo
- - Methods  `getFirstDayOfWeek()`  
- - Methods  `getWeekEndStart()` 
- - Methods  `getWeekEndStart()` 
+Class: ILibLocaleInfo
+ - Methods:  `getFirstDayOfWeek()`, `getWeekEndStart()`, `getWeekEndStart()` 
 
 ```dart
 import 'package:flutter_ilib/flutter_ilib.dart';
