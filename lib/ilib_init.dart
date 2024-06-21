@@ -9,13 +9,13 @@ bool _iLibPrepared = false;
 Future<JavascriptRuntime> initializeiLib() async {
   try {
     final jsiLibFile = await _ilib;
-    if (_iLibPrepared==false) {
+    if (_iLibPrepared == false) {
       _jsRuntime.evaluate(jsiLibFile);
       _iLibPrepared = true;
     }
     return _jsRuntime;
   } on PlatformException catch (e) {
-      print('Failed to init js engine: ${e.details}');
+    print('Failed to init js engine: ${e.details}');
   }
   return _jsRuntime;
 }

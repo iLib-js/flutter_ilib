@@ -9,25 +9,23 @@ class ILibLocaleInfo {
   }
   Future<int> getFirstDayOfWeek() async {
     JavascriptRuntime ilibJS = await initializeiLib();
-    String jscode1 =
-        'new LocaleInfo("$locale").getFirstDayOfWeek()';
+    String jscode1 = 'new LocaleInfo("$locale").getFirstDayOfWeek()';
     String result = ilibJS.evaluate(jscode1).stringResult;
     return int.parse(result);
   }
 
   Future<int> getWeekEndStart() async {
     JavascriptRuntime ilibJS = await initializeiLib();
-    
-    String jscode1 =
-        'new LocaleInfo("$locale").getWeekEndStart()';
+
+    String jscode1 = 'new LocaleInfo("$locale").getWeekEndStart()';
     String result = ilibJS.evaluate(jscode1).stringResult;
     return int.parse(result);
   }
+
   Future<int> getWeekEndEnd() async {
     JavascriptRuntime ilibJS = await initializeiLib();
-    
-    String jscode1 =
-        'new LocaleInfo("$locale").getWeekEndEnd()';
+
+    String jscode1 = 'new LocaleInfo("$locale").getWeekEndEnd()';
     String result = ilibJS.evaluate(jscode1).stringResult;
     return int.parse(result);
   }
