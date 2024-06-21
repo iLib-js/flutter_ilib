@@ -15,7 +15,7 @@ import 'package:flutter_ilib/flutter_ilib.dart';
 
 String lo = "ko-KR";
 String jscode1 = 'new LocaleInfo("$lo").getCalendar()';
-await evaluateILib(jscode1)
+await evaluateILib(jscode1);
 // 'gregorian'
 ```
 
@@ -41,7 +41,8 @@ ILibDateOptions dateOptions = ILibDateOptions(
     minute: 45,
     second: 0,
     millisecond: 0);
-await fmt.format(dateOptions), "24. 6. 27."
+await fmt.format(dateOptions);
+// "24. 6. 27."
 ```
 
 #### class ILibLocaleInfo
@@ -58,7 +59,7 @@ await locInfo.getFirstDayOfWeek();
 await locInfo.getWeekEndStart();
 // 5
 await locInfo.getWeekEndEnd();
-// 5;
+// 5
 ```
 
 #### Locales
