@@ -6,6 +6,12 @@ void main() {
   print("Testing [localeinfo_dayofweek_test.dart] file.");
   // 0:sun, 1:mon, 2:tue, 3:wed, 4:thu, 5:fri, 6:sat
   group('dayOFWeek()', () {
+    test('testWeekData_null', () async {
+      ILibLocaleInfo locInfo = ILibLocaleInfo("null");
+      expect(await locInfo.getFirstDayOfWeek(), 1);
+      expect(await locInfo.getWeekEndStart(), 6);
+      expect(await locInfo.getWeekEndEnd(), 0);
+    });
     test('testWeekData_ar_EG', () async {
       ILibLocaleInfo locInfo = ILibLocaleInfo("ar-EG");
       expect(await locInfo.getFirstDayOfWeek(), 6);

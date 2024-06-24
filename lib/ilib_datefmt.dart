@@ -149,7 +149,7 @@ class ILibDateOptions {
       'locale': "$locale",
       'timezone': "$timezone",
       'type': "$type",
-      'calendar': "$calendar",
+      'calendar': "$calendar"
     };
 
     paramInfo.forEach((key, value) {

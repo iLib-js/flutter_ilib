@@ -5,9 +5,6 @@ This plugin uses the [flutter_js](https://pub.dev/packages/flutter_js) to make t
 
 ## General
 We provide `evaluateILib()` to use any class of APIs from ILib.  
-To give a more efficient way, we provide some classes that can be easily used in a Flutter app.   
-Currently, We have  `ILibDateFmt` and `ILibLocaleInfo` classes.
-We have a plan to provide more classes and methods.  
 
 #### evaluateILib() 
 ```dart
@@ -18,12 +15,15 @@ String jscode1 = 'new LocaleInfo("$lo").getCalendar()';
 await evaluateILib(jscode1);
 // 'gregorian'
 ```
+To give a more efficient way, we provide some classes that can be easily used in a Flutter app.   
+Currently, We have a `ILibDateFmt` and `ILibLocaleInfo` classes.
+We have a plan to provide more classes and methods.  
 
 #### class ILibDateFmt
-- Class: ILibDateOptions  
-- Class: ILibDateFmtOptions  
-- Class: ILibDateFmt
-   - Methods:  `format()`, `getClock()`  
+- Class: [ILibDateOptions](./Docs.md/#ilibdateoptions)
+- Class: [ILibDateFmtOptions](./Docs.md/#ilibdatefmtoptions)  
+- Class: [ILibDateFmt](./Docs.md#ilibdatefmt)
+   - Methods: `format()`, `getClock()`  
 
 ```dart
 import 'package:flutter_ilib/flutter_ilib.dart';
@@ -46,7 +46,7 @@ await fmt.format(dateOptions);
 ```
 
 #### class ILibLocaleInfo
-- Class: ILibLocaleInfo
+- Class: [ILibLocaleInfo](./Docs.md/#iliblocaleinfo)
    - Methods:  `getFirstDayOfWeek()`, `getWeekEndStart()`, `getWeekEndStart()` 
 
 ```dart
