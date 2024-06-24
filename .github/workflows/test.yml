@@ -11,4 +11,3 @@ jobs:
     - run: pwd
     - run: cd test/linux
     - run: la -al
-    - #run: flutter test
