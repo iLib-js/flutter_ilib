@@ -8,4 +8,7 @@ jobs:
     - uses: subosito/flutter-action@v1
     - run: export LIBQUICKJSC_TEST_PATH="$PWD/test/linux/libquickjs_c_bridge_plugin.so"
     - run: echo $LIBQUICKJSC_TEST_PATH
-    - run: flutter test
+    - run: pwd
+    - run: cd test/linux
+    - run: la -al
+    - #run: flutter test
