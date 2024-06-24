@@ -10,4 +10,4 @@ jobs:
     - run: echo $LIBQUICKJSC_TEST_PATH
     - run: pwd
     - run: cd test/linux
-    - run: la -al
+    - run: ls -al
