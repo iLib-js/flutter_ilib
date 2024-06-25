@@ -110,7 +110,7 @@ cd example
 flutter build linux --release
 flutter run -d linux --release
 ```
-<img src="./assets/flutterilibExample.png" width="500" height="300"/>
+<img src="./flutterilibExample.png" width="500" height="300"/>
 
 ## License
 
@@ -118,7 +118,3 @@ Copyright (c) 2024, JEDLSoft
 
 This plugin is license under Apache2. See the [LICENSE](./LICENSE)
 file for more details.
-
-## Release Notes
-### v0.0.1
-- initial version
