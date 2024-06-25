@@ -29,7 +29,7 @@ We have a plan to provide more classes and methods.
 import 'package:flutter_ilib/flutter_ilib.dart';
 
 ILibDateFmtOptions fmtOptions =
-    ILibDateFmtOptions(locale: "ko-KR", length: "short");
+    ILibDateFmtOptions(locale: "ko-KR", length: "short", useNative: false, timezone: "local");
 ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 ILibDateOptions dateOptions = ILibDateOptions(
     locale: "ko-KR",
@@ -110,6 +110,7 @@ cd example
 flutter build linux --release
 flutter run -d linux --release
 ```
+<img src="./assets/flutterilibExample.png" width="500" height="300"/>
 
 ## License
 
