@@ -6,6 +6,4 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - uses: subosito/flutter-action@v1
-    - run: pwd
-    - run: ls -al
     - run: ./execute_unit_test.sh
