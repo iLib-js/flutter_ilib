@@ -53,13 +53,13 @@ await fmt.format(dateOptions);
 import 'package:flutter_ilib/flutter_ilib.dart';
 
 // 0:sun, 1:mon, 2:tue, 3:wed, 4:thu, 5:fri, 6:sat
-ILibLocaleInfo locInfo = ILibLocaleInfo("fa-IR");
+ILibLocaleInfo locInfo = ILibLocaleInfo("ko-KR");
 await locInfo.getFirstDayOfWeek();
-// 6
+// 0
 await locInfo.getWeekEndStart();
-// 5
+// 6
 await locInfo.getWeekEndEnd();
-// 5
+// 0
 ```
 
 #### Locales
