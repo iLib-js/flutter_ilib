@@ -31,7 +31,6 @@ import 'package:flutter_ilib/flutter_ilib.dart';
 ILibDateFmtOptions fmtOptions =
     ILibDateFmtOptions(locale: "ko-KR", length: "short");
 ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-
 ILibDateOptions dateOptions = ILibDateOptions(
     locale: "ko-KR",
     year: 2024,
@@ -43,6 +42,16 @@ ILibDateOptions dateOptions = ILibDateOptions(
     millisecond: 0);
 await fmt.format(dateOptions);
 // "24. 6. 27."
+
+---------------------------------------------------------------------
+
+ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+    locale: "ko-KR", length: "full", type: "datetime", useNative: false);
+ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+ILibDateOptions dateOptions =
+    ILibDateOptions(dateTime: DateTime.parse('2024-06-27 10:42'));
+await fmt.format(dateOptions);
+// '2024년 6월 27일 오전 10:42'
 ```
 
 #### class ILibLocaleInfo
