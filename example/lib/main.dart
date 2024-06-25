@@ -165,7 +165,7 @@ class _MyAppState extends State<MyApp> {
     curLocale = curlo;
     ILibDateOptions dateOptions = ILibDateOptions(dateTime: DateTime.parse('2024-03-23 10:42'));
     ILibDateFmtOptions fmtOptions =
-        ILibDateFmtOptions(locale: curlo, length: "full", type: "datetime", useNative: false);
+        ILibDateFmtOptions(locale: curlo, length: "full", type: "datetime", useNative: false, timezone: "local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
     return fmt.format(dateOptions);
@@ -174,7 +174,7 @@ class _MyAppState extends State<MyApp> {
   Future<String> getDateTimeFormatNow(String curlo) async {
     ILibDateOptions dateOptions = ILibDateOptions(dateTime: DateTime.now());
     ILibDateFmtOptions fmtOptions =
-        ILibDateFmtOptions(locale: curlo, length: "full", type: "datetime");
+        ILibDateFmtOptions(locale: curlo, length: "full", type: "datetime", useNative: false, timezone: "local");
     ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     return fmt.format(dateOptions);
   }
