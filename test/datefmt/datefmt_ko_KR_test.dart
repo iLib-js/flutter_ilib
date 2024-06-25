@@ -1000,5 +1000,13 @@ void main() {
       ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       expect(await fmt.format(dateOptions), '2024년 5월 31일 오후 1:20');
     });
+    test('DateFmt_with_flutter_date_full_ko_KR2', () async {
+      DateTime setdate = DateTime(2024, 5, 31, 13, 20);
+      ILibDateOptions dateOptions = ILibDateOptions(locale:"ko-KR", dateTime: setdate);
+      ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: "ko-KR", length: "full", type: "datetime");
+      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      expect(await fmt.format(dateOptions), '2024년 5월 31일 오후 1:20');
+    });
   });
 }
