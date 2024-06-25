@@ -29,8 +29,8 @@ void main() {
       expect(await fmt.format(dateOptions), '2024년 7월 4일 오후 1:45');
     });
     test('ILibDateFmt_DateTimeObj_datetime', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ko-KR", length: "full", type: "datetime");
+      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: "ko-KR", length: "full", type: "datetime", timezone: "local");
       ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
       DateTime setdate = DateTime(2024, 5, 31, 13, 20);
@@ -38,8 +38,8 @@ void main() {
       expect(await fmt.format(dateOptions), '2024년 5월 31일 오후 1:20');
     });
     test('ILibDateFmt_DateTimeObj_time', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ko-KR", length: "full", type: "time");
+      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: "ko-KR", length: "full", type: "time", timezone: "local");
       ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
       DateTime setdate = DateTime(2024, 5, 31, 13, 20);
@@ -57,7 +57,11 @@ void main() {
     });
     test('ILibDateFmt_DateTimeObj_date2', () async {
       ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "ko-KR", length: "full", type: "datetime", useNative: false);
+          locale: "ko-KR",
+          length: "full",
+          type: "datetime",
+          useNative: false,
+          timezone: "local");
       ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       ILibDateOptions dateOptions =
           ILibDateOptions(dateTime: DateTime.parse('2024-06-27 10:42'));
