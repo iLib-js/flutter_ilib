@@ -986,7 +986,7 @@ void main() {
       DateTime setdate = DateTime(2024, 5, 31, 13, 20);
       ILibDateOptions dateOptions = ILibDateOptions(dateTime: setdate);
       ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "ko-KR", length: "short", type: "datetime");
+          locale: "ko-KR", length: "short", type: "datetime", timezone: "local");
 
       ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       expect(await fmt.format(dateOptions), '24. 5. 31. 오후 1:20');
@@ -996,7 +996,7 @@ void main() {
       DateTime setdate = DateTime(2024, 5, 31, 13, 20);
       ILibDateOptions dateOptions = ILibDateOptions(dateTime: setdate);
       ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ko-KR", length: "full", type: "datetime");
+          ILibDateFmtOptions(locale: "ko-KR", length: "full", type: "datetime", timezone: "local");
       ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       expect(await fmt.format(dateOptions), '2024년 5월 31일 오후 1:20');
     });
