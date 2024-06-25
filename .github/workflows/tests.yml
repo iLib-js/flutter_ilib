@@ -7,6 +7,5 @@ jobs:
     - uses: actions/checkout@v1
     - uses: subosito/flutter-action@v1
     - run: pwd
-    - run: export LIBQUICKJSC_TEST_PATH="$PWD/test/linux/libquickjs_c_bridge_plugin.so"
-    - run: $GITHUB_ENV
+    - run: export LIBQUICKJSC_TEST_PATH="$pwd/test/linux/libquickjs_c_bridge_plugin.so"
     - run: LIBQUICKJSC_TEST_PATH
