@@ -1,0 +1,22 @@
+#!/bin/bash
+
+while getopts ":b:s:" arg; do
+  case "$arg" in
+    b)
+      bp=$OPTARG
+      ;;
+    s)
+      sn=$OPTARG
+      ;;
+    *)
+      exit
+      ;;
+  esac
+done
+shift $((OPTIND-1))
+
+if [ -z "$bp" ] || [ -z "$sn" ]; then
+  exit
+fi
+
+LD_LIBRARY_PATH=@WEBOS_INSTALL_WEBOS_SERVICESDIR@/@SERVICE_NAME@/lib:$LD_LIBRARY_PATH /usr/bin/flutter-service -b $bp -s $sn

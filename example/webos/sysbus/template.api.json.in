@@ -1,0 +1,12 @@
+{
+  "test": [
+      "@SERVICE_NAME@/testCall",
+      "@SERVICE_NAME@/testCall2"
+  ],
+  "public": [
+      "@SERVICE_NAME@/testCall"
+  ],
+  "config" : [
+      "@SERVICE_NAME@/testCall2"
+  ]
+}
