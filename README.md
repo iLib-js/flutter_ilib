@@ -46,7 +46,7 @@ await fmt.format(dateOptions);
 ---------------------------------------------------------------------
 
 ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-    locale: "ko-KR", length: "full", type: "datetime", useNative: false);
+    locale: "ko-KR", length: "full", type: "datetime", useNative: false, timezone: "local");
 ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 ILibDateOptions dateOptions =
     ILibDateOptions(dateTime: DateTime.parse('2024-06-27 10:42'));

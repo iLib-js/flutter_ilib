@@ -959,7 +959,10 @@ void main() {
       ILibDateOptions dateOptions =
           ILibDateOptions(year: 2024, month: 3, day: 23, hour: 10, minute: 42);
       ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "ko-KR", length: "short", type: "datetime");
+          locale: "ko-KR",
+          length: "short",
+          type: "datetime",
+          timezone: "local");
       ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       expect(await fmt.format(dateOptions), '24. 3. 23. 오전 10:42');
     });
@@ -982,20 +985,28 @@ void main() {
     test('DateFmt_with_flutter_date_short_ko_KR', () async {
       DateTime setdate = DateTime(2024, 5, 31, 13, 20);
       ILibDateOptions dateOptions = ILibDateOptions(dateTime: setdate);
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ko-KR", length: "short");
+      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: "ko-KR", length: "short", type: "datetime", timezone: "local");
 
       ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-      expect(await fmt.format(dateOptions), '24. 5. 31.');
+      expect(await fmt.format(dateOptions), '24. 5. 31. 오후 1:20');
     });
 
     test('DateFmt_with_flutter_date_full_ko_KR', () async {
       DateTime setdate = DateTime(2024, 5, 31, 13, 20);
       ILibDateOptions dateOptions = ILibDateOptions(dateTime: setdate);
       ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ko-KR", length: "full");
+          ILibDateFmtOptions(locale: "ko-KR", length: "full", type: "datetime", timezone: "local");
       ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-      expect(await fmt.format(dateOptions), '2024년 5월 31일');
+      expect(await fmt.format(dateOptions), '2024년 5월 31일 오후 1:20');
+    });
+    test('DateFmt_with_flutter_date_full_ko_KR2', () async {
+      DateTime setdate = DateTime(2024, 5, 31, 13, 20);
+      ILibDateOptions dateOptions = ILibDateOptions(locale:"ko-KR", dateTime: setdate);
+      ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: "ko-KR", length: "full", type: "datetime");
+      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      expect(await fmt.format(dateOptions), '2024년 5월 31일 오후 1:20');
     });
   });
 }
