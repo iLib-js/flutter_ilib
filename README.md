@@ -110,7 +110,7 @@ cd example
 flutter build linux --release
 flutter run -d linux --release
 ```
-<img src="./assets/flutterilibExample.png" width="900" height="600"/>
+<img src="./assets/flutterilibExample.png" width="500" height="300"/>
 
 ## License
 
