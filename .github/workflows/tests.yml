@@ -1,4 +1,4 @@
-name: test-my-app
+name: test-flutterilib
 on: [push, workflow_dispatch]
 jobs:
   drive:
