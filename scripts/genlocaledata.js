@@ -20,7 +20,6 @@
  */
 
 var fs = require('fs');
-var util = require('util');
 var path = require('path');
 var Locale = require("ilib-locale");
 
@@ -42,12 +41,19 @@ var defaultlocales = ["af-ZA","am-ET","ar-AE","ar-EG","ar-IQ","ar-MA","ar-SA",
                     "zh-Hant-HK","zh-Hant-TW"];
 
 function usage() {
-    console.log("Usage: genlocaledata [-h] [toDir]\n" +
-        "Generate the character type data.\n\n" +
+    console.log(
+        "Usage: genlocaledata.js [-i ilibPath] [-l locales] [-o outDir] \n" +
+        "Generate the ilib locale data js files.\n\n" +
         "-h or --help\n" +
         "  this help\n" +
-        "toDir\n" +
-        "  directory to output the normalization json files. Default: current dir.");
+        "-i or --ilibPath\n" +
+        "  Location where ilib is installed. Default: '.' \n" +
+        "-l or --locales\n" +
+        "  Restrict operation to only the given locales. Locales should be given as \n" +
+        "  a comma-separated list of BCP-47 locale specs. By default it will operate\n"+
+        "  with all locales that the webOS Platform needs to support.\n" +
+        "-o or --outDir\n" +
+        "  Directory to place the [language].js Default: './tmp'");
     process.exit(1);
 }
 
@@ -61,11 +67,10 @@ if (process.argv.length < 2) {
     console.error('Error: not enough arguments');
     usage();
 }
-var ilibPath = "../../js/data/locale";
-var incPath = "./ilib-standard-flutter.js";
-var outputDir = "./tmp";
+var ilibPath = ".";
+var outDir = "./tmp";
 var locales
-var options = [];
+
 var argv = process.argv;
 for(var i=0; i < argv.length;i++){
     var val = argv[i];
@@ -75,29 +80,20 @@ for(var i=0; i < argv.length;i++){
         if (i < argv.length && argv[i+1]) {
             locales = argv[++i].split(",");
         }
-    } else if (val === "-ilibPath") {
+    } else if (val === "-i" || val === "--ilibPath") {
         ilibPath = argv[++i];
-    } else if (val === "-incPath") {
-        incPath = argv[++i];
-    } else if (val === "-o" || val === "--output") {
-        outputDir = argv[++i];
+    } else if (val === "-o" || val === "--outDir") {
+        outDir = argv[++i];
     } 
 }
 
-/*if (process.argv.length > 2) {
-    locales = process.argv[2];
-}*/
-//localeDir = process.arg[2]
-//locales = process.arg[3];
-var localeArr = locales ? locales.split(",") : defaultlocales;
-
-console.log("!!");
+var iliblocalePath = path.join(ilibPath, "js/data/locale");
+var ilibincPath = path.join(ilibPath, "js/lib/ilib-standard-flutter-inc.js");
+var localeList = locales ? locales : defaultlocales;
 
 console.log("genlocaledata - generate locale data file.\n" +
     "Copyright (c) 2024 JEDLSoft");
 
-// localelist. locale data directory. result
-// file scan. data. set.
 var dataMap = {
     "PhoneFmt.js": ["phonefmt"],
     "DateRngFmt.js": ["dateformats", "sysres"],
@@ -110,7 +106,7 @@ var dataMap = {
     "Name.js": ["name"],
     "Currency.js": ["currency"],
     "DateFmt.js": ["dateformats", "sysres"],
-    "TimeZone.js": ["localeinfo", "zoneinfo"],
+    "TimeZone.js": ["localeinfo"], // except zoneinfo
     "LocaleInfo.js": ["localeinfo"],
     "Address.js":["address", "countries", "nativecountries", "ctrynames"],
     "NameFmt.js": ["name"],
@@ -124,96 +120,90 @@ var dataMap = {
     "AlphabeticIndex.js": ["nfc", "nfkd"]
 }
 
-var filelist = [];
-var datalist = [];
-var jsonList = [];
+var jsFileList = [];
+
 try {
- const info = fs.readFileSync('./ilib-standard-flutter-inc.js', 'utf8')
+ const info = fs.readFileSync(ilibincPath, 'utf8')
  const lines = info.split('\n')
  lines.forEach(line => {
     if (line.indexOf('.js') != -1 && line.indexOf('ilib-standard-flutter.js') == -1){
-        filelist.push(line);
+        jsFileList.push(line);
     }
  })
 } catch (err) {
  console.error(err)
 }
-
-filelist.forEach(function(val, index, arr){
+var datalist = [];
+jsFileList.forEach(function(val){
     if (dataMap[val] !== undefined) {
         datalist = datalist.concat(dataMap[val])
     }
 });
-jsonList = [... new Set(datalist)];
-
-
-var outFile = {};
-var fileName;
-var readData;
+var jsonList = [... new Set(datalist)];
 
 function readJsonFile(datapath, name) {
-    name += ".json";
-    var fullPath = path.join(datapath, name);
-    if (fs.existsSync(fullPath)) {
-        readData = fs.readFileSync(fullPath, 'utf-8');
+    var fullFilePath = path.join(datapath, name + ".json");
+    var readData;
+    if (fs.existsSync(fullFilePath)) {
+        readData = fs.readFileSync(fullFilePath, 'utf-8');
         return readData;
     }
     return;
 }
 
-/* 
-ilib.data.dateformats_en = {};
-ilib.data.dateformats_en_US = {};
-ilib.data.dateformats_und_US = {};
-*/
-
-localeArr.forEach(function(loc){
+var outFile = {};
+localeList.forEach(function(loc){
     var lo = new Locale(loc);
-    var lan = lo.language;
+    var lang = lo.language;
     var script = lo.script;
     var region = lo.region;
-    var jsonPath, scriptPath, regionPath;
-    var data, key;
+    var jsonPath;
+    var data;
     jsonList.forEach(function(jsonfile){
-        if (outFile[lan] == undefined) {
-            outFile[lan] = {};
+        if (outFile[lang] == undefined) {
+            outFile[lang] = {};
         }
         
-        if (lan) {
-            jsonPath = path.join(ilibPath, lan);
+        if (lang) {
+            jsonPath = path.join(iliblocalePath, lang);
             data = readJsonFile(jsonPath, jsonfile);
-            if (data) outFile[lan]["ilib.data." + jsonfile + "_" + lan] = data;
+            if (data) outFile[lang]["ilib.data." + jsonfile + "_" + lang] = data;
            
             if (script) {
-                jsonPath = path.join(ilibPath, lan, script);
+                jsonPath = path.join(iliblocalePath, lang, script);
                 data = readJsonFile(jsonPath, jsonfile);
-                if (data) outFile[lan]["ilib.data." + jsonfile + "_" + lan + "_" + script] = data;
+                if (data) outFile[lang]["ilib.data." + jsonfile + "_" + lang + "_" + script] = data;
 
                 if (region) {
-                    jsonPath = path.join(ilibPath, lan, script, region);
+                    jsonPath = path.join(iliblocalePath, lang, script, region);
                     data = readJsonFile(jsonPath, jsonfile);
-                    if (data) outFile[lan]["ilib.data." + jsonfile + "_" + lan + "_" + script + "_" + region] = data;
+                    if (data) outFile[lang]["ilib.data." + jsonfile + "_" + lang + "_" + script + "_" + region] = data;
                 }
             } else if (region){
-                jsonPath = path.join(ilibPath, lan, region);
+                jsonPath = path.join(iliblocalePath, lang, region);
                 data = readJsonFile(jsonPath, jsonfile);
-                if (data) outFile[lan]["ilib.data." + jsonfile + "_" + lan + "_" + region] = data;
+                if (data) outFile[lang]["ilib.data." + jsonfile + "_" + lang + "_" + region] = data;
 
-                jsonPath = path.join(ilibPath, "und", region);
+                jsonPath = path.join(iliblocalePath, "und", region);
                 data = readJsonFile(jsonPath, jsonfile);
-                if (data) outFile[lan]["ilib.data." + jsonfile + "_und_" + region] = data;
+                if (data) outFile[lang]["ilib.data." + jsonfile + "_und_" + region] = data;
             }
+        } else {
+            console.log("The locale is missing languae code.")
         }
     });
 })
 
 for (var loc in outFile) {
-    var contents="";
+    var contents = "";
     for(var keys in outFile[loc]){
-        contents += keys + " = "+outFile[loc][keys]+"\n";
+        contents += keys + " = " + outFile[loc][keys] + "\n";
     }
-    fs.writeFileSync(path.join("tmp", loc + ".js"), contents, "utf-8");
+    if (!fs.existsSync(outDir)){
+        fs.mkdirSync(outDir);
+    }
+    console.log("writing " + outDir + "/"+ loc + ".js file.");
+    var resultFile = path.join(outDir, loc + ".js");
+    fs.writeFileSync(resultFile, contents, "utf-8");
 }
-
-console.log("!!!!");
 console.log("done");
