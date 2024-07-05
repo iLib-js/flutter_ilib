@@ -22,6 +22,7 @@
 var fs = require('fs');
 var path = require('path');
 var Locale = require("ilib-locale");
+var uglifyjs = require('uglify-js');
 
 var defaultlocales = ["af-ZA","am-ET","ar-AE","ar-EG","ar-IQ","ar-MA","ar-SA",
                     "as-IN","az-Latn-AZ","bg-BG","bn-IN","bs-Latn-BA","bs-Latn-ME","cs-CZ","da-DK",
@@ -47,13 +48,15 @@ function usage() {
         "-h or --help\n" +
         "  this help\n" +
         "-i or --ilibPath\n" +
-        "  Location where ilib is installed. Default: '.' \n" +
+        "  Location where ilib is installed. (Default: '.') \n" +
         "-l or --locales\n" +
         "  Restrict operation to only the given locales. Locales should be given as \n" +
         "  a comma-separated list of BCP-47 locale specs. By default it will operate\n"+
         "  with all locales that the webOS Platform needs to support.\n" +
         "-o or --outDir\n" +
-        "  Directory to place the [language].js Default: './tmp'");
+        "  Directory to place the [language].js. (Default: './tmp')\n" +
+        "--minify\n" +
+        "  Minify the generated js files. (Default: 'false')");
     process.exit(1);
 }
 
@@ -70,7 +73,7 @@ if (process.argv.length < 2) {
 var ilibPath = ".";
 var outDir = "./tmp";
 var locales
-
+var isMinify = false;
 var argv = process.argv;
 for(var i=0; i < argv.length;i++){
     var val = argv[i];
@@ -84,7 +87,11 @@ for(var i=0; i < argv.length;i++){
         ilibPath = argv[++i];
     } else if (val === "-o" || val === "--outDir") {
         outDir = argv[++i];
-    } 
+    } else if (val === "--minify") {
+        isMinify = true;
+    } else {
+        console.log("wrong options");
+    }
 }
 
 var iliblocalePath = path.join(ilibPath, "js/data/locale");
@@ -203,7 +210,11 @@ for (var loc in outFile) {
         fs.mkdirSync(outDir);
     }
     console.log("writing " + outDir + "/"+ loc + ".js file.");
-    var resultFile = path.join(outDir, loc + ".js");
-    fs.writeFileSync(resultFile, contents, "utf-8");
+    var resultFilePath = path.join(outDir, loc + ".js");
+    if (isMinify) {
+        fs.writeFileSync(resultFilePath, uglifyjs.minify(contents).code, "utf-8");
+    } else {
+        fs.writeFileSync(resultFilePath, contents, "utf-8");
+    }
 }
 console.log("done");
