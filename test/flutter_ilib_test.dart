@@ -1,39 +1,40 @@
-import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  print("Testing [flutter_ilib_test.dart] file.");
+  debugPrint('Testing [flutter_ilib_test.dart] file.');
   late FlutterIlib flutterIlibPlugin;
   setUp(() {
-    flutterIlibPlugin = FlutterIlib();
+    flutterIlibPlugin = FlutterIlib.instance;
   });
   group('Basic', () {
-    test('getVersion', () async {
-      expect(await flutterIlibPlugin.getVersion(), '14.21.0');
+    test('getVersion', () {
+      expect(flutterIlibPlugin.getVersion, '14.21.0');
     });
-    test('getCLDRVersion', () async {
-      expect(await flutterIlibPlugin.getCLDRVersion(), '44.1');
+    test('getCLDRVersion', () {
+      expect(flutterIlibPlugin.getCLDRVersion, '44.1');
     });
 
-    test('evaluateILib', () async {
-      String loko = "ko-KR";
-      String loes = "es-ES";
-      String jscode1 = 'new LocaleInfo("$loko").getCalendar()';
-      String jscode2 = 'new LocaleInfo("$loes").getCalendar()';
-      String jscode3 = 'new LocaleInfo("th-TH").getCalendar()';
-      String jscode4 = 'new LocaleInfo("fa-IR").getCalendar()';
-      String jscode5 = 'new LocaleInfo("am-ET").getCalendar()';
+    test('evaluateILib', () {
+      const String loko = 'ko-KR';
+      const String loes = 'es-ES';
+      const String jscode1 = 'new LocaleInfo("$loko").getCalendar()';
+      const String jscode2 = 'new LocaleInfo("$loes").getCalendar()';
+      const String jscode3 = 'new LocaleInfo("th-TH").getCalendar()';
+      const String jscode4 = 'new LocaleInfo("fa-IR").getCalendar()';
+      const String jscode5 = 'new LocaleInfo("am-ET").getCalendar()';
 
-      expect(await evaluateILib(jscode1), 'gregorian');
-      expect(await evaluateILib(jscode2), 'gregorian');
-      expect(await evaluateILib(jscode3), 'thaisolar');
-      expect(await evaluateILib(jscode4), 'persian');
-      expect(await evaluateILib(jscode5), 'ethiopic');
+      expect(evaluateILib(jscode1), 'gregorian');
+      expect(evaluateILib(jscode2), 'gregorian');
+      expect(evaluateILib(jscode3), 'thaisolar');
+      expect(evaluateILib(jscode4), 'persian');
+      expect(evaluateILib(jscode5), 'ethiopic');
     });
-    test('evaluateILib_emptyString', () async {
-      String str = "";
-      expect(await evaluateILib(str), null);
+    test('evaluateILib_emptyString', () {
+      const String str = '';
+      expect(evaluateILib(str), null);
     });
   });
 }

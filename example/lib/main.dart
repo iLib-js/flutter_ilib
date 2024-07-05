@@ -1,16 +1,12 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 
 void main() {
-  runZonedGuarded<Future<void>>(
-    () async {
-      WidgetsFlutterBinding.ensureInitialized();
-
-      await initializeiLib();
-
+  runZonedGuarded<void>(
+    () {
       FlutterError.onError = (FlutterErrorDetails details) {
         FlutterError.presentError(details);
         debugPrint(
@@ -22,7 +18,7 @@ void main() {
     },
     (Object error, StackTrace stackTrace) {
       debugPrint(
-        'runZonedGuarded : ${error.toString()}, stackTrace: $stackTrace',
+        'runZonedGuarded : $error, stackTrace: $stackTrace',
       );
     },
   );
@@ -36,62 +32,75 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // String _platformVersion = 'Unknown';
   String _iLibVersion = 'Unknown iLib';
   String _iLibCLDRVersion = 'CLDR';
-  final _flutterIlibPlugin = FlutterIlib();
+  String _currentTime = 'Current Time';
+  final FlutterIlib _flutterIlibPlugin = FlutterIlib.instance;
 
-  var newList = ['-', '-', '-'];
+  List<String> newList = <String>['-', '-', '-'];
   String curLocale = '-';
 
   @override
   void initState() {
     super.initState();
-    initPlatformState();
+    WidgetsBinding.instance.endOfFrame.then((void value) {
+      // If the widget was removed from the tree while the asynchronous platform
+      // message was in flight, we want to discard the reply rather than calling
+      // setState to update our non-existent appearance.
+      if (!mounted) {
+        return;
+      }
+      _flutterIlibPlugin.addListener(() => initPlatformState());
+    });
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
     String iLibVersion;
     try {
-      iLibVersion = await _flutterIlibPlugin.getVersion() ?? 'Unknown iLib version';
+      iLibVersion = _flutterIlibPlugin.getVersion ?? 'Unknown iLib version';
     } on PlatformException {
       iLibVersion = 'Failed to get iLib version.';
     }
 
     String iLibCLDRVersion;
     try {
-      iLibCLDRVersion = await _flutterIlibPlugin.getCLDRVersion() ?? 'Unknown CLDR version';
+      iLibCLDRVersion =
+          _flutterIlibPlugin.getCLDRVersion ?? 'Unknown CLDR version';
     } on PlatformException {
       iLibCLDRVersion = 'Failed to get iLib CLDR version.';
     }
 
     String currentTime;
     try {
-      currentTime = await getDateTimeFormatNow('ko-KR') ?? 'Now';
+      currentTime = await getDateTimeFormatNow('ko-KR');
     } on PlatformException {
       currentTime = 'Failed to get iLib DatFmt.';
     }
 
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
     setState(() {
-      //_platformVersion = platformVersion;
       _iLibVersion = iLibVersion;
       _iLibCLDRVersion = iLibCLDRVersion;
+      _currentTime = currentTime;
     });
   }
 
-  static const textStyle = TextStyle(fontSize: 30);
-  static const itemTextStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const infoTextStyle = TextStyle(fontSize: 20);
-  static const infoItemTextStyle = TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
-  static const buttonTextStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const TextStyle textStyle = TextStyle(fontSize: 30);
+  static const TextStyle itemTextStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const TextStyle infoTextStyle = TextStyle(fontSize: 20);
+  static const TextStyle infoItemTextStyle =
+      TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
+  static const TextStyle buttonTextStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
-  var localeList = ['en-GB', 'en-US', 'ko-KR', 'fa-IR', 'am-ET'];
+  List<String> localeList = <String>[
+    'en-GB',
+    'en-US',
+    'ko-KR',
+    'fa-IR',
+    'am-ET'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -113,22 +122,23 @@ class _MyAppState extends State<MyApp> {
               const SizedBox(
                 height: 30,
               ),
-
               Wrap(
                 alignment: WrapAlignment.center,
                 spacing: 20,
-                children: [
+                children: <Widget>[
                   const Text('Change Locale', style: itemTextStyle),
                   for (int i = 0; i < localeList.length; i++)
                     ElevatedButton(
                       child: Text(localeList[i], style: buttonTextStyle),
                       onPressed: () async {
                         curLocale = localeList[i];
-                        final result1 = await getDateTimeFormatNow(curLocale);
-                        final result2 = await getFirstDayOfWeek(curLocale);
-                        final result3 = await getClock(curLocale);
+                        final String result1 =
+                            await getDateTimeFormatNow(curLocale);
+                        final String result2 =
+                            await getFirstDayOfWeek(curLocale);
+                        final String result3 = await getClock(curLocale);
                         setState(() {
-                          newList = [result1, result2, result3];
+                          newList = <String>[result1, result2, result3];
                         });
                       },
                     )
@@ -137,9 +147,9 @@ class _MyAppState extends State<MyApp> {
               const SizedBox(
                 height: 40,
               ),
-              _customTextBox('iLib Version', _iLibVersion, main:false),
-              _customTextBox('CLDR Version', _iLibCLDRVersion, main:false),
-              // _customTextBox('Current Time', _currentTime),
+              _customTextBox('iLib Version', _iLibVersion, main: false),
+              _customTextBox('CLDR Version', _iLibCLDRVersion, main: false),
+              _customTextBox('Current Time', _currentTime),
             ],
           ),
         ),
@@ -147,15 +157,15 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  Widget _customTextBox(String item, String value, {bool main=true}) {
+  Widget _customTextBox(String item, String value, {bool main = true}) {
     return SizedBox(
       width: 700,
-      height: (main? 40: 30),
+      height: (main ? 40 : 30),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(item, style: (main? itemTextStyle: infoItemTextStyle)),
-          Text(value, style: (main? textStyle: infoTextStyle)),
+        children: <Widget>[
+          Text(item, style: (main ? itemTextStyle : infoItemTextStyle)),
+          Text(value, style: (main ? textStyle : infoTextStyle)),
         ],
       ),
     );
@@ -163,35 +173,53 @@ class _MyAppState extends State<MyApp> {
 
   Future<String> getDateTimeFormat(String curlo) async {
     curLocale = curlo;
-    ILibDateOptions dateOptions = ILibDateOptions(dateTime: DateTime.parse('2024-03-23 10:42'));
-    ILibDateFmtOptions fmtOptions =
-        ILibDateFmtOptions(locale: curlo, length: "full", type: "datetime", useNative: false, timezone: "local");
-    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    final ILibDateOptions dateOptions =
+        ILibDateOptions(dateTime: DateTime.parse('2024-03-23 10:42'));
+    final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+        locale: curlo,
+        length: 'full',
+        type: 'datetime',
+        useNative: false,
+        timezone: 'local');
+    final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
     return fmt.format(dateOptions);
   }
 
   Future<String> getDateTimeFormatNow(String curlo) async {
-    ILibDateOptions dateOptions = ILibDateOptions(dateTime: DateTime.now());
-    ILibDateFmtOptions fmtOptions =
-        ILibDateFmtOptions(locale: curlo, length: "full", type: "datetime", useNative: false, timezone: "local");
-    ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    final ILibDateOptions dateOptions =
+        ILibDateOptions(dateTime: DateTime.now());
+    final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+        locale: curlo,
+        length: 'full',
+        type: 'datetime',
+        useNative: false,
+        timezone: 'local');
+    final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     return fmt.format(dateOptions);
   }
 
   Future<String> getFirstDayOfWeek(String curlo) async {
-    ILibLocaleInfo locInfo = ILibLocaleInfo(curlo);
-    var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    final ILibLocaleInfo locInfo = ILibLocaleInfo(curlo);
+    final List<String> days = <String>[
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday'
+    ];
 
-    int firstDay = await locInfo.getFirstDayOfWeek();
+    final int firstDay = locInfo.getFirstDayOfWeek();
 
     return days[firstDay];
   }
 
   Future<String> getClock(String curlo) async {
-    ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: curlo);
+    final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: curlo);
 
-    int clock = await ILibDateFmt(fmtOptions).getClock();
+    final int clock = ILibDateFmt(fmtOptions).getClock();
 
     return '$clock';
   }
