@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_js/flutter_js.dart';
 
-class FlutteriLib extends ChangeNotifier {
-  FlutteriLib._internal() {
+class LoadIlibJS extends ChangeNotifier {
+  LoadIlibJS._internal() {
     loadJS();
   }
 
-  static final FlutteriLib _instance = FlutteriLib._internal();
-  static FlutteriLib get instance => _instance;
+  static final LoadIlibJS _instance = LoadIlibJS._internal();
+  static LoadIlibJS get instance => _instance;
 
   final JavascriptRuntime _jsRuntime = getJavascriptRuntime();
   bool _iLibPrepared = false;
@@ -22,7 +22,7 @@ class FlutteriLib extends ChangeNotifier {
     notifyListeners();
   }
 
-  void initJS() {
+  void initIlib() {
     try {
       if (_iLibPrepared == false) {
         _jsEvalResult = _jsRuntime.evaluate(_loadJSResult);

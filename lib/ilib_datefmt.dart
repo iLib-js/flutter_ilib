@@ -10,8 +10,8 @@ class ILibDateFmt {
     calendar = options.calendar;
     timezone = options.timezone;
     useNative = options.useNative;
-    FlutteriLib.instance.addListener(() {
-      FlutteriLib.instance.initJS();
+    LoadIlibJS.instance.addListener(() {
+      LoadIlibJS.instance.initIlib();
     });
   }
   String? locale;
@@ -59,7 +59,7 @@ class ILibDateFmt {
     final String formatOptions = toJsonString();
     final String dateOptions = date.toJsonString();
 
-    result = FlutteriLib.instance
+    result = LoadIlibJS.instance
         .evaluate(
             'new DateFmt($formatOptions).format(DateFactory($dateOptions))')
         .stringResult;
@@ -70,7 +70,7 @@ class ILibDateFmt {
     String result = '';
     final String formatOptions = toJsonString();
     final String jscode1 = 'new DateFmt($formatOptions).getClock()';
-    result = FlutteriLib.instance.evaluate(jscode1).stringResult;
+    result = LoadIlibJS.instance.evaluate(jscode1).stringResult;
     return int.parse(result);
   }
 }

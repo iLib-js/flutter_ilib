@@ -13,8 +13,8 @@ export 'ilib_utils.dart';
 
 class FlutterIlib extends ChangeNotifier {
   FlutterIlib._internal() {
-    FlutteriLib.instance.addListener(() {
-      FlutteriLib.instance.initJS();
+    LoadIlibJS.instance.addListener(() {
+      LoadIlibJS.instance.initIlib();
       notifyListeners();
     });
   }
@@ -22,7 +22,7 @@ class FlutterIlib extends ChangeNotifier {
   static final FlutterIlib _instance = FlutterIlib._internal();
   static FlutterIlib get instance => _instance;
 
-  String? get getVersion => evaluateILib('''ilib.getVersion()''');
+  String? get getVersion => evaluateIlib('''ilib.getVersion()''');
 
-  String? get getCLDRVersion => evaluateILib('''ilib.getCLDRVersion()''');
+  String? get getCLDRVersion => evaluateIlib('''ilib.getCLDRVersion()''');
 }
