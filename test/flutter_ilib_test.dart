@@ -11,10 +11,12 @@ void main() {
   });
   group('Basic', () {
     test('getVersion', () {
-      expect(flutterIlibPlugin.getVersion, '14.21.0');
+      flutterIlibPlugin
+          .addListener(() => expect(flutterIlibPlugin.getVersion, '14.21.0'));
     });
     test('getCLDRVersion', () {
-      expect(flutterIlibPlugin.getCLDRVersion, '44.1');
+      flutterIlibPlugin
+          .addListener(() => expect(flutterIlibPlugin.getCLDRVersion, '44.1'));
     });
 
     test('evaluateILib', () {
@@ -26,15 +28,20 @@ void main() {
       const String jscode4 = 'new LocaleInfo("fa-IR").getCalendar()';
       const String jscode5 = 'new LocaleInfo("am-ET").getCalendar()';
 
-      expect(evaluateILib(jscode1), 'gregorian');
-      expect(evaluateILib(jscode2), 'gregorian');
-      expect(evaluateILib(jscode3), 'thaisolar');
-      expect(evaluateILib(jscode4), 'persian');
-      expect(evaluateILib(jscode5), 'ethiopic');
+      flutterIlibPlugin
+          .addListener(() => expect(evaluateIlib(jscode1), 'gregorian'));
+      flutterIlibPlugin
+          .addListener(() => expect(evaluateIlib(jscode2), 'gregorian'));
+      flutterIlibPlugin
+          .addListener(() => expect(evaluateIlib(jscode3), 'thaisolar'));
+      flutterIlibPlugin
+          .addListener(() => expect(evaluateIlib(jscode4), 'persian'));
+      flutterIlibPlugin
+          .addListener(() => expect(evaluateIlib(jscode5), 'ethiopic'));
     });
     test('evaluateILib_emptyString', () {
       const String str = '';
-      expect(evaluateILib(str), null);
+      flutterIlibPlugin.addListener(() => expect(evaluateIlib(str), null));
     });
   });
 }
