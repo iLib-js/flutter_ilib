@@ -14,7 +14,7 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   testWidgets('getPlatformVersion test', (WidgetTester tester) async {
-    final FlutterIlib plugin = FlutterIlib.instance;
+    final FlutterILib plugin = FlutterILib.instance;
     final String? version = plugin.getVersion;
     // The version string depends on the host platform running the test, so
     // just assert that some non-empty string is returned.

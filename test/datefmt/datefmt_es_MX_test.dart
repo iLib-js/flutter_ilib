@@ -5,10 +5,10 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [datefmt_es_MX_test.dart] file.');
-  late FlutterIlib flutterIlibPlugin;
   setUpAll(() async {
-    flutterIlibPlugin = FlutterIlib.instance..addListener(() {});
-    await Future.delayed(const Duration(seconds: 3), () {});
+    await ILibJS.instance
+        .loadJSwithPath('../../assets/js/ilib-standard-flutter-compiled.js');
+    ILibJS.instance.initILib();
   });
   group('format()', () {
     test('testDateFmtSimpleShort_es_MX', () {

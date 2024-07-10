@@ -10,8 +10,8 @@ class ILibDateFmt {
     calendar = options.calendar;
     timezone = options.timezone;
     useNative = options.useNative;
-    LoadIlibJS.instance.addListener(() {
-      LoadIlibJS.instance.initIlib();
+    ILibJS.instance.addListener(() {
+      ILibJS.instance.initILib();
     });
   }
   String? locale;
@@ -59,7 +59,7 @@ class ILibDateFmt {
     final String formatOptions = toJsonString();
     final String dateOptions = date.toJsonString();
 
-    result = LoadIlibJS.instance
+    result = ILibJS.instance
         .evaluate(
             'new DateFmt($formatOptions).format(DateFactory($dateOptions))')
         .stringResult;
@@ -70,7 +70,7 @@ class ILibDateFmt {
     String result = '';
     final String formatOptions = toJsonString();
     final String jscode1 = 'new DateFmt($formatOptions).getClock()';
-    result = LoadIlibJS.instance.evaluate(jscode1).stringResult;
+    result = ILibJS.instance.evaluate(jscode1).stringResult;
     return int.parse(result);
   }
 }

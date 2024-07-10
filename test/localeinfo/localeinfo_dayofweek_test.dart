@@ -5,10 +5,11 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [localeinfo_dayofweek_test.dart] file.');
-  late FlutterIlib flutterIlibPlugin;
   setUpAll(() async {
-    flutterIlibPlugin = FlutterIlib.instance..addListener(() {});
-    await Future.delayed(const Duration(seconds: 3), () {});
+    debugPrint('DsetUp');
+    await ILibJS.instance
+        .loadJSwithPath('../../assets/js/ilib-standard-flutter-compiled.js');
+    ILibJS.instance.initILib();
   });
   // 0:sun, 1:mon, 2:tue, 3:wed, 4:thu, 5:fri, 6:sat
   group('dayOFWeek()', () {

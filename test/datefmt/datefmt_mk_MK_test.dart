@@ -6,11 +6,9 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [datefmt_mk_MK_test.dart] file.');
   setUpAll(() async {
-    final FlutterIlib flutterIlibPlugin = FlutterIlib.instance
-      ..addListener(() {
-        //debugPrint('ilib load Success');
-      });
-    await Future.delayed(const Duration(seconds: 3), () {});
+    await ILibJS.instance
+        .loadJSwithPath('../../assets/js/ilib-standard-flutter-compiled.js');
+    ILibJS.instance.initILib();
   });
   group('format()', () {
     test('testDateFmtSimpleShort_mk_MK', () {

@@ -5,13 +5,13 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [flutter_ilib_datefmt_test.dart] file.');
-  late FlutterIlib flutterIlibPlugin;
   setUpAll(() async {
-    flutterIlibPlugin = FlutterIlib.instance..addListener(() {});
-    await Future.delayed(const Duration(seconds: 3), () {});
+    await ILibJS.instance
+        .loadJSwithPath('../../assets/js/ilib-standard-flutter-compiled.js');
+    ILibJS.instance.initILib();
   });
   group('format()', () {
-    test('ILibDateFmt_no_Options', () async {
+    test('ILibDateFmt_no_Options', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions();
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 

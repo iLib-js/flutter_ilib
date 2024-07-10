@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_js/flutter_js.dart';
 
-class LoadIlibJS extends ChangeNotifier {
-  LoadIlibJS._internal() {
+class ILibJS extends ChangeNotifier {
+  ILibJS._internal() {
     loadJS();
   }
 
-  static final LoadIlibJS _instance = LoadIlibJS._internal();
-  static LoadIlibJS get instance => _instance;
+  static final ILibJS _instance = ILibJS._internal();
+  static ILibJS get instance => _instance;
 
   final JavascriptRuntime _jsRuntime = getJavascriptRuntime();
   bool _iLibPrepared = false;
@@ -22,7 +22,12 @@ class LoadIlibJS extends ChangeNotifier {
     notifyListeners();
   }
 
-  void initIlib() {
+  Future<String?> loadJSwithPath(String path) async {
+    _loadJSResult = await rootBundle.loadString(path);
+    return _loadJSResult;
+  }
+
+  void initILib() {
     try {
       if (_iLibPrepared == false) {
         _jsEvalResult = _jsRuntime.evaluate(_loadJSResult);

@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
   String _iLibVersion = 'Unknown iLib';
   String _iLibCLDRVersion = 'CLDR';
   String _currentTime = 'Current Time';
-  final FlutterIlib _flutterIlibPlugin = FlutterIlib.instance;
+  final FlutterILib _flutterIlibPlugin = FlutterILib.instance;
 
   List<String> newList = <String>['-', '-', '-'];
   String curLocale = '-';
