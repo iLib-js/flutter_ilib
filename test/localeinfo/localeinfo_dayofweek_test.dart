@@ -6,7 +6,6 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [localeinfo_dayofweek_test.dart] file.');
   setUpAll(() async {
-    debugPrint('DsetUp');
     await ILibJS.instance
         .loadJSwithPath('../../assets/js/ilib-standard-flutter-compiled.js');
     ILibJS.instance.initILib();
