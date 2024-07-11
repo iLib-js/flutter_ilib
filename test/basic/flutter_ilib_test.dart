@@ -25,15 +25,15 @@ void main() {
       const String jscode4 = 'new LocaleInfo("fa-IR").getCalendar()';
       const String jscode5 = 'new LocaleInfo("am-ET").getCalendar()';
 
-      expect(evaluateILib(jscode1), 'gregorian');
-      expect(evaluateILib(jscode2), 'gregorian');
-      expect(evaluateILib(jscode3), 'thaisolar');
-      expect(evaluateILib(jscode4), 'persian');
-      expect(evaluateILib(jscode5), 'ethiopic');
+      expect(flutterIlibPlugin.evaluateILib(jscode1), 'gregorian');
+      expect(flutterIlibPlugin.evaluateILib(jscode2), 'gregorian');
+      expect(flutterIlibPlugin.evaluateILib(jscode3), 'thaisolar');
+      expect(flutterIlibPlugin.evaluateILib(jscode4), 'persian');
+      expect(flutterIlibPlugin.evaluateILib(jscode5), 'ethiopic');
     });
     test('evaluateILib_emptyString', () {
       const String str = '';
-      expect(evaluateILib(str), null);
+      expect(flutterIlibPlugin.evaluateILib(str), null);
     });
   });
 }
