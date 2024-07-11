@@ -149,7 +149,7 @@ class _MyAppState extends State<MyApp> {
               ),
               _customTextBox('iLib Version', _iLibVersion, main: false),
               _customTextBox('CLDR Version', _iLibCLDRVersion, main: false),
-              _customTextBox('Current Time', _currentTime),
+              //_customTextBox('Current Time', _currentTime),
             ],
           ),
         ),

@@ -1,10 +1,8 @@
 library flutter_ilib;
 
 import 'package:flutter/foundation.dart';
-
+import 'package:flutter_js/flutter_js.dart';
 import 'ilib_init.dart';
-
-import 'ilib_utils.dart';
 
 export 'ilib_datefmt.dart';
 export 'ilib_init.dart';
@@ -25,4 +23,12 @@ class FlutterILib extends ChangeNotifier {
   String? get getVersion => evaluateILib('''ilib.getVersion()''');
 
   String? get getCLDRVersion => evaluateILib('''ilib.getCLDRVersion()''');
+
+  String? evaluateILib(String jscode) {
+    final JsEvalResult jsEvalResult = ILibJS.instance.evaluate(jscode);
+    final String? result = (jsEvalResult.stringResult == 'null')
+        ? null
+        : jsEvalResult.stringResult;
+    return result;
+  }
 }
