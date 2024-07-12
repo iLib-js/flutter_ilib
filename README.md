@@ -4,7 +4,6 @@ A wrapper plugin to use [iLib](https://github.com/iLib-js/iLib) conveniently in 
 This plugin uses the [flutter_js](https://pub.dev/packages/flutter_js) to make the javascript file in the Flutter application work properly.
 
 ## How to use
-
 ### Initialization
 Add following import:
 ```dart
@@ -37,9 +36,7 @@ ILibDateOptions dateOptions = ILibDateOptions(
     millisecond: 0);
 fmt.format(dateOptions);
 // "24. 6. 27."
-
 ---------------------------------------------------------------------
-
 ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
     locale: "ko-KR", length: "full", type: "datetime", useNative: false, timezone: "local");
 ILibDateFmt fmt = ILibDateFmt(fmtOptions);
@@ -65,11 +62,9 @@ locInfo.getWeekEndEnd();
 #### FlutterILib
 - Methods: `evaluateILib()` : It allows to use any class of APIs from ILib.  
 ```dart
-import 'package:flutter_ilib/flutter_ilib.dart';
-
 String lo = "ko-KR";
 String jscode1 = 'new LocaleInfo("$lo").getCalendar()';
-evaluateILib(jscode1);
+_flutterIlibPlugin.evaluateILib(jscode1);
 // 'gregorian'
 ```
 To give a more efficient way, we provide some classes that can be easily used in a Flutter app.   
