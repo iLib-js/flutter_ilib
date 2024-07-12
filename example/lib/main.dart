@@ -54,8 +54,7 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
+  void initPlatformState() {
     String iLibVersion;
     try {
       iLibVersion = _flutterIlibPlugin.getVersion ?? 'Unknown iLib version';
@@ -73,7 +72,7 @@ class _MyAppState extends State<MyApp> {
 
     String currentTime;
     try {
-      currentTime = await getDateTimeFormatNow('ko-KR');
+      currentTime = getDateTimeFormatNow('ko-KR');
     } on PlatformException {
       currentTime = 'Failed to get iLib DatFmt.';
     }
@@ -130,13 +129,11 @@ class _MyAppState extends State<MyApp> {
                   for (int i = 0; i < localeList.length; i++)
                     ElevatedButton(
                       child: Text(localeList[i], style: buttonTextStyle),
-                      onPressed: () async {
+                      onPressed: () {
                         curLocale = localeList[i];
-                        final String result1 =
-                            await getDateTimeFormatNow(curLocale);
-                        final String result2 =
-                            await getFirstDayOfWeek(curLocale);
-                        final String result3 = await getClock(curLocale);
+                        final String result1 = getDateTimeFormatNow(curLocale);
+                        final String result2 = getFirstDayOfWeek(curLocale);
+                        final String result3 = getClock(curLocale);
                         setState(() {
                           newList = <String>[result1, result2, result3];
                         });
@@ -171,7 +168,7 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  Future<String> getDateTimeFormat(String curlo) async {
+  String getDateTimeFormat(String curlo) {
     curLocale = curlo;
     final ILibDateOptions dateOptions =
         ILibDateOptions(dateTime: DateTime.parse('2024-03-23 10:42'));
@@ -186,7 +183,7 @@ class _MyAppState extends State<MyApp> {
     return fmt.format(dateOptions);
   }
 
-  Future<String> getDateTimeFormatNow(String curlo) async {
+  String getDateTimeFormatNow(String curlo) {
     final ILibDateOptions dateOptions =
         ILibDateOptions(dateTime: DateTime.now());
     final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -199,7 +196,7 @@ class _MyAppState extends State<MyApp> {
     return fmt.format(dateOptions);
   }
 
-  Future<String> getFirstDayOfWeek(String curlo) async {
+  String getFirstDayOfWeek(String curlo) {
     final ILibLocaleInfo locInfo = ILibLocaleInfo(curlo);
     final List<String> days = <String>[
       'Sunday',
@@ -216,7 +213,7 @@ class _MyAppState extends State<MyApp> {
     return days[firstDay];
   }
 
-  Future<String> getClock(String curlo) async {
+  String getClock(String curlo) {
     final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: curlo);
 
     final int clock = ILibDateFmt(fmtOptions).getClock();
