@@ -14,7 +14,7 @@ Add a listener to receive a callback message that ilib is ready for use.
 
 ```dart
 final FlutterILib _flutterIlibPlugin = FlutterILib.instance;
-_flutterIlibPlugin = FlutterILib.instance..addListener(() {
+_flutterIlibPlugin.addListener(() {
     // do Something.
 });
 ```
