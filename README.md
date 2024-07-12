@@ -57,9 +57,9 @@ locInfo.getWeekEndEnd();
 // 0
 ```
 
-### CLASS
+## CLASS
 
-#### FlutterILib
+### FlutterILib
 - Methods: `evaluateILib()` : It allows to use any class of APIs from ILib.  
 ```dart
 String lo = "ko-KR";
@@ -71,17 +71,17 @@ To give a more efficient way, we provide some classes that can be easily used in
 Currently, We have a `ILibDateFmt` and `ILibLocaleInfo` classes.
 We have a plan to provide more classes and methods.  
 
-#### ILibDateFmt
+### ILibDateFmt
 - Class: [ILibDateOptions](./Docs.md/#ilibdateoptions)
 - Class: [ILibDateFmtOptions](./Docs.md/#ilibdatefmtoptions)  
 - Class: [ILibDateFmt](./Docs.md#ilibdatefmt)
    - Methods: `format()`, `getClock()`  
 
-#### ILibLocaleInfo
+### ILibLocaleInfo
 - Class: [ILibLocaleInfo](./Docs.md/#iliblocaleinfo)
    - Methods:  `getFirstDayOfWeek()`, `getWeekEndStart()`, `getWeekEndStart()` 
 
-#### Locales
+## Locales
 The results of the following locales are checked by unit tests.  
 They have the same result as the original iLib methods.
 ```
