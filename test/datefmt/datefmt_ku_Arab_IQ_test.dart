@@ -1,17 +1,23 @@
-import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  print("Testing [datefmt_ku_Arab_IQ_test.dart] file.");
+  debugPrint('Testing [datefmt_ku_Arab_IQ_test.dart] file.');
+  setUpAll(() async {
+    await ILibJS.instance
+        .loadJSwithPath('../../assets/js/ilib-standard-flutter-compiled.js');
+    ILibJS.instance.initILib();
+  });
   group('format()', () {
-    test('testDateFmtSimpleShort_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", length: "short");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtSimpleShort_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', length: 'short');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -19,15 +25,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏٢٠١١-٠٩-٢٩');
+      expect(fmt.format(dateOptions), '‏٢٠١١-٠٩-٢٩');
     });
-    test('testDateFmtSimpleMedium_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", length: "medium");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtSimpleMedium_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', length: 'medium');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -35,15 +41,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏٢٠١١ ئەیلوول ٢٩');
+      expect(fmt.format(dateOptions), '‏٢٠١١ ئەیلوول ٢٩');
     });
-    test('testDateFmtSimpleLong_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", length: "long");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtSimpleLong_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', length: 'long');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -51,15 +57,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏٢٩ی ئەیلوولی ٢٠١١');
+      expect(fmt.format(dateOptions), '‏٢٩ی ئەیلوولی ٢٠١١');
     });
-    test('testDateFmtSimpleFull_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", length: "full");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtSimpleFull_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', length: 'full');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -67,15 +73,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏٢٠١١ ئەیلوول ٢٩');
+      expect(fmt.format(dateOptions), '‏٢٠١١ ئەیلوول ٢٩');
     });
-    test('testDateFmtSimpleTimeShort_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "ku-Arab-IQ", length: "short", type: "time");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtSimpleTimeShort_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'ku-Arab-IQ', length: 'short', type: 'time');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -83,15 +89,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏١:٤٥ د.ن');
+      expect(fmt.format(dateOptions), '‏١:٤٥ د.ن');
     });
-    test('testDateFmtSimpleTimeMedium_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "ku-Arab-IQ", length: "medium", type: "time");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtSimpleTimeMedium_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'ku-Arab-IQ', length: 'medium', type: 'time');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -99,15 +105,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏١:٤٥ د.ن');
+      expect(fmt.format(dateOptions), '‏١:٤٥ د.ن');
     });
-    test('testDateFmtSimpleTimeLong_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "ku-Arab-IQ", length: "long", type: "time");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtSimpleTimeLong_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'ku-Arab-IQ', length: 'long', type: 'time');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -115,15 +121,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏١:٤٥ د.ن');
+      expect(fmt.format(dateOptions), '‏١:٤٥ د.ن');
     });
-    test('testDateFmtSimpleTimeFull_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "ku-Arab-IQ", length: "full", type: "time");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtSimpleTimeFull_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'ku-Arab-IQ', length: 'full', type: 'time');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -131,15 +137,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏١:٤٥ د.ن');
+      expect(fmt.format(dateOptions), '‏١:٤٥ د.ن');
     });
-    test('testDateFmtDateTimeSimpleShort_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "ku-Arab-IQ", length: "short", type: "datetime");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtDateTimeSimpleShort_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'ku-Arab-IQ', length: 'short', type: 'datetime');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -147,15 +153,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏٢٠١١-٠٩-٢٩ ‏١:٤٥ د.ن');
+      expect(fmt.format(dateOptions), '‏٢٠١١-٠٩-٢٩ ‏١:٤٥ د.ن');
     });
-    test('testDateFmtDateTimeSimpleMedium_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "ku-Arab-IQ", length: "medium", type: "datetime");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtDateTimeSimpleMedium_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'ku-Arab-IQ', length: 'medium', type: 'datetime');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -163,15 +169,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏٢٠١١ ئەیلوول ٢٩ ‏١:٤٥ د.ن');
+      expect(fmt.format(dateOptions), '‏٢٠١١ ئەیلوول ٢٩ ‏١:٤٥ د.ن');
     });
-    test('testDateFmtDateTimeSimpleLong_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "ku-Arab-IQ", length: "long", type: "datetime");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtDateTimeSimpleLong_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'ku-Arab-IQ', length: 'long', type: 'datetime');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -179,15 +185,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏٢٩ی ئەیلوولی ٢٠١١ ‏١:٤٥ د.ن');
+      expect(fmt.format(dateOptions), '‏٢٩ی ئەیلوولی ٢٠١١ ‏١:٤٥ د.ن');
     });
-    test('testDateFmtDateTimeSimpleFull_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "ku-Arab-IQ", length: "full", type: "datetime");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtDateTimeSimpleFull_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'ku-Arab-IQ', length: 'full', type: 'datetime');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -195,15 +201,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏٢٠١١ ئەیلوول ٢٩ ‏١:٤٥ د.ن');
+      expect(fmt.format(dateOptions), '‏٢٠١١ ئەیلوول ٢٩ ‏١:٤٥ د.ن');
     });
-    test('testDateFmtTypeDate_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", type: "date");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtTypeDate_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', type: 'date');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -211,15 +217,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏٢٠١١-٠٩-٢٩');
+      expect(fmt.format(dateOptions), '‏٢٠١١-٠٩-٢٩');
     });
-    test('testDateFmtTypeTime_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", type: "time");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtTypeTime_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', type: 'time');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -227,15 +233,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏١:٤٥ د.ن');
+      expect(fmt.format(dateOptions), '‏١:٤٥ د.ن');
     });
-    test('testDateFmtTypeDateTime_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", type: "datetime");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtTypeDateTime_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', type: 'datetime');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -243,15 +249,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏٢٠١١-٠٩-٢٩ ‏١:٤٥ د.ن');
+      expect(fmt.format(dateOptions), '‏٢٠١١-٠٩-٢٩ ‏١:٤٥ د.ن');
     });
-    test('testDateFmtShortDateComponentsY_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", date: "y");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtShortDateComponentsY_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', date: 'y');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -259,15 +265,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '٢٠١١');
+      expect(fmt.format(dateOptions), '٢٠١١');
     });
-    test('testDateFmtShortDateComponentsM_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", date: "m");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtShortDateComponentsM_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', date: 'm');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -275,15 +281,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '٠٩');
+      expect(fmt.format(dateOptions), '٠٩');
     });
-    test('testDateFmtShortDateComponentsD_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", date: "d");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtShortDateComponentsD_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', date: 'd');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -291,15 +297,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '٢٩');
+      expect(fmt.format(dateOptions), '٢٩');
     });
-    test('testDateFmtShortDateComponentsDM_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", date: "dm");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtShortDateComponentsDM_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', date: 'dm');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -307,15 +313,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏٠٩-٢٩');
+      expect(fmt.format(dateOptions), '‏٠٩-٢٩');
     });
-    test('testDateFmtShortDateComponentsMY_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", date: "my");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtShortDateComponentsMY_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', date: 'my');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -323,15 +329,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏٢٠١١-٠٩');
+      expect(fmt.format(dateOptions), '‏٢٠١١-٠٩');
     });
-    test('testDateFmtShortDateComponentsDMY_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", date: "dmy");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtShortDateComponentsDMY_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', date: 'dmy');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -340,15 +346,15 @@ void main() {
           second: 0,
           millisecond: 0);
 
-      expect(await fmt.format(dateOptions), '‏٢٠١١-٠٩-٢٩');
+      expect(fmt.format(dateOptions), '‏٢٠١١-٠٩-٢٩');
     });
-    test('testDateFmtShortDateComponentsWDM_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", date: "wdm");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtShortDateComponentsWDM_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', date: 'wdm');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -356,15 +362,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏٠٩-٢٩, پ');
+      expect(fmt.format(dateOptions), '‏٠٩-٢٩, پ');
     });
-    test('testDateFmtShortDateComponentsWDMY_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", date: "wdmy");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtShortDateComponentsWDMY_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', date: 'wdmy');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -372,15 +378,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏٢٠١١-٠٩-٢٩, پ');
+      expect(fmt.format(dateOptions), '‏٢٠١١-٠٩-٢٩, پ');
     });
-    test('testDateFmtFullDateComponentsY_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", length: "full", date: "y");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtFullDateComponentsY_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', length: 'full', date: 'y');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -388,15 +394,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '٢٠١١');
+      expect(fmt.format(dateOptions), '٢٠١١');
     });
-    test('testDateFmtFullDateComponentsM_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", length: "full", date: "m");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtFullDateComponentsM_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', length: 'full', date: 'm');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -404,15 +410,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), 'ئەیلوول');
+      expect(fmt.format(dateOptions), 'ئەیلوول');
     });
-    test('testDateFmtFullDateComponentsD_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", length: "full", date: "d");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtFullDateComponentsD_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', length: 'full', date: 'd');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -420,15 +426,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '٢٩');
+      expect(fmt.format(dateOptions), '٢٩');
     });
-    test('testDateFmtFullDateComponentsDM_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", length: "full", date: "dm");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtFullDateComponentsDM_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', length: 'full', date: 'dm');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -436,15 +442,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), 'ئەیلوول ٢٩');
+      expect(fmt.format(dateOptions), 'ئەیلوول ٢٩');
     });
-    test('testDateFmtFullDateComponentsMY_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", length: "full", date: "my");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtFullDateComponentsMY_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', length: 'full', date: 'my');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -452,15 +458,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏٢٠١١ ئەیلوول');
+      expect(fmt.format(dateOptions), '‏٢٠١١ ئەیلوول');
     });
-    test('testDateFmtFullDateComponentsDMY_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", length: "full", date: "dmy");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtFullDateComponentsDMY_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', length: 'full', date: 'dmy');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -468,15 +474,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏٢٠١١ ئەیلوول ٢٩');
+      expect(fmt.format(dateOptions), '‏٢٠١١ ئەیلوول ٢٩');
     });
-    test('testDateFmtFullDateComponentsWDM_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", length: "full", date: "wdm");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtFullDateComponentsWDM_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', length: 'full', date: 'wdm');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -484,15 +490,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), 'ئەیلوول ٢٩, پێنجشەممە');
+      expect(fmt.format(dateOptions), 'ئەیلوول ٢٩, پێنجشەممە');
     });
-    test('testDateFmtFullDateComponentsWDMY_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "ku-Arab-IQ", length: "full", date: "wdmy");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtFullDateComponentsWDMY_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'ku-Arab-IQ', length: 'full', date: 'wdmy');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -500,15 +506,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏٢٠١١ ئەیلوول ٢٩, پێنجشەممە');
+      expect(fmt.format(dateOptions), '‏٢٠١١ ئەیلوول ٢٩, پێنجشەممە');
     });
-    test('testDateFmtShortTimeComponentsS_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", type: "time", time: "s");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtShortTimeComponentsS_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', type: 'time', time: 's');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -516,15 +522,15 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '٣٧');
+      expect(fmt.format(dateOptions), '٣٧');
     });
-    test('testDateFmtShortTimeComponentsM_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", type: "time", time: "m");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtShortTimeComponentsM_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', type: 'time', time: 'm');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -532,15 +538,15 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '٤٥');
+      expect(fmt.format(dateOptions), '٤٥');
     });
-    test('testDateFmtShortTimeComponentsH_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", type: "time", time: "h");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtShortTimeComponentsH_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', type: 'time', time: 'h');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -548,15 +554,15 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '١');
+      expect(fmt.format(dateOptions), '١');
     });
-    test('testDateFmtShortTimeComponentsMS_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", type: "time", time: "ms");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtShortTimeComponentsMS_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', type: 'time', time: 'ms');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -564,15 +570,15 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '٤٥:٣٧');
+      expect(fmt.format(dateOptions), '٤٥:٣٧');
     });
-    test('testDateFmtShortTimeComponentsHM_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", type: "time", time: "hm");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtShortTimeComponentsHM_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', type: 'time', time: 'hm');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -580,15 +586,15 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏١:٤٥');
+      expect(fmt.format(dateOptions), '‏١:٤٥');
     });
-    test('testDateFmtShortTimeComponentsHMS_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", type: "time", time: "hms");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtShortTimeComponentsHMS_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', type: 'time', time: 'hms');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -596,15 +602,15 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏١:٤٥:٣٧');
+      expect(fmt.format(dateOptions), '‏١:٤٥:٣٧');
     });
-    test('testDateFmtShortTimeComponentsHMA_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", type: "time", time: "hma");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtShortTimeComponentsHMA_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', type: 'time', time: 'hma');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -612,15 +618,15 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏١:٤٥ د.ن');
+      expect(fmt.format(dateOptions), '‏١:٤٥ د.ن');
     });
-    test('testDateFmtShortTimeComponentsHMZ_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", type: "time", time: "hmz");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtShortTimeComponentsHMZ_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', type: 'time', time: 'hmz');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -628,15 +634,15 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏١:٤٥ +٠٣/+٠٤');
+      expect(fmt.format(dateOptions), '‏١:٤٥ +٠٣/+٠٤');
     });
-    test('testDateFmtShortTimeComponentsHMAZ_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", type: "time", time: "hmaz");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtShortTimeComponentsHMAZ_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', type: 'time', time: 'hmaz');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -644,15 +650,15 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏١:٤٥ د.ن +٠٣/+٠٤');
+      expect(fmt.format(dateOptions), '‏١:٤٥ د.ن +٠٣/+٠٤');
     });
-    test('testDateFmtShortTimeComponentsHMSA_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", type: "time", time: "hmsa");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtShortTimeComponentsHMSA_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', type: 'time', time: 'hmsa');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -660,15 +666,15 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏١:٤٥:٣٧ د.ن');
+      expect(fmt.format(dateOptions), '‏١:٤٥:٣٧ د.ن');
     });
-    test('testDateFmtShortTimeComponentsHMSZ_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", type: "time", time: "hmsz");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtShortTimeComponentsHMSZ_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', type: 'time', time: 'hmsz');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -676,15 +682,15 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏١:٤٥:٣٧ +٠٣/+٠٤');
+      expect(fmt.format(dateOptions), '‏١:٤٥:٣٧ +٠٣/+٠٤');
     });
-    test('testDateFmtShortTimeComponentsHMSAZ_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "ku-Arab-IQ", type: "time", time: "hmsaz");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtShortTimeComponentsHMSAZ_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ku-Arab-IQ', type: 'time', time: 'hmsaz');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -692,15 +698,15 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏١:٤٥:٣٧ د.ن +٠٣/+٠٤');
+      expect(fmt.format(dateOptions), '‏١:٤٥:٣٧ د.ن +٠٣/+٠٤');
     });
-    test('testDateFmtFullTimeComponentsS_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "ku-Arab-IQ", type: "time", length: "full", time: "s");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtFullTimeComponentsS_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'ku-Arab-IQ', type: 'time', length: 'full', time: 's');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -708,15 +714,15 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '٣٧');
+      expect(fmt.format(dateOptions), '٣٧');
     });
-    test('testDateFmtFullTimeComponentsM_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "ku-Arab-IQ", type: "time", length: "full", time: "m");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtFullTimeComponentsM_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'ku-Arab-IQ', type: 'time', length: 'full', time: 'm');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -724,15 +730,15 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '٤٥');
+      expect(fmt.format(dateOptions), '٤٥');
     });
-    test('testDateFmtFullTimeComponentsH_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "ku-Arab-IQ", type: "time", length: "full", time: "h");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtFullTimeComponentsH_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'ku-Arab-IQ', type: 'time', length: 'full', time: 'h');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -740,15 +746,15 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '١');
+      expect(fmt.format(dateOptions), '١');
     });
-    test('testDateFmtFullTimeComponentsMS_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "ku-Arab-IQ", type: "time", length: "full", time: "ms");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtFullTimeComponentsMS_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'ku-Arab-IQ', type: 'time', length: 'full', time: 'ms');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -756,15 +762,15 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '٤٥:٣٧');
+      expect(fmt.format(dateOptions), '٤٥:٣٧');
     });
-    test('testDateFmtFullTimeComponentsHM_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "ku-Arab-IQ", type: "time", length: "full", time: "hm");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtFullTimeComponentsHM_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'ku-Arab-IQ', type: 'time', length: 'full', time: 'hm');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -772,15 +778,15 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏١:٤٥');
+      expect(fmt.format(dateOptions), '‏١:٤٥');
     });
-    test('testDateFmtFullTimeComponentsHMS_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "ku-Arab-IQ", type: "time", length: "full", time: "hms");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtFullTimeComponentsHMS_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'ku-Arab-IQ', type: 'time', length: 'full', time: 'hms');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -788,15 +794,15 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏١:٤٥:٣٧');
+      expect(fmt.format(dateOptions), '‏١:٤٥:٣٧');
     });
-    test('testDateFmtFullTimeComponentsHMA_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "ku-Arab-IQ", type: "time", length: "full", time: "hma");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtFullTimeComponentsHMA_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'ku-Arab-IQ', type: 'time', length: 'full', time: 'hma');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -804,15 +810,15 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏١:٤٥ د.ن');
+      expect(fmt.format(dateOptions), '‏١:٤٥ د.ن');
     });
-    test('testDateFmtFullTimeComponentsHMZ_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "ku-Arab-IQ", type: "time", length: "full", time: "hmz");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtFullTimeComponentsHMZ_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'ku-Arab-IQ', type: 'time', length: 'full', time: 'hmz');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -820,15 +826,15 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏١:٤٥ +٠٣/+٠٤');
+      expect(fmt.format(dateOptions), '‏١:٤٥ +٠٣/+٠٤');
     });
-    test('testDateFmtFullTimeComponentsHMAZ_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "ku-Arab-IQ", type: "time", length: "full", time: "hmaz");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtFullTimeComponentsHMAZ_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'ku-Arab-IQ', type: 'time', length: 'full', time: 'hmaz');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -836,15 +842,15 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏١:٤٥ د.ن +٠٣/+٠٤');
+      expect(fmt.format(dateOptions), '‏١:٤٥ د.ن +٠٣/+٠٤');
     });
-    test('testDateFmtFullTimeComponentsHMSA_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "ku-Arab-IQ", type: "time", length: "full", time: "hmsa");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtFullTimeComponentsHMSA_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'ku-Arab-IQ', type: 'time', length: 'full', time: 'hmsa');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -852,15 +858,15 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏١:٤٥:٣٧ د.ن');
+      expect(fmt.format(dateOptions), '‏١:٤٥:٣٧ د.ن');
     });
-    test('testDateFmtFullTimeComponentsHMSZ_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "ku-Arab-IQ", type: "time", length: "full", time: "hmsz");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtFullTimeComponentsHMSZ_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'ku-Arab-IQ', type: 'time', length: 'full', time: 'hmsz');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -868,15 +874,15 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏١:٤٥:٣٧ +٠٣/+٠٤');
+      expect(fmt.format(dateOptions), '‏١:٤٥:٣٧ +٠٣/+٠٤');
     });
-    test('testDateFmtFullTimeComponentsHMSAZ_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "ku-Arab-IQ", type: "time", length: "full", time: "hmsaz");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtFullTimeComponentsHMSAZ_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'ku-Arab-IQ', type: 'time', length: 'full', time: 'hmsaz');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 9,
           day: 29,
@@ -884,15 +890,15 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏١:٤٥:٣٧ د.ن +٠٣/+٠٤');
+      expect(fmt.format(dateOptions), '‏١:٤٥:٣٧ د.ن +٠٣/+٠٤');
     });
-    test('testDateFmtWithTimeZoneAndNoDST_ku_Arab_IQ', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "ku-Arab-IQ", type: "time", length: "full", time: "hmsz");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtWithTimeZoneAndNoDST_ku_Arab_IQ', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'ku-Arab-IQ', type: 'time', length: 'full', time: 'hmsz');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "ku-Arab-IQ",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ku-Arab-IQ',
           year: 2011,
           month: 12,
           day: 29,
@@ -900,7 +906,7 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '‏١:٤٥:٣٧ +٠٣/+٠٤');
+      expect(fmt.format(dateOptions), '‏١:٤٥:٣٧ +٠٣/+٠٤');
     });
   });
 }

@@ -1,16 +1,6 @@
 import 'ilib_init.dart';
-import 'package:flutter_js/flutter_js.dart';
 
 class ILibDateFmt {
-  String? locale;
-  String? type;
-  String? length;
-  String? timezone;
-  String? calendar;
-  String? date;
-  String? time;
-  bool? useNative;
-
   ILibDateFmt(ILibDateFmtOptions options) {
     locale = options.locale;
     type = options.type;
@@ -20,23 +10,36 @@ class ILibDateFmt {
     calendar = options.calendar;
     timezone = options.timezone;
     useNative = options.useNative;
+    ILibJS.instance.addListener(() {
+      ILibJS.instance.initILib();
+    });
   }
+  String? locale;
+  String? type;
+  String? length;
+  String? timezone;
+  String? calendar;
+  String? date;
+  String? time;
+  bool? useNative;
 
   String toJsonString() {
-    String result = "";
-    String completeOption = "";
+    String result = '';
+    String completeOption = '';
 
-    Map<String, String> paramInfo = {
-      'locale': "$locale",
-      'type': "$type",
-      'length': "$length",
-      'date': "$date",
-      'time': "$time",
-      'calendar': "$calendar",
-      'timezone': "$timezone"
+    final Map<String, String> paramInfo = <String, String>{
+      'locale': '$locale',
+      'type': '$type',
+      'length': '$length',
+      'date': '$date',
+      'time': '$time',
+      'calendar': '$calendar',
+      'timezone': '$timezone'
     };
-    paramInfo.forEach((key, value) {
-      if (value != 'null') result += '$key:"$value",';
+    paramInfo.forEach((String key, String value) {
+      if (value != 'null') {
+        result += '$key:"$value",';
+      }
     });
 
     if (useNative != null) {
@@ -50,39 +53,29 @@ class ILibDateFmt {
     return completeOption;
   }
 
-  Future<String> format(ILibDateOptions date) async {
-    String result = "";
-    JavascriptRuntime ilibJS = await initializeiLib();
-    String formatOptions = toJsonString();
-    String dateOptions = date.toJsonString();
+  String format(ILibDateOptions date) {
+    String result = '';
 
-    String jscode2 =
-        'new DateFmt($formatOptions).format(DateFactory($dateOptions))';
-    //print(jscode2);
-    result = ilibJS.evaluate(jscode2).stringResult;
+    final String formatOptions = toJsonString();
+    final String dateOptions = date.toJsonString();
+
+    result = ILibJS.instance
+        .evaluate(
+            'new DateFmt($formatOptions).format(DateFactory($dateOptions))')
+        .stringResult;
     return result;
   }
 
-  Future<int> getClock() async {
-    String result = "";
-    JavascriptRuntime ilibJS = await initializeiLib();
-    String formatOptions = toJsonString();
-    String jscode1 = 'new DateFmt($formatOptions).getClock()';
-    result = ilibJS.evaluate(jscode1).stringResult;
+  int getClock() {
+    String result = '';
+    final String formatOptions = toJsonString();
+    final String jscode1 = 'new DateFmt($formatOptions).getClock()';
+    result = ILibJS.instance.evaluate(jscode1).stringResult;
     return int.parse(result);
   }
 }
 
 class ILibDateFmtOptions {
-  String? locale;
-  String? length;
-  String? type;
-  String? calendar;
-  String? timezone;
-  String? date;
-  String? time;
-  bool? useNative;
-
   ILibDateFmtOptions(
       {this.locale,
       this.length,
@@ -92,23 +85,17 @@ class ILibDateFmtOptions {
       this.useNative,
       this.date,
       this.time});
+  String? locale;
+  String? length;
+  String? type;
+  String? calendar;
+  String? timezone;
+  String? date;
+  String? time;
+  bool? useNative;
 }
 
 class ILibDateOptions {
-  String? locale;
-  int? year;
-  int? month;
-  int? day;
-  int? hour;
-  int? minute;
-  int? second;
-  int? millisecond;
-  int? unixtime;
-  String? timezone;
-  String? type;
-  String? calendar;
-  DateTime? dateTime;
-
   ILibDateOptions(
       {this.locale,
       this.year,
@@ -123,6 +110,19 @@ class ILibDateOptions {
       this.calendar,
       this.dateTime,
       this.type});
+  String? locale;
+  int? year;
+  int? month;
+  int? day;
+  int? hour;
+  int? minute;
+  int? second;
+  int? millisecond;
+  int? unixtime;
+  String? timezone;
+  String? type;
+  String? calendar;
+  DateTime? dateTime;
 
   String toJsonString() {
     int? y = year;
@@ -132,8 +132,8 @@ class ILibDateOptions {
     int? min = minute;
     int? sec = second;
     int? milsec = millisecond;
-    String result = "";
-    String completeOption = "";
+    String result = '';
+    String completeOption = '';
 
     if (dateTime != null) {
       y = dateTime!.year;
@@ -145,18 +145,20 @@ class ILibDateOptions {
       milsec = dateTime!.millisecond;
     }
 
-    Map<String, String> paramInfo = {
-      'locale': "$locale",
-      'timezone': "$timezone",
-      'type': "$type",
-      'calendar': "$calendar"
+    final Map<String, String> paramInfo = <String, String>{
+      'locale': '$locale',
+      'timezone': '$timezone',
+      'type': '$type',
+      'calendar': '$calendar'
     };
 
-    paramInfo.forEach((key, value) {
-      if (value != 'null') result += '$key:"$value",';
+    paramInfo.forEach((String key, String value) {
+      if (value != 'null') {
+        result += '$key:"$value",';
+      }
     });
 
-    Map<String, int?> datetimeInfo = {
+    final Map<String, int?> datetimeInfo = <String, int?>{
       'year': y,
       'month': m,
       'day': d,
@@ -165,12 +167,14 @@ class ILibDateOptions {
       'second': sec,
       'millisecond': milsec,
     };
-    datetimeInfo.forEach((key, value) {
-      if (value != null) result += '$key:$value,';
+    datetimeInfo.forEach((String key, int? value) {
+      if (value != null) {
+        result += '$key:$value,';
+      }
     });
     result =
         result.isNotEmpty ? result.substring(0, result.length - 1) : result;
-    completeOption = result.isNotEmpty ? '{$result}' : "";
+    completeOption = result.isNotEmpty ? '{$result}' : '';
     return completeOption;
   }
 }

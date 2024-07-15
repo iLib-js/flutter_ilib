@@ -1,32 +1,28 @@
 import 'ilib_init.dart';
-import 'package:flutter_js/flutter_js.dart';
 
 class ILibLocaleInfo {
-  String? locale;
-
   ILibLocaleInfo(String lo) {
     locale = lo;
+    ILibJS.instance.addListener(() {
+      ILibJS.instance.initILib();
+    });
   }
-  Future<int> getFirstDayOfWeek() async {
-    JavascriptRuntime ilibJS = await initializeiLib();
-    String jscode1 = 'new LocaleInfo("$locale").getFirstDayOfWeek()';
-    String result = ilibJS.evaluate(jscode1).stringResult;
+  String? locale;
+  int getFirstDayOfWeek() {
+    final String jscode1 = 'new LocaleInfo("$locale").getFirstDayOfWeek()';
+    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
     return int.parse(result);
   }
 
-  Future<int> getWeekEndStart() async {
-    JavascriptRuntime ilibJS = await initializeiLib();
-
-    String jscode1 = 'new LocaleInfo("$locale").getWeekEndStart()';
-    String result = ilibJS.evaluate(jscode1).stringResult;
+  int getWeekEndStart() {
+    final String jscode1 = 'new LocaleInfo("$locale").getWeekEndStart()';
+    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
     return int.parse(result);
   }
 
-  Future<int> getWeekEndEnd() async {
-    JavascriptRuntime ilibJS = await initializeiLib();
-
-    String jscode1 = 'new LocaleInfo("$locale").getWeekEndEnd()';
-    String result = ilibJS.evaluate(jscode1).stringResult;
+  int getWeekEndEnd() {
+    final String jscode1 = 'new LocaleInfo("$locale").getWeekEndEnd()';
+    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
     return int.parse(result);
   }
 }
