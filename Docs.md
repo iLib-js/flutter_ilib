@@ -64,8 +64,8 @@ ILibDateFmt(ILibDateFmtOptions options)
 |name|description|
 |------|---|
 |_String_ toJsonString() | A string representation of parameters to call functions of iLib library properly|
-|_Future\<String>_ format()| Formats a particular date instance according to the settings of this formatter object|
-| _Future\<int>_ getClock()| Returns the default clock from the locale is returned instead."12" or "24" depending on whether this formatter uses the 12-hour or 24-hour clock|
+|_String_ format()| Formats a particular date instance according to the settings of this formatter object|
+|_int_ getClock()| Returns the default clock from the locale is returned instead."12" or "24" depending on whether this formatter uses the 12-hour or 24-hour clock|
 
 ## ILibLocaleInfo
 
@@ -82,6 +82,6 @@ ILibLocaleInfo(String locale)
  ### Methods
 |name|description|
 |------|---|
-|_Future\<int>_ getFirstDayOfWeek() | Returns the day of week that starts weeks in the current locale. <br>Days are still numbered the standard way with 0 for Sunday through 6 for Saturday, <br> but calendars should be displayed and weeks calculated with the day of week returned from this function as the first day of the week.|
-|_Future\<int>_ getWeekEndStart() | Returns the day of week that starts weekend in the current locale.<br> Days are still numbered the standard way with 0 for Sunday through 6 for Saturday.|
-|_Future\<int>_ getWeekEndEnd() | Returns the day of week that ends weekend in the current locale. <br>Days are still numbered the standard way with 0 for Sunday through 6 for Saturday.|
+|_int_ getFirstDayOfWeek() | Returns the day of week that starts weeks in the current locale. <br>Days are still numbered the standard way with 0 for Sunday through 6 for Saturday, <br> but calendars should be displayed and weeks calculated with the day of week returned from this function as the first day of the week.|
+|_int_ getWeekEndStart() | Returns the day of week that starts weekend in the current locale.<br> Days are still numbered the standard way with 0 for Sunday through 6 for Saturday.|
+|_int_ getWeekEndEnd() | Returns the day of week that ends weekend in the current locale. <br>Days are still numbered the standard way with 0 for Sunday through 6 for Saturday.|
