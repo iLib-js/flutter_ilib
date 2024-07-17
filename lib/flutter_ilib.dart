@@ -23,6 +23,8 @@ class FlutterILib extends ChangeNotifier {
 
   String? get getCLDRVersion => evaluateILib('''ilib.getCLDRVersion()''');
 
+  /// It allows the use of any class of APIs from ILib.
+  /// [jscode] Convert the Javascript code you want to get as a result into a string.
   String? evaluateILib(String jscode) {
     final JsEvalResult jsEvalResult = ILibJS.instance.evaluate(jscode);
     final String? result = (jsEvalResult.stringResult == 'null')
