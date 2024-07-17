@@ -81,7 +81,7 @@ We have a plan to provide more classes and methods.
 - Class: [ILibLocaleInfo](./Docs.md/#iliblocaleinfo)
    - Methods:  `getFirstDayOfWeek()`, `getWeekEndStart()`, `getWeekEndStart()` 
 
-## Locales
+## Supported Locales
 The results of the following locales are checked by unit tests.  
 They have the same result as the original iLib methods.
 ```
@@ -99,6 +99,11 @@ ru-RU,ru-UA,si-LK,sk-SK,sl-SI,sq-AL,sq-ME,sr-Latn-ME,sr-Latn-RS,sv-FI,sv-SE,
 sw-Latn-KE,ta-IN,te-IN,th-TH,tr-AM, tr-AZ,tr-CY,tr-TR,uk-UA,ur-IN,uz-Latn-UZ,  
 vi-VN,zh-Hans-CN,zh-Hant-HK,zh-Hant-TW
 ```
+
+## Supported Platforms
+* Linux
+* webOS
+
 
 ## TEST
 ### Run the Unit Test
