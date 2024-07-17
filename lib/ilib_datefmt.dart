@@ -1,6 +1,7 @@
 import 'ilib_init.dart';
 
 class ILibDateFmt {
+  /// [options] Set the Options for formatting
   ILibDateFmt(ILibDateFmtOptions options) {
     locale = options.locale;
     type = options.type;
@@ -23,6 +24,7 @@ class ILibDateFmt {
   String? time;
   bool? useNative;
 
+  /// A string representation of parameters to call functions of iLib library properly
   String toJsonString() {
     String result = '';
     String completeOption = '';
@@ -53,6 +55,7 @@ class ILibDateFmt {
     return completeOption;
   }
 
+  /// Formats a particular date instance according to the settings of this formatter object
   String format(ILibDateOptions date) {
     String result = '';
 
@@ -66,6 +69,8 @@ class ILibDateFmt {
     return result;
   }
 
+  /// Returns the default clock from the locale is returned instead.
+  /// "12" or "24" depending on whether this formatter uses the 12-hour or 24-hour clock
   int getClock() {
     String result = '';
     final String formatOptions = toJsonString();
@@ -76,6 +81,14 @@ class ILibDateFmt {
 }
 
 class ILibDateFmtOptions {
+  /// [locale] Locales are specified either with a specifier string that follows the BCP-47 convention,
+  /// [length] Specifies the length of the format to use.Valid values are "short", "medium", "long" and "full".
+  /// [type] Specifies whether this formatter should format times only, dates only, or both times and dates together. Valid values are "time", "date", and "datetime".
+  /// [calendar] The type of calendar to use for this format.
+  /// [timezone] Time zone to use when formatting times.
+  /// [useNative] The flag used to determine whether to use the native script settings for formatting the numbers.
+  /// [date] This property tells which components of a date format to use. Valid values are: "dmwy", "dmy", "dmw", "dm", "my", "dw", "d", "m","n","y". Default components, if this property is not specified, is "dmy".
+  /// [time] This property gives which components of a time format to use. Valid values for this property are: "ahmsz", "ahms", "hmsz", "hms", "ahmz", "ahm", hmz", ah", "hm", "ms", "h", "m", "s". Default value if this property is not specified is "hma".
   ILibDateFmtOptions(
       {this.locale,
       this.length,
@@ -96,6 +109,19 @@ class ILibDateFmtOptions {
 }
 
 class ILibDateOptions {
+  /// [locale] Locales are specified either with a specifier string that follows the BCP-47 convention,
+  /// [year] The year
+  /// [month] The month
+  /// [day] The day of the month
+  /// [hour] The hour of the day
+  /// [minute] The minute [0..59]
+  /// [second] The second [0..59]
+  /// [millisecond] The millisecond [0..999]
+  /// [unixtime] Sets the time of this instance according to the given unix time.
+  /// [timezone] Time zone name as a string
+  /// [calendar] Same as "type" property
+  /// [dateTime] DateTime class of flutter
+  /// [type] Specifies the type/calendar of the date desired.
   ILibDateOptions(
       {this.locale,
       this.year,
@@ -124,6 +150,7 @@ class ILibDateOptions {
   String? calendar;
   DateTime? dateTime;
 
+  /// A string representation of parameters to call functions of iLib library properly
   String toJsonString() {
     int? y = year;
     int? m = month;
