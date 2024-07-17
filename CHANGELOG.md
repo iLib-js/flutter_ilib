@@ -1,5 +1,5 @@
 ## 0.0.4
-* Added more of the  API  comments in codes.
+* Added more of the API comments in codes.
 
 ## 0.0.3
 * Updated to show a sample screenshot image in the published package.
