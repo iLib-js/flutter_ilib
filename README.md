@@ -36,7 +36,9 @@ ILibDateOptions dateOptions = ILibDateOptions(
     millisecond: 0);
 fmt.format(dateOptions);
 // "24. 6. 27."
----------------------------------------------------------------------
+```
+
+```dart
 ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
     locale: "ko-KR", length: "full", type: "datetime", useNative: false, timezone: "local");
 ILibDateFmt fmt = ILibDateFmt(fmtOptions);
@@ -104,7 +106,6 @@ vi-VN,zh-Hans-CN,zh-Hant-HK,zh-Hant-TW
 * Linux
 * webOS
 
-
 ## TEST
 ### Run the Unit Test
 On Linux, you need to export an environment variable called `LIBQUICKJSC_TEST_PATH` pointing to the file `libquickjs_c_bridge_plugin.so`.
@@ -119,7 +120,6 @@ We have the script file for the above works to do everything at once.
 ./execute_unit_test.sh
 ```
 
-
 ### Excute the example
 We provide the example app that can be executed.
 ```
@@ -127,7 +127,6 @@ cd example
 flutter build linux --release
 flutter run -d linux --release
 ```
-
 ![image](./flutterilibExample.png)
 
 ## License
