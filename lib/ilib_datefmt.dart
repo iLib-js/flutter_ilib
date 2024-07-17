@@ -1,7 +1,7 @@
 import 'ilib_init.dart';
 
 class ILibDateFmt {
-  /// Set the Options to [options] for the DateFormating.
+  /// [options] Set the Options for formatting
   ILibDateFmt(ILibDateFmtOptions options) {
     locale = options.locale;
     type = options.type;
