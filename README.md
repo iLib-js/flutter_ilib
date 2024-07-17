@@ -1,7 +1,7 @@
 # flutter_ilib
 
-A wrapper plugin to use [iLib](https://github.com/iLib-js/iLib) conveniently in Flutter apps.  
-This plugin uses the [flutter_js](https://pub.dev/packages/flutter_js) to make the javascript file in the Flutter application work properly.
+A wrapper plugin to conveniently use [iLib](https://github.com/iLib-js/iLib) in Flutter apps.  
+This plugin uses the [flutter_js](https://pub.dev/packages/flutter_js) to make the javascript file work properly in the Flutter app.
 
 ## How to use
 ### Initialization
