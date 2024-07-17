@@ -1,32 +1,41 @@
 import 'ilib_init.dart';
-import 'package:flutter_js/flutter_js.dart';
 
 class ILibLocaleInfo {
-  String? locale;
-
+  /// [lo] Set the locale for which the info is sought
   ILibLocaleInfo(String lo) {
     locale = lo;
+    ILibJS.instance.addListener(() {
+      ILibJS.instance.initILib();
+    });
   }
-  Future<int> getFirstDayOfWeek() async {
-    JavascriptRuntime ilibJS = await initializeiLib();
-    String jscode1 = 'new LocaleInfo("$locale").getFirstDayOfWeek()';
-    String result = ilibJS.evaluate(jscode1).stringResult;
+  String? locale;
+
+  /// Returns the day of week that starts weeks in the current locale.
+  ///
+  /// Days are still numbered the standard way with 0 for Sunday through 6 for Saturday,
+  /// but calendars should be displayed and weeks calculated with the day of week returned
+  /// from this function as the first day of the week.
+  int getFirstDayOfWeek() {
+    final String jscode1 = 'new LocaleInfo("$locale").getFirstDayOfWeek()';
+    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
     return int.parse(result);
   }
 
-  Future<int> getWeekEndStart() async {
-    JavascriptRuntime ilibJS = await initializeiLib();
-
-    String jscode1 = 'new LocaleInfo("$locale").getWeekEndStart()';
-    String result = ilibJS.evaluate(jscode1).stringResult;
+  /// Returns the day of week that starts weekend in the current locale.
+  ///
+  /// Days are still numbered the standard way with 0 for Sunday through 6 for Saturday.
+  int getWeekEndStart() {
+    final String jscode1 = 'new LocaleInfo("$locale").getWeekEndStart()';
+    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
     return int.parse(result);
   }
 
-  Future<int> getWeekEndEnd() async {
-    JavascriptRuntime ilibJS = await initializeiLib();
-
-    String jscode1 = 'new LocaleInfo("$locale").getWeekEndEnd()';
-    String result = ilibJS.evaluate(jscode1).stringResult;
+  /// Returns the day of week that ends weekend in the current locale.
+  ///
+  /// Days are still numbered the standard way with 0 for Sunday through 6 for Saturday.
+  int getWeekEndEnd() {
+    final String jscode1 = 'new LocaleInfo("$locale").getWeekEndEnd()';
+    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
     return int.parse(result);
   }
 }

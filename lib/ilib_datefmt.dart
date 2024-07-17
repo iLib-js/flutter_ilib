@@ -1,16 +1,7 @@
 import 'ilib_init.dart';
-import 'package:flutter_js/flutter_js.dart';
 
 class ILibDateFmt {
-  String? locale;
-  String? type;
-  String? length;
-  String? timezone;
-  String? calendar;
-  String? date;
-  String? time;
-  bool? useNative;
-
+  /// [options] Set the Options for formatting
   ILibDateFmt(ILibDateFmtOptions options) {
     locale = options.locale;
     type = options.type;
@@ -20,23 +11,37 @@ class ILibDateFmt {
     calendar = options.calendar;
     timezone = options.timezone;
     useNative = options.useNative;
+    ILibJS.instance.addListener(() {
+      ILibJS.instance.initILib();
+    });
   }
+  String? locale;
+  String? type;
+  String? length;
+  String? timezone;
+  String? calendar;
+  String? date;
+  String? time;
+  bool? useNative;
 
+  /// A string representation of parameters to call functions of iLib library properly
   String toJsonString() {
-    String result = "";
-    String completeOption = "";
+    String result = '';
+    String completeOption = '';
 
-    Map<String, String> paramInfo = {
-      'locale': "$locale",
-      'type': "$type",
-      'length': "$length",
-      'date': "$date",
-      'time': "$time",
-      'calendar': "$calendar",
-      'timezone': "$timezone"
+    final Map<String, String> paramInfo = <String, String>{
+      'locale': '$locale',
+      'type': '$type',
+      'length': '$length',
+      'date': '$date',
+      'time': '$time',
+      'calendar': '$calendar',
+      'timezone': '$timezone'
     };
-    paramInfo.forEach((key, value) {
-      if (value != 'null') result += '$key:"$value",';
+    paramInfo.forEach((String key, String value) {
+      if (value != 'null') {
+        result += '$key:"$value",';
+      }
     });
 
     if (useNative != null) {
@@ -50,39 +55,40 @@ class ILibDateFmt {
     return completeOption;
   }
 
-  Future<String> format(ILibDateOptions date) async {
-    String result = "";
-    JavascriptRuntime ilibJS = await initializeiLib();
-    String formatOptions = toJsonString();
-    String dateOptions = date.toJsonString();
+  /// Formats a particular date instance according to the settings of this formatter object
+  String format(ILibDateOptions date) {
+    String result = '';
 
-    String jscode2 =
-        'new DateFmt($formatOptions).format(DateFactory($dateOptions))';
-    //print(jscode2);
-    result = ilibJS.evaluate(jscode2).stringResult;
+    final String formatOptions = toJsonString();
+    final String dateOptions = date.toJsonString();
+
+    result = ILibJS.instance
+        .evaluate(
+            'new DateFmt($formatOptions).format(DateFactory($dateOptions))')
+        .stringResult;
     return result;
   }
 
-  Future<int> getClock() async {
-    String result = "";
-    JavascriptRuntime ilibJS = await initializeiLib();
-    String formatOptions = toJsonString();
-    String jscode1 = 'new DateFmt($formatOptions).getClock()';
-    result = ilibJS.evaluate(jscode1).stringResult;
+  /// Returns the default clock from the locale is returned instead.
+  /// "12" or "24" depending on whether this formatter uses the 12-hour or 24-hour clock
+  int getClock() {
+    String result = '';
+    final String formatOptions = toJsonString();
+    final String jscode1 = 'new DateFmt($formatOptions).getClock()';
+    result = ILibJS.instance.evaluate(jscode1).stringResult;
     return int.parse(result);
   }
 }
 
 class ILibDateFmtOptions {
-  String? locale;
-  String? length;
-  String? type;
-  String? calendar;
-  String? timezone;
-  String? date;
-  String? time;
-  bool? useNative;
-
+  /// [locale] Locales are specified either with a specifier string that follows the BCP-47 convention,
+  /// [length] Specifies the length of the format to use.Valid values are "short", "medium", "long" and "full".
+  /// [type] Specifies whether this formatter should format times only, dates only, or both times and dates together. Valid values are "time", "date", and "datetime".
+  /// [calendar] The type of calendar to use for this format.
+  /// [timezone] Time zone to use when formatting times.
+  /// [useNative] The flag used to determine whether to use the native script settings for formatting the numbers.
+  /// [date] This property tells which components of a date format to use. Valid values are: "dmwy", "dmy", "dmw", "dm", "my", "dw", "d", "m","n","y". Default components, if this property is not specified, is "dmy".
+  /// [time] This property gives which components of a time format to use. Valid values for this property are: "ahmsz", "ahms", "hmsz", "hms", "ahmz", "ahm", hmz", ah", "hm", "ms", "h", "m", "s". Default value if this property is not specified is "hma".
   ILibDateFmtOptions(
       {this.locale,
       this.length,
@@ -92,23 +98,30 @@ class ILibDateFmtOptions {
       this.useNative,
       this.date,
       this.time});
+  String? locale;
+  String? length;
+  String? type;
+  String? calendar;
+  String? timezone;
+  String? date;
+  String? time;
+  bool? useNative;
 }
 
 class ILibDateOptions {
-  String? locale;
-  int? year;
-  int? month;
-  int? day;
-  int? hour;
-  int? minute;
-  int? second;
-  int? millisecond;
-  int? unixtime;
-  String? timezone;
-  String? type;
-  String? calendar;
-  DateTime? dateTime;
-
+  /// [locale] Locales are specified either with a specifier string that follows the BCP-47 convention,
+  /// [year] The year
+  /// [month] The month
+  /// [day] The day of the month
+  /// [hour] The hour of the day
+  /// [minute] The minute [0..59]
+  /// [second] The second [0..59]
+  /// [millisecond] The millisecond [0..999]
+  /// [unixtime] Sets the time of this instance according to the given unix time.
+  /// [timezone] Time zone name as a string
+  /// [calendar] Same as "type" property
+  /// [dateTime] DateTime class of flutter
+  /// [type] Specifies the type/calendar of the date desired.
   ILibDateOptions(
       {this.locale,
       this.year,
@@ -123,7 +136,21 @@ class ILibDateOptions {
       this.calendar,
       this.dateTime,
       this.type});
+  String? locale;
+  int? year;
+  int? month;
+  int? day;
+  int? hour;
+  int? minute;
+  int? second;
+  int? millisecond;
+  int? unixtime;
+  String? timezone;
+  String? type;
+  String? calendar;
+  DateTime? dateTime;
 
+  /// A string representation of parameters to call functions of iLib library properly
   String toJsonString() {
     int? y = year;
     int? m = month;
@@ -132,8 +159,8 @@ class ILibDateOptions {
     int? min = minute;
     int? sec = second;
     int? milsec = millisecond;
-    String result = "";
-    String completeOption = "";
+    String result = '';
+    String completeOption = '';
 
     if (dateTime != null) {
       y = dateTime!.year;
@@ -145,18 +172,20 @@ class ILibDateOptions {
       milsec = dateTime!.millisecond;
     }
 
-    Map<String, String> paramInfo = {
-      'locale': "$locale",
-      'timezone': "$timezone",
-      'type': "$type",
-      'calendar': "$calendar"
+    final Map<String, String> paramInfo = <String, String>{
+      'locale': '$locale',
+      'timezone': '$timezone',
+      'type': '$type',
+      'calendar': '$calendar'
     };
 
-    paramInfo.forEach((key, value) {
-      if (value != 'null') result += '$key:"$value",';
+    paramInfo.forEach((String key, String value) {
+      if (value != 'null') {
+        result += '$key:"$value",';
+      }
     });
 
-    Map<String, int?> datetimeInfo = {
+    final Map<String, int?> datetimeInfo = <String, int?>{
       'year': y,
       'month': m,
       'day': d,
@@ -165,12 +194,14 @@ class ILibDateOptions {
       'second': sec,
       'millisecond': milsec,
     };
-    datetimeInfo.forEach((key, value) {
-      if (value != null) result += '$key:$value,';
+    datetimeInfo.forEach((String key, int? value) {
+      if (value != null) {
+        result += '$key:$value,';
+      }
     });
     result =
         result.isNotEmpty ? result.substring(0, result.length - 1) : result;
-    completeOption = result.isNotEmpty ? '{$result}' : "";
+    completeOption = result.isNotEmpty ? '{$result}' : '';
     return completeOption;
   }
 }

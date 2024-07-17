@@ -1,33 +1,27 @@
 # flutter_ilib
 
-A wrapper plugin to use [iLib](https://github.com/iLib-js/iLib) conveniently in Flutter apps.  
-This plugin uses the [flutter_js](https://pub.dev/packages/flutter_js) to make the javascript file in the Flutter application work properly.
+A wrapper plugin to conveniently use [iLib](https://github.com/iLib-js/iLib) in Flutter apps.  
+This plugin uses the [flutter_js](https://pub.dev/packages/flutter_js) to make the javascript file work properly in the Flutter app.
 
-## General
-We provide `evaluateILib()` to use any class of APIs from ILib.  
-
-#### evaluateILib() 
+## How to use
+### Initialization
+Add following import:
 ```dart
 import 'package:flutter_ilib/flutter_ilib.dart';
-
-String lo = "ko-KR";
-String jscode1 = 'new LocaleInfo("$lo").getCalendar()';
-await evaluateILib(jscode1);
-// 'gregorian'
 ```
-To give a more efficient way, we provide some classes that can be easily used in a Flutter app.   
-Currently, We have a `ILibDateFmt` and `ILibLocaleInfo` classes.
-We have a plan to provide more classes and methods.  
-
-#### class ILibDateFmt
-- Class: [ILibDateOptions](./Docs.md/#ilibdateoptions)
-- Class: [ILibDateFmtOptions](./Docs.md/#ilibdatefmtoptions)  
-- Class: [ILibDateFmt](./Docs.md#ilibdatefmt)
-   - Methods: `format()`, `getClock()`  
+Add a listener to receive a callback message that ilib is ready for use.
 
 ```dart
-import 'package:flutter_ilib/flutter_ilib.dart';
+final FlutterILib _flutterIlibPlugin = FlutterILib.instance;
+_flutterIlibPlugin.addListener(() {
+    // do Something.
+});
+```
 
+### Formatting
+Get the result of formatting by using the class provided by flutter_ilib.
+
+```dart
 ILibDateFmtOptions fmtOptions =
     ILibDateFmtOptions(locale: "ko-KR", length: "short", useNative: false, timezone: "local");
 ILibDateFmt fmt = ILibDateFmt(fmtOptions);
@@ -40,38 +34,54 @@ ILibDateOptions dateOptions = ILibDateOptions(
     minute: 45,
     second: 0,
     millisecond: 0);
-await fmt.format(dateOptions);
+fmt.format(dateOptions);
 // "24. 6. 27."
-
 ---------------------------------------------------------------------
-
 ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
     locale: "ko-KR", length: "full", type: "datetime", useNative: false, timezone: "local");
 ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 ILibDateOptions dateOptions =
     ILibDateOptions(dateTime: DateTime.parse('2024-06-27 10:42'));
-await fmt.format(dateOptions);
+fmt.format(dateOptions);
 // '2024년 6월 27일 오전 10:42'
 ```
 
-#### class ILibLocaleInfo
-- Class: [ILibLocaleInfo](./Docs.md/#iliblocaleinfo)
-   - Methods:  `getFirstDayOfWeek()`, `getWeekEndStart()`, `getWeekEndStart()` 
-
 ```dart
-import 'package:flutter_ilib/flutter_ilib.dart';
-
 // 0:sun, 1:mon, 2:tue, 3:wed, 4:thu, 5:fri, 6:sat
 ILibLocaleInfo locInfo = ILibLocaleInfo("ko-KR");
-await locInfo.getFirstDayOfWeek();
+locInfo.getFirstDayOfWeek();
 // 0
-await locInfo.getWeekEndStart();
+locInfo.getWeekEndStart();
 // 6
-await locInfo.getWeekEndEnd();
+locInfo.getWeekEndEnd();
 // 0
 ```
 
-#### Locales
+## CLASS
+
+### FlutterILib
+- Methods: `evaluateILib()` : It allows to use any class of APIs from ILib.  
+```dart
+String lo = "ko-KR";
+String jscode1 = 'new LocaleInfo("$lo").getCalendar()';
+_flutterIlibPlugin.evaluateILib(jscode1);
+// 'gregorian'
+```
+To give a more efficient way, we provide some classes that can be easily used in a Flutter app.   
+Currently, We have a `ILibDateFmt` and `ILibLocaleInfo` classes.
+We have a plan to provide more classes and methods.  
+
+### ILibDateFmt
+- Class: [ILibDateOptions](./Docs.md/#ilibdateoptions)
+- Class: [ILibDateFmtOptions](./Docs.md/#ilibdatefmtoptions)  
+- Class: [ILibDateFmt](./Docs.md#ilibdatefmt)
+   - Methods: `format()`, `getClock()`  
+
+### ILibLocaleInfo
+- Class: [ILibLocaleInfo](./Docs.md/#iliblocaleinfo)
+   - Methods:  `getFirstDayOfWeek()`, `getWeekEndStart()`, `getWeekEndStart()` 
+
+## Locales
 The results of the following locales are checked by unit tests.  
 They have the same result as the original iLib methods.
 ```
@@ -104,13 +114,16 @@ We have the script file for the above works to do everything at once.
 ./execute_unit_test.sh
 ```
 
+
 ### Excute the example
+We provide the example app that can be executed.
 ```
 cd example
 flutter build linux --release
 flutter run -d linux --release
 ```
-<img src="./flutterilibExample.png" width="500" height="300"/>
+
+![image](./flutterilibExample.png)
 
 ## License
 

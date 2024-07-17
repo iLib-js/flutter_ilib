@@ -1,17 +1,23 @@
-import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  print("Testing [datefmt_fr_CA_test.dart] file.");
+  debugPrint('Testing [datefmt_fr_CA_test.dart] file.');
+  setUpAll(() async {
+    await ILibJS.instance
+        .loadJSwithPath('../../assets/js/ilib-standard-flutter-compiled.js');
+    ILibJS.instance.initILib();
+  });
   group('format()', () {
-    test('testDateFmtfrCASimpleShort', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", length: "short");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCASimpleShort', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', length: 'short');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -19,15 +25,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '2011-09-29');
+      expect(fmt.format(dateOptions), '2011-09-29');
     });
-    test('testDateFmtfrCASimpleMedium', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", length: "medium");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCASimpleMedium', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', length: 'medium');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -35,15 +41,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "29 sept. 2011");
+      expect(fmt.format(dateOptions), '29 sept. 2011');
     });
-    test('testDateFmtfrCASimpleLong', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", length: "long");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCASimpleLong', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', length: 'long');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -51,15 +57,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "29 septembre 2011");
+      expect(fmt.format(dateOptions), '29 septembre 2011');
     });
-    test('testDateFmtfrCASimpleFull', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", length: "full");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCASimpleFull', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', length: 'full');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -67,15 +73,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "29 septembre 2011");
+      expect(fmt.format(dateOptions), '29 septembre 2011');
     });
-    test('testDateFmtfrCASimpleTimeShort', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", length: "short", type: "time");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCASimpleTimeShort', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', length: 'short', type: 'time');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -83,15 +89,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "13 h 45");
+      expect(fmt.format(dateOptions), '13 h 45');
     });
-    test('testDateFmtfrCASimpleTimeMedium', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", length: "medium", type: "time");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCASimpleTimeMedium', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', length: 'medium', type: 'time');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -99,15 +105,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "13 h 45");
+      expect(fmt.format(dateOptions), '13 h 45');
     });
-    test('testDateFmtfrCASimpleTimeLong', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", length: "long", type: "time");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCASimpleTimeLong', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', length: 'long', type: 'time');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -115,15 +121,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "13 h 45");
+      expect(fmt.format(dateOptions), '13 h 45');
     });
-    test('testDateFmtfrCASimpleTimeFull', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", length: "full", type: "time");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCASimpleTimeFull', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', length: 'full', type: 'time');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -131,15 +137,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "13 h 45");
+      expect(fmt.format(dateOptions), '13 h 45');
     });
-    test('testDateFmtfrCADateTimeSimpleShort', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "fr-CA", length: "short", type: "datetime");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCADateTimeSimpleShort', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'fr-CA', length: 'short', type: 'datetime');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -147,15 +153,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '2011-09-29 13 h 45');
+      expect(fmt.format(dateOptions), '2011-09-29 13 h 45');
     });
-    test('testDateFmtfrCADateTimeSimpleMedium', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "fr-CA", length: "medium", type: "datetime");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCADateTimeSimpleMedium', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'fr-CA', length: 'medium', type: 'datetime');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -163,15 +169,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "29 sept. 2011, 13 h 45");
+      expect(fmt.format(dateOptions), '29 sept. 2011, 13 h 45');
     });
-    test('testDateFmtfrCADateTimeSimpleLong', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", length: "long", type: "datetime");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCADateTimeSimpleLong', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', length: 'long', type: 'datetime');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -179,15 +185,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "29 septembre 2011 à 13 h 45");
+      expect(fmt.format(dateOptions), '29 septembre 2011 à 13 h 45');
     });
-    test('testDateFmtfrCADateTimeSimpleFull', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", length: "full", type: "datetime");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCADateTimeSimpleFull', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', length: 'full', type: 'datetime');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -195,15 +201,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "29 septembre 2011 à 13 h 45");
+      expect(fmt.format(dateOptions), '29 septembre 2011 à 13 h 45');
     });
-    test('testDateFmtfrCATypeDate', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", type: "date");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCATypeDate', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', type: 'date');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -211,15 +217,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '2011-09-29');
+      expect(fmt.format(dateOptions), '2011-09-29');
     });
-    test('testDateFmtfrCATypeTime', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", type: "time");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCATypeTime', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', type: 'time');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -227,15 +233,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "13 h 45");
+      expect(fmt.format(dateOptions), '13 h 45');
     });
-    test('testDateFmtfrCATypeDateTime', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", type: "datetime");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCATypeDateTime', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', type: 'datetime');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -243,15 +249,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '2011-09-29 13 h 45');
+      expect(fmt.format(dateOptions), '2011-09-29 13 h 45');
     });
-    test('testDateFmtfrCAShortDateComponentsY', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", date: "y");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAShortDateComponentsY', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', date: 'y');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -259,15 +265,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '2011');
+      expect(fmt.format(dateOptions), '2011');
     });
-    test('testDateFmtfrCAShortDateComponentsM', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", date: "m");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAShortDateComponentsM', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', date: 'm');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -275,15 +281,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "09");
+      expect(fmt.format(dateOptions), '09');
     });
-    test('testDateFmtfrCAShortDateComponentsN', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", date: "n");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAShortDateComponentsN', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', date: 'n');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -291,15 +297,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "s");
+      expect(fmt.format(dateOptions), 's');
     });
-    test('testDateFmtfrCAShortDateComponentsD', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", date: "d");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAShortDateComponentsD', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', date: 'd');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -307,15 +313,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "29");
+      expect(fmt.format(dateOptions), '29');
     });
-    test('testDateFmtfrCAShortDateComponentsDM', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", date: "dm");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAShortDateComponentsDM', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', date: 'dm');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -323,15 +329,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "09-29");
+      expect(fmt.format(dateOptions), '09-29');
     });
-    test('testDateFmtfrCAShortDateComponentsMY', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", date: "my");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAShortDateComponentsMY', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', date: 'my');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -339,15 +345,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '2011-09');
+      expect(fmt.format(dateOptions), '2011-09');
     });
-    test('testDateFmtfrCAShortDateComponentsDMY', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", date: "dmy");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAShortDateComponentsDMY', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', date: 'dmy');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -355,15 +361,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '2011-09-29');
+      expect(fmt.format(dateOptions), '2011-09-29');
     });
-    test('testDateFmtfrCAShortDateComponentsWDM', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", date: "wdm");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAShortDateComponentsWDM', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', date: 'wdm');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -371,15 +377,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "J 09-29");
+      expect(fmt.format(dateOptions), 'J 09-29');
     });
-    test('testDateFmtfrCAShortDateComponentsWDMY', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", date: "wdmy");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAShortDateComponentsWDMY', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', date: 'wdmy');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -387,15 +393,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), 'J 2011-09-29');
+      expect(fmt.format(dateOptions), 'J 2011-09-29');
     });
-    test('testDateFmtfrCAFullDateComponentsY', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", length: "full", date: "y");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAFullDateComponentsY', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', length: 'full', date: 'y');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -403,15 +409,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "2011");
+      expect(fmt.format(dateOptions), '2011');
     });
-    test('testDateFmtfrCAFullDateComponentsM', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", length: "full", date: "m");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAFullDateComponentsM', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', length: 'full', date: 'm');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -419,15 +425,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "septembre");
+      expect(fmt.format(dateOptions), 'septembre');
     });
-    test('testDateFmtfrCAFullDateComponentsD', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", length: "full", date: "d");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAFullDateComponentsD', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', length: 'full', date: 'd');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -435,15 +441,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "29");
+      expect(fmt.format(dateOptions), '29');
     });
-    test('testDateFmtfrCAFullDateComponentsDM', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", length: "full", date: "dm");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAFullDateComponentsDM', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', length: 'full', date: 'dm');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -451,15 +457,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "29 septembre");
+      expect(fmt.format(dateOptions), '29 septembre');
     });
-    test('testDateFmtfrCAFullDateComponentsMY', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", length: "full", date: "my");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAFullDateComponentsMY', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', length: 'full', date: 'my');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -467,15 +473,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "septembre 2011");
+      expect(fmt.format(dateOptions), 'septembre 2011');
     });
-    test('testDateFmtfrCAFullDateComponentsDMY', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", length: "full", date: "dmy");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAFullDateComponentsDMY', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', length: 'full', date: 'dmy');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -483,15 +489,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "29 septembre 2011");
+      expect(fmt.format(dateOptions), '29 septembre 2011');
     });
-    test('testDateFmtfrCAFullDateComponentsWDM', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", length: "full", date: "wdm");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAFullDateComponentsWDM', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', length: 'full', date: 'wdm');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -499,15 +505,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "jeudi 29 septembre");
+      expect(fmt.format(dateOptions), 'jeudi 29 septembre');
     });
-    test('testDateFmtfrCAFullDateComponentsWDMY', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", length: "full", date: "wdmy");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAFullDateComponentsWDMY', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', length: 'full', date: 'wdmy');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -515,15 +521,15 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "jeudi 29 septembre 2011");
+      expect(fmt.format(dateOptions), 'jeudi 29 septembre 2011');
     });
-    test('testDateFmtfrCAShortTimeComponentsS', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", type: "time", time: "s");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAShortTimeComponentsS', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', type: 'time', time: 's');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -531,15 +537,15 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "37");
+      expect(fmt.format(dateOptions), '37');
     });
-    test('testDateFmtfrCAShortTimeComponentsM', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", type: "time", time: "m");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAShortTimeComponentsM', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', type: 'time', time: 'm');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -547,15 +553,15 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "45");
+      expect(fmt.format(dateOptions), '45');
     });
-    test('testDateFmtfrCAShortTimeComponentsH', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", type: "time", time: "h");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAShortTimeComponentsH', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', type: 'time', time: 'h');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -563,15 +569,15 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "13");
+      expect(fmt.format(dateOptions), '13');
     });
-    test('testDateFmtfrCAShortTimeComponentsMS', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", type: "time", time: "ms");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAShortTimeComponentsMS', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', type: 'time', time: 'ms');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -579,15 +585,15 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), '45 min 37');
+      expect(fmt.format(dateOptions), '45 min 37');
     });
-    test('testDateFmtfrCAShortTimeComponentsHM', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", type: "time", time: "hm");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAShortTimeComponentsHM', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', type: 'time', time: 'hm');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -595,15 +601,15 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "13 h 45");
+      expect(fmt.format(dateOptions), '13 h 45');
     });
-    test('testDateFmtfrCAShortTimeComponentsHMS', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", type: "time", time: "hms");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAShortTimeComponentsHMS', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', type: 'time', time: 'hms');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -611,15 +617,15 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "13 h 45 min 37 s");
+      expect(fmt.format(dateOptions), '13 h 45 min 37 s');
     });
-    test('testDateFmtfrCAShortTimeComponentsHMA', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", type: "time", time: "hma");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAShortTimeComponentsHMA', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', type: 'time', time: 'hma');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -627,38 +633,18 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "13 h 45");
+      expect(fmt.format(dateOptions), '13 h 45');
     });
-    test('testDateFmtfrCAShortTimeComponentsHMZ', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "fr-CA",
-          type: "time",
-          time: "hmz",
-          timezone: "America/Montreal");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAShortTimeComponentsHMZ', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'fr-CA',
+          type: 'time',
+          time: 'hmz',
+          timezone: 'America/Montreal');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
-          year: 2011,
-          month: 9,
-          day: 29,
-          hour: 13,
-          minute: 45,
-          second: 37,
-          millisecond: 0,
-          timezone: "America/Montreal");
-      expect(await fmt.format(dateOptions), "13 h 45 EDT");
-    });
-    test('testDateFmtfrCAShortTimeComponentsHMAZ', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "fr-CA",
-          type: "time",
-          time: "hmaz",
-          timezone: "America/Montreal");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -666,35 +652,19 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0,
-          timezone: "America/Montreal");
-      expect(await fmt.format(dateOptions), "13 h 45 EDT");
+          timezone: 'America/Montreal');
+      expect(fmt.format(dateOptions), '13 h 45 EDT');
     });
-    test('testDateFmtfrCAShortTimeComponentsHMSA', () async {
-      ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: "fr-CA", type: "time", time: "hmsa");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAShortTimeComponentsHMAZ', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'fr-CA',
+          type: 'time',
+          time: 'hmaz',
+          timezone: 'America/Montreal');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
-          year: 2011,
-          month: 9,
-          day: 29,
-          hour: 13,
-          minute: 45,
-          second: 37,
-          millisecond: 0);
-      expect(await fmt.format(dateOptions), "13 h 45 min 37 s");
-    });
-    test('testDateFmtfrCAShortTimeComponentsHMSZ', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "fr-CA",
-          type: "time",
-          time: "hmsz",
-          timezone: "America/Montreal");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -702,19 +672,35 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0,
-          timezone: "America/Montreal");
-      expect(await fmt.format(dateOptions), "13 h 45 min 37 s EDT");
+          timezone: 'America/Montreal');
+      expect(fmt.format(dateOptions), '13 h 45 EDT');
     });
-    test('testDateFmtfrCAShortTimeComponentsHMSAZ', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "fr-CA",
-          type: "time",
-          time: "hmsaz",
-          timezone: "America/Montreal");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAShortTimeComponentsHMSA', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-CA', type: 'time', time: 'hmsa');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
+          year: 2011,
+          month: 9,
+          day: 29,
+          hour: 13,
+          minute: 45,
+          second: 37,
+          millisecond: 0);
+      expect(fmt.format(dateOptions), '13 h 45 min 37 s');
+    });
+    test('testDateFmtfrCAShortTimeComponentsHMSZ', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'fr-CA',
+          type: 'time',
+          time: 'hmsz',
+          timezone: 'America/Montreal');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -722,132 +708,19 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0,
-          timezone: "America/Montreal");
-      expect(await fmt.format(dateOptions), "13 h 45 min 37 s EDT");
+          timezone: 'America/Montreal');
+      expect(fmt.format(dateOptions), '13 h 45 min 37 s EDT');
     });
-    test('testDateFmtfrCAFullTimeComponentsS', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "fr-CA", type: "time", length: "full", time: "s");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAShortTimeComponentsHMSAZ', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'fr-CA',
+          type: 'time',
+          time: 'hmsaz',
+          timezone: 'America/Montreal');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
-          year: 2011,
-          month: 9,
-          day: 29,
-          hour: 13,
-          minute: 45,
-          second: 37,
-          millisecond: 0);
-      expect(await fmt.format(dateOptions), "37");
-    });
-    test('testDateFmtfrCAFullTimeComponentsM', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "fr-CA", type: "time", length: "full", time: "m");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
-          year: 2011,
-          month: 9,
-          day: 29,
-          hour: 13,
-          minute: 45,
-          second: 37,
-          millisecond: 0);
-      expect(await fmt.format(dateOptions), "45");
-    });
-    test('testDateFmtfrCAFullTimeComponentsH', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "fr-CA", type: "time", length: "full", time: "h");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
-          year: 2011,
-          month: 9,
-          day: 29,
-          hour: 13,
-          minute: 45,
-          second: 37,
-          millisecond: 0);
-      expect(await fmt.format(dateOptions), "13");
-    });
-    test('testDateFmtfrCAFullTimeComponentsMS', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "fr-CA", type: "time", length: "full", time: "ms");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
-          year: 2011,
-          month: 9,
-          day: 29,
-          hour: 13,
-          minute: 45,
-          second: 37,
-          millisecond: 0);
-      expect(await fmt.format(dateOptions), '45 min 37');
-    });
-    test('testDateFmtfrCAFullTimeComponentsHM', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "fr-CA", type: "time", length: "full", time: "hm");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
-          year: 2011,
-          month: 9,
-          day: 29,
-          hour: 13,
-          minute: 45,
-          second: 37,
-          millisecond: 0);
-      expect(await fmt.format(dateOptions), "13 h 45");
-    });
-    test('testDateFmtfrCAFullTimeComponentsHMS', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "fr-CA", type: "time", length: "full", time: "hms");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
-          year: 2011,
-          month: 9,
-          day: 29,
-          hour: 13,
-          minute: 45,
-          second: 37,
-          millisecond: 0);
-      expect(await fmt.format(dateOptions), "13 h 45 min 37 s");
-    });
-    test('testDateFmtfrCAFullTimeComponentsHMA', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "fr-CA", type: "time", length: "full", time: "hma");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
-          year: 2011,
-          month: 9,
-          day: 29,
-          hour: 13,
-          minute: 45,
-          second: 37,
-          millisecond: 0);
-      expect(await fmt.format(dateOptions), "13 h 45");
-    });
-    test('testDateFmtfrCAFullTimeComponentsHMZ', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "fr-CA",
-          type: "time",
-          length: "full",
-          time: "hmz",
-          timezone: "America/Montreal");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -855,37 +728,16 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0,
-          timezone: "America/Montreal");
-      expect(await fmt.format(dateOptions), "13 h 45 EDT");
+          timezone: 'America/Montreal');
+      expect(fmt.format(dateOptions), '13 h 45 min 37 s EDT');
     });
-    test('testDateFmtfrCAFullTimeComponentsHMAZ', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "fr-CA",
-          type: "time",
-          length: "full",
-          time: "hmaz",
-          timezone: "America/Montreal");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAFullTimeComponentsS', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'fr-CA', type: 'time', length: 'full', time: 's');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
-          year: 2011,
-          month: 9,
-          day: 29,
-          hour: 13,
-          minute: 45,
-          second: 37,
-          millisecond: 0,
-          timezone: "America/Montreal");
-      expect(await fmt.format(dateOptions), "13 h 45 EDT");
-    });
-    test('testDateFmtfrCAFullTimeComponentsHMSA', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "fr-CA", type: "time", length: "full", time: "hmsa");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -893,19 +745,115 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(await fmt.format(dateOptions), "13 h 45 min 37 s");
+      expect(fmt.format(dateOptions), '37');
     });
-    test('testDateFmtfrCAFullTimeComponentsHMSZ', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "fr-CA",
-          type: "time",
-          length: "full",
-          time: "hmsz",
-          timezone: "America/Montreal");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAFullTimeComponentsM', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'fr-CA', type: 'time', length: 'full', time: 'm');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
+          year: 2011,
+          month: 9,
+          day: 29,
+          hour: 13,
+          minute: 45,
+          second: 37,
+          millisecond: 0);
+      expect(fmt.format(dateOptions), '45');
+    });
+    test('testDateFmtfrCAFullTimeComponentsH', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'fr-CA', type: 'time', length: 'full', time: 'h');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
+          year: 2011,
+          month: 9,
+          day: 29,
+          hour: 13,
+          minute: 45,
+          second: 37,
+          millisecond: 0);
+      expect(fmt.format(dateOptions), '13');
+    });
+    test('testDateFmtfrCAFullTimeComponentsMS', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'fr-CA', type: 'time', length: 'full', time: 'ms');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
+          year: 2011,
+          month: 9,
+          day: 29,
+          hour: 13,
+          minute: 45,
+          second: 37,
+          millisecond: 0);
+      expect(fmt.format(dateOptions), '45 min 37');
+    });
+    test('testDateFmtfrCAFullTimeComponentsHM', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'fr-CA', type: 'time', length: 'full', time: 'hm');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
+          year: 2011,
+          month: 9,
+          day: 29,
+          hour: 13,
+          minute: 45,
+          second: 37,
+          millisecond: 0);
+      expect(fmt.format(dateOptions), '13 h 45');
+    });
+    test('testDateFmtfrCAFullTimeComponentsHMS', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'fr-CA', type: 'time', length: 'full', time: 'hms');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
+          year: 2011,
+          month: 9,
+          day: 29,
+          hour: 13,
+          minute: 45,
+          second: 37,
+          millisecond: 0);
+      expect(fmt.format(dateOptions), '13 h 45 min 37 s');
+    });
+    test('testDateFmtfrCAFullTimeComponentsHMA', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'fr-CA', type: 'time', length: 'full', time: 'hma');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
+          year: 2011,
+          month: 9,
+          day: 29,
+          hour: 13,
+          minute: 45,
+          second: 37,
+          millisecond: 0);
+      expect(fmt.format(dateOptions), '13 h 45');
+    });
+    test('testDateFmtfrCAFullTimeComponentsHMZ', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'fr-CA',
+          type: 'time',
+          length: 'full',
+          time: 'hmz',
+          timezone: 'America/Montreal');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -913,20 +861,20 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0,
-          timezone: "America/Montreal");
-      expect(await fmt.format(dateOptions), "13 h 45 min 37 s EDT");
+          timezone: 'America/Montreal');
+      expect(fmt.format(dateOptions), '13 h 45 EDT');
     });
-    test('testDateFmtfrCAFullTimeComponentsHMSAZ', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "fr-CA",
-          type: "time",
-          length: "full",
-          time: "hmsaz",
-          timezone: "America/Montreal");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAFullTimeComponentsHMAZ', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'fr-CA',
+          type: 'time',
+          length: 'full',
+          time: 'hmaz',
+          timezone: 'America/Montreal');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 9,
           day: 29,
@@ -934,20 +882,78 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0,
-          timezone: "America/Montreal");
-      expect(await fmt.format(dateOptions), "13 h 45 min 37 s EDT");
+          timezone: 'America/Montreal');
+      expect(fmt.format(dateOptions), '13 h 45 EDT');
     });
-    test('testDateFmtfrCAWithTimeZoneAndNoDST', () async {
-      ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: "fr-CA",
-          type: "time",
-          length: "full",
-          time: "hmsz",
-          timezone: "America/Montreal");
-      ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+    test('testDateFmtfrCAFullTimeComponentsHMSA', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'fr-CA', type: 'time', length: 'full', time: 'hmsa');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-      ILibDateOptions dateOptions = ILibDateOptions(
-          locale: "fr-CA",
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
+          year: 2011,
+          month: 9,
+          day: 29,
+          hour: 13,
+          minute: 45,
+          second: 37,
+          millisecond: 0);
+      expect(fmt.format(dateOptions), '13 h 45 min 37 s');
+    });
+    test('testDateFmtfrCAFullTimeComponentsHMSZ', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'fr-CA',
+          type: 'time',
+          length: 'full',
+          time: 'hmsz',
+          timezone: 'America/Montreal');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
+          year: 2011,
+          month: 9,
+          day: 29,
+          hour: 13,
+          minute: 45,
+          second: 37,
+          millisecond: 0,
+          timezone: 'America/Montreal');
+      expect(fmt.format(dateOptions), '13 h 45 min 37 s EDT');
+    });
+    test('testDateFmtfrCAFullTimeComponentsHMSAZ', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'fr-CA',
+          type: 'time',
+          length: 'full',
+          time: 'hmsaz',
+          timezone: 'America/Montreal');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
+          year: 2011,
+          month: 9,
+          day: 29,
+          hour: 13,
+          minute: 45,
+          second: 37,
+          millisecond: 0,
+          timezone: 'America/Montreal');
+      expect(fmt.format(dateOptions), '13 h 45 min 37 s EDT');
+    });
+    test('testDateFmtfrCAWithTimeZoneAndNoDST', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'fr-CA',
+          type: 'time',
+          length: 'full',
+          time: 'hmsz',
+          timezone: 'America/Montreal');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-CA',
           year: 2011,
           month: 12,
           day: 29,
@@ -955,8 +961,8 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0,
-          timezone: "America/Montreal");
-      expect(await fmt.format(dateOptions), "13 h 45 min 37 s EST");
+          timezone: 'America/Montreal');
+      expect(fmt.format(dateOptions), '13 h 45 min 37 s EST');
     });
   });
 }
