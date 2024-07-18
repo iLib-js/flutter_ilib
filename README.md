@@ -5,11 +5,11 @@ This plugin uses the [flutter_js](https://pub.dev/packages/flutter_js) to make t
 
 ## How to use
 ### Initialization
-Add following import:
+Add the following import.
 ```dart
 import 'package:flutter_ilib/flutter_ilib.dart';
 ```
-Add a listener to receive a callback message that ilib is ready for use.
+Add a listener to get a callback message that ilib is ready to use.
 
 ```dart
 final FlutterILib _flutterIlibPlugin = FlutterILib.instance;
@@ -22,11 +22,11 @@ _flutterIlibPlugin.addListener(() {
 Get the result of formatting by using the class provided by flutter_ilib.
 
 ```dart
-ILibDateFmtOptions fmtOptions =
-    ILibDateFmtOptions(locale: "ko-KR", length: "short", useNative: false, timezone: "local");
-ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-ILibDateOptions dateOptions = ILibDateOptions(
-    locale: "ko-KR",
+final ILibDateFmtOptions fmtOptions =
+    ILibDateFmtOptions(locale: 'ko-KR', length: 'short', useNative: false, timezone: 'local');
+final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+final ILibDateOptions dateOptions = ILibDateOptions(
+    locale: 'ko-KR',
     year: 2024,
     month: 6,
     day: 27,
@@ -35,22 +35,26 @@ ILibDateOptions dateOptions = ILibDateOptions(
     second: 0,
     millisecond: 0);
 fmt.format(dateOptions);
-// "24. 6. 27."
+// '24. 6. 27.'
 ```
 
 ```dart
-ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-    locale: "ko-KR", length: "full", type: "datetime", useNative: false, timezone: "local");
-ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-ILibDateOptions dateOptions =
-    ILibDateOptions(dateTime: DateTime.parse('2024-06-27 10:42'));
+final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'ko-KR',
+          length: 'full',
+          type: 'datetime',
+          useNative: false,
+          timezone: 'local');
+final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ko-KR', dateTime: DateTime.parse('2024-06-27 10:42'));
 fmt.format(dateOptions);
 // '2024년 6월 27일 오전 10:42'
 ```
 
 ```dart
 // 0:sun, 1:mon, 2:tue, 3:wed, 4:thu, 5:fri, 6:sat
-ILibLocaleInfo locInfo = ILibLocaleInfo("ko-KR");
+final ILibLocaleInfo locInfo = ILibLocaleInfo('ko-KR');
 locInfo.getFirstDayOfWeek();
 // 0
 locInfo.getWeekEndStart();
@@ -64,10 +68,10 @@ locInfo.getWeekEndEnd();
 ### FlutterILib
 - Methods: `evaluateILib()` : It allows to use any class of APIs from ILib.  
 ```dart
-String lo = "ko-KR";
+String lo = 'am-ET';
 String jscode1 = 'new LocaleInfo("$lo").getCalendar()';
 _flutterIlibPlugin.evaluateILib(jscode1);
-// 'gregorian'
+// 'ethiopic'
 ```
 To give a more efficient way, we provide some classes that can be easily used in a Flutter app.   
 Currently, We have a `ILibDateFmt` and `ILibLocaleInfo` classes.
@@ -86,7 +90,8 @@ We have a plan to provide more classes and methods.
 ## Supported Locales
 The results of the following locales are checked by unit tests.  
 They have the same result as the original iLib methods.
-```
+
+```json
 af-ZA,am-ET,ar-AE,ar-EG,ar-IQ,ar-MA,ar-SA,as-IN,az-Latn-AZ,bg-BG,bn-IN,    
 bs-Latn-BA,bs-Latn-ME,cs-CZ,da-DK,de-AT,de-CH,de-DE,de-LU,el-CY,el-GR, 
 en-AM,en-AU,en-AZ,en-CA,en-CN,en-GB, en-GE,en-GH,en-HK,en-IE,en-IN,en-IS,  
