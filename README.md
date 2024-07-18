@@ -66,7 +66,9 @@ locInfo.getWeekEndEnd();
 ## CLASS
 
 ### FlutterILib
-- Methods: `evaluateILib()` : It allows to use any class of APIs from ILib.  
+- Methods: `evaluateILib()` :
+    It allows to use any class of APIs from ILib.   
+    Convert the Javascript code you want to get as a result into a string and pass it as an argument.
 ```dart
 String lo = 'am-ET';
 String jscode1 = 'new LocaleInfo("$lo").getCalendar()';
