@@ -91,7 +91,7 @@ We have a plan to provide more classes and methods.
 The results of the following locales are checked by unit tests.  
 They have the same result as the original iLib methods.
 
-```json
+```
 af-ZA,am-ET,ar-AE,ar-EG,ar-IQ,ar-MA,ar-SA,as-IN,az-Latn-AZ,bg-BG,bn-IN,    
 bs-Latn-BA,bs-Latn-ME,cs-CZ,da-DK,de-AT,de-CH,de-DE,de-LU,el-CY,el-GR, 
 en-AM,en-AU,en-AZ,en-CA,en-CN,en-GB, en-GE,en-GH,en-HK,en-IE,en-IN,en-IS,  
