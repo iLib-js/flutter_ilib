@@ -1,6 +1,6 @@
 ## 0.1.0
 * Updated the `README.md` file.
-* Updated the minot version up for release.
+* Updated the minor version up for release.
 
 ## 0.0.4
 * Added more of the API comments in codes.
