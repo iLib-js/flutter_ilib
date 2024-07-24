@@ -1,12 +1,11 @@
 import 'ilib_init.dart';
+import 'ilib_utils.dart';
 
 class ILibLocaleInfo {
   /// [lo] Set the locale for which the info is sought
   ILibLocaleInfo(String lo) {
     locale = lo;
-    ILibJS.instance.addListener(() {
-      ILibJS.instance.initILib();
-    });
+    loadLocaleData(lo);
   }
   String? locale;
 

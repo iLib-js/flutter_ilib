@@ -1,4 +1,5 @@
 import 'ilib_init.dart';
+import 'ilib_utils.dart';
 
 class ILibDateFmt {
   /// [options] Set the Options for formatting
@@ -11,10 +12,10 @@ class ILibDateFmt {
     calendar = options.calendar;
     timezone = options.timezone;
     useNative = options.useNative;
-    ILibJS.instance.addListener(() {
-      ILibJS.instance.initILib();
-    });
+
+    loadLocaleData(locale);
   }
+
   String? locale;
   String? type;
   String? length;

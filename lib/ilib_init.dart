@@ -22,10 +22,12 @@ class ILibJS extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<String?> loadJSwithPath(String path) async {
+  Future<String> loadJSwithPath(String path) async {
     _loadJSResult = await rootBundle.loadString(path);
     return _loadJSResult;
   }
+
+  List<String> fileList = <String>[];
 
   void initILib() {
     try {
