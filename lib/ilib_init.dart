@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_js/flutter_js.dart';
+import 'ilib_utils.dart';
 
 class ILibJS extends ChangeNotifier {
   ILibJS._internal() {
@@ -19,6 +20,8 @@ class ILibJS extends ChangeNotifier {
   Future<void> loadJS() async {
     _loadJSResult = await rootBundle.loadString(
         'packages/flutter_ilib/assets/js/ilib-standard-flutter-compiled.js');
+    final String curlocale = getLocale();
+    loadLocaleData(curlocale);
     notifyListeners();
   }
 

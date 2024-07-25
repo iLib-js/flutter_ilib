@@ -1,4 +1,16 @@
+import 'dart:ui';
 import 'ilib_init.dart';
+
+String currentLocale =
+    PlatformDispatcher.instance.locale.toString().replaceAll('_', '-');
+
+String getLocale() {
+  return currentLocale;
+}
+
+void setLocale(String loc) {
+  currentLocale = loc;
+}
 
 String getJSDataPath(String? locale) {
   if (locale == null) {
@@ -10,6 +22,8 @@ String getJSDataPath(String? locale) {
 }
 
 void loadLocaleData(String? locale) {
+  locale ??= getLocale();
+
   final String dataPath = getJSDataPath(locale);
   final ILibJS ilibjsinstace = ILibJS.instance;
 

@@ -11,6 +11,9 @@ void main() {
     await ILibJS.instance
         .loadJSwithPath('../../assets/js/ilib-standard-flutter-compiled.js');
     ILibJS.instance.initILib();
+    loadLocaleData('th-TH');
+    loadLocaleData('fa-IR');
+    loadLocaleData('am-ET');
   });
   group('Basic', () {
     test('getVersion', () => expect(flutterIlibPlugin.getVersion, '14.21.0'));
