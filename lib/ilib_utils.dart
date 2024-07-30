@@ -21,8 +21,22 @@ String getJSDataPath(String? locale) {
   return fullPath;
 }
 
+bool isValidLocale(String lo) {
+  const String pattern =
+      r'(^|[^a-z])([a-z][a-z][a-z]?)(-([A-Z][a-z][a-z][a-z]))?(-([A-Z][A-Z]))?$';
+  final RegExp regExp = RegExp(pattern);
+  if (!regExp.hasMatch(lo)) {
+    return false;
+  }
+  return true;
+}
+
 void loadLocaleData(String? locale) {
   locale ??= getLocale();
+
+  if (!isValidLocale(locale)) {
+    return;
+  }
 
   final String dataPath = getJSDataPath(locale);
   final ILibJS ilibjsinstace = ILibJS.instance;

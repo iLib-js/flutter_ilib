@@ -9,6 +9,7 @@ void main() {
     await ILibJS.instance
         .loadJSwithPath('../../assets/js/ilib-standard-flutter-compiled.js');
     ILibJS.instance.initILib();
+    loadLocaleData('-');
   });
   group('getClock()', () {
     test('testClock_ar_EG', () {

@@ -140,6 +140,7 @@ try {
 } catch (err) {
  console.error(err)
 }
+
 var datalist = [];
 jsFileList.forEach(function(val){
     if (dataMap[val] !== undefined) {
@@ -185,6 +186,10 @@ localeList.forEach(function(loc){
                     jsonPath = path.join(iliblocalePath, lang, script, region);
                     data = readJsonFile(jsonPath, jsonfile);
                     if (data) outFile[lang]["ilib.data." + jsonfile + "_" + lang + "_" + script + "_" + region] = data;
+
+                    jsonPath = path.join(iliblocalePath, "und", region);
+                    data = readJsonFile(jsonPath, jsonfile);
+                    if (data) outFile[lang]["ilib.data." + jsonfile + "_und_" + region] = data;
                 }
             } else if (region){
                 jsonPath = path.join(iliblocalePath, lang, region);

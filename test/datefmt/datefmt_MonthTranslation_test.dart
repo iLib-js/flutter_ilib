@@ -6,9 +6,10 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [datefmt_MonthTranslation_test.dart] file.');
   setUpAll(() async {
-    await ILibJS.instance
-        .loadJSwithPath('../../assets/js/ilib-standard-flutter-compiled.js');
+    await ILibJS.instance.loadJSwithPath(
+        '../../assets/js/ilib-standard-flutter-compiled-unittest.js');
     ILibJS.instance.initILib();
+    loadLocaleData('-');
   });
   group('testMonthTranslate_ar_EG', () {
     final Map<int, String> expectedResult = <int, String>{

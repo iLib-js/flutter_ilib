@@ -9,6 +9,7 @@ void main() {
     await ILibJS.instance
         .loadJSwithPath('../../assets/js/ilib-standard-flutter-compiled.js');
     ILibJS.instance.initILib();
+    loadLocaleData('ko-KR');
   });
   group('format()', () {
     test('testDateFmtSimpleShort_ko_KR', () {
@@ -47,7 +48,6 @@ void main() {
       final ILibDateFmtOptions fmtOptions =
           ILibDateFmtOptions(locale: 'ko-KR', length: 'long');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-
       final ILibDateOptions dateOptions = ILibDateOptions(
           locale: 'ko-KR',
           year: 2011,
