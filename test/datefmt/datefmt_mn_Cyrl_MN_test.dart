@@ -666,15 +666,14 @@ void main() {
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
       final ILibDateOptions dateOptions = ILibDateOptions(
-        locale: 'mn-Cyrl-MN',
-        year: 2011,
-        month: 8,
-        day: 29,
-        hour: 13,
-        minute: 45,
-        second: 37,
-        millisecond: 0,
-      );
+          locale: 'mn-Cyrl-MN',
+          year: 2011,
+          month: 8,
+          day: 29,
+          hour: 13,
+          minute: 45,
+          second: 37,
+          millisecond: 0);
       expect(fmt.format(dateOptions), '13:45 (+08/+09)');
     });
     test('testDateFmtShortTimeComponentsHMSA_mn_Cyrl_MN', () {
