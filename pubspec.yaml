@@ -47,6 +47,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/
+    - assets/locales/
     - assets/js/ilib-standard-flutter-compiled.js
 
   # For details regarding assets in packages, see

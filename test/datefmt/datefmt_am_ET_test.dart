@@ -9,13 +9,13 @@ void main() {
     await ILibJS.instance
         .loadJSwithPath('../../assets/js/ilib-standard-flutter-compiled.js');
     ILibJS.instance.initILib();
+    ILibJS.instance.loadLocaleData('am-ET');
   });
   group('format()', () {
     test('testDateFmtSimpleShort_am_ET', () {
       final ILibDateFmtOptions fmtOptions =
           ILibDateFmtOptions(locale: 'am-ET', length: 'short');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-
       final ILibDateOptions dateOptions = ILibDateOptions(
           locale: 'am-ET',
           year: 2011,

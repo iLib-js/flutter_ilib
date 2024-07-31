@@ -11,10 +11,10 @@ class ILibDateFmt {
     calendar = options.calendar;
     timezone = options.timezone;
     useNative = options.useNative;
-    ILibJS.instance.addListener(() {
-      ILibJS.instance.initILib();
-    });
+
+    ILibJS.instance.loadLocaleData(locale);
   }
+
   String? locale;
   String? type;
   String? length;
@@ -58,7 +58,6 @@ class ILibDateFmt {
   /// Formats a particular date instance according to the settings of this formatter object
   String format(ILibDateOptions date) {
     String result = '';
-
     final String formatOptions = toJsonString();
     final String dateOptions = date.toJsonString();
 
