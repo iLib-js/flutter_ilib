@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_js/flutter_js.dart';
-import 'ilib_utils.dart';
+import 'internal/ilib_utils.dart';
 
 class ILibJS extends ChangeNotifier {
   ILibJS._internal() {
@@ -47,11 +47,24 @@ class ILibJS extends ChangeNotifier {
   JsEvalResult evaluate(String code, {String? sourceUrl}) {
     try {
       _jsEvalResult = _jsRuntime.evaluate(code);
-
       return _jsEvalResult;
     } on PlatformException catch (e) {
       debugPrint('Failed to load js engine: ${e.details}');
       rethrow;
+    }
+  }
+
+  Future<void> loadLocaleData(String? locale) async {
+    locale ??= getLocale();
+    String loadData = '';
+    if (!isValidLocale(locale)) {
+      return;
+    }
+    final String dataPath = getJSDataPath(locale);
+    if (!fileList.contains(dataPath)) {
+      fileList.add(dataPath);
+      loadData = await loadJSwithPath(dataPath);
+      evaluate(loadData);
     }
   }
 }

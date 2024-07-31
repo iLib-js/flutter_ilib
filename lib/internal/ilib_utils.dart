@@ -1,5 +1,4 @@
 import 'dart:ui';
-import 'ilib_init.dart';
 
 String currentLocale =
     PlatformDispatcher.instance.locale.toString().replaceAll('_', '-');
@@ -13,9 +12,10 @@ void setLocale(String loc) {
 }
 
 String getJSDataPath(String? locale) {
-  if (locale == null) {
+  if (locale == null || !isValidLocale(locale)) {
     return '';
   }
+
   final String lang = locale.split('-')[0];
   final String fullPath = 'packages/flutter_ilib/assets/locales/$lang.js';
   return fullPath;
@@ -29,22 +29,4 @@ bool isValidLocale(String lo) {
     return false;
   }
   return true;
-}
-
-void loadLocaleData(String? locale) {
-  locale ??= getLocale();
-
-  if (!isValidLocale(locale)) {
-    return;
-  }
-
-  final String dataPath = getJSDataPath(locale);
-  final ILibJS ilibjsinstace = ILibJS.instance;
-
-  if (!ilibjsinstace.fileList.contains(dataPath)) {
-    ilibjsinstace.fileList.add(dataPath);
-    ilibjsinstace.loadJSwithPath(dataPath).then((String result) {
-      ILibJS.instance.evaluate(result);
-    });
-  }
 }

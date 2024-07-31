@@ -9,7 +9,7 @@ void main() {
     await ILibJS.instance
         .loadJSwithPath('../../assets/js/ilib-standard-flutter-compiled.js');
     ILibJS.instance.initILib();
-    loadLocaleData('or-IN');
+    ILibJS.instance.loadLocaleData('or-IN');
   });
   group('format()', () {
     test('testDateFmtINSimpleShort_or_IN', () {

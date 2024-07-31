@@ -1,7 +1,5 @@
 /*
- * genlocaledata.js - automatically find modules and update code that
- * uses those modules to have the right require() statements at the
- * top of them
+ * genlocaledata.js - generate the ilib locale data into js file per locale.
  *
  * Copyright © 2024 JEDLSoft
  *
@@ -117,12 +115,12 @@ var dataMap = {
     "LocaleInfo.js": ["localeinfo"],
     "Address.js":["address", "countries", "nativecountries", "ctrynames"],
     "NameFmt.js": ["name"],
-    "NumFmt.js.js": ["localeinfo", "currency"],
+    "NumFmt.js": ["localeinfo", "currency"],
     "ResBundle.js": ["pseudomap"],
     "Country.js": ["ctryreverse"],
     "PhoneNumber.js": ["states", "idd", "mnc"],
     "IString.js": ["plurals"],
-    "DurationFmt.js": ["dateformats, sysres"],
+    "DurationFmt.js": ["dateformats", "sysres"],
     "UnitFmt.js":["unitfmt"],
     "AlphabeticIndex.js": ["nfc", "nfkd"]
 }

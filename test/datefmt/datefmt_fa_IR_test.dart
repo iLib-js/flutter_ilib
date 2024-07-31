@@ -9,7 +9,7 @@ void main() {
     await ILibJS.instance
         .loadJSwithPath('../../assets/js/ilib-standard-flutter-compiled.js');
     ILibJS.instance.initILib();
-    loadLocaleData('fa-IR');
+    ILibJS.instance.loadLocaleData('fa-IR');
   });
   group('format()', () {
     test('SimpleShort_fa_IR', () {

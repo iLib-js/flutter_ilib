@@ -1,5 +1,4 @@
 import 'ilib_init.dart';
-import 'ilib_utils.dart';
 
 class ILibDateFmt {
   /// [options] Set the Options for formatting
@@ -13,7 +12,7 @@ class ILibDateFmt {
     timezone = options.timezone;
     useNative = options.useNative;
 
-    loadLocaleData(locale);
+    ILibJS.instance.loadLocaleData(locale);
   }
 
   String? locale;
@@ -59,7 +58,6 @@ class ILibDateFmt {
   /// Formats a particular date instance according to the settings of this formatter object
   String format(ILibDateOptions date) {
     String result = '';
-
     final String formatOptions = toJsonString();
     final String dateOptions = date.toJsonString();
 

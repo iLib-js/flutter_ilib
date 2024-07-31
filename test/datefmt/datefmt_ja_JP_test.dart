@@ -9,7 +9,7 @@ void main() {
     await ILibJS.instance
         .loadJSwithPath('../../assets/js/ilib-standard-flutter-compiled.js');
     ILibJS.instance.initILib();
-    loadLocaleData('ja-JP');
+    ILibJS.instance.loadLocaleData('ja-JP');
   });
   group('format()', () {
     test('testDateFmtSimpleShort_ja_JP', () {
