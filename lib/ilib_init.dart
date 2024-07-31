@@ -56,15 +56,19 @@ class ILibJS extends ChangeNotifier {
 
   Future<void> loadLocaleData(String? locale) async {
     locale ??= getLocale();
-    String loadData = '';
     if (!isValidLocale(locale)) {
       return;
     }
+
     final String dataPath = getJSDataPath(locale);
     if (!fileList.contains(dataPath)) {
       fileList.add(dataPath);
-      loadData = await loadJSwithPath(dataPath);
-      evaluate(loadData);
+      try {
+        final String loadData = await loadJSwithPath(dataPath);
+        evaluate(loadData);
+      } catch (err) {
+        debugPrint('Caught error: $err');
+      }
     }
   }
 }
