@@ -1039,12 +1039,13 @@ void main() {
       expect(locInfo.getWeekEndStart(), 6);
       expect(locInfo.getWeekEndEnd(), 0);
     });
+    /* pa-PK is not a supported locale. so the _PK specific locale data won't be included
     test('testWeekData_pa_PK', () {
       final ILibLocaleInfo locInfo = ILibLocaleInfo('pa-PK');
       expect(locInfo.getFirstDayOfWeek(), 0);
       expect(locInfo.getWeekEndStart(), 6);
       expect(locInfo.getWeekEndEnd(), 0);
-    });
+    });*/
     test('testWeekData_pt_AO', () {
       final ILibLocaleInfo locInfo = ILibLocaleInfo('pt-AO');
       expect(locInfo.getFirstDayOfWeek(), 1);
@@ -1063,12 +1064,13 @@ void main() {
       expect(locInfo.getWeekEndStart(), 6);
       expect(locInfo.getWeekEndEnd(), 0);
     });
+    /* ur-PK is not a supported locale. so the _PK specific locale data won't be included
     test('testWeekData_ur_PK', () {
       final ILibLocaleInfo locInfo = ILibLocaleInfo('ur-PK');
       expect(locInfo.getFirstDayOfWeek(), 0);
       expect(locInfo.getWeekEndStart(), 6);
       expect(locInfo.getWeekEndEnd(), 0);
-    });
+    });*/
     test('testWeekData_zh_Hans_SG', () {
       final ILibLocaleInfo locInfo = ILibLocaleInfo('zh-Hans-SG');
       expect(locInfo.getFirstDayOfWeek(), 0);
