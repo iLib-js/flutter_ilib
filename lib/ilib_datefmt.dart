@@ -78,6 +78,15 @@ class ILibDateFmt {
     result = ILibJS.instance.evaluate(jscode1).stringResult;
     return int.parse(result);
   }
+
+  /// Return the template string that is used to format date/times for this formatter instance
+  String getTemplate() {
+    String result = '';
+    final String formatOptions = toJsonString();
+    final String jscode1 = 'new DateFmt($formatOptions).getTemplate()';
+    result = ILibJS.instance.evaluate(jscode1).stringResult;
+    return result;
+  }
 }
 
 class ILibDateFmtOptions {

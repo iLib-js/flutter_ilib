@@ -1,3 +1,6 @@
+## 0.2.0
+* Added the `getTemplate()` method in ILibDateFmt class.
+
 ## 0.1.0
 * Updated the `README.md` file.
 * Updated the minor version up for release.
