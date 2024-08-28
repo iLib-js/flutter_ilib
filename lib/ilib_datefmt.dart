@@ -94,7 +94,7 @@ class ILibDateFmt {
     String result = '';
 
     final String formatOptions = toJsonString();
-    final List<MeridiemsInfo> listlist = [];
+    final List<MeridiemsInfo> meridems = [];
 
     final String jscode1 = 'new DateFmt($formatOptions).getMeridiemsRange()';
     // [{name:am, start: 00:00, end:11:59}, {name:pm, start:12:00, end:23:59}]
@@ -105,17 +105,17 @@ class ILibDateFmt {
       String match = m[0]!;
       match = match.replaceAll('{', '').replaceAll('}', '').trim();
       final List<String?> parts = match.split(',');
-      final List<String?> valuelist = [];
+      final List<String?> meridiemData = [];
       for (final String? item in parts) {
         final String? temp = item;
         final int idx = temp!.indexOf(':');
-        valuelist.add(temp.substring(idx + 1).trim());
+        meridiemData.add(temp.substring(idx + 1).trim());
         //final List<String> parts = [temp.substring(0, idx).trim(), temp.substring(idx+1).trim()];
       }
-      listlist.add(MeridiemsInfo(
-          name: valuelist[0], startTime: valuelist[1], endTime: valuelist[2]));
+      meridems.add(MeridiemsInfo(
+          name: meridiemData[0], startTime: meridiemData[1], endTime: meridiemData[2]));
     }
-    return listlist;
+    return meridems;
   }
 }
 
