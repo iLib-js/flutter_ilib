@@ -59,9 +59,8 @@ class ILibDateFmt {
   String format(ILibDateOptions date) {
     String result = '';
 
-    final String formatOptions = toJsonString();
     final String dateOptions = date.toJsonString();
-
+    final String formatOptions = toJsonString();
     result = ILibJS.instance
         .evaluate(
             'new DateFmt($formatOptions).format(DateFactory($dateOptions))')
@@ -86,6 +85,36 @@ class ILibDateFmt {
     final String jscode1 = 'new DateFmt($formatOptions).getTemplate()';
     result = ILibJS.instance.evaluate(jscode1).stringResult;
     return result;
+  }
+
+  /// Return the range of possible meridiems (times of day like "AM" or "PM") in this date formatter.
+  List<MeridiemsInfo> getMeridiemRange() {
+    final RegExp pattern = RegExp('{(.[^{]*)}');
+    String result = '';
+
+    final String formatOptions = toJsonString();
+    final List<MeridiemsInfo> listlist = [];
+
+    final String jscode1 = 'new DateFmt($formatOptions).getMeridiemsRange()';
+    // [{name:am, start: 00:00, end:11:59}, {name:pm, start:12:00, end:23:59}]
+    result = ILibJS.instance.evaluate(jscode1).stringResult;
+
+    final Iterable<Match> matches = pattern.allMatches(result);
+    for (final Match m in matches) {
+      String match = m[0]!;
+      match = match.replaceAll('{', '').replaceAll('}', '').trim();
+      final List<String?> parts = match.split(',');
+      final List<String?> valuelist = [];
+      for (final String? item in parts) {
+        final String? temp = item;
+        final int idx = temp!.indexOf(':');
+        valuelist.add(temp.substring(idx + 1).trim());
+        //final List<String> parts = [temp.substring(0, idx).trim(), temp.substring(idx+1).trim()];
+      }
+      listlist.add(MeridiemsInfo(
+          name: valuelist[0], startTime: valuelist[1], endTime: valuelist[2]));
+    }
+    return listlist;
   }
 }
 
@@ -213,4 +242,14 @@ class ILibDateOptions {
     completeOption = result.isNotEmpty ? '{$result}' : '';
     return completeOption;
   }
+}
+
+class MeridiemsInfo {
+  /// [name] The name of the meridiem
+  /// [startTime] The startTime of meridiem
+  /// [endTime] The endTime of meridiem
+  MeridiemsInfo({this.name, this.startTime, this.endTime});
+  String? name;
+  String? startTime;
+  String? endTime;
 }

@@ -93,5 +93,21 @@ void main() {
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       expect(fmt.getClock(), 24);
     });
+    test('getMeridiem_en_GB', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'en-GB');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemRange();
+      expect(meridiems[0].name, 'am');
+      expect(meridiems[1].name, 'pm');
+    });
+    test('getMeridiem_ko_KR', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ko-KR');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemRange();
+      expect(meridiems[0].name, '오전');
+      expect(meridiems[1].name, '오후');
+    });
   });
 }
