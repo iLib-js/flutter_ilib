@@ -58,9 +58,9 @@ class ILibDateFmt {
   /// Formats a particular date instance according to the settings of this formatter object
   String format(ILibDateOptions date) {
     String result = '';
-
-    final String dateOptions = date.toJsonString();
     final String formatOptions = toJsonString();
+    final String dateOptions = date.toJsonString();
+
     result = ILibJS.instance
         .evaluate(
             'new DateFmt($formatOptions).format(DateFactory($dateOptions))')
