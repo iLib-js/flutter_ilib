@@ -113,7 +113,7 @@ class ILibDateFmt {
         //final List<String> parts = [temp.substring(0, idx).trim(), temp.substring(idx+1).trim()];
       }
       meridems.add(MeridiemsInfo(
-          name: meridiemData[0], startTime: meridiemData[1], endTime: meridiemData[2]));
+          name: meridiemData[0], start: meridiemData[1], end: meridiemData[2]));
     }
     return meridems;
   }
@@ -128,6 +128,7 @@ class ILibDateFmtOptions {
   /// [useNative] The flag used to determine whether to use the native script settings for formatting the numbers.
   /// [date] This property tells which components of a date format to use. Valid values are: "dmwy", "dmy", "dmw", "dm", "my", "dw", "d", "m","n","y". Default components, if this property is not specified, is "dmy".
   /// [time] This property gives which components of a time format to use. Valid values for this property are: "ahmsz", "ahms", "hmsz", "hms", "ahmz", "ahm", hmz", ah", "hm", "ms", "h", "m", "s". Default value if this property is not specified is "hma".
+  /// [meridiems] string that specifies what style of meridiems to use with this format. The choices are "default", "gregorian", "ethiopic", and "chinese".
   ILibDateFmtOptions(
       {this.locale,
       this.length,
@@ -136,7 +137,8 @@ class ILibDateFmtOptions {
       this.timezone,
       this.useNative,
       this.date,
-      this.time});
+      this.time,
+      this.meridiems});
   String? locale;
   String? length;
   String? type;
@@ -144,6 +146,7 @@ class ILibDateFmtOptions {
   String? timezone;
   String? date;
   String? time;
+  String? meridiems;
   bool? useNative;
 }
 
@@ -247,10 +250,10 @@ class ILibDateOptions {
 
 class MeridiemsInfo {
   /// [name] The name of the meridiem
-  /// [startTime] The startTime of meridiem
-  /// [endTime] The endTime of meridiem
-  MeridiemsInfo({this.name, this.startTime, this.endTime});
+  /// [start] The startTime of meridiem
+  /// [end] The endTime of meridiem
+  MeridiemsInfo({this.name, this.start, this.end});
   String? name;
-  String? startTime;
-  String? endTime;
+  String? start;
+  String? end;
 }
