@@ -7,7 +7,7 @@ void main() {
   debugPrint('Testing [datefmt_ku_Arab_IQ_test.dart] file.');
   setUpAll(() async {
     await ILibJS.instance
-        .loadJSwithPath('../../assets/js/ilib-standard-flutter-compiled.js');
+        .loadJSwithPath('../../assets/js/ilib-all.js');
     ILibJS.instance.initILib();
     ILibJS.instance.loadLocaleData('ku-Arab-IQ');
   });

@@ -7,7 +7,7 @@ void main() {
   debugPrint('Testing [datefmt_sq_AL_test.dart] file.');
   setUpAll(() async {
     await ILibJS.instance
-        .loadJSwithPath('../../assets/js/ilib-standard-flutter-compiled.js');
+        .loadJSwithPath('../../assets/js/ilib-all.js');
     ILibJS.instance.initILib();
     ILibJS.instance.loadLocaleData('sq-AL');
   });

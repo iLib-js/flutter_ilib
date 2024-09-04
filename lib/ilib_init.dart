@@ -19,7 +19,7 @@ class ILibJS extends ChangeNotifier {
 
   Future<void> loadJS() async {
     _loadJSResult = await rootBundle.loadString(
-        'packages/flutter_ilib/assets/js/ilib-standard-flutter-compiled.js');
+        'packages/flutter_ilib/assets/js/ilib-all.js');
     final String curlocale = getLocale();
     loadLocaleData(curlocale);
     notifyListeners();

@@ -8,7 +8,7 @@ void main() {
   setUpAll(() async {
     final ILibJS ilibjsinstance = ILibJS.instance;
     await ilibjsinstance
-        .loadJSwithPath('../../assets/js/ilib-standard-flutter-compiled.js');
+        .loadJSwithPath('../../assets/js/ilib-all.js');
     ilibjsinstance.initILib();
     ilibjsinstance.loadLocaleData('af');
     ilibjsinstance.loadLocaleData('am');

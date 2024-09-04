@@ -9,7 +9,7 @@ void main() {
   setUpAll(() async {
     flutterIlibPlugin = FlutterILib.instance;
     await ILibJS.instance
-        .loadJSwithPath('../../assets/js/ilib-standard-flutter-compiled.js');
+        .loadJSwithPath('../../assets/js/ilib-all.js');
     ILibJS.instance.initILib();
     ILibJS.instance.loadLocaleData('th-TH');
     ILibJS.instance.loadLocaleData('fa-IR');
