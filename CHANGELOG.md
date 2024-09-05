@@ -1,7 +1,7 @@
 ## 0.2.0
-* Added the `getTemplate()` method in ILibDateFmt class.
-* Re-generated the assemble ilib file to return the correct releaser version
-* Changed the assembled ilib file name to `ilib-all.js`
+* Added the method `getTemplate()` in the class ILibDateFmt.
+* Regenerated the assemble ilib file to return the correct released version number.
+* Changed the name of the assemble ilib file to `ilib-all.js`.
 
 ## 0.1.0
 * Updated the `README.md` file.
