@@ -7,7 +7,7 @@ void main() {
   debugPrint('Testing [datefmt_Clock_test.dart] file.');
   setUpAll(() async {
     await ILibJS.instance
-        .loadJSwithPath('../../assets/js/ilib-standard-flutter-compiled.js');
+        .loadJSwithPath('../../assets/js/ilib-all.js');
     ILibJS.instance.initILib();
   });
   group('getClock()', () {
