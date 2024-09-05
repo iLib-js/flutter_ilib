@@ -6,8 +6,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [localeinfo_dayofweek_test.dart] file.');
   setUpAll(() async {
-    await ILibJS.instance
-        .loadJSwithPath('../../assets/js/ilib-all.js');
+    await ILibJS.instance.loadJSwithPath('../../assets/js/ilib-all.js');
     ILibJS.instance.initILib();
   });
   // 0:sun, 1:mon, 2:tue, 3:wed, 4:thu, 5:fri, 6:sat
