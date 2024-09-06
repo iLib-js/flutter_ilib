@@ -1232,6 +1232,7 @@ void main() {
             timezone: 'local');
         final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
         final ILibDateOptions dateOptions = ILibDateOptions(
+            locale: 'fa-IR',
             year: 2015,
             month: 8,
             day: num + 2,
@@ -1262,6 +1263,7 @@ void main() {
             timezone: 'local');
         final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
         final ILibDateOptions dateOptions = ILibDateOptions(
+            locale: 'fa-IR',
             year: 2015,
             month: 8,
             day: num + 2,
@@ -1291,6 +1293,7 @@ void main() {
             timezone: 'local');
         final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
         final ILibDateOptions dateOptions = ILibDateOptions(
+            locale: 'fa-IR',
             year: 2015,
             month: 8,
             day: num + 2,
