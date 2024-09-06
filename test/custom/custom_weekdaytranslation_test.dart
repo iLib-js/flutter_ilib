@@ -1232,12 +1232,11 @@ void main() {
             timezone: 'local');
         final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
         final ILibDateOptions dateOptions = ILibDateOptions(
-            locale: 'fa-IR',
             year: 2015,
             month: 8,
-            day: num + 2,
+            day: num + 1,
             type: 'persian',
-            timezone: 'local');
+            timezone: 'Etc/UTC');
         expect(fmt.format(dateOptions), expected);
       });
     });
@@ -1263,12 +1262,11 @@ void main() {
             timezone: 'local');
         final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
         final ILibDateOptions dateOptions = ILibDateOptions(
-            locale: 'fa-IR',
             year: 2015,
             month: 8,
-            day: num + 2,
+            day: num + 1,
             type: 'persian',
-            timezone: 'local');
+            timezone: 'Etc/UTC');
         expect(fmt.format(dateOptions), expected);
       });
     });
@@ -1293,12 +1291,11 @@ void main() {
             timezone: 'local');
         final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
         final ILibDateOptions dateOptions = ILibDateOptions(
-            locale: 'fa-IR',
             year: 2015,
             month: 8,
-            day: num + 2,
+            day: num + 1,
             type: 'persian',
-            timezone: 'local');
+            timezone: 'Etc/UTC');
         expect(fmt.format(dateOptions), expected);
       });
     });
