@@ -1229,7 +1229,7 @@ void main() {
             date: 'w',
             length: 'full',
             useNative: false,
-            timezone: 'Etc/UTC');
+            timezone: 'local');
         final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
         final ILibDateOptions dateOptions = ILibDateOptions(
             year: 2015, month: 8, day: num + 2, type: 'persian');
@@ -1255,7 +1255,7 @@ void main() {
             date: 'w',
             length: 'medium',
             useNative: false,
-            timezone: 'Etc/UTC');
+            timezone: 'local');
         final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
         final ILibDateOptions dateOptions = ILibDateOptions(
             year: 2015, month: 8, day: num + 2, type: 'persian');
@@ -1280,7 +1280,7 @@ void main() {
             date: 'w',
             length: 'short',
             useNative: false,
-            timezone: 'Etc/UTC');
+            timezone: 'local');
         final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
         final ILibDateOptions dateOptions = ILibDateOptions(
             year: 2015, month: 8, day: num + 2, type: 'persian');
