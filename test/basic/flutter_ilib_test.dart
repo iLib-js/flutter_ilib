@@ -8,8 +8,7 @@ void main() {
   late FlutterILib flutterIlibPlugin;
   setUpAll(() async {
     flutterIlibPlugin = FlutterILib.instance;
-    await ILibJS.instance
-        .loadJSwithPath('../../assets/js/ilib-all.js');
+    await ILibJS.instance.loadJSwithPath('../../assets/js/ilib-all.js');
     ILibJS.instance.initILib();
   });
   group('Basic', () {
