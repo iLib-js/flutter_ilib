@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'ilib_init.dart';
 
 class ILibDateFmt {
@@ -90,31 +91,33 @@ class ILibDateFmt {
 
   /// Return the range of possible meridiems (times of day like "AM" or "PM") in this date formatter.
   List<MeridiemsInfo> getMeridiemRange() {
-    final RegExp pattern = RegExp('{(.[^{]*)}');
     String result = '';
-
     final String formatOptions = toJsonString();
     final List<MeridiemsInfo> meridems = [];
-
     final String jscode1 = 'new DateFmt($formatOptions).getMeridiemsRange()';
-    // [{name:am, start: 00:00, end:11:59}, {name:pm, start:12:00, end:23:59}]
+
     result = ILibJS.instance.evaluate(jscode1).stringResult;
 
-    final Iterable<Match> matches = pattern.allMatches(result);
-    for (final Match m in matches) {
-      String match = m[0]!;
-      match = match.replaceAll('{', '').replaceAll('}', '').trim();
-      final List<String?> parts = match.split(',');
-      final List<String?> meridiemData = [];
-      for (final String? item in parts) {
-        final String? temp = item;
-        final int idx = temp!.indexOf(':');
-        meridiemData.add(temp.substring(idx + 1).trim());
-        //final List<String> parts = [temp.substring(0, idx).trim(), temp.substring(idx+1).trim()];
-      }
+    final String jsonString = result
+        .replaceAll(RegExp(r'name'), '"name"')
+        .replaceAll(RegExp(r'start'), '"start"')
+        .replaceAll(RegExp(r'end'), '"end"')
+        .replaceAllMapped(
+            RegExp(r'(\d{2}:\d{2})'), (match) => '"${match.group(0)}"')
+        .replaceAllMapped(RegExp(r'(?<=:\s)(\w+)(?=,|\})'), (match) {
+      return '"${match.group(0)}"';
+    }).replaceAllMapped(RegExp(r'(?<=:\s)(\W+)(?=,|\})'), (match) {
+      return '"${match.group(0)}"';
+    });
+
+    final meridiemlist = json.decode(jsonString);
+    meridiemlist.forEach((item) {
       meridems.add(MeridiemsInfo(
-          name: meridiemData[0], start: meridiemData[1], end: meridiemData[2]));
-    }
+          name: item['name'].toString(),
+          start: item['start'].toString(),
+          end: item['end'].toString()));
+    });
+
     return meridems;
   }
 }
