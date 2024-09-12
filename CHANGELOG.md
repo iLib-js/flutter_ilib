@@ -1,3 +1,6 @@
+## 0.3.0
+* Added the method `getMeridiemRange()` in the class ILibDateFmt.
+
 ## 0.2.0
 * Added the method `getTemplate()` in the class ILibDateFmt.
 * Regenerated the assemble ilib file to return the correct released version number.

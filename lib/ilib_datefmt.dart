@@ -94,24 +94,12 @@ class ILibDateFmt {
     String result = '';
     final String formatOptions = toJsonString();
     final List<MeridiemsInfo> meridems = [];
-    final String jscode1 = 'new DateFmt($formatOptions).getMeridiemsRange()';
-
+    final String jscode1 =
+        'JSON.stringify(new DateFmt($formatOptions).getMeridiemsRange())';
     result = ILibJS.instance.evaluate(jscode1).stringResult;
+    final dynamic meridiemlist = json.decode(result);
 
-    final String jsonString = result
-        .replaceAll(RegExp(r'name'), '"name"')
-        .replaceAll(RegExp(r'start'), '"start"')
-        .replaceAll(RegExp(r'end'), '"end"')
-        .replaceAllMapped(
-            RegExp(r'(\d{2}:\d{2})'), (match) => '"${match.group(0)}"')
-        .replaceAllMapped(RegExp(r'(?<=:\s)(\w+)(?=,|\})'), (match) {
-      return '"${match.group(0)}"';
-    }).replaceAllMapped(RegExp(r'(?<=:\s)(\W+)(?=,|\})'), (match) {
-      return '"${match.group(0)}"';
-    });
-
-    final meridiemlist = json.decode(jsonString);
-    meridiemlist.forEach((item) {
+    meridiemlist.forEach((dynamic item) {
       meridems.add(MeridiemsInfo(
           name: item['name'].toString(),
           start: item['start'].toString(),
