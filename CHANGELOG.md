@@ -1,5 +1,5 @@
 ## 0.3.0
-* Added the method `getMeridiemRange()` in the class ILibDateFmt.
+* Added the method `getMeridiemsRange()` in the class ILibDateFmt.
 * Updated test files to use ILib's `loadJS()` instead of `loadJSwithPath()`.
 
 ## 0.2.0
