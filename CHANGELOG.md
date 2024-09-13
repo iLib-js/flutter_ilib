@@ -1,3 +1,6 @@
+## 0.3.0
+* Updated test files to use ILib's `loadJS()` instead of `loadJSwithPath()`.
+
 ## 0.2.0
 * Added the method `getTemplate()` in the class ILibDateFmt.
 * Regenerated the assemble ilib file to return the correct released version number.
