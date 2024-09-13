@@ -90,7 +90,7 @@ class ILibDateFmt {
   }
 
   /// Return the range of possible meridiems (times of day like "AM" or "PM") in this date formatter.
-  List<MeridiemsInfo> getMeridiemRange() {
+  List<MeridiemsInfo> getMeridiemsRange() {
     String result = '';
     final String formatOptions = toJsonString();
     final List<MeridiemsInfo> meridems = [];
