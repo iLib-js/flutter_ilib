@@ -2,7 +2,7 @@
 
 # git remote add
 echo -e "\n[git remote add ...]"
-git remote add private-sync git@github.com:iLib-js/flutter_ilib_webos.git
+git remote add sync-private git@github.com:iLib-js/flutter_ilib_webos.git
 
 # git sync with public flutter_ilib main(release) branch
 git reset --hard
@@ -11,7 +11,7 @@ git fetch origin
 git rebase remotes/origin/main
 
 echo -e "\n[sync branch ...]"
-git push private-sync HEAD:public/sync
+git push sync-private HEAD:public/sync
 
 # sync tag
 echo -e "\n[tags ...]"
@@ -25,7 +25,7 @@ done
  
 # upload tag to flutter_ilib_webos
 echo -e "\n[sync tag ...]"
-git push --tags private-sync
+git push --tags sync-private
 
 echo -e "\n[git remote remove ...]"
-git remote remove private-sync
+git remote remove sync-private
