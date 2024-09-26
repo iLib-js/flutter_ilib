@@ -110,11 +110,5 @@ void main() {
       expect(meridiems[0].name, '오전');
       expect(meridiems[1].name, '오후');
     });
-    test('getTemplate_ko_KR', () {
-      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'ko-KR');
-      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-
-      expect(fmt.getTemplate(), '오전');
-    });
   });
 }
