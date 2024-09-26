@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../test_env.dart';
+
 void main() {
+  late String testPlatform;
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [flutter_ilib_datefmt_test.dart] file.');
   setUpAll(() async {
+    testPlatform = getTestPlatform();
     await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
   });
@@ -105,6 +109,12 @@ void main() {
       final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
       expect(meridiems[0].name, '오전');
       expect(meridiems[1].name, '오후');
+    });
+    test('getTemplate_ko_KR', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'ko-KR');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+
+      expect(fmt.getTemplate(), '오전');
     });
   });
 }
