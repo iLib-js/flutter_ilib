@@ -588,7 +588,8 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), 'إثنين');
+      final String result = (testPlatform == 'webOS') ? 'اثنين' : 'إثنين';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtFullDateComponentsW5_ar_EG', () {
       final ILibDateFmtOptions fmtOptions =

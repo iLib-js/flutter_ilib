@@ -2,15 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../test_env.dart';
-
 void main() {
-  late String testPlatform;
   TestWidgetsFlutterBinding.ensureInitialized();
 
   debugPrint('Testing [datefmt_af_ZA_test.dart] file.');
   setUpAll(() async {
-    testPlatform = getTestPlatform();
     await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
   });
