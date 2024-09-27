@@ -5,7 +5,7 @@ String getTestPlatform() {
   final File file = File('test/env');
 
   if (file.existsSync()) {
-    testPlatform = file.readAsStringSync().split('=')[1];
+    testPlatform = file.readAsStringSync().split('=')[1].trim();
   } else {
     testPlatform = Platform.operatingSystem;
   }
