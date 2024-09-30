@@ -60,7 +60,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '2011 m. rugsėjo 29 d.');
+      final String result = (testPlatform == 'webOS')
+          ? '2011 m. Rugs 29 d.'
+          : '2011 m. rugsėjo 29 d.';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtSimpleFull_lt_LT', () {
       final ILibDateFmtOptions fmtOptions =

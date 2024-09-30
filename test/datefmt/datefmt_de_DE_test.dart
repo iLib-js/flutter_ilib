@@ -380,7 +380,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), 'D, 29.09');
+      final String result =
+          (testPlatform == 'webOS') ? 'Do., 29.09' : 'D, 29.09';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortDateComponentsWDMY_de_DE', () {
       final ILibDateFmtOptions fmtOptions =
@@ -396,7 +398,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), 'D, 29.09.11');
+      final String result =
+          (testPlatform == 'webOS') ? 'Do., 29.09.11' : 'D, 29.09.11';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtFullDateComponentsY_de_DE', () {
       final ILibDateFmtOptions fmtOptions =

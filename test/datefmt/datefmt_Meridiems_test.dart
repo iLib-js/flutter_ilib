@@ -43,8 +43,13 @@ void main() {
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
 
-      expect(meridiems[0].name, 'পূৰ্বাহ্ন');
-      expect(meridiems[1].name, 'অপৰাহ্ন');
+      if (testPlatform == 'webOS') {
+        expect(meridiems[0].name, 'AM');
+        expect(meridiems[1].name, 'PM');
+      } else {
+        expect(meridiems[0].name, 'পূৰ্বাহ্ন');
+        expect(meridiems[1].name, 'অপৰাহ্ন');
+      }
     });
     test('testMeridiem_bg_BG', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'bg-BG');
@@ -68,8 +73,13 @@ void main() {
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
 
-      expect(meridiems[0].name, 'prijepodne');
-      expect(meridiems[1].name, 'popodne');
+      if (testPlatform == 'webOS') {
+        expect(meridiems[0].name, 'prijepodne');
+        expect(meridiems[1].name, 'poslijepodne');
+      } else {
+        expect(meridiems[0].name, 'prijepodne');
+        expect(meridiems[1].name, 'popodne');
+      }
     });
     test('testMeridiem_bs_Latn_ME', () {
       final ILibDateFmtOptions fmtOptions =
@@ -77,8 +87,13 @@ void main() {
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
 
-      expect(meridiems[0].name, 'prijepodne');
-      expect(meridiems[1].name, 'popodne');
+      if (testPlatform == 'webOS') {
+        expect(meridiems[0].name, 'prijepodne');
+        expect(meridiems[1].name, 'poslijepodne');
+      } else {
+        expect(meridiems[0].name, 'prijepodne');
+        expect(meridiems[1].name, 'popodne');
+      }
     });
     test('testMeridiem_cs_CZ', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'cs-CZ');
@@ -596,9 +611,13 @@ void main() {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'hi-IN');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
-
-      expect(meridiems[0].name, 'am');
-      expect(meridiems[1].name, 'pm');
+      if (testPlatform == 'webOS') {
+        expect(meridiems[0].name, 'AM');
+        expect(meridiems[1].name, 'PM');
+      } else {
+        expect(meridiems[0].name, 'am');
+        expect(meridiems[1].name, 'pm');
+      }
     });
     test('testMeridiem_hr_HR', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'hr-HR');
@@ -677,8 +696,13 @@ void main() {
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
 
-      expect(meridiems[0].name, 'ಪೂರ್ವಾಹ್ನ');
-      expect(meridiems[1].name, 'ಅಪರಾಹ್ನ');
+      if (testPlatform == 'webOS') {
+        expect(meridiems[0].name, 'AM');
+        expect(meridiems[1].name, 'PM');
+      } else {
+        expect(meridiems[0].name, 'ಪೂರ್ವಾಹ್ನ');
+        expect(meridiems[1].name, 'ಅಪರಾಹ್ನ');
+      }
     });
     test('testMeridiem_ko_KR', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'ko-KR');
@@ -774,8 +798,13 @@ void main() {
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
 
-      expect(meridiems[0].name, 'ਪੂ.ਦੁ.');
-      expect(meridiems[1].name, 'ਬਾ.ਦੁ.');
+      if (testPlatform == 'webOS') {
+        expect(meridiems[0].name, 'AM');
+        expect(meridiems[1].name, 'PM');
+      } else {
+        expect(meridiems[0].name, 'ਪੂ.ਦੁ.');
+        expect(meridiems[1].name, 'ਬਾ.ਦੁ.');
+      }
     });
     test('testMeridiem_pl_PL', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'pl-PL');
@@ -895,15 +924,25 @@ void main() {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'sq-AL');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
-      expect(meridiems[0].name, 'e paradites');
-      expect(meridiems[1].name, 'e pasdites');
+      if (testPlatform == 'webOS') {
+        expect(meridiems[0].name, 'të paradites');
+        expect(meridiems[1].name, 'të pasdites');
+      } else {
+        expect(meridiems[0].name, 'e paradites');
+        expect(meridiems[1].name, 'e pasdites');
+      }
     });
     test('testMeridiem_sq_ME', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'sq-ME');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
-      expect(meridiems[0].name, 'e paradites');
-      expect(meridiems[1].name, 'e pasdites');
+      if (testPlatform == 'webOS') {
+        expect(meridiems[0].name, 'të paradites');
+        expect(meridiems[1].name, 'të pasdites');
+      } else {
+        expect(meridiems[0].name, 'e paradites');
+        expect(meridiems[1].name, 'e pasdites');
+      }
     });
     test('testMeridiem_sv_FI', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'sv-FI');
@@ -925,9 +964,13 @@ void main() {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'ta-IN');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
-
-      expect(meridiems[0].name, 'AM');
-      expect(meridiems[1].name, 'பிற்பகல்');
+      if (testPlatform == 'webOS') {
+        expect(meridiems[0].name, 'AM');
+        expect(meridiems[1].name, 'PM');
+      } else {
+        expect(meridiems[0].name, 'AM');
+        expect(meridiems[1].name, 'பிற்பகல்');
+      }
     });
     test('testMeridiem_te_IN', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'te-IN');
@@ -1099,25 +1142,47 @@ void main() {
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
 
-      expect(meridiems[0].name, 'ጥዋት');
-      expect(meridiems[0].start, '00:00');
-      expect(meridiems[0].end, '05:59');
+      if (testPlatform == 'webOS') {
+        expect(meridiems[0].name, 'ከሌሊቱ');
+        expect(meridiems[0].start, '00:00');
+        expect(meridiems[0].end, '05:59');
 
-      expect(meridiems[1].name, 'ቀትር');
-      expect(meridiems[1].start, '06:00');
-      expect(meridiems[1].end, '06:00');
+        expect(meridiems[1].name, 'ከጥዋቱ');
+        expect(meridiems[1].start, '06:00');
+        expect(meridiems[1].end, '06:00');
 
-      expect(meridiems[2].name, 'ከሰዓት');
-      expect(meridiems[2].start, '06:01');
-      expect(meridiems[2].end, '11:59');
+        expect(meridiems[2].name, 'ቀትር');
+        expect(meridiems[2].start, '06:01');
+        expect(meridiems[2].end, '11:59');
 
-      expect(meridiems[3].name, 'ከምሽቱ');
-      expect(meridiems[3].start, '12:00');
-      expect(meridiems[3].end, '17:59');
+        expect(meridiems[3].name, 'ከሰዓት');
+        expect(meridiems[3].start, '12:00');
+        expect(meridiems[3].end, '17:59');
 
-      expect(meridiems[4].name, 'ከሌሊቱ');
-      expect(meridiems[4].start, '18:00');
-      expect(meridiems[4].end, '23:59');
+        expect(meridiems[4].name, 'ከምሽቱ');
+        expect(meridiems[4].start, '18:00');
+        expect(meridiems[4].end, '23:59');
+      } else {
+        expect(meridiems[0].name, 'ጥዋት');
+        expect(meridiems[0].start, '00:00');
+        expect(meridiems[0].end, '05:59');
+
+        expect(meridiems[1].name, 'ቀትር');
+        expect(meridiems[1].start, '06:00');
+        expect(meridiems[1].end, '06:00');
+
+        expect(meridiems[2].name, 'ከሰዓት');
+        expect(meridiems[2].start, '06:01');
+        expect(meridiems[2].end, '11:59');
+
+        expect(meridiems[3].name, 'ከምሽቱ');
+        expect(meridiems[3].start, '12:00');
+        expect(meridiems[3].end, '17:59');
+
+        expect(meridiems[4].name, 'ከሌሊቱ');
+        expect(meridiems[4].start, '18:00');
+        expect(meridiems[4].end, '23:59');
+      }
     });
     test('testMeridiem_ha_Latn_NG', () {
       final ILibDateFmtOptions fmtOptions =

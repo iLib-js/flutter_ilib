@@ -284,7 +284,8 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), 'се');
+      final String result = (testPlatform == 'webOS') ? 'сент.' : 'се';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortDateComponentsN_ru_RU', () {
       final ILibDateFmtOptions fmtOptions =

@@ -60,7 +60,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29 de setembro de 2011');
+      final String result = (testPlatform == 'webOS')
+          ? '29 setembro 2011'
+          : '29 de setembro de 2011';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtPTSimpleFull', () {
       final ILibDateFmtOptions fmtOptions =
@@ -188,7 +191,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29 de setembro de 2011 às 13:45');
+      final String result = (testPlatform == 'webOS')
+          ? '29 setembro 2011 às 13:45'
+          : '29 de setembro de 2011 às 13:45';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtPTDateTimeSimpleFull', () {
       final ILibDateFmtOptions fmtOptions =

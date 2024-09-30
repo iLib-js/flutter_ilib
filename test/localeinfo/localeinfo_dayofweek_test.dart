@@ -606,7 +606,10 @@ void main() {
     });
     test('testWeekData_pt_PT', () {
       final ILibLocaleInfo locInfo = ILibLocaleInfo('pt-PT');
-      expect(locInfo.getFirstDayOfWeek(), 0);
+
+      final int result = (testPlatform == 'webOS') ? 1 : 0;
+      expect(locInfo.getFirstDayOfWeek(), result);
+
       expect(locInfo.getWeekEndStart(), 6);
       expect(locInfo.getWeekEndEnd(), 0);
     });

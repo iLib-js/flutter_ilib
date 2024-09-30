@@ -661,7 +661,9 @@ void main() {
       final ILibDateFmtOptions fmtOptions =
           ILibDateFmtOptions(locale: 'zh-Hant-TW');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-      expect(fmt.getClock(), 12);
+
+      final int result = (testPlatform == 'webOS') ? 24 : 12;
+      expect(fmt.getClock(), result);
     });
     test('testClock_en_GE', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'en-GE');
@@ -707,7 +709,9 @@ void main() {
       final ILibDateFmtOptions fmtOptions =
           ILibDateFmtOptions(locale: 'ha-Latn-NG');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-      expect(fmt.getClock(), 24);
+
+      final int result = (testPlatform == 'webOS') ? 12 : 24;
+      expect(fmt.getClock(), result);
     });
     test('testClock_or_IN', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'or-IN');

@@ -203,7 +203,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29 సెప్టెంబర్, 2011 1:45 PMకి');
+      final String result = (testPlatform == 'webOS')
+          ? '29 సెప్టెంబర్, 2011 1:45 PM'
+          : '29 సెప్టెంబర్, 2011 1:45 PMకి';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINDateTimeSimpleFull_te_IN', () {
       final ILibDateFmtOptions fmtOptions =
@@ -219,9 +222,11 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29, సెప్టెంబర్ 2011 1:45 PMకి');
+      final String result = (testPlatform == 'webOS')
+          ? '29, సెప్టెంబర్ 2011 1:45 PM'
+          : '29, సెప్టెంబర్ 2011 1:45 PMకి';
+      expect(fmt.format(dateOptions), result);
     });
-
     test('testDateFmtINTypeDate_te_IN', () {
       final ILibDateFmtOptions fmtOptions =
           ILibDateFmtOptions(locale: 'te-IN', type: 'date');
