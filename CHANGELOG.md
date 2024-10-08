@@ -1,6 +1,7 @@
 ## 0.3.0
 * Added the method `getMeridiemsRange()` in the class ILibDateFmt.
 * Updated test files to use ILib's `loadJS()` instead of `loadJSwithPath()`.
+* Updated the test files to share them between flutter_ilib and another flutter_ilib for webOS. The webOS overrides some of the locale data, so some test cases return different results.
 
 ## 0.2.0
 * Added the method `getTemplate()` in the class ILibDateFmt.
