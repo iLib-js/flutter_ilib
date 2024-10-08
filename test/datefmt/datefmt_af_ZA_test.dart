@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+
   debugPrint('Testing [datefmt_af_ZA_test.dart] file.');
   setUpAll(() async {
     await ILibJS.instance.loadJS();

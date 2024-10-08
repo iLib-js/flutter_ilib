@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../test_env.dart';
+
 void main() {
+  late String testPlatform;
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [datefmt_ha_Latn_NG_test.dart] file.');
   setUpAll(() async {
+    testPlatform = getTestPlatform();
     await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
   });
@@ -283,7 +287,8 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '01:45');
+      final String result = (testPlatform == 'webOS') ? '1:45 Safiya' : '01:45';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtSimpleTimeMedium_ha_Latn', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -302,7 +307,8 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '13:45');
+      final String result = (testPlatform == 'webOS') ? '1:45 Yamma' : '13:45';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtSimpleTimeLong_ha_Latn', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -321,7 +327,8 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '13:45');
+      final String result = (testPlatform == 'webOS') ? '1:45 Yamma' : '13:45';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtSimpleTimeFull_ha_Latn', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -340,7 +347,8 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '13:45');
+      final String result = (testPlatform == 'webOS') ? '1:45 Yamma' : '13:45';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtDateTimeSimpleShort_ha_Latn', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -359,7 +367,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29/9/11, 13:45');
+      final String result =
+          (testPlatform == 'webOS') ? '29/9/11, 1:45 Yamma' : '29/9/11, 13:45';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtDateTimeSimpleMedium_ha_Latn', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -378,7 +388,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29 Sat, 2011, 13:45');
+      final String result = (testPlatform == 'webOS')
+          ? '29 Sat, 2011, 1:45 Yamma'
+          : '29 Sat, 2011, 13:45';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtDateTimeSimpleLong_ha_Latn', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -397,7 +410,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29 Satumba, 2011 da 13:45');
+      final String result = (testPlatform == 'webOS')
+          ? '29 Satumba, 2011 da 1:45 Yamma'
+          : '29 Satumba, 2011 da 13:45';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtDateTimeSimpleFull_ha_Latn', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -416,9 +432,11 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29 Satumba, 2011 da 13:45');
+      final String result = (testPlatform == 'webOS')
+          ? '29 Satumba, 2011 da 1:45 Yamma'
+          : '29 Satumba, 2011 da 13:45';
+      expect(fmt.format(dateOptions), result);
     });
-
     test('testDateFmtTypeDate_ha_Latn', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
           locale: 'ha-Latn-NG', calendar: 'gregorian', type: 'date');
@@ -449,7 +467,8 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '13:45');
+      final String result = (testPlatform == 'webOS') ? '1:45 Yamma' : '13:45';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtTypeDateTime_ha_Latn', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -465,7 +484,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29/9/11, 13:45');
+      final String result =
+          (testPlatform == 'webOS') ? '29/9/11, 1:45 Yamma' : '29/9/11, 13:45';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortDateComponentsY_ha_Latn', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -825,7 +846,8 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '13');
+      final String result = (testPlatform == 'webOS') ? '1' : '13';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortTimeComponentsMS_ha_Latn', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -846,7 +868,6 @@ void main() {
           millisecond: 0);
       expect(fmt.format(dateOptions), '45:37');
     });
-
     test('testDateFmtShortTimeComponentsHMZ_ha_Latn', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
           locale: 'ha-Latn-NG',
@@ -864,7 +885,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '13:45 WAT');
+      final String result =
+          (testPlatform == 'webOS') ? '1:45 WAT' : '13:45 WAT';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortTimeComponentsHMAZ_ha_Latn', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -883,7 +906,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '13:45 WAT');
+      final String result =
+          (testPlatform == 'webOS') ? '1:45 Yamma WAT' : '13:45 WAT';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortTimeComponentsHMSZ_ha_Latn', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -902,7 +927,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '13:45:37 WAT');
+      final String result =
+          (testPlatform == 'webOS') ? '1:45:37 WAT' : '13:45:37 WAT';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortTimeComponentsHMSAZ_ha_Latn', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -921,7 +948,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '13:45:37 WAT');
+      final String result =
+          (testPlatform == 'webOS') ? '1:45:37 Yamma WAT' : '13:45:37 WAT';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtFullTimeComponentsS_ha_Latn', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -963,7 +992,6 @@ void main() {
           millisecond: 0);
       expect(fmt.format(dateOptions), '45');
     });
-
     test('testDateFmtFullTimeComponentsMS_ha_Latn', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
           locale: 'ha-Latn-NG',
@@ -1002,7 +1030,8 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '13:45');
+      final String result = (testPlatform == 'webOS') ? '1:45' : '13:45';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtFullTimeComponentsHMS_ha_Latn', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -1022,9 +1051,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '13:45:37');
+      final String result = (testPlatform == 'webOS') ? '1:45:37' : '13:45:37';
+      expect(fmt.format(dateOptions), result);
     });
-
     test('testDateFmtFullTimeComponentsHMZ_ha_Latn', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
           locale: 'ha-Latn-NG',
@@ -1043,7 +1072,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '13:45 WAT');
+      final String result =
+          (testPlatform == 'webOS') ? '1:45 WAT' : '13:45 WAT';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtFullTimeComponentsHMAZ_ha_Latn', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -1063,9 +1094,10 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '13:45 WAT');
+      final String result =
+          (testPlatform == 'webOS') ? '1:45 Yamma WAT' : '13:45 WAT';
+      expect(fmt.format(dateOptions), result);
     });
-
     test('testDateFmtFullTimeComponentsHMSZ_ha_Latn', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
           locale: 'ha-Latn-NG',
@@ -1084,7 +1116,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '13:45:37 WAT');
+      final String result =
+          (testPlatform == 'webOS') ? '1:45:37 WAT' : '13:45:37 WAT';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtFullTimeComponentsHMSAZ_ha_Latn', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -1104,7 +1138,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '13:45:37 WAT');
+      final String result =
+          (testPlatform == 'webOS') ? '1:45:37 Yamma WAT' : '13:45:37 WAT';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtWithTimeZoneAndNoDST_ha_Latn', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -1124,7 +1160,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '13:45:37 WAT');
+      final String result =
+          (testPlatform == 'webOS') ? '1:45:37 WAT' : '13:45:37 WAT';
+      expect(fmt.format(dateOptions), result);
     });
   });
 }

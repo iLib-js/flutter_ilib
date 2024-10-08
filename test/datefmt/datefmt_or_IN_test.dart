@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../test_env.dart';
+
 void main() {
+  late String testPlatform;
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [datefmt_or_IN_test.dart] file.');
   setUpAll(() async {
+    testPlatform = getTestPlatform();
     await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
   });
@@ -199,7 +203,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45 PM ଠାରେ ସେପ୍ଟେମ୍ବର 29, 2011');
+      final String result = (testPlatform == 'webOS')
+          ? '1:45 PM ରେ ସେପ୍ଟେମ୍ବର 29, 2011'
+          : '1:45 PM ଠାରେ ସେପ୍ଟେମ୍ବର 29, 2011';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINDateTimeSimpleFull_or_IN', () {
       final ILibDateFmtOptions fmtOptions =
@@ -215,9 +222,11 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45 PM ଠାରେ ସେପ୍ଟେମ୍ବର 29, 2011');
+      final String result = (testPlatform == 'webOS')
+          ? '1:45 PM ରେ ସେପ୍ଟେମ୍ବର 29, 2011'
+          : '1:45 PM ଠାରେ ସେପ୍ଟେମ୍ବର 29, 2011';
+      expect(fmt.format(dateOptions), result);
     });
-
     test('testDateFmtINTypeDate_or_IN', () {
       final ILibDateFmtOptions fmtOptions =
           ILibDateFmtOptions(locale: 'or-IN', type: 'date');

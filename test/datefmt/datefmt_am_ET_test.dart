@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../test_env.dart';
+
 void main() {
+  String testPlatform = '';
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [datefmt_am_ET_test.dart] file.');
   setUpAll(() async {
+    testPlatform = getTestPlatform();
     await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
   });
@@ -14,7 +18,6 @@ void main() {
       final ILibDateFmtOptions fmtOptions =
           ILibDateFmtOptions(locale: 'am-ET', length: 'short');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-
       final ILibDateOptions dateOptions = ILibDateOptions(
           locale: 'am-ET',
           year: 2011,
@@ -72,7 +75,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29 ግንቦት 2011');
+
+      final String result =
+          (testPlatform == 'webOS') ? 'ግንቦት 29 ቀን 2011 ዓ.ም' : '29 ግንቦት 2011';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtSimpleTimeShort_am_ET', () {
       final ILibDateFmtOptions fmtOptions =
@@ -88,7 +94,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45 ከምሽቱ');
+
+      final String result =
+          (testPlatform == 'webOS') ? 'ከሰዓት 1:45' : '1:45 ከምሽቱ';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtSimpleTimeMedium_am_ET', () {
       final ILibDateFmtOptions fmtOptions =
@@ -104,7 +113,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45 ከምሽቱ');
+      final String result =
+          (testPlatform == 'webOS') ? 'ከሰዓት 1:45' : '1:45 ከምሽቱ';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtSimpleTimeLong_am_ET', () {
       final ILibDateFmtOptions fmtOptions =
@@ -120,7 +131,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45 ከምሽቱ');
+      final String result =
+          (testPlatform == 'webOS') ? 'ከሰዓት 1:45' : '1:45 ከምሽቱ';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtSimpleTimeFull_am_ET', () {
       final ILibDateFmtOptions fmtOptions =
@@ -136,7 +149,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45 ከምሽቱ');
+      final String result =
+          (testPlatform == 'webOS') ? 'ከሰዓት 1:45' : '1:45 ከምሽቱ';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtDateTimeSimpleShort_am_ET', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -152,7 +167,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29/09/2011 1:45 ከምሽቱ');
+      final String result = (testPlatform == 'webOS')
+          ? '29/09/2011 ከሰዓት 1:45'
+          : '29/09/2011 1:45 ከምሽቱ';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtDateTimeSimpleMedium_am_ET', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -168,7 +186,11 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29 ግንቦት 2011 1:45 ከምሽቱ');
+
+      final String result = (testPlatform == 'webOS')
+          ? '29 ግንቦት 2011 ከሰዓት 1:45'
+          : '29 ግንቦት 2011 1:45 ከምሽቱ';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtDateTimeSimpleLong_am_ET', () {
       final ILibDateFmtOptions fmtOptions =
@@ -184,7 +206,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29 ግንቦት 2011 1:45 ከምሽቱ');
+      final String result = (testPlatform == 'webOS')
+          ? '29 ግንቦት 2011 ከሰዓት 1:45'
+          : '29 ግንቦት 2011 1:45 ከምሽቱ';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtDateTimeSimpleFull_am_ET', () {
       final ILibDateFmtOptions fmtOptions =
@@ -200,7 +225,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29 ግንቦት 2011 1:45 ከምሽቱ');
+      final String result = (testPlatform == 'webOS')
+          ? 'ግንቦት 29 ቀን 2011 ዓ.ም ከሰዓት 1:45'
+          : '29 ግንቦት 2011 1:45 ከምሽቱ';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtTypeDate_am_ET', () {
       final ILibDateFmtOptions fmtOptions =
@@ -232,7 +260,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45 ከምሽቱ');
+      final String result =
+          (testPlatform == 'webOS') ? 'ከሰዓት 1:45' : '1:45 ከምሽቱ';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtTypeDateTime_am_ET', () {
       final ILibDateFmtOptions fmtOptions =
@@ -248,7 +278,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29/09/2011 1:45 ከምሽቱ');
+      final String result = (testPlatform == 'webOS')
+          ? '29/09/2011 ከሰዓት 1:45'
+          : '29/09/2011 1:45 ከምሽቱ';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortDateComponentsY_am_ET', () {
       final ILibDateFmtOptions fmtOptions =
@@ -472,7 +505,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), 'ግንቦት 2011');
+      final String result =
+          (testPlatform == 'webOS') ? 'ግንቦት ቀን 2011 ዓ.ም' : 'ግንቦት 2011';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtFullDateComponentsDMY_am_ET', () {
       final ILibDateFmtOptions fmtOptions =
@@ -488,7 +523,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29 ግንቦት 2011');
+      final String result =
+          (testPlatform == 'webOS') ? 'ግንቦት 29 ቀን 2011 ዓ.ም' : '29 ግንቦት 2011';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtFullDateComponentsWDM_am_ET', () {
       final ILibDateFmtOptions fmtOptions =
@@ -520,7 +557,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), 'ሐሙስ፣ 29 ግንቦት 2011');
+      final String result = (testPlatform == 'webOS')
+          ? 'ሐሙስ፣ ግንቦት 29 ቀን 2011 ዓ.ም'
+          : 'ሐሙስ፣ 29 ግንቦት 2011';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortTimeComponentsS_am_ET', () {
       final ILibDateFmtOptions fmtOptions =
@@ -632,7 +672,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45 ከምሽቱ');
+      final String result =
+          (testPlatform == 'webOS') ? 'ከሰዓት 1:45' : '1:45 ከምሽቱ';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortTimeComponentsHMZ_am_ET', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -670,7 +712,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45 ከምሽቱ EAT');
+      final String result =
+          (testPlatform == 'webOS') ? 'ከሰዓት 1:45 EAT' : '1:45 ከምሽቱ EAT';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortTimeComponentsHMSA_am_ET', () {
       final ILibDateFmtOptions fmtOptions =
@@ -686,7 +730,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45:37 ከምሽቱ');
+      final String result =
+          (testPlatform == 'webOS') ? 'ከሰዓት 1:45:37' : '1:45:37 ከምሽቱ';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortTimeComponentsHMSZ_am_ET', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -724,7 +770,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45:37 ከምሽቱ EAT');
+      final String result =
+          (testPlatform == 'webOS') ? 'ከሰዓት 1:45:37 EAT' : '1:45:37 ከምሽቱ EAT';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtFullTimeComponentsS_am_ET', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -836,7 +884,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45 ከምሽቱ');
+      final String result =
+          (testPlatform == 'webOS') ? 'ከሰዓት 1:45' : '1:45 ከምሽቱ';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtFullTimeComponentsHMZ_am_ET', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -876,7 +926,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45 ከምሽቱ EAT');
+      final String result =
+          (testPlatform == 'webOS') ? 'ከሰዓት 1:45 EAT' : '1:45 ከምሽቱ EAT';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtFullTimeComponentsHMSA_am_ET', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -892,7 +944,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45:37 ከምሽቱ');
+      final String result =
+          (testPlatform == 'webOS') ? 'ከሰዓት 1:45:37' : '1:45:37 ከምሽቱ';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtFullTimeComponentsHMSZ_am_ET', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -932,7 +986,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45:37 ከምሽቱ EAT');
+      final String result =
+          (testPlatform == 'webOS') ? 'ከሰዓት 1:45:37 EAT' : '1:45:37 ከምሽቱ EAT';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtWithTimeZoneAndNoDST_am_ET', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -973,7 +1029,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45 ጥዋት');
+      final String result =
+          (testPlatform == 'webOS') ? 'ከሌሊቱ 1:45' : '1:45 ጥዋት';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtTimeMeridiem1_am_ET', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -993,7 +1051,9 @@ void main() {
           minute: 0,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '6:00 ቀትር');
+      final String result =
+          (testPlatform == 'webOS') ? 'ከጥዋቱ 6:00' : '6:00 ቀትር';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtTimeMeridiem2_am_ET', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -1013,7 +1073,9 @@ void main() {
           minute: 22,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '8:22 ከሰዓት');
+      final String result =
+          (testPlatform == 'webOS') ? 'ቀትር 8:22' : '8:22 ከሰዓት';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtTimeMeridiem3_am_ET', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -1033,7 +1095,9 @@ void main() {
           minute: 22,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:22 ከምሽቱ');
+      final String result =
+          (testPlatform == 'webOS') ? 'ከሰዓት 1:22' : '1:22 ከምሽቱ';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtTimeMeridiem4_am_ET', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -1053,7 +1117,9 @@ void main() {
           minute: 22,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '7:22 ከሌሊቱ');
+      final String result =
+          (testPlatform == 'webOS') ? 'ከምሽቱ 7:22' : '7:22 ከሌሊቱ';
+      expect(fmt.format(dateOptions), result);
     });
   });
 }

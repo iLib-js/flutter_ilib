@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../test_env.dart';
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [datefmt_MonthTranslation_test.dart] file.');
@@ -2533,20 +2535,41 @@ void main() {
     });
   });
   group('testMonthTranslate_es_MX_medium', () {
-    final Map<int, String> expectedResult = <int, String>{
-      1: 'ene',
-      2: 'feb',
-      3: 'mar',
-      4: 'abr',
-      5: 'may',
-      6: 'jun',
-      7: 'jul',
-      8: 'ago',
-      9: 'sep',
-      10: 'oct',
-      11: 'nov',
-      12: 'dic'
-    };
+    final String testPlatform = getTestPlatform();
+    Map<int, String> expectedResult;
+    switch (testPlatform) {
+      case 'webOS':
+        expectedResult = <int, String>{
+          1: 'Ene',
+          2: 'Feb',
+          3: 'Mar',
+          4: 'Abr',
+          5: 'May',
+          6: 'Jun',
+          7: 'Jul',
+          8: 'Ago',
+          9: 'Sep',
+          10: 'Oct',
+          11: 'Nov',
+          12: 'Dic'
+        };
+      default:
+        expectedResult = <int, String>{
+          1: 'ene',
+          2: 'feb',
+          3: 'mar',
+          4: 'abr',
+          5: 'may',
+          6: 'jun',
+          7: 'jul',
+          8: 'ago',
+          9: 'sep',
+          10: 'oct',
+          11: 'nov',
+          12: 'dic'
+        };
+    }
+
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -4843,20 +4866,41 @@ void main() {
     });
   });
   group('testMonthTranslate_pl_PL', () {
-    final Map<int, String> expectedResult = <int, String>{
-      1: 'styczeń',
-      2: 'luty',
-      3: 'marzec',
-      4: 'kwiecień',
-      5: 'maj',
-      6: 'czerwiec',
-      7: 'lipiec',
-      8: 'sierpień',
-      9: 'wrzesień',
-      10: 'październik',
-      11: 'listopad',
-      12: 'grudzień',
-    };
+    final String testPlatform = getTestPlatform();
+    Map<int, String> expectedResult;
+    switch (testPlatform) {
+      case 'webOS':
+        expectedResult = <int, String>{
+          1: 'Styczeń',
+          2: 'Luty',
+          3: 'Marzec',
+          4: 'Kwiecień',
+          5: 'Maj',
+          6: 'Czerwiec',
+          7: 'Lipiec',
+          8: 'Sierpień',
+          9: 'Wrzesień',
+          10: 'Październik',
+          11: 'Listopad',
+          12: 'Grudzień'
+        };
+      default:
+        expectedResult = <int, String>{
+          1: 'styczeń',
+          2: 'luty',
+          3: 'marzec',
+          4: 'kwiecień',
+          5: 'maj',
+          6: 'czerwiec',
+          7: 'lipiec',
+          8: 'sierpień',
+          9: 'wrzesień',
+          10: 'październik',
+          11: 'listopad',
+          12: 'grudzień',
+        };
+    }
+
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -4873,20 +4917,41 @@ void main() {
     });
   });
   group('testMonthTranslate_pl_PL_medium', () {
-    final Map<int, String> expectedResult = <int, String>{
-      1: 'sty',
-      2: 'lut',
-      3: 'mar',
-      4: 'kwi',
-      5: 'maj',
-      6: 'cze',
-      7: 'lip',
-      8: 'sie',
-      9: 'wrz',
-      10: 'paź',
-      11: 'lis',
-      12: 'gru'
-    };
+    final String testPlatform = getTestPlatform();
+    Map<int, String> expectedResult;
+    switch (testPlatform) {
+      case 'webOS':
+        expectedResult = <int, String>{
+          1: 'Sty',
+          2: 'Lut',
+          3: 'Mar',
+          4: 'Kwi',
+          5: 'Maj',
+          6: 'Cze',
+          7: 'Lip',
+          8: 'Sie',
+          9: 'Wrz',
+          10: 'Paź',
+          11: 'Lis',
+          12: 'Gru'
+        };
+      default:
+        expectedResult = <int, String>{
+          1: 'sty',
+          2: 'lut',
+          3: 'mar',
+          4: 'kwi',
+          5: 'maj',
+          6: 'cze',
+          7: 'lip',
+          8: 'sie',
+          9: 'wrz',
+          10: 'paź',
+          11: 'lis',
+          12: 'gru'
+        };
+    }
+
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -6704,21 +6769,43 @@ void main() {
     });
   });
   group('testMonthTranslate_am_ET', () {
-    final Map<int, String> expectedResult = <int, String>{
-      1: 'መስከረም',
-      2: 'ጥቅምት',
-      3: 'ኅዳር',
-      4: 'ታኅሣሥ',
-      5: 'ጥር',
-      6: 'የካቲት',
-      7: 'መጋቢት',
-      8: 'ሚያዝያ',
-      9: 'ግንቦት',
-      10: 'ሰኔ',
-      11: 'ሐምሌ',
-      12: 'ነሐሴ',
-      13: 'ጳጉሜን',
-    };
+    final String testPlatform = getTestPlatform();
+    Map<int, String> expectedResult;
+    switch (testPlatform) {
+      case 'webOS':
+        expectedResult = <int, String>{
+          1: 'መስከረም',
+          2: 'ጥቅምት',
+          3: 'ኅዳር',
+          4: 'ታኅሣሥ',
+          5: 'ጥር',
+          6: 'የካቲት',
+          7: 'መጋቢት',
+          8: 'ሚያዝያ',
+          9: 'ግንቦት',
+          10: 'ሰኔ',
+          11: 'ሐምሌ',
+          12: 'ነሐሴ',
+          13: 'ጳጉሜ',
+        };
+      default:
+        expectedResult = <int, String>{
+          1: 'መስከረም',
+          2: 'ጥቅምት',
+          3: 'ኅዳር',
+          4: 'ታኅሣሥ',
+          5: 'ጥር',
+          6: 'የካቲት',
+          7: 'መጋቢት',
+          8: 'ሚያዝያ',
+          9: 'ግንቦት',
+          10: 'ሰኔ',
+          11: 'ሐምሌ',
+          12: 'ነሐሴ',
+          13: 'ጳጉሜን',
+        };
+    }
+
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -6735,21 +6822,43 @@ void main() {
     });
   });
   group('testMonthTranslate_am_ET_medium', () {
-    final Map<int, String> expectedResult = <int, String>{
-      1: 'መስከረም',
-      2: 'ጥቅምት',
-      3: 'ኅዳር',
-      4: 'ታኅሣሥ',
-      5: 'ጥር',
-      6: 'የካቲት',
-      7: 'መጋቢት',
-      8: 'ሚያዝያ',
-      9: 'ግንቦት',
-      10: 'ሰኔ',
-      11: 'ሐምሌ',
-      12: 'ነሐሴ',
-      13: 'ጳጉሜን'
-    };
+    final String testPlatform = getTestPlatform();
+    Map<int, String> expectedResult;
+    switch (testPlatform) {
+      case 'webOS':
+        expectedResult = <int, String>{
+          1: 'መስከረም',
+          2: 'ጥቅምት',
+          3: 'ኅዳር',
+          4: 'ታኅሣሥ',
+          5: 'ጥር',
+          6: 'የካቲት',
+          7: 'መጋቢት',
+          8: 'ሚያዝያ',
+          9: 'ግንቦት',
+          10: 'ሰኔ',
+          11: 'ሐምሌ',
+          12: 'ነሐሴ',
+          13: 'ጳጉሜ'
+        };
+      default:
+        expectedResult = <int, String>{
+          1: 'መስከረም',
+          2: 'ጥቅምት',
+          3: 'ኅዳር',
+          4: 'ታኅሣሥ',
+          5: 'ጥር',
+          6: 'የካቲት',
+          7: 'መጋቢት',
+          8: 'ሚያዝያ',
+          9: 'ግንቦት',
+          10: 'ሰኔ',
+          11: 'ሐምሌ',
+          12: 'ነሐሴ',
+          13: 'ጳጉሜን'
+        };
+    }
+
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
