@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../test_env.dart';
+
 void main() {
+  late String testPlatform;
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [datefmt_ar_EG_test.dart] file.');
   setUpAll(() async {
-    await ILibJS.instance
-        .loadJSwithPath('../../assets/js/ilib-all.js');
+    testPlatform = getTestPlatform();
+    await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
   });
   group('format()', () {
@@ -585,7 +588,8 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), 'إثنين');
+      final String result = (testPlatform == 'webOS') ? 'اثنين' : 'إثنين';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtFullDateComponentsW5_ar_EG', () {
       final ILibDateFmtOptions fmtOptions =

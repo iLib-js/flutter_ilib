@@ -17,8 +17,8 @@ class ILibJS extends ChangeNotifier {
   String _loadJSResult = '';
 
   Future<void> loadJS() async {
-    _loadJSResult = await rootBundle.loadString(
-        'packages/flutter_ilib/assets/js/ilib-all.js');
+    _loadJSResult = await rootBundle
+        .loadString('packages/flutter_ilib/assets/js/ilib-all.js');
     notifyListeners();
   }
 

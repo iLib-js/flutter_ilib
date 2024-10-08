@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../test_env.dart';
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [datefmt_WeekdayTranslation_test.dart] file.');
   setUpAll(() async {
-    await ILibJS.instance
-        .loadJSwithPath('../../assets/js/ilib-all.js');
+    await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
   });
   group('testWeekdayTranslation_ar_EG', () {
@@ -61,15 +62,31 @@ void main() {
     });
   });
   group('testWeekdayTranslation_ar_EG_medium', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'أحد',
-      1: 'إثنين',
-      2: 'ثلاثاء',
-      3: 'أربعاء',
-      4: 'خميس',
-      5: 'جمعة',
-      6: 'سبت'
-    };
+    final String testPlatform = getTestPlatform();
+    Map<int, String> expectedResult;
+    switch (testPlatform) {
+      case 'webOS':
+        expectedResult = <int, String>{
+          0: 'أحد',
+          1: 'اثنين',
+          2: 'ثلاثاء',
+          3: 'أربعاء',
+          4: 'خميس',
+          5: 'جمعة',
+          6: 'سبت'
+        };
+      default:
+        expectedResult = <int, String>{
+          0: 'أحد',
+          1: 'إثنين',
+          2: 'ثلاثاء',
+          3: 'أربعاء',
+          4: 'خميس',
+          5: 'جمعة',
+          6: 'سبت'
+        };
+    }
+
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -186,15 +203,31 @@ void main() {
     });
   });
   group('testWeekdayTranslation_ar_IQ_short', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'ح',
-      1: 'ن',
-      2: 'ث',
-      3: 'ر',
-      4: 'خ',
-      5: 'ج',
-      6: 'س'
-    };
+    final String testPlatform = getTestPlatform();
+    Map<int, String> expectedResult;
+    switch (testPlatform) {
+      case 'webOS':
+        expectedResult = <int, String>{
+          0: 'الأحد',
+          1: 'الاثنين',
+          2: 'الثلاثاء',
+          3: 'الأربعاء',
+          4: 'الخميس',
+          5: 'الجمعة',
+          6: 'السبت',
+        };
+      default:
+        expectedResult = <int, String>{
+          0: 'ح',
+          1: 'ن',
+          2: 'ث',
+          3: 'ر',
+          4: 'خ',
+          5: 'ج',
+          6: 'س'
+        };
+    }
+
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -1086,15 +1119,31 @@ void main() {
     });
   });
   group('testWeekdayTranslation_de_AT_short', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'S',
-      1: 'M',
-      2: 'D',
-      3: 'M',
-      4: 'D',
-      5: 'F',
-      6: 'S'
-    };
+    final String testPlatform = getTestPlatform();
+    Map<int, String> expectedResult;
+    switch (testPlatform) {
+      case 'webOS':
+        expectedResult = <int, String>{
+          0: 'So.',
+          1: 'Mo.',
+          2: 'Di.',
+          3: 'Mi.',
+          4: 'Do.',
+          5: 'Fr.',
+          6: 'Sa.'
+        };
+      default:
+        expectedResult = <int, String>{
+          0: 'S',
+          1: 'M',
+          2: 'D',
+          3: 'M',
+          4: 'D',
+          5: 'F',
+          6: 'S'
+        };
+    }
+
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -1186,15 +1235,30 @@ void main() {
     });
   });
   group('testWeekdayTranslation_de_CH_short', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'S',
-      1: 'M',
-      2: 'D',
-      3: 'M',
-      4: 'D',
-      5: 'F',
-      6: 'S'
-    };
+    final String testPlatform = getTestPlatform();
+    Map<int, String> expectedResult;
+    switch (testPlatform) {
+      case 'webOS':
+        expectedResult = <int, String>{
+          0: 'So.',
+          1: 'Mo.',
+          2: 'Di.',
+          3: 'Mi.',
+          4: 'Do.',
+          5: 'Fr.',
+          6: 'Sa.'
+        };
+      default:
+        expectedResult = <int, String>{
+          0: 'S',
+          1: 'M',
+          2: 'D',
+          3: 'M',
+          4: 'D',
+          5: 'F',
+          6: 'S'
+        };
+    }
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -1286,15 +1350,30 @@ void main() {
     });
   });
   group('testWeekdayTranslation_de_DE_short', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'S',
-      1: 'M',
-      2: 'D',
-      3: 'M',
-      4: 'D',
-      5: 'F',
-      6: 'S'
-    };
+    final String testPlatform = getTestPlatform();
+    Map<int, String> expectedResult;
+    switch (testPlatform) {
+      case 'webOS':
+        expectedResult = <int, String>{
+          0: 'So.',
+          1: 'Mo.',
+          2: 'Di.',
+          3: 'Mi.',
+          4: 'Do.',
+          5: 'Fr.',
+          6: 'Sa.'
+        };
+      default:
+        expectedResult = <int, String>{
+          0: 'S',
+          1: 'M',
+          2: 'D',
+          3: 'M',
+          4: 'D',
+          5: 'F',
+          6: 'S'
+        };
+    }
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -1386,15 +1465,30 @@ void main() {
     });
   });
   group('testWeekdayTranslation_de_LU_short', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'S',
-      1: 'M',
-      2: 'D',
-      3: 'M',
-      4: 'D',
-      5: 'F',
-      6: 'S'
-    };
+    final String testPlatform = getTestPlatform();
+    Map<int, String> expectedResult;
+    switch (testPlatform) {
+      case 'webOS':
+        expectedResult = <int, String>{
+          0: 'So.',
+          1: 'Mo.',
+          2: 'Di.',
+          3: 'Mi.',
+          4: 'Do.',
+          5: 'Fr.',
+          6: 'Sa.'
+        };
+      default:
+        expectedResult = <int, String>{
+          0: 'S',
+          1: 'M',
+          2: 'D',
+          3: 'M',
+          4: 'D',
+          5: 'F',
+          6: 'S'
+        };
+    }
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -4588,15 +4682,31 @@ void main() {
     });
   });
   group('testWeekdayTranslation_es_CO_short', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'd',
-      1: 'l',
-      2: 'm',
-      3: 'm',
-      4: 'j',
-      5: 'v',
-      6: 's'
-    };
+    final String testPlatform = getTestPlatform();
+    Map<int, String> expectedResult;
+    switch (testPlatform) {
+      case 'webOS':
+        expectedResult = <int, String>{
+          0: 'DO',
+          1: 'LU',
+          2: 'MA',
+          3: 'MI',
+          4: 'JU',
+          5: 'VI',
+          6: 'SA'
+        };
+      default:
+        expectedResult = <int, String>{
+          0: 'd',
+          1: 'l',
+          2: 'm',
+          3: 'm',
+          4: 'j',
+          5: 'v',
+          6: 's'
+        };
+    }
+
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -6272,15 +6382,30 @@ void main() {
     });
   });
   group('testWeekdayTranslation_fa_IR_short', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'ی',
-      1: 'د',
-      2: 'س',
-      3: 'چ',
-      4: 'پ',
-      5: 'ج',
-      6: 'ش'
-    };
+    final String testPlatform = getTestPlatform();
+    Map<int, String> expectedResult;
+    switch (testPlatform) {
+      case 'webOS':
+        expectedResult = <int, String>{
+          0: 'یکشنبه',
+          1: 'دوشنبه',
+          2: 'سه‌شنبه',
+          3: 'چهارشنبه',
+          4: 'پنجشنبه',
+          5: 'جمعه',
+          6: 'شنبه'
+        };
+      default:
+        expectedResult = <int, String>{
+          0: 'ی',
+          1: 'د',
+          2: 'س',
+          3: 'چ',
+          4: 'پ',
+          5: 'ج',
+          6: 'ش'
+        };
+    }
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -8526,15 +8651,31 @@ void main() {
     });
   });
   group('testWeekdayTranslation_lt_LT_long', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'sk',
-      1: 'pr',
-      2: 'an',
-      3: 'tr',
-      4: 'kt',
-      5: 'pn',
-      6: 'št'
-    };
+    final String testPlatform = getTestPlatform();
+    Map<int, String> expectedResult;
+    switch (testPlatform) {
+      case 'webOS':
+        expectedResult = <int, String>{
+          0: 'Sekm.',
+          1: 'Pir.',
+          2: 'Antr.',
+          3: 'Treč.',
+          4: 'Ketv.',
+          5: 'Penkt.',
+          6: 'Šešt.'
+        };
+      default:
+        expectedResult = <int, String>{
+          0: 'sk',
+          1: 'pr',
+          2: 'an',
+          3: 'tr',
+          4: 'kt',
+          5: 'pn',
+          6: 'št'
+        };
+    }
+
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -9502,15 +9643,31 @@ void main() {
     });
   });
   group('testWeekdayTranslation_pl_PL', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'niedziela',
-      1: 'poniedziałek',
-      2: 'wtorek',
-      3: 'środa',
-      4: 'czwartek',
-      5: 'piątek',
-      6: 'sobota'
-    };
+    final String testPlatform = getTestPlatform();
+    Map<int, String> expectedResult;
+    switch (testPlatform) {
+      case 'webOS':
+        expectedResult = <int, String>{
+          0: 'Niedziela',
+          1: 'Poniedziałek',
+          2: 'Wtorek',
+          3: 'Środa',
+          4: 'Czwartek',
+          5: 'Piątek',
+          6: 'Sobota'
+        };
+      default:
+        expectedResult = <int, String>{
+          0: 'niedziela',
+          1: 'poniedziałek',
+          2: 'wtorek',
+          3: 'środa',
+          4: 'czwartek',
+          5: 'piątek',
+          6: 'sobota'
+        };
+    }
+
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -9527,15 +9684,30 @@ void main() {
     });
   });
   group('testWeekdayTranslation_pl_PL_long', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'niedz.',
-      1: 'pon.',
-      2: 'wt.',
-      3: 'śr.',
-      4: 'czw.',
-      5: 'pt.',
-      6: 'sob.'
-    };
+    final String testPlatform = getTestPlatform();
+    Map<int, String> expectedResult;
+    switch (testPlatform) {
+      case 'webOS':
+        expectedResult = <int, String>{
+          0: 'Niedz.',
+          1: 'Pon.',
+          2: 'Wt.',
+          3: 'Śr.',
+          4: 'Czw.',
+          5: 'Pt.',
+          6: 'Sob.'
+        };
+      default:
+        expectedResult = <int, String>{
+          0: 'niedz.',
+          1: 'pon.',
+          2: 'wt.',
+          3: 'śr.',
+          4: 'czw.',
+          5: 'pt.',
+          6: 'sob.'
+        };
+    }
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -9552,15 +9724,30 @@ void main() {
     });
   });
   group('testWeekdayTranslation_pl_PL_medium', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'nie',
-      1: 'pon',
-      2: 'wto',
-      3: 'śro',
-      4: 'czw',
-      5: 'pią',
-      6: 'sob'
-    };
+    final String testPlatform = getTestPlatform();
+    Map<int, String> expectedResult;
+    switch (testPlatform) {
+      case 'webOS':
+        expectedResult = <int, String>{
+          0: 'Nie',
+          1: 'Pon',
+          2: 'Wto',
+          3: 'Śro',
+          4: 'Czw',
+          5: 'Pią',
+          6: 'Sob'
+        };
+      default:
+        expectedResult = <int, String>{
+          0: 'nie',
+          1: 'pon',
+          2: 'wto',
+          3: 'śro',
+          4: 'czw',
+          5: 'pią',
+          6: 'sob'
+        };
+    }
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -10127,15 +10314,30 @@ void main() {
     });
   });
   group('testWeekdayTranslation_ru_BY_long', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'вс',
-      1: 'пн',
-      2: 'вт',
-      3: 'ср',
-      4: 'чт',
-      5: 'пт',
-      6: 'сб'
-    };
+    final String testPlatform = getTestPlatform();
+    Map<int, String> expectedResult;
+    switch (testPlatform) {
+      case 'webOS':
+        expectedResult = <int, String>{
+          0: 'воскр.',
+          1: 'понед.',
+          2: 'вторн.',
+          3: 'среда',
+          4: 'четв.',
+          5: 'пятн.',
+          6: 'субб.'
+        };
+      default:
+        expectedResult = <int, String>{
+          0: 'вс',
+          1: 'пн',
+          2: 'вт',
+          3: 'ср',
+          4: 'чт',
+          5: 'пт',
+          6: 'сб'
+        };
+    }
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -10177,15 +10379,30 @@ void main() {
     });
   });
   group('testWeekdayTranslation_ru_BY_short', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'В',
-      1: 'П',
-      2: 'В',
-      3: 'С',
-      4: 'Ч',
-      5: 'П',
-      6: 'С'
-    };
+    final String testPlatform = getTestPlatform();
+    Map<int, String> expectedResult;
+    switch (testPlatform) {
+      case 'webOS':
+        expectedResult = <int, String>{
+          0: 'вс',
+          1: 'пн',
+          2: 'вт',
+          3: 'ср',
+          4: 'чт',
+          5: 'пт',
+          6: 'сб'
+        };
+      default:
+        expectedResult = <int, String>{
+          0: 'В',
+          1: 'П',
+          2: 'В',
+          3: 'С',
+          4: 'Ч',
+          5: 'П',
+          6: 'С'
+        };
+    }
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -10227,15 +10444,30 @@ void main() {
     });
   });
   group('testWeekdayTranslation_ru_KG_long', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'вс',
-      1: 'пн',
-      2: 'вт',
-      3: 'ср',
-      4: 'чт',
-      5: 'пт',
-      6: 'сб'
-    };
+    final String testPlatform = getTestPlatform();
+    Map<int, String> expectedResult;
+    switch (testPlatform) {
+      case 'webOS':
+        expectedResult = <int, String>{
+          0: 'воскр.',
+          1: 'понед.',
+          2: 'вторн.',
+          3: 'среда',
+          4: 'четв.',
+          5: 'пятн.',
+          6: 'субб.'
+        };
+      default:
+        expectedResult = <int, String>{
+          0: 'вс',
+          1: 'пн',
+          2: 'вт',
+          3: 'ср',
+          4: 'чт',
+          5: 'пт',
+          6: 'сб'
+        };
+    }
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -10277,15 +10509,30 @@ void main() {
     });
   });
   group('testWeekdayTranslation_ru_KG_short', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'В',
-      1: 'П',
-      2: 'В',
-      3: 'С',
-      4: 'Ч',
-      5: 'П',
-      6: 'С'
-    };
+    final String testPlatform = getTestPlatform();
+    Map<int, String> expectedResult;
+    switch (testPlatform) {
+      case 'webOS':
+        expectedResult = <int, String>{
+          0: 'вс',
+          1: 'пн',
+          2: 'вт',
+          3: 'ср',
+          4: 'чт',
+          5: 'пт',
+          6: 'сб'
+        };
+      default:
+        expectedResult = <int, String>{
+          0: 'В',
+          1: 'П',
+          2: 'В',
+          3: 'С',
+          4: 'Ч',
+          5: 'П',
+          6: 'С'
+        };
+    }
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -10327,15 +10574,30 @@ void main() {
     });
   });
   group('testWeekdayTranslation_ru_KZ_long', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'вс',
-      1: 'пн',
-      2: 'вт',
-      3: 'ср',
-      4: 'чт',
-      5: 'пт',
-      6: 'сб'
-    };
+    final String testPlatform = getTestPlatform();
+    Map<int, String> expectedResult;
+    switch (testPlatform) {
+      case 'webOS':
+        expectedResult = <int, String>{
+          0: 'воскр.',
+          1: 'понед.',
+          2: 'вторн.',
+          3: 'среда',
+          4: 'четв.',
+          5: 'пятн.',
+          6: 'субб.'
+        };
+      default:
+        expectedResult = <int, String>{
+          0: 'вс',
+          1: 'пн',
+          2: 'вт',
+          3: 'ср',
+          4: 'чт',
+          5: 'пт',
+          6: 'сб'
+        };
+    }
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -10377,15 +10639,30 @@ void main() {
     });
   });
   group('testWeekdayTranslation_ru_KZ_short', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'В',
-      1: 'П',
-      2: 'В',
-      3: 'С',
-      4: 'Ч',
-      5: 'П',
-      6: 'С'
-    };
+    final String testPlatform = getTestPlatform();
+    Map<int, String> expectedResult;
+    switch (testPlatform) {
+      case 'webOS':
+        expectedResult = <int, String>{
+          0: 'вс',
+          1: 'пн',
+          2: 'вт',
+          3: 'ср',
+          4: 'чт',
+          5: 'пт',
+          6: 'сб'
+        };
+      default:
+        expectedResult = <int, String>{
+          0: 'В',
+          1: 'П',
+          2: 'В',
+          3: 'С',
+          4: 'Ч',
+          5: 'П',
+          6: 'С'
+        };
+    }
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -10427,15 +10704,30 @@ void main() {
     });
   });
   group('testWeekdayTranslation_ru_GE_long', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'вс',
-      1: 'пн',
-      2: 'вт',
-      3: 'ср',
-      4: 'чт',
-      5: 'пт',
-      6: 'сб'
-    };
+    final String testPlatform = getTestPlatform();
+    Map<int, String> expectedResult;
+    switch (testPlatform) {
+      case 'webOS':
+        expectedResult = <int, String>{
+          0: 'воскр.',
+          1: 'понед.',
+          2: 'вторн.',
+          3: 'среда',
+          4: 'четв.',
+          5: 'пятн.',
+          6: 'субб.'
+        };
+      default:
+        expectedResult = <int, String>{
+          0: 'вс',
+          1: 'пн',
+          2: 'вт',
+          3: 'ср',
+          4: 'чт',
+          5: 'пт',
+          6: 'сб'
+        };
+    }
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -10477,15 +10769,30 @@ void main() {
     });
   });
   group('testWeekdayTranslation_ru_GE_short', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'В',
-      1: 'П',
-      2: 'В',
-      3: 'С',
-      4: 'Ч',
-      5: 'П',
-      6: 'С'
-    };
+    final String testPlatform = getTestPlatform();
+    Map<int, String> expectedResult;
+    switch (testPlatform) {
+      case 'webOS':
+        expectedResult = <int, String>{
+          0: 'вс',
+          1: 'пн',
+          2: 'вт',
+          3: 'ср',
+          4: 'чт',
+          5: 'пт',
+          6: 'сб'
+        };
+      default:
+        expectedResult = <int, String>{
+          0: 'В',
+          1: 'П',
+          2: 'В',
+          3: 'С',
+          4: 'Ч',
+          5: 'П',
+          6: 'С'
+        };
+    }
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -10527,15 +10834,30 @@ void main() {
     });
   });
   group('testWeekdayTranslation_ru_RU_long', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'вс',
-      1: 'пн',
-      2: 'вт',
-      3: 'ср',
-      4: 'чт',
-      5: 'пт',
-      6: 'сб'
-    };
+    final String testPlatform = getTestPlatform();
+    Map<int, String> expectedResult;
+    switch (testPlatform) {
+      case 'webOS':
+        expectedResult = <int, String>{
+          0: 'воскр.',
+          1: 'понед.',
+          2: 'вторн.',
+          3: 'среда',
+          4: 'четв.',
+          5: 'пятн.',
+          6: 'субб.'
+        };
+      default:
+        expectedResult = <int, String>{
+          0: 'вс',
+          1: 'пн',
+          2: 'вт',
+          3: 'ср',
+          4: 'чт',
+          5: 'пт',
+          6: 'сб'
+        };
+    }
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -10577,15 +10899,30 @@ void main() {
     });
   });
   group('testWeekdayTranslation_ru_RU_short', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'В',
-      1: 'П',
-      2: 'В',
-      3: 'С',
-      4: 'Ч',
-      5: 'П',
-      6: 'С'
-    };
+    final String testPlatform = getTestPlatform();
+    Map<int, String> expectedResult;
+    switch (testPlatform) {
+      case 'webOS':
+        expectedResult = <int, String>{
+          0: 'вс',
+          1: 'пн',
+          2: 'вт',
+          3: 'ср',
+          4: 'чт',
+          5: 'пт',
+          6: 'сб'
+        };
+      default:
+        expectedResult = <int, String>{
+          0: 'В',
+          1: 'П',
+          2: 'В',
+          3: 'С',
+          4: 'Ч',
+          5: 'П',
+          6: 'С'
+        };
+    }
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -10627,15 +10964,30 @@ void main() {
     });
   });
   group('testWeekdayTranslation_ru_UA_long', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'вс',
-      1: 'пн',
-      2: 'вт',
-      3: 'ср',
-      4: 'чт',
-      5: 'пт',
-      6: 'сб'
-    };
+    final String testPlatform = getTestPlatform();
+    Map<int, String> expectedResult;
+    switch (testPlatform) {
+      case 'webOS':
+        expectedResult = <int, String>{
+          0: 'воскр.',
+          1: 'понед.',
+          2: 'вторн.',
+          3: 'среда',
+          4: 'четв.',
+          5: 'пятн.',
+          6: 'субб.'
+        };
+      default:
+        expectedResult = <int, String>{
+          0: 'вс',
+          1: 'пн',
+          2: 'вт',
+          3: 'ср',
+          4: 'чт',
+          5: 'пт',
+          6: 'сб'
+        };
+    }
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -10677,15 +11029,30 @@ void main() {
     });
   });
   group('testWeekdayTranslation_ru_UA_short', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'В',
-      1: 'П',
-      2: 'В',
-      3: 'С',
-      4: 'Ч',
-      5: 'П',
-      6: 'С'
-    };
+    final String testPlatform = getTestPlatform();
+    Map<int, String> expectedResult;
+    switch (testPlatform) {
+      case 'webOS':
+        expectedResult = <int, String>{
+          0: 'вс',
+          1: 'пн',
+          2: 'вт',
+          3: 'ср',
+          4: 'чт',
+          5: 'пт',
+          6: 'сб'
+        };
+      default:
+        expectedResult = <int, String>{
+          0: 'В',
+          1: 'П',
+          2: 'В',
+          3: 'С',
+          4: 'Ч',
+          5: 'П',
+          6: 'С'
+        };
+    }
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(

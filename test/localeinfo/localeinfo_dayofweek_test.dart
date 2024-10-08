@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../test_env.dart';
+
 void main() {
+  late String testPlatform;
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [localeinfo_dayofweek_test.dart] file.');
   setUpAll(() async {
-    await ILibJS.instance
-        .loadJSwithPath('../../assets/js/ilib-all.js');
+    testPlatform = getTestPlatform();
+
+    await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
   });
   // 0:sun, 1:mon, 2:tue, 3:wed, 4:thu, 5:fri, 6:sat
@@ -602,7 +606,10 @@ void main() {
     });
     test('testWeekData_pt_PT', () {
       final ILibLocaleInfo locInfo = ILibLocaleInfo('pt-PT');
-      expect(locInfo.getFirstDayOfWeek(), 0);
+
+      final int result = (testPlatform == 'webOS') ? 1 : 0;
+      expect(locInfo.getFirstDayOfWeek(), result);
+
       expect(locInfo.getWeekEndStart(), 6);
       expect(locInfo.getWeekEndEnd(), 0);
     });
