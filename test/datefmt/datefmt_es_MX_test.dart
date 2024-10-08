@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../test_env.dart';
+
 void main() {
+  late String testPlatform;
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [datefmt_es_MX_test.dart] file.');
   setUpAll(() async {
-    await ILibJS.instance
-        .loadJSwithPath('../../assets/js/ilib-all.js');
+    testPlatform = getTestPlatform();
+    await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
     ILibJS.instance.loadLocaleData('es-MX');
   });
@@ -26,7 +29,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29/09/11');
+      final String result =
+          (testPlatform == 'webOS') ? '29/Sep/11' : '29/09/11';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtSimpleMedium_es_MX', () {
       final ILibDateFmtOptions fmtOptions =
@@ -42,7 +47,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29 sep 2011');
+      final String result =
+          (testPlatform == 'webOS') ? '29 Sep 2011' : '29 sep 2011';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtSimpleLong_es_MX', () {
       final ILibDateFmtOptions fmtOptions =
@@ -154,7 +161,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29/09/11, 1:45 p.m.');
+      final String result = (testPlatform == 'webOS')
+          ? '29/Sep/11, 1:45 p.m.'
+          : '29/09/11, 1:45 p.m.';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtDateTimeSimpleMedium_es_MX', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -170,7 +180,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '9 sep 2011, 1:45 p.m.');
+      final String result = (testPlatform == 'webOS')
+          ? '9 Sep 2011, 1:45 p.m.'
+          : '9 sep 2011, 1:45 p.m.';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtDateTimeSimpleLong_es_MX', () {
       final ILibDateFmtOptions fmtOptions =
@@ -218,7 +231,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29/09/11');
+      final String result =
+          (testPlatform == 'webOS') ? '29/Sep/11' : '29/09/11';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtTypeTime_es_MX', () {
       final ILibDateFmtOptions fmtOptions =
@@ -250,7 +265,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29/09/11, 1:45 p.m.');
+      final String result = (testPlatform == 'webOS')
+          ? '29/Sep/11, 1:45 p.m.'
+          : '29/09/11, 1:45 p.m.';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortDateComponentsY_es_MX', () {
       final ILibDateFmtOptions fmtOptions =
@@ -282,7 +300,8 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '09');
+      final String result = (testPlatform == 'webOS') ? 'Sep' : '09';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortDateComponentsN_es_MX', () {
       final ILibDateFmtOptions fmtOptions =
@@ -330,7 +349,8 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29/09');
+      final String result = (testPlatform == 'webOS') ? '29/Sep' : '29/09';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortDateComponentsMY_es_MX', () {
       final ILibDateFmtOptions fmtOptions =
@@ -346,7 +366,8 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '09/11');
+      final String result = (testPlatform == 'webOS') ? 'Sep/11' : '09/11';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortDateComponentsDMY_es_MX', () {
       final ILibDateFmtOptions fmtOptions =
@@ -362,7 +383,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29/09/11');
+      final String result =
+          (testPlatform == 'webOS') ? '29/Sep/11' : '29/09/11';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortDateComponentsWDM_es_MX', () {
       final ILibDateFmtOptions fmtOptions =
@@ -378,7 +401,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), 'J, 29/09');
+      final String result =
+          (testPlatform == 'webOS') ? 'J, 29/Sep' : 'J, 29/09';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortDateComponentsWDMY_es_MX', () {
       final ILibDateFmtOptions fmtOptions =
@@ -394,7 +419,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), 'J, 29/09/11');
+      final String result =
+          (testPlatform == 'webOS') ? 'J, 29/Sep/11' : 'J, 29/09/11';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtFullDateComponentsY_es_MX', () {
       final ILibDateFmtOptions fmtOptions =

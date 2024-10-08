@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'ilib_init.dart';
 
 class ILibDateFmt {
@@ -86,6 +87,26 @@ class ILibDateFmt {
     result = ILibJS.instance.evaluate(jscode1).stringResult;
     return result;
   }
+
+  /// Return the range of possible meridiems (times of day like "AM" or "PM") in this date formatter.
+  List<MeridiemsInfo> getMeridiemsRange() {
+    String result = '';
+    final String formatOptions = toJsonString();
+    final List<MeridiemsInfo> meridems = [];
+    final String jscode1 =
+        'JSON.stringify(new DateFmt($formatOptions).getMeridiemsRange())';
+    result = ILibJS.instance.evaluate(jscode1).stringResult;
+    final dynamic meridiemlist = json.decode(result);
+
+    meridiemlist.forEach((dynamic item) {
+      meridems.add(MeridiemsInfo(
+          name: item['name'].toString(),
+          start: item['start'].toString(),
+          end: item['end'].toString()));
+    });
+
+    return meridems;
+  }
 }
 
 class ILibDateFmtOptions {
@@ -97,6 +118,7 @@ class ILibDateFmtOptions {
   /// [useNative] The flag used to determine whether to use the native script settings for formatting the numbers.
   /// [date] This property tells which components of a date format to use. Valid values are: "dmwy", "dmy", "dmw", "dm", "my", "dw", "d", "m","n","y". Default components, if this property is not specified, is "dmy".
   /// [time] This property gives which components of a time format to use. Valid values for this property are: "ahmsz", "ahms", "hmsz", "hms", "ahmz", "ahm", hmz", ah", "hm", "ms", "h", "m", "s". Default value if this property is not specified is "hma".
+  /// [meridiems] string that specifies what style of meridiems to use with this format. The choices are "default", "gregorian", "ethiopic", and "chinese".
   ILibDateFmtOptions(
       {this.locale,
       this.length,
@@ -105,7 +127,8 @@ class ILibDateFmtOptions {
       this.timezone,
       this.useNative,
       this.date,
-      this.time});
+      this.time,
+      this.meridiems});
   String? locale;
   String? length;
   String? type;
@@ -113,6 +136,7 @@ class ILibDateFmtOptions {
   String? timezone;
   String? date;
   String? time;
+  String? meridiems;
   bool? useNative;
 }
 
@@ -212,4 +236,14 @@ class ILibDateOptions {
     completeOption = result.isNotEmpty ? '{$result}' : '';
     return completeOption;
   }
+}
+
+class MeridiemsInfo {
+  /// [name] The name of the meridiem
+  /// [start] The startTime of meridiem
+  /// [end] The endTime of meridiem
+  MeridiemsInfo({this.name, this.start, this.end});
+  String? name;
+  String? start;
+  String? end;
 }

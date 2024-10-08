@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../test_env.dart';
+
 void main() {
+  late String testPlatform;
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [datefmt_fa_IR_test.dart] file.');
   setUpAll(() async {
-    await ILibJS.instance
-        .loadJSwithPath('../../assets/js/ilib-all.js');
+    testPlatform = getTestPlatform();
+    await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
     ILibJS.instance.loadLocaleData('fa-IR');
   });
@@ -27,7 +30,9 @@ void main() {
           second: 0,
           millisecond: 0,
           calendar: 'gregorian');
-      expect(fmt.format(dateOptions), '‏۲۰۱۱/۹/۲۹');
+      final String result =
+          (testPlatform == 'webOS') ? '‏۲۹‏/۹‏/۲۰۱۱' : '‏۲۰۱۱/۹/۲۹';
+      expect(fmt.format(dateOptions), result);
     });
     test('SimpleMedium_fa_IR', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -168,7 +173,10 @@ void main() {
           second: 0,
           millisecond: 0,
           calendar: 'gregorian');
-      expect(fmt.format(dateOptions), '‏۲۰۱۱/۹/۲۹, ‏۱۳:۴۵');
+      final String result = (testPlatform == 'webOS')
+          ? '‏۱۳:۴۵،‏ ‏۲۹‏/۹‏/۲۰۱۱'
+          : '‏۲۰۱۱/۹/۲۹, ‏۱۳:۴۵';
+      expect(fmt.format(dateOptions), result);
     });
     test('DateTimeSimpleMedium_fa_IR', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -188,7 +196,10 @@ void main() {
           second: 0,
           millisecond: 0,
           calendar: 'gregorian');
-      expect(fmt.format(dateOptions), '‏۲۹ سپتامبر ۲۰۱۱، ‏۱۳:۴۵');
+      final String result = (testPlatform == 'webOS')
+          ? '‏۱۳:۴۵،‏ ‏۲۹ سپتامبر ۲۰۱۱'
+          : '‏۲۹ سپتامبر ۲۰۱۱، ‏۱۳:۴۵';
+      expect(fmt.format(dateOptions), result);
     });
     test('DateTimeSimpleLong_fa_IR', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -208,7 +219,10 @@ void main() {
           second: 0,
           millisecond: 0,
           calendar: 'gregorian');
-      expect(fmt.format(dateOptions), '‏۲۹ سپتامبر ۲۰۱۱ ساعت ‏۱۳:۴۵');
+      final String result = (testPlatform == 'webOS')
+          ? 'ساعت ‏۱۳:۴۵، ‏۲۹ سپتامبر ۲۰۱۱'
+          : '‏۲۹ سپتامبر ۲۰۱۱ ساعت ‏۱۳:۴۵';
+      expect(fmt.format(dateOptions), result);
     });
     test('DateTimeSimpleFull_fa_IR', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -228,7 +242,10 @@ void main() {
           second: 0,
           millisecond: 0,
           calendar: 'gregorian');
-      expect(fmt.format(dateOptions), '‏۲۹ سپتامبر ۲۰۱۱ ساعت ‏۱۳:۴۵');
+      final String result = (testPlatform == 'webOS')
+          ? 'ساعت ‏۱۳:۴۵، ‏۲۹ سپتامبر ۲۰۱۱'
+          : '‏۲۹ سپتامبر ۲۰۱۱ ساعت ‏۱۳:۴۵';
+      expect(fmt.format(dateOptions), result);
     });
     test('TypeDate_fa_IR', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -245,7 +262,9 @@ void main() {
           second: 0,
           millisecond: 0,
           calendar: 'gregorian');
-      expect(fmt.format(dateOptions), '‏۲۰۱۱/۹/۲۹');
+      final String result =
+          (testPlatform == 'webOS') ? '‏۲۹‏/۹‏/۲۰۱۱' : '‏۲۰۱۱/۹/۲۹';
+      expect(fmt.format(dateOptions), result);
     });
     test('TypeTime_fa_IR', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -279,7 +298,10 @@ void main() {
           second: 0,
           millisecond: 0,
           calendar: 'gregorian');
-      expect(fmt.format(dateOptions), '‏۲۰۱۱/۹/۲۹, ‏۱۳:۴۵');
+      final String result = (testPlatform == 'webOS')
+          ? '‏۱۳:۴۵،‏ ‏۲۹‏/۹‏/۲۰۱۱'
+          : '‏۲۰۱۱/۹/۲۹, ‏۱۳:۴۵';
+      expect(fmt.format(dateOptions), result);
     });
     test('ShortDateComponentsY_fa_IR', () {
       final ILibDateFmtOptions fmtOptions =
@@ -347,7 +369,8 @@ void main() {
           second: 0,
           millisecond: 0,
           calendar: 'gregorian');
-      expect(fmt.format(dateOptions), '‏۹/۲۹');
+      final String result = (testPlatform == 'webOS') ? '‏۲۹‏/۹' : '‏۹/۲۹';
+      expect(fmt.format(dateOptions), result);
     });
     test('ShortDateComponentsMY_fa_IR', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -364,7 +387,8 @@ void main() {
           second: 0,
           millisecond: 0,
           calendar: 'gregorian');
-      expect(fmt.format(dateOptions), '‏۲۰۱۱/۹');
+      final String result = (testPlatform == 'webOS') ? '‏۹‏/۲۰۱۱' : '‏۲۰۱۱/۹';
+      expect(fmt.format(dateOptions), result);
     });
     test('ShortDateComponentsDMY_fa_IR', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -381,7 +405,9 @@ void main() {
           second: 0,
           millisecond: 0,
           calendar: 'gregorian');
-      expect(fmt.format(dateOptions), '‏۲۰۱۱/۹/۲۹');
+      final String result =
+          (testPlatform == 'webOS') ? '‏۲۹‏/۹‏/۲۰۱۱' : '‏۲۰۱۱/۹/۲۹';
+      expect(fmt.format(dateOptions), result);
     });
     test('ShortDateComponentsWDM_fa_IR', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -398,7 +424,9 @@ void main() {
           second: 0,
           millisecond: 0,
           calendar: 'gregorian');
-      expect(fmt.format(dateOptions), 'پ ‏۹/۲۹');
+      final String result =
+          (testPlatform == 'webOS') ? '‏پنجشنبه، ۲۹‏/۹' : 'پ ‏۹/۲۹';
+      expect(fmt.format(dateOptions), result);
     });
     test('ShortDateComponentsWDMY_fa_IR', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -415,7 +443,9 @@ void main() {
           second: 0,
           millisecond: 0,
           calendar: 'gregorian');
-      expect(fmt.format(dateOptions), 'پ ۲۰۱۱/۹/۲۹');
+      final String result =
+          (testPlatform == 'webOS') ? '‏پنجشنبه، ۲۹‏/۹‏/۲۰۱۱' : 'پ ۲۰۱۱/۹/۲۹';
+      expect(fmt.format(dateOptions), result);
     });
     test('FullDateComponentsY_fa_IR', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -500,7 +530,9 @@ void main() {
           second: 0,
           millisecond: 0,
           calendar: 'gregorian');
-      expect(fmt.format(dateOptions), 'سپتامبر ۲۰۱۱');
+      final String result =
+          (testPlatform == 'webOS') ? '‏سپتامبر ۲۰۱۱' : 'سپتامبر ۲۰۱۱';
+      expect(fmt.format(dateOptions), result);
     });
     test('FullDateComponentsDMY_fa_IR', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -534,7 +566,10 @@ void main() {
           second: 0,
           millisecond: 0,
           calendar: 'gregorian');
-      expect(fmt.format(dateOptions), 'پنجشنبه ‏۲۹ سپتامبر');
+      final String result = (testPlatform == 'webOS')
+          ? '‏پنجشنبه، ۲۹ سپتامبر'
+          : 'پنجشنبه ‏۲۹ سپتامبر';
+      expect(fmt.format(dateOptions), result);
     });
     test('FullDateComponentsWDMY_fa_IR', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -551,7 +586,10 @@ void main() {
           second: 0,
           millisecond: 0,
           calendar: 'gregorian');
-      expect(fmt.format(dateOptions), 'پنجشنبه ۲۹ سپتامبر ۲۰۱۱');
+      final String result = (testPlatform == 'webOS')
+          ? '‏پنجشنبه، ۲۹ سپتامبر ۲۰۱۱'
+          : 'پنجشنبه ۲۹ سپتامبر ۲۰۱۱';
+      expect(fmt.format(dateOptions), result);
     });
     test('ShortTimeComponentsS_fa_IR', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -1030,9 +1068,7 @@ void main() {
           calendar: 'gregorian');
       expect(fmt.format(dateOptions), '‏۱۳:۴۵:۳۷ (+۰۳۳۰/+۰۴۳۰)');
     });
-
     /* Now Persian calendar tests */
-
     test('PersSimpleShort_fa_IR', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
           calendar: 'persian', locale: 'fa-IR', length: 'short');
@@ -1047,7 +1083,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '‏۱۳۹۲/۹/۲۱');
+      final String result =
+          (testPlatform == 'webOS') ? '‏۲۱‏/۹‏/۱۳۹۲' : '‏۱۳۹۲/۹/۲۱';
+      expect(fmt.format(dateOptions), result);
     });
     test('PersSimpleMedium_fa_IR', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -1095,7 +1133,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '‏۱۳۹۲ آذر ۲۱');
+      final String result =
+          (testPlatform == 'webOS') ? '‏۲۱ آذر ۱۳۹۲' : '‏۱۳۹۲ آذر ۲۱';
+      expect(fmt.format(dateOptions), result);
     });
     test('PersSimpleTimeShort_fa_IR', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -1178,7 +1218,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '‏۱۳۹۲/۹/۲۱،‏ ‏۱۳:۴۵');
+      final String result = (testPlatform == 'webOS')
+          ? '‏۱۳:۴۵،‏ ‏۲۱‏/۹‏/۱۳۹۲'
+          : '‏۱۳۹۲/۹/۲۱،‏ ‏۱۳:۴۵';
+      expect(fmt.format(dateOptions), result);
     });
     test('PersDateTimeSimpleMedium_fa_IR', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -1197,7 +1240,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '‏۲۱ آذر ۱۳۹۲،‏ ‏۱۳:۴۵');
+      final String result = (testPlatform == 'webOS')
+          ? '‏۱۳:۴۵،‏ ‏۲۱ آذر ۱۳۹۲'
+          : '‏۲۱ آذر ۱۳۹۲،‏ ‏۱۳:۴۵';
+      expect(fmt.format(dateOptions), result);
     });
     test('PersDateTimeSimpleLong_fa_IR', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -1216,7 +1262,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '‏۲۱ آذر ۱۳۹۲، ساعت ‏۱۳:۴۵');
+      final String result = (testPlatform == 'webOS')
+          ? 'ساعت ‏۱۳:۴۵، ‏۲۱ آذر ۱۳۹۲'
+          : '‏۲۱ آذر ۱۳۹۲، ساعت ‏۱۳:۴۵';
+      expect(fmt.format(dateOptions), result);
     });
     test('PersDateTimeSimpleFull_fa_IR', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -1235,7 +1284,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '‏۱۳۹۲ آذر ۲۱، ساعت ‏۱۳:۴۵');
+      final String result = (testPlatform == 'webOS')
+          ? 'ساعت ‏۱۳:۴۵، ‏۲۱ آذر ۱۳۹۲'
+          : '‏۱۳۹۲ آذر ۲۱، ساعت ‏۱۳:۴۵';
+      expect(fmt.format(dateOptions), result);
     });
   });
 }

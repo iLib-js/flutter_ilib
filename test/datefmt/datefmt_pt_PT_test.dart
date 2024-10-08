@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../test_env.dart';
+
 void main() {
+  late String testPlatform;
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [datefmt_pt_PT_test.dart] file.');
   setUpAll(() async {
-    await ILibJS.instance
-        .loadJSwithPath('../../assets/js/ilib-all.js');
+    testPlatform = getTestPlatform();
+    await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
     ILibJS.instance.loadLocaleData('pt-PT');
   });
@@ -58,7 +61,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29 de setembro de 2011');
+      final String result = (testPlatform == 'webOS')
+          ? '29 setembro 2011'
+          : '29 de setembro de 2011';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtPTSimpleFull', () {
       final ILibDateFmtOptions fmtOptions =
@@ -186,7 +192,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29 de setembro de 2011 às 13:45');
+      final String result = (testPlatform == 'webOS')
+          ? '29 setembro 2011 às 13:45'
+          : '29 de setembro de 2011 às 13:45';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtPTDateTimeSimpleFull', () {
       final ILibDateFmtOptions fmtOptions =

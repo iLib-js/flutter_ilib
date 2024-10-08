@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../test_env.dart';
+
 void main() {
+  late String testPlatform;
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [datefmt_zh_Hant_TW_test.dart] file.');
   setUpAll(() async {
-    await ILibJS.instance
-        .loadJSwithPath('../../assets/js/ilib-all.js');
+    testPlatform = getTestPlatform();
+    await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
     ILibJS.instance.loadLocaleData('zh-Hant-TW');
   });
@@ -90,7 +93,8 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '下午1:45');
+      final String result = (testPlatform == 'webOS') ? '13:45' : '下午1:45';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtSimpleTimeMedium_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -106,7 +110,8 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '下午1:45');
+      final String result = (testPlatform == 'webOS') ? '13:45' : '下午1:45';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtSimpleTimeLong_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -122,7 +127,8 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '下午1:45');
+      final String result = (testPlatform == 'webOS') ? '13:45' : '下午1:45';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtSimpleTimeFull_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -138,7 +144,8 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '下午1:45');
+      final String result = (testPlatform == 'webOS') ? '13:45' : '下午1:45';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtDateTimeSimpleShort_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -154,7 +161,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '2011/9/29 下午1:45');
+      final String result =
+          (testPlatform == 'webOS') ? '2011/9/29 13:45' : '2011/9/29 下午1:45';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtDateTimeSimpleMedium_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -170,7 +179,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '2011年9月29日 下午1:45');
+      final String result =
+          (testPlatform == 'webOS') ? '2011年9月29日 13:45' : '2011年9月29日 下午1:45';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtDateTimeSimpleLong_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -186,7 +197,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '2011年9月29日 下午1:45');
+      final String result =
+          (testPlatform == 'webOS') ? '2011年9月29日 13:45' : '2011年9月29日 下午1:45';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtDateTimeSimpleFull_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -202,9 +215,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '2011年9月29日 下午1:45');
+      final String result =
+          (testPlatform == 'webOS') ? '2011年9月29日 13:45' : '2011年9月29日 下午1:45';
+      expect(fmt.format(dateOptions), result);
     });
-
     test('testDateFmtTypeDate_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions =
           ILibDateFmtOptions(locale: 'zh-Hant-TW', type: 'date');
@@ -235,7 +249,8 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '下午1:45');
+      final String result = (testPlatform == 'webOS') ? '13:45' : '下午1:45';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtTypeDateTime_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions =
@@ -251,7 +266,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '2011/9/29 下午1:45');
+      final String result =
+          (testPlatform == 'webOS') ? '2011/9/29 13:45' : '2011/9/29 下午1:45';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortDateComponentsY_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions =
@@ -571,7 +588,8 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1');
+      final String result = (testPlatform == 'webOS') ? '13時' : '1';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortTimeComponentsMS_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions =
@@ -603,7 +621,8 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45');
+      final String result = (testPlatform == 'webOS') ? '13:45' : '1:45';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortTimeComponentsHMS_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions =
@@ -619,7 +638,8 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45:37');
+      final String result = (testPlatform == 'webOS') ? '13:45:37' : '1:45:37';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortTimeComponentsHMA_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions =
@@ -635,7 +655,8 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '下午1:45');
+      final String result = (testPlatform == 'webOS') ? '13:45' : '下午1:45';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortTimeComponentsHMZ_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -654,7 +675,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45 [CST]');
+      final String result =
+          (testPlatform == 'webOS') ? '13:45 [CST]' : '1:45 [CST]';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortTimeComponentsHMAZ_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -673,7 +696,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '下午1:45 [CST]');
+      final String result =
+          (testPlatform == 'webOS') ? '13:45 [CST]' : '下午1:45 [CST]';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortTimeComponentsHMSA_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions =
@@ -689,7 +714,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '下午1:45:37');
+      final String result =
+          (testPlatform == 'webOS') ? '13:45:37' : '下午1:45:37';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortTimeComponentsHMSZ_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -708,7 +735,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45:37 [CST]');
+      final String result =
+          (testPlatform == 'webOS') ? '13:45:37 [CST]' : '1:45:37 [CST]';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortTimeComponentsHMSAZ_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -727,7 +756,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '下午1:45:37 [CST]');
+      final String result =
+          (testPlatform == 'webOS') ? '13:45:37 [CST]' : '下午1:45:37 [CST]';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtFullTimeComponentsS_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -775,7 +806,8 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1');
+      final String result = (testPlatform == 'webOS') ? '13時' : '1';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtFullTimeComponentsMS_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -807,7 +839,8 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45');
+      final String result = (testPlatform == 'webOS') ? '13:45' : '1:45';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtFullTimeComponentsHMS_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -823,7 +856,8 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45:37');
+      final String result = (testPlatform == 'webOS') ? '13:45:37' : '1:45:37';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtFullTimeComponentsHMA_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -839,7 +873,8 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '下午1:45');
+      final String result = (testPlatform == 'webOS') ? '13:45' : '下午1:45';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtFullTimeComponentsHMZ_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -859,7 +894,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45 [CST]');
+      final String result =
+          (testPlatform == 'webOS') ? '13:45 [CST]' : '1:45 [CST]';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtFullTimeComponentsHMAZ_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -879,7 +916,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '下午1:45 [CST]');
+      final String result =
+          (testPlatform == 'webOS') ? '13:45 [CST]' : '下午1:45 [CST]';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtFullTimeComponentsHMSA_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -895,7 +934,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '下午1:45:37');
+      final String result =
+          (testPlatform == 'webOS') ? '13:45:37' : '下午1:45:37';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtFullTimeComponentsHMSZ_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -915,7 +956,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45:37 [CST]');
+      final String result =
+          (testPlatform == 'webOS') ? '13:45:37 [CST]' : '1:45:37 [CST]';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtFullTimeComponentsHMSAZ_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -935,7 +978,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '下午1:45:37 [CST]');
+      final String result =
+          (testPlatform == 'webOS') ? '13:45:37 [CST]' : '下午1:45:37 [CST]';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtTimeFrameDefaultWeeHours_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -951,7 +996,8 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '凌晨1:45');
+      final String result = (testPlatform == 'webOS') ? '1:45' : '凌晨1:45';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtTimeFrameDefaultEarlyMorning_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -967,7 +1013,8 @@ void main() {
           minute: 30,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '上午8:30');
+      final String result = (testPlatform == 'webOS') ? '8:30' : '上午8:30';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtTimeFrameDefaultLateMorning_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -983,7 +1030,8 @@ void main() {
           minute: 30,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '上午11:30');
+      final String result = (testPlatform == 'webOS') ? '11:30' : '上午11:30';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtTimeFrameDefaultNoonHour_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -999,7 +1047,8 @@ void main() {
           minute: 37,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '中午12:37');
+      final String result = (testPlatform == 'webOS') ? '12:37' : '中午12:37';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtTimeFrameDefaultAfterNoon_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -1015,7 +1064,8 @@ void main() {
           minute: 37,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '下午3:37');
+      final String result = (testPlatform == 'webOS') ? '15:37' : '下午3:37';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtTimeFrameDefaultEvening_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -1031,7 +1081,8 @@ void main() {
           minute: 47,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '晚上7:47');
+      final String result = (testPlatform == 'webOS') ? '19:47' : '晚上7:47';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtTimeFrameDefaultNight_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -1047,9 +1098,9 @@ void main() {
           minute: 53,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '晚上10:53');
+      final String result = (testPlatform == 'webOS') ? '22:53' : '晚上10:53';
+      expect(fmt.format(dateOptions), result);
     });
-
     test('testDateFmtWithTimeZoneAndNoDST_zh_Hant_TW', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
           locale: 'zh-Hant-TW',
@@ -1069,7 +1120,9 @@ void main() {
           second: 37,
           millisecond: 0,
           timezone: 'Asia/Taipei');
-      expect(fmt.format(dateOptions), '1:45:37 [CST]');
+      final String result =
+          (testPlatform == 'webOS') ? '13:45:37 [CST]' : '1:45:37 [CST]';
+      expect(fmt.format(dateOptions), result);
     });
   });
 }

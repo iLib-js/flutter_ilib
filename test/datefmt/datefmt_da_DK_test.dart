@@ -6,8 +6,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [datefmt_da_DK_test.dart] file.');
   setUpAll(() async {
-    await ILibJS.instance
-        .loadJSwithPath('../../assets/js/ilib-all.js');
+    await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
     ILibJS.instance.loadLocaleData('da-DK');
   });

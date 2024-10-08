@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../test_env.dart';
+
 void main() {
+  late String testPlatform;
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [datefmt_te_IN_test.dart] file.');
   setUpAll(() async {
-    await ILibJS.instance
-        .loadJSwithPath('../../assets/js/ilib-all.js');
+    testPlatform = getTestPlatform();
+    await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
     ILibJS.instance.loadLocaleData('te-IN');
   });
@@ -201,7 +204,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29 సెప్టెంబర్, 2011 1:45 PMకి');
+      final String result = (testPlatform == 'webOS')
+          ? '29 సెప్టెంబర్, 2011 1:45 PM'
+          : '29 సెప్టెంబర్, 2011 1:45 PMకి';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINDateTimeSimpleFull_te_IN', () {
       final ILibDateFmtOptions fmtOptions =
@@ -217,9 +223,11 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29, సెప్టెంబర్ 2011 1:45 PMకి');
+      final String result = (testPlatform == 'webOS')
+          ? '29, సెప్టెంబర్ 2011 1:45 PM'
+          : '29, సెప్టెంబర్ 2011 1:45 PMకి';
+      expect(fmt.format(dateOptions), result);
     });
-
     test('testDateFmtINTypeDate_te_IN', () {
       final ILibDateFmtOptions fmtOptions =
           ILibDateFmtOptions(locale: 'te-IN', type: 'date');

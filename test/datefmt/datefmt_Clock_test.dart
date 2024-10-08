@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../test_env.dart';
+
 void main() {
+  late String testPlatform;
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [datefmt_Clock_test.dart] file.');
   setUpAll(() async {
+    testPlatform = getTestPlatform();
     final ILibJS ilibjsinstance = ILibJS.instance;
-    await ilibjsinstance
-        .loadJSwithPath('../../assets/js/ilib-all.js');
+    await ilibjsinstance.loadJS();
     ilibjsinstance.initILib();
+
     ilibjsinstance.loadLocaleData('af');
     ilibjsinstance.loadLocaleData('am');
     ilibjsinstance.loadLocaleData('ar');
@@ -726,7 +730,9 @@ void main() {
       final ILibDateFmtOptions fmtOptions =
           ILibDateFmtOptions(locale: 'zh-Hant-TW');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-      expect(fmt.getClock(), 12);
+
+      final int result = (testPlatform == 'webOS') ? 24 : 12;
+      expect(fmt.getClock(), result);
     });
     test('testClock_en_GE', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'en-GE');
@@ -772,7 +778,9 @@ void main() {
       final ILibDateFmtOptions fmtOptions =
           ILibDateFmtOptions(locale: 'ha-Latn-NG');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-      expect(fmt.getClock(), 24);
+
+      final int result = (testPlatform == 'webOS') ? 12 : 24;
+      expect(fmt.getClock(), result);
     });
     test('testClock_or_IN', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'or-IN');
