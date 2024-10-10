@@ -26,7 +26,6 @@ final ILibDateFmtOptions fmtOptions =
     ILibDateFmtOptions(locale: 'ko-KR', length: 'short', useNative: false, timezone: 'local');
 final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 final ILibDateOptions dateOptions = ILibDateOptions(
-    locale: 'ko-KR',
     year: 2024,
     month: 6,
     day: 27,
@@ -47,7 +46,7 @@ final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
           timezone: 'local');
 final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 final ILibDateOptions dateOptions = ILibDateOptions(
-          locale: 'ko-KR', dateTime: DateTime.parse('2024-06-27 10:42'));
+          dateTime: DateTime.parse('2024-06-27 10:42'));
 fmt.format(dateOptions);
 // '2024년 6월 27일 오전 10:42'
 ```
@@ -83,7 +82,7 @@ We have a plan to provide more classes and methods.
 - Class: [ILibDateOptions](./Docs.md/#ilibdateoptions)
 - Class: [ILibDateFmtOptions](./Docs.md/#ilibdatefmtoptions)  
 - Class: [ILibDateFmt](./Docs.md#ilibdatefmt)
-   - Methods: `format()`, `getClock()`  
+   - Methods: `format()`, `getClock()`, `getTemplate()`, `getTemplate()`, `getMeridiemsRange()`
 
 ### ILibLocaleInfo
 - Class: [ILibLocaleInfo](./Docs.md/#iliblocaleinfo)
