@@ -82,7 +82,7 @@ We have a plan to provide more classes and methods.
 - Class: [ILibDateOptions](./Docs.md/#ilibdateoptions)
 - Class: [ILibDateFmtOptions](./Docs.md/#ilibdatefmtoptions)  
 - Class: [ILibDateFmt](./Docs.md#ilibdatefmt)
-   - Methods: `format()`, `getClock()`, `getTemplate()`, `getTemplate()`, `getMeridiemsRange()`
+   - Methods: `format()`, `getClock()`, `getTemplate()`, `getMeridiemsRange()`
 
 ### ILibLocaleInfo
 - Class: [ILibLocaleInfo](./Docs.md/#iliblocaleinfo)
