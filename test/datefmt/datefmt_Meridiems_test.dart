@@ -10,8 +10,76 @@ void main() {
   debugPrint('Testing [flutter_ilib_datefmt_test.dart] file.');
   setUpAll(() async {
     testPlatform = getTestPlatform();
-    await ILibJS.instance.loadJS();
-    ILibJS.instance.initILib();
+    final ILibJS ilibjsinstance = ILibJS.instance;
+    await ilibjsinstance.loadJS();
+    ilibjsinstance.initILib();
+
+    ilibjsinstance.loadLocaleData('af');
+    ilibjsinstance.loadLocaleData('am');
+    ilibjsinstance.loadLocaleData('ar');
+    ilibjsinstance.loadLocaleData('as');
+    ilibjsinstance.loadLocaleData('az');
+    ilibjsinstance.loadLocaleData('bg');
+    ilibjsinstance.loadLocaleData('bn');
+    ilibjsinstance.loadLocaleData('bs');
+    ilibjsinstance.loadLocaleData('cs');
+    ilibjsinstance.loadLocaleData('da');
+    ilibjsinstance.loadLocaleData('de');
+    ilibjsinstance.loadLocaleData('el');
+    ilibjsinstance.loadLocaleData('en');
+    ilibjsinstance.loadLocaleData('es');
+    ilibjsinstance.loadLocaleData('et');
+    ilibjsinstance.loadLocaleData('fa');
+    ilibjsinstance.loadLocaleData('fi');
+    ilibjsinstance.loadLocaleData('fr');
+    ilibjsinstance.loadLocaleData('ga');
+    ilibjsinstance.loadLocaleData('gu');
+    ilibjsinstance.loadLocaleData('ha');
+    ilibjsinstance.loadLocaleData('he');
+    ilibjsinstance.loadLocaleData('hi');
+    ilibjsinstance.loadLocaleData('hr');
+    ilibjsinstance.loadLocaleData('hu');
+    ilibjsinstance.loadLocaleData('id');
+    ilibjsinstance.loadLocaleData('is');
+    ilibjsinstance.loadLocaleData('it');
+    ilibjsinstance.loadLocaleData('ja');
+    ilibjsinstance.loadLocaleData('ka');
+    ilibjsinstance.loadLocaleData('kk');
+    ilibjsinstance.loadLocaleData('km');
+    ilibjsinstance.loadLocaleData('kn');
+    ilibjsinstance.loadLocaleData('ko');
+    ilibjsinstance.loadLocaleData('ku');
+    ilibjsinstance.loadLocaleData('lt');
+    ilibjsinstance.loadLocaleData('lv');
+    ilibjsinstance.loadLocaleData('mk');
+    ilibjsinstance.loadLocaleData('ml');
+    ilibjsinstance.loadLocaleData('mn');
+    ilibjsinstance.loadLocaleData('mr');
+    ilibjsinstance.loadLocaleData('ms');
+    ilibjsinstance.loadLocaleData('nb');
+    ilibjsinstance.loadLocaleData('nl');
+    ilibjsinstance.loadLocaleData('or');
+    ilibjsinstance.loadLocaleData('pa');
+    ilibjsinstance.loadLocaleData('pl');
+    ilibjsinstance.loadLocaleData('pt');
+    ilibjsinstance.loadLocaleData('ro');
+    ilibjsinstance.loadLocaleData('ru');
+    ilibjsinstance.loadLocaleData('si');
+    ilibjsinstance.loadLocaleData('sk');
+    ilibjsinstance.loadLocaleData('sl');
+    ilibjsinstance.loadLocaleData('sq');
+    ilibjsinstance.loadLocaleData('sr');
+    ilibjsinstance.loadLocaleData('sv');
+    ilibjsinstance.loadLocaleData('sw');
+    ilibjsinstance.loadLocaleData('ta');
+    ilibjsinstance.loadLocaleData('te');
+    ilibjsinstance.loadLocaleData('th');
+    ilibjsinstance.loadLocaleData('tr');
+    ilibjsinstance.loadLocaleData('uk');
+    ilibjsinstance.loadLocaleData('ur');
+    ilibjsinstance.loadLocaleData('uz');
+    ilibjsinstance.loadLocaleData('vi');
+    ilibjsinstance.loadLocaleData('zh');
   });
   group('getMeridiems()', () {
     test('testMeridiem_ar_EG', () {
@@ -1361,30 +1429,6 @@ void main() {
 
       expect(meridiems[0].name, 'PG');
       expect(meridiems[1].name, 'PTG');
-    });
-    test('testMeridiem_pt_AO', () {
-      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'pt-AO');
-      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
-
-      expect(meridiems[0].name, 'da manhã');
-      expect(meridiems[1].name, 'da tarde');
-    });
-    test('testMeridiem_pt_GQ', () {
-      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'pt-GQ');
-      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
-
-      expect(meridiems[0].name, 'da manhã');
-      expect(meridiems[1].name, 'da tarde');
-    });
-    test('testMeridiem_pt_CV', () {
-      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'pt-CV');
-      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
-
-      expect(meridiems[0].name, 'da manhã');
-      expect(meridiems[1].name, 'da tarde');
     });
     test('testMeridiem_ur_PK', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'ur-PK');

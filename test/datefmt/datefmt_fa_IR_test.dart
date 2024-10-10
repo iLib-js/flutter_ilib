@@ -12,6 +12,7 @@ void main() {
     testPlatform = getTestPlatform();
     await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
+    ILibJS.instance.loadLocaleData('fa-IR');
   });
   group('format()', () {
     test('SimpleShort_fa_IR', () {

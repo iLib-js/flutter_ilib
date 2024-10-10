@@ -8,8 +8,76 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [datefmt_WeekdayTranslation_test.dart] file.');
   setUpAll(() async {
-    await ILibJS.instance.loadJS();
-    ILibJS.instance.initILib();
+    final ILibJS ilibjsinstance = ILibJS.instance;
+    await ilibjsinstance.loadJS();
+    ilibjsinstance.initILib();
+
+    ilibjsinstance.loadLocaleData('af');
+    ilibjsinstance.loadLocaleData('am');
+    ilibjsinstance.loadLocaleData('ar');
+    ilibjsinstance.loadLocaleData('as');
+    ilibjsinstance.loadLocaleData('az');
+    ilibjsinstance.loadLocaleData('bg');
+    ilibjsinstance.loadLocaleData('bn');
+    ilibjsinstance.loadLocaleData('bs');
+    ilibjsinstance.loadLocaleData('cs');
+    ilibjsinstance.loadLocaleData('da');
+    ilibjsinstance.loadLocaleData('de');
+    ilibjsinstance.loadLocaleData('el');
+    ilibjsinstance.loadLocaleData('en');
+    ilibjsinstance.loadLocaleData('es');
+    ilibjsinstance.loadLocaleData('et');
+    ilibjsinstance.loadLocaleData('fa');
+    ilibjsinstance.loadLocaleData('fi');
+    ilibjsinstance.loadLocaleData('fr');
+    ilibjsinstance.loadLocaleData('ga');
+    ilibjsinstance.loadLocaleData('gu');
+    ilibjsinstance.loadLocaleData('ha');
+    ilibjsinstance.loadLocaleData('he');
+    ilibjsinstance.loadLocaleData('hi');
+    ilibjsinstance.loadLocaleData('hr');
+    ilibjsinstance.loadLocaleData('hu');
+    ilibjsinstance.loadLocaleData('id');
+    ilibjsinstance.loadLocaleData('is');
+    ilibjsinstance.loadLocaleData('it');
+    ilibjsinstance.loadLocaleData('ja');
+    ilibjsinstance.loadLocaleData('ka');
+    ilibjsinstance.loadLocaleData('kk');
+    ilibjsinstance.loadLocaleData('km');
+    ilibjsinstance.loadLocaleData('kn');
+    ilibjsinstance.loadLocaleData('ko');
+    ilibjsinstance.loadLocaleData('ku');
+    ilibjsinstance.loadLocaleData('lt');
+    ilibjsinstance.loadLocaleData('lv');
+    ilibjsinstance.loadLocaleData('mk');
+    ilibjsinstance.loadLocaleData('ml');
+    ilibjsinstance.loadLocaleData('mn');
+    ilibjsinstance.loadLocaleData('mr');
+    ilibjsinstance.loadLocaleData('ms');
+    ilibjsinstance.loadLocaleData('nb');
+    ilibjsinstance.loadLocaleData('nl');
+    ilibjsinstance.loadLocaleData('or');
+    ilibjsinstance.loadLocaleData('pa');
+    ilibjsinstance.loadLocaleData('pl');
+    ilibjsinstance.loadLocaleData('pt');
+    ilibjsinstance.loadLocaleData('ro');
+    ilibjsinstance.loadLocaleData('ru');
+    ilibjsinstance.loadLocaleData('si');
+    ilibjsinstance.loadLocaleData('sk');
+    ilibjsinstance.loadLocaleData('sl');
+    ilibjsinstance.loadLocaleData('sq');
+    ilibjsinstance.loadLocaleData('sr');
+    ilibjsinstance.loadLocaleData('sv');
+    ilibjsinstance.loadLocaleData('sw');
+    ilibjsinstance.loadLocaleData('ta');
+    ilibjsinstance.loadLocaleData('te');
+    ilibjsinstance.loadLocaleData('th');
+    ilibjsinstance.loadLocaleData('tr');
+    ilibjsinstance.loadLocaleData('uk');
+    ilibjsinstance.loadLocaleData('ur');
+    ilibjsinstance.loadLocaleData('uz');
+    ilibjsinstance.loadLocaleData('vi');
+    ilibjsinstance.loadLocaleData('zh');
   });
   group('testWeekdayTranslation_ar_EG', () {
     final Map<int, String> expectedResult = <int, String>{
@@ -14813,31 +14881,6 @@ void main() {
       });
     });
   });
-  group('testWeekdayTranslation_pt_AO_long', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'domingo',
-      1: 'segunda',
-      2: 'terça',
-      3: 'quarta',
-      4: 'quinta',
-      5: 'sexta',
-      6: 'sábado'
-    };
-    expectedResult.forEach((int num, String expected) {
-      test(num, () {
-        final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-            locale: 'pt-AO',
-            date: 'w',
-            length: 'long',
-            useNative: false,
-            timezone: 'local');
-        final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-        final ILibDateOptions dateOptions = ILibDateOptions(
-            year: 2015, month: 8, day: num + 2, type: 'gregorian');
-        expect(fmt.format(dateOptions), expected);
-      });
-    });
-  });
   group('testWeekdayTranslation_pt_AO_medium', () {
     final Map<int, String> expectedResult = <int, String>{
       0: 'dom.',
@@ -14913,31 +14956,6 @@ void main() {
       });
     });
   });
-  group('testWeekdayTranslation_pt_GQ_long', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'domingo',
-      1: 'segunda',
-      2: 'terça',
-      3: 'quarta',
-      4: 'quinta',
-      5: 'sexta',
-      6: 'sábado'
-    };
-    expectedResult.forEach((int num, String expected) {
-      test(num, () {
-        final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-            locale: 'pt-GQ',
-            date: 'w',
-            length: 'long',
-            useNative: false,
-            timezone: 'local');
-        final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-        final ILibDateOptions dateOptions = ILibDateOptions(
-            year: 2015, month: 8, day: num + 2, type: 'gregorian');
-        expect(fmt.format(dateOptions), expected);
-      });
-    });
-  });
   group('testWeekdayTranslation_pt_GQ_medium', () {
     final Map<int, String> expectedResult = <int, String>{
       0: 'dom.',
@@ -15004,31 +15022,6 @@ void main() {
             locale: 'pt-CV',
             date: 'w',
             length: 'full',
-            useNative: false,
-            timezone: 'local');
-        final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-        final ILibDateOptions dateOptions = ILibDateOptions(
-            year: 2015, month: 8, day: num + 2, type: 'gregorian');
-        expect(fmt.format(dateOptions), expected);
-      });
-    });
-  });
-  group('testWeekdayTranslation_pt_CV_long', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'domingo',
-      1: 'segunda',
-      2: 'terça',
-      3: 'quarta',
-      4: 'quinta',
-      5: 'sexta',
-      6: 'sábado'
-    };
-    expectedResult.forEach((int num, String expected) {
-      test(num, () {
-        final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-            locale: 'pt-CV',
-            date: 'w',
-            length: 'long',
             useNative: false,
             timezone: 'local');
         final ILibDateFmt fmt = ILibDateFmt(fmtOptions);

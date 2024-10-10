@@ -10,9 +10,78 @@ void main() {
   debugPrint('Testing [datefmt_Clock_test.dart] file.');
   setUpAll(() async {
     testPlatform = getTestPlatform();
-    await ILibJS.instance.loadJS();
-    ILibJS.instance.initILib();
+    final ILibJS ilibjsinstance = ILibJS.instance;
+    await ilibjsinstance.loadJS();
+    ilibjsinstance.initILib();
+
+    ilibjsinstance.loadLocaleData('af');
+    ilibjsinstance.loadLocaleData('am');
+    ilibjsinstance.loadLocaleData('ar');
+    ilibjsinstance.loadLocaleData('as');
+    ilibjsinstance.loadLocaleData('az');
+    ilibjsinstance.loadLocaleData('bg');
+    ilibjsinstance.loadLocaleData('bn');
+    ilibjsinstance.loadLocaleData('bs');
+    ilibjsinstance.loadLocaleData('cs');
+    ilibjsinstance.loadLocaleData('da');
+    ilibjsinstance.loadLocaleData('de');
+    ilibjsinstance.loadLocaleData('el');
+    ilibjsinstance.loadLocaleData('en');
+    ilibjsinstance.loadLocaleData('es');
+    ilibjsinstance.loadLocaleData('et');
+    ilibjsinstance.loadLocaleData('fa');
+    ilibjsinstance.loadLocaleData('fi');
+    ilibjsinstance.loadLocaleData('fr');
+    ilibjsinstance.loadLocaleData('ga');
+    ilibjsinstance.loadLocaleData('gu');
+    ilibjsinstance.loadLocaleData('ha');
+    ilibjsinstance.loadLocaleData('he');
+    ilibjsinstance.loadLocaleData('hi');
+    ilibjsinstance.loadLocaleData('hr');
+    ilibjsinstance.loadLocaleData('hu');
+    ilibjsinstance.loadLocaleData('id');
+    ilibjsinstance.loadLocaleData('is');
+    ilibjsinstance.loadLocaleData('it');
+    ilibjsinstance.loadLocaleData('ja');
+    ilibjsinstance.loadLocaleData('ka');
+    ilibjsinstance.loadLocaleData('kk');
+    ilibjsinstance.loadLocaleData('km');
+    ilibjsinstance.loadLocaleData('kn');
+    ilibjsinstance.loadLocaleData('ko');
+    ilibjsinstance.loadLocaleData('ku');
+    ilibjsinstance.loadLocaleData('lt');
+    ilibjsinstance.loadLocaleData('lv');
+    ilibjsinstance.loadLocaleData('mk');
+    ilibjsinstance.loadLocaleData('ml');
+    ilibjsinstance.loadLocaleData('mn');
+    ilibjsinstance.loadLocaleData('mr');
+    ilibjsinstance.loadLocaleData('ms');
+    ilibjsinstance.loadLocaleData('nb');
+    ilibjsinstance.loadLocaleData('nl');
+    ilibjsinstance.loadLocaleData('or');
+    ilibjsinstance.loadLocaleData('pa');
+    ilibjsinstance.loadLocaleData('pl');
+    ilibjsinstance.loadLocaleData('pt');
+    ilibjsinstance.loadLocaleData('ro');
+    ilibjsinstance.loadLocaleData('ru');
+    ilibjsinstance.loadLocaleData('si');
+    ilibjsinstance.loadLocaleData('sk');
+    ilibjsinstance.loadLocaleData('sl');
+    ilibjsinstance.loadLocaleData('sq');
+    ilibjsinstance.loadLocaleData('sr');
+    ilibjsinstance.loadLocaleData('sv');
+    ilibjsinstance.loadLocaleData('sw');
+    ilibjsinstance.loadLocaleData('ta');
+    ilibjsinstance.loadLocaleData('te');
+    ilibjsinstance.loadLocaleData('th');
+    ilibjsinstance.loadLocaleData('tr');
+    ilibjsinstance.loadLocaleData('uk');
+    ilibjsinstance.loadLocaleData('ur');
+    ilibjsinstance.loadLocaleData('uz');
+    ilibjsinstance.loadLocaleData('vi');
+    ilibjsinstance.loadLocaleData('zh');
   });
+
   group('getClock()', () {
     test('testClock_ar_EG', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'ar-EG');
@@ -929,11 +998,12 @@ void main() {
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       expect(fmt.getClock(), 12);
     });
+    /* pa-PK is not a supported locale. so the _PK specific locale data won't be included
     test('testClock_pa_PK', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'pa-PK');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       expect(fmt.getClock(), 12);
-    });
+    });*/
     test('testClock_pt_AO', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'pt-AO');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
@@ -949,11 +1019,13 @@ void main() {
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       expect(fmt.getClock(), 24);
     });
+    /*
+    ur-PK is not a supported locale. so the _PK specific locale data won't be included
     test('testClock_ur_PK', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'ur-PK');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       expect(fmt.getClock(), 12);
-    });
+    });*/
     test('testClock_zh_Hans_SG', () {
       final ILibDateFmtOptions fmtOptions =
           ILibDateFmtOptions(locale: 'zh-Hans-SG');

@@ -8,6 +8,7 @@ void main() {
   setUpAll(() async {
     await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
+    ILibJS.instance.loadLocaleData('hr-HR');
   });
   group('format()', () {
     test('testDateFmtSimpleShort_hr_HR', () {
