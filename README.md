@@ -22,8 +22,11 @@ _flutterIlibPlugin.addListener(() {
 Get the result of formatting by using the class provided by flutter_ilib.
 
 ```dart
-final ILibDateFmtOptions fmtOptions =
-    ILibDateFmtOptions(locale: 'ko-KR', length: 'short', useNative: false, timezone: 'local');
+final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'ko-KR',
+          length: 'short',
+          useNative: false,
+          timezone: 'local');
 final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 final ILibDateOptions dateOptions = ILibDateOptions(
     year: 2024,
@@ -45,7 +48,8 @@ final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
           useNative: false,
           timezone: 'local');
 final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-final ILibDateOptions dateOptions = ILibDateOptions(dateTime: DateTime.parse('2024-06-27 10:42'));
+final ILibDateOptions dateOptions =
+    ILibDateOptions(dateTime: DateTime.parse('2024-06-27 10:42'));
 fmt.format(dateOptions);
 // '2024년 6월 27일 오전 10:42'
 ```
