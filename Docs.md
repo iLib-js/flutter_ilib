@@ -68,7 +68,7 @@ ILibDateFmt(ILibDateFmtOptions options)
 |_String_ format()| Formats a particular date instance according to the settings of this formatter object|
 |_int_ getClock()| Returns the default clock from the locale is returned instead."12" or "24" depending on whether this formatter uses the 12-hour or 24-hour clock|
 |_String_ getTemplate()| Return the template string that is used to format date/times for this formatter instance|
-|_List<MeridiemsInfo>_ getMeridiemsRange()| Return the range of possible meridiems (times of day like "AM" or "PM") in this date formatter.|
+|_List\<MeridiemsInfo>_ getMeridiemsRange()| Return the range of possible meridiems (times of day like "AM" or "PM") in this date formatter.|
 
 ## ILibLocaleInfo
 
