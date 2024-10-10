@@ -46,7 +46,7 @@ ILibDateOptions (String? locale, int? year, int? month, int? day, int? hour, int
 
  ### Constructors
 ```dart
-ILibDateFmtOptions (String? locale, String? length, String? type, String? calendar, String? timezone, String? date, String? time, bool? useNative)
+ILibDateFmtOptions (String? locale, String? length, String? type, String? calendar, String? timezone, String? date, String? time, bool? useNative, String? meridiems)
 ```
 
 ## ILibDateFmt
