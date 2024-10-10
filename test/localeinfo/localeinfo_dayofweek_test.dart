@@ -10,7 +10,7 @@ void main() {
   debugPrint('Testing [localeinfo_dayofweek_test.dart] file.');
   setUpAll(() async {
     testPlatform = getTestPlatform();
-    
+
     final ILibJS ilibjsinstance = ILibJS.instance;
     await ilibjsinstance.loadJS();
     ilibjsinstance.initILib();
