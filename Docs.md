@@ -42,10 +42,11 @@ ILibDateOptions (String? locale, int? year, int? month, int? day, int? hour, int
 |_\<String?>_ date| This property tells which components of a date format to use. <br> For example, sometimes you may wish to format a date that only contains the month and date without the year, such as when displaying a person's yearly birthday. <br>The value of this property allows you to specify only those components you want to see in the final output, ordered correctly for the locale. <br> Valid values are: "dmwy", "dmy", "dmw", "dm", "my", "dw", "d", "m","n","y" <br> Default components, if this property is not specified, is "dmy".|
 |_\<String?>_ time|This property gives which components of a time format to use.<br> The time will be formatted correctly for the locale with only the time components requested. <br>For example, a clock might only display the hour and minute and not need the seconds or the am/pm component. In this case, the time property should be set to "hm".<br> Valid values for this property are: "ahmsz", "ahms", "hmsz", "hms", "ahmz", "ahm", hmz", ah", "hm", "ms", "h", "m", "s" <br> Default value if this property is not specified is "hma". |
 |_\<bool?>_ useNative|The flag used to determine whether to use the native script settings for formatting the numbers.|
+|_\<String?>_ meridiems|String that specifies what style of meridiems to use with this format. The choices are "default", "gregorian", "ethiopic", and "chinese".|
 
  ### Constructors
 ```dart
-ILibDateFmtOptions (String? locale, String? length, String? type, String? calendar, String? timezone, String? date, String? time, bool? useNative)
+ILibDateFmtOptions (String? locale, String? length, String? type, String? calendar, String? timezone, String? date, String? time, bool? useNative, String? meridiems)
 ```
 
 ## ILibDateFmt
@@ -66,6 +67,8 @@ ILibDateFmt(ILibDateFmtOptions options)
 |_String_ toJsonString() | A string representation of parameters to call functions of iLib library properly|
 |_String_ format()| Formats a particular date instance according to the settings of this formatter object|
 |_int_ getClock()| Returns the default clock from the locale is returned instead."12" or "24" depending on whether this formatter uses the 12-hour or 24-hour clock|
+|_String_ getTemplate()| Return the template string that is used to format date/times for this formatter instance|
+|_List\<MeridiemsInfo>_ getMeridiemsRange()| Return the range of possible meridiems (times of day like "AM" or "PM") in this date formatter.|
 
 ## ILibLocaleInfo
 
