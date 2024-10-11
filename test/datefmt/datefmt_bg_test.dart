@@ -331,26 +331,22 @@ void main() {
           millisecond: 0);
       expect(fmt.format(dateOptions), '29.09');
     });
-    /*
     test('testDateFmtShortDateComponentsMY_bg_BG', () {
-        ILibDateFmtOptions fmtOptions =
-        ILibDateFmtOptions(locale: "bg-BG", date: "my");
-        ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'bg-BG', date: 'my');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-        ILibDateOptions dateOptions = ILibDateOptions(
-            locale: "bg-BG",
-            year: 2011,
-            month: 9,
-            day: 29,
-            hour: 13,
-            minute: 45,
-            second: 0,
-            millisecond: 0
-        );
-        expect(await fmt.format(dateOptions), "9.11 г.");
-        
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'bg-BG',
+          year: 2011,
+          month: 9,
+          day: 29,
+          hour: 13,
+          minute: 45,
+          second: 0,
+          millisecond: 0);
+      expect(fmt.format(dateOptions), '09.11 г.');
     });
-    */
     test('testDateFmtShortDateComponentsDMY_bg_BG', () {
       final ILibDateFmtOptions fmtOptions =
           ILibDateFmtOptions(locale: 'bg-BG', date: 'dmy');
@@ -383,26 +379,22 @@ void main() {
           millisecond: 0);
       expect(fmt.format(dateOptions), 'ч, 29.09');
     });
-    /*
     test('testDateFmtShortDateComponentsWDMY_bg_BG', () {
-        ILibDateFmtOptions fmtOptions =
-        ILibDateFmtOptions(locale: "bg-BG", date: "wdmy");
-        ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'bg-BG', date: 'wdmy');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-        ILibDateOptions dateOptions = ILibDateOptions(
-            locale: "bg-BG",
-            year: 2011,
-            month: 9,
-            day: 29,
-            hour: 13,
-            minute: 45,
-            second: 0,
-            millisecond: 0
-        );
-        expect(await fmt.format(dateOptions), "ч, 29.09.11 г.");
-        
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'bg-BG',
+          year: 2011,
+          month: 9,
+          day: 29,
+          hour: 13,
+          minute: 45,
+          second: 0,
+          millisecond: 0);
+      expect(fmt.format(dateOptions), 'ч, 29.09.11 г.');
     });
-    */
     test('testDateFmtFullDateComponentsY_bg_BG', () {
       final ILibDateFmtOptions fmtOptions =
           ILibDateFmtOptions(locale: 'bg-BG', length: 'full', date: 'y');
@@ -515,27 +507,22 @@ void main() {
           millisecond: 0);
       expect(fmt.format(dateOptions), 'четвъртък, 29 септември');
     });
-    /*
     test('testDateFmtFullDateComponentsWDMY_bg_BG', () {
-        ILibDateFmtOptions fmtOptions =
-        ILibDateFmtOptions(locale: "bg-BG", length: "full", date: "wdmy");
-        ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'bg-BG', length: 'full', date: 'wdmy');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
-        ILibDateOptions dateOptions = ILibDateOptions(
-            locale: "bg-BG",
-            year: 2011,
-            month: 9,
-            day: 29,
-            hour: 13,
-            minute: 45,
-            second: 0,
-            millisecond: 0
-        );
-        expect(await fmt.format(dateOptions), "четвъртък, 29 септ. 2011 г.");
-        
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'bg-BG',
+          year: 2011,
+          month: 9,
+          day: 29,
+          hour: 13,
+          minute: 45,
+          second: 0,
+          millisecond: 0);
+      expect(fmt.format(dateOptions), 'четвъртък, 29 септември 2011 г.');
     });
-    */
-
     test('testDateFmtShortTimeComponentsS_bg_BG', () {
       final ILibDateFmtOptions fmtOptions =
           ILibDateFmtOptions(locale: 'bg-BG', type: 'time', time: 's');
