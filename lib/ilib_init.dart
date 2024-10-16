@@ -16,12 +16,18 @@ class ILibJS extends ChangeNotifier {
 
   JsEvalResult _jsEvalResult = JsEvalResult('', '');
   String _loadJSResult = '';
+  String _loadLocaleJSResult = '';
 
   Future<void> loadJS() async {
     _loadJSResult = await rootBundle
         .loadString('packages/flutter_ilib/assets/js/ilib-all.js');
+
     final String curlocale = getLocale();
-    loadLocaleData(curlocale);
+    final String dataPath = getJSDataPath(curlocale);
+    if (!fileList.contains(dataPath)) {
+      _loadLocaleJSResult = await rootBundle.loadString(dataPath);
+      fileList.add(dataPath);
+    }
     notifyListeners();
   }
 
@@ -35,7 +41,8 @@ class ILibJS extends ChangeNotifier {
   void initILib() {
     try {
       if (_iLibPrepared == false) {
-        _jsEvalResult = _jsRuntime.evaluate(_loadJSResult);
+        _jsRuntime.evaluate(_loadJSResult);
+        _jsRuntime.evaluate(_loadLocaleJSResult);
         _iLibPrepared = true;
       }
     } on PlatformException catch (e) {
