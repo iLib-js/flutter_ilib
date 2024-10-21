@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -36,7 +37,8 @@ class _MyAppState extends State<MyApp> {
   String _iLibCLDRVersion = 'CLDR';
   String _currentTime = 'Current Time';
   final FlutterILib _flutterIlibPlugin = FlutterILib.instance;
-
+  final String currentLocale =
+      PlatformDispatcher.instance.locale.toString().replaceAll('_', '-');
   List<String> newList = <String>['-', '-', '-'];
   String curLocale = '-';
 
@@ -72,7 +74,7 @@ class _MyAppState extends State<MyApp> {
 
     String currentTime;
     try {
-      currentTime = getDateTimeFormatNow('ko-KR');
+      currentTime = getDateTimeFormatNow(currentLocale);
     } on PlatformException {
       currentTime = 'Failed to get iLib DatFmt.';
     }
@@ -179,7 +181,6 @@ class _MyAppState extends State<MyApp> {
         useNative: false,
         timezone: 'local');
     final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-
     return fmt.format(dateOptions);
   }
 
