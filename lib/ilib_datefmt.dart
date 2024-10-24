@@ -16,6 +16,14 @@ class ILibDateFmt {
     ILibJS.instance.loadLocaleData(locale);
   }
 
+  async static create(ILibDateFmtOptions options) {
+    ILibDateFmt inst = new ILibDateFmt(options);
+    // load data async here, then:
+    data = await loadDatFmtData();
+    inst.init(data);
+    return inst;
+  }
+  
   String? locale;
   String? type;
   String? length;
