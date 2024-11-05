@@ -36,8 +36,6 @@ class _MyAppState extends State<MyApp> {
   String _iLibVersion = 'Unknown iLib';
   String _iLibCLDRVersion = 'CLDR';
   String _currentTime = 'Current Time';
-  final String currentLocale =
-      PlatformDispatcher.instance.locale.toString().replaceAll('_', '-');
   List<String> newList = <String>['-', '-', '-'];
   String curLocale =
       PlatformDispatcher.instance.locale.toString().replaceAll('_', '-');
@@ -77,12 +75,12 @@ class _MyAppState extends State<MyApp> {
     }
 
     try {
-      currentTime = getDateTimeFormatNow(curLocale);
+      currentTime = getDateTimeFormatNow('en-US');
     } on PlatformException {
       currentTime = 'Failed to get iLib DatFmt.';
     }
 
-    result1 = getDateTimeFormatNow(curLocale);
+    result1 = getDateTimeFormat(curLocale);
     result2 = getFirstDayOfWeek(curLocale);
     result3 = getClock(curLocale);
 
@@ -143,7 +141,7 @@ class _MyAppState extends State<MyApp> {
                         curLocale = localeList[i];
                         _flutterIlibPlugin.loadLocaleData(curLocale);
 
-                        result1 = getDateTimeFormatNow(curLocale);
+                        result1 = getDateTimeFormat(curLocale);
                         result2 = getFirstDayOfWeek(curLocale);
                         result3 = getClock(curLocale);
                         setState(() {
@@ -180,12 +178,11 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  String getDateTimeFormat(String curlo) {
-    curLocale = curlo;
+  String getDateTimeFormatNow(String lo) {
     final ILibDateOptions dateOptions =
-        ILibDateOptions(dateTime: DateTime.parse('2024-03-23 10:42'));
+        ILibDateOptions(dateTime: DateTime.now());
     final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-        locale: curlo,
+        locale: lo,
         length: 'full',
         type: 'datetime',
         useNative: false,
@@ -194,7 +191,7 @@ class _MyAppState extends State<MyApp> {
     return fmt.format(dateOptions);
   }
 
-  String getDateTimeFormatNow(String curlo) {
+  String getDateTimeFormat(String curlo) {
     final ILibDateOptions dateOptions =
         ILibDateOptions(dateTime: DateTime.now());
     final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
