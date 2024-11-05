@@ -12,7 +12,7 @@ void main() {
     testPlatform = getTestPlatform();
     await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
-    ILibJS.instance.loadLocaleData('sq-AL');
+    ILibJS.instance.loadILibLocaleData('sq-AL');
   });
   group('format()', () {
     test('testDateFmtINSimpleShort_sq_AL', () {

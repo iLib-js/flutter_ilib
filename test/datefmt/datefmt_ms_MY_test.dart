@@ -8,7 +8,7 @@ void main() {
   setUpAll(() async {
     await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
-    ILibJS.instance.loadLocaleData('ms-MY');
+    ILibJS.instance.loadILibLocaleData('ms-MY');
   });
   group('format()', () {
     test('testDateFmtSimpleShort_ms_MY', () {

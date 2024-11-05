@@ -40,7 +40,7 @@ class ILibJS extends ChangeNotifier {
 
   void initILib() {
     try {
-      if (_iLibPrepared == false) {
+      if (!_iLibPrepared) {
         _jsRuntime.evaluate(_loadJSResult);
         _jsRuntime.evaluate(_loadLocaleJSResult);
         _iLibPrepared = true;
@@ -61,8 +61,13 @@ class ILibJS extends ChangeNotifier {
     }
   }
 
-  Future<void> loadLocaleData(String? locale) async {
+  Future<void> loadILibLocaleData(String? locale) async {
+    if (!_iLibPrepared) {
+      return;
+    }
+
     locale ??= getLocale();
+
     if (!isValidLocale(locale)) {
       return;
     }
@@ -73,6 +78,9 @@ class ILibJS extends ChangeNotifier {
       try {
         final String loadData = await loadJSwithPath(dataPath);
         evaluate(loadData);
+        if (currentLocale != locale) {
+          notifyListeners();
+        }
       } catch (err) {
         debugPrint('Caught error: $err');
       }

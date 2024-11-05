@@ -36,11 +36,13 @@ class _MyAppState extends State<MyApp> {
   String _iLibVersion = 'Unknown iLib';
   String _iLibCLDRVersion = 'CLDR';
   String _currentTime = 'Current Time';
-  final FlutterILib _flutterIlibPlugin = FlutterILib.instance;
   final String currentLocale =
       PlatformDispatcher.instance.locale.toString().replaceAll('_', '-');
   List<String> newList = <String>['-', '-', '-'];
-  String curLocale = '-';
+  String curLocale =
+      PlatformDispatcher.instance.locale.toString().replaceAll('_', '-');
+  String result1 = '', result2 = '', result3 = '';
+  final FlutterILib _flutterIlibPlugin = FlutterILib.instance;
 
   @override
   void initState() {
@@ -52,19 +54,21 @@ class _MyAppState extends State<MyApp> {
       if (!mounted) {
         return;
       }
-      _flutterIlibPlugin.addListener(() => initPlatformState());
+      _flutterIlibPlugin.addListener(() => updateState());
     });
   }
 
-  void initPlatformState() {
+  void updateState() {
     String iLibVersion;
+    String currentTime;
+    String iLibCLDRVersion;
+
     try {
       iLibVersion = _flutterIlibPlugin.getVersion ?? 'Unknown iLib version';
     } on PlatformException {
       iLibVersion = 'Failed to get iLib version.';
     }
 
-    String iLibCLDRVersion;
     try {
       iLibCLDRVersion =
           _flutterIlibPlugin.getCLDRVersion ?? 'Unknown CLDR version';
@@ -72,17 +76,21 @@ class _MyAppState extends State<MyApp> {
       iLibCLDRVersion = 'Failed to get iLib CLDR version.';
     }
 
-    String currentTime;
     try {
-      currentTime = getDateTimeFormatNow(currentLocale);
+      currentTime = getDateTimeFormatNow(curLocale);
     } on PlatformException {
       currentTime = 'Failed to get iLib DatFmt.';
     }
+
+    result1 = getDateTimeFormatNow(curLocale);
+    result2 = getFirstDayOfWeek(curLocale);
+    result3 = getClock(curLocale);
 
     setState(() {
       _iLibVersion = iLibVersion;
       _iLibCLDRVersion = iLibCLDRVersion;
       _currentTime = currentTime;
+      newList = <String>[result1, result2, result3];
     });
   }
 
@@ -133,9 +141,11 @@ class _MyAppState extends State<MyApp> {
                       child: Text(localeList[i], style: buttonTextStyle),
                       onPressed: () {
                         curLocale = localeList[i];
-                        final String result1 = getDateTimeFormatNow(curLocale);
-                        final String result2 = getFirstDayOfWeek(curLocale);
-                        final String result3 = getClock(curLocale);
+                        _flutterIlibPlugin.loadLocaleData(curLocale);
+
+                        result1 = getDateTimeFormatNow(curLocale);
+                        result2 = getFirstDayOfWeek(curLocale);
+                        result3 = getClock(curLocale);
                         setState(() {
                           newList = <String>[result1, result2, result3];
                         });
@@ -210,15 +220,12 @@ class _MyAppState extends State<MyApp> {
     ];
 
     final int firstDay = locInfo.getFirstDayOfWeek();
-
     return days[firstDay];
   }
 
   String getClock(String curlo) {
     final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: curlo);
-
     final int clock = ILibDateFmt(fmtOptions).getClock();
-
     return '$clock';
   }
 }

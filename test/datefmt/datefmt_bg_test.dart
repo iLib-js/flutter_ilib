@@ -8,7 +8,7 @@ void main() {
   setUpAll(() async {
     await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
-    ILibJS.instance.loadLocaleData('bg-BG');
+    ILibJS.instance.loadILibLocaleData('bg-BG');
   });
   group('format()', () {
     test('testDateFmtSimpleShort_bg_BG', () {

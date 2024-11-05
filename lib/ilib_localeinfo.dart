@@ -4,7 +4,7 @@ class ILibLocaleInfo {
   /// [lo] Set the locale for which the info is sought
   ILibLocaleInfo(String lo) {
     locale = lo;
-    ILibJS.instance.loadLocaleData(locale);
+    //ILibJS.instance.loadILibLocaleData(locale);
   }
   String? locale;
 

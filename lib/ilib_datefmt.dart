@@ -13,7 +13,7 @@ class ILibDateFmt {
     timezone = options.timezone;
     useNative = options.useNative;
 
-    ILibJS.instance.loadLocaleData(locale);
+    //ILibJS.instance.loadILibLocaleData(locale);
   }
 
   String? locale;
