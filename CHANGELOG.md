@@ -1,3 +1,7 @@
+## 0.4.0
+* Added `libquickjs_c_bridge_plugin.so` for aarch64-webos
+* Updated `CMakeLists.txt` for webos to support both arm and aarch64
+
 ## 0.3.0
 * Added the method `getMeridiemsRange()` in the class ILibDateFmt.
 * Updated test files to use ILib's `loadJS()` instead of `loadJSwithPath()`.
