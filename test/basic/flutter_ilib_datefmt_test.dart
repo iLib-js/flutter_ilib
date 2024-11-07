@@ -6,8 +6,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [flutter_ilib_datefmt_test.dart] file.');
   setUpAll(() async {
-    await ILibJS.instance
-        .loadJSwithPath('../../assets/js/ilib-standard-flutter-compiled.js');
+    await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
   });
   group('format()', () {
@@ -92,6 +91,20 @@ void main() {
           ILibDateFmtOptions(locale: 'en-GB', length: 'full');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       expect(fmt.getClock(), 24);
+    });
+    test('getMeridiem_en_GB', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'en-GB');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].name, 'am');
+      expect(meridiems[1].name, 'pm');
+    });
+    test('getMeridiem_ko_KR', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'ko-KR');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].name, '오전');
+      expect(meridiems[1].name, '오후');
     });
   });
 }

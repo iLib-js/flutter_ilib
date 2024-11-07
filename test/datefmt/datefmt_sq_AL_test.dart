@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../test_env.dart';
+
 void main() {
+  late String testPlatform;
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [datefmt_sq_AL_test.dart] file.');
   setUpAll(() async {
-    await ILibJS.instance
-        .loadJSwithPath('../../assets/js/ilib-standard-flutter-compiled.js');
+    testPlatform = getTestPlatform();
+    await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
   });
   group('format()', () {
@@ -88,7 +91,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45 e pasdites');
+      final String result =
+          (testPlatform == 'webOS') ? '1:45 të pasdites' : '1:45 e pasdites';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINSimpleTimeShort_sq_AL1', () {
       final ILibDateFmtOptions fmtOptions =
@@ -104,7 +109,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45 e pasdites');
+      final String result =
+          (testPlatform == 'webOS') ? '1:45 të pasdites' : '1:45 e pasdites';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINSimpleTimeMedium_sq_AL', () {
       final ILibDateFmtOptions fmtOptions =
@@ -120,7 +127,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45 e pasdites');
+      final String result =
+          (testPlatform == 'webOS') ? '1:45 të pasdites' : '1:45 e pasdites';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINSimpleTimeLong_sq_AL', () {
       final ILibDateFmtOptions fmtOptions =
@@ -136,7 +145,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45 e pasdites');
+      final String result =
+          (testPlatform == 'webOS') ? '1:45 të pasdites' : '1:45 e pasdites';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINSimpleTimeFull_sq_AL', () {
       final ILibDateFmtOptions fmtOptions =
@@ -152,7 +163,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45 e pasdites');
+      final String result =
+          (testPlatform == 'webOS') ? '1:45 të pasdites' : '1:45 e pasdites';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINDateTimeSimpleShort_sq_AL', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -168,7 +181,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29.9.11, 1:45 e pasdites');
+      final String result = (testPlatform == 'webOS')
+          ? '29.9.11, 1:45 të pasdites'
+          : '29.9.11, 1:45 e pasdites';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINDateTimeSimpleMedium_sq_AL', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -184,7 +200,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29 sht 2011, 1:45 e pasdites');
+      final String result = (testPlatform == 'webOS')
+          ? '29 sht 2011, 1:45 të pasdites'
+          : '29 sht 2011, 1:45 e pasdites';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINDateTimeSimpleLong_sq_AL', () {
       final ILibDateFmtOptions fmtOptions =
@@ -200,7 +219,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29 shtator 2011 në 1:45 e pasdites');
+      final String result = (testPlatform == 'webOS')
+          ? '29 shtator 2011 në 1:45 të pasdites'
+          : '29 shtator 2011 në 1:45 e pasdites';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINDateTimeSimpleFull_sq_AL', () {
       final ILibDateFmtOptions fmtOptions =
@@ -216,9 +238,11 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29 shtator 2011 në 1:45 e pasdites');
+      final String result = (testPlatform == 'webOS')
+          ? '29 shtator 2011 në 1:45 të pasdites'
+          : '29 shtator 2011 në 1:45 e pasdites';
+      expect(fmt.format(dateOptions), result);
     });
-
     test('testDateFmtINTypeDate_sq_AL', () {
       final ILibDateFmtOptions fmtOptions =
           ILibDateFmtOptions(locale: 'sq-AL', type: 'date');
@@ -249,7 +273,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45 e pasdites');
+      final String result =
+          (testPlatform == 'webOS') ? '1:45 të pasdites' : '1:45 e pasdites';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINTypeDateTime_sq_AL', () {
       final ILibDateFmtOptions fmtOptions =
@@ -265,7 +291,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29.9.11, 1:45 e pasdites');
+      final String result = (testPlatform == 'webOS')
+          ? '29.9.11, 1:45 të pasdites'
+          : '29.9.11, 1:45 e pasdites';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINShortDateComponentsY_sq_AL', () {
       final ILibDateFmtOptions fmtOptions =
@@ -633,7 +662,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45 e pasdites');
+      final String result =
+          (testPlatform == 'webOS') ? '1:45 të pasdites' : '1:45 e pasdites';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINShortTimeComponentsHMZ_sq_AL', () {
       final ILibDateFmtOptions fmtOptions =
@@ -649,9 +680,11 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45:37 e pasdites CEST');
+      final String result = (testPlatform == 'webOS')
+          ? '1:45:37 të pasdites CEST'
+          : '1:45:37 e pasdites CEST';
+      expect(fmt.format(dateOptions), result);
     });
-
     test('testDateFmtINFullTimeComponentsHM_sq_AL', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
           locale: 'sq-AL', type: 'time', length: 'full', time: 'hma');
@@ -666,7 +699,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45 e pasdites');
+      final String result =
+          (testPlatform == 'webOS') ? '1:45 të pasdites' : '1:45 e pasdites';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINFullTimeComponentsHMS_sq_AL', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -682,7 +717,10 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45:37 e pasdites');
+      final String result = (testPlatform == 'webOS')
+          ? '1:45:37 të pasdites'
+          : '1:45:37 e pasdites';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINFullTimeComponentsHMA_sq_AL', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -698,7 +736,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45 e pasdites');
+      final String result =
+          (testPlatform == 'webOS') ? '1:45 të pasdites' : '1:45 e pasdites';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINFullTimeComponentsHMAZ_sq_AL', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -714,7 +754,10 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45:37 e pasdites CEST');
+      final String result = (testPlatform == 'webOS')
+          ? '1:45:37 të pasdites CEST'
+          : '1:45:37 e pasdites CEST';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINFullTimeComponentsHMSA_sq_AL', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -730,7 +773,10 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45:37 e pasdites');
+      final String result = (testPlatform == 'webOS')
+          ? '1:45:37 të pasdites'
+          : '1:45:37 e pasdites';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINFullTimeComponentsHMSZ_sq_AL', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -746,7 +792,10 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45:37 e pasdites CEST');
+      final String result = (testPlatform == 'webOS')
+          ? '1:45:37 të pasdites CEST'
+          : '1:45:37 e pasdites CEST';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINFullTimeComponentsHMSAZ_sq_AL', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -762,7 +811,10 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45:37 e pasdites CEST');
+      final String result = (testPlatform == 'webOS')
+          ? '1:45:37 të pasdites CEST'
+          : '1:45:37 e pasdites CEST';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINWithTimeZoneAndNoDST_sq_AL', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -778,7 +830,10 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '1:45:37 e pasdites CET');
+      final String result = (testPlatform == 'webOS')
+          ? '1:45:37 të pasdites CET'
+          : '1:45:37 e pasdites CET';
+      expect(fmt.format(dateOptions), result);
     });
   });
 }

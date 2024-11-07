@@ -22,11 +22,13 @@ _flutterIlibPlugin.addListener(() {
 Get the result of formatting by using the class provided by flutter_ilib.
 
 ```dart
-final ILibDateFmtOptions fmtOptions =
-    ILibDateFmtOptions(locale: 'ko-KR', length: 'short', useNative: false, timezone: 'local');
+final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+    locale: 'ko-KR',
+    length: 'short',
+    useNative: false,
+    timezone: 'local');
 final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 final ILibDateOptions dateOptions = ILibDateOptions(
-    locale: 'ko-KR',
     year: 2024,
     month: 6,
     day: 27,
@@ -40,14 +42,14 @@ fmt.format(dateOptions);
 
 ```dart
 final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: 'ko-KR',
-          length: 'full',
-          type: 'datetime',
-          useNative: false,
-          timezone: 'local');
+    locale: 'ko-KR',
+    length: 'full',
+    type: 'datetime',
+    useNative: false,
+    timezone: 'local');
 final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-final ILibDateOptions dateOptions = ILibDateOptions(
-          locale: 'ko-KR', dateTime: DateTime.parse('2024-06-27 10:42'));
+final ILibDateOptions dateOptions =
+    ILibDateOptions(dateTime: DateTime.parse('2024-06-27 10:42'));
 fmt.format(dateOptions);
 // '2024년 6월 27일 오전 10:42'
 ```
@@ -83,7 +85,7 @@ We have a plan to provide more classes and methods.
 - Class: [ILibDateOptions](./Docs.md/#ilibdateoptions)
 - Class: [ILibDateFmtOptions](./Docs.md/#ilibdatefmtoptions)  
 - Class: [ILibDateFmt](./Docs.md#ilibdatefmt)
-   - Methods: `format()`, `getClock()`  
+   - Methods: `format()`, `getClock()`, `getTemplate()`, `getMeridiemsRange()`
 
 ### ILibLocaleInfo
 - Class: [ILibLocaleInfo](./Docs.md/#iliblocaleinfo)
@@ -96,7 +98,7 @@ They have the same result as the original iLib methods.
 ```text
 af-ZA,am-ET,ar-AE,ar-EG,ar-IQ,ar-MA,ar-SA,as-IN,az-Latn-AZ,bg-BG,bn-IN,    
 bs-Latn-BA,bs-Latn-ME,cs-CZ,da-DK,de-AT,de-CH,de-DE,de-LU,el-CY,el-GR, 
-en-AM,en-AU,en-AZ,en-CA,en-CN,en-GB, en-GE,en-GH,en-HK,en-IE,en-IN,en-IS,  
+en-AM,en-AU,en-AZ,en-CA,en-CN,en-GB,en-GE,en-GH,en-HK,en-IE,en-IN,en-IS,  
 en-JP,en-KE,en-LK,en-MM,en-MW,en-MX,en-MY,en-NG,en-NZ,en-PH,en-PR,en-SG,  
 en-TW,en-UG,en-US,en-ZA,en-ZM,es-AR,es-BO,es-CA,es-CL,es-CO,es-DO,es-EC,  
 es-ES,es-GT,es-HN,es-MX,es-NI,es-PA,es-PE,es-PR,es-PY,es-SV,es-US,es-UY,  
@@ -105,7 +107,7 @@ he-IL,hi-IN,hr-HR,hr-ME,hu-HU,id-ID,is-IS,it-CH,it-IT,ja-JP,kk-Cyrl-KZ,km-KH,
 kn-IN,ko-KR,ko-US,ku-Arab-IQ,lt-LT,lv-LV,mk-MK,ml-IN,mn-Cyrl-MN,mr-IN,ms-MY,  
 nb-NO,nl-BE,nl-NL,or-IN,pa-IN,pl-PL,pt-BR,pt-PT,ro-RO,ru-BY,ru-GE,ru-KG,ru-KZ,  
 ru-RU,ru-UA,si-LK,sk-SK,sl-SI,sq-AL,sq-ME,sr-Latn-ME,sr-Latn-RS,sv-FI,sv-SE,  
-sw-Latn-KE,ta-IN,te-IN,th-TH,tr-AM, tr-AZ,tr-CY,tr-TR,uk-UA,ur-IN,uz-Latn-UZ,  
+sw-Latn-KE,ta-IN,te-IN,th-TH,tr-AM,tr-AZ,tr-CY,tr-TR,uk-UA,ur-IN,uz-Latn-UZ,  
 vi-VN,zh-Hans-CN,zh-Hant-HK,zh-Hant-TW
 ```
 

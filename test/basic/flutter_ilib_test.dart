@@ -8,12 +8,11 @@ void main() {
   late FlutterILib flutterIlibPlugin;
   setUpAll(() async {
     flutterIlibPlugin = FlutterILib.instance;
-    await ILibJS.instance
-        .loadJSwithPath('../../assets/js/ilib-standard-flutter-compiled.js');
+    await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
   });
   group('Basic', () {
-    test('getVersion', () => expect(flutterIlibPlugin.getVersion, '14.21.0'));
+    test('getVersion', () => expect(flutterIlibPlugin.getVersion, '14.20.0'));
     test('getCLDRVersion',
         () => expect(flutterIlibPlugin.getCLDRVersion, '44.1'));
     test('evaluateILib', () {
