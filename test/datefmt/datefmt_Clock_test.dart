@@ -932,12 +932,6 @@ void main() {
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       expect(fmt.getClock(), 12);
     });
-    /* pa-PK is not a supported locale. so the _PK specific locale data won't be included
-    test('testClock_pa_PK', () {
-      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'pa-PK');
-      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-      expect(fmt.getClock(), 12);
-    });*/
     test('testClock_pt_AO', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'pt-AO');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
@@ -953,13 +947,6 @@ void main() {
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       expect(fmt.getClock(), 24);
     });
-    /*
-    ur-PK is not a supported locale. so the _PK specific locale data won't be included
-    test('testClock_ur_PK', () {
-      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'ur-PK');
-      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-      expect(fmt.getClock(), 12);
-    });*/
     test('testClock_zh_Hans_SG', () {
       final ILibDateFmtOptions fmtOptions =
           ILibDateFmtOptions(locale: 'zh-Hans-SG');
