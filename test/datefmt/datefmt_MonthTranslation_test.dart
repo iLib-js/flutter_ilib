@@ -11,8 +11,8 @@ void main() {
     final ILibJS ilibjsinstance = ILibJS.instance;
     await ilibjsinstance.loadJS();
     ilibjsinstance.initILib();
-
-    ilibjsinstance.loadILibLocaleData('af');
+    ilibjsinstance.loadILibLocaleDataAll();
+    /*ilibjsinstance.loadILibLocaleData('af');
     ilibjsinstance.loadILibLocaleData('am');
     ilibjsinstance.loadILibLocaleData('ar');
     ilibjsinstance.loadILibLocaleData('as');
@@ -77,7 +77,7 @@ void main() {
     ilibjsinstance.loadILibLocaleData('ur');
     ilibjsinstance.loadILibLocaleData('uz');
     ilibjsinstance.loadILibLocaleData('vi');
-    ilibjsinstance.loadILibLocaleData('zh');
+    ilibjsinstance.loadILibLocaleData('zh');*/
   });
   group('testMonthTranslate_ar_EG', () {
     final Map<int, String> expectedResult = <int, String>{

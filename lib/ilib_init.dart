@@ -86,4 +86,12 @@ class ILibJS extends ChangeNotifier {
       }
     }
   }
+
+  Future<void> loadILibLocaleDataAll() async {
+    final List<String> localelist = getSupportedLanguages();
+
+    for (final String lo in localelist) {
+      await loadILibLocaleData(lo);
+    }
+  }
 }
