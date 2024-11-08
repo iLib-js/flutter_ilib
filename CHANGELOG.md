@@ -3,6 +3,10 @@
   Previously, the dependent ilib was a fully assembled JS file. Now, the ilib files are separated into JS and locale files. 
   Now, the ilib files is separated the js and locale file. The JS code is assembled as `ilib-all.js`, and the locale files are generated with names like [language].js, e.g. `en.js`, `ko.js`. The iLib files are generated using the [ilib-assemble](https://github.com/iLib-js/ilib-assemble) tool. This change brings memory savings over previous versions of flutter-ilib.
 
+## 0.4.0
+* Added `libquickjs_c_bridge_plugin.so` for aarch64-webos
+* Updated `CMakeLists.txt` for webos to support both arm and aarch64
+
 ## 0.3.0
 * Added the method `getMeridiemsRange()` in the class ILibDateFmt.
 * Updated test files to use ILib's `loadJS()` instead of `loadJSwithPath()`.
