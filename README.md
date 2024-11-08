@@ -18,6 +18,37 @@ _flutterIlibPlugin.addListener(() {
 });
 ```
 
+### Updating the locale
+Since version **v1.0.0**, the structure has changed to load locale data only for the currently activated locale.  
+Initially, when the app is launched, the package automatically loads the locale data by detecting the locale.  
+To load the updated locale data file when the locale changes, I suggest adding the following method in the [localeResolutionCallback](https://api.flutter.dev/flutter/widgets/WidgetsApp/localeResolutionCallback.html) callback function.
+
+``` _flutterIlibPlugin.loadLocaleData(curLocale);```   
+
+i.e:
+```dart
+Locale? appLocaleResolutionCallback(
+      Locale? locale,
+      Iterable<Locale> supportedLocales,
+    ) {
+      Locale retLocale = localizationDelegate.fallbackLocale;
+
+      _flutterIlibPlugin.loadLocaleData(retLocale);
+      localizationDelegate.changeLocale(retLocale);
+
+      return retLocale;
+    }
+```
+```dart
+@override
+Widget build(BuildContext context) {
+....
+    return MaterialApp(
+        ....
+        localeResolutionCallback: appLocaleResolutionCallback,
+    ....
+```
+
 ### Formatting
 Get the result of formatting by using the class provided by flutter_ilib.
 
