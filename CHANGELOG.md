@@ -1,7 +1,7 @@
 ## 1.0.0
 * Updated the structure to load separate locale data files.  
-  Previously, the dependent ilib was a fully assembled JS file. Now, the ilib files are divided into the js and locale file.   
-  Now, the ilib files are separated the js and locale file. The JS code is assembled as `ilib-all.js`, and the locale files are generated with names like [language].js, e.g. `en.js`, `ko.js`. The iLib files are generated using the [ilib-assemble](https://github.com/iLib-js/ilib-assemble) tool. This change brings memory savings over previous versions of flutter-ilib.  
+  Previously, the dependent ilib was a fully assembled JS file. Now, the ilib files are divided into the js and locale files.  
+  The JS code is assembled as `ilib-init.js`, and the locale files are generated with names like [language].js, e.g. `en.js`, `ko.js`. The iLib files are generated using the [ilib-assemble](https://github.com/iLib-js/ilib-assemble) tool. This change brings memory savings over previous versions of flutter_ilib.  
   Initially, when the app is launched, the package automatically loads the locale data by detecting the system's locale. To load the updated locale data file when the locale changes, I suggest adding the following method at the appropriate time when the locale chanages. 
   ```dart
   _flutterIlibPlugin.loadLocaleData(curLocale);
