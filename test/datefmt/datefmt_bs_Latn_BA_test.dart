@@ -12,7 +12,7 @@ void main() {
     testPlatform = getTestPlatform();
     await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
-    ILibJS.instance.loadILibLocaleData('bs-Latn-BA');
+    await ILibJS.instance.loadILibLocaleData('bs-Latn-BA');
   });
   group('format()', () {
     test('testDateFmtSimpleShort_bs_Latn_BA', () {

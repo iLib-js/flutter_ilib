@@ -8,7 +8,7 @@ void main() {
   setUpAll(() async {
     await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
-    ILibJS.instance.loadILibLocaleData('ku-Arab-IQ');
+    await ILibJS.instance.loadILibLocaleData('ku-Arab-IQ');
   });
   group('format()', () {
     test('testDateFmtSimpleShort_ku_Arab_IQ', () {

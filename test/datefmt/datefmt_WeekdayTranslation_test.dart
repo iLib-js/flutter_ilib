@@ -11,7 +11,7 @@ void main() {
     final ILibJS ilibjsinstance = ILibJS.instance;
     await ilibjsinstance.loadJS();
     ilibjsinstance.initILib();
-    ilibjsinstance.loadILibLocaleDataAll();
+    await ilibjsinstance.loadILibLocaleDataAll();
   });
   group('testWeekdayTranslation_ar_EG', () {
     final Map<int, String> expectedResult = <int, String>{

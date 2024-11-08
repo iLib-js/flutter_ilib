@@ -13,7 +13,7 @@ void main() {
     final ILibJS ilibjsinstance = ILibJS.instance;
     await ilibjsinstance.loadJS();
     ilibjsinstance.initILib();
-    ilibjsinstance.loadILibLocaleDataAll();
+    await ilibjsinstance.loadILibLocaleDataAll();
   });
   group('format()', () {
     test('testDateTimeFormat_ar_EG', () {
