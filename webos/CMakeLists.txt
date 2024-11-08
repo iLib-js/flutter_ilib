@@ -31,7 +31,13 @@ if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 endif()
 set(INSTALL_BUNDLE_LIB_DIR "${CMAKE_INSTALL_PREFIX}/lib")
 
-set(QUICKJSC_BRIDGE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/shared/libquickjs_c_bridge_plugin.so")
+
+if(CMAKE_CXX_COMPILER_TARGET STREQUAL "aarch64-webos-linux")
+  set(QUICKJSC_BRIDGE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/shared/aarch64/libquickjs_c_bridge_plugin.so")
+else()
+  set(QUICKJSC_BRIDGE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/shared/arm/libquickjs_c_bridge_plugin.so")
+endif()
+
 install(CODE "file(REMOVE_RECURSE \"${INSTALL_BUNDLE_LIB_DIR}/${QUICKJSC_BRIDGE}\")" COMPONENT Runtime)
 install(FILES "${QUICKJSC_BRIDGE_PATH}" RENAME "${QUICKJSC_BRIDGE}" DESTINATION "${INSTALL_BUNDLE_LIB_DIR}" COMPONENT Runtime)
 
