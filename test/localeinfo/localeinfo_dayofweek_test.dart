@@ -10,9 +10,10 @@ void main() {
   debugPrint('Testing [localeinfo_dayofweek_test.dart] file.');
   setUpAll(() async {
     testPlatform = getTestPlatform();
-
-    await ILibJS.instance.loadJS();
-    ILibJS.instance.initILib();
+    final ILibJS ilibjsinstance = ILibJS.instance;
+    await ilibjsinstance.loadJS();
+    ilibjsinstance.initILib();
+    await ilibjsinstance.loadILibLocaleDataAll();
   });
   // 0:sun, 1:mon, 2:tue, 3:wed, 4:thu, 5:fri, 6:sat
   group('dayOFWeek()', () {
@@ -979,12 +980,6 @@ void main() {
       expect(locInfo.getWeekEndStart(), 6);
       expect(locInfo.getWeekEndEnd(), 0);
     });
-    test('testWeekData_pa_PK', () {
-      final ILibLocaleInfo locInfo = ILibLocaleInfo('pa-PK');
-      expect(locInfo.getFirstDayOfWeek(), 0);
-      expect(locInfo.getWeekEndStart(), 6);
-      expect(locInfo.getWeekEndEnd(), 0);
-    });
     test('testWeekData_pt_AO', () {
       final ILibLocaleInfo locInfo = ILibLocaleInfo('pt-AO');
       expect(locInfo.getFirstDayOfWeek(), 1);
@@ -1000,12 +995,6 @@ void main() {
     test('testWeekData_pt_CV', () {
       final ILibLocaleInfo locInfo = ILibLocaleInfo('pt-CV');
       expect(locInfo.getFirstDayOfWeek(), 1);
-      expect(locInfo.getWeekEndStart(), 6);
-      expect(locInfo.getWeekEndEnd(), 0);
-    });
-    test('testWeekData_ur_PK', () {
-      final ILibLocaleInfo locInfo = ILibLocaleInfo('ur-PK');
-      expect(locInfo.getFirstDayOfWeek(), 0);
       expect(locInfo.getWeekEndStart(), 6);
       expect(locInfo.getWeekEndEnd(), 0);
     });

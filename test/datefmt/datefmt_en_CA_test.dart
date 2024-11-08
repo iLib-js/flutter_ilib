@@ -8,6 +8,7 @@ void main() {
   setUpAll(() async {
     await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
+    await ILibJS.instance.loadILibLocaleData('en-CA');
   });
   group('format()', () {
     test('testDateFmtenCASimpleShort', () {
@@ -24,6 +25,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
+      print(fmt.getTemplate());
       expect(fmt.format(dateOptions), '2011-09-29');
     });
     test('testDateFmtenCASimpleMedium', () {

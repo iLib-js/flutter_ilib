@@ -1,6 +1,6 @@
 name: flutter_ilib
 description: "A wrapper plugin to conveniently use 'iLib' in Flutter apps. This plugin uses the 'flutter_js' to make the javascript file work properly in the Flutter app."
-version: 0.4.0
+version: 1.0.0
 homepage: https://github.com/iLib-js/flutter_ilib
 repository: https://github.com/iLib-js/flutter_ilib
 
@@ -47,7 +47,8 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/
-    - assets/js/ilib-all.js
+    - assets/locales/
+    - assets/js/ilib-init.js
 
   # For details regarding assets in packages, see
   # https://flutter.dev/assets-and-images/#from-packages

@@ -10,6 +10,9 @@ void main() {
     flutterIlibPlugin = FlutterILib.instance;
     await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
+    await ILibJS.instance.loadILibLocaleData('th-TH');
+    await ILibJS.instance.loadILibLocaleData('fa-IR');
+    await ILibJS.instance.loadILibLocaleData('am-ET');
   });
   group('Basic', () {
     test('getVersion', () => expect(flutterIlibPlugin.getVersion, '14.20.0'));
