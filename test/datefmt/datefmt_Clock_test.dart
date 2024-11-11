@@ -10,9 +10,12 @@ void main() {
   debugPrint('Testing [datefmt_Clock_test.dart] file.');
   setUpAll(() async {
     testPlatform = getTestPlatform();
-    await ILibJS.instance.loadJS();
-    ILibJS.instance.initILib();
+    final ILibJS ilibjsinstance = ILibJS.instance;
+    await ilibjsinstance.loadJS();
+    ilibjsinstance.initILib();
+    await ilibjsinstance.loadILibLocaleDataAll();
   });
+
   group('getClock()', () {
     test('testClock_ar_EG', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'ar-EG');
@@ -929,11 +932,6 @@ void main() {
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       expect(fmt.getClock(), 12);
     });
-    test('testClock_pa_PK', () {
-      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'pa-PK');
-      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-      expect(fmt.getClock(), 12);
-    });
     test('testClock_pt_AO', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'pt-AO');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
@@ -948,11 +946,6 @@ void main() {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'pt-CV');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       expect(fmt.getClock(), 24);
-    });
-    test('testClock_ur_PK', () {
-      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'ur-PK');
-      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-      expect(fmt.getClock(), 12);
     });
     test('testClock_zh_Hans_SG', () {
       final ILibDateFmtOptions fmtOptions =

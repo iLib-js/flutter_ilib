@@ -8,6 +8,7 @@ void main() {
   setUpAll(() async {
     await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
+    await ILibJS.instance.loadILibLocaleData('vi-VN');
   });
   group('format()', () {
     test('testDateFmtSimpleShort_vi_VN', () {

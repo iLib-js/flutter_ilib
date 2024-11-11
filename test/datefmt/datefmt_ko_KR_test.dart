@@ -8,6 +8,7 @@ void main() {
   setUpAll(() async {
     await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
+    await ILibJS.instance.loadILibLocaleData('ko-KR');
   });
   group('format()', () {
     test('testDateFmtSimpleShort_ko_KR', () {
@@ -46,7 +47,6 @@ void main() {
       final ILibDateFmtOptions fmtOptions =
           ILibDateFmtOptions(locale: 'ko-KR', length: 'long');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-
       final ILibDateOptions dateOptions = ILibDateOptions(
           locale: 'ko-KR',
           year: 2011,

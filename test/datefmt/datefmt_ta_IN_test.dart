@@ -8,6 +8,7 @@ void main() {
   setUpAll(() async {
     await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
+    await ILibJS.instance.loadILibLocaleData('ta-IN');
   });
   group('format()', () {
     test('testDateFmtINSimpleShort_ta_IN', () {

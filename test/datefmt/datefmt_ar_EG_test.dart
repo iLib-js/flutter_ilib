@@ -12,6 +12,7 @@ void main() {
     testPlatform = getTestPlatform();
     await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
+    await ILibJS.instance.loadILibLocaleData('ar-EG');
   });
   group('format()', () {
     test('testDateFmtSimpleShort_ar_EG', () {
