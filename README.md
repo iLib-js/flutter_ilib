@@ -19,8 +19,8 @@ _flutterIlibPlugin.addListener(() {
 ```
 
 ### Updating the locale
-Since version **v1.0.0**, the structure has changed to load locale data only for the currently activated locale.  
-Initially, when the app is launched, the package automatically loads the locale data by detecting the system's locale.  
+Since version **v1.0.0**, the structure has been updated to load locale data only for the currently activated locale.  
+when the app is launched, the package automatically loads the locale data by detecting the system's locale.  
 To load the updated locale data file when the locale changes, I suggest adding the following method at the appropriate time when the locale chanages.  
 
 ``` _flutterIlibPlugin.loadLocaleData(curLocale);```  
