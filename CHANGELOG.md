@@ -7,7 +7,6 @@
   _flutterIlibPlugin.loadLocaleData(curLocale);
   ```
 
-
 ## 0.4.0
 * Added `libquickjs_c_bridge_plugin.so` for aarch64-webos
 * Updated `CMakeLists.txt` for webos to support both arm and aarch64
