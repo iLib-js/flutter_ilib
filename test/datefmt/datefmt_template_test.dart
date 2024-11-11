@@ -10,8 +10,10 @@ void main() {
   debugPrint('Testing [datefmt_template_test.dart] file.');
   setUpAll(() async {
     testPlatform = getTestPlatform();
-    await ILibJS.instance.loadJS();
-    ILibJS.instance.initILib();
+    final ILibJS ilibjsinstance = ILibJS.instance;
+    await ilibjsinstance.loadJS();
+    ilibjsinstance.initILib();
+    await ilibjsinstance.loadILibLocaleDataAll();
   });
   group('format()', () {
     test('testDateTimeFormat_ar_EG', () {

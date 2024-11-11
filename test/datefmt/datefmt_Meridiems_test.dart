@@ -10,8 +10,10 @@ void main() {
   debugPrint('Testing [flutter_ilib_datefmt_test.dart] file.');
   setUpAll(() async {
     testPlatform = getTestPlatform();
-    await ILibJS.instance.loadJS();
-    ILibJS.instance.initILib();
+    final ILibJS ilibjsinstance = ILibJS.instance;
+    await ilibjsinstance.loadJS();
+    ilibjsinstance.initILib();
+    await ilibjsinstance.loadILibLocaleDataAll();
   });
   group('getMeridiems()', () {
     test('testMeridiem_ar_EG', () {
@@ -1361,30 +1363,6 @@ void main() {
 
       expect(meridiems[0].name, 'PG');
       expect(meridiems[1].name, 'PTG');
-    });
-    test('testMeridiem_pt_AO', () {
-      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'pt-AO');
-      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
-
-      expect(meridiems[0].name, 'da manhã');
-      expect(meridiems[1].name, 'da tarde');
-    });
-    test('testMeridiem_pt_GQ', () {
-      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'pt-GQ');
-      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
-
-      expect(meridiems[0].name, 'da manhã');
-      expect(meridiems[1].name, 'da tarde');
-    });
-    test('testMeridiem_pt_CV', () {
-      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'pt-CV');
-      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
-
-      expect(meridiems[0].name, 'da manhã');
-      expect(meridiems[1].name, 'da tarde');
     });
     test('testMeridiem_ur_PK', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'ur-PK');

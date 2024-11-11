@@ -8,6 +8,7 @@ void main() {
   setUpAll(() async {
     await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
+    await ILibJS.instance.loadILibLocaleData('kk-Cyrl-KZ');
   });
   group('format()', () {
     test('testDateFmtSimpleShort_kk_Cyrl_KZ', () {

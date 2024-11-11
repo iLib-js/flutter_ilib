@@ -32,4 +32,8 @@ class FlutterILib extends ChangeNotifier {
         : jsEvalResult.stringResult;
     return result;
   }
+
+  Future<void> loadLocaleData(String? locale) async {
+    await ILibJS.instance.loadILibLocaleData(locale);
+  }
 }

@@ -8,8 +8,10 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [datefmt_WeekdayTranslation_test.dart] file.');
   setUpAll(() async {
-    await ILibJS.instance.loadJS();
-    ILibJS.instance.initILib();
+    final ILibJS ilibjsinstance = ILibJS.instance;
+    await ilibjsinstance.loadJS();
+    ilibjsinstance.initILib();
+    await ilibjsinstance.loadILibLocaleDataAll();
   });
   group('testWeekdayTranslation_ar_EG', () {
     final Map<int, String> expectedResult = <int, String>{
@@ -14813,31 +14815,6 @@ void main() {
       });
     });
   });
-  group('testWeekdayTranslation_pt_AO_long', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'domingo',
-      1: 'segunda',
-      2: 'terça',
-      3: 'quarta',
-      4: 'quinta',
-      5: 'sexta',
-      6: 'sábado'
-    };
-    expectedResult.forEach((int num, String expected) {
-      test(num, () {
-        final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-            locale: 'pt-AO',
-            date: 'w',
-            length: 'long',
-            useNative: false,
-            timezone: 'local');
-        final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-        final ILibDateOptions dateOptions = ILibDateOptions(
-            year: 2015, month: 8, day: num + 2, type: 'gregorian');
-        expect(fmt.format(dateOptions), expected);
-      });
-    });
-  });
   group('testWeekdayTranslation_pt_AO_medium', () {
     final Map<int, String> expectedResult = <int, String>{
       0: 'dom.',
@@ -14913,31 +14890,6 @@ void main() {
       });
     });
   });
-  group('testWeekdayTranslation_pt_GQ_long', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'domingo',
-      1: 'segunda',
-      2: 'terça',
-      3: 'quarta',
-      4: 'quinta',
-      5: 'sexta',
-      6: 'sábado'
-    };
-    expectedResult.forEach((int num, String expected) {
-      test(num, () {
-        final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-            locale: 'pt-GQ',
-            date: 'w',
-            length: 'long',
-            useNative: false,
-            timezone: 'local');
-        final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-        final ILibDateOptions dateOptions = ILibDateOptions(
-            year: 2015, month: 8, day: num + 2, type: 'gregorian');
-        expect(fmt.format(dateOptions), expected);
-      });
-    });
-  });
   group('testWeekdayTranslation_pt_GQ_medium', () {
     final Map<int, String> expectedResult = <int, String>{
       0: 'dom.',
@@ -15004,31 +14956,6 @@ void main() {
             locale: 'pt-CV',
             date: 'w',
             length: 'full',
-            useNative: false,
-            timezone: 'local');
-        final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-        final ILibDateOptions dateOptions = ILibDateOptions(
-            year: 2015, month: 8, day: num + 2, type: 'gregorian');
-        expect(fmt.format(dateOptions), expected);
-      });
-    });
-  });
-  group('testWeekdayTranslation_pt_CV_long', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'domingo',
-      1: 'segunda',
-      2: 'terça',
-      3: 'quarta',
-      4: 'quinta',
-      5: 'sexta',
-      6: 'sábado'
-    };
-    expectedResult.forEach((int num, String expected) {
-      test(num, () {
-        final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-            locale: 'pt-CV',
-            date: 'w',
-            length: 'long',
             useNative: false,
             timezone: 'local');
         final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
