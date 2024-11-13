@@ -1,7 +1,6 @@
 ### Checklist
 
-The following lists affect Pub Points on pub.dev.
-
+The following lists affects Pub Points on pub.dev when the package is published.
 * [ ] Passed the all tests.
 * [ ] Verified that the example app works.
 * [ ] Executed the `dart format` command.
