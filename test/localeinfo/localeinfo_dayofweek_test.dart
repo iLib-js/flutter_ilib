@@ -868,7 +868,7 @@ void main() {
     });
     test('testWeekData_ar_AE', () {
       final ILibLocaleInfo locInfo = ILibLocaleInfo('ar-AE');
-      expect(locInfo.getFirstDayOfWeek(), 6);
+      expect(locInfo.getFirstDayOfWeek(), 1);
       expect(locInfo.getWeekEndStart(), 6);
       expect(locInfo.getWeekEndEnd(), 0);
     });
