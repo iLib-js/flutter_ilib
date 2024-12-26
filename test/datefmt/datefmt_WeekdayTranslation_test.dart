@@ -603,7 +603,7 @@ void main() {
       3: 'বুঃ',
       4: 'বৃঃ',
       5: 'শুঃ',
-      6: 'শনি'
+      6: 'শঃ'
     };
     expectedResult.forEach((int num, String expected) {
       test(num, () {
@@ -972,13 +972,13 @@ void main() {
   });
   group('testWeekdayTranslation_da_DK_long', () {
     final Map<int, String> expectedResult = <int, String>{
-      0: 'søn',
-      1: 'man',
-      2: 'tir',
-      3: 'ons',
-      4: 'tor',
-      5: 'fre',
-      6: 'lør'
+      0: 'søn.',
+      1: 'man.',
+      2: 'tirs.',
+      3: 'ons.',
+      4: 'tors.',
+      5: 'fre.',
+      6: 'lør.'
     };
     expectedResult.forEach((int num, String expected) {
       test(num, () {
@@ -997,13 +997,13 @@ void main() {
   });
   group('testWeekdayTranslation_da_DK_medium', () {
     final Map<int, String> expectedResult = <int, String>{
-      0: 'sø',
-      1: 'ma',
-      2: 'ti',
-      3: 'on',
-      4: 'to',
-      5: 'fr',
-      6: 'lø'
+      0: 'sø.',
+      1: 'ma.',
+      2: 'ti.',
+      3: 'on.',
+      4: 'to.',
+      5: 'fr.',
+      6: 'lø.'
     };
     expectedResult.forEach((int num, String expected) {
       test(num, () {
@@ -4560,13 +4560,13 @@ void main() {
   });
   group('testWeekdayTranslation_es_CL_medium', () {
     final Map<int, String> expectedResult = <int, String>{
-      0: 'DO',
-      1: 'LU',
-      2: 'MA',
-      3: 'MI',
-      4: 'JU',
-      5: 'VI',
-      6: 'SA'
+      0: 'do',
+      1: 'lu',
+      2: 'ma',
+      3: 'mi',
+      4: 'ju',
+      5: 'vi',
+      6: 'sá'
     };
     expectedResult.forEach((int num, String expected) {
       test(num, () {

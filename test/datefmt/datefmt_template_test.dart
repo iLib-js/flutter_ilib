@@ -1280,10 +1280,10 @@ void main() {
       final ILibDateFmt fmt2 = ILibDateFmt(fmtOptions2);
       final ILibDateFmt fmt3 = ILibDateFmt(fmtOptions3);
       final ILibDateFmt fmt4 = ILibDateFmt(fmtOptions4);
-      expect(fmt1.getTemplate(), 'EEEE d MMMM yyyy');
-      expect(fmt2.getTemplate(), 'EEE d MMMM yyyy');
-      expect(fmt3.getTemplate(), 'EE d MMM yyyy');
-      expect(fmt4.getTemplate(), 'E d/M/yy');
+      expect(fmt1.getTemplate(), 'EEEE, d MMMM yyyy');
+      expect(fmt2.getTemplate(), 'EEE, d MMMM yyyy');
+      expect(fmt3.getTemplate(), 'EE, d MMM yyyy');
+      expect(fmt4.getTemplate(), 'E, d/M/yy');
 
       final ILibDateFmtOptions fmtOptions5 = ILibDateFmtOptions(
           locale: 'en-AU',
@@ -1303,8 +1303,8 @@ void main() {
       final ILibDateFmt fmt5 = ILibDateFmt(fmtOptions5);
       final ILibDateFmt fmt6 = ILibDateFmt(fmtOptions6);
 
-      expect(fmt5.getTemplate(), "EEEE d MMMM yyyy 'at' h:mm a");
-      expect(fmt6.getTemplate(), 'E d/M/yy, h:mm a');
+      expect(fmt5.getTemplate(), "EEEE, d MMMM yyyy 'at' h:mm a");
+      expect(fmt6.getTemplate(), 'E, d/M/yy, h:mm a');
 
       final ILibDateFmtOptions fmtOptions7 = ILibDateFmtOptions(
           locale: 'en-AU',
@@ -1490,10 +1490,10 @@ void main() {
       final ILibDateFmt fmt2 = ILibDateFmt(fmtOptions2);
       final ILibDateFmt fmt3 = ILibDateFmt(fmtOptions3);
       final ILibDateFmt fmt4 = ILibDateFmt(fmtOptions4);
-      expect(fmt1.getTemplate(), 'EEEE d MMMM yyyy');
-      expect(fmt2.getTemplate(), 'EEE d MMMM yyyy');
-      expect(fmt3.getTemplate(), 'EE d MMM yyyy');
-      expect(fmt4.getTemplate(), 'E dd/MM/yyyy');
+      expect(fmt1.getTemplate(), 'EEEE, d MMMM yyyy');
+      expect(fmt2.getTemplate(), 'EEE, d MMMM yyyy');
+      expect(fmt3.getTemplate(), 'EE, d MMM yyyy');
+      expect(fmt4.getTemplate(), 'E, dd/MM/yyyy');
 
       final ILibDateFmtOptions fmtOptions5 = ILibDateFmtOptions(
           locale: 'en-GB',
@@ -1513,8 +1513,8 @@ void main() {
       final ILibDateFmt fmt5 = ILibDateFmt(fmtOptions5);
       final ILibDateFmt fmt6 = ILibDateFmt(fmtOptions6);
 
-      expect(fmt5.getTemplate(), "EEEE d MMMM yyyy 'at' HH:mm");
-      expect(fmt6.getTemplate(), 'E dd/MM/yyyy, HH:mm');
+      expect(fmt5.getTemplate(), "EEEE, d MMMM yyyy 'at' HH:mm");
+      expect(fmt6.getTemplate(), 'E, dd/MM/yyyy, HH:mm');
 
       final ILibDateFmtOptions fmtOptions7 = ILibDateFmtOptions(
           locale: 'en-GB',
@@ -1770,10 +1770,10 @@ void main() {
       final ILibDateFmt fmt2 = ILibDateFmt(fmtOptions2);
       final ILibDateFmt fmt3 = ILibDateFmt(fmtOptions3);
       final ILibDateFmt fmt4 = ILibDateFmt(fmtOptions4);
-      expect(fmt1.getTemplate(), 'EEEE d MMMM, yyyy');
-      expect(fmt2.getTemplate(), 'EEE d MMMM yyyy');
-      expect(fmt3.getTemplate(), 'EE d MMM yyyy');
-      expect(fmt4.getTemplate(), 'E dd/MM/yy');
+      expect(fmt1.getTemplate(), 'EEEE, d MMMM yyyy');
+      expect(fmt2.getTemplate(), 'EEE, d MMMM yyyy');
+      expect(fmt3.getTemplate(), 'EE, d MMM yyyy');
+      expect(fmt4.getTemplate(), 'E, dd/MM/yy');
 
       final ILibDateFmtOptions fmtOptions5 = ILibDateFmtOptions(
           locale: 'en-IN',
@@ -1793,8 +1793,8 @@ void main() {
       final ILibDateFmt fmt5 = ILibDateFmt(fmtOptions5);
       final ILibDateFmt fmt6 = ILibDateFmt(fmtOptions6);
 
-      expect(fmt5.getTemplate(), "EEEE d MMMM, yyyy 'at' h:mm a");
-      expect(fmt6.getTemplate(), 'E dd/MM/yy, h:mm a');
+      expect(fmt5.getTemplate(), "EEEE, d MMMM yyyy 'at' h:mm a");
+      expect(fmt6.getTemplate(), 'E, dd/MM/yy, h:mm a');
 
       final ILibDateFmtOptions fmtOptions7 = ILibDateFmtOptions(
           locale: 'en-IN',
@@ -6257,9 +6257,9 @@ void main() {
       final ILibDateFmt fmt2 = ILibDateFmt(fmtOptions2);
       final ILibDateFmt fmt3 = ILibDateFmt(fmtOptions3);
       final ILibDateFmt fmt4 = ILibDateFmt(fmtOptions4);
-      expect(fmt1.getTemplate(), 'EEEE, d MMMM yyyy');
-      expect(fmt2.getTemplate(), 'EEE, d MMMM yyyy');
-      expect(fmt3.getTemplate(), 'EE, d.M.yyyy');
+      expect(fmt1.getTemplate(), "EEEE, d MMMM yyyy \'г\'.");
+      expect(fmt2.getTemplate(), "EEE, d MMMM yyyy \'г\'.");
+      expect(fmt3.getTemplate(), "EE, d.M.yyyy \'г\'.");
       expect(fmt4.getTemplate(), 'E, d.M.yy');
 
       final ILibDateFmtOptions fmtOptions5 = ILibDateFmtOptions(
@@ -6280,7 +6280,7 @@ void main() {
       final ILibDateFmt fmt5 = ILibDateFmt(fmtOptions5);
       final ILibDateFmt fmt6 = ILibDateFmt(fmtOptions6);
 
-      expect(fmt5.getTemplate(), "EEEE, d MMMM yyyy, 'во' HH:mm");
+      expect(fmt5.getTemplate(), "EEEE, d MMMM yyyy \'г\'., \'во\' HH:mm");
       expect(fmt6.getTemplate(), "E, d.M.yy, 'во' HH:mm");
 
       final ILibDateFmtOptions fmtOptions7 = ILibDateFmtOptions(
@@ -7104,7 +7104,7 @@ void main() {
       expect(fmt1.getTemplate(), 'EEEE, d. MMMM yyyy.');
       expect(fmt2.getTemplate(), 'EEE, d. MMMM yyyy.');
       expect(fmt3.getTemplate(), 'EE, d. M. yyyy.');
-      expect(fmt4.getTemplate(), 'E, d.M.yy.');
+      expect(fmt4.getTemplate(), 'E, d. M. yyyy.');
 
       final ILibDateFmtOptions fmtOptions5 = ILibDateFmtOptions(
           locale: 'sr-Cyrl-RS',
@@ -7125,7 +7125,7 @@ void main() {
       final ILibDateFmt fmt6 = ILibDateFmt(fmtOptions6);
 
       expect(fmt5.getTemplate(), 'EEEE, d. MMMM yyyy. HH:mm');
-      expect(fmt6.getTemplate(), 'E, d.M.yy. HH:mm');
+      expect(fmt6.getTemplate(), 'E, d. M. yyyy. HH:mm');
 
       final ILibDateFmtOptions fmtOptions7 = ILibDateFmtOptions(
           locale: 'sr-Cyrl-RS',
@@ -7174,7 +7174,7 @@ void main() {
       expect(fmt1.getTemplate(), 'EEEE, d. MMMM yyyy.');
       expect(fmt2.getTemplate(), 'EEE, d. MMMM yyyy.');
       expect(fmt3.getTemplate(), 'EE, d. M. yyyy.');
-      expect(fmt4.getTemplate(), 'E, d.M.yy.');
+      expect(fmt4.getTemplate(), 'E, d. M. yyyy.');
 
       final ILibDateFmtOptions fmtOptions5 = ILibDateFmtOptions(
           locale: 'sr-Latn-RS',
@@ -7195,7 +7195,7 @@ void main() {
       final ILibDateFmt fmt6 = ILibDateFmt(fmtOptions6);
 
       expect(fmt5.getTemplate(), 'EEEE, d. MMMM yyyy. HH:mm');
-      expect(fmt6.getTemplate(), 'E, d.M.yy. HH:mm');
+      expect(fmt6.getTemplate(), 'E, d. M. yyyy. HH:mm');
 
       final ILibDateFmtOptions fmtOptions7 = ILibDateFmtOptions(
           locale: 'sr-Latn-RS',
@@ -8104,8 +8104,8 @@ void main() {
       final ILibDateFmt fmt5 = ILibDateFmt(fmtOptions5);
       final ILibDateFmt fmt6 = ILibDateFmt(fmtOptions6);
 
-      expect(fmt5.getTemplate(), 'EEEE, d MMMM, yyyy அன்று a h:mm');
-      expect(fmt6.getTemplate(), 'E, d/M/yy, a h:mm');
+      expect(fmt5.getTemplate(), 'EEEE, d MMMM, yyyy அன்று h:mm a');
+      expect(fmt6.getTemplate(), 'E, d/M/yy, h:mm a');
 
       final ILibDateFmtOptions fmtOptions7 = ILibDateFmtOptions(
           locale: 'ta-IN',
@@ -8115,7 +8115,7 @@ void main() {
           useNative: false,
           timezone: 'local');
       final ILibDateFmt fmt7 = ILibDateFmt(fmtOptions7);
-      expect(fmt7.getTemplate(), 'a h:mm:ss z');
+      expect(fmt7.getTemplate(), 'h:mm:ss a z');
     });
     test('testDateTimeFormat_te_IN', () {
       final ILibDateFmtOptions fmtOptions1 = ILibDateFmtOptions(
