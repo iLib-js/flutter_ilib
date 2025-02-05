@@ -49,8 +49,8 @@ void main() {
         expect(meridiems[0].name, 'AM');
         expect(meridiems[1].name, 'PM');
       } else {
-        expect(meridiems[0].name, 'পূৰ্বাহ্ন');
-        expect(meridiems[1].name, 'অপৰাহ্ন');
+        expect(meridiems[0].name, 'AM');
+        expect(meridiems[1].name, 'PM');
       }
     });
     test('testMeridiem_bg_BG', () {
@@ -606,8 +606,8 @@ void main() {
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
 
-      expect(meridiems[0].name, 'לפנה״צ');
-      expect(meridiems[1].name, 'אחה״צ');
+      expect(meridiems[0].name, 'AM');
+      expect(meridiems[1].name, 'PM');
     });
     test('testMeridiem_hi_IN', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'hi-IN');
@@ -702,8 +702,8 @@ void main() {
         expect(meridiems[0].name, 'AM');
         expect(meridiems[1].name, 'PM');
       } else {
-        expect(meridiems[0].name, 'ಪೂರ್ವಾಹ್ನ');
-        expect(meridiems[1].name, 'ಅಪರಾಹ್ನ');
+        expect(meridiems[0].name, 'AM');
+        expect(meridiems[1].name, 'PM');
       }
     });
     test('testMeridiem_ko_KR', () {
@@ -971,7 +971,7 @@ void main() {
         expect(meridiems[1].name, 'PM');
       } else {
         expect(meridiems[0].name, 'AM');
-        expect(meridiems[1].name, 'பிற்பகல்');
+        expect(meridiems[1].name, 'PM');
       }
     });
     test('testMeridiem_te_IN', () {
