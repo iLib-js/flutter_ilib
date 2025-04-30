@@ -1,7 +1,8 @@
 # flutter_ilib
 
-A wrapper plugin to conveniently use [iLib](https://github.com/iLib-js/iLib) in Flutter apps.  
-This plugin uses the [flutter_js](https://pub.dev/packages/flutter_js) to make the javascript file work properly in the Flutter app.
+A wrapper plugin to conveniently use [iLib](https://github.com/iLib-js/iLib) in Flutter app.  
+The iLib is an internationalization library written in pure JavaScript.  
+This plugin uses the [flutter_js](https://pub.dev/packages/flutter_js) to make the JavaScript file work properly in the Flutter app.
 
 ## How to use
 ### Initialization
@@ -169,7 +170,7 @@ flutter run -d linux --release
 
 ## License
 
-Copyright (c) 2024, JEDLSoft
+Copyright (c) 2024-2025, JEDLSoft
 
 This plugin is license under Apache2. See the [LICENSE](./LICENSE)
 file for more details.

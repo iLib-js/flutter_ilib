@@ -15,9 +15,9 @@ void main() {
     await ILibJS.instance.loadILibLocaleData('am-ET');
   });
   group('Basic', () {
-    test('getVersion', () => expect(flutterIlibPlugin.getVersion, '14.20.0'));
+    test('getVersion', () => expect(flutterIlibPlugin.getVersion, '14.21.0'));
     test('getCLDRVersion',
-        () => expect(flutterIlibPlugin.getCLDRVersion, '44.1'));
+        () => expect(flutterIlibPlugin.getCLDRVersion, '46.0'));
     test('evaluateILib', () {
       const String loko = 'ko-KR';
       const String loes = 'es-ES';

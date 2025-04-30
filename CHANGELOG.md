@@ -1,3 +1,8 @@
+## 1.1.0
+* Updated the iLib files to version 14.21.0 since the new version of iLib has been released.
+  * iLib version 14.21.0 incorporates CLDR 46
+* Updated the test cases where expectations have aligned between webOS versions and upstream since the CLDR update to 46
+
 ## 1.0.0
 * Updated the structure to load separate locale data files.  
   Previously, the dependent ilib was a fully assembled JS file. Now, the ilib files are divided into the js and locale files.  

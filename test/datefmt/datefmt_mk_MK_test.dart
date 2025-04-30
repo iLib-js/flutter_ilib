@@ -41,7 +41,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29.9.2011');
+      expect(fmt.format(dateOptions), '29.9.2011 г.');
     });
     test('testDateFmtSimpleLong_mk_MK', () {
       final ILibDateFmtOptions fmtOptions =
@@ -57,7 +57,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29 септември 2011');
+      expect(fmt.format(dateOptions), '29 септември 2011 г.');
     });
     test('testDateFmtSimpleFull_mk_MK', () {
       final ILibDateFmtOptions fmtOptions =
@@ -73,7 +73,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29 септември 2011');
+      expect(fmt.format(dateOptions), '29 септември 2011 г.');
     });
     test('testDateFmtSimpleTimeShort_mk_MK', () {
       final ILibDateFmtOptions fmtOptions =
@@ -169,7 +169,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29.9.2011, во 13:45');
+      expect(fmt.format(dateOptions), '29.9.2011 г., во 13:45');
     });
     test('testDateFmtDateTimeSimpleLong_mk_MK', () {
       final ILibDateFmtOptions fmtOptions =
@@ -185,7 +185,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29 септември 2011, во 13:45');
+      expect(fmt.format(dateOptions), '29 септември 2011 г., во 13:45');
     });
     test('testDateFmtDateTimeSimpleFull_mk_MK', () {
       final ILibDateFmtOptions fmtOptions =
@@ -201,7 +201,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29 септември 2011, во 13:45');
+      expect(fmt.format(dateOptions), '29 септември 2011 г., во 13:45');
     });
 
     test('testDateFmtShortDateComponentsY_mk_MK', () {
@@ -426,7 +426,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), 'септември 2011');
+      expect(fmt.format(dateOptions), 'септември 2011 г.');
     });
     test('testDateFmtFullDateComponentsDMY_mk_MK', () {
       final ILibDateFmtOptions fmtOptions =
@@ -442,7 +442,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29 септември 2011');
+      expect(fmt.format(dateOptions), '29 септември 2011 г.');
     });
     test('testDateFmtFullDateComponentsWDM_mk_MK', () {
       final ILibDateFmtOptions fmtOptions =
@@ -474,7 +474,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), 'четврток, 29 септември 2011');
+      expect(fmt.format(dateOptions), 'четврток, 29 септември 2011 г.');
     });
     test('testDateFmtShortTimeComponentsS_mk_MK', () {
       final ILibDateFmtOptions fmtOptions =
