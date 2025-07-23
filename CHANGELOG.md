@@ -1,3 +1,7 @@
+## 1.2.0
+* Added `isReady` getter to `ILibJS` class to expose internal `_iLibPrepared` state.
+* Added `isReady` getter to `FlutterILib` class for external access to ILibJS initialization status.
+
 ## 1.1.0
 * Updated the iLib files to version 14.21.0 since the new version of iLib has been released.
   * iLib version 14.21.0 incorporates CLDR 46
