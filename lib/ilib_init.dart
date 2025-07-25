@@ -10,7 +10,7 @@ class ILibJS extends ChangeNotifier {
 
   static final ILibJS _instance = ILibJS._internal();
   static ILibJS get instance => _instance;
-  bool get isReady => _iLibPrepared;
+  bool get isILibReady => _iLibPrepared;
 
   final JavascriptRuntime _jsRuntime = getJavascriptRuntime();
   bool _iLibPrepared = false;

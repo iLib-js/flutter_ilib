@@ -20,7 +20,7 @@ class FlutterILib extends ChangeNotifier {
   static FlutterILib get instance => _instance;
 
   /// Return whether iLib is ready
-  bool get isReady => ILibJS.instance.isReady;
+  bool get isILibReady => ILibJS.instance.isILibReady;
 
   /// Return the current version of iLib.
   String? get getVersion => evaluateILib('''ilib.getVersion()''');

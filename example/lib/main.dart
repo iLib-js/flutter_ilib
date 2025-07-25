@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
       if (!mounted) {
         return;
       }
-      if (!_flutterIlibPlugin.isReady) {
+      if (!_flutterIlibPlugin.isILibReady) {
         _flutterIlibPlugin.addListener(() => updateState());
       } else {
         updateState();

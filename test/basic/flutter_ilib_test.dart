@@ -37,6 +37,6 @@ void main() {
       const String str = '';
       expect(flutterIlibPlugin.evaluateILib(str), null);
     });
-    test('isReady', () => expect(flutterIlibPlugin.isReady, true));
+    test('isILibReady', () => expect(flutterIlibPlugin.isILibReady, true));
   });
 }
