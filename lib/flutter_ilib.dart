@@ -19,6 +19,9 @@ class FlutterILib extends ChangeNotifier {
   static final FlutterILib _instance = FlutterILib._internal();
   static FlutterILib get instance => _instance;
 
+  /// Return whether iLib is ready
+  bool get isILibReady => ILibJS.instance.isILibReady;
+
   /// Return the current version of iLib.
   String? get getVersion => evaluateILib('''ilib.getVersion()''');
 
