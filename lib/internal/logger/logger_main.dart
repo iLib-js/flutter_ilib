@@ -10,9 +10,6 @@ const String defaultTag = 'flutter_ilib';
 /// This logger forwards messages to the root logger and listens to log records.
 /// It supports multiple log levels and optional tagging and location tracking.
 ///
-/// - `tag`: Used to identify the source of the log.
-/// - `loc`: If `true`, includes the caller's location in the log message.
-///
 /// Use [Logger()] to access the shared instance.
 class Logger implements LogAdapter {
   /// Returns the singleton instance of [Logger].
@@ -59,9 +56,9 @@ class Logger implements LogAdapter {
 
   /// Logs a debug-level message.
   ///
-  /// - [message]: The content to log.
-  /// - [tag]: Optional identifier for the log source (default: `'flutter_ilib'`).
-  /// - [loc]: Whether to include caller location information (default: `false`).
+  /// [message] The content to log.
+  /// [tag] Optional identifier for the log source (default: `'flutter_ilib'`).
+  /// [loc] Whether to include caller location information (default: `false`).
   @override
   void debug(String message, {String tag = defaultTag, bool loc = false}) {
     _logger.fine(_formatMessage(message, tag, loc));
@@ -69,9 +66,9 @@ class Logger implements LogAdapter {
 
   /// Logs an informational message.
   ///
-  /// - [message]: The content to log.
-  /// - [tag]: Optional identifier for the log source (default: `'flutter_ilib'`).
-  /// - [loc]: Whether to include caller location information (default: `false`).
+  /// [message] The content to log.
+  /// [tag] Optional identifier for the log source (default: `'flutter_ilib'`).
+  /// [loc] Whether to include caller location information (default: `false`).
   @override
   void info(String message, {String tag = defaultTag, bool loc = false}) {
     _logger.info(_formatMessage(message, tag, loc));
@@ -79,9 +76,9 @@ class Logger implements LogAdapter {
 
   /// Logs a warning message.
   ///
-  /// - [message]: The content to log.
-  /// - [tag]: Optional identifier for the log source (default: `'flutter_ilib'`).
-  /// - [loc]: Whether to include caller location information (default: `false`).
+  /// [message] The content to log.
+  /// [tag] Optional identifier for the log source (default: `'flutter_ilib'`).
+  /// [loc] Whether to include caller location information (default: `false`).
   @override
   void warn(String message, {String tag = defaultTag, bool loc = false}) {
     _logger.warning(_formatMessage(message, tag, loc));
@@ -89,9 +86,9 @@ class Logger implements LogAdapter {
 
   /// Logs an error message.
   ///
-  /// - [message]: The content to log.
-  /// - [tag]: Optional identifier for the log source (default: `'flutter_ilib'`).
-  /// - [loc]: Whether to include caller location information (default: `false`).
+  /// [message] The content to log.
+  /// [tag] Optional identifier for the log source (default: `'flutter_ilib'`).
+  /// [loc] Whether to include caller location information (default: `false`).
   @override
   void error(String message, {String tag = defaultTag, bool loc = false}) {
     _logger.severe(_formatMessage(message, tag, loc));

@@ -34,5 +34,4 @@ abstract class LogAdapter {
   /// [tag] is an optional identifier for the log source (default: 'default').
   /// [loc] indicates whether to include location information (default: false).
   void error(String message, {String tag = defaultTag, bool loc = false});
-
 }

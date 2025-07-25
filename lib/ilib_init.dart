@@ -87,7 +87,6 @@ class ILibJS extends ChangeNotifier {
         final String loadData = await loadJSwithPath(dataPath);
         evaluate(loadData);
         if (currentLocale != locale) {
-          logger.info('locale Changed to $locale');
           notifyListeners();
         }
       } catch (err) {
