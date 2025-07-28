@@ -4,7 +4,7 @@ import 'package:flutter_js/flutter_js.dart';
 import 'internal/ilib_utils.dart';
 
 import 'internal/logger/log_adapter.dart';
-import 'internal/logger/logger.dart';
+import 'internal/logger/logger_selector.dart';
 
 class ILibJS extends ChangeNotifier {
   ILibJS._internal() {
