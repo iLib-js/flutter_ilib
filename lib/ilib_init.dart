@@ -3,6 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_js/flutter_js.dart';
 import 'internal/ilib_utils.dart';
 
+import 'internal/logger/log_adapter.dart';
+import 'internal/logger/logger_selector.dart';
+
 class ILibJS extends ChangeNotifier {
   ILibJS._internal() {
     loadJS();
@@ -10,6 +13,8 @@ class ILibJS extends ChangeNotifier {
 
   static final ILibJS _instance = ILibJS._internal();
   static ILibJS get instance => _instance;
+  bool get isILibReady => _iLibPrepared;
+  final LogAdapter logger = Logger();
 
   final JavascriptRuntime _jsRuntime = getJavascriptRuntime();
   bool _iLibPrepared = false;
@@ -28,6 +33,8 @@ class ILibJS extends ChangeNotifier {
       _loadLocaleJSResult = await rootBundle.loadString(dataPath);
       fileList.add(dataPath);
     }
+
+    logger.info('Notifying listeners after js loading');
     notifyListeners();
   }
 
@@ -44,9 +51,10 @@ class ILibJS extends ChangeNotifier {
         _jsRuntime.evaluate(_loadJSResult);
         _jsRuntime.evaluate(_loadLocaleJSResult);
         _iLibPrepared = true;
+        logger.info('iLib initialization completed');
       }
     } on PlatformException catch (e) {
-      debugPrint('Failed to init js engine: ${e.details}');
+      logger.error('Failed to init js engine: ${e.details}');
       rethrow;
     }
   }
@@ -56,7 +64,7 @@ class ILibJS extends ChangeNotifier {
       _jsEvalResult = _jsRuntime.evaluate(code);
       return _jsEvalResult;
     } on PlatformException catch (e) {
-      debugPrint('Failed to load js engine: ${e.details}');
+      logger.error('Failed to evaluate: ${e.details}');
       rethrow;
     }
   }
@@ -82,7 +90,7 @@ class ILibJS extends ChangeNotifier {
           notifyListeners();
         }
       } catch (err) {
-        debugPrint('Caught error: $err');
+        logger.error('Failed to load localeData: $err');
       }
     }
   }
