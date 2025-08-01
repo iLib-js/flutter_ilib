@@ -158,6 +158,10 @@ We have the script file for the above works to do everything at once.
 ```
 ./execute_unit_test.sh
 ```
+> **Note**  
+> Logging behavior has been updated and logs are printed by default during tests.  
+> To suppress verbose logs during testing, add `--dart-define=TEST_MODE=true` option.  
+> In this mode, only logs with **warning level or higher** will be printed.
 
 ### Excute the example
 We provide the example app that can be executed.
