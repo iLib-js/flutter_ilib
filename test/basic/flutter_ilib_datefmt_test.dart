@@ -73,6 +73,14 @@ void main() {
           ILibDateOptions(dateTime: DateTime.parse('2024-06-27 10:42'));
       expect(fmt.format(dateOptions), '2024년 6월 27일 오전 10:42');
     });
+    test('ILibDateFmt_DateTimeObj_utc', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'ko-KR', length: 'full', type: 'datetime', useNative: false);
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final ILibDateOptions dateOptions =
+          ILibDateOptions(dateTime: DateTime.parse('2024-06-27 10:42Z'));
+      expect(fmt.format(dateOptions), '2024년 6월 27일 오후 7:42');
+    });
   });
   group('getClock()', () {
     test('getClock_ko_KR', () {
