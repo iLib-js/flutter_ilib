@@ -1,3 +1,6 @@
+## 1.2.1
+* Fixed incorrect timezone handling when [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html) where UTC-based times were being misinterpreted as local time during formatting and parsing.
+
 ## 1.2.0
 * Added `isILibReady` getter to `ILibJS` class to expose internal `_iLibPrepared` state.
 * Added `isILibReady` getter to `FlutterILib` class for external access to ILibJS initialization status.

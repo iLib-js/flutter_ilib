@@ -205,7 +205,9 @@ class ILibDateOptions {
 
     final Map<String, String> paramInfo = <String, String>{
       'locale': '$locale',
-      'timezone': '$timezone',
+      // If dateTime is not null and is in UTC, set timezone to 'Etc/UTC'.
+      // Otherwise, use the provided timezone value.
+      'timezone': (dateTime?.isUtc ?? false) ? 'Etc/UTC' : '$timezone',
       'type': '$type',
       'calendar': '$calendar'
     };
