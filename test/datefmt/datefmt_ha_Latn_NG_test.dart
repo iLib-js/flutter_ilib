@@ -1206,26 +1206,6 @@ void main() {
       expect(fmt.format(dateOptions), '01:45');
     });
 
-    test('testDateFmtTemplateClock24Switchhh_ha_Latn', () {
-      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: 'ha-Latn-NG',
-          calendar: 'gregorian',
-          clock: '24',
-          template: 'hh:mm');
-      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-
-      final ILibDateOptions dateOptions = ILibDateOptions(
-          locale: 'ha-Latn-NG',
-          year: 2011,
-          month: 9,
-          day: 29,
-          hour: 13,
-          minute: 45,
-          second: 0,
-          millisecond: 0);
-      expect(fmt.format(dateOptions), '13:45');
-    });
-
     test('testDateFmtTemplateClock24SwitchKK_ha_Latn', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
           locale: 'ha-Latn-NG',
@@ -1246,9 +1226,29 @@ void main() {
       expect(fmt.format(dateOptions), '13:45');
     });
 
-    test('testDateFmtTemplateNoClockNotFollowLocaleDefault12hh_ha_Latn', () {
+    test('testDateFmtTemplateClock24Switchhh_ha_Latn', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: 'ha-Latn-NG', calendar: 'gregorian', template: 'hh:mm');
+          locale: 'ha-Latn-NG',
+          calendar: 'gregorian',
+          clock: '24',
+          template: 'hh:mm');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ha-Latn-NG',
+          year: 2011,
+          month: 9,
+          day: 29,
+          hour: 13,
+          minute: 45,
+          second: 0,
+          millisecond: 0);
+      expect(fmt.format(dateOptions), '13:45');
+    });
+
+    test('testDateFmtTemplateNoClockNotFollowLocaleDefault12KK_ha_Latn', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'ha-Latn-NG', calendar: 'gregorian', template: 'KK:mm');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
       final ILibDateOptions dateOptions = ILibDateOptions(
@@ -1263,9 +1263,9 @@ void main() {
       expect(fmt.format(dateOptions), '01:45');
     });
 
-    test('testDateFmtTemplateNoClockNotFollowLocaleDefault12KK_ha_Latn', () {
+    test('testDateFmtTemplateNoClockNotFollowLocaleDefault12hh_ha_Latn', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: 'ha-Latn-NG', calendar: 'gregorian', template: 'KK:mm');
+          locale: 'ha-Latn-NG', calendar: 'gregorian', template: 'hh:mm');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
       final ILibDateOptions dateOptions = ILibDateOptions(

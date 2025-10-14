@@ -1432,12 +1432,100 @@ void main() {
       expect(fmt.format(dateOptions), '01:45');
     });
 
+    test('testDateFmtTemplateClock24SwitchKK_th_TH', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'th-TH',
+          calendar: 'thaisolar',
+          clock: '24',
+          template: 'KK:mm');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'th-TH',
+          year: 2011,
+          month: 9,
+          day: 29,
+          hour: 13,
+          minute: 45,
+          second: 0,
+          millisecond: 0);
+      expect(fmt.format(dateOptions), '13:45');
+    });
+
     test('testDateFmtTemplateClock24Switchhh_th_TH', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
           locale: 'th-TH',
           calendar: 'thaisolar',
           clock: '24',
           template: 'hh:mm');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'th-TH',
+          year: 2011,
+          month: 9,
+          day: 29,
+          hour: 13,
+          minute: 45,
+          second: 0,
+          millisecond: 0);
+      expect(fmt.format(dateOptions), '13:45');
+    });
+
+    test('testDateFmtTemplateNoClockNotFollowLocaleDefault12KK_th_TH', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'th-TH', calendar: 'thaisolar', template: 'KK:mm');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'th-TH',
+          year: 2011,
+          month: 9,
+          day: 29,
+          hour: 13,
+          minute: 45,
+          second: 0,
+          millisecond: 0);
+      expect(fmt.format(dateOptions), '01:45');
+    });
+
+    test('testDateFmtTemplateNoClockNotFollowLocaleDefault12hh_th_TH', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'th-TH', calendar: 'thaisolar', template: 'hh:mm');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'th-TH',
+          year: 2011,
+          month: 9,
+          day: 29,
+          hour: 13,
+          minute: 45,
+          second: 0,
+          millisecond: 0);
+      expect(fmt.format(dateOptions), '01:45');
+    });
+
+    test('testDateFmtTemplateNoClockNotFollowLocaleDefault24HH_th_TH', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'th-TH', calendar: 'thaisolar', template: 'HH:mm');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'th-TH',
+          year: 2011,
+          month: 9,
+          day: 29,
+          hour: 13,
+          minute: 45,
+          second: 0,
+          millisecond: 0);
+      expect(fmt.format(dateOptions), '13:45');
+    });
+
+    test('testDateFmtTemplateNoClockNotFollowLocaleDefault24kk_th_TH', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+          locale: 'th-TH', calendar: 'thaisolar', template: 'kk:mm');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
       final ILibDateOptions dateOptions = ILibDateOptions(

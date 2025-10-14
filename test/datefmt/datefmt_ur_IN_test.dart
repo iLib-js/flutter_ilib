@@ -951,23 +951,6 @@ void main() {
       expect(fmt.format(dateOptions), '۰۱:۴۵');
     });
 
-    test('testDateFmtINTemplateClock24Switchhh_ur_IN', () {
-      final ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: 'ur-IN', clock: '24', template: 'hh:mm');
-      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-
-      final ILibDateOptions dateOptions = ILibDateOptions(
-          locale: 'ur-IN',
-          year: 2011,
-          month: 9,
-          day: 29,
-          hour: 13,
-          minute: 45,
-          second: 0,
-          millisecond: 0);
-      expect(fmt.format(dateOptions), '۱۳:۴۵');
-    });
-
     test('testDateFmtINTemplateClock24SwitchKK_ur_IN', () {
       final ILibDateFmtOptions fmtOptions =
           ILibDateFmtOptions(locale: 'ur-IN', clock: '24', template: 'KK:mm');
@@ -985,9 +968,26 @@ void main() {
       expect(fmt.format(dateOptions), '۱۳:۴۵');
     });
 
-    test('testDateFmtINTemplateNoClockDoNotFollowLocaleDefault12hh_ur_IN', () {
+    test('testDateFmtINTemplateClock24Switchhh_ur_IN', () {
       final ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: 'ur-IN', template: 'hh:mm');
+          ILibDateFmtOptions(locale: 'ur-IN', clock: '24', template: 'hh:mm');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'ur-IN',
+          year: 2011,
+          month: 9,
+          day: 29,
+          hour: 13,
+          minute: 45,
+          second: 0,
+          millisecond: 0);
+      expect(fmt.format(dateOptions), '۱۳:۴۵');
+    });
+
+    test('testDateFmtINTemplateNoClockDoNotFollowLocaleDefault12KK_ur_IN', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'ur-IN', template: 'KK:mm');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
       final ILibDateOptions dateOptions = ILibDateOptions(
@@ -1002,9 +1002,9 @@ void main() {
       expect(fmt.format(dateOptions), '۰۱:۴۵');
     });
 
-    test('testDateFmtINTemplateNoClockDoNotFollowLocaleDefault12KK_ur_IN', () {
+    test('testDateFmtINTemplateNoClockDoNotFollowLocaleDefault12hh_ur_IN', () {
       final ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: 'ur-IN', template: 'KK:mm');
+          ILibDateFmtOptions(locale: 'ur-IN', template: 'hh:mm');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
 
       final ILibDateOptions dateOptions = ILibDateOptions(

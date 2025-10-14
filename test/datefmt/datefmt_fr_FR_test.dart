@@ -987,6 +987,23 @@ void main() {
       expect(fmt.format(dateOptions), '01:45');
     });
 
+    test('testDateFmtTemplateClock24SwitchKK_fr_FR', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-FR', clock: '24', template: 'KK:mm');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-FR',
+          year: 2011,
+          month: 9,
+          day: 29,
+          hour: 13,
+          minute: 45,
+          second: 0,
+          millisecond: 0);
+      expect(fmt.format(dateOptions), '13:45');
+    });
+
     test('testDateFmtTemplateClock24Switchhh_fr_FR', () {
       final ILibDateFmtOptions fmtOptions =
           ILibDateFmtOptions(locale: 'fr-FR', clock: '24', template: 'hh:mm');
@@ -1002,6 +1019,23 @@ void main() {
           second: 0,
           millisecond: 0);
       expect(fmt.format(dateOptions), '13:45');
+    });
+
+    test('testDateFmtTemplateNoClockDoNotFollowLocaleDefault12KK_fr_FR', () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'fr-FR', template: 'KK:mm');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          locale: 'fr-FR',
+          year: 2011,
+          month: 9,
+          day: 29,
+          hour: 13,
+          minute: 45,
+          second: 0,
+          millisecond: 0);
+      expect(fmt.format(dateOptions), '01:45');
     });
 
     test('testDateFmtTemplateNoClockDoNotFollowLocaleDefault12hh_fr_FR', () {
