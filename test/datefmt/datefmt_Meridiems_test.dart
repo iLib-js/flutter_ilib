@@ -1390,5 +1390,377 @@ void main() {
       expect(meridiems[0].name, '上午');
       expect(meridiems[1].name, '下午');
     });
+
+    test('testDateFmtGetMeridiemsRangeEnd_with_am_ET_locale', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'am-ET');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].end, '05:59');
+    });
+
+    test('testDateFmtGetMeridiemsRangeEnd_with_am_ET_locale_ethiopic_meridiems',
+        () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'am-ET', meridiems: 'ethiopic');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].end, '05:59');
+    });
+
+    test(
+        'testDateFmtGetMeridiemsRangeEnd_with_am_ET_locale_gregorian_meridiems',
+        () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'am-ET', meridiems: 'gregorian');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].end, '11:59');
+    });
+
+    test('testDateFmtGetMeridiemsRangeEnd_with_en_US_locale', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'en-US');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].end, '11:59');
+    });
+
+    test('testDateFmtGetMeridiemsRangeEnd_with_zh_CN_locale', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'zh-CN');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].end, '11:59');
+    });
+
+    test('testDateFmtGetMeridiemsRangeEnd_with_zh_CN_locale_chinese_meridiems',
+        () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'zh-CN', meridiems: 'chinese');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].end, '05:59');
+    });
+
+    test(
+        'testDateFmtGetMeridiemsRangeEnd_with_zh_CN_locale_gregorian_meridiems',
+        () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'zh-CN', meridiems: 'gregorian');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].end, '11:59');
+    });
+
+    test('testDateFmtGetMeridiemsRangeLength_with_am_ET_locale', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'am-ET');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems.length, 5);
+    });
+
+    test(
+        'testDateFmtGetMeridiemsRangeLength_with_am_ET_locale_ethiopic_meridiems',
+        () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'am-ET', meridiems: 'ethiopic');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems.length, 5);
+    });
+
+    test(
+        'testDateFmtGetMeridiemsRangeLength_with_am_ET_locale_gregorian_meridiems',
+        () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'am-ET', meridiems: 'gregorian');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems.length, 2);
+    });
+
+    test('testDateFmtGetMeridiemsRangeLength_with_en_US_locale', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'en-US');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems.length, 2);
+    });
+
+    test('testDateFmtGetMeridiemsRangeLength_with_zh_CN_locale', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'zh-CN');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems.length, 2);
+    });
+
+    test(
+        'testDateFmtGetMeridiemsRangeLength_with_zh_CN_locale_chinese_meridiems',
+        () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'zh-CN', meridiems: 'chinese');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems.length, 7);
+    });
+
+    test(
+        'testDateFmtGetMeridiemsRangeLength_with_zh_CN_locale_gregorian_meridiems',
+        () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'zh-CN', meridiems: 'gregorian');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems.length, 2);
+    });
+
+    test('testDateFmtGetMeridiemsRangeName_with_am_ET_locale', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'am-ET');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].name, 'ጥዋት');
+    });
+
+    test(
+        'testDateFmtGetMeridiemsRangeName_with_am_ET_locale_ethiopic_meridiems',
+        () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'am-ET', meridiems: 'ethiopic');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].name, 'ጥዋት');
+    });
+
+    test(
+        'testDateFmtGetMeridiemsRangeName_with_am_ET_locale_gregorian_meridiems',
+        () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'am-ET', meridiems: 'gregorian');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].name, 'ጥዋት');
+    });
+
+    test('testDateFmtGetMeridiemsRangeName_with_as_IN_locale', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'as-IN');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].name, 'AM');
+      expect(meridiems[1].name, 'PM');
+    });
+
+    test('testDateFmtGetMeridiemsRangeName_with_bn_IN_locale', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'bn-IN');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].name, 'AM');
+      expect(meridiems[1].name, 'PM');
+    });
+
+    test('testDateFmtGetMeridiemsRangeName_with_en_US_locale', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'en-US');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].name, 'AM');
+    });
+
+    test('testDateFmtGetMeridiemsRangeName_with_gu_IN_locale', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'gu-IN');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].name, 'AM');
+      expect(meridiems[1].name, 'PM');
+    });
+
+    test('testDateFmtGetMeridiemsRangeName_with_hi_IN_locale', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'hi-IN');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].name, 'am');
+      expect(meridiems[1].name, 'pm');
+    });
+
+    test('testDateFmtGetMeridiemsRangeName_with_kn_IN_locale', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'kn-IN');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].name, 'AM');
+      expect(meridiems[1].name, 'PM');
+    });
+
+    test('testDateFmtGetMeridiemsRangeName_with_ml_IN_locale', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'ml-IN');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].name, 'AM');
+      expect(meridiems[1].name, 'PM');
+    });
+
+    test('testDateFmtGetMeridiemsRangeName_with_mr_IN_locale', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'mr-IN');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].name, 'AM');
+      expect(meridiems[1].name, 'PM');
+    });
+
+    test('testDateFmtGetMeridiemsRangeName_with_or_IN_locale', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'or-IN');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].name, 'AM');
+      expect(meridiems[1].name, 'PM');
+    });
+
+    test('testDateFmtGetMeridiemsRangeName_with_pa_IN_locale', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'pa-IN');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].name, 'ਪੂ.ਦੁ.');
+      expect(meridiems[1].name, 'ਬਾ.ਦੁ.');
+    });
+
+    test('testDateFmtGetMeridiemsRangeName_with_ta_IN_locale', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'ta-IN');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].name, 'AM');
+      expect(meridiems[1].name, 'PM');
+    });
+
+    test('testDateFmtGetMeridiemsRangeName_with_te_IN_locale', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'te-IN');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].name, 'AM');
+      expect(meridiems[1].name, 'PM');
+    });
+
+    test('testDateFmtGetMeridiemsRangeName_with_ur_IN_locale', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'ur-IN');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].name, 'AM');
+      expect(meridiems[1].name, 'PM');
+    });
+
+    test('testDateFmtGetMeridiemsRangeName_with_ur_PK_locale', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'ur-PK');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].name, 'AM');
+      expect(meridiems[1].name, 'PM');
+    });
+
+    test('testDateFmtGetMeridiemsRangeName_with_zh_CN_locale', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'zh-CN');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].name, '上午');
+    });
+
+    test('testDateFmtGetMeridiemsRangeName_with_zh_CN_locale_chinese_meridiems',
+        () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'zh-CN', meridiems: 'chinese');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].name, '凌晨');
+    });
+
+    test(
+        'testDateFmtGetMeridiemsRangeName_with_zh_CN_locale_gregorian_meridiems',
+        () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'zh-CN', meridiems: 'gregorian');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].name, '上午');
+    });
+
+    test('testDateFmtGetMeridiemsRangeStart_with_am_ET_locale', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'am-ET');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].start, '00:00');
+    });
+
+    test(
+        'testDateFmtGetMeridiemsRangeStart_with_am_ET_locale_ethiopic_meridiems',
+        () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'am-ET', meridiems: 'ethiopic');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].start, '00:00');
+    });
+
+    test(
+        'testDateFmtGetMeridiemsRangeStart_with_am_ET_locale_gregorian_meridiems',
+        () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'am-ET', meridiems: 'gregorian');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].start, '00:00');
+    });
+
+    test('testDateFmtGetMeridiemsRangeStart_with_en_US_locale', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'en-US');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].start, '00:00');
+    });
+
+    test('testDateFmtGetMeridiemsRangeStart_with_zh_CN_locale', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'zh-CN');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].start, '00:00');
+    });
+
+    test(
+        'testDateFmtGetMeridiemsRangeStart_with_zh_CN_locale_chinese_meridiems',
+        () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'zh-CN', meridiems: 'chinese');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].start, '00:00');
+    });
+
+    test(
+        'testDateFmtGetMeridiemsRangeStart_with_zh_CN_locale_gregorian_meridiems',
+        () {
+      final ILibDateFmtOptions fmtOptions =
+          ILibDateFmtOptions(locale: 'zh-CN', meridiems: 'gregorian');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
+      expect(meridiems[0].start, '00:00');
+    });
+
+    test('testDateFmtGetMeridiemsRange_with_noArgument', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions();
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> mdRange = fmt.getMeridiemsRange();
+      expect(mdRange.length > 0, isTrue,
+          reason:
+              'getMeridiemsRange should return length value greater than 0');
+    });
+
+    test('testDateFmtGetMeridiemsRange_with_undefined_locale', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: null);
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> mdRange = fmt.getMeridiemsRange();
+      expect(mdRange.length > 0, isTrue,
+          reason:
+              'getMeridiemsRange should return length value greater than 0');
+    });
+
+    test('testDateFmtGetMeridiemsRange_with_wrong_locale', () {
+      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'wrong');
+      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+      final List<MeridiemsInfo> mdRange = fmt.getMeridiemsRange();
+      expect(mdRange.length > 0, isTrue,
+          reason:
+              'getMeridiemsRange should return length value greater than 0');
+    });
   });
 }

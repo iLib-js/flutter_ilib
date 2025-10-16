@@ -1,3 +1,8 @@
+## 1.3.0
+* Added `clock` field to ILibDateFmtOptions for specifying time format (e.g., 12-hour or 24-hour).
+* Added `template` field to ILibDateFmtOptions for defining custom date/time display patterns.
+* Fixed proper handling of `meridiems` field in ILibDateFmtOptions, which was previously ignored.
+
 ## 1.2.1
 * Fixed incorrect timezone handling when [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html) where UTC-based times were being misinterpreted as local time during formatting and parsing.
 
@@ -12,10 +17,10 @@
 * Updated the test cases where expectations have aligned between webOS versions and upstream since the CLDR update to 46
 
 ## 1.0.0
-* Updated the structure to load separate locale data files.  
-  Previously, the dependent ilib was a fully assembled JS file. Now, the ilib files are divided into the js and locale files.  
-  The JS code is assembled as `ilib-init.js`, and the locale files are generated with names like [language].js, e.g. `en.js`, `ko.js`. The iLib files are generated using the [ilib-assemble](https://github.com/iLib-js/ilib-assemble) tool. This change brings memory savings over previous versions of flutter_ilib.  
-  Initially, when the app is launched, the package automatically loads the locale data by detecting the system's locale. To load the updated locale data file when the locale changes, I suggest adding the following method at the appropriate time when the locale chanages. 
+* Updated the structure to load separate locale data files.
+  Previously, the dependent ilib was a fully assembled JS file. Now, the ilib files are divided into the js and locale files.
+  The JS code is assembled as `ilib-init.js`, and the locale files are generated with names like [language].js, e.g. `en.js`, `ko.js`. The iLib files are generated using the [ilib-assemble](https://github.com/iLib-js/ilib-assemble) tool. This change brings memory savings over previous versions of flutter_ilib.
+  Initially, when the app is launched, the package automatically loads the locale data by detecting the system's locale. To load the updated locale data file when the locale changes, I suggest adding the following method at the appropriate time when the locale chanages.
   ```dart
   _flutterIlibPlugin.loadLocaleData(curLocale);
   ```
