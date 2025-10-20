@@ -11,6 +11,9 @@ class ILibDateFmt {
     time = options.time;
     calendar = options.calendar;
     timezone = options.timezone;
+    clock = options.clock;
+    template = options.template;
+    meridiems = options.meridiems;
     useNative = options.useNative;
 
     //ILibJS.instance.loadILibLocaleData(locale);
@@ -23,6 +26,9 @@ class ILibDateFmt {
   String? calendar;
   String? date;
   String? time;
+  String? clock;
+  String? template;
+  String? meridiems;
   bool? useNative;
 
   /// A string representation of parameters to call functions of iLib library properly
@@ -37,7 +43,10 @@ class ILibDateFmt {
       'date': '$date',
       'time': '$time',
       'calendar': '$calendar',
-      'timezone': '$timezone'
+      'timezone': '$timezone',
+      'clock': '$clock',
+      'template': '$template',
+      'meridiems': '$meridiems',
     };
     paramInfo.forEach((String key, String value) {
       if (value != 'null') {
@@ -117,6 +126,8 @@ class ILibDateFmtOptions {
   /// [useNative] The flag used to determine whether to use the native script settings for formatting the numbers.
   /// [date] This property tells which components of a date format to use. Valid values are: "dmwy", "dmy", "dmw", "dm", "my", "dw", "d", "m","n","y". Default components, if this property is not specified, is "dmy".
   /// [time] This property gives which components of a time format to use. Valid values for this property are: "ahmsz", "ahms", "hmsz", "hms", "ahmz", "ahm", hmz", ah", "hm", "ms", "h", "m", "s". Default value if this property is not specified is "hma".
+  /// [clock] Hour format. Valid values: "12", "24".
+  /// [template] Custom date/time format string.
   /// [meridiems] string that specifies what style of meridiems to use with this format. The choices are "default", "gregorian", "ethiopic", and "chinese".
   ILibDateFmtOptions(
       {this.locale,
@@ -127,6 +138,8 @@ class ILibDateFmtOptions {
       this.useNative,
       this.date,
       this.time,
+      this.clock,
+      this.template,
       this.meridiems});
   String? locale;
   String? length;
@@ -135,6 +148,8 @@ class ILibDateFmtOptions {
   String? timezone;
   String? date;
   String? time;
+  String? clock;
+  String? template;
   String? meridiems;
   bool? useNative;
 }
