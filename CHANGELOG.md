@@ -1,3 +1,8 @@
+## 1.3.0
+* Added `clock` field to ILibDateFmtOptions for specifying time format (e.g., 12-hour or 24-hour).
+* Added `template` field to ILibDateFmtOptions for defining custom date/time display patterns.
+* Fixed proper handling of `meridiems` field in ILibDateFmtOptions, which was previously ignored.
+
 ## 1.2.1
 * Fixed incorrect timezone handling when [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html) where UTC-based times were being misinterpreted as local time during formatting and parsing.
 
