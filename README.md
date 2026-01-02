@@ -174,7 +174,7 @@ flutter run -d linux --release
 
 ## License
 
-Copyright (c) 2024-2025, JEDLSoft
+Copyright (c) 2024-2026, JEDLSoft
 
 This plugin is license under Apache2. See the [LICENSE](./LICENSE)
 file for more details.
