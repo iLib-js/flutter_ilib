@@ -1,3 +1,7 @@
+## 1.4.0
+* Include the `DurationFmt.js` file from iLib in the `ilib-init.js` file within the assets.  
+  The developer can use `evaluate()` to obtain the result of Duration formatting until the DurationFmt class is properly implemented.
+
 ## 1.3.0
 * Added `clock` field to ILibDateFmtOptions for specifying time format (e.g., 12-hour or 24-hour).
 * Added `template` field to ILibDateFmtOptions for defining custom date/time display patterns.

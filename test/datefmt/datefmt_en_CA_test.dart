@@ -25,7 +25,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      print(fmt.getTemplate());
+
       expect(fmt.format(dateOptions), '2011-09-29');
     });
     test('testDateFmtenCASimpleMedium', () {
