@@ -700,7 +700,6 @@ void main() {
           '1 an, 1 mois, 1 semaine, 1 jour, 1 heure, 1 minute, 1 seconde et 1 milliseconde');
     });
     //test cases for bg-BG
-
     test('testDurFmtBGFormatShortDefaultStyle', () {
       final ILibDurationFmtOptions fmtOptions =
           ILibDurationFmtOptions(locale: 'bg-BG', length: 'short');
@@ -766,9 +765,7 @@ void main() {
       expect(fmt.format(dateOptions),
           '1 година, 1 месец, 1 седмица, 1 ден, 1 час, 1 минута и 1 секунда');
     });
-
     //test cases for bs-Latn-BA
-
     test('testDurFmtBSLatnFormatShortDefaultStyle', () {
       final ILibDurationFmtOptions fmtOptions =
           ILibDurationFmtOptions(locale: 'bs-Latn-BA', length: 'short');
@@ -835,7 +832,6 @@ void main() {
           '1 godina, 1 mjesec, 1 sedmica, 1 dan, 1 sat, 1 minuta i 1 sekunda');
     });
     //test cases for cs-CZ
-
     test('testDurFmtCSFormatShortDefaultStyle', () {
       final ILibDurationFmtOptions fmtOptions =
           ILibDurationFmtOptions(locale: 'cs-CZ', length: 'short');
@@ -899,7 +895,6 @@ void main() {
           '1 rok, 1 měsíc, 1 týden, 1 den, 1 hodina, 1 minuta a 1 sekunda');
     });
     //test cases for da-DK
-
     test('testDurFmtDAFormatShortDefaultStyle', () {
       final ILibDurationFmtOptions fmtOptions =
           ILibDurationFmtOptions(locale: 'da-DK', length: 'short');
@@ -963,7 +958,6 @@ void main() {
           '1 år, 1 måned, 1 uge, 1 dag, 1 time, 1 minut og 1 sekund');
     });
     //test cases for el-GR
-
     test('testDurFmtGRFormatShortDefaultStyle', () {
       final ILibDurationFmtOptions fmtOptions =
           ILibDurationFmtOptions(locale: 'el-GR', length: 'short');
