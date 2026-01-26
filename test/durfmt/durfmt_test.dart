@@ -7,7 +7,7 @@ import '../test_env.dart';
 void main() {
   late String testPlatform;
   TestWidgetsFlutterBinding.ensureInitialized();
-  debugPrint('Testing [datefmt_Clock_test.dart] file.');
+  debugPrint('Testing [durfmt_test.dart] file.');
   setUpAll(() async {
     testPlatform = getTestPlatform();
     final ILibJS ilibjsinstance = ILibJS.instance;
@@ -16,7 +16,7 @@ void main() {
     await ilibjsinstance.loadILibLocaleDataAll();
   });
 
-  group('getClock()', () {
+  group('test_ILibDurationFmt', () {
     test('testDurFmtConstructorEmpty', () {
       final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions();
       final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
@@ -1539,13 +1539,13 @@ void main() {
         if (platform === 'nodejs') {
             var cldrVersion = Number(process.versions['cldr']);
             if (Number(cldrVersion) < 36) { // Intl.PluralRules doesn't support this locale until this version.
-                test.equal(duration.toString(), '‏20 שנים, 20 חודשים, 20 שבועות, 20 ימים, 20 שעות, 20 דקות ו-20 שניות');
+                expect(fmt.format(dateOptions),, '‏20 שנים, 20 חודשים, 20 שבועות, 20 ימים, 20 שעות, 20 דקות ו-20 שניות');
             }  else if(Number(cldrVersion) <= 41) {
-                test.equal(duration.toString(), '‏20 שנים, 20 חודשים, 20 שבועות, 20 יום, 20 שעות, 20 דקות ו-20 שניות');
+                expect(fmt.format(dateOptions),, '‏20 שנים, 20 חודשים, 20 שבועות, 20 יום, 20 שעות, 20 דקות ו-20 שניות');
             } else if (Number(cldrVersion) < 43) { // The `many` category has been removed since CLDR 42.
-                test.equal(duration.toString(), '‏20 שנים, 20 חודשים, 20 שבועות, 20 יום, 20 שעות, 20 דקות ו-‏20 שניות');
+                expect(fmt.format(dateOptions),, '‏20 שנים, 20 חודשים, 20 שבועות, 20 יום, 20 שעות, 20 דקות ו-‏20 שניות');
             } else {
-                test.equal(duration.toString(), '‏20 שנים, 20 חודשים, 20 שבועות, 20 ימים, 20 שעות, 20 דקות ו-20 שניות');
+                expect(fmt.format(dateOptions),, '‏20 שנים, 20 חודשים, 20 שבועות, 20 ימים, 20 שעות, 20 דקות ו-20 שניות');
             }
         } else if (platform === 'browser') {
             var browser = ilib._getBrowser();
@@ -1553,9 +1553,9 @@ void main() {
             if (browser === 'chrome' && getChromeVersion() >= 110) {
                 expected = '‏20 שנים, 20 חודשים, 20 שבועות, 20 ימים, 20 שעות, 20 דקות ו-20 שניות';
             }
-            test.equal(duration.toString(), expected);
+            expect(fmt.format(dateOptions),, expected);
         } else {
-            test.equal(duration.toString(), '‏20 שנים, 20 חודשים, 20 שבועות, 20 ימים, 20 שעות, 20 דקות ו-20 שניות');
+            expect(fmt.format(dateOptions),, '‏20 שנים, 20 חודשים, 20 שבועות, 20 ימים, 20 שעות, 20 דקות ו-20 שניות');
         }
         test.done();
     },*/
@@ -2173,6 +2173,2318 @@ void main() {
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(fmt.format(dateOptions),
           '১ বছর, ১ মাস, ১ সপ্তাহ, ১ দিন, ১ ঘন্টা, ১ মিনিট, ১ সেকেন্ড');
+    });
+    test('testDurFmtASFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'as-IN', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '১ বছৰ ১ মাহ ১ সপ্তাহ ১ দিন ১ ঘণ্টা ১ মিনিট ১ ছেকেণ্ড');
+    });
+    test('testDurFmtASFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'as-IN', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '১ বছৰ ১ মাহ ১ সপ্তাহ ১ দিন ১ ঘণ্টা ১ মিনিট ১ ছেকেণ্ড');
+    });
+    test('testDurFmtASFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'as-IN', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '১ বছৰ ১ মাহ ১ সপ্তাহ ১ দিন ১.০১.০১');
+    });
+    test('testDurFmtASFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'as-IN', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '১ বছৰ ১ মাহ ১ সপ্তাহ ১ দিন ১ ঘণ্টা ১ মিনিট ১ ছেকেণ্ড');
+    });
+    test('testDurFmtASFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'as-IN', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '১ বছৰ, ১ মাহ, ১ সপ্তাহ, ১ দিন, ১ ঘণ্টা, ১ মিনিট, ১ ছেকেণ্ড');
+    });
+    test('testDurFmtASFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'as-IN', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '১ বছৰ, ১ মাহ, ১ সপ্তাহ, ১ দিন, ১ ঘণ্টা, ১ মিনিট, ১ ছেকেণ্ড');
+    });
+    //test cases for Punjabi(pa-Guru-IN)
+    test('testDurFmtPAFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'pa-Guru-IN', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 ਸਾਲ 1 ਮਹੀਨਾ 1 ਹਫ਼ਤਾ 1 ਦਿਨ 1 ਘੰਟਾ 1 ਮਿੰਟ 1 ਸਕਿੰਟ');
+    });
+    test('testDurFmtPAFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'pa-Guru-IN', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 ਸਾਲ 1 ਮਹੀਨਾ 1 ਹਫ਼ਤਾ 1 ਦਿਨ 1 ਘੰਟਾ 1 ਮਿੰਟ 1 ਸਕਿੰਟ');
+    });
+    test('testDurFmtPAFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'pa-Guru-IN', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 ਸਾਲ 1 ਮਹੀਨਾ 1 ਹਫ਼ਤਾ 1 ਦਿਨ 1:01:01');
+    });
+    test('testDurFmtPAFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'pa-Guru-IN', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 ਸਾਲ 1 ਮਹੀਨਾ 1 ਹਫ਼ਤਾ 1 ਦਿਨ 1 ਘੰਟਾ 1 ਮਿੰਟ 1 ਸਕਿੰਟ');
+    });
+    test('testDurFmtPAFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'pa-Guru-IN', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 ਸਾਲ, 1 ਮਹੀਨਾ, 1 ਹਫ਼ਤਾ, 1 ਦਿਨ, 1 ਘੰਟਾ, 1 ਮਿੰਟ, 1 ਸਕਿੰਟ');
+    });
+    test('testDurFmtPAFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'pa-Guru-IN', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 ਸਾਲ, 1 ਮਹੀਨਾ, 1 ਹਫ਼ਤਾ, 1 ਦਿਨ, 1 ਘੰਟਾ, 1 ਮਿੰਟ, 1 ਸਕਿੰਟ');
+    });
+    //test cases for Urdu(ur-IN)
+    test('testDurFmtURFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'ur-IN', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '‏۱ سال، ۱ مہینہ، ۱ ہفتہ، ۱ دن، ۱ گھنٹہ، ۱ منٹ، ۱ سیکنڈ');
+    });
+    test('testDurFmtURFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'ur-IN', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '‏۱ سال، ۱ مہینہ، ۱ ہفتہ، ۱ دن، ۱ گھنٹہ، ۱ منٹ، ۱ سیکنڈ');
+    });
+    test('testDurFmtURFormatShortTextWestern', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'ur-IN', length: 'short', style: 'text', useNative: false);
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '‏1 سال، 1 مہینہ، 1 ہفتہ، 1 دن، 1 گھنٹہ، 1 منٹ، 1 سیکنڈ');
+    });
+    test('testDurFmtURFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'ur-IN', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(
+          fmt.format(dateOptions), '‏۱ سال، ۱ مہینہ، ۱ ہفتہ، ۱ دن، ‏۱:۰۱:۰۱');
+    });
+    test('testDurFmtURFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'ur-IN', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '‏۱ سال، ۱ مہینہ، ۱ ہفتہ، ۱ دن، ۱ گھنٹہ، ۱ منٹ، ۱ سیکنڈ');
+    });
+    test('testDurFmtURFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'ur-IN', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '‏۱ سال، ۱ مہینہ، ۱ ہفتہ، ۱ دن، ۱ گھنٹہ، ۱ منٹ، ۱ سیکنڈ');
+    });
+    test('testDurFmtURFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'ur-IN', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '‏۱ سال, ۱ مہینہ, ۱ ہفتہ, ۱ دن, ۱ گھنٹہ, ۱ منٹ، اور ۱ سیکنڈ');
+    });
+    //test cases for croation
+    test('testDurFmtHRFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'hr-HR', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 g. 1 mj. 1 tj. 1 d. 1 h 1 m 1 s');
+    });
+    test('testDurFmtHRFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'hr-HR', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 g. 1 mj. 1 tj. 1 d. 1 h 1 m 1 s');
+    });
+    test('testDurFmtHRFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'hr-HR', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 g. 1 mj. 1 tj. 1 d. 01:01:01');
+    });
+    test('testDurFmtHRFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'hr-HR', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(
+          fmt.format(dateOptions), '1 g., 1 mj., 1 tj., 1 d., 1 h, 1 m, 1 s');
+    });
+    test('testDurFmtHRFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'hr-HR', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 g., 1 mj., 1 tj., 1 dan, 1 h, 1 min, 1 s');
+    });
+    test('testDurFmtHRFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'hr-HR', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 godina, 1 mjesec, 1 tjedan, 1 dan, 1 sat, 1 minuta i 1 sekunda');
+    });
+    //test cases for hungarian
+    test('testDurFmtHUFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'hu-HU', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(
+          fmt.format(dateOptions), '1 év, 1 h., 1 hét, 1 nap, 1 ó, 1 p, 1 mp');
+    });
+    test('testDurFmtHUFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'hu-HU', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(
+          fmt.format(dateOptions), '1 év, 1 h., 1 hét, 1 nap, 1 ó, 1 p, 1 mp');
+    });
+    test('testDurFmtHUFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'hu-HU', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 év, 1 h., 1 hét, 1 nap, 1:01:01');
+    });
+    test('testDurFmtHUFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'hu-HU', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(
+          fmt.format(dateOptions), '1 év, 1 h., 1 hét, 1 nap, 1 ó, 1 p, 1 mp');
+    });
+    test('testDurFmtHUFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'hu-HU', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 év, 1 hónap, 1 hét, 1 nap, 1 ó, 1 p, 1 mp');
+    });
+    test('testDurFmtHUFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'hu-HU', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 év, 1 hónap, 1 hét, 1 nap, 1 óra, 1 perc és 1 másodperc');
+    });
+    //test cases for indonesia
+    test('testDurFmtIDFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'id-ID', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 thn, 1 bln, 1 mgg, 1 hr, 1 j, 1 mnt, 1 dtk');
+    });
+    test('testDurFmtIDFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'id-ID', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 thn, 1 bln, 1 mgg, 1 hr, 1 j, 1 mnt, 1 dtk');
+    });
+    test('testDurFmtIDFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'id-ID', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 thn, 1 bln, 1 mgg, 1 hr, 01.01.01');
+    });
+    test('testDurFmtIDFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'id-ID', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 thn, 1 bln, 1 mgg, 1 hr, 1 j, 1 mnt, 1 dtk');
+    });
+    test('testDurFmtIDFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'id-ID', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 thn, 1 bln, 1 mgg, 1 hr, 1 j, 1 mnt, 1 dtk');
+    });
+    test('testDurFmtIDFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'id-ID', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 tahun, 1 bulan, 1 minggu, 1 hari, 1 jam, 1 menit, 1 detik');
+    });
+    //test cases for Italy
+    test('testDurFmtITFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'it-IT', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1anno 1 mese 1sett. 1g 1h 1min 1s');
+    });
+    test('testDurFmtITFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'it-IT', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1anno 1 mese 1sett. 1g 1h 1min 1s');
+    });
+    test('testDurFmtITFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'it-IT', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1anno 1 mese 1sett. 1g 01:01:01');
+    });
+    test('testDurFmtITFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'it-IT', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(
+          fmt.format(dateOptions), '1anno, 1 mese, 1sett., 1g, 1h, 1min, 1s');
+    });
+    test('testDurFmtITFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'it-IT', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 anno, 1 mese, 1 sett., 1 giorno, 1 h, 1 min, 1 s');
+    });
+    test('testDurFmtITFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'it-IT', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 anno, 1 mese, 1 settimana, 1 giorno, 1 ora, 1 minuto e 1 secondo');
+    });
+    //test cases for japanese
+    test('testDurFmtJAFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'ja-JP', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1,
+          month: 1,
+          week: 1,
+          day: 1,
+          hour: 1,
+          minute: 1,
+          second: 1,
+          millisecond: 1);
+      expect(fmt.format(dateOptions), '1y1m1w1d1h1m1s1ms');
+    });
+    test('testDurFmtJAFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'ja-JP', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1,
+          month: 1,
+          week: 1,
+          day: 1,
+          hour: 1,
+          minute: 1,
+          second: 1,
+          millisecond: 1);
+      expect(fmt.format(dateOptions), '1y1m1w1d1h1m1s1ms');
+    });
+    test('testDurFmtJAFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'ja-JP', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1,
+          month: 1,
+          week: 1,
+          day: 1,
+          hour: 1,
+          minute: 1,
+          second: 1,
+          millisecond: 1);
+      expect(fmt.format(dateOptions), '1y1m1w1d1:01:01');
+    });
+    test('testDurFmtJAFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'ja-JP', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1,
+          month: 1,
+          week: 1,
+          day: 1,
+          hour: 1,
+          minute: 1,
+          second: 1,
+          millisecond: 1);
+      expect(fmt.format(dateOptions), '1y1m1w1d1h1m1s1ms');
+    });
+    test('testDurFmtJAFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'ja-JP', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1,
+          month: 1,
+          week: 1,
+          day: 1,
+          hour: 1,
+          minute: 1,
+          second: 1,
+          millisecond: 1);
+      expect(fmt.format(dateOptions), '1 年 1 か月 1 週間 1 日 1 時間 1 分 1 秒 1 ms');
+    });
+    test('testDurFmtJAFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'ja-JP', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1,
+          month: 1,
+          week: 1,
+          day: 1,
+          hour: 1,
+          minute: 1,
+          second: 1,
+          millisecond: 1);
+      expect(fmt.format(dateOptions), '1 年 1 か月 1 週間 1 日 1 時間 1 分 1 秒 1 ミリ秒');
+    });
+    //test cases for kk-Cyrl-KZ
+    test('testDurFmtKKFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'kk-Cyrl-KZ', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 ж. 1 ай 1 ап. 1 к. 1 сағ 1 мин 1 с');
+    });
+    test('testDurFmtKKFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'kk-Cyrl-KZ', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 ж. 1 ай 1 ап. 1 к. 1 сағ 1 мин 1 с');
+    });
+    test('testDurFmtKKFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'kk-Cyrl-KZ', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 ж. 1 ай 1 ап. 1 к. 01:01:01');
+    });
+    test('testDurFmtKKFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'kk-Cyrl-KZ', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 ж. 1 ай 1 ап. 1 күн 1 сағ 1 мин 1 с');
+    });
+    test('testDurFmtKKFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'kk-Cyrl-KZ', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 жыл 1 ай 1 апта 1 күн 1 сағат 1 минут 1 секунд');
+    });
+    //test cases for ko-KR
+    test('testDurFmtKOFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'ko-KR', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1,
+          month: 1,
+          week: 1,
+          day: 1,
+          hour: 1,
+          minute: 1,
+          second: 1,
+          millisecond: 1);
+      expect(fmt.format(dateOptions), '1년 1개월 1주 1일 1시간 1분 1초 1밀리초');
+    });
+    test('testDurFmtKOFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'ko-KR', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1,
+          month: 1,
+          week: 1,
+          day: 1,
+          hour: 1,
+          minute: 1,
+          second: 1,
+          millisecond: 1);
+      expect(fmt.format(dateOptions), '1년 1개월 1주 1일 1시간 1분 1초 1밀리초');
+    });
+    test('testDurFmtKOFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'ko-KR', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1,
+          month: 1,
+          week: 1,
+          day: 1,
+          hour: 1,
+          minute: 1,
+          second: 1,
+          millisecond: 1);
+      expect(fmt.format(dateOptions), '1년 1개월 1주 1일 1:01:01');
+    });
+    test('testDurFmtKOFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'ko-KR', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1,
+          month: 1,
+          week: 1,
+          day: 1,
+          hour: 1,
+          minute: 1,
+          second: 1,
+          millisecond: 1);
+      expect(fmt.format(dateOptions), '1년 1개월 1주 1일 1시간 1분 1초 1밀리초');
+    });
+    test('testDurFmtKOFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'ko-KR', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1,
+          month: 1,
+          week: 1,
+          day: 1,
+          hour: 1,
+          minute: 1,
+          second: 1,
+          millisecond: 1);
+      expect(fmt.format(dateOptions), '1년 1개월 1주 1일 1시간 1분 1초 1밀리초');
+    });
+    test('testDurFmtKOFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'ko-KR', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1,
+          month: 1,
+          week: 1,
+          day: 1,
+          hour: 1,
+          minute: 1,
+          second: 1,
+          millisecond: 1);
+      expect(fmt.format(dateOptions), '1년 1개월 1주 1일 1시간 1분 1초 1밀리초');
+    });
+    test('testDurFmtKUFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'ku-Arab-IQ', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '‏١س ١م ١ﻪـ ١ر ١ک ١خ ١چ');
+    });
+    test('testDurFmtKUFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'ku-Arab-IQ', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '‏١س ١م ١ﻪـ ١ر ١ک ١خ ١چ');
+    });
+    test('testDurFmtKUFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'ku-Arab-IQ', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '‏١س ١م ١ﻪـ ١ر ‏١:٠١:٠١');
+    });
+    test('testDurFmtKUFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'ku-Arab-IQ', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '‏١س ١م ١ﻪـ ١ر ١ک ١خ ١چ');
+    });
+    test('testDurFmtKUFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'ku-Arab-IQ', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '‏١ ساڵ ١ مانگ ١ هەفتە ١ رۆژ ١ کاتژ ١ خول ١ چرک');
+    });
+    test('testDurFmtKUFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'ku-Arab-IQ', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '‏١ ساڵ, ١ مانگ, ١ هەفتە, ١ رۆژ, ١ کاتژمێر, ١ خولەک,  ١ چرکە');
+    });
+    //test cases for lt-LT
+    test('testDurFmtLTFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'lt-LT', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 m. 1 mėn. 1 sav. 1 d. 1 h 1 min. 1 s');
+    });
+    test('testDurFmtLTFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'lt-LT', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 m. 1 mėn. 1 sav. 1 d. 1 h 1 min. 1 s');
+    });
+    test('testDurFmtLTFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'lt-LT', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 m. 1 mėn. 1 sav. 1 d. 01:01:01');
+    });
+    test('testDurFmtLTFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'lt-LT', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 m. 1 mėn. 1 sav. 1 d. 1 h 1 min. 1 s');
+    });
+    test('testDurFmtLTFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'lt-LT', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 m. 1 mėn. 1 sav. 1 d. 1 val. 1 min. 1 sek.');
+    });
+    test('testDurFmtLTFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'lt-LT', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 metai 1 mėnuo 1 savaitė 1 diena 1 valanda 1 minutė ir 1 sekundė');
+    });
+    //test cases for lv-LV
+    test('testDurFmtLVFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'lv-LV', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 g. 1 m. 1 n. 1 d. 1 h 1 min 1 s');
+    });
+    test('testDurFmtLVFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'lv-LV', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 g. 1 m. 1 n. 1 d. 1 h 1 min 1 s');
+    });
+    test('testDurFmtLVFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'lv-LV', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 g. 1 m. 1 n. 1 d. 01:01:01');
+    });
+    test('testDurFmtLVFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'lv-LV', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(
+          fmt.format(dateOptions), '1 g., 1 m., 1 n., 1 d., 1 h, 1 min, 1 s');
+    });
+    test('testDurFmtLVFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'lv-LV', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 g., 1 mēn., 1 ned., 1 d., 1 st., 1 min, 1 sek.');
+    });
+    test('testDurFmtLVFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'lv-LV', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 gads, 1 mēnesis, 1 nedēļa, 1 diena, 1 stunda, 1 minūte un 1 sekunde');
+    });
+    //test cases for mk-MK
+    test('testDurFmtMKFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'mk-MK', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(
+          fmt.format(dateOptions), '1 г., 1 м., 1 с., 1 д., 1 ч., 1 м., 1 с.');
+    });
+    test('testDurFmtMKFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'mk-MK', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(
+          fmt.format(dateOptions), '1 г., 1 м., 1 с., 1 д., 1 ч., 1 м., 1 с.');
+    });
+    test('testDurFmtMKFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'mk-MK', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 г., 1 м., 1 с., 1 д., 01:01:01');
+    });
+    test('testDurFmtMKFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'mk-MK', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(
+          fmt.format(dateOptions), '1 г., 1 м., 1 с., 1 д., 1 ч., 1 м., 1 с.');
+    });
+    test('testDurFmtMKFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'mk-MK', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 год., 1 мес., 1 сед., 1 ден, 1 ч., 1 мин., 1 сек.');
+    });
+    test('testDurFmtMKFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'mk-MK', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 година, 1 месец, 1 седмица, 1 ден, 1 час, 1 минута и 1 секунда');
+    });
+    //test cases for mn-Cyrl-MN
+    test('testDurFmtMNFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'mn-Cyrl-MN', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1ж 1с 1 д.х 1 хоног 1 ц 1 мин 1 сек');
+    });
+    test('testDurFmtMNFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'mn-Cyrl-MN', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1ж 1с 1 д.х 1 хоног 1 ц 1 мин 1 сек');
+    });
+    test('testDurFmtMNFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'mn-Cyrl-MN', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1ж 1с 1 д.х 1 хоног 01:01:01');
+    });
+    test('testDurFmtMNFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'mn-Cyrl-MN', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1ж 1с 1 д.х 1 хоног 1 ц 1 мин 1 сек');
+    });
+    test('testDurFmtMNFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'mn-Cyrl-MN', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 жил 1 сар 1 д.х 1 хоног 1 цаг 1 мин 1 сек');
+    });
+    test('testDurFmtMNFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'mn-Cyrl-MN', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 жил 1 сар 1 долоо хоног 1 хоног 1 цаг 1 минут 1 секунд');
+    });
+    //test cases for ms-Latn-MY
+    test('testDurFmtMSFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'ms-Latn-MY', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 thn 1 bln 1 mgu 1 h 1 j 1 min 1 s');
+    });
+    test('testDurFmtMSFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'ms-Latn-MY', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 thn 1 bln 1 mgu 1 h 1 j 1 min 1 s');
+    });
+    test('testDurFmtMSFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'ms-Latn-MY', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 thn 1 bln 1 mgu 1 h 1:01:01');
+    });
+    test('testDurFmtMSFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'ms-Latn-MY', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(
+          fmt.format(dateOptions), '1 thn, 1 bln, 1 mgu, 1 h, 1 j, 1 min, 1 s');
+    });
+    test('testDurFmtMSFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'ms-Latn-MY', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 thn, 1 bln, 1 mgu, 1 hari, 1 j, 1 min, 1 saat');
+    });
+    test('testDurFmtMSFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'ms-Latn-MY', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 tahun, 1 bulan, 1 minggu, 1 hari, 1 jam, 1 minit, 1 saat');
+    });
+    //test cases for nb-NO
+    test('testDurFmtNBFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'nb-NO', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1å, 1 m, 1u, 1d, 1t, 1m, 1s');
+    });
+    test('testDurFmtNBFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'nb-NO', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1å, 1 m, 1u, 1d, 1t, 1m, 1s');
+    });
+    test('testDurFmtNBFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'nb-NO', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1å, 1 m, 1u, 1d, 01:01:01');
+    });
+    test('testDurFmtNBFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'nb-NO', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1å, 1 m, 1u, 1d, 1t, 1m, 1s');
+    });
+    test('testDurFmtNBFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'nb-NO', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(
+          fmt.format(dateOptions), '1 år, 1 md., 1 u, 1 d, 1 t, 1 min, 1 sek');
+    });
+    test('testDurFmtNBFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'nb-NO', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 år, 1 måned, 1 uke, 1 døgn, 1 time, 1 minutt og 1 sekund');
+    });
+    //test cases for nl-NL
+    test('testDurFmtNLFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'nl-NL', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 jr, 1 m, 1 w, 1 d, 1 u, 1 m, 1 s');
+    });
+    test('testDurFmtNLFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'nl-NL', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 jr, 1 m, 1 w, 1 d, 1 u, 1 m, 1 s');
+    });
+    test('testDurFmtNLFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'nl-NL', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 jr, 1 m, 1 w, 1 d, 01:01:01');
+    });
+    test('testDurFmtNLFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'nl-NL', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 jr, 1 m, 1 w, 1 d, 1 u, 1 m, 1 s');
+    });
+    test('testDurFmtNLFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'nl-NL', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 jr, 1 mnd, 1 wk, 1 dag, 1 uur, 1 min, 1 sec');
+    });
+    test('testDurFmtNLFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'nl-NL', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 jaar, 1 maand, 1 week, 1 dag, 1 uur, 1 minuut en 1 seconde');
+    });
+    //test cases for pl-PL
+    test('testDurFmtPLFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'pl-PL', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(
+          fmt.format(dateOptions), '1 r., 1 m-c, 1 t., 1 d., 1 h, 1 min, 1 s');
+    });
+    test('testDurFmtPLFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'pl-PL', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(
+          fmt.format(dateOptions), '1 r., 1 m-c, 1 t., 1 d., 1 h, 1 min, 1 s');
+    });
+    test('testDurFmtPLFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'pl-PL', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 r., 1 m-c, 1 t., 1 d., 01:01:01');
+    });
+    test('testDurFmtPLFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'pl-PL', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(
+          fmt.format(dateOptions), '1 r., 1 m-c, 1 t., 1 d., 1 h, 1 min, 1 s');
+    });
+    test('testDurFmtPLFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'pl-PL', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 rok, 1 mies., 1 tydz., 1 dzień, 1 godz., 1 min, 1 sek.');
+    });
+    test('testDurFmtPLFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'pl-PL', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 rok, 1 miesiąc, 1 tydzień, 1 dzień, 1 godzina, 1 minuta i 1 sekunda');
+    });
+    //test cases for pt-BR
+    test('testDurFmtPTFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'pt-BR', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 ano 1 mês 1 sem. 1 dia 1 h 1 min 1 s');
+    });
+    test('testDurFmtPTFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'pt-BR', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 ano 1 mês 1 sem. 1 dia 1 h 1 min 1 s');
+    });
+    test('testDurFmtPTFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'pt-BR', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 ano 1 mês 1 sem. 1 dia 01:01:01');
+    });
+    test('testDurFmtPTFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'pt-BR', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 ano, 1 mês, 1 sem., 1 dia, 1 h, 1 min, 1 s');
+    });
+    test('testDurFmtPTFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'pt-BR', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 ano, 1 mês, 1 sem., 1 dia, 1 h, 1 min, 1 s');
+    });
+    test('testDurFmtPTFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'pt-BR', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 ano, 1 mês, 1 semana, 1 dia, 1 hora, 1 minuto e 1 segundo');
+    });
+    //test cases for ro-RO
+    test('testDurFmtROFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'ro-RO', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 a, 1 l, 1 săpt., 1 z, 1 h, 1 m, 1 s');
+    });
+    test('testDurFmtROFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'ro-RO', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 a, 1 l, 1 săpt., 1 z, 1 h, 1 m, 1 s');
+    });
+    test('testDurFmtROFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'ro-RO', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 a, 1 l, 1 săpt., 1 z, 01:01:01');
+    });
+    test('testDurFmtROFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'ro-RO', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 a, 1 l, 1 săpt., 1 z, 1 h, 1 m, 1 s');
+    });
+    test('testDurFmtROFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'ro-RO', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 an, 1 lună, 1 săpt., 1 zi, 1 oră, 1 min., 1 s');
+    });
+    test('testDurFmtROFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'ro-RO', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 an, 1 lună, 1 săptămână, 1 zi, 1 oră, 1 minut, 1 secundă');
+    });
+    //test cases for ru-RU
+    test('testDurFmtRUFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'ru-RU', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 г. 1 м. 1 н. 1 д. 1 ч 1 мин 1 с');
+    });
+    test('testDurFmtRUFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'ru-RU', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 г. 1 м. 1 н. 1 д. 1 ч 1 мин 1 с');
+    });
+    test('testDurFmtRUFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'ru-RU', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 г. 1 м. 1 н. 1 д. 01:01:01');
+    });
+    test('testDurFmtRUFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'ru-RU', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 г. 1 м. 1 н. 1 д. 1 ч 1 мин 1 с');
+    });
+    test('testDurFmtRUFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'ru-RU', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 г. 1 мес. 1 нед. 1 дн. 1 ч 1 мин 1 с');
+    });
+    test('testDurFmtRUFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'ru-RU', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 год 1 месяц 1 неделя 1 день 1 час 1 минута 1 секунда');
+    });
+    //test cases for sk-SK
+    test('testDurFmtSKFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'sk-SK', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(
+          fmt.format(dateOptions), '1 r., 1 m., 1 t., 1 d., 1 h, 1 min, 1 s');
+    });
+    test('testDurFmtSKFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'sk-SK', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(
+          fmt.format(dateOptions), '1 r., 1 m., 1 t., 1 d., 1 h, 1 min, 1 s');
+    });
+    test('testDurFmtSKFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'sk-SK', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 r., 1 m., 1 t., 1 d., 1:01:01');
+    });
+    test('testDurFmtSKFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'sk-SK', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(
+          fmt.format(dateOptions), '1 r., 1 m., 1 t., 1 d., 1 h, 1 min, 1 s');
+    });
+    test('testDurFmtSKFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'sk-SK', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 r., 1 mes., 1 týž., 1 deň, 1 h, 1 min, 1 s');
+    });
+    test('testDurFmtSKFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'sk-SK', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 rok, 1 mesiac, 1 týždeň, 1 deň, 1 hodina, 1 minúta, 1 sekunda');
+    });
+    //test cases for sq-AL
+    test('testDurFmtSQFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'sq-AL', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 vit, 1 muaj, 1 javë, 1 ditë, 1 orë, 1 min., 1 sek.');
+    });
+    test('testDurFmtSQFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'sq-AL', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 vit, 1 muaj, 1 javë, 1 ditë, 1 orë, 1 min., 1 sek.');
+    });
+    test('testDurFmtSQFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'sq-AL', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 vit, 1 muaj, 1 javë, 1 ditë, 1:01:01');
+    });
+    test('testDurFmtSQFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'sq-AL', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 vit, 1 muaj, 1 javë, 1 ditë, 1 orë, 1 min., 1 sek.');
+    });
+    test('testDurFmtSQFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'sq-AL', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 vit, 1 muaj, 1 javë, 1 ditë, 1 orë, 1 min., 1 sek.');
+    });
+    test('testDurFmtSQFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'sq-AL', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 vit, 1 muaj, 1 javë, 1 ditë, 1 orë, 1 minutë e 1 sekondë');
+    });
+    //test cases for sr-Latn-RS
+    test('testDurFmtSRFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'sr-Latn-RS', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 g, 1 m, 1 n, 1 d, 1 č, 1 m, 1 s');
+    });
+    test('testDurFmtSRFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'sr-Latn-RS', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 g, 1 m, 1 n, 1 d, 1 č, 1 m, 1 s');
+    });
+    test('testDurFmtSRFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'sr-Latn-RS', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 g, 1 m, 1 n, 1 d, 01:01:01');
+    });
+    test('testDurFmtSRFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'sr-Latn-RS', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 god, 1 mes., 1 ned., 1 dan, 1 sat, 1 min, 1 sek');
+    });
+    test('testDurFmtSRFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'sr-Latn-RS', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 godina, 1 mesec, 1 nedelja, 1 dan, 1 sat, 1 minut i 1 sekunda');
+    });
+    //test cases for th-TH
+    test('testDurFmtTHFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'th-TH', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(
+          fmt.format(dateOptions), '1ปี 1เดือน 1สัปดาห์ 1วัน 1ชม. 1นาที 1วิ');
+    });
+    test('testDurFmtTHFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'th-TH', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(
+          fmt.format(dateOptions), '1ปี 1เดือน 1สัปดาห์ 1วัน 1ชม. 1นาที 1วิ');
+    });
+    test('testDurFmtTHFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'th-TH', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1ปี 1เดือน 1สัปดาห์ 1วัน 01:01:01');
+    });
+    test('testDurFmtTHFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'th-TH', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(
+          fmt.format(dateOptions), '1ปี 1เดือน 1สัปดาห์ 1วัน 1ชม. 1นาที 1วิ');
+    });
+    test('testDurFmtTHFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'th-TH', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 ปี 1 เดือน 1 สัปดาห์ 1 วัน 1 ชม. 1 นาที 1 วิ');
+    });
+    test('testDurFmtTHFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'th-TH', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 ปี 1 เดือน 1 สัปดาห์ 1 วัน 1 ชั่วโมง 1 นาที และ 1 วินาที');
+    });
+    //test cases for uk-UA
+    test('testDurFmtUKUAFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'uk-UA', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1р, 1м, 1т, 1д, 1г, 1х, 1с');
+    });
+    test('testDurFmtUKUAFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'uk-UA', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1р, 1м, 1т, 1д, 1г, 1х, 1с');
+    });
+    test('testDurFmtUKUAFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'uk-UA', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1р, 1м, 1т, 1д, 01:01:01');
+    });
+    test('testDurFmtUKUAFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'uk-UA', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1р, 1м, 1т, 1д, 1г, 1х, 1с');
+    });
+    test('testDurFmtUKUAFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'uk-UA', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 р., 1 міс., 1 тиж., 1 дн., 1 год, 1 хв, 1 с');
+    });
+    test('testDurFmtUKUAFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'uk-UA', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 рік, 1 місяць, 1 тиждень, 1 день, 1 година, 1 хвилина і 1 секунда');
+    });
+    //test cases for uz-Latn-UZ
+    test('testDurFmtUZLATNFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'uz-Latn-UZ', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 yil 1 oy 1 hafta 1 kun 1 soat 1 daq. 1 s');
+    });
+    test('testDurFmtUZLATNFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'uz-Latn-UZ', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 yil 1 oy 1 hafta 1 kun 1 soat 1 daq. 1 s');
+    });
+    test('testDurFmtUZLATNFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'uz-Latn-UZ', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 yil 1 oy 1 hafta 1 kun 01:01:01');
+    });
+    test('testDurFmtUZLATNFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'uz-Latn-UZ', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 yil 1 oy 1 hafta 1 kun 1 soat 1 daq. 1 s');
+    });
+    test('testDurFmtUZLATNFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'uz-Latn-UZ', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 yil 1 oy 1 hafta 1 kun 1 soat 1 daq. 1 son.');
+    });
+    test('testDurFmtUZLATNFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'uz-Latn-UZ', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 yil 1 oy 1 hafta 1 kun 1 soat 1 daqiqa 1 soniya');
+    });
+    //test cases for vietnemese
+    test('testDurFmtVIFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'vi-VN', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 năm 1 tháng 1 tuần 1 ngày 1 giờ 1 phút 1 giây');
+    });
+    test('testDurFmtVIFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'vi-VN', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 năm 1 tháng 1 tuần 1 ngày 1 giờ 1 phút 1 giây');
+    });
+    test('testDurFmtVIFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'vi-VN', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 năm 1 tháng 1 tuần 1 ngày 01:01:01');
+    });
+    test('testDurFmtVIFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'vi-VN', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 năm, 1 tháng, 1 tuần, 1 ngày, 1 giờ, 1 phút, 1 giây');
+    });
+    test('testDurFmtVIFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'vi-VN', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 năm, 1 tháng, 1 tuần, 1 ngày, 1 giờ, 1 phút, 1 giây');
+    });
+    test('testDurFmtVIFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'vi-VN', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 năm, 1 tháng, 1 tuần, 1 ngày, 1 giờ, 1 phút, 1 giây');
+    });
+    //test cases for zh-Hant-TW
+    test('testDurFmtZHFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'zh-Hant-TW', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 年1 個月1 週1 天1 小時1 分鐘1 秒');
+    });
+    test('testDurFmtZHFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'zh-Hant-TW', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 年1 個月1 週1 天1 小時1 分鐘1 秒');
+    });
+    test('testDurFmtZHFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'zh-Hant-TW', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 年1 個月1 週1 天1:01:01');
+    });
+    test('testDurFmtZHFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'zh-Hant-TW', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 年1 個月1 週1 天1 小時1 分鐘1 秒');
+    });
+    test('testDurFmtZHFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'zh-Hant-TW', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 年 1 個月 1 週 1 天 1 小時 1 分鐘 1 秒');
+    });
+    test('testDurFmtZHFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'zh-Hant-TW', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 年 1 個月 1 週 1 天 1 小時 1 分鐘 1 秒');
+    });
+    //test cases for zh-Hank-HK
+    test('testDurFmtZHHKFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'zh-Hant-HK', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1年1個月1週1日1小時1分1秒');
+    });
+    test('testDurFmtZHHKFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'zh-Hant-HK', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1年1個月1週1日1小時1分1秒');
+    });
+    test('testDurFmtZHHKFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'zh-Hant-HK', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1年1個月1週1日1:01:01');
+    });
+    test('testDurFmtZHHKFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'zh-Hant-HK', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1年1個月1週1日1小時1分1秒');
+    });
+    test('testDurFmtZHHKFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'zh-Hant-HK', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 年 1 個月 1 星期 1 日 1 小時 1 分鐘 1 秒');
+    });
+    test('testDurFmtZHHKFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'zh-Hant-HK', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 年 1 個月 1 星期 1 日 1 小時 1 分鐘 1 秒');
+    });
+    //test cases for tr-TR
+    test('testDurFmtTRFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'tr-TR', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1y 1a 1h 1g 1 sa 1d 1sn');
+    });
+    test('testDurFmtTRFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'tr-TR', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1y 1a 1h 1g 1 sa 1d 1sn');
+    });
+    test('testDurFmtTRFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'tr-TR', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1y 1a 1h 1g 01:01:01');
+    });
+    test('testDurFmtTRFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'tr-TR', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1y 1a 1h 1g 1 sa 1d 1sn');
+    });
+    test('testDurFmtTRFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'tr-TR', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(
+          fmt.format(dateOptions), '1 yıl 1 ay 1 hf. 1 gün 1 sa. 1 dk. 1 sn.');
+    });
+    test('testDurFmtTRFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'tr-TR', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 yıl 1 ay 1 hafta 1 gün 1 saat 1 dakika 1 saniye');
+    });
+    //test cases for swedish
+    test('testDurFmtSVFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'sv-SE', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1å 1m 1v 1d 1h 1m 1s');
+    });
+    test('testDurFmtSVFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'sv-SE', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1å 1m 1v 1d 1h 1m 1s');
+    });
+    test('testDurFmtSVFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'sv-SE', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1å 1m 1v 1d 01:01:01');
+    });
+    test('testDurFmtSVFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'sv-SE', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1å, 1m, 1v, 1d, 1h, 1m, 1s');
+    });
+    test('testDurFmtSVFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'sv-SE', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(
+          fmt.format(dateOptions), '1 år, 1 mån, 1 v, 1 d, 1 tim, 1 min, 1 s');
+    });
+    test('testDurFmtSVFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'sv-SE', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 år, 1 månad, 1 vecka, 1 dygn, 1 timme, 1 minut, 1 sekund');
+    });
+    //test cases for sl-SI
+    test('testDurFmtSLFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'sl-SI', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 l, 1 m, 1 t, 1 d, 1 h, 1 min, 1 s');
+    });
+    test('testDurFmtSLFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'sl-SI', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 l, 1 m, 1 t, 1 d, 1 h, 1 min, 1 s');
+    });
+    test('testDurFmtSLFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'sl-SI', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 l, 1 m, 1 t, 1 d, 01:01:01');
+    });
+    test('testDurFmtSLFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'sl-SI', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 l, 1 m, 1 t, 1 d, 1 h, 1 min, 1 s');
+    });
+    test('testDurFmtSLFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'sl-SI', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 l, 1 m, 1 t, 1 d, 1 h, 1 min, 1 sek.');
+    });
+    test('testDurFmtSLFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'sl-SI', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 leto, 1 mesec, 1 teden, 1 dan, 1 ura, 1 minuta in 1 sekunda');
+    });
+    //test cases for portuguese pt-PU
+    test('testDurFmtPTPTFormatShortDefaultStyle', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'pt-PT', length: 'short');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 ano, 1 mês, 1 sem., 1 dia, 1 h, 1 min, 1 s');
+    });
+    test('testDurFmtPTPTFormatShortText', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'pt-PT', length: 'short', style: 'text');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 ano, 1 mês, 1 sem., 1 dia, 1 h, 1 min, 1 s');
+    });
+    test('testDurFmtPTPTFormatShortClock', () {
+      final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+          locale: 'pt-PT', length: 'short', style: 'clock');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions), '1 ano, 1 mês, 1 sem., 1 dia, 01:01:01');
+    });
+    test('testDurFmtPTPTFormatMedium', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'pt-PT', length: 'medium');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 ano, 1 mês, 1 sem., 1 dia, 1 h, 1 min, 1 s');
+    });
+    test('testDurFmtPTPTFormatLong', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'pt-PT', length: 'long');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 ano, 1 mês, 1 sem., 1 dia, 1 h, 1 min, 1 s');
+    });
+    test('testDurFmtPTPTFormatFull', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'pt-PT', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
+
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
+      expect(fmt.format(dateOptions),
+          '1 ano, 1 mês, 1 semana, 1 dia, 1 hora, 1 minuto e 1 segundo');
     });
   });
 }

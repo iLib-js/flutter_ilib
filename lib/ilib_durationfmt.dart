@@ -7,13 +7,13 @@ class ILibDurationFmt {
     locale = options.locale;
     length = options.length;
     style = options.style;
-    useNative = options.useNative ?? true;
+    useNative = options.useNative;
   }
 
   String? locale;
   String? length;
   String? style;
-  bool useNative = true;
+  bool? useNative;
 
   /// A string representation of parameters to call functions of iLib library properly
   String toJsonString() {
@@ -47,10 +47,12 @@ class ILibDurationFmt {
     String result = '';
     final String formatOptions = toJsonString();
     final String dateOptions = date.toJsonString();
+
     result = ILibJS.instance
         .evaluate(
             'new DurationFmt($formatOptions).format($dateOptions).toString()')
         .stringResult;
+
     return result;
   }
 
