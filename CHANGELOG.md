@@ -6,25 +6,25 @@
   The developer can use `evaluate()` to obtain the result of Duration formatting until the DurationFmt class is properly implemented.
 
 ## 1.3.0
-* Add `clock` field to ILibDateFmtOptions for specifying time format (e.g., 12-hour or 24-hour).
-* Add `template` field to ILibDateFmtOptions for defining custom date/time display patterns.
-* Fix proper handling of `meridiems` field in ILibDateFmtOptions, which was previously ignored.
+* Added `clock` field to ILibDateFmtOptions for specifying time format (e.g., 12-hour or 24-hour).
+* Added `template` field to ILibDateFmtOptions for defining custom date/time display patterns.
+* Fixed proper handling of `meridiems` field in ILibDateFmtOptions, which was previously ignored.
 
 ## 1.2.1
-* Fix incorrect timezone handling when [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html) where UTC-based times were being misinterpreted as local time during formatting and parsing.
+* Fixed incorrect timezone handling when [DateTime](https://api.flutter.dev/flutter/dart-core/DateTime-class.html) where UTC-based times were being misinterpreted as local time during formatting and parsing.
 
 ## 1.2.0
-* Add `isILibReady` getter to `ILibJS` class to expose internal `_iLibPrepared` state.
-* Add `isILibReady` getter to `FlutterILib` class for external access to ILibJS initialization status.
+* Added `isILibReady` getter to `ILibJS` class to expose internal `_iLibPrepared` state.
+* Added `isILibReady` getter to `FlutterILib` class for external access to ILibJS initialization status.
 * Updated logging system to use the logging package with support for multiple log levels
 
 ## 1.1.0
-* Update the iLib files to version 14.21.0 since the new version of iLib has been released.
+* Updated the iLib files to version 14.21.0 since the new version of iLib has been released.
   * iLib version 14.21.0 incorporates CLDR 46
-* Update the test cases where expectations have aligned between webOS versions and upstream since the CLDR update to 46
+* Updated the test cases where expectations have aligned between webOS versions and upstream since the CLDR update to 46
 
 ## 1.0.0
-* Update the structure to load separate locale data files.
+* Updated the structure to load separate locale data files.
   Previously, the dependent ilib was a fully assembled JS file. Now, the ilib files are divided into the js and locale files.  
   The JS code is assembled as `ilib-init.js`, and the locale files are generated with names like [language].js, e.g. `en.js`, `ko.js`. The iLib files are generated using the [ilib-assemble](https://github.com/iLib-js/ilib-assemble) tool. This change brings memory savings over previous versions of flutter_ilib.  
   Initially, when the app is launched, the package automatically loads the locale data by detecting the system's locale. To load the updated locale data file when the locale changes, I suggest adding the following method at the appropriate time when the locale chanages. 
@@ -33,31 +33,31 @@
   ```
 
 ## 0.4.0
-* Add `libquickjs_c_bridge_plugin.so` for aarch64-webos
-* Update `CMakeLists.txt` for webos to support both arm and aarch64
+* Added `libquickjs_c_bridge_plugin.so` for aarch64-webos
+* Updated `CMakeLists.txt` for webos to support both arm and aarch64
 
 ## 0.3.0
 * Add the method `getMeridiemsRange()` in the class ILibDateFmt.
-* Update test files to use ILib's `loadJS()` instead of `loadJSwithPath()`.
-* Update the test files to share them between flutter_ilib and another flutter_ilib for webOS. The webOS overrides some of the locale data, so some test cases return different results.
+* Updated test files to use ILib's `loadJS()` instead of `loadJSwithPath()`.
+* Updated the test files to share them between flutter_ilib and another flutter_ilib for webOS. The webOS overrides some of the locale data, so some test cases return different results.
 
 ## 0.2.0
-* Add the method `getTemplate()` in the class ILibDateFmt.
-* Re-generate the assemble ilib file to return the correct released version number.
+* Added the method `getTemplate()` in the class ILibDateFmt.
+* Regenerated the assemble ilib file to return the correct released version number.
 * Change the name of the assemble ilib file to `ilib-all.js`.
 
 ## 0.1.0
-* Update the `README.md` file.
-* Update the minor version up for release.
+* Updated the `README.md` file.
+* Updated the minor version up for release.
 
 ## 0.0.4
-* Add more of the API comments in codes.
+* Added more of the API comments in codes.
 
 ## 0.0.3
-* Update to show a sample screenshot image in the published package.
+* Updated to show a sample screenshot image in the published package.
 
 ## 0.0.2
-* Updat structure by using `ChangeNotifier` so that APIs can be used synchronously.
+* Updated structure by using `ChangeNotifier` so that APIs can be used synchronously.
   *  First, the app must add a listener to receive a callback message that the iLib is ready for use. then the APIs can be used synchronously.
 * Added the linter file (`analysis_options.yaml`) and fixed warnings.
 

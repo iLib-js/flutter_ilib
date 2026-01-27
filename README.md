@@ -145,7 +145,7 @@ We have a plan to provide more classes and methods.
    - Methods:  `getFirstDayOfWeek()`, `getWeekEndStart()`, `getWeekEndStart()`
 
 ### ILibDurationFmt
-- Class: [ILibDurationFmtOptions](./Docs.md/#ilibdurationfmteoptions)
+- Class: [ILibDurationFmtOptions](./Docs.md/#ilibdurationfmtoptions)
 - Class: [ILibDurationFmt](./Docs.md/#ilibdurationfmt)
    - Methods:  `format()`, `getLocale()`, `getStyle()`, , `getLength()`
 
