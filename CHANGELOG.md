@@ -37,14 +37,14 @@
 * Updated `CMakeLists.txt` for webos to support both arm and aarch64
 
 ## 0.3.0
-* Add the method `getMeridiemsRange()` in the class ILibDateFmt.
+* Added the method `getMeridiemsRange()` in the class ILibDateFmt.
 * Updated test files to use ILib's `loadJS()` instead of `loadJSwithPath()`.
 * Updated the test files to share them between flutter_ilib and another flutter_ilib for webOS. The webOS overrides some of the locale data, so some test cases return different results.
 
 ## 0.2.0
 * Added the method `getTemplate()` in the class ILibDateFmt.
 * Regenerated the assemble ilib file to return the correct released version number.
-* Change the name of the assemble ilib file to `ilib-all.js`.
+* Changed the name of the assemble ilib file to `ilib-all.js`.
 
 ## 0.1.0
 * Updated the `README.md` file.
