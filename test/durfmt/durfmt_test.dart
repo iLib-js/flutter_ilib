@@ -1516,49 +1516,23 @@ void main() {
       expect(fmt.format(dateOptions),
           '‏20 שנים, 20 ח׳, 20 שבועות, 20 ימ׳, 20 שע׳, 20 דק׳, 20 שנ׳');
     });
-    /*test('testDurFmtHEFormatFullManyNumber', () {
-        final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
-            locale: 'he-IL',
-            length: 'full'
-        );
-        final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);       
-        expect(fmt, isNotNull);
+    test('testDurFmtHEFormatFullManyNumber', () {
+      final ILibDurationFmtOptions fmtOptions =
+          ILibDurationFmtOptions(locale: 'he-IL', length: 'full');
+      final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+      expect(fmt, isNotNull);
 
-        final ILibDateOptions dateOptions = ILibDateOptions(
-            year: 20,
-            month: 20,
-            week: 20,
-            day: 20,
-            hour: 20,
-            minute: 20,
-            second: 20
-        });
-
-        // The `many` category has been removed since CLDR 42.
-        var platform = ilib._getPlatform();
-        if (platform === 'nodejs') {
-            var cldrVersion = Number(process.versions['cldr']);
-            if (Number(cldrVersion) < 36) { // Intl.PluralRules doesn't support this locale until this version.
-                expect(fmt.format(dateOptions),, '‏20 שנים, 20 חודשים, 20 שבועות, 20 ימים, 20 שעות, 20 דקות ו-20 שניות');
-            }  else if(Number(cldrVersion) <= 41) {
-                expect(fmt.format(dateOptions),, '‏20 שנים, 20 חודשים, 20 שבועות, 20 יום, 20 שעות, 20 דקות ו-20 שניות');
-            } else if (Number(cldrVersion) < 43) { // The `many` category has been removed since CLDR 42.
-                expect(fmt.format(dateOptions),, '‏20 שנים, 20 חודשים, 20 שבועות, 20 יום, 20 שעות, 20 דקות ו-‏20 שניות');
-            } else {
-                expect(fmt.format(dateOptions),, '‏20 שנים, 20 חודשים, 20 שבועות, 20 ימים, 20 שעות, 20 דקות ו-20 שניות');
-            }
-        } else if (platform === 'browser') {
-            var browser = ilib._getBrowser();
-            var expected = '‏20 שנים, 20 חודשים, 20 שבועות, 20 יום, 20 שעות, 20 דקות ו-‏20 שניות';
-            if (browser === 'chrome' && getChromeVersion() >= 110) {
-                expected = '‏20 שנים, 20 חודשים, 20 שבועות, 20 ימים, 20 שעות, 20 דקות ו-20 שניות';
-            }
-            expect(fmt.format(dateOptions),, expected);
-        } else {
-            expect(fmt.format(dateOptions),, '‏20 שנים, 20 חודשים, 20 שבועות, 20 ימים, 20 שעות, 20 דקות ו-20 שניות');
-        }
-        test.done();
-    },*/
+      final ILibDateOptions dateOptions = ILibDateOptions(
+          year: 20,
+          month: 20,
+          week: 20,
+          day: 20,
+          hour: 20,
+          minute: 20,
+          second: 20);
+      expect(fmt.format(dateOptions),
+          '‏20 שנים, 20 חודשים, 20 שבועות, 20 ימים, 20 שעות, 20 דקות ו-20 שניות');
+    });
     test('testDurFmtHEFormatShortOtherNumber', () {
       final ILibDurationFmtOptions fmtOptions =
           ILibDurationFmtOptions(locale: 'he-IL', length: 'short');

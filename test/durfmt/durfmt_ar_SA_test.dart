@@ -13,7 +13,7 @@ void main() {
     final ILibJS ilibjsinstance = ILibJS.instance;
     await ilibjsinstance.loadJS();
     ilibjsinstance.initILib();
-    await ilibjsinstance.loadILibLocaleDataAll();
+    await ILibJS.instance.loadILibLocaleData('ar-SA');
   });
 
   group('ILibDurationFmt ar-SA', () {
@@ -23,13 +23,7 @@ void main() {
       );
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 1,
-          month: 1,
-          week: 1,
-          day: 1,
-          hour: 1,
-          minute: 1,
-          second: 1);
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(fmt.format(dateOptions), '‏سنة وشهر و١ أ و١ ي و١ س و١ د و١ ث');
     });
 
@@ -39,13 +33,7 @@ void main() {
       );
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 1,
-          month: 1,
-          week: 1,
-          day: 1,
-          hour: 1,
-          minute: 1,
-          second: 1);
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(fmt.format(dateOptions), '‏سنة وشهر و١ أ و١ ي و١ س و١ د و١ ث');
     });
 
@@ -56,13 +44,7 @@ void main() {
       );
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 1,
-          month: 1,
-          week: 1,
-          day: 1,
-          hour: 1,
-          minute: 1,
-          second: 1);
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(fmt.format(dateOptions), '‏سنة وشهر و١ أ و١ ي و‏١:٠١:٠١');
     });
 
@@ -72,13 +54,7 @@ void main() {
       );
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 1,
-          month: 1,
-          week: 1,
-          day: 1,
-          hour: 1,
-          minute: 1,
-          second: 1);
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(fmt.format(dateOptions), '‏سنة وشهر و١ أ و١ ي و١ س و١ د و١ ث');
     });
 
@@ -88,13 +64,7 @@ void main() {
       );
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 1,
-          month: 1,
-          week: 1,
-          day: 1,
-          hour: 1,
-          minute: 1,
-          second: 1);
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(fmt.format(dateOptions),
           '‏سنة، وشهر، وأسبوع، ويوم، و١ س، و١ د، و١ ث');
     });
@@ -105,13 +75,7 @@ void main() {
       );
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 1,
-          month: 1,
-          week: 1,
-          day: 1,
-          hour: 1,
-          minute: 1,
-          second: 1);
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(fmt.format(dateOptions),
           '‏سنة، وشهر، وأسبوع، ويوم، وساعة، ودقيقة، وثانية');
     });
@@ -355,13 +319,7 @@ void main() {
       );
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 1,
-          month: 1,
-          week: 1,
-          day: 1,
-          hour: 1,
-          minute: 1,
-          second: 1);
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(fmt.format(dateOptions), '‏سنة وشهر و1 أ و1 ي و1 س و1 د و1 ث');
     });
 
@@ -372,13 +330,7 @@ void main() {
       );
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 1,
-          month: 1,
-          week: 1,
-          day: 1,
-          hour: 1,
-          minute: 1,
-          second: 1);
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(fmt.format(dateOptions), '‏سنة وشهر و1 أ و1 ي و1 س و1 د و1 ث');
     });
 
@@ -389,13 +341,7 @@ void main() {
       );
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 1,
-          month: 1,
-          week: 1,
-          day: 1,
-          hour: 1,
-          minute: 1,
-          second: 1);
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(fmt.format(dateOptions), '‏سنة وشهر و1 أ و1 ي و‏1:01:01');
     });
 
@@ -406,13 +352,7 @@ void main() {
       );
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 1,
-          month: 1,
-          week: 1,
-          day: 1,
-          hour: 1,
-          minute: 1,
-          second: 1);
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(fmt.format(dateOptions), '‏سنة وشهر و1 أ و1 ي و1 س و1 د و1 ث');
     });
 
@@ -423,13 +363,7 @@ void main() {
       );
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 1,
-          month: 1,
-          week: 1,
-          day: 1,
-          hour: 1,
-          minute: 1,
-          second: 1);
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(fmt.format(dateOptions),
           '‏سنة، وشهر، وأسبوع، ويوم، و1 س، و1 د، و1 ث');
     });
@@ -441,13 +375,7 @@ void main() {
       );
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 1,
-          month: 1,
-          week: 1,
-          day: 1,
-          hour: 1,
-          minute: 1,
-          second: 1);
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(fmt.format(dateOptions),
           '‏سنة، وشهر، وأسبوع، ويوم، وساعة، ودقيقة، وثانية');
     });

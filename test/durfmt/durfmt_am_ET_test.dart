@@ -13,7 +13,7 @@ void main() {
     final ILibJS ilibjsinstance = ILibJS.instance;
     await ilibjsinstance.loadJS();
     ilibjsinstance.initILib();
-    await ilibjsinstance.loadILibLocaleDataAll();
+    await ILibJS.instance.loadILibLocaleData('am-ET');
   });
 
   group('ILibDurationFmt am-ET', () {
@@ -23,13 +23,7 @@ void main() {
       );
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 1,
-          month: 1,
-          week: 1,
-          day: 1,
-          hour: 1,
-          minute: 1,
-          second: 1);
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(
           fmt.format(dateOptions), '1 ዓመት፣ 1 ወር፣ 1 ሳምንት፣ 1 ቀ፣ 1 ሰ፣ 1 ደ፣ 1 ሰ');
     });
@@ -40,13 +34,7 @@ void main() {
       );
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 1,
-          month: 1,
-          week: 1,
-          day: 1,
-          hour: 1,
-          minute: 1,
-          second: 1);
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(
           fmt.format(dateOptions), '1 ዓመት፣ 1 ወር፣ 1 ሳምንት፣ 1 ቀ፣ 1 ሰ፣ 1 ደ፣ 1 ሰ');
     });
@@ -58,13 +46,7 @@ void main() {
       );
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 1,
-          month: 1,
-          week: 1,
-          day: 1,
-          hour: 1,
-          minute: 1,
-          second: 1);
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(fmt.format(dateOptions), '1 ዓመት፣ 1 ወር፣ 1 ሳምንት፣ 1 ቀ፣ 1:01:01');
     });
 
@@ -74,13 +56,7 @@ void main() {
       );
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 1,
-          month: 1,
-          week: 1,
-          day: 1,
-          hour: 1,
-          minute: 1,
-          second: 1);
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(
           fmt.format(dateOptions), '1 ዓመት፣ 1 ወር፣ 1 ሳምንት፣ 1 ቀ፣ 1 ሰ፣ 1 ደ፣ 1 ሰ');
     });
@@ -91,13 +67,7 @@ void main() {
       );
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 1,
-          month: 1,
-          week: 1,
-          day: 1,
-          hour: 1,
-          minute: 1,
-          second: 1);
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(fmt.format(dateOptions),
           '1 ዓመት፣ 1 ወራት፣ 1 ሳምንት፣ 1 ቀናት፣ 1 ሰዓ፣ 1 ደቂ፣ 1 ሰከ');
     });
@@ -108,13 +78,7 @@ void main() {
       );
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 1,
-          month: 1,
-          week: 1,
-          day: 1,
-          hour: 1,
-          minute: 1,
-          second: 1);
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(fmt.format(dateOptions),
           '1 ዓመት፣ 1 ወር፣ 1 ሳምንት፣ 1 ቀናት፣ 1 ሰዓት፣ 1 ደቂቃ እና 1 ሰከንድ');
     });
@@ -125,13 +89,7 @@ void main() {
       );
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 2,
-          month: 2,
-          week: 2,
-          day: 2,
-          hour: 2,
-          minute: 2,
-          second: 2);
+          year: 2, month: 2, week: 2, day: 2, hour: 2, minute: 2, second: 2);
       expect(fmt.format(dateOptions), '2 ዓ፣ 2 ወር፣ 2 ሳምንት፣ 2 ቀ፣ 2 ሰ፣ 2 ደ፣ 2 ሰ');
     });
 
@@ -141,13 +99,7 @@ void main() {
       );
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 2,
-          month: 2,
-          week: 2,
-          day: 2,
-          hour: 2,
-          minute: 2,
-          second: 2);
+          year: 2, month: 2, week: 2, day: 2, hour: 2, minute: 2, second: 2);
       expect(fmt.format(dateOptions), '2 ዓ፣ 2 ወር፣ 2 ሳምንት፣ 2 ቀ፣ 2 ሰ፣ 2 ደ፣ 2 ሰ');
     });
 
@@ -158,13 +110,7 @@ void main() {
       );
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 2,
-          month: 2,
-          week: 2,
-          day: 2,
-          hour: 2,
-          minute: 2,
-          second: 2);
+          year: 2, month: 2, week: 2, day: 2, hour: 2, minute: 2, second: 2);
       expect(fmt.format(dateOptions), '2 ዓ፣ 2 ወር፣ 2 ሳምንት፣ 2 ቀ፣ 2:02:02');
     });
 
@@ -174,13 +120,7 @@ void main() {
       );
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 2,
-          month: 2,
-          week: 2,
-          day: 2,
-          hour: 2,
-          minute: 2,
-          second: 2);
+          year: 2, month: 2, week: 2, day: 2, hour: 2, minute: 2, second: 2);
       expect(fmt.format(dateOptions), '2 ዓ፣ 2 ወር፣ 2 ሳምንት፣ 2 ቀ፣ 2 ሰ፣ 2 ደ፣ 2 ሰ');
     });
 
@@ -190,13 +130,7 @@ void main() {
       );
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 2,
-          month: 2,
-          week: 2,
-          day: 2,
-          hour: 2,
-          minute: 2,
-          second: 2);
+          year: 2, month: 2, week: 2, day: 2, hour: 2, minute: 2, second: 2);
       expect(fmt.format(dateOptions),
           '2 ዓመታት፣ 2 ወራት፣ 2 ሳምንታት፣ 2 ቀናት፣ 2 ሰዓ፣ 2 ደቂቃ፣ 2 ሰከ');
     });
@@ -207,13 +141,7 @@ void main() {
       );
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 2,
-          month: 2,
-          week: 2,
-          day: 2,
-          hour: 2,
-          minute: 2,
-          second: 2);
+          year: 2, month: 2, week: 2, day: 2, hour: 2, minute: 2, second: 2);
       expect(fmt.format(dateOptions),
           '2 ዓመታት፣ 2 ወራት፣ 2 ሳምንታት፣ 2 ቀናት፣ 2 ሰዓቶች፣ 2 ደቂቃዎች እና 2 ሰከንዶች');
     });

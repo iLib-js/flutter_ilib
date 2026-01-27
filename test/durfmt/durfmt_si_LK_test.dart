@@ -13,7 +13,7 @@ void main() {
     final ILibJS ilibjsinstance = ILibJS.instance;
     await ilibjsinstance.loadJS();
     ilibjsinstance.initILib();
-    await ilibjsinstance.loadILibLocaleDataAll();
+    await ILibJS.instance.loadILibLocaleData('si-LK');
   });
 
   group('ILibDurationFmt si-LK', () {
@@ -23,13 +23,7 @@ void main() {
       );
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 1,
-          month: 1,
-          week: 1,
-          day: 1,
-          hour: 1,
-          minute: 1,
-          second: 1);
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(fmt.format(dateOptions), 'ව 1, මා 1, ස 1, දි 1, පැය 1, මි 1, ත 1');
     });
 
@@ -39,13 +33,7 @@ void main() {
       );
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 1,
-          month: 1,
-          week: 1,
-          day: 1,
-          hour: 1,
-          minute: 1,
-          second: 1);
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(fmt.format(dateOptions), 'ව 1, මා 1, ස 1, දි 1, පැය 1, මි 1, ත 1');
     });
 
@@ -56,13 +44,7 @@ void main() {
       );
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 1,
-          month: 1,
-          week: 1,
-          day: 1,
-          hour: 1,
-          minute: 1,
-          second: 1);
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(fmt.format(dateOptions), 'ව 1, මා 1, ස 1, දි 1, 01.01.01');
     });
 
@@ -72,13 +54,7 @@ void main() {
       );
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 1,
-          month: 1,
-          week: 1,
-          day: 1,
-          hour: 1,
-          minute: 1,
-          second: 1);
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(fmt.format(dateOptions), 'ව 1, මා 1, ස 1, දි 1, පැය 1, මි 1, ත 1');
     });
 
@@ -88,13 +64,7 @@ void main() {
       );
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 1,
-          month: 1,
-          week: 1,
-          day: 1,
-          hour: 1,
-          minute: 1,
-          second: 1);
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(fmt.format(dateOptions),
           'වසර 1, මාස 1, සති 1, දින 1, පැය 1, මිනි 1, තත් 1');
     });
@@ -105,13 +75,7 @@ void main() {
       );
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 1,
-          month: 1,
-          week: 1,
-          day: 1,
-          hour: 1,
-          minute: 1,
-          second: 1);
+          year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(fmt.format(dateOptions),
           'වසර 1, මාස 1, සති 1, දින 1, පැය 1, මිනිත්තු 1, සහ තත්පර 1');
     });
