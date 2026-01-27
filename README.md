@@ -129,7 +129,7 @@ _flutterIlibPlugin.evaluateILib(jscode1);
 // 'ethiopic'
 ```
 To give a more efficient way, we provide some classes that can be easily used in a Flutter app.   
-Currently, We have a `ILibDateFmt` and `ILibLocaleInfo` classes.
+Currently, We have a `ILibDateFmt` , `ILibLocaleInfo` and `ILibDurationFmt` classes.
 We have a plan to provide more classes and methods.  
 
 ### ILibDate
@@ -147,7 +147,7 @@ We have a plan to provide more classes and methods.
 ### ILibDurationFmt
 - Class: [ILibDurationFmtOptions](./Docs.md/#ilibdurationfmtoptions)
 - Class: [ILibDurationFmt](./Docs.md/#ilibdurationfmt)
-   - Methods:  `format()`, `getLocale()`, `getStyle()`, , `getLength()`
+   - Methods:  `format()`, `getLocale()`, `getStyle()`, `getLength()`
 
 ## Supported Locales
 The results of the following locales are checked by unit tests.  
