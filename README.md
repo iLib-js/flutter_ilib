@@ -85,6 +85,27 @@ fmt.format(dateOptions);
 ```
 
 ```dart
+final ILibDurationFmtOptions fmtOptions =
+    ILibDurationOptions(locale: 'en-GB', length: 'full');
+final ILibDurationFmt fmt = ILibDuration(fmtOptions);
+final ILibDateOptions dateOptions = ILibDateOptions(
+    year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1);
+fmt.format(dateOptions);
+// '1 year, 1 month, 1 week, 1 day, 1 hour, 1 minute'
+
+final ILibDurationFmtOptions fmtOptions = ILibDurationOptions(
+      locale: 'en-GB',
+      length: 'full',
+      style: 'clock',
+    );
+final ILibDurationFmt fmt = ILibDuration(fmtOptions);
+final ILibDateOptions dateOptions = ILibDateOptions(
+    year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1);
+fmt.format(dateOptions);
+// '2 years, 2 months, 2 weeks, 2 days, 02:02'
+```
+
+```dart
 // 0:sun, 1:mon, 2:tue, 3:wed, 4:thu, 5:fri, 6:sat
 final ILibLocaleInfo locInfo = ILibLocaleInfo('ko-KR');
 locInfo.getFirstDayOfWeek();
@@ -111,15 +132,22 @@ To give a more efficient way, we provide some classes that can be easily used in
 Currently, We have a `ILibDateFmt` and `ILibLocaleInfo` classes.
 We have a plan to provide more classes and methods.  
 
-### ILibDateFmt
+### ILibDate
 - Class: [ILibDateOptions](./Docs.md/#ilibdateoptions)
+
+### ILibDateFmt
 - Class: [ILibDateFmtOptions](./Docs.md/#ilibdatefmtoptions)  
 - Class: [ILibDateFmt](./Docs.md#ilibdatefmt)
    - Methods: `format()`, `getClock()`, `getTemplate()`, `getMeridiemsRange()`
 
 ### ILibLocaleInfo
 - Class: [ILibLocaleInfo](./Docs.md/#iliblocaleinfo)
-   - Methods:  `getFirstDayOfWeek()`, `getWeekEndStart()`, `getWeekEndStart()` 
+   - Methods:  `getFirstDayOfWeek()`, `getWeekEndStart()`, `getWeekEndStart()`
+
+### ILibDurationFmt
+- Class: [ILibDurationFmtOptions](./Docs.md/#ilibdurationfmteoptions)
+- Class: [ILibDurationFmt](./Docs.md/#ilibdurationfmt)
+   - Methods:  `format()`, `getLocale()`, `getStyle()`, , `getLength()`
 
 ## Supported Locales
 The results of the following locales are checked by unit tests.  

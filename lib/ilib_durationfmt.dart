@@ -56,7 +56,9 @@ class ILibDurationFmt {
     return result;
   }
 
-  /// Return the template string that is used to format date/times for this formatter instance
+  /// Return the locale that was used to construct this duration formatter object.
+  /// If the locale was not given as parameter to the constructor, this method returns the default
+  /// locale of the system.
   String getLocale() {
     String result = '';
     final String formatOptions = toJsonString();
@@ -66,6 +68,9 @@ class ILibDurationFmt {
     return result;
   }
 
+  /// Return the length that was used to construct this duration formatter object. If the
+  /// length was not given as parameter to the constructor, this method returns the default
+  /// length. Valid values are "short", "medium", "long", and "full".
   String getLength() {
     String result = '';
     final String formatOptions = toJsonString();
@@ -74,6 +79,8 @@ class ILibDurationFmt {
     return result;
   }
 
+  /// Return the style that was used to construct this duration formatter object.
+  /// Valid values are "text" or "clock".
   String getStyle() {
     String result = '';
     final String formatOptions = toJsonString();
@@ -84,10 +91,9 @@ class ILibDurationFmt {
 }
 
 class ILibDurationFmtOptions {
-  /// [locale] Locales are specified either with a specifier string that follows the BCP-47 convention,
-  /// [length] Specifies the length of the format to use.Valid values are "short", "medium", "long" and "full".
-  /// [style]
-  /// [type] Specifies whether this formatter should format times only, dates only, or both times and dates together. Valid values are "time", "date", and "datetime".
+  /// [locale] Locales are specified either with a specifier string that follows the BCP-47 convention.
+  /// [length] Specifies the length of the format to use. Valid values are "short", "medium", "long" and "full".
+  /// [style] whether hours, minutes, and seconds should be formatted as a text string or as a regular time as on a clock.
   /// [useNative] The flag used to determine whether to use the native script settings for formatting the numbers.
   ILibDurationFmtOptions({
     this.locale,
