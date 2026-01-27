@@ -86,19 +86,19 @@ fmt.format(dateOptions);
 
 ```dart
 final ILibDurationFmtOptions fmtOptions =
-    ILibDurationOptions(locale: 'en-GB', length: 'full');
-final ILibDurationFmt fmt = ILibDuration(fmtOptions);
+    ILibDurationFmtOptions(locale: 'en-GB', length: 'full');
+final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
 final ILibDateOptions dateOptions = ILibDateOptions(
     year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1);
 fmt.format(dateOptions);
 // '1 year, 1 month, 1 week, 1 day, 1 hour, 1 minute'
 
-final ILibDurationFmtOptions fmtOptions = ILibDurationOptions(
+final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
       locale: 'en-GB',
       length: 'full',
       style: 'clock',
     );
-final ILibDurationFmt fmt = ILibDuration(fmtOptions);
+final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
 final ILibDateOptions dateOptions = ILibDateOptions(
     year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1);
 fmt.format(dateOptions);
