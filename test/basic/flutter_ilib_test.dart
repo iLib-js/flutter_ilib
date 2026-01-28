@@ -215,6 +215,6 @@ void main() {
     const String str =
         'new DurationFmt({locale:"$loc", length:"$length",style: "$style", useNative: false}).format({year: $year, month: $month, day: $day, hour: $hour, minute: $minute}).toString()';
 
-    expect(flutterIlibPlugin.evaluateILib(str), '2 سال 3 ماه 16 روز ‏5:23');
+    expect(flutterIlibPlugin.evaluateILib(str), '‏2 سال 3 ماه 16 روز ‏5:23');
   });
 }

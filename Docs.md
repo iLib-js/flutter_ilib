@@ -1,3 +1,4 @@
+# Date
 ## ILibDateOptions
 
 ### Properties
@@ -7,6 +8,7 @@
 |_\<String?>_ locale | Locales are specified either with a specifier string that follows the BCP-47 convention, <br>(roughly: "language-script-region").|
 |_\<int?>_ year | The year|
 |_\<int?>_ month | The month|
+|_\<int?>_ week | The week|
 |_\<int?>_ day | The day of the month|
 |_\<int?>_ hour | The hour of the day|
 |_\<int?>_ minute | The minute [0..59]|
@@ -20,7 +22,7 @@
 
  ### Constructors
 ```dart
-ILibDateOptions (String? locale, int? year, int? month, int? day, int? hour, int? minute, int? second, int? millisecond, int? unixtime, String? type, String? calendar, DateTime? dateTime)
+ILibDateOptions (String? locale, int? year, int? month, int? week, int? day, int? hour, int? minute, int? second, int? millisecond, int? unixtime, String? type, String? calendar, DateTime? dateTime)
 ```
 
  ### Methods
@@ -29,6 +31,7 @@ ILibDateOptions (String? locale, int? year, int? month, int? day, int? hour, int
 |_String_ toJsonString() | A string representation of parameters to call functions of iLib library properly|
 
 
+# Date Formatting
 ## ILibDateFmtOptions
 
 ### Properties
@@ -70,8 +73,45 @@ ILibDateFmt(ILibDateFmtOptions options)
 |_String_ getTemplate()| Return the template string that is used to format date/times for this formatter instance|
 |_List\<MeridiemsInfo>_ getMeridiemsRange()| Return the range of possible meridiems (times of day like "AM" or "PM") in this date formatter.|
 
-## ILibLocaleInfo
 
+
+# Duration Formatting
+## ILibDurationFmtOptions
+### Properties
+|name|description|
+|------|---|
+|_\<String?>_ locale| locale to use when formatting the duration. If the locale is not specified, then the default locale of the app will be used |
+|_\<String?>_ length| Specify the length of the format to use. The length is the approximate size of the formatted string. <br> <li><i>short</i> - use a short representation of the duration. This is the most compact format possible for the locale. eg. 1y 1m 1w 1d 1:01:01 <br> <li><i>medium</i> - use a medium length representation of the duration. This is a slightly longer format. eg. 1 yr 1 mo 1 wk 1 dy 1 hr 1 mi 1 se <br> <li><i>long</i> - use a long representation of the duration. This is a fully specified format, but some of the textual <br> <li><i>full</i> - use a full representation of the duration. This is a fully specified format where all the textual parts are spelled out completely. eg. 1 year, 1 month, 1 week, 1 day, 1 hour, 1 minute and 1 second parts may still be abbreviated. eg. 1 yr 1 mo 1 wk 1 day 1 hr 1 min 1 sec|
+|_\<String?>_ style| whether hours, minutes, and seconds should be formatted as a text string or as a regular time as on a clock. eg. text is "1 hour, 15 minutes", whereas clock is "1:15:00". Valid values for this property are "text" or "clock". Default if this property is not specified is "text". |
+|_\<Bool?>_ useNative| the flag used to determaine whether to use the native script settings for formatting the numbers |
+
+ ### Constructors
+```dart
+ILibDurationFmtOptions (String? locale, String? length, String? style, bool? useNative)
+```
+
+## ILibDurationFmt
+### Properties
+|name|description|
+|------|---|
+| _\<ILibDurationFmtOptions>_ options | Options for the DurationFormating|
+
+ ### Constructors
+```dart
+ILibDurationFmt(ILibDurationFmtOptions options)
+```
+ ### Methods
+|name|description|
+|------|---|
+|_String_ toJsonString() | A string representation of parameters to call functions of iLib library properly|
+|_String_ format()| Formats a particular date instance according to the settings of this formatter object|
+|_String_ getLocale()| Return the locale that was used to construct this duration formatter object.|
+|_String_ getLength()| Return the length that was used to construct this duration formatter object.|
+|_String_ getStyle()| Return the style that was used to construct this duration formatter object.|
+
+
+# LocaleInfo
+## ILibLocaleInfo
 ### Properties
 |name|description|
 |------|---|
@@ -88,3 +128,6 @@ ILibLocaleInfo(String locale)
 |_int_ getFirstDayOfWeek() | Returns the day of week that starts weeks in the current locale. <br>Days are still numbered the standard way with 0 for Sunday through 6 for Saturday, <br> but calendars should be displayed and weeks calculated with the day of week returned from this function as the first day of the week.|
 |_int_ getWeekEndStart() | Returns the day of week that starts weekend in the current locale.<br> Days are still numbered the standard way with 0 for Sunday through 6 for Saturday.|
 |_int_ getWeekEndEnd() | Returns the day of week that ends weekend in the current locale. <br>Days are still numbered the standard way with 0 for Sunday through 6 for Saturday.|
+
+
+
