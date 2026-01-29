@@ -48,8 +48,10 @@ Widget build(BuildContext context) {
     ....
 ```
 
-### Formatting
+### Examples
 Get the result of formatting by using the class provided by flutter_ilib.
+
+### Date Formatting
 
 ```dart
 final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -84,6 +86,8 @@ fmt.format(dateOptions);
 // '2024년 6월 27일 오전 10:42'
 ```
 
+### Duration Formatting
+
 ```dart
 final ILibDurationFmtOptions fmtOptions =
     ILibDurationFmtOptions(locale: 'en-GB', length: 'full');
@@ -104,6 +108,8 @@ final ILibDateOptions dateOptions = ILibDateOptions(
 fmt.format(dateOptions);
 // '2 years, 2 months, 2 weeks, 2 days, 02:02'
 ```
+
+### LocaleInfo
 
 ```dart
 // 0:sun, 1:mon, 2:tue, 3:wed, 4:thu, 5:fri, 6:sat
