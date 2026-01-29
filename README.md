@@ -100,7 +100,7 @@ final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
     );
 final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
 final ILibDateOptions dateOptions = ILibDateOptions(
-    year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1);
+    year: 2, month: 2, week: 2, day: 2, hour: 2, minute: 2);
 fmt.format(dateOptions);
 // '2 years, 2 months, 2 weeks, 2 days, 02:02'
 ```
