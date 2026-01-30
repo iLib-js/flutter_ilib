@@ -1,18 +1,18 @@
 class ILibDateOptions {
-  /// [locale] Locales are specified either with a specifier string that follows the BCP-47 convention,
-  /// [year] The year
-  /// [month] The month
-  /// [week] The week
-  /// [day] The day of the month
-  /// [hour] The hour of the day
-  /// [minute] The minute [0..59]
-  /// [second] The second [0..59]
-  /// [millisecond] The millisecond [0..999]
-  /// [unixtime] Sets the time of this instance according to the given unix time.
-  /// [timezone] Time zone name as a string
-  /// [calendar] Same as "type" property
-  /// [dateTime] DateTime class of flutter
-  /// [type] Specifies the type/calendar of the date desired.
+  /// [locale] Locales are specified either with a specifier string that follows the BCP-47 convention.<br>
+  /// [year] The year<br>
+  /// [month] The month<br>
+  /// [week] The week<br>
+  /// [day] The day of the month<br>
+  /// [hour] The hour of the day<br>
+  /// [minute] The minute [0..59]<br>
+  /// [second] The second [0..59]<br>
+  /// [millisecond] The millisecond [0..999]<br>
+  /// [unixtime] Sets the time of this instance according to the given unix time.<br>
+  /// [timezone] Time zone name as a string<br>
+  /// [calendar] Same as "type" property<br>
+  /// [dateTime] DateTime class of flutter<br>
+  /// [type] Specifies the type/calendar of the date desired.<br>
   ILibDateOptions(
       {this.locale,
       this.year,
