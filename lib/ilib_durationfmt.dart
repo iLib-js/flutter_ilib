@@ -56,9 +56,9 @@ class ILibDurationFmt {
     return result;
   }
 
-  /// Return the locale that was used to construct this duration formatter object.
-  /// If the locale was not given as parameter to the constructor, this method returns the default
-  /// locale of the system.
+  /// Return the locale that was used to construct this duration formatter object.<br>
+  /// If the locale was not given as parameter to the constructor, this method returns the default<br>
+  /// locale of the system.<br>
   String getLocale() {
     String result = '';
     final String formatOptions = toJsonString();
@@ -68,9 +68,9 @@ class ILibDurationFmt {
     return result;
   }
 
-  /// Return the length that was used to construct this duration formatter object. If the
-  /// length was not given as parameter to the constructor, this method returns the default
-  /// length. Valid values are "short", "medium", "long", and "full".
+  /// Return the length that was used to construct this duration formatter object. If the<br>
+  /// length was not given as parameter to the constructor, this method returns the default<br>
+  /// length. Valid values are "short", "medium", "long", and "full".<br>
   String getLength() {
     String result = '';
     final String formatOptions = toJsonString();
@@ -79,8 +79,8 @@ class ILibDurationFmt {
     return result;
   }
 
-  /// Return the style that was used to construct this duration formatter object.
-  /// Valid values are "text" or "clock".
+  /// Return the style that was used to construct this duration formatter object.<br>
+  /// Valid values are "text" or "clock".<br>
   String getStyle() {
     String result = '';
     final String formatOptions = toJsonString();
@@ -91,10 +91,10 @@ class ILibDurationFmt {
 }
 
 class ILibDurationFmtOptions {
-  /// [locale] Locales are specified either with a specifier string that follows the BCP-47 convention.
-  /// [length] Specifies the length of the format to use. Valid values are "short", "medium", "long" and "full".
-  /// [style] whether hours, minutes, and seconds should be formatted as a text string or as a regular time as on a clock.
-  /// [useNative] The flag used to determine whether to use the native script settings for formatting the numbers.
+  /// [locale] Locales are specified either with a specifier string that follows the BCP-47 convention.<br>
+  /// [length] Specifies the length of the format to use. Valid values are "short", "medium", "long" and "full".<br>
+  /// [style] whether hours, minutes, and seconds should be formatted as a text string or as a regular time as on a clock.<br>
+  /// [useNative] The flag used to determine whether to use the native script settings for formatting the numbers.<br>
   ILibDurationFmtOptions({
     this.locale,
     this.length,

@@ -119,17 +119,17 @@ class ILibDateFmt {
 }
 
 class ILibDateFmtOptions {
-  /// [locale] Locales are specified either with a specifier string that follows the BCP-47 convention,
-  /// [length] Specifies the length of the format to use.Valid values are "short", "medium", "long" and "full".
-  /// [type] Specifies whether this formatter should format times only, dates only, or both times and dates together. Valid values are "time", "date", and "datetime".
-  /// [calendar] The type of calendar to use for this format.
-  /// [timezone] Time zone to use when formatting times.
-  /// [useNative] The flag used to determine whether to use the native script settings for formatting the numbers.
-  /// [date] This property tells which components of a date format to use. Valid values are: "dmwy", "dmy", "dmw", "dm", "my", "dw", "d", "m","n","y". Default components, if this property is not specified, is "dmy".
-  /// [time] This property gives which components of a time format to use. Valid values for this property are: "ahmsz", "ahms", "hmsz", "hms", "ahmz", "ahm", hmz", ah", "hm", "ms", "h", "m", "s". Default value if this property is not specified is "hma".
-  /// [clock] Hour format. Valid values: "12", "24".
-  /// [template] Custom date/time format string.
-  /// [meridiems] string that specifies what style of meridiems to use with this format. The choices are "default", "gregorian", "ethiopic", and "chinese".
+  /// [locale] Locales are specified either with a specifier string that follows the BCP-47 convention,<br>
+  /// [length] Specifies the length of the format to use.Valid values are "short", "medium", "long" and "full".<br>
+  /// [type] Specifies whether this formatter should format times only, dates only, or both times and dates together. Valid values are "time", "date", and "datetime".<br>
+  /// [calendar] The type of calendar to use for this format.<br>
+  /// [timezone] Time zone to use when formatting times.<br>
+  /// [useNative] The flag used to determine whether to use the native script settings for formatting the numbers.<br>
+  /// [date] This property tells which components of a date format to use. Valid values are: "dmwy", "dmy", "dmw", "dm", "my", "dw", "d", "m","n","y". Default components, if this property is not specified, is "dmy".<br>
+  /// [time] This property gives which components of a time format to use. Valid values for this property are: "ahmsz", "ahms", "hmsz", "hms", "ahmz", "ahm", hmz", ah", "hm", "ms", "h", "m", "s". Default value if this property is not specified is "hma".<br>
+  /// [clock] Hour format. Valid values: "12", "24".<br>
+  /// [template] Custom date/time format string.<br>
+  /// [meridiems] string that specifies what style of meridiems to use with this format. The choices are "default", "gregorian", "ethiopic", and "chinese".<br>
   ILibDateFmtOptions(
       {this.locale,
       this.length,
@@ -156,9 +156,9 @@ class ILibDateFmtOptions {
 }
 
 class MeridiemsInfo {
-  /// [name] The name of the meridiem
-  /// [start] The startTime of meridiem
-  /// [end] The endTime of meridiem
+  /// [name] The name of the meridiem.<br>
+  /// [start] The startTime of meridiem.<br>
+  /// [end] The endTime of meridiem.<br>
   MeridiemsInfo({this.name, this.start, this.end});
   String? name;
   String? start;
