@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../test_env.dart';
+
 void main() {
+  String testPlatform = '';
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [flutter_ilib_test.dart] file.');
   late FlutterILib flutterIlibPlugin;
   setUpAll(() async {
+    testPlatform = getTestPlatform();
     flutterIlibPlugin = FlutterILib.instance;
     await ILibJS.instance.loadJS();
     ILibJS.instance.initILib();
@@ -67,6 +71,22 @@ void main() {
 
       expect(flutterIlibPlugin.evaluateILib(str), '2년 3개월 16일 5시간 23분 10초');
     });
+    test('evaluateILib_DurationFmt_ko_KR3', () {
+      const String loc = 'ko-KR';
+      const String length = 'short';
+      const String style = 'clock';
+      const int year = 2;
+      const int month = 3;
+      const int day = 16;
+      const int hour = 5;
+      const int minute = 23;
+      const int second = 10;
+      const String str =
+          'new DurationFmt({locale:"$loc", length: "$length", style:"$style"}).format({year: $year, month: $month, day: $day, hour: $hour, minute: $minute, second: $second}).toString()';
+
+      expect(flutterIlibPlugin.evaluateILib(str), '2년 3개월 16일 5:23:10');
+    });
+
     test('evaluateILib_DurationFmt_en_US', () {
       const String loc = 'en-US';
       const String length = 'full';
@@ -113,6 +133,22 @@ void main() {
           '2 años, 2 meses, 2 días, 2 horas, 2 minutos y 2 segundos');
     });
 
+    test('evaluateILib_DurationFmt_es_ES2', () {
+      const String loc = 'es-ES';
+      const String length = 'short';
+      const String style = 'clock';
+      const int year = 2;
+      const int month = 2;
+      const int day = 2;
+      const int hour = 2;
+      const int minute = 2;
+      const int second = 2;
+      const String str =
+          'new DurationFmt({locale:"$loc", length:"$length", style:"$style"}).format({year: $year, month: $month, day: $day, hour: $hour, minute: $minute, second: $second}).toString()';
+
+      expect(flutterIlibPlugin.evaluateILib(str), '2a 2m 2d 2:02:02');
+    });
+
     test('evaluateILib_DurationFmt_th_TH', () {
       const String loc = 'th-TH';
       const String length = 'short';
@@ -141,8 +177,44 @@ void main() {
       const String str =
           'new DurationFmt({locale:"$loc", length:"$length"}).format({year: $year, month: $month, day: $day, hour: $hour, minute: $minute, second: $second}).toString()';
 
-      expect(flutterIlibPlugin.evaluateILib(str),
-          '2 ዓመታት፣ 2 ወራት፣ 2 ቀናት፣ 2 ሰዓቶች፣ 2 ደቂቃዎች እና 2 ሰከንዶች');
+      final String result = (testPlatform == 'webOS')
+          ? '2 ዓመታት፣ 2 ወራት፣ 2 ቀናት፣ 2 ሰዓት፣ 2 ደቂቃ እና 2 ሰከንድ'
+          : '2 ዓመታት፣ 2 ወራት፣ 2 ቀናት፣ 2 ሰዓቶች፣ 2 ደቂቃዎች እና 2 ሰከንዶች';
+      expect(flutterIlibPlugin.evaluateILib(str), result);
     });
+
+    test('evaluateILib_DurationFmt_am_ET2', () {
+      const String loc = 'am-ET';
+      const String length = 'short';
+      const String style = 'clock';
+      const int year = 2;
+      const int month = 2;
+      const int day = 2;
+      const int hour = 2;
+      const int minute = 2;
+      const int second = 2;
+      const String str =
+          'new DurationFmt({locale:"$loc", length:"$length",style: "$style", useNative: false}).format({year: $year, month: $month, day: $day, hour: $hour, minute: $minute, second: $second}).toString()';
+
+      final String result = (testPlatform == 'webOS')
+          ? '2 ዓ፣ 2 ወ፣ 2 ቀ፣ 2:02:02'
+          : '2 ዓ፣ 2 ወር፣ 2 ቀ፣ 2:02:02';
+      expect(flutterIlibPlugin.evaluateILib(str), result);
+    });
+  });
+
+  test('evaluateILib_DurationFmt_fa_IR', () {
+    const String loc = 'fa-IR';
+    const String length = 'short';
+    const String style = 'clock';
+    const int year = 2;
+    const int month = 3;
+    const int day = 16;
+    const int hour = 5;
+    const int minute = 23;
+    const String str =
+        'new DurationFmt({locale:"$loc", length:"$length",style: "$style", useNative: false}).format({year: $year, month: $month, day: $day, hour: $hour, minute: $minute}).toString()';
+
+    expect(flutterIlibPlugin.evaluateILib(str), '‏2 سال 3 ماه 16 روز ‏5:23');
   });
 }

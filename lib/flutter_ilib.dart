@@ -6,7 +6,9 @@ import 'ilib_init.dart';
 import 'internal/logger/log_adapter.dart';
 import 'internal/logger/logger_selector.dart';
 
+export 'ilib_date.dart';
 export 'ilib_datefmt.dart';
+export 'ilib_durationfmt.dart';
 export 'ilib_init.dart';
 export 'ilib_localeinfo.dart';
 

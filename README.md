@@ -48,8 +48,10 @@ Widget build(BuildContext context) {
     ....
 ```
 
-### Formatting
+### Examples
 Get the result of formatting by using the class provided by flutter_ilib.
+
+### Date Formatting
 
 ```dart
 final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -84,6 +86,31 @@ fmt.format(dateOptions);
 // '2024년 6월 27일 오전 10:42'
 ```
 
+### Duration Formatting
+
+```dart
+final ILibDurationFmtOptions fmtOptions =
+    ILibDurationFmtOptions(locale: 'en-GB', length: 'full');
+final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+final ILibDateOptions dateOptions = ILibDateOptions(
+    year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1);
+fmt.format(dateOptions);
+// '1 year, 1 month, 1 week, 1 day, 1 hour, 1 minute'
+
+final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
+      locale: 'en-GB',
+      length: 'full',
+      style: 'clock',
+    );
+final ILibDurationFmt fmt = ILibDurationFmt(fmtOptions);
+final ILibDateOptions dateOptions = ILibDateOptions(
+    year: 2, month: 2, week: 2, day: 2, hour: 2, minute: 2);
+fmt.format(dateOptions);
+// '2 years, 2 months, 2 weeks, 2 days, 02:02'
+```
+
+### LocaleInfo
+
 ```dart
 // 0:sun, 1:mon, 2:tue, 3:wed, 4:thu, 5:fri, 6:sat
 final ILibLocaleInfo locInfo = ILibLocaleInfo('ko-KR');
@@ -108,18 +135,25 @@ _flutterIlibPlugin.evaluateILib(jscode1);
 // 'ethiopic'
 ```
 To give a more efficient way, we provide some classes that can be easily used in a Flutter app.   
-Currently, We have a `ILibDateFmt` and `ILibLocaleInfo` classes.
+Currently, We have a `ILibDateFmt` , `ILibLocaleInfo` and `ILibDurationFmt` classes.
 We have a plan to provide more classes and methods.  
 
-### ILibDateFmt
+### ILibDate
 - Class: [ILibDateOptions](./Docs.md/#ilibdateoptions)
+
+### ILibDateFmt
 - Class: [ILibDateFmtOptions](./Docs.md/#ilibdatefmtoptions)  
 - Class: [ILibDateFmt](./Docs.md#ilibdatefmt)
    - Methods: `format()`, `getClock()`, `getTemplate()`, `getMeridiemsRange()`
 
 ### ILibLocaleInfo
 - Class: [ILibLocaleInfo](./Docs.md/#iliblocaleinfo)
-   - Methods:  `getFirstDayOfWeek()`, `getWeekEndStart()`, `getWeekEndStart()` 
+   - Methods:  `getFirstDayOfWeek()`, `getWeekEndStart()`, `getWeekEndStart()`
+
+### ILibDurationFmt
+- Class: [ILibDurationFmtOptions](./Docs.md/#ilibdurationfmtoptions)
+- Class: [ILibDurationFmt](./Docs.md/#ilibdurationfmt)
+   - Methods:  `format()`, `getLocale()`, `getStyle()`, `getLength()`
 
 ## Supported Locales
 The results of the following locales are checked by unit tests.  
