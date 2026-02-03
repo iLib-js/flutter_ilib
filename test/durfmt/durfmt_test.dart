@@ -345,8 +345,11 @@ void main() {
           minute: 1,
           second: 1,
           millisecond: 1);
-      expect(fmt.format(dateOptions),
-          '1 J, 1 M, 1 W, 1 T, 1 Std., 1 Min., 1 Sek., 1 ms');
+
+      final String result = (testPlatform == 'webOS')
+          ? '1 J., 1 M., 1 W., 1 T., 1 Std., 1 Min., 1 Sek., 1 ms'
+          : '1 J, 1 M, 1 W, 1 T, 1 Std., 1 Min., 1 Sek., 1 ms';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtFormatShortDEText', () {
       final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
@@ -363,8 +366,10 @@ void main() {
           minute: 1,
           second: 1,
           millisecond: 1);
-      expect(fmt.format(dateOptions),
-          '1 J, 1 M, 1 W, 1 T, 1 Std., 1 Min., 1 Sek., 1 ms');
+      final String result = (testPlatform == 'webOS')
+          ? '1 J., 1 M., 1 W., 1 T., 1 Std., 1 Min., 1 Sek., 1 ms'
+          : '1 J, 1 M, 1 W, 1 T, 1 Std., 1 Min., 1 Sek., 1 ms';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtFormatShortDEClock', () {
       final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
@@ -382,7 +387,10 @@ void main() {
           minute: 1,
           second: 1,
           millisecond: 1);
-      expect(fmt.format(dateOptions), '1 J, 1 M, 1 W, 1 T, 01:01:01');
+      final String result = (testPlatform == 'webOS')
+          ? '1 J., 1 M., 1 W., 1 T., 01:01:01'
+          : '1 J, 1 M, 1 W, 1 T, 01:01:01';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtFormatMediumDE', () {
       final ILibDurationFmtOptions fmtOptions =
@@ -400,8 +408,10 @@ void main() {
           minute: 1,
           second: 1,
           millisecond: 1);
-      expect(fmt.format(dateOptions),
-          '1 J, 1 M, 1 W, 1 T, 1 Std., 1 Min., 1 Sek., 1 ms');
+      final String result = (testPlatform == 'webOS')
+          ? '1 J., 1 M., 1 W., 1 T., 1 Std., 1 Min., 1 Sek., 1 ms'
+          : '1 J, 1 M, 1 W, 1 T, 1 Std., 1 Min., 1 Sek., 1 ms';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtFormatLongDESingle', () {
       final ILibDurationFmtOptions fmtOptions =
@@ -419,8 +429,10 @@ void main() {
           minute: 1,
           second: 1,
           millisecond: 1);
-      expect(fmt.format(dateOptions),
-          '1 J, 1 Mon., 1 Wo., 1 Tg., 1 Std., 1 Min., 1 Sek., 1 ms');
+      final String result = (testPlatform == 'webOS')
+          ? '1 J., 1 Mon., 1 Wo., 1 Tg., 1 Std., 1 Min., 1 Sek., 1 ms'
+          : '1 J, 1 Mon., 1 Wo., 1 Tg., 1 Std., 1 Min., 1 Sek., 1 ms';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtFormatFullDESingle', () {
       final ILibDurationFmtOptions fmtOptions =
@@ -455,8 +467,10 @@ void main() {
           minute: 2,
           second: 2,
           millisecond: 2);
-      expect(fmt.format(dateOptions),
-          '2 J, 2 Mon., 2 Wo., 2 Tg., 2 Std., 2 Min., 2 Sek., 2 ms');
+      final String result = (testPlatform == 'webOS')
+          ? '2 J., 2 Mon., 2 Wo., 2 Tg., 2 Std., 2 Min., 2 Sek., 2 ms'
+          : '2 J, 2 Mon., 2 Wo., 2 Tg., 2 Std., 2 Min., 2 Sek., 2 ms';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtFormatFullDEPlural', () {
       final ILibDurationFmtOptions fmtOptions =
@@ -473,6 +487,7 @@ void main() {
           minute: 2,
           second: 2,
           millisecond: 2);
+      final String result = (testPlatform == 'webOS') ? '' : '';
       expect(fmt.format(dateOptions),
           '2 Jahre, 2 Monate, 2 Wochen, 2 Tage, 2 Stunden, 2 Minuten, 2 Sekunden und 2 Millisekunden');
     });
@@ -491,7 +506,10 @@ void main() {
           minute: 1,
           second: 1,
           millisecond: 1);
-      expect(fmt.format(dateOptions), '1年1个月1周1天1小时1分钟1秒1毫秒');
+      final String result = (testPlatform == 'webOS')
+          ? '1年1个月1周1天1小时1分1秒1毫秒'
+          : '1年1个月1周1天1小时1分钟1秒1毫秒';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtFormatShortZHText', () {
       final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
@@ -508,7 +526,10 @@ void main() {
           minute: 1,
           second: 1,
           millisecond: 1);
-      expect(fmt.format(dateOptions), '1年1个月1周1天1小时1分钟1秒1毫秒');
+      final String result = (testPlatform == 'webOS')
+          ? '1年1个月1周1天1小时1分1秒1毫秒'
+          : '1年1个月1周1天1小时1分钟1秒1毫秒';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtFormatShortZHClock', () {
       final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
@@ -525,7 +546,9 @@ void main() {
           minute: 1,
           second: 1,
           millisecond: 1);
-      expect(fmt.format(dateOptions), '1年1个月1周1天01:01:01');
+      final String result =
+          (testPlatform == 'webOS') ? '1年1个月1周1天01:01:01' : '1年1个月1周1天01:01:01';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtFormatMediumZH', () {
       final ILibDurationFmtOptions fmtOptions =
@@ -542,7 +565,10 @@ void main() {
           minute: 1,
           second: 1,
           millisecond: 1);
-      expect(fmt.format(dateOptions), '1年1个月1周1天1小时1分钟1秒1毫秒');
+      final String result = (testPlatform == 'webOS')
+          ? '1年1个月1周1天1小时1分1秒1毫秒'
+          : '1年1个月1周1天1小时1分钟1秒1毫秒';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtFormatLongZH', () {
       final ILibDurationFmtOptions fmtOptions =
@@ -559,7 +585,10 @@ void main() {
           minute: 1,
           second: 1,
           millisecond: 1);
-      expect(fmt.format(dateOptions), '1年1个月1周1天1小时1分钟1秒1毫秒');
+      final String result = (testPlatform == 'webOS')
+          ? '1年1个月1周1天1小时1分1秒1毫秒'
+          : '1年1个月1周1天1小时1分钟1秒1毫秒';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtFormatFullZH', () {
       final ILibDurationFmtOptions fmtOptions =
@@ -774,8 +803,10 @@ void main() {
 
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
-      expect(fmt.format(dateOptions),
-          '1 god., 1 mj., 1 sedm., 1 d., 1 h, 1 m, 1 s');
+      final String result = (testPlatform == 'webOS')
+          ? '1 god., 1 mj., 1 sed., 1 d., 1 h, 1 m, 1 s'
+          : '1 god., 1 mj., 1 sedm., 1 d., 1 h, 1 m, 1 s';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtBSLatnFormatShortText', () {
       final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
@@ -785,8 +816,10 @@ void main() {
 
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
-      expect(fmt.format(dateOptions),
-          '1 god., 1 mj., 1 sedm., 1 d., 1 h, 1 m, 1 s');
+      final String result = (testPlatform == 'webOS')
+          ? '1 god., 1 mj., 1 sed., 1 d., 1 h, 1 m, 1 s'
+          : '1 god., 1 mj., 1 sedm., 1 d., 1 h, 1 m, 1 s';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtBSLatnFormatShortClock', () {
       final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
@@ -796,7 +829,10 @@ void main() {
 
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
-      expect(fmt.format(dateOptions), '1 god., 1 mj., 1 sedm., 1 d., 01:01:01');
+      final String result = (testPlatform == 'webOS')
+          ? '1 god., 1 mj., 1 sed., 1 d., 01:01:01'
+          : '1 god., 1 mj., 1 sedm., 1 d., 01:01:01';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtBSLatnFormatMedium', () {
       final ILibDurationFmtOptions fmtOptions =
@@ -806,8 +842,10 @@ void main() {
 
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
-      expect(fmt.format(dateOptions),
-          '1 god., 1 mj., 1 sedm., 1 d., 1 h, 1 m, 1 s');
+      final String result = (testPlatform == 'webOS')
+          ? '1 god., 1 mj., 1 sed., 1 d., 1 h, 1 m, 1 s'
+          : '1 god., 1 mj., 1 sedm., 1 d., 1 h, 1 m, 1 s';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtBSLatnFormatLong', () {
       final ILibDurationFmtOptions fmtOptions =
@@ -817,8 +855,10 @@ void main() {
 
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
-      expect(fmt.format(dateOptions),
-          '1 god., 1 mj., 1 sedm., 1 dan, 1 h, 1 min., 1 sek.');
+      final String result = (testPlatform == 'webOS')
+          ? '1 god., 1 mj., 1 sed., 1 dan, 1 h, 1 min., 1 s'
+          : '1 god., 1 mj., 1 sedm., 1 dan, 1 h, 1 min., 1 sek.';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtBSLatnFormatFull', () {
       final ILibDurationFmtOptions fmtOptions =
@@ -1006,8 +1046,10 @@ void main() {
 
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
-      expect(fmt.format(dateOptions),
-          '1 έτ., 1 μήν., 1 εβδ., 1 ημέρα, 1 ώ., 1 λ., 1 δευτ.');
+      final String result = (testPlatform == 'webOS')
+          ? '1 έτ., 1 μήν., 1 εβδ., 1 ημ., 1 ώρα, 1 λεπ., 1 δευτ.'
+          : '1 έτ., 1 μήν., 1 εβδ., 1 ημέρα, 1 ώ., 1 λ., 1 δευτ.';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtGRFormatFull', () {
       final ILibDurationFmtOptions fmtOptions =
@@ -1029,7 +1071,10 @@ void main() {
 
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
-      expect(fmt.format(dateOptions), '1 a. 1 mes 1 sem. 1 día 1 h 1 min 1 s');
+      final String result = (testPlatform == 'webOS')
+          ? '1 año 1 mes 1 sem. 1 día 1 hr 1 min 1 seg.'
+          : '1 a. 1 mes 1 sem. 1 día 1 h 1 min 1 s';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtESFormatShortText', () {
       final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
@@ -1039,7 +1084,10 @@ void main() {
 
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
-      expect(fmt.format(dateOptions), '1 a. 1 mes 1 sem. 1 día 1 h 1 min 1 s');
+      final String result = (testPlatform == 'webOS')
+          ? '1 año 1 mes 1 sem. 1 día 1 hr 1 min 1 seg.'
+          : '1 a. 1 mes 1 sem. 1 día 1 h 1 min 1 s';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtESFormatShortClock', () {
       final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
@@ -1049,7 +1097,10 @@ void main() {
 
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
-      expect(fmt.format(dateOptions), '1 a. 1 mes 1 sem. 1 día 1:01:01');
+      final String result = (testPlatform == 'webOS')
+          ? '1 año 1 mes 1 sem. 1 día 1:01:01'
+          : '1 a. 1 mes 1 sem. 1 día 1:01:01';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtESFormatMedium', () {
       final ILibDurationFmtOptions fmtOptions =
@@ -1059,8 +1110,10 @@ void main() {
 
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
-      expect(fmt.format(dateOptions),
-          '1 a., 1 mes, 1 sem., 1 día, 1 h, 1 min, 1 s');
+      final String result = (testPlatform == 'webOS')
+          ? '1 año, 1 mes, 1 sem., 1 día, 1 hr, 1 min, 1 seg.'
+          : '1 a., 1 mes, 1 sem., 1 día, 1 h, 1 min, 1 s';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtESFormatLong', () {
       final ILibDurationFmtOptions fmtOptions =
@@ -1070,8 +1123,10 @@ void main() {
 
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
-      expect(fmt.format(dateOptions),
-          '1 a., 1 mes, 1 sem., 1 día, 1 h, 1 min, 1 s');
+      final String result = (testPlatform == 'webOS')
+          ? '1 año, 1 mes, 1 sem., 1 día, 1 hr, 1 min, 1 seg.'
+          : '1 a., 1 mes, 1 sem., 1 día, 1 h, 1 min, 1 s';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtESFormatFull', () {
       final ILibDurationFmtOptions fmtOptions =
@@ -1156,8 +1211,10 @@ void main() {
 
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
-      expect(fmt.format(dateOptions),
-          '‏۱ سال ۱ ماه ۱ هفته ۱ روز ۱ ساعت ۱ دقیقه ۱ ث');
+      final String result = (testPlatform == 'webOS')
+          ? '‏۱ سال و ۱ ماه و ۱ هفته و ۱ روز و ۱ ساعت و ۱ دقیقه و ۱ ثانیه'
+          : '‏۱ سال ۱ ماه ۱ هفته ۱ روز ۱ ساعت ۱ دقیقه ۱ ث';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtFAFormatShortText', () {
       final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
@@ -1167,8 +1224,10 @@ void main() {
 
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
-      expect(fmt.format(dateOptions),
-          '‏۱ سال ۱ ماه ۱ هفته ۱ روز ۱ ساعت ۱ دقیقه ۱ ث');
+      final String result = (testPlatform == 'webOS')
+          ? '‏۱ سال و ۱ ماه و ۱ هفته و ۱ روز و ۱ ساعت و ۱ دقیقه و ۱ ثانیه'
+          : '‏۱ سال ۱ ماه ۱ هفته ۱ روز ۱ ساعت ۱ دقیقه ۱ ث';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtFAFormatShortClock', () {
       final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
@@ -1178,7 +1237,10 @@ void main() {
 
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
-      expect(fmt.format(dateOptions), '‏۱ سال ۱ ماه ۱ هفته ۱ روز ‏۱:۰۱:۰۱');
+      final String result = (testPlatform == 'webOS')
+          ? '‏۱ سال و ۱ ماه و ۱ هفته و ۱ روز و ‏۱:۰۱:۰۱'
+          : '‏۱ سال ۱ ماه ۱ هفته ۱ روز ‏۱:۰۱:۰۱';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtFAFormatMedium', () {
       final ILibDurationFmtOptions fmtOptions =
@@ -1188,8 +1250,10 @@ void main() {
 
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
-      expect(fmt.format(dateOptions),
-          '‏۱ سال ۱ ماه ۱ هفته ۱ روز ۱ ساعت ۱ دقیقه ۱ ث');
+      final String result = (testPlatform == 'webOS')
+          ? '‏۱ سال و ۱ ماه و ۱ هفته و ۱ روز و ۱ ساعت و ۱ دقیقه و ۱ ثانیه'
+          : '‏۱ سال ۱ ماه ۱ هفته ۱ روز ۱ ساعت ۱ دقیقه ۱ ث';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtFAFormatLong', () {
       final ILibDurationFmtOptions fmtOptions =
@@ -1199,8 +1263,10 @@ void main() {
 
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
-      expect(fmt.format(dateOptions),
-          '‏۱ سال،‏ ۱ ماه،‏ ۱ هفته،‏ ۱ روز،‏ ۱ ساعت،‏ ۱ دقیقه،‏ ۱ ثانیه');
+      final String result = (testPlatform == 'webOS')
+          ? '‏۱ سال و ۱ ماه و ۱ هفته و ۱ روز و ۱ ساعت و ۱ دقیقه و ۱ ثانیه'
+          : '‏۱ سال،‏ ۱ ماه،‏ ۱ هفته،‏ ۱ روز،‏ ۱ ساعت،‏ ۱ دقیقه،‏ ۱ ثانیه';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtFAFormatFull', () {
       final ILibDurationFmtOptions fmtOptions =
@@ -1210,8 +1276,10 @@ void main() {
 
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
-      expect(fmt.format(dateOptions),
-          '‏۱ سال،‏ ۱ ماه،‏ ۱ هفته،‏ ۱ روز،‏ ۱ ساعت،‏ ۱ دقیقه، و ۱ ثانیه');
+      final String result = (testPlatform == 'webOS')
+          ? '‏۱ سال و ۱ ماه و ۱ هفته و ۱ روز و ۱ ساعت و ۱ دقیقه و ۱ ثانیه'
+          : '‏۱ سال،‏ ۱ ماه،‏ ۱ هفته،‏ ۱ روز،‏ ۱ ساعت،‏ ۱ دقیقه، و ۱ ثانیه';
+      expect(fmt.format(dateOptions), result);
     });
     //test cases for fi-FI
     test('testDurFmtFIFormatShortDefaultStyle', () {
@@ -2883,7 +2951,10 @@ void main() {
 
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
-      expect(fmt.format(dateOptions), '‏١س ١م ١ﻪـ ١ر ١ک ١خ ١چ');
+      final String result = (testPlatform == 'webOS')
+          ? '‏١س ١م ١هـ ١ر ١ک ١خ ١چ'
+          : '‏١س ١م ١ﻪـ ١ر ١ک ١خ ١چ';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtKUFormatShortText', () {
       final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
@@ -2893,7 +2964,10 @@ void main() {
 
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
-      expect(fmt.format(dateOptions), '‏١س ١م ١ﻪـ ١ر ١ک ١خ ١چ');
+      final String result = (testPlatform == 'webOS')
+          ? '‏١س ١م ١هـ ١ر ١ک ١خ ١چ'
+          : '‏١س ١م ١ﻪـ ١ر ١ک ١خ ١چ';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtKUFormatShortClock', () {
       final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
@@ -2903,7 +2977,10 @@ void main() {
 
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
-      expect(fmt.format(dateOptions), '‏١س ١م ١ﻪـ ١ر ‏١:٠١:٠١');
+      final String result = (testPlatform == 'webOS')
+          ? '‏١س ١م ١هـ ١ر ‏١:٠١:٠١'
+          : '‏١س ١م ١ﻪـ ١ر ‏١:٠١:٠١';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtKUFormatMedium', () {
       final ILibDurationFmtOptions fmtOptions =
@@ -2913,7 +2990,10 @@ void main() {
 
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
-      expect(fmt.format(dateOptions), '‏١س ١م ١ﻪـ ١ر ١ک ١خ ١چ');
+      final String result = (testPlatform == 'webOS')
+          ? '‏١س ١م ١هـ ١ر ١ک ١خ ١چ'
+          : '‏١س ١م ١ﻪـ ١ر ١ک ١خ ١چ';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtKUFormatLong', () {
       final ILibDurationFmtOptions fmtOptions =
@@ -3392,8 +3472,10 @@ void main() {
 
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
-      expect(
-          fmt.format(dateOptions), '1 r., 1 m-c, 1 t., 1 d., 1 h, 1 min, 1 s');
+      final String result = (testPlatform == 'webOS')
+          ? '1 r., 1 m-c, 1 tydz., 1 d., 1 godz., 1 min, 1 s'
+          : '1 r., 1 m-c, 1 t., 1 d., 1 h, 1 min, 1 s';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtPLFormatShortText', () {
       final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
@@ -3403,8 +3485,10 @@ void main() {
 
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
-      expect(
-          fmt.format(dateOptions), '1 r., 1 m-c, 1 t., 1 d., 1 h, 1 min, 1 s');
+      final String result = (testPlatform == 'webOS')
+          ? '1 r., 1 m-c, 1 tydz., 1 d., 1 godz., 1 min, 1 s'
+          : '1 r., 1 m-c, 1 t., 1 d., 1 h, 1 min, 1 s';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtPLFormatShortClock', () {
       final ILibDurationFmtOptions fmtOptions = ILibDurationFmtOptions(
@@ -3414,7 +3498,10 @@ void main() {
 
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
-      expect(fmt.format(dateOptions), '1 r., 1 m-c, 1 t., 1 d., 01:01:01');
+      final String result = (testPlatform == 'webOS')
+          ? '1 r., 1 m-c, 1 tydz., 1 d., 01:01:01'
+          : '1 r., 1 m-c, 1 t., 1 d., 01:01:01';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtPLFormatMedium', () {
       final ILibDurationFmtOptions fmtOptions =
@@ -3424,8 +3511,10 @@ void main() {
 
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
-      expect(
-          fmt.format(dateOptions), '1 r., 1 m-c, 1 t., 1 d., 1 h, 1 min, 1 s');
+      final String result = (testPlatform == 'webOS')
+          ? '1 rok, 1 mi, 1 ty, 1 dz, 1 go, 1 mi, 1 se'
+          : '1 r., 1 m-c, 1 t., 1 d., 1 h, 1 min, 1 s';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtPLFormatLong', () {
       final ILibDurationFmtOptions fmtOptions =

@@ -63,55 +63,111 @@ void main() {
             fmt.format(ILibDateOptions(hour: 100, minute: 100, second: 100)));
       }
 
-      expect(textformatted_1[0], '‏سنة، وشهر، وأسبوع، ويوم');
-      expect(textformatted_1[1], '‏سنة واحدة، وشهر، وأسبوع، ويوم');
-      expect(textformatted_1[2], '‏1 سنة وشهر و1 أ و1 ي');
-      expect(textformatted_1[3], '‏1 سنة وشهر و1 أ و1 ي');
+      if (testPlatform == 'webOS') {
+        expect(textformatted_1[0], '‏سنة، شهر، أسبوع، يوم');
+        expect(textformatted_1[1], '‏سنة، شهر، أسبوع، يوم');
+        expect(textformatted_1[2], '‏1 سنة وشهر و1 أسبوع و1 يوم');
+        expect(textformatted_1[3], '‏1 سنة وشهر و1 أسبوع و1 يوم');
 
-      expect(textformatted_2[0], '‏سنتان، وشهران، وأسبوعان، ويومان');
-      expect(textformatted_2[1], '‏سنتان، وشهران، وأسبوعان، ويومان');
-      expect(textformatted_2[2], '‏2 سنة وشهران و2 أ و2 ي');
-      expect(textformatted_2[3], '‏2 سنة وشهران و2 أ و2 ي');
+        expect(textformatted_2[0], '‏سنتان، شهران، أسبوعان، يومان');
+        expect(textformatted_2[1], '‏سنتان، شهران، أسبوعان، يومان');
+        expect(textformatted_2[2], '‏2 سنة وشهران و2 أسبوع و2 يوم');
+        expect(textformatted_2[3], '‏2 سنة وشهران و2 أسبوع و2 يوم');
 
-      expect(textformatted_3[0], '‏3 سنوات، و3 أشهر، و3 أسابيع، و3 أيام');
-      expect(textformatted_3[1], '‏3 سنوات، و3 أشهر، و3 أسابيع، و3 أيام');
-      expect(textformatted_3[2], '‏3 سنة و3 أشهر و3 أ و3 ي');
-      expect(textformatted_3[3], '‏3 سنة و3 أشهر و3 أ و3 ي');
+        expect(textformatted_3[0], '‏3 سنوات، 3 أشهر، 3 أسابيع، 3 أيام');
+        expect(textformatted_3[1], '‏3 سنة، 3 شهر، 3 أسابيع، 3 أيام');
+        expect(textformatted_3[2], '‏3 سنة و3 أشهر و3 أسبوع و3 يوم');
+        expect(textformatted_3[3], '‏3 سنة و3 أشهر و3 أسبوع و3 يوم');
 
-      expect(textformatted_11[0], '‏11 سنة، و11 شهرًا، و11 أسبوعًا، و11 يومًا');
-      expect(textformatted_11[1], '‏11 سنة، و11 شهرًا، و11 أسبوعًا، و11 يومًا');
-      expect(textformatted_11[2], '‏11 سنة و11 شهرًا و11 أ و11 ي');
-      expect(textformatted_11[3], '‏11 سنة و11 شهرًا و11 أ و11 ي');
+        expect(textformatted_11[0], '‏11 سنة، 11 شهرًا، 11 أسبوعًا، 11 يومًا');
+        expect(textformatted_11[1], '‏11 سنة، 11 شهر، 11 أسبوعًا، 11 يومًا');
+        expect(textformatted_11[2], '‏11 سنة و11 شهرًا و11 أسبوع و11 يوم');
+        expect(textformatted_11[3], '‏11 سنة و11 شهرًا و11 أسبوع و11 يوم');
 
-      expect(textformatted_100[0], '‏100 سنة، و100 شهر، و100 أسبوع، و100 يوم');
-      expect(textformatted_100[1], '‏100 سنة، و100 شهر، و100 أسبوع، و100 يوم');
-      expect(textformatted_100[2], '‏100 سنة و100 شهر و100 أ و100 ي');
-      expect(textformatted_100[3], '‏100 سنة و100 شهر و100 أ و100 ي');
+        expect(textformatted_100[0], '‏100 سنة، 100 شهر، 100 أسبوع، 100 يوم');
+        expect(textformatted_100[1], '‏100 سنة، 100 شهر، 100 أسبوع، 100 يوم');
+        expect(textformatted_100[2], '‏100 سنة و100 شهر و100 أسبوع و100 يوم');
+        expect(textformatted_100[3], '‏100 سنة و100 شهر و100 أسبوع و100 يوم');
 
-      expect(clockformatted_1[0], '‏ساعة، ودقيقة، وثانية');
-      expect(clockformatted_1[1], '‏1 س، و1 د، و1 ث');
-      expect(clockformatted_1[2], '‏1 س و1 د و1 ث');
-      expect(clockformatted_1[3], '‏1 س و1 د و1 ث');
+        expect(clockformatted_1[0], '‏ساعة، دقيقة، ثانية');
+        expect(clockformatted_1[1], '‏1 س، 1 د، 1 ث');
+        expect(clockformatted_1[2], '‏1 س و1 د و1 ث');
+        expect(clockformatted_1[3], '‏1 س و1 د و1 ث');
 
-      expect(clockformatted_2[0], '‏ساعتان، ودقيقتان، وثانيتان');
-      expect(clockformatted_2[1], '‏2 س، و2 د، و2 ث');
-      expect(clockformatted_2[2], '‏2 س و2 د و2 ث');
-      expect(clockformatted_2[3], '‏2 س و2 د و2 ث');
+        expect(clockformatted_2[0], '‏ساعتان، دقيقتان، ثانيتان');
+        expect(clockformatted_2[1], '‏2 س، 2 د، 2 ث');
+        expect(clockformatted_2[2], '‏2 س و2 د و2 ث');
+        expect(clockformatted_2[3], '‏2 س و2 د و2 ث');
 
-      expect(clockformatted_3[0], '‏3 ساعات، و3 دقائق، و3 ثوان');
-      expect(clockformatted_3[1], '‏3 س، و3 د، و3 ث');
-      expect(clockformatted_3[2], '‏3 س و3 د و3 ث');
-      expect(clockformatted_3[3], '‏3 س و3 د و3 ث');
+        expect(clockformatted_3[0], '‏3 ساعات، 3 دقائق، 3 ثوان');
+        expect(clockformatted_3[1], '‏3 س، 3 د، 3 ث');
+        expect(clockformatted_3[2], '‏3 س و3 د و3 ث');
+        expect(clockformatted_3[3], '‏3 س و3 د و3 ث');
 
-      expect(clockformatted_11[0], '‏11 ساعة، و11 دقيقة، و11 ثانية');
-      expect(clockformatted_11[1], '‏11 س، و11 د، و11 ث');
-      expect(clockformatted_11[2], '‏11 س و11 د و11 ث');
-      expect(clockformatted_11[3], '‏11 س و11 د و11 ث');
+        expect(clockformatted_11[0], '‏11 ساعة، 11 دقيقة، 11 ثانية');
+        expect(clockformatted_11[1], '‏11 س، 11 د، 11 ث');
+        expect(clockformatted_11[2], '‏11 س و11 د و11 ث');
+        expect(clockformatted_11[3], '‏11 س و11 د و11 ث');
 
-      expect(clockformatted_100[0], '‏100 ساعة، و100 دقيقة، و100 ثانية');
-      expect(clockformatted_100[1], '‏100 س، و100 د، و100 ث');
-      expect(clockformatted_100[2], '‏100 س و100 د و100 ث');
-      expect(clockformatted_100[3], '‏100 س و100 د و100 ث');
+        expect(clockformatted_100[0], '‏100 ساعة، 100 دقيقة، 100 ثانية');
+        expect(clockformatted_100[1], '‏100 س، 100 د، 100 ث');
+        expect(clockformatted_100[2], '‏100 س و100 د و100 ث');
+        expect(clockformatted_100[3], '‏100 س و100 د و100 ث');
+      } else {
+        expect(textformatted_1[0], '‏سنة، وشهر، وأسبوع، ويوم');
+        expect(textformatted_1[1], '‏سنة واحدة، وشهر، وأسبوع، ويوم');
+        expect(textformatted_1[2], '‏1 سنة وشهر و1 أ و1 ي');
+        expect(textformatted_1[3], '‏1 سنة وشهر و1 أ و1 ي');
+
+        expect(textformatted_2[0], '‏سنتان، وشهران، وأسبوعان، ويومان');
+        expect(textformatted_2[1], '‏سنتان، وشهران، وأسبوعان، ويومان');
+        expect(textformatted_2[2], '‏2 سنة وشهران و2 أ و2 ي');
+        expect(textformatted_2[3], '‏2 سنة وشهران و2 أ و2 ي');
+
+        expect(textformatted_3[0], '‏3 سنوات، و3 أشهر، و3 أسابيع، و3 أيام');
+        expect(textformatted_3[1], '‏3 سنوات، و3 أشهر، و3 أسابيع، و3 أيام');
+        expect(textformatted_3[2], '‏3 سنة و3 أشهر و3 أ و3 ي');
+        expect(textformatted_3[3], '‏3 سنة و3 أشهر و3 أ و3 ي');
+
+        expect(
+            textformatted_11[0], '‏11 سنة، و11 شهرًا، و11 أسبوعًا، و11 يومًا');
+        expect(
+            textformatted_11[1], '‏11 سنة، و11 شهرًا، و11 أسبوعًا، و11 يومًا');
+        expect(textformatted_11[2], '‏11 سنة و11 شهرًا و11 أ و11 ي');
+        expect(textformatted_11[3], '‏11 سنة و11 شهرًا و11 أ و11 ي');
+
+        expect(
+            textformatted_100[0], '‏100 سنة، و100 شهر، و100 أسبوع، و100 يوم');
+        expect(
+            textformatted_100[1], '‏100 سنة، و100 شهر، و100 أسبوع، و100 يوم');
+        expect(textformatted_100[2], '‏100 سنة و100 شهر و100 أ و100 ي');
+        expect(textformatted_100[3], '‏100 سنة و100 شهر و100 أ و100 ي');
+
+        expect(clockformatted_1[0], '‏ساعة، ودقيقة، وثانية');
+        expect(clockformatted_1[1], '‏1 س، و1 د، و1 ث');
+        expect(clockformatted_1[2], '‏1 س و1 د و1 ث');
+        expect(clockformatted_1[3], '‏1 س و1 د و1 ث');
+
+        expect(clockformatted_2[0], '‏ساعتان، ودقيقتان، وثانيتان');
+        expect(clockformatted_2[1], '‏2 س، و2 د، و2 ث');
+        expect(clockformatted_2[2], '‏2 س و2 د و2 ث');
+        expect(clockformatted_2[3], '‏2 س و2 د و2 ث');
+
+        expect(clockformatted_3[0], '‏3 ساعات، و3 دقائق، و3 ثوان');
+        expect(clockformatted_3[1], '‏3 س، و3 د، و3 ث');
+        expect(clockformatted_3[2], '‏3 س و3 د و3 ث');
+        expect(clockformatted_3[3], '‏3 س و3 د و3 ث');
+
+        expect(clockformatted_11[0], '‏11 ساعة، و11 دقيقة، و11 ثانية');
+        expect(clockformatted_11[1], '‏11 س، و11 د، و11 ث');
+        expect(clockformatted_11[2], '‏11 س و11 د و11 ث');
+        expect(clockformatted_11[3], '‏11 س و11 د و11 ث');
+
+        expect(clockformatted_100[0], '‏100 ساعة، و100 دقيقة، و100 ثانية');
+        expect(clockformatted_100[1], '‏100 س، و100 د، و100 ث');
+        expect(clockformatted_100[2], '‏100 س و100 د و100 ث');
+        expect(clockformatted_100[3], '‏100 س و100 د و100 ث');
+      }
     });
     test('testDurFmt_ar_IQ', () {
       final List<String> textformatted_1 = <String>[];
@@ -483,32 +539,70 @@ void main() {
       }
 
       expect(textformatted_1[0], '1 godina, 1 mjesec, 1 sedmica i 1 dan');
-      expect(textformatted_1[1], '1 god., 1 mj., 1 sedm., 1 dan');
-      expect(textformatted_1[2], '1 god., 1 mj., 1 sedm., 1 d.');
-      expect(textformatted_1[3], '1 god., 1 mj., 1 sedm., 1 d.');
+
+      String result = (testPlatform == 'webOS')
+          ? '1 god., 1 mj., 1 sed., 1 dan'
+          : '1 god., 1 mj., 1 sedm., 1 dan';
+      expect(textformatted_1[1], result);
+
+      result = (testPlatform == 'webOS')
+          ? '1 god., 1 mj., 1 sed., 1 d.'
+          : '1 god., 1 mj., 1 sedm., 1 d.';
+      expect(textformatted_1[2], result);
+      expect(textformatted_1[3], result);
 
       expect(textformatted_4[0], '4 godine, 4 mjeseca, 4 sedmice i 4 dana');
-      expect(textformatted_4[1], '4 god., 4 mj., 4 sedm., 4 dana');
-      expect(textformatted_4[2], '4 god., 4 mj., 4 sedm., 4 d.');
-      expect(textformatted_4[3], '4 god., 4 mj., 4 sedm., 4 d.');
+
+      result = (testPlatform == 'webOS')
+          ? '4 god., 4 mj., 4 sed., 4 dana'
+          : '4 god., 4 mj., 4 sedm., 4 dana';
+      expect(textformatted_4[1], result);
+
+      result = (testPlatform == 'webOS')
+          ? '4 god., 4 mj., 4 sed., 4 d.'
+          : '4 god., 4 mj., 4 sedm., 4 d.';
+      expect(textformatted_4[2], result);
+      expect(textformatted_4[3], result);
 
       expect(textformatted_5[0], '5 godina, 5 mjeseci, 5 sedmica i 5 dana');
-      expect(textformatted_5[1], '5 god., 5 mj., 5 sedm., 5 dana');
-      expect(textformatted_5[2], '5 god., 5 mj., 5 sedm., 5 d.');
-      expect(textformatted_5[3], '5 god., 5 mj., 5 sedm., 5 d.');
+
+      result = (testPlatform == 'webOS')
+          ? '5 god., 5 mj., 5 sed., 5 dana'
+          : '5 god., 5 mj., 5 sedm., 5 dana';
+      expect(textformatted_5[1], result);
+
+      result = (testPlatform == 'webOS')
+          ? '5 god., 5 mj., 5 sed., 5 d.'
+          : '5 god., 5 mj., 5 sedm., 5 d.';
+      expect(textformatted_5[2], result);
+      expect(textformatted_5[3], result);
 
       expect(clockformatted_1[0], '1 sat, 1 minuta i 1 sekunda');
-      expect(clockformatted_1[1], '1 h, 1 min., 1 sek.');
+
+      result = (testPlatform == 'webOS')
+          ? '1 h, 1 min., 1 s'
+          : '1 h, 1 min., 1 sek.';
+      expect(clockformatted_1[1], result);
+
       expect(clockformatted_1[2], '1 h, 1 m, 1 s');
       expect(clockformatted_1[3], '1 h, 1 m, 1 s');
 
       expect(clockformatted_4[0], '4 sata, 4 minute i 4 sekunde');
-      expect(clockformatted_4[1], '4 h, 4 min., 4 sek.');
+
+      result = (testPlatform == 'webOS')
+          ? '4 h, 4 min., 4 s'
+          : '4 h, 4 min., 4 sek.';
+      expect(clockformatted_4[1], result);
+
       expect(clockformatted_4[2], '4 h, 4 m, 4 s');
       expect(clockformatted_4[3], '4 h, 4 m, 4 s');
 
       expect(clockformatted_5[0], '5 sati, 5 minuta i 5 sekundi');
-      expect(clockformatted_5[1], '5 h, 5 min., 5 sek.');
+
+      result = (testPlatform == 'webOS')
+          ? '5 h, 5 min., 5 s'
+          : '5 h, 5 min., 5 sek.';
+      expect(clockformatted_5[1], result);
       expect(clockformatted_5[2], '5 h, 5 m, 5 s');
       expect(clockformatted_5[3], '5 h, 5 m, 5 s');
     });
@@ -644,14 +738,28 @@ void main() {
       }
 
       expect(textformatted_1[0], '1 Jahr, 1 Monat, 1 Woche und 1 Tag');
-      expect(textformatted_1[1], '1 J, 1 Mon., 1 Wo., 1 Tg.');
-      expect(textformatted_1[2], '1 J, 1 M, 1 W, 1 T');
-      expect(textformatted_1[3], '1 J, 1 M, 1 W, 1 T');
+
+      String result = (testPlatform == 'webOS')
+          ? '1 J., 1 Mon., 1 Wo., 1 Tg.'
+          : '1 J, 1 Mon., 1 Wo., 1 Tg.';
+      expect(textformatted_1[1], result);
+
+      result = (testPlatform == 'webOS')
+          ? '1 J., 1 M., 1 W., 1 T.'
+          : '1 J, 1 M, 1 W, 1 T';
+      expect(textformatted_1[2], result);
+      expect(textformatted_1[3], result);
 
       expect(textformatted_2[0], '2 Jahre, 2 Monate, 2 Wochen und 2 Tage');
-      expect(textformatted_2[1], '2 J, 2 Mon., 2 Wo., 2 Tg.');
-      expect(textformatted_2[2], '2 J, 2 M, 2 W, 2 T');
-      expect(textformatted_2[3], '2 J, 2 M, 2 W, 2 T');
+      result = (testPlatform == 'webOS')
+          ? '2 J., 2 Mon., 2 Wo., 2 Tg.'
+          : '2 J, 2 Mon., 2 Wo., 2 Tg.';
+      expect(textformatted_2[1], result);
+      result = (testPlatform == 'webOS')
+          ? '2 J., 2 M., 2 W., 2 T.'
+          : '2 J, 2 M, 2 W, 2 T';
+      expect(textformatted_2[2], result);
+      expect(textformatted_2[3], result);
 
       expect(clockformatted_1[0], '1 Stunde, 1 Minute und 1 Sekunde');
       expect(clockformatted_1[1], '1 Std., 1 Min., 1 Sek.');
@@ -689,14 +797,28 @@ void main() {
       }
 
       expect(textformatted_1[0], '1 Jahr, 1 Monat, 1 Woche und 1 Tag');
-      expect(textformatted_1[1], '1 J, 1 Mon., 1 Wo., 1 Tg.');
-      expect(textformatted_1[2], '1 J, 1 M, 1 W, 1 T');
-      expect(textformatted_1[3], '1 J, 1 M, 1 W, 1 T');
+
+      String result = (testPlatform == 'webOS')
+          ? '1 J., 1 Mon., 1 Wo., 1 Tg.'
+          : '1 J, 1 Mon., 1 Wo., 1 Tg.';
+      expect(textformatted_1[1], result);
+
+      result = (testPlatform == 'webOS')
+          ? '1 J., 1 M., 1 W., 1 T.'
+          : '1 J, 1 M, 1 W, 1 T';
+      expect(textformatted_1[2], result);
+      expect(textformatted_1[3], result);
 
       expect(textformatted_2[0], '2 Jahre, 2 Monate, 2 Wochen und 2 Tage');
-      expect(textformatted_2[1], '2 J, 2 Mon., 2 Wo., 2 Tg.');
-      expect(textformatted_2[2], '2 J, 2 M, 2 W, 2 T');
-      expect(textformatted_2[3], '2 J, 2 M, 2 W, 2 T');
+      result = (testPlatform == 'webOS')
+          ? '2 J., 2 Mon., 2 Wo., 2 Tg.'
+          : '2 J, 2 Mon., 2 Wo., 2 Tg.';
+      expect(textformatted_2[1], result);
+      result = (testPlatform == 'webOS')
+          ? '2 J., 2 M., 2 W., 2 T.'
+          : '2 J, 2 M, 2 W, 2 T';
+      expect(textformatted_2[2], result);
+      expect(textformatted_2[3], result);
 
       expect(clockformatted_1[0], '1 Stunde, 1 Minute und 1 Sekunde');
       expect(clockformatted_1[1], '1 Std., 1 Min., 1 Sek.');
@@ -733,14 +855,28 @@ void main() {
       }
 
       expect(textformatted_1[0], '1 Jahr, 1 Monat, 1 Woche und 1 Tag');
-      expect(textformatted_1[1], '1 J, 1 Mon., 1 Wo., 1 Tg.');
-      expect(textformatted_1[2], '1 J, 1 M, 1 W, 1 T');
-      expect(textformatted_1[3], '1 J, 1 M, 1 W, 1 T');
+
+      String result = (testPlatform == 'webOS')
+          ? '1 J., 1 Mon., 1 Wo., 1 Tg.'
+          : '1 J, 1 Mon., 1 Wo., 1 Tg.';
+      expect(textformatted_1[1], result);
+
+      result = (testPlatform == 'webOS')
+          ? '1 J., 1 M., 1 W., 1 T.'
+          : '1 J, 1 M, 1 W, 1 T';
+      expect(textformatted_1[2], result);
+      expect(textformatted_1[3], result);
 
       expect(textformatted_16[0], '16 Jahre, 16 Monate, 16 Wochen und 16 Tage');
-      expect(textformatted_16[1], '16 J, 16 Mon., 16 Wo., 16 Tg.');
-      expect(textformatted_16[2], '16 J, 16 M, 16 W, 16 T');
-      expect(textformatted_16[3], '16 J, 16 M, 16 W, 16 T');
+      result = (testPlatform == 'webOS')
+          ? '16 J., 16 Mon., 16 Wo., 16 Tg.'
+          : '16 J, 16 Mon., 16 Wo., 16 Tg.';
+      expect(textformatted_16[1], result);
+      result = (testPlatform == 'webOS')
+          ? '16 J., 16 M., 16 W., 16 T.'
+          : '16 J, 16 M, 16 W, 16 T';
+      expect(textformatted_16[2], result);
+      expect(textformatted_16[3], result);
 
       expect(clockformatted_1[0], '1 Stunde, 1 Minute und 1 Sekunde');
       expect(clockformatted_1[1], '1 Std., 1 Min., 1 Sek.');
@@ -777,14 +913,28 @@ void main() {
       }
 
       expect(textformatted_1[0], '1 Jahr, 1 Monat, 1 Woche und 1 Tag');
-      expect(textformatted_1[1], '1 J, 1 Mon., 1 Wo., 1 Tg.');
-      expect(textformatted_1[2], '1 J, 1 M, 1 W, 1 T');
-      expect(textformatted_1[3], '1 J, 1 M, 1 W, 1 T');
+
+      String result = (testPlatform == 'webOS')
+          ? '1 J., 1 Mon., 1 Wo., 1 Tg.'
+          : '1 J, 1 Mon., 1 Wo., 1 Tg.';
+      expect(textformatted_1[1], result);
+
+      result = (testPlatform == 'webOS')
+          ? '1 J., 1 M., 1 W., 1 T.'
+          : '1 J, 1 M, 1 W, 1 T';
+      expect(textformatted_1[2], result);
+      expect(textformatted_1[3], result);
 
       expect(textformatted_17[0], '17 Jahre, 17 Monate, 17 Wochen und 17 Tage');
-      expect(textformatted_17[1], '17 J, 17 Mon., 17 Wo., 17 Tg.');
-      expect(textformatted_17[2], '17 J, 17 M, 17 W, 17 T');
-      expect(textformatted_17[3], '17 J, 17 M, 17 W, 17 T');
+      result = (testPlatform == 'webOS')
+          ? '17 J., 17 Mon., 17 Wo., 17 Tg.'
+          : '17 J, 17 Mon., 17 Wo., 17 Tg.';
+      expect(textformatted_17[1], result);
+      result = (testPlatform == 'webOS')
+          ? '17 J., 17 M., 17 W., 17 T.'
+          : '17 J, 17 M, 17 W, 17 T';
+      expect(textformatted_17[2], result);
+      expect(textformatted_17[3], result);
 
       expect(clockformatted_1[0], '1 Stunde, 1 Minute und 1 Sekunde');
       expect(clockformatted_1[1], '1 Std., 1 Min., 1 Sek.');
@@ -821,22 +971,38 @@ void main() {
       }
 
       expect(textformatted_1[0], '1 έτος, 1 μήνας, 1 εβδομάδα, 1 ημέρα');
-      expect(textformatted_1[1], '1 έτ., 1 μήν., 1 εβδ., 1 ημέρα');
+
+      String result = (testPlatform == 'webOS')
+          ? '1 έτ., 1 μήν., 1 εβδ., 1 ημ.'
+          : '1 έτ., 1 μήν., 1 εβδ., 1 ημέρα';
+      expect(textformatted_1[1], result);
+
       expect(textformatted_1[2], '1 έ, 1 μ, 1 ε, 1 η');
       expect(textformatted_1[3], '1 έ 1 μ 1 ε 1 η');
 
       expect(textformatted_2[0], '2 έτη, 2 μήνες, 2 εβδομάδες, 2 ημέρες');
-      expect(textformatted_2[1], '2 έτ., 2 μήν., 2 εβδ., 2 ημέρες');
+
+      result = (testPlatform == 'webOS')
+          ? '2 έτ., 2 μήν., 2 εβδ., 2 ημ.'
+          : '2 έτ., 2 μήν., 2 εβδ., 2 ημέρες';
+      expect(textformatted_2[1], result);
+
       expect(textformatted_2[2], '2 έ, 2 μ, 2 ε, 2 η');
       expect(textformatted_2[3], '2 έ 2 μ 2 ε 2 η');
 
       expect(clockformatted_1[0], '1 ώρα, 1 λεπτό, 1 δευτερόλεπτο');
-      expect(clockformatted_1[1], '1 ώ., 1 λ., 1 δευτ.');
+      result = (testPlatform == 'webOS')
+          ? '1 ώρα, 1 λεπ., 1 δευτ.'
+          : '1 ώ., 1 λ., 1 δευτ.';
+      expect(clockformatted_1[1], result);
       expect(clockformatted_1[2], '1 ώ, 1 λ, 1 δ');
       expect(clockformatted_1[3], '1 ώ 1 λ 1 δ');
 
       expect(clockformatted_2[0], '2 ώρες, 2 λεπτά, 2 δευτερόλεπτα');
-      expect(clockformatted_2[1], '2 ώ., 2 λ., 2 δευτ.');
+      result = (testPlatform == 'webOS')
+          ? '2 ώρ., 2 λεπ., 2 δευτ.'
+          : '2 ώ., 2 λ., 2 δευτ.';
+      expect(clockformatted_2[1], result);
       expect(clockformatted_2[2], '2 ώ, 2 λ, 2 δ');
       expect(clockformatted_2[3], '2 ώ 2 λ 2 δ');
     });
@@ -865,22 +1031,38 @@ void main() {
       }
 
       expect(textformatted_1[0], '1 έτος, 1 μήνας, 1 εβδομάδα, 1 ημέρα');
-      expect(textformatted_1[1], '1 έτ., 1 μήν., 1 εβδ., 1 ημέρα');
+
+      String result = (testPlatform == 'webOS')
+          ? '1 έτ., 1 μήν., 1 εβδ., 1 ημ.'
+          : '1 έτ., 1 μήν., 1 εβδ., 1 ημέρα';
+      expect(textformatted_1[1], result);
+
       expect(textformatted_1[2], '1 έ, 1 μ, 1 ε, 1 η');
       expect(textformatted_1[3], '1 έ 1 μ 1 ε 1 η');
 
       expect(textformatted_17[0], '17 έτη, 17 μήνες, 17 εβδομάδες, 17 ημέρες');
-      expect(textformatted_17[1], '17 έτ., 17 μήν., 17 εβδ., 17 ημέρες');
+
+      result = (testPlatform == 'webOS')
+          ? '17 έτ., 17 μήν., 17 εβδ., 17 ημ.'
+          : '17 έτ., 17 μήν., 17 εβδ., 17 ημέρες';
+      expect(textformatted_17[1], result);
+
       expect(textformatted_17[2], '17 έ, 17 μ, 17 ε, 17 η');
       expect(textformatted_17[3], '17 έ 17 μ 17 ε 17 η');
 
       expect(clockformatted_1[0], '1 ώρα, 1 λεπτό, 1 δευτερόλεπτο');
-      expect(clockformatted_1[1], '1 ώ., 1 λ., 1 δευτ.');
+      result = (testPlatform == 'webOS')
+          ? '1 ώρα, 1 λεπ., 1 δευτ.'
+          : '1 ώ., 1 λ., 1 δευτ.';
+      expect(clockformatted_1[1], result);
       expect(clockformatted_1[2], '1 ώ, 1 λ, 1 δ');
       expect(clockformatted_1[3], '1 ώ 1 λ 1 δ');
 
       expect(clockformatted_17[0], '17 ώρες, 17 λεπτά, 17 δευτερόλεπτα');
-      expect(clockformatted_17[1], '17 ώ., 17 λ., 17 δευτ.');
+      result = (testPlatform == 'webOS')
+          ? '17 ώρ., 17 λεπ., 17 δευτ.'
+          : '17 ώ., 17 λ., 17 δευτ.';
+      expect(clockformatted_17[1], result);
       expect(clockformatted_17[2], '17 ώ, 17 λ, 17 δ');
       expect(clockformatted_17[3], '17 ώ 17 λ 17 δ');
     });
@@ -2103,24 +2285,64 @@ void main() {
       }
 
       expect(textformatted_1[0], '1 año, 1 mes, 1 semana y 1 día');
-      expect(textformatted_1[1], '1 a., 1 mes, 1 sem., 1 día');
-      expect(textformatted_1[2], '1 a., 1 mes, 1 sem., 1 día');
-      expect(textformatted_1[3], '1 a. 1 mes 1 sem. 1 día');
+
+      String result = (testPlatform == 'webOS')
+          ? '1 año, 1 mes, 1 sem., 1 día'
+          : '1 a., 1 mes, 1 sem., 1 día';
+      expect(textformatted_1[1], result);
+
+      result = (testPlatform == 'webOS')
+          ? '1 año, 1 mes, 1 sem., 1 día'
+          : '1 a., 1 mes, 1 sem., 1 día';
+      expect(textformatted_1[2], result);
+
+      result = (testPlatform == 'webOS')
+          ? '1 año 1 mes 1 sem. 1 día'
+          : '1 a. 1 mes 1 sem. 1 día';
+      expect(textformatted_1[3], result);
 
       expect(textformatted_16[0], '16 años, 16 meses, 16 semanas y 16 días');
-      expect(textformatted_16[1], '16 a., 16 meses, 16 sems., 16 días');
-      expect(textformatted_16[2], '16 a., 16 meses, 16 sems., 16 días');
-      expect(textformatted_16[3], '16 a. 16 meses 16 sems. 16 días');
+      result = (testPlatform == 'webOS')
+          ? '16 años, 16 meses, 16 sems., 16 días'
+          : '16 a., 16 meses, 16 sems., 16 días';
+      expect(textformatted_16[1], result);
+
+      result = (testPlatform == 'webOS')
+          ? '16 años, 16 meses, 16 sems., 16 días'
+          : '16 a., 16 meses, 16 sems., 16 días';
+      expect(textformatted_16[2], result);
+      result = (testPlatform == 'webOS')
+          ? '16 años 16 meses 16 sems. 16 días'
+          : '16 a. 16 meses 16 sems. 16 días';
+      expect(textformatted_16[3], result);
 
       expect(clockformatted_1[0], '1 hora, 1 minuto y 1 segundo');
-      expect(clockformatted_1[1], '1 h, 1 min, 1 s');
-      expect(clockformatted_1[2], '1 h, 1 min, 1 s');
-      expect(clockformatted_1[3], '1 h 1 min 1 s');
+
+      result =
+          (testPlatform == 'webOS') ? '1 hr, 1 min, 1 seg.' : '1 h, 1 min, 1 s';
+      expect(clockformatted_1[1], result);
+
+      result =
+          (testPlatform == 'webOS') ? '1 hr, 1 min, 1 seg.' : '1 h, 1 min, 1 s';
+      expect(clockformatted_1[2], result);
+
+      result = (testPlatform == 'webOS') ? '1 hr 1 min 1 seg.' : '1 h 1 min 1 s';
+      expect(clockformatted_1[3], result);
 
       expect(clockformatted_16[0], '16 horas, 16 minutos y 16 segundos');
-      expect(clockformatted_16[1], '16 h, 16 min, 16 s');
-      expect(clockformatted_16[2], '16 h, 16 min, 16 s');
-      expect(clockformatted_16[3], '16 h 16 min 16 s');
+      result = (testPlatform == 'webOS')
+          ? '16 hrs, 16 min, 16 seg.'
+          : '16 h, 16 min, 16 s';
+      expect(clockformatted_16[1], result);
+
+      result = (testPlatform == 'webOS')
+          ? '16 hrs, 16 min, 16 seg.'
+          : '16 h, 16 min, 16 s';
+      expect(clockformatted_16[2], result);
+
+      result =
+          (testPlatform == 'webOS') ? '16 hrs 16 min 16 seg.' : '16 h 16 min 16 s';
+      expect(clockformatted_16[3], result);
     });
     test('testDurFmt_es_DO', () {
       // 1 2
@@ -2155,13 +2377,22 @@ void main() {
 
       expect(clockformatted_1[0], '1 hora, 1 minuto y 1 segundo');
       expect(clockformatted_1[1], '1 h, 1 min, 1 seg.');
-      expect(clockformatted_1[2], '1h, 1min, 1s');
-      expect(clockformatted_1[3], '1h 1min 1s');
+
+      String result =
+          (testPlatform == 'webOS') ? '1h, 1min, 1seg.' : '1h, 1min, 1s';
+      expect(clockformatted_1[2], result);
+
+      result = (testPlatform == 'webOS') ? '1h 1min 1seg.' : '1h 1min 1s';
+      expect(clockformatted_1[3], result);
 
       expect(clockformatted_2[0], '2 horas, 2 minutos y 2 segundos');
       expect(clockformatted_2[1], '2 h, 2 min, 2 seg.');
-      expect(clockformatted_2[2], '2h, 2min, 2s');
-      expect(clockformatted_2[3], '2h 2min 2s');
+
+      result = (testPlatform == 'webOS') ? '2h, 2min, 2seg.' : '2h, 2min, 2s';
+      expect(clockformatted_2[2], result);
+
+      result = (testPlatform == 'webOS') ? '2h 2min 2seg.' : '2h 2min 2s';
+      expect(clockformatted_2[3], result);
     });
     test('testDurFmt_es_EC', () {
       // 1 16
@@ -2565,13 +2796,22 @@ void main() {
 
       expect(clockformatted_1[0], '1 hora, 1 minuto y 1 segundo');
       expect(clockformatted_1[1], '1 h, 1 min, 1 seg.');
-      expect(clockformatted_1[2], '1h, 1min, 1s');
-      expect(clockformatted_1[3], '1h 1min 1s');
+
+      String result =
+          (testPlatform == 'webOS') ? '1h, 1min, 1seg.' : '1h, 1min, 1s';
+      expect(clockformatted_1[2], result);
+
+      result = (testPlatform == 'webOS') ? '1h 1min 1seg.' : '1h 1min 1s';
+      expect(clockformatted_1[3], result);
 
       expect(clockformatted_2[0], '2 horas, 2 minutos y 2 segundos');
       expect(clockformatted_2[1], '2 h, 2 min, 2 seg.');
-      expect(clockformatted_2[2], '2h, 2min, 2s');
-      expect(clockformatted_2[3], '2h 2min 2s');
+
+      result = (testPlatform == 'webOS') ? '2h, 2min, 2seg.' : '2h, 2min, 2s';
+      expect(clockformatted_2[2], result);
+
+      result = (testPlatform == 'webOS') ? '2h 2min 2seg.' : '2h 2min 2s';
+      expect(clockformatted_2[3], result);
     });
     test('testDurFmt_es_SV', () {
       // 1 17
@@ -2805,25 +3045,69 @@ void main() {
             .add(fmt.format(ILibDateOptions(hour: 2, minute: 2, second: 2)));
       }
 
-      expect(textformatted_1[0], '‏1 سال،‏ 1 ماه،‏ 1 هفته، و 1 روز');
-      expect(textformatted_1[1], '‏1 سال،‏ 1 ماه،‏ 1 هفته،‏ 1 روز');
-      expect(textformatted_1[2], '‏1 سال 1 ماه 1 هفته 1 روز');
-      expect(textformatted_1[3], '‏1 سال 1 ماه 1 هفته 1 روز');
+      String result = (testPlatform == 'webOS')
+          ? '‏1 سال و 1 ماه و 1 هفته و 1 روز'
+          : '‏1 سال،‏ 1 ماه،‏ 1 هفته، و 1 روز';
+      expect(textformatted_1[0], result);
 
-      expect(textformatted_2[0], '‏2 سال،‏ 2 ماه،‏ 2 هفته، و 2 روز');
-      expect(textformatted_2[1], '‏2 سال،‏ 2 ماه،‏ 2 هفته،‏ 2 روز');
-      expect(textformatted_2[2], '‏2 سال 2 ماه 2 هفته 2 روز');
-      expect(textformatted_2[3], '‏2 سال 2 ماه 2 هفته 2 روز');
+      result = (testPlatform == 'webOS')
+          ? '‏1 سال و 1 ماه و 1 هفته و 1 روز'
+          : '‏1 سال،‏ 1 ماه،‏ 1 هفته،‏ 1 روز';
+      expect(textformatted_1[1], result);
 
-      expect(clockformatted_1[0], '‏1 ساعت،‏ 1 دقیقه، و 1 ثانیه');
-      expect(clockformatted_1[1], '‏1 ساعت،‏ 1 دقیقه،‏ 1 ثانیه');
-      expect(clockformatted_1[2], '‏1 ساعت 1 دقیقه 1 ث');
-      expect(clockformatted_1[3], '‏1 ساعت 1 دقیقه 1 ث');
+      result = (testPlatform == 'webOS')
+          ? '‏1 سال و 1 ماه و 1 هفته و 1 روز'
+          : '‏1 سال 1 ماه 1 هفته 1 روز';
+      expect(textformatted_1[2], result);
+      expect(textformatted_1[3], result);
 
-      expect(clockformatted_2[0], '‏2 ساعت،‏ 2 دقیقه، و 2 ثانیه');
-      expect(clockformatted_2[1], '‏2 ساعت،‏ 2 دقیقه،‏ 2 ثانیه');
-      expect(clockformatted_2[2], '‏2 ساعت 2 دقیقه 2 ث');
-      expect(clockformatted_2[3], '‏2 ساعت 2 دقیقه 2 ث');
+      result = (testPlatform == 'webOS')
+          ? '‏2 سال و 2 ماه و 2 هفته و 2 روز'
+          : '‏2 سال،‏ 2 ماه،‏ 2 هفته، و 2 روز';
+      expect(textformatted_2[0], result);
+
+      result = (testPlatform == 'webOS')
+          ? '‏2 سال و 2 ماه و 2 هفته و 2 روز'
+          : '‏2 سال،‏ 2 ماه،‏ 2 هفته،‏ 2 روز';
+      expect(textformatted_2[1], result);
+
+      result = (testPlatform == 'webOS')
+          ? '‏2 سال و 2 ماه و 2 هفته و 2 روز'
+          : '‏2 سال 2 ماه 2 هفته 2 روز';
+      expect(textformatted_2[2], result);
+      expect(textformatted_2[3], result);
+
+      result = (testPlatform == 'webOS')
+          ? '‏1 ساعت و 1 دقیقه و 1 ثانیه'
+          : '‏1 ساعت،‏ 1 دقیقه، و 1 ثانیه';
+      expect(clockformatted_1[0], result);
+
+      result = (testPlatform == 'webOS')
+          ? '‏1 ساعت و 1 دقیقه و 1 ثانیه'
+          : '‏1 ساعت،‏ 1 دقیقه،‏ 1 ثانیه';
+      expect(clockformatted_1[1], result);
+
+      result = (testPlatform == 'webOS')
+          ? '‏1 ساعت و 1 دقیقه و 1 ثانیه'
+          : '‏1 ساعت 1 دقیقه 1 ث';
+      expect(clockformatted_1[2], result);
+      expect(clockformatted_1[3], result);
+
+      result = (testPlatform == 'webOS')
+          ? '‏2 ساعت و 2 دقیقه و 2 ثانیه'
+          : '‏2 ساعت،‏ 2 دقیقه، و 2 ثانیه';
+      expect(clockformatted_2[0], result);
+
+      result = (testPlatform == 'webOS')
+          ? '‏2 ساعت و 2 دقیقه و 2 ثانیه'
+          : '‏2 ساعت،‏ 2 دقیقه،‏ 2 ثانیه';
+      expect(clockformatted_2[1], result);
+
+      result = (testPlatform == 'webOS')
+          ? '‏2 ساعت و 2 دقیقه و 2 ثانیه'
+          : '‏2 ساعت 2 دقیقه 2 ث';
+      expect(clockformatted_2[2], result);
+      expect(clockformatted_2[3], result);
     });
     test('testDurFmt_fa_IR', () {
       // 1 18
@@ -2850,25 +3134,61 @@ void main() {
             .add(fmt.format(ILibDateOptions(hour: 18, minute: 18, second: 18)));
       }
 
-      expect(textformatted_1[0], '‏1 سال،‏ 1 ماه،‏ 1 هفته، و 1 روز');
-      expect(textformatted_1[1], '‏1 سال،‏ 1 ماه،‏ 1 هفته،‏ 1 روز');
-      expect(textformatted_1[2], '‏1 سال 1 ماه 1 هفته 1 روز');
-      expect(textformatted_1[3], '‏1 سال 1 ماه 1 هفته 1 روز');
+      String result = (testPlatform == 'webOS')
+          ? '‏1 سال و 1 ماه و 1 هفته و 1 روز'
+          : '‏1 سال،‏ 1 ماه،‏ 1 هفته، و 1 روز';
+      expect(textformatted_1[0], result);
+      result = (testPlatform == 'webOS')
+          ? '‏1 سال و 1 ماه و 1 هفته و 1 روز'
+          : '‏1 سال،‏ 1 ماه،‏ 1 هفته،‏ 1 روز';
+      expect(textformatted_1[1], result);
+      result = (testPlatform == 'webOS')
+          ? '‏1 سال و 1 ماه و 1 هفته و 1 روز'
+          : '‏1 سال 1 ماه 1 هفته 1 روز';
+      expect(textformatted_1[2], result);
+      expect(textformatted_1[3], result);
 
-      expect(textformatted_18[0], '‏18 سال،‏ 18 ماه،‏ 18 هفته، و 18 روز');
-      expect(textformatted_18[1], '‏18 سال،‏ 18 ماه،‏ 18 هفته،‏ 18 روز');
-      expect(textformatted_18[2], '‏18 سال 18 ماه 18 هفته 18 روز');
-      expect(textformatted_18[3], '‏18 سال 18 ماه 18 هفته 18 روز');
+      result = (testPlatform == 'webOS')
+          ? '‏18 سال و 18 ماه و 18 هفته و 18 روز'
+          : '‏18 سال،‏ 18 ماه،‏ 18 هفته، و 18 روز';
+      expect(textformatted_18[0], result);
+      result = (testPlatform == 'webOS')
+          ? '‏18 سال و 18 ماه و 18 هفته و 18 روز'
+          : '‏18 سال،‏ 18 ماه،‏ 18 هفته،‏ 18 روز';
+      expect(textformatted_18[1], result);
+      result = (testPlatform == 'webOS')
+          ? '‏18 سال و 18 ماه و 18 هفته و 18 روز'
+          : '‏18 سال 18 ماه 18 هفته 18 روز';
+      expect(textformatted_18[2], result);
+      expect(textformatted_18[3], result);
 
-      expect(clockformatted_1[0], '‏1 ساعت،‏ 1 دقیقه، و 1 ثانیه');
-      expect(clockformatted_1[1], '‏1 ساعت،‏ 1 دقیقه،‏ 1 ثانیه');
-      expect(clockformatted_1[2], '‏1 ساعت 1 دقیقه 1 ث');
-      expect(clockformatted_1[3], '‏1 ساعت 1 دقیقه 1 ث');
+      result = (testPlatform == 'webOS')
+          ? '‏1 ساعت و 1 دقیقه و 1 ثانیه'
+          : '‏1 ساعت،‏ 1 دقیقه، و 1 ثانیه';
+      expect(clockformatted_1[0], result);
+      result = (testPlatform == 'webOS')
+          ? '‏1 ساعت و 1 دقیقه و 1 ثانیه'
+          : '‏1 ساعت،‏ 1 دقیقه،‏ 1 ثانیه';
+      expect(clockformatted_1[1], result);
+      result = (testPlatform == 'webOS')
+          ? '‏1 ساعت و 1 دقیقه و 1 ثانیه'
+          : '‏1 ساعت 1 دقیقه 1 ث';
+      expect(clockformatted_1[2], result);
+      expect(clockformatted_1[3], result);
 
-      expect(clockformatted_18[0], '‏18 ساعت،‏ 18 دقیقه، و 18 ثانیه');
-      expect(clockformatted_18[1], '‏18 ساعت،‏ 18 دقیقه،‏ 18 ثانیه');
-      expect(clockformatted_18[2], '‏18 ساعت 18 دقیقه 18 ث');
-      expect(clockformatted_18[3], '‏18 ساعت 18 دقیقه 18 ث');
+      result = (testPlatform == 'webOS')
+          ? '‏18 ساعت و 18 دقیقه و 18 ثانیه'
+          : '‏18 ساعت،‏ 18 دقیقه، و 18 ثانیه';
+      expect(clockformatted_18[0], result);
+      result = (testPlatform == 'webOS')
+          ? '‏18 ساعت و 18 دقیقه و 18 ثانیه'
+          : '‏18 ساعت،‏ 18 دقیقه،‏ 18 ثانیه';
+      expect(clockformatted_18[1], result);
+      result = (testPlatform == 'webOS')
+          ? '‏18 ساعت و 18 دقیقه و 18 ثانیه'
+          : '‏18 ساعت 18 دقیقه 18 ث';
+      expect(clockformatted_18[2], result);
+      expect(clockformatted_18[3], result);
     });
     test('testDurFmt_fi_FI', () {
       // 1 17
@@ -4410,33 +4730,73 @@ void main() {
 
       expect(textformatted_1[0], '1 rok, 1 miesiąc, 1 tydzień i 1 dzień');
       expect(textformatted_1[1], '1 rok, 1 mies., 1 tydz., 1 dzień');
-      expect(textformatted_1[2], '1 r., 1 m-c, 1 t., 1 d.');
-      expect(textformatted_1[3], '1 r., 1 m-c, 1 t., 1 d.');
+
+      String result = (testPlatform == 'webOS')
+          ? '1 rok, 1 mi, 1 ty, 1 dz'
+          : '1 r., 1 m-c, 1 t., 1 d.';
+      expect(textformatted_1[2], result);
+
+      result = (testPlatform == 'webOS')
+          ? '1 r., 1 m-c, 1 tydz., 1 d.'
+          : '1 r., 1 m-c, 1 t., 1 d.';
+      expect(textformatted_1[3], result);
 
       expect(textformatted_2[0], '2 lata, 2 miesiące, 2 tygodnie i 2 dni');
       expect(textformatted_2[1], '2 lata, 2 mies., 2 tyg., 2 dni');
-      expect(textformatted_2[2], '2 l., 2 m-ce, 2 t., 2 d.');
-      expect(textformatted_2[3], '2 l., 2 m-ce, 2 t., 2 d.');
+
+      result = (testPlatform == 'webOS')
+          ? '2 la, 2 mi, 2 ty, 2 dni'
+          : '2 l., 2 m-ce, 2 t., 2 d.';
+      expect(textformatted_2[2], result);
+
+      result = (testPlatform == 'webOS')
+          ? '2 l., 2 m-ce, 2 tyg., 2 dn.'
+          : '2 l., 2 m-ce, 2 t., 2 d.';
+      expect(textformatted_2[3], result);
 
       expect(textformatted_5[0], '5 lat, 5 miesięcy, 5 tygodni i 5 dni');
       expect(textformatted_5[1], '5 lat, 5 mies., 5 tyg., 5 dni');
-      expect(textformatted_5[2], '5 l., 5 m-cy, 5 t., 5 d.');
-      expect(textformatted_5[3], '5 l., 5 m-cy, 5 t., 5 d.');
+
+      result = (testPlatform == 'webOS')
+          ? '5 lat, 5 mi, 5 ty, 5 dni'
+          : '5 l., 5 m-cy, 5 t., 5 d.';
+      expect(textformatted_5[2], result);
+      result = (testPlatform == 'webOS')
+          ? '5 l., 5 m-cy, 5 tyg., 5 dn.'
+          : '5 l., 5 m-cy, 5 t., 5 d.';
+      expect(textformatted_5[3], result);
 
       expect(clockformatted_1[0], '1 godzina, 1 minuta i 1 sekunda');
       expect(clockformatted_1[1], '1 godz., 1 min, 1 sek.');
-      expect(clockformatted_1[2], '1 h, 1 min, 1 s');
-      expect(clockformatted_1[3], '1 h, 1 min, 1 s');
+
+      result =
+          (testPlatform == 'webOS') ? '1 go, 1 mi, 1 se' : '1 h, 1 min, 1 s';
+      expect(clockformatted_1[2], result);
+
+      result =
+          (testPlatform == 'webOS') ? '1 godz., 1 min, 1 s' : '1 h, 1 min, 1 s';
+      expect(clockformatted_1[3], result);
 
       expect(clockformatted_2[0], '2 godziny, 2 minuty i 2 sekundy');
       expect(clockformatted_2[1], '2 godz., 2 min, 2 sek.');
-      expect(clockformatted_2[2], '2 h, 2 min, 2 s');
-      expect(clockformatted_2[3], '2 h, 2 min, 2 s');
+
+      result =
+          (testPlatform == 'webOS') ? '2 go, 2 mi, 2 se' : '2 h, 2 min, 2 s';
+      expect(clockformatted_2[2], result);
+      result =
+          (testPlatform == 'webOS') ? '2 godz., 2 min, 2 s' : '2 h, 2 min, 2 s';
+      expect(clockformatted_2[3], result);
 
       expect(clockformatted_5[0], '5 godzin, 5 minut i 5 sekund');
       expect(clockformatted_5[1], '5 godz., 5 min, 5 sek.');
-      expect(clockformatted_5[2], '5 h, 5 min, 5 s');
-      expect(clockformatted_5[3], '5 h, 5 min, 5 s');
+
+      result =
+          (testPlatform == 'webOS') ? '5 go, 5 mi, 5 se' : '5 h, 5 min, 5 s';
+      expect(clockformatted_5[2], result);
+
+      result =
+          (testPlatform == 'webOS') ? '5 godz., 5 min, 5 s' : '5 h, 5 min, 5 s';
+      expect(clockformatted_5[3], result);
     });
     test('testDurFmt_pt_BR', () {
       // 1 2
@@ -5846,9 +6206,12 @@ void main() {
       expect(textformatted_1[3], '1年1个月1周1天');
 
       expect(clockformatted_1[0], '1小时1分钟1秒钟');
-      expect(clockformatted_1[1], '1小时1分钟1秒');
-      expect(clockformatted_1[2], '1小时1分钟1秒');
-      expect(clockformatted_1[3], '1小时1分钟1秒');
+      String result = (testPlatform == 'webOS') ? '1小时1分1秒' : '1小时1分钟1秒';
+      expect(clockformatted_1[1], result);
+      result = (testPlatform == 'webOS') ? '1小时1分1秒' : '1小时1分钟1秒';
+      expect(clockformatted_1[2], result);
+      result = (testPlatform == 'webOS') ? '1小时1分1秒' : '1小时1分钟1秒';
+      expect(clockformatted_1[3], result);
     });
     test('testDurFmt_zh_Hant_HK', () {
       // 2
@@ -6210,23 +6573,47 @@ void main() {
             .add(fmt.format(ILibDateOptions(hour: 18, minute: 18, second: 18)));
       }
 
-      expect(textformatted_1[0], '1 ዓመት፣ 1 ወር፣ 1 ሳምንት እና 1 ቀናት');
-      expect(textformatted_1[1], '1 ዓመት፣ 1 ወራት፣ 1 ሳምንት፣ 1 ቀናት');
-      expect(textformatted_1[2], '1 ዓመት፣ 1 ወር፣ 1 ሳምንት፣ 1 ቀ');
-      expect(textformatted_1[3], '1 ዓመት፣ 1 ወር፣ 1 ሳምንት፣ 1 ቀ');
+      String result = (testPlatform == 'webOS')
+          ? '1 ዓመት፣ 1 ወር፣ 1 ሳምንት እና 1 ቀን'
+          : '1 ዓመት፣ 1 ወር፣ 1 ሳምንት እና 1 ቀናት';
+      expect(textformatted_1[0], result);
+      result = (testPlatform == 'webOS')
+          ? '1 ዓመ፣ 1 ወር፣ 1 ሳም፣ 1 ቀናት'
+          : '1 ዓመት፣ 1 ወራት፣ 1 ሳምንት፣ 1 ቀናት';
+      expect(textformatted_1[1], result);
+      result = (testPlatform == 'webOS')
+          ? '1 ዓ፣ 1 ወ፣ 1 ሳ፣ 1 ቀ'
+          : '1 ዓመት፣ 1 ወር፣ 1 ሳምንት፣ 1 ቀ';
+      expect(textformatted_1[2], result);
+      expect(textformatted_1[3], result);
 
       expect(textformatted_18[0], '18 ዓመታት፣ 18 ወራት፣ 18 ሳምንታት እና 18 ቀናት');
-      expect(textformatted_18[1], '18 ዓመታት፣ 18 ወራት፣ 18 ሳምንታት፣ 18 ቀናት');
-      expect(textformatted_18[2], '18 ዓ፣ 18 ወር፣ 18 ሳምንት፣ 18 ቀ');
-      expect(textformatted_18[3], '18 ዓ፣ 18 ወር፣ 18 ሳምንት፣ 18 ቀ');
+      result = (testPlatform == 'webOS')
+          ? '18 ዓመ፣ 18 ወራ፣ 18 ሳም፣ 18 ቀናት'
+          : '18 ዓመታት፣ 18 ወራት፣ 18 ሳምንታት፣ 18 ቀናት';
+      expect(textformatted_18[1], result);
+
+      result = (testPlatform == 'webOS')
+          ? '18 ዓ፣ 18 ወ፣ 18 ሳ፣ 18 ቀ'
+          : '18 ዓ፣ 18 ወር፣ 18 ሳምንት፣ 18 ቀ';
+      expect(textformatted_18[2], result);
+      expect(textformatted_18[3], result);
 
       expect(clockformatted_1[0], '1 ሰዓት፣ 1 ደቂቃ እና 1 ሰከንድ');
       expect(clockformatted_1[1], '1 ሰዓ፣ 1 ደቂ፣ 1 ሰከ');
       expect(clockformatted_1[2], '1 ሰ፣ 1 ደ፣ 1 ሰ');
       expect(clockformatted_1[3], '1 ሰ፣ 1 ደ፣ 1 ሰ');
 
-      expect(clockformatted_18[0], '18 ሰዓቶች፣ 18 ደቂቃዎች እና 18 ሰከንዶች');
-      expect(clockformatted_18[1], '18 ሰዓ፣ 18 ደቂቃ፣ 18 ሰከ');
+      result = (testPlatform == 'webOS')
+          ? '18 ሰዓት፣ 18 ደቂቃ እና 18 ሰከንድ'
+          : '18 ሰዓቶች፣ 18 ደቂቃዎች እና 18 ሰከንዶች';
+      expect(clockformatted_18[0], result);
+
+      result = (testPlatform == 'webOS')
+          ? '18 ሰዓ፣ 18 ደቂ፣ 18 ሰከ'
+          : '18 ሰዓ፣ 18 ደቂቃ፣ 18 ሰከ';
+      expect(clockformatted_18[1], result);
+
       expect(clockformatted_18[2], '18 ሰ፣ 18 ደ፣ 18 ሰ');
       expect(clockformatted_18[3], '18 ሰ፣ 18 ደ፣ 18 ሰ');
     });
