@@ -72,4 +72,6 @@ DateFmt.js
 TimeZone.js
 ResBundle.js
 DurationFmt.js
+NumFmt.js
+Currency.js
 */
