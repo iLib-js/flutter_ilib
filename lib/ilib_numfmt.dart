@@ -57,14 +57,20 @@ class ILibNumFmt {
   }
 
   /// Format a number according to the settings of this number formatter instance
-  String format([dynamic num]) {
+
+  String format(dynamic number) {
     String result = '';
-    if (num != null) {
+    if (number != null) {
+      if (number is! num && number is! String) {
+        throw ArgumentError(
+            'Invalid argument type. Expected num or String, got ${number.runtimeType}');
+      }
+      if (number is num && (number.isNaN || number.isInfinite)) {
+        return number.toString();
+      }
+
       final String formatOptions = toJsonString();
-
-      // Ensure the input is a string if it's not already
-      final String numStr = num is String ? num : num.toString();
-
+      final String numStr = number is String ? number : number.toString();
       result = ILibJS.instance
           .evaluate('new NumFmt($formatOptions).format($numStr).toString()')
           .stringResult;
@@ -73,11 +79,11 @@ class ILibNumFmt {
   }
 
   /// FApply the constraints used in the current formatter to the given number
-  String constrain(int num) {
+  String constrain(int number) {
     String result = '';
     final String formatOptions = toJsonString();
     result = ILibJS.instance
-        .evaluate('new NumFmt($formatOptions).constrain($num).toString()')
+        .evaluate('new NumFmt($formatOptions).constrain($number).toString()')
         .stringResult;
 
     return result;

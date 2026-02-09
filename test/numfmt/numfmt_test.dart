@@ -41,12 +41,14 @@ void main() {
       expect(fmt, isNotNull);
       expect(fmt.format(1.745), '1.745');
     });
+
     test('testNumFmtNumberFormatUndefined', () {
       final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions());
 
       expect(fmt, isNotNull);
-      expect(fmt.format(), '');
+      expect(fmt.format(null), '');
     });
+
     test('testNumFmtNumberFormatSimpleNeg', () {
       final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions());
 
