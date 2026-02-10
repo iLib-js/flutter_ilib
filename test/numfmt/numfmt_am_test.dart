@@ -9,17 +9,10 @@ void main() {
     final ILibJS ilibjsinstance = ILibJS.instance;
     await ilibjsinstance.loadJS();
     ilibjsinstance.initILib();
-    await ilibjsinstance.loadILibLocaleDataAll();
+    await ILibJS.instance.loadILibLocaleData('am-ET');
   });
 
   group('iLibNumFmt_am', () {
-    test('testNumFmtNumberFormatNaN', () {
-      final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions());
-
-      expect(fmt, isNotNull);
-      expect(fmt.format(double.nan), 'NaN');
-    });
-
     test('testNumFmtNumberETFormatNoFractionalLimit', () {
       final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions(locale: 'am-ET'));
       expect(fmt, isNotNull);

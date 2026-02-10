@@ -128,6 +128,73 @@ ILibLocaleInfo(String locale)
 |_int_ getFirstDayOfWeek() | Returns the day of week that starts weeks in the current locale. <br>Days are still numbered the standard way with 0 for Sunday through 6 for Saturday, <br> but calendars should be displayed and weeks calculated with the day of week returned from this function as the first day of the week.|
 |_int_ getWeekEndStart() | Returns the day of week that starts weekend in the current locale.<br> Days are still numbered the standard way with 0 for Sunday through 6 for Saturday.|
 |_int_ getWeekEndEnd() | Returns the day of week that ends weekend in the current locale. <br>Days are still numbered the standard way with 0 for Sunday through 6 for Saturday.|
+|_String_ getDecimalSeparator() | Returns the decimal separator for formatted numbers in this locale. |
+|_String_ getGroupingSeparator() | Returns the separator character used to separate groups of digits on the integer side of the decimal character. |
+|_String_ getPercentageFormat() | Returns the format template used to format percentages in this locale. |
+|_String_ getNegativePercentageFormat() | Returns the format template used to format percentages in this locale with negative amounts. |
+|_CurrencyFormats_ getCurrencyFormats() | Returns an object containing the format templates for formatting currencies in this locale. |
+|_String_ getCurrency() | Returns the currency that is legal in the locale or most commonly used in commerce. |
 
 
+# Number Formatting
 
+## ILibNumFmtOptions
+
+### Properties
+
+|name|description|
+|------|---|
+|_\<String?>_ locale| Locale to use for number formatting. |
+|_\<String?>_ type| Specifies the formatter type. Valid values: "number", "currency", "percentage". Default: "number". |
+|_\<String?>_ currency| ISO 4217 currency code for "currency" type. Required for currency formatting. |
+|_\<int?>_ maxFractionDigits| Maximum digits after the decimal. `-1` means unlimited, `0` means no fractional digits. |
+|_\<int?>_ minFractionDigits| Minimum digits after the decimal. Pads with zeros if necessary. |
+|_\<int?>_ significantDigits| Maximum significant digits, applied before and after the decimal. |
+|_\<String?>_ style| Formatting style. For "currency": "common" (symbol) or "iso" (ISO code). For "number": "standard", "scientific", "native", or "nogrouping". |
+|_\<String?>_ roundingMode| Governs rounding behavior. Examples: "up", "down", "halfup", "halfeven". |
+|_\<bool?>_ useNative| Determines whether to use native script settings for formatting numbers. |
+
+### Constructors
+```dart
+ILibNumFmtOptions({
+  String? locale,
+  String? type,
+  String? currency,
+  int? maxFractionDigits,
+  int? minFractionDigits,
+  int? significantDigits,
+  String? style,
+  String? roundingMode,
+  bool? useNative,
+})
+```
+
+## ILibNumFmt
+
+### Properties
+
+|name|description|
+|------|---|
+|_\<ILibNumFmtOptions>_ options| Options for configuring the number formatter. |
+
+### Constructors
+```dart
+ILibNumFmt(ILibNumFmtOptions options)
+```
+
+### Methods
+
+|name|description|
+|------|---|
+|_String_ format(dynamic number)| Formats a number according to the settings of this formatter instance. |
+|_String_ constrain(int number)| Applies the constraints used in the current formatter to the given number. |
+|_String_ getLocale()| Returns the locale used to construct this number formatter object. |
+|_String_ getType()| Returns the type of formatter. Valid values are "number", "currency", and "percentage". |
+|_bool_ isGroupingUsed()| Returns true if this formatter groups together digits in the integral portion of a number. |
+|_int_ getMaxFractionDigits()| Returns the maximum fraction digits set up in the constructor. |
+|_int_ getMinFractionDigits()| Returns the minimum fraction digits set up in the constructor. |
+|_int_ getSignificantDigits()| Returns the significant digits set up in the constructor. |
+|_int?_ getCurrency()| Returns the ISO 4217 code for the currency that this formatter formats. |
+|_String_ getRoundingMode()| Returns the rounding mode set up in the constructor. |
+|_String_ getStyle()| Returns the style used to construct this number formatter object. |
+|_bool_ getUseNative()| Returns true if this formatter uses native digits to format the number. |

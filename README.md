@@ -120,6 +120,37 @@ locInfo.getWeekEndStart();
 // 6
 locInfo.getWeekEndEnd();
 // 0
+
+locInfo.getDecimalSeparator();
+// '.'
+locInfo.getGroupingSeparator();
+// ','
+locInfo.getPercentageFormat();
+// '{n}%'
+locInfo.getNegativePercentageFormat();
+// '-{n}%'
+locInfo.getCurrencyFormats().common;
+// {s}{n}
+locInfo.getCurrency();
+// 'KRW'
+```
+
+### Number Formatting
+
+```dart
+final ILibNumFmtOptions fmtOptions = ILibNumFmtOptions(
+  locale: 'en-US',
+  type: 'currency',
+  currency: 'USD',
+  maxFractionDigits: 2,
+  minFractionDigits: 2,
+  roundingMode: 'halfup',
+);
+final ILibNumFmt fmt = ILibNumFmt(fmtOptions);
+fmt.format(1234567.89);
+// '$1,234,567.89'
+fmt.format(-1234567.89);
+// '-$1,234,567.89'
 ```
 
 ## CLASS
