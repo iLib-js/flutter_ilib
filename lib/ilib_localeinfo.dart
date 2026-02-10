@@ -42,7 +42,8 @@ class ILibLocaleInfo {
 
   /// Return the decimal separator for formatted numbers in this locale
   String getDecimalSeparator() {
-    final String jscode1 = 'new LocaleInfo("$locale").getDecimalSeparator().toString()';
+    final String jscode1 =
+        'new LocaleInfo("$locale").getDecimalSeparator().toString()';
     final String result = ILibJS.instance.evaluate(jscode1).stringResult;
     return result;
   }
@@ -50,21 +51,24 @@ class ILibLocaleInfo {
   /// Return the separator character used to separate groups of digits on the
   /// integer side of the decimal character.
   String getGroupingSeparator() {
-    final String jscode1 = 'new LocaleInfo("$locale").getGroupingSeparator().toString()';
+    final String jscode1 =
+        'new LocaleInfo("$locale").getGroupingSeparator().toString()';
     final String result = ILibJS.instance.evaluate(jscode1).stringResult;
     return result;
   }
 
   /// Return the format template used to format percentages in this locale
   String getPercentageFormat() {
-    final String jscode1 = 'new LocaleInfo("$locale").getPercentageFormat().toString()';
+    final String jscode1 =
+        'new LocaleInfo("$locale").getPercentageFormat().toString()';
     final String result = ILibJS.instance.evaluate(jscode1).stringResult;
     return result;
   }
 
   /// Return the format template used to format percentages in this locale with negative amounts
   String getNegativePercentageFormat() {
-    final String jscode1 = 'new LocaleInfo("$locale").getNegativePercentageFormat().toString()';
+    final String jscode1 =
+        'new LocaleInfo("$locale").getNegativePercentageFormat().toString()';
     final String result = ILibJS.instance.evaluate(jscode1).stringResult;
     return result;
   }
@@ -79,7 +83,8 @@ class ILibLocaleInfo {
         'JSON.stringify(new LocaleInfo("$locale").getCurrencyFormats())';
     result = ILibJS.instance.evaluate(jscode1).stringResult;
 
-    final Map<String, dynamic> map = json.decode(result) as Map<String, dynamic>;
+    final Map<String, dynamic> map =
+        json.decode(result) as Map<String, dynamic>;
 
     final CurrencyFormats cf = CurrencyFormats(
       common: (map['common'] as String?) ?? '',
@@ -97,7 +102,6 @@ class ILibLocaleInfo {
     final String result = ILibJS.instance.evaluate(jscode1).stringResult;
     return result;
   }
-
 }
 
 /// Represents currency formatting templates for a specific locale.
