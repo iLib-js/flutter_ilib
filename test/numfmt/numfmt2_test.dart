@@ -58,8 +58,13 @@ void main() {
       final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions(
           locale: 'ar-IQ', type: 'standard', useNative: false));
       expect(li.getDecimalSeparator(), '٫');
-      expect(li.getGroupingSeparator(), '٬');
-      expect(fmt.format(123456789.45), '123٬456٬789٫45');
+      if (testPlatform == 'webOS') {
+        expect(li.getGroupingSeparator(), ' ');
+        expect(fmt.format(123456789.45), '123 456 789٫45');
+      } else {
+        expect(li.getGroupingSeparator(), '٬');
+        expect(fmt.format(123456789.45), '123٬456٬789٫45');
+      }
 
       final ILibNumFmt pctfmt = ILibNumFmt(ILibNumFmtOptions(
           locale: 'ar-IQ', type: 'percentage', useNative: false));
@@ -81,8 +86,13 @@ void main() {
       final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions(
           locale: 'ar-MA', type: 'standard', useNative: false));
       expect(li.getDecimalSeparator(), ',');
-      expect(li.getGroupingSeparator(), '.');
-      expect(fmt.format(123456789.45), '123.456.789,45');
+      if (testPlatform == 'webOS') {
+        expect(li.getGroupingSeparator(), ' ');
+        expect(fmt.format(123456789.45), '123 456 789,45');
+      } else {
+        expect(li.getGroupingSeparator(), '.');
+        expect(fmt.format(123456789.45), '123.456.789,45');
+      }
 
       final ILibNumFmt pctfmt = ILibNumFmt(ILibNumFmtOptions(
           locale: 'ar-MA', type: 'percentage', useNative: false));
@@ -1460,24 +1470,42 @@ void main() {
       final ILibLocaleInfo li = ILibLocaleInfo('fa-IR');
       final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions(
           locale: 'fa-IR', type: 'standard', useNative: false));
-      expect(li.getDecimalSeparator(), '٫');
-      expect(li.getGroupingSeparator(), '٬');
-      expect(fmt.format(123456789.45), '123٬456٬789٫45');
+      if (testPlatform == 'webOS') {
+        expect(li.getDecimalSeparator(), '/');
+        expect(li.getGroupingSeparator(), '٫');
+        expect(fmt.format(123456789.45), '123٫456٫789/45');
+      } else {
+        expect(li.getDecimalSeparator(), '٫');
+        expect(li.getGroupingSeparator(), '٬');
+        expect(fmt.format(123456789.45), '123٬456٬789٫45');
+      }
 
       final ILibNumFmt pctfmt = ILibNumFmt(ILibNumFmtOptions(
           locale: 'fa-IR', type: 'percentage', useNative: false));
-      expect(li.getPercentageFormat(), '{n}٪');
-      expect(li.getNegativePercentageFormat(), '‎−{n}٪');
-      expect(pctfmt.format(34), '34٪');
+      if (testPlatform == 'webOS') {
+        expect(li.getPercentageFormat(), '‪{n} %');
+        expect(li.getNegativePercentageFormat(), '‪-{n} %');
+        expect(pctfmt.format(34), '‪34 %');
+      } else {
+        expect(li.getPercentageFormat(), '{n}٪');
+        expect(li.getNegativePercentageFormat(), '‎−{n}٪');
+        expect(pctfmt.format(34), '34٪');
+      }
 
       final ILibNumFmt curfmt = ILibNumFmt(ILibNumFmtOptions(
           locale: 'fa-IR',
           type: 'currency',
           useNative: false,
           currency: li.getCurrency()));
-      expect(li.getCurrencyFormats().common, '‎{s}{n}');
-      expect(li.getCurrencyFormats().commonNegative, '‎−‎{s}{n}');
-      expect(curfmt.format(57.05), '‎﷼57'); //IRR
+      if (testPlatform == 'webOS') {
+        expect(li.getCurrencyFormats().common, '{n} ؜{s}');
+        expect(li.getCurrencyFormats().commonNegative, '؜{n}- ؜{s}');
+        expect(curfmt.format(57.05), '57 ؜﷼');
+      } else {
+        expect(li.getCurrencyFormats().common, '‎{s}{n}');
+        expect(li.getCurrencyFormats().commonNegative, '‎−‎{s}{n}');
+        expect(curfmt.format(57.05), '‎﷼57'); //IRR
+      }
     });
     test('testNumFmt_fi_FI', () {
       final ILibLocaleInfo li = ILibLocaleInfo('fi-FI');

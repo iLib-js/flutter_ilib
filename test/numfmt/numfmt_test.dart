@@ -2786,7 +2786,11 @@ void main() {
           ILibNumFmt(ILibNumFmtOptions(locale: 'fa-IR', maxFractionDigits: 2));
 
       expect(fmt, isNotNull);
-      expect(fmt.format(-111123456.785), '‎−۱۱۱٬۱۲۳٬۴۵۶٫۷۸');
+      if (testPlatform == 'webOS') {
+        expect(fmt.format(-111123456.785), '‎−۱۱۱٫۱۲۳٫۴۵۶/۷۸');
+      } else {
+        expect(fmt.format(-111123456.785), '‎−۱۱۱٬۱۲۳٬۴۵۶٫۷۸');
+      }
     });
 
     test('testNumFmtCurrencyFormatCorrectCurrencyForLocale_fa_IR', () {
@@ -2794,7 +2798,11 @@ void main() {
           type: 'currency', locale: 'fa-IR', currency: 'IRR'));
 
       expect(fmt, isNotNull);
-      expect(fmt.format(100110.57), '‎﷼۱۰۰٬۱۱۱');
+      if (testPlatform == 'webOS') {
+        expect(fmt.format(100110.57), '۱۰۰٫۱۱۱ ؜﷼');
+      } else {
+        expect(fmt.format(100110.57), '‎﷼۱۰۰٬۱۱۱');
+      }
     });
 
     test('testNumFmtCurrencyFormatCorrectNegativeCurrencyForLocale_fa_IR', () {
@@ -2802,7 +2810,12 @@ void main() {
           type: 'currency', locale: 'fa-IR', currency: 'IRR'));
 
       expect(fmt, isNotNull);
-      expect(fmt.format(-100110.57), '‎−‎﷼۱۰۰٬۱۱۱');
+
+      if (testPlatform == 'webOS') {
+        expect(fmt.format(-100110.57), '؜۱۰۰٫۱۱۱- ؜﷼');
+      } else {
+        expect(fmt.format(-100110.57), '‎−‎﷼۱۰۰٬۱۱۱');
+      }
     });
 
     test('testNumFmtPercentageFormatRegular_fa_IR', () {
@@ -2810,7 +2823,12 @@ void main() {
           ILibNumFmt(ILibNumFmtOptions(locale: 'fa-IR', type: 'percentage'));
 
       expect(fmt, isNotNull);
-      expect(fmt.format(57.8), '۵۷٫۸٪');
+
+      if (testPlatform == 'webOS') {
+        expect(fmt.format(57.8), '‪۵۷/۸ %');
+      } else {
+        expect(fmt.format(57.8), '۵۷٫۸٪');
+      }
     });
 
     test('testNumFmtPercentageFormatNegative_fa_IR', () {
@@ -2818,7 +2836,11 @@ void main() {
           ILibNumFmt(ILibNumFmtOptions(locale: 'fa-IR', type: 'percentage'));
 
       expect(fmt, isNotNull);
-      expect(fmt.format(-57.8), '‎−۵۷٫۸٪');
+      if (testPlatform == 'webOS') {
+        expect(fmt.format(-57.8), '‪-۵۷/۸ %');
+      } else {
+        expect(fmt.format(-57.8), '‎−۵۷٫۸٪');
+      }
     });
 
     //test cases for ga-IE

@@ -3,20 +3,6 @@ import 'dart:convert';
 import 'flutter_ilib.dart';
 import 'ilib_init.dart';
 
-class CurrencyFormats {
-  CurrencyFormats({
-    this.common,
-    this.commonNegative,
-    this.iso,
-    this.isoNegative,
-  });
-
-  String? common;
-  String? commonNegative;
-  String? iso;
-  String? isoNegative;
-}
-
 class ILibLocaleInfo {
   /// [lo] Set the locale for which the info is sought
   ILibLocaleInfo(String lo) {
@@ -76,19 +62,16 @@ class ILibLocaleInfo {
     return result;
   }
 
-  /// Return the format template used to format percentages in this locale
-  /// with negative amounts
+  /// Return the format template used to format percentages in this locale with negative amounts
   String getNegativePercentageFormat() {
     final String jscode1 = 'new LocaleInfo("$locale").getNegativePercentageFormat().toString()';
     final String result = ILibJS.instance.evaluate(jscode1).stringResult;
     return result;
   }
 
-  /// Return an object containing the format templates for formatting currencies
-  /// in this locale. The object has a number of properties in it that each are
-  /// a particular style of format.
-  /// Normally, this contains a "common" and an "iso" style,
-  /// but may contain others in the future
+  /// Return [CurrencyFormats] containing the format templates for formatting currencies in this locale.
+  ///
+  /// The object has a number of properties in it that each are a particular style of format.
   CurrencyFormats getCurrencyFormats() {
     String result = '';
 
@@ -108,12 +91,25 @@ class ILibLocaleInfo {
     return cf;
   }
 
-  /// Return the currency that is legal in the locale, or which is most commonly
-  /// used in regular commerce
+  /// Return the currency that is legal in the locale or most commonly used in commerce.
   String getCurrency() {
     final String jscode1 = 'new LocaleInfo("$locale").getCurrency().toString()';
     final String result = ILibJS.instance.evaluate(jscode1).stringResult;
     return result;
   }
 
+}
+
+class CurrencyFormats {
+  CurrencyFormats({
+    this.common,
+    this.commonNegative,
+    this.iso,
+    this.isoNegative,
+  });
+
+  String? common;
+  String? commonNegative;
+  String? iso;
+  String? isoNegative;
 }

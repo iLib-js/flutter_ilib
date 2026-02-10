@@ -1,8 +1,13 @@
+## 1.6.0
+* Implement the `ILibNumFmt` class to enable NumberFormatting
+* Add new methods for NumberFormatting to `ILibLocaleInfo`
+* Update `ilib-init.js` including `NumFmt.js` and `Currency.js`
+
 ## 1.5.0
 * Implement the `ILibDurationFmt` class to enable DurationFormatting.
 
 ## 1.4.0
-* Include the `DurationFmt.js` file from iLib in the `ilib-init.js` file within the assets.  
+* Include the `DurationFmt.js` file from iLib in the `ilib-init.js` file within the assets.
   The developer can use `evaluate()` to obtain the result of Duration formatting until the DurationFmt class is properly implemented.
 
 ## 1.3.0
@@ -25,9 +30,9 @@
 
 ## 1.0.0
 * Updated the structure to load separate locale data files.
-  Previously, the dependent ilib was a fully assembled JS file. Now, the ilib files are divided into the js and locale files.  
-  The JS code is assembled as `ilib-init.js`, and the locale files are generated with names like [language].js, e.g. `en.js`, `ko.js`. The iLib files are generated using the [ilib-assemble](https://github.com/iLib-js/ilib-assemble) tool. This change brings memory savings over previous versions of flutter_ilib.  
-  Initially, when the app is launched, the package automatically loads the locale data by detecting the system's locale. To load the updated locale data file when the locale changes, I suggest adding the following method at the appropriate time when the locale chanages. 
+  Previously, the dependent ilib was a fully assembled JS file. Now, the ilib files are divided into the js and locale files.
+  The JS code is assembled as `ilib-init.js`, and the locale files are generated with names like [language].js, e.g. `en.js`, `ko.js`. The iLib files are generated using the [ilib-assemble](https://github.com/iLib-js/ilib-assemble) tool. This change brings memory savings over previous versions of flutter_ilib.
+  Initially, when the app is launched, the package automatically loads the locale data by detecting the system's locale. To load the updated locale data file when the locale changes, I suggest adding the following method at the appropriate time when the locale chanages.
   ```dart
   _flutterIlibPlugin.loadLocaleData(curLocale);
   ```
