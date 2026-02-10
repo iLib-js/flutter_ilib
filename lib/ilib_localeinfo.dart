@@ -100,6 +100,7 @@ class ILibLocaleInfo {
 
 }
 
+/// Represents currency formatting templates for a specific locale.
 class CurrencyFormats {
   CurrencyFormats({
     this.common,

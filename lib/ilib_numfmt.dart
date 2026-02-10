@@ -57,7 +57,6 @@ class ILibNumFmt {
   }
 
   /// Format a number according to the settings of this number formatter instance
-
   String format(dynamic number) {
     String result = '';
     if (number != null) {
@@ -78,7 +77,7 @@ class ILibNumFmt {
     return result;
   }
 
-  /// FApply the constraints used in the current formatter to the given number
+  /// Apply the constraints used in the current formatter to the given number
   String constrain(int number) {
     String result = '';
     final String formatOptions = toJsonString();
@@ -89,7 +88,7 @@ class ILibNumFmt {
     return result;
   }
 
-  /// Return the locale that was used to construct this number formatter object.
+  /// Return the locale that was used to construct this number formatter object.<br>
   /// If the locale was not given as parameter to the constructor, this method returns the default
   /// locale of the system.
   String getLocale() {
@@ -100,8 +99,7 @@ class ILibNumFmt {
     return result;
   }
 
-  /// Return the type of formatter. Valid values are "number", "currency", and
-  /// "percentage".
+  /// Return the type of formatter. Valid values are "number", "currency", and "percentage".
   String getType() {
     String result = '';
     final String formatOptions = toJsonString();
@@ -161,8 +159,8 @@ class ILibNumFmt {
     return int.parse(result);
   }
 
-  /// Returns the rounding mode set up in the constructor. The rounding mode
-  /// controls how numbers are rounded when the integral or fraction digits
+  /// Returns the rounding mode set up in the constructor.<br>
+  /// The rounding mode controls how numbers are rounded when the integral or fraction digits
   /// of a number are limited.
   String getRoundingMode() {
     String result = '';
@@ -172,9 +170,9 @@ class ILibNumFmt {
     return result;
   }
 
-  /// Return the style that was used to construct this number formatter object
-  /// Valid values are for "currency": "common" (symbol) or "iso" (ISO code).
-  /// for "number": "standard", "scientific", "native", or "nogrouping".
+  /// Return the style that was used to construct this number formatter object.<br>
+  /// Valid values are for "currency": "common" (symbol) or "iso" (ISO code).<br>
+  /// for "number": "standard", "scientific", "native", or "nogrouping".<br>
   String getStyle() {
     String result = '';
     final String formatOptions = toJsonString();
@@ -194,17 +192,17 @@ class ILibNumFmt {
 }
 
 /// Options for configuring the number formatter.
-///
 class ILibNumFmtOptions {
-  /// [locale] Locales are specified either with a specifier string that follows the BCP-47 convention.
-  /// [useNative] The flag used to determine whether to use the native script settings for formatting the numbers.
-  /// [type] The formatter type. Valid values: "number", "currency", "percentage". Default: "number".
-  /// [currency] ISO 4217 currency code for "currency" type. Required for currency formatting.
-  /// [maxFractionDigits] Maximum digits after the decimal. `-1` means unlimited, `0` means no fractional digits.
-  /// [minFractionDigits] Minimum digits after the decimal. Pads with zeros if necessary.
-  /// [significantDigits] Maximum significant digits, applied before and after the decimal.
-  /// [roundingMode] Governs rounding behavior. Examples: "up", "down", "halfup", "halfeven".
-  /// [style] Formatting style. For "currency": "common" (symbol) or "iso" (ISO code). For "number": "standard", "scientific", "native", or "nogrouping".
+  /// [locale] Locales are specified either with a specifier string that follows the BCP-47 convention.<br>
+  /// [useNative] The flag used to determine whether to use the native script settings for formatting the numbers.<br>
+  /// [type] The formatter type. Valid values: "number", "currency", "percentage". Default: "number".<br>
+  /// [currency] ISO 4217 currency code for "currency" type. Required for currency formatting.<br>
+  /// [maxFractionDigits] Maximum digits after the decimal. `-1` means unlimited, `0` means no fractional digits.<br>
+  /// [minFractionDigits] Minimum digits after the decimal. Pads with zeros if necessary.<br>
+  /// [significantDigits] Maximum significant digits, applied before and after the decimal.<br>
+  /// [roundingMode] Governs rounding behavior. Examples: "up", "down", "halfup", "halfeven".<br>
+  /// [style] Formatting style.<br>
+  /// For "currency": "common" (symbol) or "iso" (ISO code). For "number": "standard", "scientific", "native", or "nogrouping".<br>
   ILibNumFmtOptions({
     this.locale,
     this.type,
