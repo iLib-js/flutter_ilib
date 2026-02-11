@@ -145,7 +145,8 @@ class ILibNumFmt {
     return int.parse(result);
   }
 
-  /// Returns the ISO 4217 code for the currency that this formatter formats
+  /// Returns the ISO 4217 code for the currency that this formatter formats<br>
+  /// If this formatter's type is not "currency", then this method will return null.
   int? getCurrency() {
     String result = '';
     final String formatOptions = toJsonString();

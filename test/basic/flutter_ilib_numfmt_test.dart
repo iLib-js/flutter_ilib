@@ -9,7 +9,6 @@ void main() {
     final ILibJS ilibjsinstance = ILibJS.instance;
     await ilibjsinstance.loadJS();
     ilibjsinstance.initILib();
-    await ilibjsinstance.loadILibLocaleDataAll();
   });
 
   group('iLibNumFmt-format()', () {

@@ -33,7 +33,6 @@ void main() {
       expect(fmt.isGroupingUsed(), isTrue);
       expect(fmt.getRoundingMode(), 'halfdown');
       expect(fmt.getCurrency(), isNull);
-      // print(fmt.getCurrency());
     });
     test('testNumFmtNumberFormatSimple', () {
       final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions());
