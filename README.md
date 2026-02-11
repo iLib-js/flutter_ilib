@@ -187,7 +187,7 @@ We have a plan to provide more classes and methods.
    - Methods:  `format()`, `getLocale()`, `getStyle()`, `getLength()`
 
 ### ILibNumFmt
-- Clasee: [ILibNumFmtOptions](./Docs.md/#ilibnumnfmtoptions)
+- Clasee: [ILibNumFmtOptions](./Docs.md/#ilibnumfmtoptions)
 - Class: [ILibNumFmt](./Docs.md/#ilibnumfmt)
    - Methods:  `format()`, `constrain()`, `getLocale()`, `getStyle()`, `getType()`, `isGroupingUsed()`, `getMaxFractionDigits()`, `getMinFractionDigits()`, `getSignificantDigits()`, `getCurrency()`, `getRoundingMode()`, `getUseNative()`
 
