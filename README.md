@@ -179,12 +179,17 @@ We have a plan to provide more classes and methods.
 
 ### ILibLocaleInfo
 - Class: [ILibLocaleInfo](./Docs.md/#iliblocaleinfo)
-   - Methods:  `getFirstDayOfWeek()`, `getWeekEndStart()`, `getWeekEndStart()`
+   - Methods:  `getFirstDayOfWeek()`, `getWeekEndStart()`, `getWeekEndStart()`, `getDecimalSeparator()`, `getGroupingSeparator()`, `getPercentageFormat()`, `getNegativePercentageFormat()`,`getCurrency()`, `getCurrencyFormats()`
 
 ### ILibDurationFmt
 - Class: [ILibDurationFmtOptions](./Docs.md/#ilibdurationfmtoptions)
 - Class: [ILibDurationFmt](./Docs.md/#ilibdurationfmt)
    - Methods:  `format()`, `getLocale()`, `getStyle()`, `getLength()`
+
+### ILibNumFmt
+- Clasee: [ILibNumFmtOptions](./Docs.md/#ilibnumnfmtoptions)
+- Class: [ILibNumFmt](./Docs.md/#ilibdurationfmt)
+   - Methods:  `format()`, `constrain()`, `getLocale()`, `getStyle()`, `getType()`, `isGroupingUsed()`, `getMaxFractionDigits()`, `getMinFractionDigits()`, `getSignificantDigits()`, `getCurrency()`, `getRoundingMode()`, `getUseNative()`
 
 ## Supported Locales
 The results of the following locales are checked by unit tests.  
