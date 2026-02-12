@@ -120,6 +120,37 @@ locInfo.getWeekEndStart();
 // 6
 locInfo.getWeekEndEnd();
 // 0
+
+locInfo.getDecimalSeparator();
+// '.'
+locInfo.getGroupingSeparator();
+// ','
+locInfo.getPercentageFormat();
+// '{n}%'
+locInfo.getNegativePercentageFormat();
+// '-{n}%'
+locInfo.getCurrencyFormats().common;
+// {s}{n}
+locInfo.getCurrency();
+// 'KRW'
+```
+
+### Number Formatting
+
+```dart
+final ILibNumFmtOptions fmtOptions = ILibNumFmtOptions(
+  locale: 'en-US',
+  type: 'currency',
+  currency: 'USD',
+  maxFractionDigits: 2,
+  minFractionDigits: 2,
+  roundingMode: 'halfup',
+);
+final ILibNumFmt fmt = ILibNumFmt(fmtOptions);
+fmt.format(1234567.89);
+// '$1,234,567.89'
+fmt.format(-1234567.89);
+// '-$1,234,567.89'
 ```
 
 ## CLASS
@@ -148,12 +179,17 @@ We have a plan to provide more classes and methods.
 
 ### ILibLocaleInfo
 - Class: [ILibLocaleInfo](./Docs.md/#iliblocaleinfo)
-   - Methods:  `getFirstDayOfWeek()`, `getWeekEndStart()`, `getWeekEndStart()`
+   - Methods:  `getFirstDayOfWeek()`, `getWeekEndStart()`, `getWeekEndStart()`, `getDecimalSeparator()`, `getGroupingSeparator()`, `getPercentageFormat()`, `getNegativePercentageFormat()`,`getCurrency()`, `getCurrencyFormats()`
 
 ### ILibDurationFmt
 - Class: [ILibDurationFmtOptions](./Docs.md/#ilibdurationfmtoptions)
 - Class: [ILibDurationFmt](./Docs.md/#ilibdurationfmt)
    - Methods:  `format()`, `getLocale()`, `getStyle()`, `getLength()`
+
+### ILibNumFmt
+- Clasee: [ILibNumFmtOptions](./Docs.md/#ilibnumfmtoptions)
+- Class: [ILibNumFmt](./Docs.md/#ilibnumfmt)
+   - Methods:  `format()`, `constrain()`, `getLocale()`, `getStyle()`, `getType()`, `isGroupingUsed()`, `getMaxFractionDigits()`, `getMinFractionDigits()`, `getSignificantDigits()`, `getCurrency()`, `getRoundingMode()`, `getUseNative()`
 
 ## Supported Locales
 The results of the following locales are checked by unit tests.  

@@ -11,6 +11,7 @@ export 'ilib_datefmt.dart';
 export 'ilib_durationfmt.dart';
 export 'ilib_init.dart';
 export 'ilib_localeinfo.dart';
+export 'ilib_numfmt.dart';
 
 class FlutterILib extends ChangeNotifier {
   FlutterILib._internal() {
