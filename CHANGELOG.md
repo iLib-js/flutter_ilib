@@ -1,3 +1,9 @@
+## 1.6.0
+* Implement the `ILibNumFmt` class to enable NumberFormatting
+* Add new methods for NumberFormatting to `ILibLocaleInfo`:  
+`getDecimalSeparator()`, `getGroupingSeparator()`, `getPercentageFormat()`, `getNegativePercentageFormat()`,`getCurrency()`, `getCurrencyFormats()`
+* Update `ilib-init.js` including `NumFmt.js` and `Currency.js`
+
 ## 1.5.0
 * Implement the `ILibDurationFmt` class to enable DurationFormatting.
 

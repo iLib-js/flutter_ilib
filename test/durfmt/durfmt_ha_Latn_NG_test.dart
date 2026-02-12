@@ -46,7 +46,11 @@ void main() {
       expect(fmt, isNotNull);
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
-      expect(fmt.format(dateOptions), 'shkr 1, w1, m1, r1, 01:01:01');
+
+      final String result = (testPlatform == 'webOS')
+          ? 'shkr 1, w1, m1, r1, 1:01:01'
+          : 'shkr 1, w1, m1, r1, 01:01:01';
+      expect(fmt.format(dateOptions), result);
     });
 
     test('testDurFmtHAFormatMedium', () {
