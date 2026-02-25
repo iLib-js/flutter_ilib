@@ -133,6 +133,10 @@ locInfo.getCurrencyFormats().common;
 // {s}{n}
 locInfo.getCurrency();
 // 'KRW'
+
+final ILibLocale locale = locInfo.getLocale();
+locale.getLanguage();
+// 'ko'
 ```
 
 ### Number Formatting
@@ -153,6 +157,18 @@ fmt.format(-1234567.89);
 // '-$1,234,567.89'
 ```
 
+## ScriptInfo
+```dart
+final ILibLocaleInfo locInfo = ILibLocaleInfo('en-US');
+final ILibScriptInfo scInfo = ILibScriptInfo(locInfo.getScript());
+scInfo.getCode();
+//'Latn'
+scInfo.getName();
+// 'Latin'
+scInfo.getScriptDirection();
+// 'ltr'
+```
+
 ## CLASS
 
 ### FlutterILib
@@ -166,7 +182,13 @@ _flutterIlibPlugin.evaluateILib(jscode1);
 // 'ethiopic'
 ```
 To give a more efficient way, we provide some classes that can be easily used in a Flutter app.   
-Currently, We have a `ILibDateFmt` , `ILibLocaleInfo` and `ILibDurationFmt` classes.
+Currently, we have the following classes:
+- `ILibDateFmt`
+- `ILibLocaleInfo`
+- `ILibDurationFmt`
+- `ILibNumFmt`
+- `ILibScriptInfo`
+
 We have a plan to provide more classes and methods.  
 
 ### ILibDate
@@ -177,9 +199,12 @@ We have a plan to provide more classes and methods.
 - Class: [ILibDateFmt](./Docs.md#ilibdatefmt)
    - Methods: `format()`, `getClock()`, `getTemplate()`, `getMeridiemsRange()`
 
+### ILibLocale
+- Class: [ILibLocale](./Docs.md/#iliblocale)
+
 ### ILibLocaleInfo
 - Class: [ILibLocaleInfo](./Docs.md/#iliblocaleinfo)
-   - Methods:  `getFirstDayOfWeek()`, `getWeekEndStart()`, `getWeekEndStart()`, `getDecimalSeparator()`, `getGroupingSeparator()`, `getPercentageFormat()`, `getNegativePercentageFormat()`,`getCurrency()`, `getCurrencyFormats()`
+  - Methods: `getLanguageName()`, `getRegionName()`, `getClock()`, `getLocale()`, `getUnits()`, `getCalendar()`, `getFirstDayOfWeek()`, `getWeekEndStart()`, `getWeekEndEnd()`, `getTimeZone()`, `getDecimalSeparator()`, `getNativeDecimalSeparator()`, `getGroupingSeparator()`, `getNativeGroupingSeparator()`, `getPrimaryGroupingDigits()`, `getSecondaryGroupingDigits()`, `getPercentageFormat()`, `getNegativePercentageFormat()`, `getPercentageSymbol()`, `getExponential()`, `getNativeExponential()`, `getNativePercentageSymbol()`, `getNegativeNumberFormat()`, `getCurrencyFormats()`, `getCurrency()`, `getDigitsStyle()`, `getDigits()`, `getNativeDigits()`, `getRoundingMode()`, `getScript()`, `getDefaultScript()`, `getAllScripts()`, `getMeridiemsStyle()`, `getPaperSize()`, `getDelimiterQuotationStart()`, `getDelimiterQuotationEnd()`
 
 ### ILibDurationFmt
 - Class: [ILibDurationFmtOptions](./Docs.md/#ilibdurationfmtoptions)
@@ -190,6 +215,10 @@ We have a plan to provide more classes and methods.
 - Clasee: [ILibNumFmtOptions](./Docs.md/#ilibnumfmtoptions)
 - Class: [ILibNumFmt](./Docs.md/#ilibnumfmt)
    - Methods:  `format()`, `constrain()`, `getLocale()`, `getStyle()`, `getType()`, `isGroupingUsed()`, `getMaxFractionDigits()`, `getMinFractionDigits()`, `getSignificantDigits()`, `getCurrency()`, `getRoundingMode()`, `getUseNative()`
+
+### ILibScriptInfo
+- Class: [ILibScriptInfo](./Docs.md/#ilibscriptinfo)
+   - Methods: `getCode()`, `getCodeNumber()`, `getName()`, `getLongCode()`, `getScriptDirection()`, `getNeedsIME()`, `getCasing()`
 
 ## Supported Locales
 The results of the following locales are checked by unit tests.  

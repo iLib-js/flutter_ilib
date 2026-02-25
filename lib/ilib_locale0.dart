@@ -1,5 +1,4 @@
 import 'flutter_ilib.dart';
-// import 'ilib_init.dart';
 
 class ILibLocale0 {
   ILibLocale0(String this.locale);
@@ -75,10 +74,7 @@ class ILibLocale0 {
     return result;
   }
 
-  /// Return the language locale specifier. This includes the
-  /// language and the script if it is available. This can be
-  /// used to see whether the written language of two locales
-  /// match each other regardless of the region or variant.
+  /// Return the language locale specifier.
   String? getLangSpec() {
     final String jscode1 = 'new Locale("$locale").getLangSpec()';
     final String result = ILibJS.instance.evaluate(jscode1).stringResult;
@@ -121,7 +117,7 @@ class ILibLocale0 {
     return result;
   }
 
-  ///  Return the ISO-639 alpha3 equivalent language code for the given ISO 639 alpha1 language code.
+  /// Return the ISO-639 alpha3 equivalent language code for the given ISO 639 alpha1 language code.
   /// If the given alpha1 code is not found, this function returns its argument unchanged.
   static String? languageAlpha1ToAlpha3(String? alpha1) {
     final String jscode1 = 'Locale.languageAlpha1ToAlpha3("$alpha1")';

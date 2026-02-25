@@ -155,6 +155,8 @@ void main() {
       final ILibLocaleInfo info = ILibLocaleInfo('ko-KR');
       expect(info, isNotNull);
       expect(info.getTimeZone(), 'Asia/Seoul');
+      expect(info.getLocale().getLanguage(), 'ko');
+      expect(info.getLanguageName(), 'Korean');
     });
     test('testLocaleInfoGetTimeZoneDefault', () {
       final ILibLocaleInfo info = ILibLocaleInfo('zz-ZZ');

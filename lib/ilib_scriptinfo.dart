@@ -1,93 +1,72 @@
-import 'dart:convert';
-import 'dart:io';
-
-// not evaluate the js code, but load the data from json file directly
+import 'flutter_ilib.dart';
+import 'ilib_init.dart';
 
 class ILibScriptInfo {
-  ILibScriptInfo(this.script) {
-    if (scripts == null) {
-      _loadScripts();
-    }
-    info = script != null && scripts != null
-        ? scripts![script] as Map<String, dynamic>?
-        : null;
-  }
-  final String? script;
-  static Map<String, dynamic>? scripts;
-  Map<String, dynamic>? info;
-
-  /// Load the scripts.json data
-  void _loadScripts() {
-    try {
-      // Assuming scripts.json is in the same directory as the script
-      final File file = File('assets/json/scripts.json');
-      final String jsonData = file.readAsStringSync();
-      scripts = jsonDecode(jsonData) as Map<String, dynamic>;
-    } catch (e) {
-      // Fallback to default data if scripts.json is not found
-      scripts = <String, dynamic>{
-        'Latn': <String, Object>{
-          'nb': 215,
-          'nm': 'Latin',
-          'lid': 'Latin',
-          'rtl': false,
-          'ime': false,
-          'casing': true
-        }
-      };
-    }
-  }
+  /// [script] The ISO 15924 4-letter identifier for the script
+  ILibScriptInfo(String this.script);
+  String? script;
 
   /// Return the 4-letter ISO 15924 identifier associated with this script.
   String? getCode() {
-    return (info != null) ? script : null;
-  }
-
-  /// Get the ISO 15924 code number associated with this script
-  int getCodeNumber() {
-    if (info != null && info!.containsKey('nb')) {
-      return info!['nb'] as int;
+    final String jscode1 = 'new ScriptInfo("$script").getCode()';
+    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
+    if (result == null || result.isEmpty || result == 'null') {
+      return null;
     }
-    return 0;
+    return result;
   }
 
-  /// Get the name of this script in English
+  /// Get the ISO 15924 code number associated with this script.
+  int? getCodeNumber() {
+    final String jscode1 = 'new ScriptInfo("$script").getCodeNumber()';
+    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
+    if (result == null || result.isEmpty || result == 'null') {
+      return 0;
+    }
+    return int.tryParse(result);
+  }
+
+  /// Get the name of this script in English.
   String? getName() {
-    if (info != null && info!.containsKey('nm')) {
-      return info!['nm'] as String;
+    final String jscode1 = 'new ScriptInfo("$script").getName()';
+    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
+    if (result == null || result.isEmpty || result == 'null') {
+      return null;
     }
-    return null;
+    return result;
   }
 
-  /// Get the long identifier associated with this script
+  /// Get the long identifier associated with this script.
   String? getLongCode() {
-    if (info != null && info!.containsKey('lid')) {
-      return info!['lid'] as String;
+    final String jscode1 = 'new ScriptInfo("$script").getLongCode()';
+    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
+    if (result == null || result.isEmpty || result == 'null') {
+      return null;
     }
-    return null;
+    return result;
   }
 
-  /// Return the usual direction that text in this script is written in
+  /// Return the usual direction that text in this script is written in.<br>
+  /// Possible return values are "rtl" for right-to-left,<br>
+  /// "ltr" for left-to-right, and "ttb" for top-to-bottom.
   String getScriptDirection() {
-    if (info != null && info!.containsKey('rtl')) {
-      return (info!['rtl'] as bool) ? 'rtl' : 'ltr';
-    }
-    return 'ltr';
+    final String jscode1 = 'new ScriptInfo("$script").getScriptDirection()';
+    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
+    return result;
   }
 
   /// Return true if this script typically requires an input method engine
+  /// to enter its characters.
   bool getNeedsIME() {
-    if (info != null && info!.containsKey('ime')) {
-      return info!['ime'] as bool;
-    }
-    return false;
+    final String jscode1 = 'new ScriptInfo("$script").getNeedsIME()';
+    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
+    return result.toLowerCase() == 'true';
   }
 
-  /// Return true if this script uses lower- and upper-case characters
+  /// Return true if this script uses lower- and upper-case characters.
   bool getCasing() {
-    if (info != null && info!.containsKey('casing')) {
-      return info!['casing'] as bool;
-    }
-    return false;
+    final String jscode1 = 'new ScriptInfo("$script").getCasing()';
+    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
+    return result.toLowerCase() == 'true';
   }
 }

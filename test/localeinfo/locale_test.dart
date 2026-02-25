@@ -5,12 +5,6 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [locale_test.dart] file.');
-  setUpAll(() async {
-    final ILibJS ilibjsinstance = ILibJS.instance;
-    await ilibjsinstance.loadJS();
-    ilibjsinstance.initILib();
-    await ilibjsinstance.loadILibLocaleDataAll();
-  });
 
   group('ILibLocale', () {
     test('testLocaleConstructor', () {

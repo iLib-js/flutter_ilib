@@ -1,6 +1,11 @@
 // ! Not using evalueateILib()
 
 class ILibLocale {
+  /// [language] the ISO 639 2-letter code for the language, or a full
+  ///  locale spec in BCP-47 format, or another Locale instance to copy from
+  /// [region] the ISO 3166 2-letter code for the region
+  /// [variant] the name of the variant of this locale, if any
+  /// [script] the ISO 15924 code of the script for this locale, if any
   factory ILibLocale(
       [Object? language, String? region, String? variant, String? script]) {
     if (language is String) {
@@ -741,7 +746,7 @@ class ILibLocale {
     'Zzzz',
   ];
 
-  // Helper methods to validate codes
+  // Tell whether or not the str does not start with a lower case ASCII char.
   static bool _notLower(String str) {
     if (str.isEmpty) {
       return true;
@@ -750,6 +755,7 @@ class ILibLocale {
     return ch < 97 || ch > 122;
   }
 
+  // Tell whether or not the str does not start with an upper case ASCII char.
   static bool _notUpper(String str) {
     if (str.isEmpty) {
       return true;
@@ -758,6 +764,7 @@ class ILibLocale {
     return ch < 65 || ch > 90;
   }
 
+  // Tell whether or not the str does not start with a digit char.
   static bool _notDigit(String str) {
     if (str.isEmpty) {
       return true;
@@ -766,6 +773,8 @@ class ILibLocale {
     return ch < 48 || ch > 57;
   }
 
+  // Tell whether or not the given string has the correct syntax to be
+  // an ISO 639 language code.
   static bool _isLanguageCode(String? str) {
     if (str == null || str.length < 2 || str.length > 3) {
       return false;
@@ -780,6 +789,8 @@ class ILibLocale {
     return true;
   }
 
+  // Tell whether or not the given string has the correct syntax to be
+  // an ISO 3166 2-letter region code or M.49 3-digit region code.
   static bool _isRegionCode(String? str) {
     if (str == null || str.length < 2 || str.length > 3) {
       return false;
@@ -802,6 +813,8 @@ class ILibLocale {
     return true;
   }
 
+  // Tell whether or not the given string has the correct syntax to be
+  // an ISO 639 language code.
   static bool _isScriptCode(String? str) {
     if (str == null || str.length != 4 || _notUpper(str[0])) {
       return false;
@@ -816,10 +829,15 @@ class ILibLocale {
     return true;
   }
 
+  /// Return the ISO-3166 alpha3 equivalent region code for the given ISO 3166 alpha2
+  /// region code.
+  /// If the given alpha2 code is not found, this function returns its argument unchanged.
   static String? regionAlpha2ToAlpha3(String? alpha2) {
     return a2toa3regmap[alpha2] ?? alpha2;
   }
 
+  /// Return the ISO-639 alpha3 equivalent language code for the given ISO 639 alpha1 language code.
+  /// If the given alpha1 code is not found, this function returns its argument unchanged.
   static String? languageAlpha1ToAlpha3(String? alpha1) {
     return a1toa3langmap[alpha1] ?? alpha1;
   }
@@ -840,30 +858,37 @@ class ILibLocale {
     }
   }
 
+  /// Return the ISO 639 language code for this locale.
   String? getLanguage() {
     return language;
   }
 
+  /// Return the language of this locale as an ISO-639-alpha3 language code.
   String? getLanguageAlpha3() {
     return language != null ? languageAlpha1ToAlpha3(language) : null;
   }
 
+  /// Return the ISO 3166 region code for this locale.
   String? getRegion() {
     return region;
   }
 
+  /// Return the region of this locale as an ISO-3166-alpha3 region code.
   String? getRegionAlpha3() {
     return region != null ? regionAlpha2ToAlpha3(region) : null;
   }
 
+  /// Return the ISO 15924 script code for this locale.
   String? getScript() {
     return script;
   }
 
+  /// Return the variant code for this locale.
   String? getVariant() {
     return variant;
   }
 
+  /// Return the whole locale specifier as a string.
   String getSpec() {
     if (spec == null || spec!.isEmpty) {
       _genSpec();
@@ -871,6 +896,7 @@ class ILibLocale {
     return spec!;
   }
 
+  /// Return the language locale specifier.
   String getLangSpec() {
     String spec = language ?? '';
     if (spec.isNotEmpty && script != null && script!.isNotEmpty) {
@@ -884,6 +910,7 @@ class ILibLocale {
     return getSpec();
   }
 
+  /// Return true if the other locale is exactly equal to the current one.
   bool equals(ILibLocale other) {
     return language == other.language &&
         region == other.region &&
@@ -891,6 +918,7 @@ class ILibLocale {
         variant == other.variant;
   }
 
+  // A list of all known pseudo-locales.
   static List<String> pseudoLocales = [
     'zxx-XX',
     'zxx-Cyrl-XX',
@@ -899,10 +927,13 @@ class ILibLocale {
   ];
   static List<String> locales = <String>[];
 
+  /// Return the language locale specifier.
   bool isPseudo() {
     return pseudoLocales.contains(spec);
   }
 
+  /// Return true if the current locale uses a valid ISO codes <br>
+  /// for each component of the locale that exists.
   bool isValid() {
     if (language == null && script == null && region == null) {
       return false;
@@ -919,7 +950,5 @@ class ILibLocale {
 
   static List<String> getAvailableLocales() {
     throw UnimplementedError('getAvailableLocales is not implemented yet');
-    // Assuming `locales` is a predefined list of available locales
-    // return locales;
   }
 }

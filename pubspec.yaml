@@ -50,7 +50,6 @@ flutter:
     - assets/
     - assets/locales/
     - assets/js/ilib-init.js
-    - assets/json/scripts.json
 
   # For details regarding assets in packages, see
   # https://flutter.dev/assets-and-images/#from-packages
