@@ -1,8 +1,6 @@
-// ! Not using evalueateILib()
-
 class ILibLocale {
-  /// [language] the ISO 639 2-letter code for the language, or a full
-  ///  locale spec in BCP-47 format, or another Locale instance to copy from
+  /// [language] the ISO 639 2-letter code for the language,<br>
+  /// or a full locale spec in BCP-47 format, or another Locale instance to copy from
   /// [region] the ISO 3166 2-letter code for the region
   /// [variant] the name of the variant of this locale, if any
   /// [script] the ISO 15924 code of the script for this locale, if any
