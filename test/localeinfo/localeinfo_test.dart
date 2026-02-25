@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-// import '../test_env.dart';
+import '../test_env.dart';
 
 void main() {
+  late String testPlatform;
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [localeinfo_test.dart] file.');
   setUpAll(() async {
+    testPlatform = getTestPlatform();
     final ILibJS ilibjsinstance = ILibJS.instance;
     await ilibjsinstance.loadJS();
     ilibjsinstance.initILib();
@@ -1831,25 +1833,30 @@ void main() {
     test('testLocaleInfoGetDecimalSeparatorfor_fa', () {
       final ILibLocaleInfo info = ILibLocaleInfo('fa-IR');
       expect(info, isNotNull);
-      expect(info.getDecimalSeparator(), '٫');
+
+      final String result = (testPlatform == 'webOS') ? '/' : '٫';
+      expect(info.getDecimalSeparator(), result);
     });
     test('testLocaleInfoGetGroupingSeparatorfor_fa', () {
       final ILibLocaleInfo info = ILibLocaleInfo('fa-IR');
       expect(info, isNotNull);
+      final String result = (testPlatform == 'webOS') ? '٫' : '٬';
 
-      expect(info.getGroupingSeparator(), '٬');
+      expect(info.getGroupingSeparator(), result);
     });
     test('testLocaleInfoGetPercentageFormat_fa', () {
       final ILibLocaleInfo info = ILibLocaleInfo('fa-IR');
       expect(info, isNotNull);
 
-      expect(info.getPercentageFormat(), '{n}٪');
+      final String result = (testPlatform == 'webOS') ? '‪{n} %' : '{n}٪';
+      expect(info.getPercentageFormat(), result);
     });
     test('testLocaleInfoGetCurrencyFormat_fa', () {
       final ILibLocaleInfo info = ILibLocaleInfo('fa-IR');
       expect(info, isNotNull);
 
-      expect(info.getCurrencyFormats().common, '‎{s}{n}');
+      final String result = (testPlatform == 'webOS') ? '{n} ؜{s}' : '‎{s}{n}';
+      expect(info.getCurrencyFormats().common, result);
     });
     test('testLocaleInfoGetNegativeNumberFormat_fa', () {
       final ILibLocaleInfo info = ILibLocaleInfo('fa-IR');
@@ -1861,13 +1868,16 @@ void main() {
       final ILibLocaleInfo info = ILibLocaleInfo('fa-IR');
       expect(info, isNotNull);
 
-      expect(info.getNegativePercentageFormat(), '‎−{n}٪');
+      final String result = (testPlatform == 'webOS') ? '‪-{n} %' : '‎−{n}٪';
+      expect(info.getNegativePercentageFormat(), result);
     });
     test('testLocaleInfoGetNegativeCurrencyFormat_fa', () {
       final ILibLocaleInfo info = ILibLocaleInfo('fa-IR');
       expect(info, isNotNull);
 
-      expect(info.getCurrencyFormats().commonNegative, '‎−‎{s}{n}');
+      final String result =
+          (testPlatform == 'webOS') ? '؜{n}- ؜{s}' : '‎−‎{s}{n}';
+      expect(info.getCurrencyFormats().commonNegative, result);
     });
     test('testLocaleInfoGetPrimaryGroupingDigits_fa', () {
       final ILibLocaleInfo info = ILibLocaleInfo('fa-IR');

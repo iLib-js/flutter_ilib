@@ -529,12 +529,6 @@ void main() {
       final String jscode1 =
           'new Locale("${loc.language}", "${loc.region}", "${loc.script}", "${loc.variant}").isValid()';
       final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-      print(' ========== zh-Hans-CN testLocaleIsValidLocaleTrueFull');
-      print(result);
-      if (result == null || result.isEmpty || result == 'null') {
-        print(
-            ' ========== zh-Hans-CN testLocaleIsValidLocaleTrueFull: result is null or empty or "null"');
-      }
       expect(loc, isNotNull);
       expect(loc.isValid(), isTrue);
     });
