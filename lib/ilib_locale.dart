@@ -834,33 +834,35 @@ class ILibLocale {
     return true;
   }
 
-  /// Return the ISO-3166 alpha3 equivalent region code for the given ISO 3166 alpha2
-  /// region code.
+  /// Return the ISO-3166 alpha3 equivalent region code
+  /// for the given ISO 3166 alpha2 region code.<br>
   /// If the given alpha2 code is not found, this function returns its argument unchanged.
   static String? regionAlpha2ToAlpha3(String? alpha2) {
     return a2toa3regmap[alpha2] ?? alpha2;
   }
 
-  /// Return the ISO-639 alpha3 equivalent language code for the given ISO 639 alpha1 language code.
+  /// Return the ISO-639 alpha3 equivalent language code
+  /// for the given ISO 639 alpha1 language code.<br>
   /// If the given alpha1 code is not found, this function returns its argument unchanged.
   static String? languageAlpha1ToAlpha3(String? alpha1) {
     return a1toa3langmap[alpha1] ?? alpha1;
   }
 
   void _genSpec() {
-    spec = (language != null && language!.isNotEmpty) ? language : '';
-
-    if (script != null && script!.isNotEmpty) {
-      spec = spec!.isEmpty ? script : '$spec-${script!}';
+    final List<String> parts = <String>[];
+    if (language?.isNotEmpty ?? false) {
+      parts.add(language!);
     }
-
-    if (region != null && region!.isNotEmpty) {
-      spec = spec!.isEmpty ? region : '$spec-${region!}';
+    if (script?.isNotEmpty ?? false) {
+      parts.add(script!);
     }
-
-    if (variant != null && variant!.isNotEmpty) {
-      spec = spec!.isEmpty ? variant : '$spec-${variant!}';
+    if (region?.isNotEmpty ?? false) {
+      parts.add(region!);
     }
+    if (variant?.isNotEmpty ?? false) {
+      parts.add(variant!);
+    }
+    spec = parts.join('-');
   }
 
   /// Return the ISO 639 language code for this locale.
