@@ -1,3 +1,9 @@
+## 1.7.0
+* Implement the `ILibScriptInfo` class for ScriptInfomation
+* Add new methods to `ILibLocaleInfo`:  
+`getLanguageName()`, `getRegionName()`, `getClock()`, `getLocale()`, `getUnits()`, `getCalendar()`, `getTimeZone()`, `getPrimaryGroupingDigits()`, `getSecondaryGroupingDigits()`, `getPercentageSymbol()`, `getExponential()`, `getNativeExponential()`, `getNativePercentageSymbol()`, `getNegativeNumberFormat()`, `getDigitsStyle()`, `getDigits()`, `getNativeDigits()`, `getRoundingMode()`, `getScript()`, `getDefaultScript()`, `getAllScripts()`, `getMeridiemsStyle()`, `getPaperSize()`, `getDelimiterQuotationStart()`, `getDelimiterQuotationEnd()`
+* Implement `ILibLocale`
+
 ## 1.6.0
 * Implement the `ILibNumFmt` class to enable NumberFormatting
 * Add new methods for NumberFormatting to `ILibLocaleInfo`:  

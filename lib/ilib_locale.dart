@@ -744,13 +744,20 @@ class ILibLocale {
     'Zzzz',
   ];
 
+  static const int _asciiLowerA = 97; // 'a'
+  static const int _asciiLowerZ = 122; // 'z'
+  static const int _asciiUpperA = 65; // 'A'
+  static const int _asciiUpperZ = 90; // 'Z'
+  static const int _asciiDigit0 = 48; // '0'
+  static const int _asciiDigit9 = 57; // '9'
+
   // Tell whether or not the str does not start with a lower case ASCII char.
   static bool _notLower(String str) {
     if (str.isEmpty) {
       return true;
     }
     final int ch = str.codeUnitAt(0);
-    return ch < 97 || ch > 122;
+    return ch < _asciiLowerA || ch > _asciiLowerZ;
   }
 
   // Tell whether or not the str does not start with an upper case ASCII char.
@@ -759,7 +766,7 @@ class ILibLocale {
       return true;
     }
     final int ch = str.codeUnitAt(0);
-    return ch < 65 || ch > 90;
+    return ch < _asciiUpperA || ch > _asciiUpperZ;
   }
 
   // Tell whether or not the str does not start with a digit char.
@@ -768,7 +775,7 @@ class ILibLocale {
       return true;
     }
     final int ch = str.codeUnitAt(0);
-    return ch < 48 || ch > 57;
+    return ch < _asciiDigit0 || ch > _asciiDigit9;
   }
 
   // Tell whether or not the given string has the correct syntax to be
@@ -812,7 +819,7 @@ class ILibLocale {
   }
 
   // Tell whether or not the given string has the correct syntax to be
-  // an ISO 639 language code.
+  // an ISO 15924 script code.
   static bool _isScriptCode(String? str) {
     if (str == null || str.length != 4 || _notUpper(str[0])) {
       return false;
@@ -916,16 +923,15 @@ class ILibLocale {
         variant == other.variant;
   }
 
-  // A list of all known pseudo-locales.
+  /// A list of all known pseudo-locales.
   static List<String> pseudoLocales = [
     'zxx-XX',
     'zxx-Cyrl-XX',
     'zxx-Hans-XX',
     'zxx-Hebr-XX'
   ];
-  static List<String> locales = <String>[];
 
-  /// Return the language locale specifier.
+  /// Return true if the current locale is the special pseudo locale.
   bool isPseudo() {
     return pseudoLocales.contains(spec);
   }
