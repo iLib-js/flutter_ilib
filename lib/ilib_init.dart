@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_js/flutter_js.dart';
@@ -22,10 +24,13 @@ class ILibJS extends ChangeNotifier {
   JsEvalResult _jsEvalResult = JsEvalResult('', '');
   String _loadJSResult = '';
   String _loadLocaleJSResult = '';
+  String _loadScriptInfo = '';
 
   Future<void> loadJS() async {
     _loadJSResult = await rootBundle
         .loadString('packages/flutter_ilib/assets/js/ilib-init.js');
+
+    _loadScriptInfo = await rootBundle.loadString('packages/flutter_ilib/assets/json/scripts.json');
 
     final String curlocale = getLocale();
     final String dataPath = getJSDataPath(curlocale);
@@ -101,5 +106,10 @@ class ILibJS extends ChangeNotifier {
     for (final String lo in localelist) {
       await loadILibLocaleData(lo);
     }
+  }
+
+  Map<String, dynamic> getScriptInfo() {
+    final Map<String, dynamic>? scripts = jsonDecode(_loadScriptInfo) as Map<String, dynamic>;
+    return scripts ?? <String, dynamic>{};
   }
 }

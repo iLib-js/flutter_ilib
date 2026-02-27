@@ -14,6 +14,7 @@ export 'ilib_locale.dart';
 export 'ilib_localeinfo.dart';
 export 'ilib_numfmt.dart';
 export 'ilib_scriptinfo.dart';
+export 'ilib_scriptinfowithjson.dart';
 
 class FlutterILib extends ChangeNotifier {
   FlutterILib._internal() {
