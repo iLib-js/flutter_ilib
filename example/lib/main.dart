@@ -161,6 +161,8 @@ class _MyAppState extends State<MyApp> {
               _customTextBox('iLib Version', _iLibVersion, main: false),
               _customTextBox('CLDR Version', _iLibCLDRVersion, main: false),
               _customTextBox('Current Time', _currentTime),
+              _customTextBox('Upper Case', getUpperLowerCase('el-GR', 'groß'), main: false),
+              _customTextBox('Lower Case', getUpperLowerCase('tr-TR', 'Iİ', direction: 'tolower'), main: false),
             ],
           ),
         ),
@@ -228,5 +230,13 @@ class _MyAppState extends State<MyApp> {
     final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: curlo);
     final int clock = ILibDateFmt(fmtOptions).getClock();
     return '$clock';
+  }
+
+  String getUpperLowerCase(String curlo, String str, {String direction = 'toupper'}) {
+    final ILibCaseMapper caseMapper =
+        ILibCaseMapper(locale: curlo, direction: direction);
+    String? result = caseMapper.map(str)?? '';
+    String? result2 = '$str\t($curlo)\t($direction)\t-->\t$result';
+    return result2;
   }
 }
