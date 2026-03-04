@@ -53,19 +53,20 @@ class ILibCaseMapper {
     final int len = string.length;
 
     while (i < len) {
-      String c = string[i];
+      final String c = string[i];
       i++;
 
       if (!up && c == 'Σ') {
         if (i < len) {
-          String nextChar = string[i];
+          final String nextChar = string[i];
           i++;
 
-          int code = nextChar.codeUnitAt(0);
+          final int code = nextChar.codeUnitAt(0);
 
           // if the next char is not a greek letter, this is the end of the word so use the
           // final form of sigma. Otherwise, use the mid-word form.
-          bool isNotGreek = (code < 0x0388 && code != 0x0386) || code > 0x03CE;
+          final bool isNotGreek =
+              (code < 0x0388 && code != 0x0386) || code > 0x03CE;
           buffer.write(isNotGreek ? 'ς' : 'σ');
 
           buffer.write(nextChar.toLowerCase());

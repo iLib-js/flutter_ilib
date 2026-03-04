@@ -39,7 +39,7 @@ void main() {
 
     test('testToUpperFromPunctuationUnchanged_default', () {
       final ILibCaseMapper mapper = ILibCaseMapper();
-      expect(mapper.map('!@#\$%^&*()'), '!@#\$%^&*()');
+      expect(mapper.map(r'!@#\$%^&*()'), r'!@#\$%^&*()');
     });
 
     test('testToUpperFromNonLatinUnchanged_default', () {

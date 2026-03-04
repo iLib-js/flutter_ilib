@@ -169,6 +169,17 @@ scInfo.getScriptDirection();
 // 'ltr'
 ```
 
+## CaseMapper
+``` dart
+final ILibCaseMapper mapper = ILibCaseMapper(locale: 'tr-TR');
+mapper.map('ıi');
+// 'Iİ'
+final ILibCaseMapper mapper = ILibCaseMapper(
+    locale: 'tr-TR', direction: 'tolower');
+mapper.map('Iİ');
+// 'ıi'
+```
+
 ## CLASS
 
 ### FlutterILib
@@ -219,6 +230,10 @@ We have a plan to provide more classes and methods.
 ### ILibScriptInfo
 - Class: [ILibScriptInfo](./Docs.md/#ilibscriptinfo)
    - Methods: `getCode()`, `getCodeNumber()`, `getName()`, `getLongCode()`, `getScriptDirection()`, `getNeedsIME()`, `getCasing()`
+
+### ILibCaseMapper
+- Class: [ILibCaseMapper](./Docs.md/#ilibcasemapper)
+  - Methods: `getLocale()`, `map()`
 
 ## Supported Locales
 The results of the following locales are checked by unit tests.  
