@@ -115,10 +115,10 @@ ILibDurationFmt(ILibDurationFmtOptions options)
 ### Properties
 |name|description|
 |------|---|
-|_String_ language|The ISO 639 2-letter code for the language, or a full locale spec in BCP-47 format, or another `ILibLocale` instance to copy from.|
+|_Object?_ language|The ISO 639 2-letter code for the language, or a full locale spec in BCP-47 format, or another `ILibLocale` instance to copy from.|
 |_String?_ script|The ISO 15924 code of the script for this locale, if any.|
-|_String?_ region|The ISO 3166 2-letter code for the region.|
 |_String?_ variant|The name of the variant of this locale, if any.|
+|_String?_ region|The ISO 3166 2-letter code for the region.|
 
 ### Constructors
 ```dart
@@ -252,3 +252,21 @@ ILibScriptInfo(String script)
 |_bool_ getNeedsIME()|Return true if this script typically requires an input method engine to enter its characters.|
 |_bool_ getCasing()|Return true if this script uses lower- and upper-case characters.|
 
+# CaseMapper
+## ILibCaseMapper
+### Properties
+|name|description|
+|------|---|
+|_String?_ locale|The locale to use for case mapping. Defaults to the system locale if not provided.|
+|_String?_ direction|Indicates whether the mapper is set to convert to uppercase (`true`) or lowercase (`false`).|
+
+### Constructors
+```dart
+ILibCaseMapper({String? locale, String? direction})
+```
+
+### Methods
+|name|description|
+|------|---|
+|_ILibLocale_ getLocale()|Returns the locale used by this mapper.|
+|_String?_ map(String? string)|Maps a string to uppercase or lowercase in a locale-sensitive manner.|

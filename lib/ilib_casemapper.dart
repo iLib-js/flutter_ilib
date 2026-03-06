@@ -2,6 +2,9 @@ import 'flutter_ilib.dart';
 
 /// A class that maps a string to upper or lower case in a locale-sensitive manner.
 class ILibCaseMapper {
+  /// [locale] locale to use when loading the mapper
+  /// [direction] "toupper" for upper-casing, or "tolower" for lower-casing.
+  /// Default if not specified is "toupper".
   ILibCaseMapper({String? locale, String? direction})
       : up = direction == null || direction == 'toupper',
         locale = locale != null ? ILibLocale(locale) : ILibLocale() {
