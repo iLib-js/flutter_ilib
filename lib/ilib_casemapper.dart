@@ -28,20 +28,30 @@ class ILibCaseMapper {
       };
     }
 
-    switch (this.locale.getLanguage()) {
-      case 'az':
-      case 'tr':
-      case 'crh':
-      case 'kk':
-      case 'krc':
-      case 'tt':
-        _setUpMap('iı', 'İI');
-        break;
+    const Set<String> specialLanguages = {'az', 'tr', 'crh', 'kk', 'krc', 'tt'};
+    if (specialLanguages.contains(this.locale.getLanguage())) {
+      _setUpMap('iı', 'İI');
     }
   }
   bool up;
   ILibLocale locale;
   Map<String, String> mapData = <String, String>{};
+
+  String _handleGreekSigma(String string, int i) {
+    if (i < string.length) {
+      final String nextChar = string[i];
+      final int code = nextChar.codeUnitAt(0);
+      // If the next char is not a Greek letter, this is the end of the word,
+      // so use the final form of sigma. Otherwise, use the mid-word form.
+      final bool isNotGreek =
+          (code < 0x0388 && code != 0x0386) || code > 0x03CE;
+      return (isNotGreek ? 'ς' : 'σ') + nextChar.toLowerCase();
+    } else {
+      // No next char means this is the end of the word,
+      // so use the final form of sigma.
+      return 'ς';
+    }
+  }
 
   String? _charMapper(String? string) {
     if (string == null || string.isEmpty) {
@@ -57,29 +67,12 @@ class ILibCaseMapper {
       i++;
 
       if (!up && c == 'Σ') {
+        buffer.write(_handleGreekSigma(string, i));
         if (i < len) {
-          final String nextChar = string[i];
           i++;
-
-          final int code = nextChar.codeUnitAt(0);
-
-          // if the next char is not a greek letter, this is the end of the word so use the
-          // final form of sigma. Otherwise, use the mid-word form.
-          final bool isNotGreek =
-              (code < 0x0388 && code != 0x0386) || code > 0x03CE;
-          buffer.write(isNotGreek ? 'ς' : 'σ');
-
-          buffer.write(nextChar.toLowerCase());
-        } else {
-          // no next char means this is the end of the word, so use the final form of sigma
-          buffer.write('ς');
         }
       } else {
-        if (mapData.containsKey(c)) {
-          buffer.write(mapData[c]);
-        } else {
-          buffer.write(up ? c.toUpperCase() : c.toLowerCase());
-        }
+        buffer.write(mapData[c] ?? (up ? c.toUpperCase() : c.toLowerCase()));
       }
     }
 

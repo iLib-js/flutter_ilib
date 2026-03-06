@@ -194,6 +194,7 @@ _flutterIlibPlugin.evaluateILib(jscode1);
 ```
 To give a more efficient way, we provide some classes that can be easily used in a Flutter app.   
 Currently, we have the following classes:
+- `ILibCaseMapper`
 - `ILibDateFmt`
 - `ILibLocaleInfo`
 - `ILibDurationFmt`
