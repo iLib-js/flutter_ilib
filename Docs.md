@@ -198,3 +198,47 @@ ILibNumFmt(ILibNumFmtOptions options)
 |_String_ getRoundingMode()| Returns the rounding mode set up in the constructor. |
 |_String_ getStyle()| Returns the style used to construct this number formatter object. |
 |_bool_ getUseNative()| Returns true if this formatter uses native digits to format the number. |
+
+# ScriptInfo
+## ILibScriptInfo
+### Properties
+|name|description|
+|------|---|
+|_String?_ script|The ISO 15924 4-letter identifier for the script.|
+
+### Constructors
+```dart
+ILibScriptInfo(String script)
+```
+
+### Methods
+|name|description|
+|------|---|
+|_String?_ getCode()|Return the 4-letter ISO 15924 identifier associated with this script.|
+|_int?_ getCodeNumber()|Get the ISO 15924 code number associated with this script.|
+|_String?_ getName()|Get the name of this script in English.|
+|_String?_ getLongCode()|Get the long identifier associated with this script.|
+|_String_ getScriptDirection()|Return the usual direction that text in this script is written in. Possible values: "rtl", "ltr", "ttb".|
+|_bool_ getNeedsIME()|Return true if this script typically requires an input method engine to enter its characters.|
+|_bool_ getCasing()|Return true if this script uses lower- and upper-case characters.|
+
+# CaseMapper
+## ILibCaseMapper
+### Constructors
+```dart
+ILibCaseMapper({String? locale, String? direction})
+```
+
+### Properties
+|name|description|
+|------|---|
+|_bool_ up|Indicates whether the mapper is set to convert to upper case (true) or lower case (false).|
+|_ILibLocale_ locale|The locale used for locale-sensitive case mapping.|
+|_Map<String, String>_ mapData|The mapping data used for case conversion.|
+
+### Methods
+|name|description|
+|------|---|
+|_ILibLocale_ getLocale()|Return the locale that this mapper was constructed with.|
+|_String?_ map(String? string)|Map a string to upper or lower case in a locale-sensitive manner.|
+
