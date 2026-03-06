@@ -926,7 +926,7 @@ class ILibLocale {
   }
 
   /// A list of all known pseudo-locales.
-  static List<String> pseudoLocales = [
+  static List<String> pseudoLocales = <String>[
     'zxx-XX',
     'zxx-Cyrl-XX',
     'zxx-Hans-XX',

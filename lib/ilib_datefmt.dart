@@ -101,7 +101,7 @@ class ILibDateFmt {
   List<MeridiemsInfo> getMeridiemsRange() {
     String result = '';
     final String formatOptions = toJsonString();
-    final List<MeridiemsInfo> meridems = [];
+    final List<MeridiemsInfo> meridems = <MeridiemsInfo>[];
     final String jscode1 =
         'JSON.stringify(new DateFmt($formatOptions).getMeridiemsRange())';
     result = ILibJS.instance.evaluate(jscode1).stringResult;

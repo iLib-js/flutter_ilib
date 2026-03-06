@@ -28,7 +28,14 @@ class ILibCaseMapper {
       };
     }
 
-    const Set<String> specialLanguages = {'az', 'tr', 'crh', 'kk', 'krc', 'tt'};
+    const Set<String> specialLanguages = <String>{
+      'az',
+      'tr',
+      'crh',
+      'kk',
+      'krc',
+      'tt'
+    };
     if (specialLanguages.contains(this.locale.getLanguage())) {
       _setUpMap('iı', 'İI');
     }

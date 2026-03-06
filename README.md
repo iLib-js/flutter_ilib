@@ -196,20 +196,27 @@ To give a more efficient way, we provide some classes that can be easily used in
 Currently, we have the following classes:
 - `ILibCaseMapper`
 - `ILibDateFmt`
-- `ILibLocaleInfo`
+- `ILibDateOptions`
 - `ILibDurationFmt`
+- `ILibLocale`
+- `ILibLocaleInfo`
 - `ILibNumFmt`
 - `ILibScriptInfo`
 
 We have a plan to provide more classes and methods.  
 
-### ILibDate
-- Class: [ILibDateOptions](./Docs.md/#ilibdateoptions)
-
 ### ILibDateFmt
-- Class: [ILibDateFmtOptions](./Docs.md/#ilibdatefmtoptions)  
+- Class: [ILibDateFmtOptions](./Docs.md/#ilibdatefmtoptions)
 - Class: [ILibDateFmt](./Docs.md#ilibdatefmt)
    - Methods: `format()`, `getClock()`, `getTemplate()`, `getMeridiemsRange()`
+
+### ILibDurationFmt
+- Class: [ILibDurationFmtOptions](./Docs.md/#ilibdurationfmtoptions)
+- Class: [ILibDurationFmt](./Docs.md/#ilibdurationfmt)
+   - Methods:  `format()`, `getLocale()`, `getStyle()`, `getLength()`
+
+### ILibDateOptions
+- Class: [ILibDateOptions](./Docs.md/#ilibdateoptions)
 
 ### ILibLocale
 - Class: [ILibLocale](./Docs.md/#iliblocale)
@@ -217,11 +224,6 @@ We have a plan to provide more classes and methods.
 ### ILibLocaleInfo
 - Class: [ILibLocaleInfo](./Docs.md/#iliblocaleinfo)
   - Methods: `getLanguageName()`, `getRegionName()`, `getClock()`, `getLocale()`, `getUnits()`, `getCalendar()`, `getFirstDayOfWeek()`, `getWeekEndStart()`, `getWeekEndEnd()`, `getTimeZone()`, `getDecimalSeparator()`, `getNativeDecimalSeparator()`, `getGroupingSeparator()`, `getNativeGroupingSeparator()`, `getPrimaryGroupingDigits()`, `getSecondaryGroupingDigits()`, `getPercentageFormat()`, `getNegativePercentageFormat()`, `getPercentageSymbol()`, `getExponential()`, `getNativeExponential()`, `getNativePercentageSymbol()`, `getNegativeNumberFormat()`, `getCurrencyFormats()`, `getCurrency()`, `getDigitsStyle()`, `getDigits()`, `getNativeDigits()`, `getRoundingMode()`, `getScript()`, `getDefaultScript()`, `getAllScripts()`, `getMeridiemsStyle()`, `getPaperSize()`, `getDelimiterQuotationStart()`, `getDelimiterQuotationEnd()`
-
-### ILibDurationFmt
-- Class: [ILibDurationFmtOptions](./Docs.md/#ilibdurationfmtoptions)
-- Class: [ILibDurationFmt](./Docs.md/#ilibdurationfmt)
-   - Methods:  `format()`, `getLocale()`, `getStyle()`, `getLength()`
 
 ### ILibNumFmt
 - Clasee: [ILibNumFmtOptions](./Docs.md/#ilibnumfmtoptions)

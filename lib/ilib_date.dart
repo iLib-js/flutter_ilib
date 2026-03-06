@@ -47,7 +47,7 @@ class ILibDateOptions {
   String toJsonString() {
     int? y = year;
     int? m = month;
-    int? w = week;
+    final int? w = week;
     int? d = day;
     int? h = hour;
     int? min = minute;
