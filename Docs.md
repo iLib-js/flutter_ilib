@@ -139,7 +139,6 @@ ILibLocale([Object? language, String? region, String? variant, String? script])
 |_bool_ equals(ILibLocale other)|Check if another locale is exactly equal to this one.|
 |_bool_ isPseudo()|Check if the locale is a pseudo-locale. Pseudo-locales are used for testing localization.|
 |_bool_ isValid()|Check if the locale uses valid ISO codes for its components. Validates language, script, and region codes.|
-|_List<String>_ getAvailableLocales()|Return a list of all available locales (not implemented).|
 
 
 ## ILibLocaleInfo
