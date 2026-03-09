@@ -111,6 +111,36 @@ ILibDurationFmt(ILibDurationFmtOptions options)
 
 
 # LocaleInfo
+## ILibLocale
+### Properties
+|name|description|
+|------|---|
+|_Object?_ language|The ISO 639 2-letter code for the language, or a full locale spec in BCP-47 format, or another `ILibLocale` instance to copy from.|
+|_String?_ script|The ISO 15924 code of the script for this locale, if any.|
+|_String?_ variant|The name of the variant of this locale, if any.|
+|_String?_ region|The ISO 3166 2-letter code for the region.|
+
+### Constructors
+```dart
+ILibLocale([Object? language, String? region, String? variant, String? script])
+```
+
+### Methods
+|name|description|
+|------|---|
+|_String_ getLanguage()|Return the ISO 639 language code of the locale.|
+|_String?_ getLanguageAlpha3()|Return the ISO 639-3 language code of the locale.|
+|_String?_ getScript()|Return the ISO 15924 script code of the locale.|
+|_String?_ getRegion()|Return the ISO 3166 region code of the locale.|
+|_String?_ getRegionAlpha3()|Return the ISO 3166-3 region code of the locale.|
+|_String?_ getVariant()|Return the variant code of the locale.|
+|_String_ getSpec()|Return the full locale specifier as a string.|
+|_String_ getLangSpec()|Return the language and script specifier of the locale.|
+|_bool_ equals(ILibLocale other)|Check if another locale is exactly equal to this one.|
+|_bool_ isPseudo()|Check if the locale is a pseudo-locale. Pseudo-locales are used for testing localization.|
+|_bool_ isValid()|Check if the locale uses valid ISO codes for its components. Validates language, script, and region codes.|
+
+
 ## ILibLocaleInfo
 ### Properties
 |name|description|
@@ -198,3 +228,45 @@ ILibNumFmt(ILibNumFmtOptions options)
 |_String_ getRoundingMode()| Returns the rounding mode set up in the constructor. |
 |_String_ getStyle()| Returns the style used to construct this number formatter object. |
 |_bool_ getUseNative()| Returns true if this formatter uses native digits to format the number. |
+
+# ScriptInfo
+## ILibScriptInfo
+### Properties
+|name|description|
+|------|---|
+|_String?_ script|The ISO 15924 4-letter identifier for the script.|
+
+### Constructors
+```dart
+ILibScriptInfo(String script)
+```
+
+### Methods
+|name|description|
+|------|---|
+|_String?_ getCode()|Return the 4-letter ISO 15924 identifier associated with this script.|
+|_int?_ getCodeNumber()|Get the ISO 15924 code number associated with this script.|
+|_String?_ getName()|Get the name of this script in English.|
+|_String?_ getLongCode()|Get the long identifier associated with this script.|
+|_String_ getScriptDirection()|Return the usual direction that text in this script is written in. Possible values: "rtl", "ltr", "ttb".|
+|_bool_ getNeedsIME()|Return true if this script typically requires an input method engine to enter its characters.|
+|_bool_ getCasing()|Return true if this script uses lower- and upper-case characters.|
+
+# CaseMapper
+## ILibCaseMapper
+### Properties
+|name|description|
+|------|---|
+|_String?_ locale|The locale to use for case mapping. Defaults to the system locale if not provided.|
+|_String?_ direction|Indicates whether the mapper is set to convert to uppercase (`true`) or lowercase (`false`).|
+
+### Constructors
+```dart
+ILibCaseMapper({String? locale, String? direction})
+```
+
+### Methods
+|name|description|
+|------|---|
+|_ILibLocale_ getLocale()|Returns the locale used by this mapper.|
+|_String?_ map(String? string)|Maps a string to uppercase or lowercase in a locale-sensitive manner.|

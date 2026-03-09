@@ -3,6 +3,7 @@
 * Add new methods to `ILibLocaleInfo`:  
 `getLanguageName()`, `getRegionName()`, `getClock()`, `getLocale()`, `getUnits()`, `getCalendar()`, `getTimeZone()`, `getPrimaryGroupingDigits()`, `getSecondaryGroupingDigits()`, `getPercentageSymbol()`, `getExponential()`, `getNativeExponential()`, `getNativePercentageSymbol()`, `getNegativeNumberFormat()`, `getDigitsStyle()`, `getDigits()`, `getNativeDigits()`, `getRoundingMode()`, `getScript()`, `getDefaultScript()`, `getAllScripts()`, `getMeridiemsStyle()`, `getPaperSize()`, `getDelimiterQuotationStart()`, `getDelimiterQuotationEnd()`
 * Implement `ILibLocale`
+* Implement `ILibCaseMapper`
 
 ## 1.6.0
 * Implement the `ILibNumFmt` class to enable NumberFormatting

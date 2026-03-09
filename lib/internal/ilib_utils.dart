@@ -32,7 +32,7 @@ bool isValidLocale(String lo) {
 }
 
 List<String> getSupportedLanguages() {
-  final List<String> locales = [
+  final List<String> locales = <String>[
     'af',
     'am',
     'ar',
