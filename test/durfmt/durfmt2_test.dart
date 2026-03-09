@@ -2326,7 +2326,8 @@ void main() {
           (testPlatform == 'webOS') ? '1 hr, 1 min, 1 seg.' : '1 h, 1 min, 1 s';
       expect(clockformatted_1[2], result);
 
-      result = (testPlatform == 'webOS') ? '1 hr 1 min 1 seg.' : '1 h 1 min 1 s';
+      result =
+          (testPlatform == 'webOS') ? '1 hr 1 min 1 seg.' : '1 h 1 min 1 s';
       expect(clockformatted_1[3], result);
 
       expect(clockformatted_16[0], '16 horas, 16 minutos y 16 segundos');
@@ -2340,8 +2341,9 @@ void main() {
           : '16 h, 16 min, 16 s';
       expect(clockformatted_16[2], result);
 
-      result =
-          (testPlatform == 'webOS') ? '16 hrs 16 min 16 seg.' : '16 h 16 min 16 s';
+      result = (testPlatform == 'webOS')
+          ? '16 hrs 16 min 16 seg.'
+          : '16 h 16 min 16 s';
       expect(clockformatted_16[3], result);
     });
     test('testDurFmt_es_DO', () {

@@ -6,12 +6,15 @@ import 'ilib_init.dart';
 import 'internal/logger/log_adapter.dart';
 import 'internal/logger/logger_selector.dart';
 
+export 'ilib_casemapper.dart';
 export 'ilib_date.dart';
 export 'ilib_datefmt.dart';
 export 'ilib_durationfmt.dart';
 export 'ilib_init.dart';
+export 'ilib_locale.dart';
 export 'ilib_localeinfo.dart';
 export 'ilib_numfmt.dart';
+export 'ilib_scriptinfo.dart';
 
 class FlutterILib extends ChangeNotifier {
   FlutterILib._internal() {
