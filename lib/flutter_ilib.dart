@@ -2,11 +2,13 @@ library flutter_ilib;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_js/flutter_js.dart';
+
 import 'ilib_init.dart';
 import 'internal/logger/log_adapter.dart';
 import 'internal/logger/logger_selector.dart';
 
 export 'ilib_casemapper.dart';
+export 'ilib_country.dart';
 export 'ilib_date.dart';
 export 'ilib_datefmt.dart';
 export 'ilib_durationfmt.dart';
