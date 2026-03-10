@@ -1,8 +1,8 @@
 # Date
+
 ## ILibDateOptions
 
 ### Properties
-
 |name|description|
 |------|---|
 |_\<String?>_ locale | Locales are specified either with a specifier string that follows the BCP-47 convention, <br>(roughly: "language-script-region").|
@@ -32,6 +32,7 @@ ILibDateOptions (String? locale, int? year, int? month, int? week, int? day, int
 
 
 # Date Formatting
+
 ## ILibDateFmtOptions
 
 ### Properties
@@ -55,16 +56,16 @@ ILibDateFmtOptions (String? locale, String? length, String? type, String? calend
 ## ILibDateFmt
 
 ### Properties
-
 |name|description|
 |------|---|
 | _\<ILibDateFmtOptions>_ options | Options for the DateFormating|
 
- ### Constructors
+### Constructors
 ```dart
 ILibDateFmt(ILibDateFmtOptions options)
 ```
- ### Methods
+
+### Methods
 |name|description|
 |------|---|
 |_String_ toJsonString() | A string representation of parameters to call functions of iLib library properly|
@@ -74,9 +75,10 @@ ILibDateFmt(ILibDateFmtOptions options)
 |_List\<MeridiemsInfo>_ getMeridiemsRange()| Return the range of possible meridiems (times of day like "AM" or "PM") in this date formatter.|
 
 
-
 # Duration Formatting
+
 ## ILibDurationFmtOptions
+
 ### Properties
 |name|description|
 |------|---|
@@ -91,16 +93,18 @@ ILibDurationFmtOptions (String? locale, String? length, String? style, bool? use
 ```
 
 ## ILibDurationFmt
+
 ### Properties
 |name|description|
 |------|---|
 | _\<ILibDurationFmtOptions>_ options | Options for the DurationFormating|
 
- ### Constructors
+### Constructors
 ```dart
 ILibDurationFmt(ILibDurationFmtOptions options)
 ```
- ### Methods
+
+### Methods
 |name|description|
 |------|---|
 |_String_ toJsonString() | A string representation of parameters to call functions of iLib library properly|
@@ -111,7 +115,9 @@ ILibDurationFmt(ILibDurationFmtOptions options)
 
 
 # LocaleInfo
+
 ## ILibLocale
+
 ### Properties
 |name|description|
 |------|---|
@@ -142,17 +148,18 @@ ILibLocale([Object? language, String? region, String? variant, String? script])
 
 
 ## ILibLocaleInfo
+
 ### Properties
 |name|description|
 |------|---|
 |_\<String>_ locale| The locale for which the info is sought |
 
- ### Constructors
+### Constructors
 ```dart
 ILibLocaleInfo(String locale)
 ```
 
- ### Methods
+### Methods
 |name|description|
 |------|---|
 |_int_ getFirstDayOfWeek() | Returns the day of week that starts weeks in the current locale. <br>Days are still numbered the standard way with 0 for Sunday through 6 for Saturday, <br> but calendars should be displayed and weeks calculated with the day of week returned from this function as the first day of the week.|
@@ -171,7 +178,6 @@ ILibLocaleInfo(String locale)
 ## ILibNumFmtOptions
 
 ### Properties
-
 |name|description|
 |------|---|
 |_\<String?>_ locale| Locale to use for number formatting. |
@@ -202,7 +208,6 @@ ILibNumFmtOptions({
 ## ILibNumFmt
 
 ### Properties
-
 |name|description|
 |------|---|
 |_\<ILibNumFmtOptions>_ options| Options for configuring the number formatter. |
@@ -213,7 +218,6 @@ ILibNumFmt(ILibNumFmtOptions options)
 ```
 
 ### Methods
-
 |name|description|
 |------|---|
 |_String_ format(dynamic number)| Formats a number according to the settings of this formatter instance. |
@@ -230,7 +234,9 @@ ILibNumFmt(ILibNumFmtOptions options)
 |_bool_ getUseNative()| Returns true if this formatter uses native digits to format the number. |
 
 # ScriptInfo
+
 ## ILibScriptInfo
+
 ### Properties
 |name|description|
 |------|---|
@@ -252,8 +258,11 @@ ILibScriptInfo(String script)
 |_bool_ getNeedsIME()|Return true if this script typically requires an input method engine to enter its characters.|
 |_bool_ getCasing()|Return true if this script uses lower- and upper-case characters.|
 
+
 # CaseMapper
+
 ## ILibCaseMapper
+
 ### Properties
 |name|description|
 |------|---|
@@ -270,3 +279,25 @@ ILibCaseMapper({String? locale, String? direction})
 |------|---|
 |_ILibLocale_ getLocale()|Returns the locale used by this mapper.|
 |_String?_ map(String? string)|Maps a string to uppercase or lowercase in a locale-sensitive manner.|
+
+# Country
+
+## ILibCountry
+### Properties
+|name|description|
+|------|---|
+|_Object?_ locale|The locale set for this instance.|
+
+### Constructors
+```dart
+ILibCountry({Object? locale})
+```
+
+### Methods
+|name|description|
+|------|---|
+|_List<String>_ getAvailableCode()|Return an array of the ids for all ISO 3166-1 alpha-2 codes that this copy of iLib knows about.|
+|_List<String>_ getAvailableCountry()|Return an array of country names that this copy of iLib knows about.|
+|_String_ getCode(String ctryname)|Return the country code corresponding to the given country name. Throws an exception if the name is not found.|
+|_String_ getName(String code)|Return the country name corresponding to the given country code. Throws an exception if the code is not found.|
+|_ILibLocale_ getLocale()|Return the locale that this info object was created with.|
