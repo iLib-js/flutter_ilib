@@ -317,5 +317,33 @@ void main() {
       final ILibLocale locale = ctry.getLocale();
       expect(locale.toString(), 'ko-KR');
     });
+    test('testCountryUnknownCode', () {
+      final ILibCountry ctry = ILibCountry();
+      expect(ctry, isNotNull);
+
+      expect(() => ctry.getName('xxx'), throwsA(isA<ArgumentError>()));
+    });
+    test('testCountryUnknownCountry', () {
+      final ILibCountry ctry = ILibCountry();
+      expect(ctry, isNotNull);
+
+      expect(() => ctry.getCode('xxx'), throwsA(isA<ArgumentError>()));
+    });
+    test('testGetAvailableCode', () {
+      final List<String> codes = ILibCountry.getAvailableCode();
+
+      expect(codes, isNotNull);
+      expect(codes, isNotEmpty);
+      expect(codes.length, 295);
+      expect(codes.contains('KR'), isTrue);
+    });
+    test('testGetAvailableCountry', () {
+      final List<String> countries = ILibCountry.getAvailableCountry();
+
+      expect(countries, isNotNull);
+      expect(countries, isNotEmpty);
+      expect(countries.length, 295);
+      expect(countries.contains('South Korea'), isTrue);
+    });
   });
 }

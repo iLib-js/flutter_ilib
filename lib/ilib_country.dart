@@ -33,21 +33,33 @@ class ILibCountry {
     return result.split(',');
   }
 
-  /// Return the country code corresponding to the country name given.
+  /// Return the country code corresponding to the country name given.<br>
+  /// If the country name is given, but it is not found in the list of known countries,
+  /// this method will throw an exception.
   String getCode(String ctryname) {
     final String jscode =
         'new Country({locale: "$locale"}).getCode("$ctryname")';
-    final String result = ILibJS.instance.evaluate(jscode).stringResult;
 
-    return result;
+    try {
+      final String result = ILibJS.instance.evaluate(jscode).stringResult;
+      return result;
+    } catch (e) {
+      throw ArgumentError('Invalid country name: $ctryname ($e)');
+    }
   }
 
-  /// Return the country name corresponding to the country code given.
+  /// Return the country name corresponding to the country code given.<br>
+  /// If the code is given, but it is not found in the list of known countries,
+  /// this method will throw an exception.
   String getName(String code) {
     final String jscode = 'new Country({locale: "$locale"}).getName("$code")';
-    final String result = ILibJS.instance.evaluate(jscode).stringResult;
 
-    return result;
+    try {
+      final String result = ILibJS.instance.evaluate(jscode).stringResult;
+      return result;
+    } catch (e) {
+      throw ArgumentError('Invalid country code: $code ($e)');
+    }
   }
 
   /// Return the locale that this info object was created with.

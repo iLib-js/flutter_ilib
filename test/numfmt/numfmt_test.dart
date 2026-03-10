@@ -1020,24 +1020,6 @@ void main() {
       expect(fmt, isNotNull);
       expect(fmt.format(345.3), '¥345');
     });
-/* here
-    test('testNumFmtCurrencyNoCurrencyDefaultForLocale', () {
-      var fmt;
-
-      try {
-        fmt = new NumFmt({
-          type: 'currency',
-          locale: 'ja-JP'
-        });
-
-        test.fail();
-      } catch (e) {
-        test.ok(typeof(fmt) === 'undefined');
-        expect(e, 'A currency property is required in the options to the number formatter constructor when the type property is set to currency.');
-      }
-
-    });
-*/
     test('testNumFmtCurrencyUseCorrectFractionDigitsForLocale', () {
       final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions(
           type: 'currency', locale: 'ja-JP', currency: 'JPY'));
