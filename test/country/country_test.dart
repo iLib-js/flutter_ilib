@@ -336,6 +336,7 @@ void main() {
       expect(codes, isNotEmpty);
       expect(codes.length, 295);
       expect(codes.contains('KR'), isTrue);
+      expect(codes.contains('xxx'), isFalse);
     });
     test('testGetAvailableCountry', () {
       final List<String> countries = ILibCountry.getAvailableCountry();
@@ -344,6 +345,7 @@ void main() {
       expect(countries, isNotEmpty);
       expect(countries.length, 295);
       expect(countries.contains('South Korea'), isTrue);
+      expect(countries.contains('xxx'), isFalse);
     });
   });
 }

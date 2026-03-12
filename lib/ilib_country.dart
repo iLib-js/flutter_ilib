@@ -5,7 +5,6 @@ import 'flutter_ilib.dart';
 class ILibCountry {
   /// [locale] Set the locale
   ILibCountry({Object? locale}) {
-    //locale = options.locale;
     if (locale is String) {
       this.locale = locale;
     } else if (locale is ILibLocale) {
@@ -44,7 +43,7 @@ class ILibCountry {
       final String result = ILibJS.instance.evaluate(jscode).stringResult;
       return result;
     } catch (e) {
-      throw ArgumentError('Invalid country name: $ctryname ($e)');
+      throw ArgumentError('Country $ctryname is unknown');
     }
   }
 
@@ -58,34 +57,41 @@ class ILibCountry {
       final String result = ILibJS.instance.evaluate(jscode).stringResult;
       return result;
     } catch (e) {
-      throw ArgumentError('Invalid country code: $code ($e)');
+      throw ArgumentError('Country code $code is unknown');
     }
   }
 
   /// Return the locale that this info object was created with.
   ILibLocale getLocale() {
-    final String jscode1 = 'new Country({locale: "$locale"}).getLocale()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
+    final String jscode =
+        'JSON.stringify(new Country({locale: "$locale"}).getLocale())';
 
-    // Ensure the result string is properly formatted as JSON
-    final String formattedResult = result
-        .replaceAllMapped(RegExp(r'(?<!")\b([a-zA-Z_][a-zA-Z0-9_]*)\b(?!"):'),
-            (Match match) => '"${match[1]}":') // Properly format JSON keys
-        .replaceAllMapped(
-            RegExp(r':\s*(?!null)([^"\s][^,}]*)'),
-            (Match match) =>
-                ': "${match[1]}"') // Quote values with special characters
-        .replaceAll(RegExp(r':\s*null'), ': null');
+    try {
+      final String result = ILibJS.instance.evaluate(jscode).stringResult;
 
-    // Parse the result string into components
-    final Map<String, dynamic> map =
-        json.decode(formattedResult) as Map<String, dynamic>;
-    final String language = map['language']?.toString() ?? '';
-    final String region = map['region']?.toString() ?? '';
-    final String script = map['script']?.toString() ?? '';
-    final String variant = map['variant']?.toString() ?? '';
+      // Attempt to parse JSON
+      final Map<String, dynamic> map =
+          json.decode(result) as Map<String, dynamic>;
 
-    // Create an ILibLocale instance using the constructor
-    return ILibLocale(language, region, variant, script);
+      // Extract values safely
+      final String language = _getStringValue(map, 'language');
+      final String region = _getStringValue(map, 'region');
+      final String script = _getStringValue(map, 'script');
+      final String variant = _getStringValue(map, 'variant');
+
+      return ILibLocale(language, region, variant, script);
+    } on FormatException catch (e) {
+      // Directly rethrow the original FormatException
+      throw FormatException('Failed to parse locale JSON: ${e.message}');
+    } catch (e) {
+      // Handle all other exceptions
+      throw Exception('An unexpected error occurred: $e');
+    }
+  }
+
+  // Helper method to safely extract string values from a map
+  String _getStringValue(Map<String, dynamic> map, String key) {
+    final dynamic value = map[key];
+    return (value is String && value.isNotEmpty) ? value : '';
   }
 }
