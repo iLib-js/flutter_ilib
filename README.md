@@ -180,6 +180,15 @@ mapper.map('Iİ');
 // 'ıi'
 ```
 
+## Country
+``` dart
+final ILibCountry ctry = ILibCountry(locale: 'ko-KR');
+ctry.getName('TR');
+// '튀르키예'
+ctry.getCode('튀르키예');
+// 'TR'
+```
+
 ## CLASS
 
 ### FlutterILib
@@ -195,6 +204,7 @@ _flutterIlibPlugin.evaluateILib(jscode1);
 To give a more efficient way, we provide some classes that can be easily used in a Flutter app.   
 Currently, we have the following classes:
 - `ILibCaseMapper`
+- `ILibCountry`
 - `ILibDateFmt`
 - `ILibDateOptions`
 - `ILibDurationFmt`
@@ -237,6 +247,10 @@ We have a plan to provide more classes and methods.
 ### ILibCaseMapper
 - Class: [ILibCaseMapper](./Docs.md/#ilibcasemapper)
   - Methods: `getLocale()`, `map()`
+
+### ILibCountry
+- Class: [ILibCountry](./Docs.md/#ilibcountry)
+  - Methods: `getAvailableCode()`, `getAvailableCountry()`, `getCode()`, `getName()`, `getLocale()`
 
 ## Supported Locales
 The results of the following locales are checked by unit tests.  
