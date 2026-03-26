@@ -72,7 +72,8 @@ class _MyAppState extends State<MyApp> {
     }
 
     try {
-      iLibCLDRVersion = _flutterIlibPlugin.getCLDRVersion ?? 'Unknown CLDR version';
+      iLibCLDRVersion =
+          _flutterIlibPlugin.getCLDRVersion ?? 'Unknown CLDR version';
     } on PlatformException {
       iLibCLDRVersion = 'Failed to get iLib CLDR version.';
     }
@@ -98,10 +99,13 @@ class _MyAppState extends State<MyApp> {
   }
 
   static const TextStyle textStyle = TextStyle(fontSize: 30);
-  static const TextStyle itemTextStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const TextStyle itemTextStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const TextStyle infoTextStyle = TextStyle(fontSize: 20);
-  static const TextStyle infoItemTextStyle = TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
-  static const TextStyle buttonTextStyle = TextStyle(fontSize: 24, fontWeight: FontWeight.bold);
+  static const TextStyle infoItemTextStyle =
+      TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
+  static const TextStyle buttonTextStyle =
+      TextStyle(fontSize: 24, fontWeight: FontWeight.bold);
 
   List<String> localeList = <String>[
     'en-GB',
@@ -119,7 +123,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('FlutterIlibPlugin example'),
+          title: const Text('FlutterIlibPlugin example app'),
         ),
         body: Center(
           // Center is a layout widget. It takes a single child and positions it
@@ -172,32 +176,46 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  Widget _customTextBox(String item, String value, {bool main = true, Color? color}) {
+  Widget _customTextBox(String item, String value,
+      {bool main = true, Color? color}) {
     return SizedBox(
       width: 1080,
       height: (main ? 40 : 30),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text(item, style: (main ? itemTextStyle : infoItemTextStyle).copyWith(color: color)),
-          Text(value, style: (main ? textStyle : infoTextStyle).copyWith(color: color)),
+          Text(item,
+              style: (main ? itemTextStyle : infoItemTextStyle)
+                  .copyWith(color: color)),
+          Text(value,
+              style: (main ? textStyle : infoTextStyle).copyWith(color: color)),
         ],
       ),
     );
   }
 
   String getDateTimeFormatNow(String lo) {
-    final ILibDateOptions dateOptions = ILibDateOptions(dateTime: DateTime.now());
+    final ILibDateOptions dateOptions =
+        ILibDateOptions(dateTime: DateTime.now());
     final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-        locale: lo, length: 'full', type: 'datetime', useNative: false, timezone: 'local');
+        locale: lo,
+        length: 'full',
+        type: 'datetime',
+        useNative: false,
+        timezone: 'local');
     final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     return fmt.format(dateOptions);
   }
 
   String getDateTimeFormat(String curlo) {
-    final ILibDateOptions dateOptions = ILibDateOptions(dateTime: DateTime.now());
+    final ILibDateOptions dateOptions =
+        ILibDateOptions(dateTime: DateTime.now());
     final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-        locale: curlo, length: 'full', type: 'datetime', useNative: false, timezone: 'local');
+        locale: curlo,
+        length: 'full',
+        type: 'datetime',
+        useNative: false,
+        timezone: 'local');
     final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     return fmt.format(dateOptions);
   }
