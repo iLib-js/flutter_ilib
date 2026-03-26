@@ -36,10 +36,10 @@ class _MyAppState extends State<MyApp> {
   String _iLibVersion = 'Unknown iLib';
   String _iLibCLDRVersion = 'CLDR';
   String _currentTime = 'Current Time';
-  List<String> newList = <String>['-', '-', '-'];
-  String curLocale =
-      PlatformDispatcher.instance.locale.toString().replaceAll('_', '-');
-  String result1 = '', result2 = '', result3 = '';
+  static const int _numOfItems = 6;
+  List<String> newList = List<String>.generate(_numOfItems, (int index) => '-');
+  String curLocale = window.locale.toString().replaceAll('_', '-');
+  List<String> results = List<String>.filled(_numOfItems, '');
   final FlutterILib _flutterIlibPlugin = FlutterILib.instance;
 
   @override
@@ -84,15 +84,17 @@ class _MyAppState extends State<MyApp> {
       currentTime = 'Failed to get iLib DatFmt.';
     }
 
-    result1 = getDateTimeFormat(curLocale);
-    result2 = getFirstDayOfWeek(curLocale);
-    result3 = getClock(curLocale);
+    results[0] = getDateTimeFormat(curLocale);
+    results[1] = getFirstDayOfWeek(curLocale);
+    results[2] = getClock(curLocale);
+    results[3] = getNumFmt(curLocale);
+    results[4] = getCountry(curLocale);
 
     setState(() {
       _iLibVersion = iLibVersion;
       _iLibCLDRVersion = iLibCLDRVersion;
       _currentTime = currentTime;
-      newList = <String>[result1, result2, result3];
+      newList = results;
     });
   }
 
@@ -103,12 +105,15 @@ class _MyAppState extends State<MyApp> {
   static const TextStyle infoItemTextStyle =
       TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
   static const TextStyle buttonTextStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+      TextStyle(fontSize: 24, fontWeight: FontWeight.bold);
 
   List<String> localeList = <String>[
     'en-GB',
     'en-US',
+    'de-DE',
+    'hi-IN',
     'ko-KR',
+    'ru-RU',
     'fa-IR',
     'am-ET'
   ];
@@ -130,6 +135,8 @@ class _MyAppState extends State<MyApp> {
               _customTextBox('DateTime (full)', newList[0]),
               _customTextBox('First Day Of the Week', newList[1]),
               _customTextBox('Clock (12 or 24)', newList[2]),
+              _customTextBox('Number Format', newList[3]),
+              _customTextBox('Country', newList[4]),
               const SizedBox(
                 height: 30,
               ),
@@ -144,12 +151,13 @@ class _MyAppState extends State<MyApp> {
                       onPressed: () {
                         curLocale = localeList[i];
                         _flutterIlibPlugin.loadLocaleData(curLocale);
-
-                        result1 = getDateTimeFormat(curLocale);
-                        result2 = getFirstDayOfWeek(curLocale);
-                        result3 = getClock(curLocale);
+                        results[0] = getDateTimeFormat(curLocale);
+                        results[1] = getFirstDayOfWeek(curLocale);
+                        results[2] = getClock(curLocale);
+                        results[3] = getNumFmt(curLocale);
+                        results[4] = getCountry(curLocale);
                         setState(() {
-                          newList = <String>[result1, result2, result3];
+                          newList = results;
                         });
                       },
                     )
@@ -161,8 +169,6 @@ class _MyAppState extends State<MyApp> {
               _customTextBox('iLib Version', _iLibVersion, main: false),
               _customTextBox('CLDR Version', _iLibCLDRVersion, main: false),
               _customTextBox('Current Time', _currentTime),
-              _customTextBox('Upper Case', getUpperLowerCase('el-GR', 'groß'), main: false),
-              _customTextBox('Lower Case', getUpperLowerCase('tr-TR', 'Iİ', direction: 'tolower'), main: false),
             ],
           ),
         ),
@@ -170,15 +176,19 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  Widget _customTextBox(String item, String value, {bool main = true}) {
+  Widget _customTextBox(String item, String value,
+      {bool main = true, Color? color}) {
     return SizedBox(
-      width: 700,
+      width: 1080,
       height: (main ? 40 : 30),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text(item, style: (main ? itemTextStyle : infoItemTextStyle)),
-          Text(value, style: (main ? textStyle : infoTextStyle)),
+          Text(item,
+              style: (main ? itemTextStyle : infoItemTextStyle)
+                  .copyWith(color: color)),
+          Text(value,
+              style: (main ? textStyle : infoTextStyle).copyWith(color: color)),
         ],
       ),
     );
@@ -232,11 +242,16 @@ class _MyAppState extends State<MyApp> {
     return '$clock';
   }
 
-  String getUpperLowerCase(String curlo, String str, {String direction = 'toupper'}) {
-    final ILibCaseMapper caseMapper =
-        ILibCaseMapper(locale: curlo, direction: direction);
-    String? result = caseMapper.map(str)?? '';
-    String? result2 = '$str\t($curlo)\t($direction)\t-->\t$result';
-    return result2;
+  String getNumFmt(String curlo) {
+    final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions(locale: curlo));
+    return fmt.format(-111123456.785);
   }
+
+  String getCountry(String curlo) {
+    final ILibCountry ctry = ILibCountry(locale: curlo);
+    return ctry.getName('KR');
+  }
+  // String getCountry(String curlo) {
+  //   return 'SA';
+  // }
 }

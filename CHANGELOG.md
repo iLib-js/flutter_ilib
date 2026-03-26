@@ -1,3 +1,6 @@
+## 1.8.0
+* Implement `ILibCountry` class for Country Information
+
 ## 1.7.0
 * Implement the `ILibScriptInfo` class for ScriptInfomation
 * Add new methods to `ILibLocaleInfo`:  
