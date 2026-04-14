@@ -1,22 +1,16 @@
 library flutter_ilib;
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter_js/flutter_js.dart';
 
 import 'ilib_init.dart';
 import 'internal/logger/log_adapter.dart';
 import 'internal/logger/logger_selector.dart';
 
 export 'ilib_casemapper.dart';
-export 'ilib_country.dart';
 export 'ilib_date.dart';
-export 'ilib_datefmt.dart';
-export 'ilib_durationfmt.dart';
 export 'ilib_init.dart';
 export 'ilib_locale.dart';
 export 'ilib_localeinfo.dart';
-export 'ilib_numfmt.dart';
-export 'ilib_scriptinfo.dart';
 
 class FlutterILib extends ChangeNotifier {
   FlutterILib._internal() {
@@ -33,21 +27,11 @@ class FlutterILib extends ChangeNotifier {
   /// Return whether iLib is ready
   bool get isILibReady => ILibJS.instance.isILibReady;
 
-  /// Return the current version of iLib.
-  String? get getVersion => evaluateILib('''ilib.getVersion()''');
+  /// Return the current version of flutter_ilib.
+  String get getVersion => '2.0.0';
 
   /// Return the CLDR version currently adopted by iLib.
-  String? get getCLDRVersion => evaluateILib('''ilib.getCLDRVersion()''');
-
-  /// It allows the use of any class of APIs from iLib.
-  /// [jscode] Convert the Javascript code you want to get as a result into a string.
-  String? evaluateILib(String jscode) {
-    final JsEvalResult jsEvalResult = ILibJS.instance.evaluate(jscode);
-    final String? result = (jsEvalResult.stringResult == 'null')
-        ? null
-        : jsEvalResult.stringResult;
-    return result;
-  }
+  String? get getCLDRVersion => '46.0';
 
   /// Load the given locale data file.
   ///

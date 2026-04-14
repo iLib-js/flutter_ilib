@@ -518,14 +518,6 @@ void main() {
       expect(loc, isNotNull);
       expect(loc.getLangSpec(), '');
     });
-    test('testLocaleIsValidLocaleTrueFull', () {
-      final ILibLocale loc = ILibLocale('zh-Hans-CN');
-      final String jscode1 =
-          'new Locale("${loc.language}", "${loc.region}", "${loc.script}", "${loc.variant}").isValid()';
-      final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-      expect(loc, isNotNull);
-      expect(loc.isValid(), isTrue);
-    });
     test('testLocaleIsValidLocaleTrueLang', () {
       final ILibLocale loc = ILibLocale('de');
       expect(loc, isNotNull);

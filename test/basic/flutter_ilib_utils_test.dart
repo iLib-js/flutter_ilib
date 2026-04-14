@@ -14,16 +14,7 @@ void main() {
       setLocale(curlo);
     });
 
-    test(
-        'getJSDataPath',
-        () => expect(getJSDataPath('ko-KR'),
-            'packages/flutter_ilib/assets/locales/ko.js'));
-    test(
-        'getJSDataPath2',
-        () => expect(
-            getJSDataPath('am'), 'packages/flutter_ilib/assets/locales/am.js'));
-    test('getJSDataPathwithWrongParam', () => expect(getJSDataPath('-'), ''));
-    test('isValidLocale', () => expect(isValidLocale('-'), false));
+test('isValidLocale', () => expect(isValidLocale('-'), false));
     test('isValidLocaleXXX', () => expect(isValidLocale('XXX'), false));
   });
 }

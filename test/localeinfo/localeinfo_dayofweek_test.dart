@@ -11,7 +11,7 @@ void main() {
   setUpAll(() async {
     testPlatform = getTestPlatform();
     final ILibJS ilibjsinstance = ILibJS.instance;
-    await ilibjsinstance.loadJS();
+    await ilibjsinstance.loadJSON();
     ilibjsinstance.initILib();
     await ilibjsinstance.loadILibLocaleDataAll();
   });

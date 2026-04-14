@@ -7,7 +7,7 @@ void main() {
   debugPrint('Testing [flutter_ilib_localeinfo_test.dart] file.');
   setUpAll(() async {
     final ILibJS ilibjsinstance = ILibJS.instance;
-    await ilibjsinstance.loadJS();
+    await ilibjsinstance.loadJSON();
     ilibjsinstance.initILib();
     await ilibjsinstance.loadILibLocaleData('ar-SA');
     await ilibjsinstance.loadILibLocaleData('de-DE');
