@@ -1,0 +1,9 @@
+{
+    "ilib.data.localeinfo": {
+        "language.name": "Swahili",
+        "locale": "sw",
+        "scripts": [
+            "Latn"
+        ]
+    }
+}

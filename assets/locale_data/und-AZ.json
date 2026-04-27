@@ -1,0 +1,10 @@
+{
+    "ilib.data.localeinfo": {
+        "clock": "24",
+        "currency": "AZN",
+        "firstDayOfWeek": 1,
+        "locale": "AZ",
+        "region.name": "Azerbaijan",
+        "timezone": "Asia/Baku"
+    }
+}

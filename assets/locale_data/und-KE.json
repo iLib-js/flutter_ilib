@@ -1,0 +1,10 @@
+{
+    "ilib.data.localeinfo": {
+        "clock": "24",
+        "currency": "KES",
+        "firstDayOfWeek": 0,
+        "locale": "KE",
+        "region.name": "Kenya",
+        "timezone": "Africa/Nairobi"
+    }
+}

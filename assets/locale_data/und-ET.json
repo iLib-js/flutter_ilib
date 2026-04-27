@@ -1,0 +1,11 @@
+{
+    "ilib.data.localeinfo": {
+        "calendar": "ethiopic",
+        "clock": "12",
+        "currency": "ETB",
+        "firstDayOfWeek": 0,
+        "locale": "ET",
+        "region.name": "Ethiopia",
+        "timezone": "Africa/Addis_Ababa"
+    }
+}

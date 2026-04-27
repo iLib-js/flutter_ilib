@@ -1,0 +1,10 @@
+{
+    "ilib.data.localeinfo": {
+        "clock": "12",
+        "currency": "SGD",
+        "firstDayOfWeek": 0,
+        "locale": "SG",
+        "region.name": "Singapore",
+        "timezone": "Asia/Singapore"
+    }
+}

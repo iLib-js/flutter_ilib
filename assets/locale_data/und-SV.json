@@ -1,0 +1,13 @@
+{
+    "ilib.data.localeinfo": {
+        "clock": "12",
+        "currency": "USD",
+        "firstDayOfWeek": 0,
+        "locale": "SV",
+        "paperSizes": {
+            "regular": "8x11"
+        },
+        "region.name": "El Salvador",
+        "timezone": "America/El_Salvador"
+    }
+}

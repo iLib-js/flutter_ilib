@@ -1,0 +1,10 @@
+{
+    "ilib.data.localeinfo": {
+        "clock": "12",
+        "currency": "KHR",
+        "firstDayOfWeek": 0,
+        "locale": "KH",
+        "region.name": "Cambodia",
+        "timezone": "Asia/Phnom_Penh"
+    }
+}

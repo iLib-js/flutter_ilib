@@ -1,0 +1,15 @@
+{
+    "ilib.data.localeinfo": {
+        "language.name": "Korean",
+        "locale": "ko",
+        "numfmt": {
+            "currencyFormats": {
+                "common": "{s}{n}",
+                "commonNegative": "-{s}{n}"
+            }
+        },
+        "scripts": [
+            "Kore"
+        ]
+    }
+}

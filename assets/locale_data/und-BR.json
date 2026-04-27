@@ -1,0 +1,10 @@
+{
+    "ilib.data.localeinfo": {
+        "clock": "24",
+        "currency": "BRL",
+        "firstDayOfWeek": 0,
+        "locale": "BR",
+        "region.name": "Brazil",
+        "timezone": "America/Sao_Paulo"
+    }
+}

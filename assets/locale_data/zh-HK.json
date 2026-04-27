@@ -1,0 +1,11 @@
+{
+    "ilib.data.localeinfo": {
+        "delimiter": {
+            "alternateQuotationEnd": "』",
+            "alternateQuotationStart": "『",
+            "quotationEnd": "」",
+            "quotationStart": "「"
+        },
+        "locale": "zh-HK"
+    }
+}

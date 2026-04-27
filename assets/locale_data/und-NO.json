@@ -1,0 +1,10 @@
+{
+    "ilib.data.localeinfo": {
+        "clock": "24",
+        "currency": "NOK",
+        "firstDayOfWeek": 1,
+        "locale": "NO",
+        "region.name": "Norway",
+        "timezone": "Europe/Oslo"
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "ilib.data.localeinfo": {
+        "delimiter": {
+            "quotationStart": "„"
+        },
+        "language.name": "Bosnian",
+        "locale": "bs",
+        "numfmt": {
+            "currencyFormats": {
+                "common": "{n} {s}",
+                "commonNegative": "-{n} {s}"
+            },
+            "decimalChar": ",",
+            "groupChar": "."
+        },
+        "scripts": [
+            "Cyrl",
+            "Latn"
+        ]
+    }
+}

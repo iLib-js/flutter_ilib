@@ -1,0 +1,13 @@
+{
+    "ilib.data.localeinfo": {
+        "clock": "12",
+        "currency": "PHP",
+        "firstDayOfWeek": 0,
+        "locale": "PH",
+        "paperSizes": {
+            "regular": "8x11"
+        },
+        "region.name": "Philippines",
+        "timezone": "Asia/Manila"
+    }
+}
