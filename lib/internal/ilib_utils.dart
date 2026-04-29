@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import '../ilib_locale.dart';
+
 String currentLocale =
     PlatformDispatcher.instance.locale.toString().replaceAll('_', '-');
 
@@ -17,6 +19,40 @@ String getJSONDataPath(String? locale) {
   }
 
   return 'packages/flutter_ilib/assets/locale_data/$locale.json';
+}
+
+List<String> getJSONDataPaths(String? locale) {
+  if (locale == null || !isValidLocale(locale)) {
+    return <String>[];
+  }
+
+  const String base = 'packages/flutter_ilib/assets/locale_data';
+  final ILibLocale loc = ILibLocale(locale);
+  final String? language = loc.language;
+  final String? script = loc.script;
+  final String? region = loc.region;
+
+  if (language == null) {
+    return <String>[];
+  }
+
+  final List<String> paths = <String>['$base/root.json'];
+
+  paths.add('$base/$language.json');
+
+  if (script != null) {
+    paths.add('$base/und_$script.json');
+    paths.add('$base/$language-$script.json');
+  }
+
+  if (region != null) {
+    paths.add('$base/und_$region.json');
+    paths.add(script != null
+        ? '$base/$language-$script-$region.json'
+        : '$base/$language-$region.json');
+  }
+
+  return paths;
 }
 
 bool isValidLocale(String lo) {

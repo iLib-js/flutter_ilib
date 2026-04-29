@@ -22,21 +22,69 @@ class ILibJS extends ChangeNotifier {
   final Map<String, Map<String, dynamic>> _localeDataMap =
       <String, Map<String, dynamic>>{};
 
+  final Map<String, Map<String, dynamic>> _fileDataCache =
+      <String, Map<String, dynamic>>{};
+
   Map<String, dynamic>? getLocaleData(String locale) => _localeDataMap[locale];
+
+  Future<Map<String, dynamic>?> _loadFile(String path) async {
+    if (_fileDataCache.containsKey(path)) {
+      return _fileDataCache[path];
+    }
+    try {
+      final String content = await rootBundle.loadString(path);
+      final Map<String, dynamic> data =
+          json.decode(content) as Map<String, dynamic>;
+      _fileDataCache[path] = data;
+      fileList.add(path);
+      return data;
+    } catch (err) {
+      logger.info('Locale data file not available, skipping: $path');
+      return null;
+    }
+  }
+
+  Map<String, dynamic> _deepMerge(
+      Map<String, dynamic> base, Map<String, dynamic> override) {
+    final Map<String, dynamic> result = Map<String, dynamic>.from(base);
+    for (final String key in override.keys) {
+      if (result.containsKey(key) &&
+          result[key] is Map<String, dynamic> &&
+          override[key] is Map<String, dynamic>) {
+        result[key] = _deepMerge(
+            result[key] as Map<String, dynamic>,
+            override[key] as Map<String, dynamic>);
+      } else {
+        result[key] = override[key];
+      }
+    }
+    return result;
+  }
+
+  Future<void> _loadLocaleData(String locale) async {
+    if (_localeDataMap.containsKey(locale)) {
+      return;
+    }
+
+    final List<String> paths = getJSONDataPaths(locale);
+    Map<String, dynamic> merged = <String, dynamic>{};
+
+    for (final String path in paths) {
+      final Map<String, dynamic>? data = await _loadFile(path);
+      if (data != null) {
+        merged = _deepMerge(merged, data);
+      }
+    }
+
+    if (merged.isNotEmpty) {
+      _localeDataMap[locale] = merged;
+    }
+  }
 
   Future<void> loadJSON() async {
     final String curlocale = getLocale();
-    final String dataPath = getJSONDataPath(curlocale);
-    if (dataPath.isNotEmpty && !fileList.contains(dataPath)) {
-      try {
-        final String jsonContent = await rootBundle.loadString(dataPath);
-        final Map<String, dynamic> jsonData =
-            json.decode(jsonContent) as Map<String, dynamic>;
-        _localeDataMap[curlocale] = jsonData;
-        fileList.add(dataPath);
-      } catch (err) {
-        logger.error('Failed to load locale JSON data: $err');
-      }
+    if (isValidLocale(curlocale)) {
+      await _loadLocaleData(curlocale);
     }
 
     logger.info('Notifying listeners after JSON loading');
@@ -71,19 +119,7 @@ class ILibJS extends ChangeNotifier {
       return;
     }
 
-    final String jsonPath = getJSONDataPath(locale);
-    print(jsonPath);
-    if (jsonPath.isNotEmpty && !fileList.contains(jsonPath)) {
-      fileList.add(jsonPath);
-      try {
-        final String jsonContent = await loadJSONwithPath(jsonPath);
-        final Map<String, dynamic> jsonData =
-            json.decode(jsonContent) as Map<String, dynamic>;
-        _localeDataMap[locale] = jsonData;
-      } catch (err) {
-        logger.error('Failed to load locale JSON data: $err');
-      }
-    }
+    await _loadLocaleData(locale);
 
     if (currentLocale != locale) {
       notifyListeners();
