@@ -46,10 +46,13 @@ List<String> getJSONDataPaths(String? locale) {
   }
 
   if (region != null) {
-    paths.add('$base/und_$region.json');
-    paths.add(script != null
-        ? '$base/$language-$script-$region.json'
-        : '$base/$language-$region.json');
+    paths.add('$base/und-$region.json');
+    if (script != null) {
+      paths.add('$base/$language-$region.json');
+      paths.add('$base/$language-$script-$region.json');
+    } else {
+      paths.add('$base/$language-$region.json');
+    }
   }
 
   return paths;

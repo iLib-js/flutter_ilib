@@ -25,7 +25,25 @@ class ILibJS extends ChangeNotifier {
   final Map<String, Map<String, dynamic>> _fileDataCache =
       <String, Map<String, dynamic>>{};
 
-  Map<String, dynamic>? getLocaleData(String locale) => _localeDataMap[locale];
+  Map<String, dynamic>? getLocaleData(String locale) {
+    return _localeDataMap[locale] ?? _buildLocaleDataFromCache(locale);
+  }
+
+  Map<String, dynamic>? _buildLocaleDataFromCache(String locale) {
+    final List<String> paths = getJSONDataPaths(locale);
+    Map<String, dynamic> merged = <String, dynamic>{};
+    for (final String path in paths) {
+      final Map<String, dynamic>? data = _fileDataCache[path];
+      if (data != null) {
+        merged = _deepMerge(merged, data);
+      }
+    }
+    if (merged.isNotEmpty) {
+      _localeDataMap[locale] = merged;
+      return merged;
+    }
+    return null;
+  }
 
   Future<Map<String, dynamic>?> _loadFile(String path) async {
     if (_fileDataCache.containsKey(path)) {
@@ -67,6 +85,8 @@ class ILibJS extends ChangeNotifier {
     }
 
     final List<String> paths = getJSONDataPaths(locale);
+    //paths.forEach(print);
+
     Map<String, dynamic> merged = <String, dynamic>{};
 
     for (final String path in paths) {
