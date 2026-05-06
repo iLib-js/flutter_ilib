@@ -18,6 +18,11 @@ String getJSONDataPath(String? locale) {
     return '';
   }
 
+  final ILibLocale loc = ILibLocale(locale);
+  if (loc.language == null && loc.region != null) {
+    return 'packages/flutter_ilib/assets/locale_data/und-${loc.region}.json';
+  }
+
   return 'packages/flutter_ilib/assets/locale_data/$locale.json';
 }
 
@@ -31,6 +36,11 @@ List<String> getJSONDataPaths(String? locale) {
   final String? language = loc.language;
   final String? script = loc.script;
   final String? region = loc.region;
+
+  // Region-only locale such as "MK" should resolve via und-REGION fallback.
+  if (language == null && region != null) {
+    return <String>['$base/root.json', '$base/und-$region.json'];
+  }
 
   if (language == null) {
     return <String>[];
@@ -59,13 +69,15 @@ List<String> getJSONDataPaths(String? locale) {
 }
 
 bool isValidLocale(String lo) {
-  const String pattern =
+  const String bcp47Pattern =
       r'(^|[^a-z])([a-z][a-z][a-z]?)(-([A-Z][a-z][a-z][a-z]))?(-([A-Z][A-Z]))?$';
-  final RegExp regExp = RegExp(pattern);
-  if (!regExp.hasMatch(lo)) {
-    return false;
+  const String regionOnlyPattern = r'^[A-Z][A-Z]$';
+
+  if (RegExp(bcp47Pattern).hasMatch(lo)) {
+    return true;
   }
-  return true;
+
+  return RegExp(regionOnlyPattern).hasMatch(lo);
 }
 
 List<String> getSupportedLocales() {
