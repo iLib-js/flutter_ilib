@@ -10,6 +10,11 @@ add_library(${PLUGIN_NAME} SHARED
   "flutter_ilib_plugin.cc"
 )
 apply_standard_settings(${PLUGIN_NAME})
+target_compile_options(${PLUGIN_NAME} PRIVATE
+  -Wno-error=ignored-optimization-argument
+  -Wno-error=unknown-warning-option
+  -Wno-error=unused-command-line-argument
+)
 set_target_properties(${PLUGIN_NAME} PROPERTIES
   CXX_VISIBILITY_PRESET hidden)
 target_compile_definitions(${PLUGIN_NAME} PRIVATE FLUTTER_PLUGIN_IMPL)
