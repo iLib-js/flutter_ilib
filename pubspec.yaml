@@ -44,6 +44,4 @@ flutter:
   # Assets used in this plugin package.
   assets:
     - assets/
-    - assets/locales/
     - assets/locale_data/
-    - assets/js/ilib-init.js
