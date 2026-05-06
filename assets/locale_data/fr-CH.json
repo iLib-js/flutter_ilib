@@ -6,7 +6,6 @@
         },
         "locale": "fr-CH",
         "numfmt": {
-            "groupChar": "'",
             "negativepctFmt": "-{n}%",
             "pctFmt": "{n}%"
         }
