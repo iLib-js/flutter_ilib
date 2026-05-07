@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [flutter_ilib_test.dart] file.');
   late FlutterILib flutterIlibPlugin;
   setUpAll(() async {
     flutterIlibPlugin = FlutterILib.instance;
-    await ILibJS.instance.loadJSON();
-    ILibJS.instance.initILib();
+    await ILibLoader.instance.loadJSON();
+    ILibLoader.instance.initILib();
   });
   group('Basic', () {
     test('getCLDRVersion',

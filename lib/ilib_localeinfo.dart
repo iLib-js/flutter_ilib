@@ -20,7 +20,8 @@ class ILibLocaleInfo {
     final String spec = _localeObj.getSpec();
     locale = spec.isNotEmpty ? spec : null;
     final String lookupLocale = locale ?? ilib_utils.getLocale();
-    _info = (ILibJS.instance.getLocaleData(lookupLocale)?['ilib.data.localeinfo']
+    _info = (ILibLoader.instance
+                .getLocaleData(lookupLocale)?['ilib.data.localeinfo']
             as Map<String, dynamic>?) ??
         Map<String, dynamic>.from(_defaultInfo);
   }
@@ -88,8 +89,7 @@ class ILibLocaleInfo {
 
   /// Return whether this locale commonly uses the 12- or the 24-hour clock.
   String getClock() {
-    return (_info['clock'] as String?) ??
-        (_defaultInfo['clock'] as String);
+    return (_info['clock'] as String?) ?? (_defaultInfo['clock'] as String);
   }
 
   /// Return the locale that this info object was created with.
@@ -99,8 +99,7 @@ class ILibLocaleInfo {
 
   /// Return the name of the measuring system commonly used in the locale.
   String getUnits() {
-    return (_info['units'] as String?) ??
-        (_defaultInfo['units'] as String);
+    return (_info['units'] as String?) ?? (_defaultInfo['units'] as String);
   }
 
   /// Return the name of the calendar commonly used in the locale.
@@ -131,8 +130,7 @@ class ILibLocaleInfo {
   ///
   /// Days are still numbered the standard way with 0 for Sunday through 6 for Saturday.
   int getWeekEndEnd() {
-    return (_info['weekendEnd'] as int?) ??
-        (_defaultInfo['weekendEnd'] as int);
+    return (_info['weekendEnd'] as int?) ?? (_defaultInfo['weekendEnd'] as int);
   }
 
   /// Return the default time zone for this locale.
@@ -148,8 +146,7 @@ class ILibLocaleInfo {
 
   /// Return the decimal separator for formatted numbers in this locale for native script.
   String getNativeDecimalSeparator() {
-    return (_nativeNumfmt?['decimalChar'] as String?) ??
-        getDecimalSeparator();
+    return (_nativeNumfmt?['decimalChar'] as String?) ?? getDecimalSeparator();
   }
 
   /// Return the separator character used to separate groups of digits on the
@@ -161,8 +158,7 @@ class ILibLocaleInfo {
   /// Return the separator character used to separate groups of digits on the
   /// integer side of the decimal character for the native script.
   String getNativeGroupingSeparator() {
-    return (_nativeNumfmt?['groupChar'] as String?) ??
-        getGroupingSeparator();
+    return (_nativeNumfmt?['groupChar'] as String?) ?? getGroupingSeparator();
   }
 
   /// Return the minimum number of digits grouped together on the integer side for the first (primary) group.

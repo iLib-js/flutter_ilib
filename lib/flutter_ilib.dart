@@ -14,8 +14,8 @@ export 'ilib_localeinfo.dart';
 
 class FlutterILib extends ChangeNotifier {
   FlutterILib._internal() {
-    ILibJS.instance.addListener(() {
-      ILibJS.instance.initILib();
+    ILibLoader.instance.addListener(() {
+      ILibLoader.instance.initILib();
       notifyListeners();
     });
   }
@@ -25,7 +25,7 @@ class FlutterILib extends ChangeNotifier {
   final LogAdapter logger = Logger();
 
   /// Return whether iLib is ready
-  bool get isILibReady => ILibJS.instance.isILibReady;
+  bool get isILibReady => ILibLoader.instance.isILibReady;
 
   /// Return the current version of flutter_ilib.
   String get getVersion => '2.0.0';
@@ -39,6 +39,6 @@ class FlutterILib extends ChangeNotifier {
   /// this should be called at the appropriate time when the locale changes.
   Future<void> loadLocaleData(String? locale) async {
     logger.debug('[FlutterILib] Loading locale data for $locale');
-    await ILibJS.instance.loadILibLocaleData(locale);
+    await ILibLoader.instance.loadILibLocaleData(locale);
   }
 }

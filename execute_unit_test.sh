@@ -5,9 +5,6 @@ test_log() {
   echo "[flutter_ilib] $1"
 }
 
-test_log "Set LIBQUICKJSC_TEST_PATH"
-export LIBQUICKJSC_TEST_PATH="${PWD}/test/linux/libquickjs_c_bridge_plugin.so"
-
 test_log "Execute unit tests..."
 echo ""
 FAILED_TESTS=()
@@ -32,4 +29,3 @@ else
   test_log "✅ All tests passed!"
   exit 0
 fi
-
