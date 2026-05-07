@@ -21,7 +21,6 @@ flutter_ilib (Dart/Flutter Plugin)
     │
     ├── Internal (lib/internal/)
     │   ├── ilib_utils.dart (locale path generation, validation)
-    │   ├── ilib_js.dart (JS runtime management)
     │   └── logger/ (logging)
     │
     └── Assets (assets/)
@@ -41,7 +40,7 @@ flutter_ilib (Dart/Flutter Plugin)
    ↓
 2. System Locale Detection
    ↓
-3. ILibJS.loadJSON() invoked
+3. ILibLoader.loadJSON() invoked
    ↓
 4. getJSONDataPaths(locale) generates load sequence
    ↓
@@ -49,7 +48,7 @@ flutter_ilib (Dart/Flutter Plugin)
    ↓
 6. Deep merge all loaded data
    ↓
-7. Cache merged result in ILibJS._localeDataMap
+7. Cache merged result in ILibLoader._localeDataMap
    ↓
 8. API calls access merged data (ILibLocaleInfo, ILibDate, etc.)
 ```
@@ -180,20 +179,22 @@ mapper.toLocaleString(String) → String
 
 **Example**: Turkish `İ` (capital dotted I) → `i̇` (lowercase dotted i)
 
-### 5. ILibJS Module (`lib/ilib_init.dart`)
+### 5. ILibLoader Module (`lib/ilib_init.dart`)
 
-**Responsibility**: Manage JavaScript runtime and locale data cache
+**Responsibility**: Manage locale data loading and caching
 
 **Pattern**: Singleton
 
 **Key Methods**:
 ```dart
-ILibJS.instance                      // Global access
+ILibLoader.instance                  // Global access
 getLocaleData(locale) → Map?         // Cached data
-_buildLocaleDataFromCache(locale)    // Build from files
-_deepMerge(base, override) → Map     // Merge strategy
-loadJSON()                           // Initialize
-loadJSONwithPath(path) → String      // Load custom path
+_mergeFromCache(locale)              // Build from file cache
+_deepMerge(base, override) → Map    // Merge strategy
+loadJSON()                           // Initialize with current locale
+initILib()                           // Mark ready (validates data loaded)
+loadILibLocaleData(locale)           // Load additional locale
+loadILibLocaleDataAll()              // Load all supported locales
 ```
 
 **Caching Strategy**:
@@ -223,7 +224,7 @@ flutter_ilib/
 │   │   └── Case conversion
 │   │
 │   ├── ilib_init.dart
-│   │   ├── ILibJS singleton
+│   │   ├── ILibLoader singleton
 │   │   ├── Data loading
 │   │   └── Caching
 │   │
@@ -360,7 +361,7 @@ Updated 5 tests to match implementation:
 ## Design Patterns
 
 ### Singleton Pattern
-`ILibJS` is a singleton for global locale data access.
+`ILibLoader` is a singleton for global locale data access.
 
 ### Factory Pattern
 `ILibLocale` uses factory constructors for flexible construction.
@@ -369,7 +370,7 @@ Updated 5 tests to match implementation:
 `getJSONDataPaths()` implements merge strategy for locale data.
 
 ### Caching Pattern
-Two-level cache in `ILibJS`:
+Two-level cache in `ILibLoader`:
 - File cache: Raw JSON from disk
 - Locale cache: Merged data ready for use
 
