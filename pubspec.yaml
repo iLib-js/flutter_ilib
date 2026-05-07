@@ -44,4 +44,4 @@ flutter:
   # Assets used in this plugin package.
   assets:
     - assets/
-    - assets/locale_data/
+    - assets/locale/
