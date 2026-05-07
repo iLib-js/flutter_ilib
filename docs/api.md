@@ -293,19 +293,19 @@ print(mapper3.toUpperCase('straße'));     // 'STRASSE' (German-specific)
 
 ---
 
-## ILibJS (Internal) API
+## ILibLoader (Internal) API
 
 ### Purpose
-Manage JavaScript runtime and locale data caching.
+Manage locale data loading and caching.
 
 ### Access
 
 ```dart
 // Global singleton
-final js = ILibJS.instance;
+final loader = ILibLoader.instance;
 
 // Check readiness
-if (js.isILibReady) {
+if (loader.isILibReady) {
   // Safe to use
 }
 ```
@@ -316,11 +316,17 @@ if (js.isILibReady) {
 /// Get cached locale data
 Map<String, dynamic>? getLocaleData(String locale)
 
-/// Load locale data
-Future<void> _loadLocaleData(String locale)
+/// Load current locale data and notify listeners
+Future<void> loadJSON()
 
-/// Initialize iLib
+/// Mark as prepared (validates data is loaded)
 void initILib()
+
+/// Load additional locale data
+Future<void> loadILibLocaleData(String? locale)
+
+/// Load all supported locales
+Future<void> loadILibLocaleDataAll()
 
 /// Listen for readiness
 void addListener(VoidCallback callback)
@@ -330,16 +336,16 @@ void removeListener(VoidCallback callback)
 ### Examples
 
 ```dart
-final ilib = ILibJS.instance;
+final loader = ILibLoader.instance;
 
 // Listen for initialization
-ilib.addListener(() {
+loader.addListener(() {
   print('iLib is ready!');
   // Now safe to use ILibLocaleInfo, etc.
 });
 
 // Check if ready
-if (ilib.isILibReady) {
+if (loader.isILibReady) {
   final info = ILibLocaleInfo('en-US');
   print(info.getRegionName());
 }
@@ -416,7 +422,7 @@ class ILibDateFmtOptions {
 ```dart
 // Issue: getRegionName() returns null
 if (info.getRegionName() == null) {
-  // Locale data not loaded yet - wait for ILibJS.isILibReady
+  // Locale data not loaded yet - wait for ILibLoader.isILibReady
 }
 
 // Issue: Locale not recognized
@@ -427,7 +433,7 @@ if (!isValidLocale(userInput)) {
 
 // Issue: Date formatting produces unexpected output
 // Ensure locale is loaded before formatting
-if (ILibJS.instance.isILibReady) {
+if (ILibLoader.instance.isILibReady) {
   final date = ILibDate(DateTime.now());
   print(date.format(...));
 }

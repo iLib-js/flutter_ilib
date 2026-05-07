@@ -13,7 +13,6 @@ version: 2.0.0
 - Flutter SDK: 3.3.0+
 - Dart SDK: 3.1.5+
 - Git
-- CMake (for Linux/WebOS builds)
 
 ### Initial Setup
 
@@ -51,12 +50,6 @@ flutter test
     "editor.defaultFormatter": "Dart-Code.dart-code"
   }
 }
-```
-
-#### Android Studio / IntelliJ
-```
-File → Settings → Plugins → Search "Flutter" → Install
-File → Settings → Languages & Frameworks → Dart → Enable
 ```
 
 ### Code Style & Formatting
@@ -217,33 +210,6 @@ dart format lib/ --output=none
 dart compile exe lib/flutter_ilib.dart -o output
 ```
 
-### Linux Plugin
-
-```bash
-cd linux
-
-# Generate build files
-cmake -Bbuild -GNinja
-
-# Compile
-cmake --build build
-
-# Clean
-cmake --build build --target clean
-```
-
-### WebOS Plugin
-
-```bash
-cd webos
-
-# Similar to Linux
-cmake -Bbuild -GNinja
-cmake --build build
-```
-
----
-
 ## Code Conventions
 
 ### Naming
@@ -272,7 +238,7 @@ Each Dart file should follow:
 ```dart
 // 1. Imports
 import 'dart:ui';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'relative/path.dart';
 
 // 2. Part declarations (if used)
@@ -524,7 +490,7 @@ if (!isValidLocale(myLocale)) {
 final paths = getJSONDataPaths(myLocale);
 print('Paths: $paths');  // Check file paths
 
-final data = ILibJS.instance.getLocaleData(myLocale);
+final data = ILibLoader.instance.getLocaleData(myLocale);
 print('Data: $data');    // Check if loaded
 ```
 

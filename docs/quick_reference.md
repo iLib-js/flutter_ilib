@@ -148,11 +148,11 @@ mapper.toUpperCase(str)
 
 | Document | Purpose |
 |----------|---------|
-| [flutter_ilib_overview.md](./flutter_ilib_overview.md) | This file (Quick Reference) |
-| [flutter_ilib_architecture.md](./flutter_ilib_architecture.md) | System design & data flow |
-| [flutter_ilib_api.md](./flutter_ilib_api.md) | Complete API reference |
-| [flutter_ilib_development.md](./flutter_ilib_development.md) | Development & testing guide |
-| [README.md](./README.md) | User guide & examples |
+| [quick_reference.md](./quick_reference.md) | This file (Quick Reference) |
+| [architecture.md](./architecture.md) | System design & data flow |
+| [api.md](./api.md) | Complete API reference |
+| [development.md](./development.md) | Development & testing guide |
+| [README.md](../README.md) | User guide & examples |
 
 ## Support
 
