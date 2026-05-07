@@ -24,7 +24,7 @@ flutter_ilib (Dart/Flutter Plugin)
     │   └── logger/ (logging)
     │
     └── Assets (assets/)
-        └── locale_data/ (100+ locale JSON files)
+        └── locale/ (100+ locale JSON files)
             ├── root.json
             ├── {language}.json
             ├── und-{REGION}.json
@@ -146,7 +146,7 @@ getWeekEndStart() → int
 getWeekEndEnd() → int
 ```
 
-**Data Source**: Downloaded locale JSON files in `assets/locale_data/`
+**Data Source**: Downloaded locale JSON files in `assets/locale/`
 
 ### 3. ILibDate Module (`lib/ilib_date.dart`)
 
@@ -240,7 +240,7 @@ flutter_ilib/
 │           └── logger_selector.dart
 │
 ├── assets/
-│   └── locale_data/
+│   └── locale/
 │       ├── root.json                  (Base data)
 │       ├── en.json, ko.json, ...      (100+ language files)
 │       ├── und-US.json, und-MK.json   (100+ region files)
@@ -361,7 +361,7 @@ Updated 5 tests to match implementation:
 ## Design Patterns
 
 ### Singleton Pattern
-`ILibLoader` is a singleton for global locale data access.
+`ILibJS` is a singleton for global locale data access.
 
 ### Factory Pattern
 `ILibLocale` uses factory constructors for flexible construction.
@@ -370,7 +370,7 @@ Updated 5 tests to match implementation:
 `getJSONDataPaths()` implements merge strategy for locale data.
 
 ### Caching Pattern
-Two-level cache in `ILibLoader`:
+Two-level cache in `ILibJS`:
 - File cache: Raw JSON from disk
 - Locale cache: Merged data ready for use
 
@@ -405,7 +405,7 @@ Two-level cache in `ILibLoader`:
 - `plugin_platform_interface: ^2.0.2` - Multi-platform support
 
 ### Asset Dependencies
-- `assets/locale_data/*.json` - iLib locale data files (100+ files)
+- `assets/locale/*.json` - iLib locale data files (100+ files)
 
 ---
 

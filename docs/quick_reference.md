@@ -82,7 +82,7 @@ lib/
 └── internal/
     └── ilib_utils.dart      (Utilities)
 
-assets/locale_data/
+assets/locale/
 ├── root.json                (Base defaults)
 ├── {language}.json          (Language files)
 ├── und-{REGION}.json        (Region files)

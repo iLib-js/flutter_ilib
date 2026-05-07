@@ -314,7 +314,7 @@ String? getRegionName() {
 
 ### Step 1: Create Data File
 
-Create `assets/locale_data/und-XX.json` for region-only:
+Create `assets/locale/und-XX.json` for region-only:
 ```json
 {
   "ilib.data.localeinfo": {
@@ -326,7 +326,7 @@ Create `assets/locale_data/und-XX.json` for region-only:
 }
 ```
 
-Or `assets/locale_data/xx-XX.json` for full locale:
+Or `assets/locale/xx-XX.json` for full locale:
 ```json
 {
   "ilib.data.localeinfo": {
@@ -342,8 +342,8 @@ Or `assets/locale_data/xx-XX.json` for full locale:
 ```yaml
 flutter:
   assets:
-    - assets/locale_data/und-XX.json
-    - assets/locale_data/xx-XX.json
+    - assets/locale/und-XX.json
+    - assets/locale/xx-XX.json
 ```
 
 ### Step 3: Add Tests

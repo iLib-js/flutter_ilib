@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ilib/internal/ilib_utils.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-const String _base = 'packages/flutter_ilib/assets/locale_data';
+const String _base = 'packages/flutter_ilib/assets/locale';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

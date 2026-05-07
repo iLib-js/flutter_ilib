@@ -20,10 +20,10 @@ String getJSONDataPath(String? locale) {
 
   final ILibLocale loc = ILibLocale(locale);
   if (loc.language == null && loc.region != null) {
-    return 'packages/flutter_ilib/assets/locale_data/und-${loc.region}.json';
+    return 'packages/flutter_ilib/assets/locale/und-${loc.region}.json';
   }
 
-  return 'packages/flutter_ilib/assets/locale_data/$locale.json';
+  return 'packages/flutter_ilib/assets/locale/$locale.json';
 }
 
 List<String> getJSONDataPaths(String? locale) {
@@ -31,7 +31,7 @@ List<String> getJSONDataPaths(String? locale) {
     return <String>[];
   }
 
-  const String base = 'packages/flutter_ilib/assets/locale_data';
+  const String base = 'packages/flutter_ilib/assets/locale';
   final ILibLocale loc = ILibLocale(locale);
   final String? language = loc.language;
   final String? script = loc.script;
