@@ -1,0 +1,8 @@
+{
+    "ilib.data.localeinfo": {
+        "locale": "en-AU",
+        "numfmt": {
+            "exponential": "e"
+        }
+    }
+}

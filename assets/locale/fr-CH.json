@@ -1,0 +1,13 @@
+{
+    "ilib.data.localeinfo": {
+        "delimiter": {
+            "alternateQuotationEnd": "›",
+            "alternateQuotationStart": "‹"
+        },
+        "locale": "fr-CH",
+        "numfmt": {
+            "negativepctFmt": "-{n}%",
+            "pctFmt": "{n}%"
+        }
+    }
+}

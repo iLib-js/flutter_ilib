@@ -1,0 +1,13 @@
+{
+    "ilib.data.localeinfo": {
+        "clock": "24",
+        "delimiter": {
+            "alternateQuotationEnd": "“",
+            "alternateQuotationStart": "”"
+        },
+        "locale": "fr-CA",
+        "numfmt": {
+            "groupChar": " "
+        }
+    }
+}

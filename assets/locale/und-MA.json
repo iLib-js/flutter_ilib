@@ -1,0 +1,9 @@
+{
+    "ilib.data.localeinfo": {
+        "clock": "24",
+        "currency": "MAD",
+        "locale": "MA",
+        "region.name": "Morocco",
+        "timezone": "Africa/Casablanca"
+    }
+}

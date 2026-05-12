@@ -1,0 +1,11 @@
+{
+    "ilib.data.localeinfo": {
+        "calendar": "thaisolar",
+        "clock": "24",
+        "currency": "THB",
+        "firstDayOfWeek": 0,
+        "locale": "TH",
+        "region.name": "Thailand",
+        "timezone": "Asia/Bangkok"
+    }
+}

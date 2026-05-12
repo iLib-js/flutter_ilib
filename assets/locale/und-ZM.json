@@ -1,0 +1,9 @@
+{
+    "ilib.data.localeinfo": {
+        "clock": "12",
+        "currency": "ZMW",
+        "locale": "ZM",
+        "region.name": "Zambia",
+        "timezone": "Africa/Lusaka"
+    }
+}

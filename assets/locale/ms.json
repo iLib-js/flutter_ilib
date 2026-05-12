@@ -1,0 +1,16 @@
+{
+    "ilib.data.localeinfo": {
+        "language.name": "Malay",
+        "locale": "ms",
+        "numfmt": {
+            "currencyFormats": {
+                "common": "{s}{n}",
+                "commonNegative": "-{s}{n}"
+            }
+        },
+        "scripts": [
+            "Latn",
+            "Arab"
+        ]
+    }
+}

@@ -1,82 +1,111 @@
-import 'dart:convert';
-
 import 'flutter_ilib.dart';
+import 'internal/ilib_utils.dart' as ilib_utils;
 
 class ILibLocaleInfo {
-  /// [lo] Set the locale for which the info is sought
-  ILibLocaleInfo([String lo = 'en-US']) {
-    locale = lo;
-    //ILibJS.instance.loadILibLocaleData(locale);
+  /// [lo] Set the locale for which the info is sought.
+  /// Accepts a [String] locale spec, an [ILibLocale] instance, or nothing (undefined).
+  factory ILibLocaleInfo([Object? lo]) {
+    final ILibLocale localeObj;
+    if (lo is String) {
+      localeObj = ILibLocale(lo);
+    } else if (lo is ILibLocale) {
+      localeObj = ILibLocale(lo);
+    } else {
+      localeObj = ILibLocale();
+    }
+    return ILibLocaleInfo._internal(localeObj);
   }
+
+  ILibLocaleInfo._internal(this._localeObj) {
+    final String spec = _localeObj.getSpec();
+    locale = spec.isNotEmpty ? spec : null;
+    final String lookupLocale = locale ?? ilib_utils.getLocale();
+    _info = (ILibLoader.instance
+                .getLocaleData(lookupLocale)?['ilib.data.localeinfo']
+            as Map<String, dynamic>?) ??
+        Map<String, dynamic>.from(_defaultInfo);
+  }
+
   String? locale;
+  late ILibLocale _localeObj;
+  Map<String, dynamic> _info = <String, dynamic>{};
+
+  static const Map<String, dynamic> _defaultInfo = <String, dynamic>{
+    'calendar': 'gregorian',
+    'clock': '24',
+    'currency': 'USD',
+    'delimiter': <String, dynamic>{
+      'quotationStart': '\u201c',
+      'quotationEnd': '\u201d',
+      'alternateQuotationStart': '\u2018',
+      'alternateQuotationEnd': '\u2019',
+    },
+    'firstDayOfWeek': 1,
+    'meridiems': 'gregorian',
+    'numfmt': <String, dynamic>{
+      'script': 'Latn',
+      'decimalChar': '.',
+      'groupChar': ',',
+      'pctChar': '%',
+      'exponential': 'E',
+      'prigroupSize': 3,
+      'currencyFormats': <String, dynamic>{
+        'common': '{s} {n}',
+        'commonNegative': '-{s} {n}',
+        'iso': '{s} {n}',
+        'isoNegative': '({s} {n})',
+      },
+      'negativenumFmt': '-{n}',
+      'pctFmt': '{n}%',
+      'negativepctFmt': '-{n}%',
+      'roundingMode': 'halfdown',
+      'secgroupSize': null,
+      'useNative': false,
+    },
+    'paperSizes': <String, dynamic>{'regular': 'A4'},
+    'timezone': 'Etc/UTC',
+    'units': 'metric',
+    'weekendEnd': 0,
+    'weekendStart': 6,
+  };
+
+  Map<String, dynamic> get _numfmt =>
+      (_info['numfmt'] as Map<String, dynamic>?) ??
+      (_defaultInfo['numfmt'] as Map<String, dynamic>);
+
+  Map<String, dynamic>? get _nativeNumfmt =>
+      _info['native_numfmt'] as Map<String, dynamic>?;
 
   /// Return the name of the locale's language in English.
   String getLanguageName() {
-    final String jscode1 = 'new LocaleInfo("$locale").getLanguageName()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+    return (_info['language.name'] as String?) ?? '';
   }
 
   /// Return the name of the locale's region in English.
   String? getRegionName() {
-    final String jscode1 = 'new LocaleInfo("$locale").getRegionName()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result.isNotEmpty ? result : null;
+    final String? value = _info['region.name'] as String?;
+    return (value != null && value.isNotEmpty) ? value : null;
   }
 
   /// Return whether this locale commonly uses the 12- or the 24-hour clock.
   String getClock() {
-    final String jscode1 = 'new LocaleInfo("$locale").getClock()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+    return (_info['clock'] as String?) ?? (_defaultInfo['clock'] as String);
   }
 
   /// Return the locale that this info object was created with.
   ILibLocale getLocale() {
-    final String jscode =
-        'JSON.stringify(new LocaleInfo("$locale").getLocale())';
-
-    try {
-      final String result = ILibJS.instance.evaluate(jscode).stringResult;
-
-      // Attempt to parse JSON
-      final Map<String, dynamic> map =
-          json.decode(result) as Map<String, dynamic>;
-
-      // Extract values safely
-      final String language = _getStringValue(map, 'language');
-      final String region = _getStringValue(map, 'region');
-      final String script = _getStringValue(map, 'script');
-      final String variant = _getStringValue(map, 'variant');
-
-      return ILibLocale(language, region, variant, script);
-    } on FormatException catch (e) {
-      // Directly rethrow the original FormatException
-      throw FormatException('Failed to parse locale JSON: ${e.message}');
-    } catch (e) {
-      // Handle all other exceptions
-      throw Exception('An unexpected error occurred: $e');
-    }
-  }
-
-  // Helper method to safely extract string values from a map
-  String _getStringValue(Map<String, dynamic> map, String key) {
-    final dynamic value = map[key];
-    return (value is String && value.isNotEmpty) ? value : '';
+    return _localeObj;
   }
 
   /// Return the name of the measuring system commonly used in the locale.
   String getUnits() {
-    final String jscode1 = 'new LocaleInfo("$locale").getUnits()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+    return (_info['units'] as String?) ?? (_defaultInfo['units'] as String);
   }
 
   /// Return the name of the calendar commonly used in the locale.
   String getCalendar() {
-    final String jscode1 = 'new LocaleInfo("$locale").getCalendar()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+    return (_info['calendar'] as String?) ??
+        (_defaultInfo['calendar'] as String);
   }
 
   /// Returns the day of week that starts weeks in the current locale.
@@ -85,249 +114,212 @@ class ILibLocaleInfo {
   /// but calendars should be displayed and weeks calculated with the day of week returned
   /// from this function as the first day of the week.
   int getFirstDayOfWeek() {
-    final String jscode1 = 'new LocaleInfo("$locale").getFirstDayOfWeek()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return int.parse(result);
+    return (_info['firstDayOfWeek'] as int?) ??
+        (_defaultInfo['firstDayOfWeek'] as int);
   }
 
   /// Returns the day of week that starts weekend in the current locale.
   ///
   /// Days are still numbered the standard way with 0 for Sunday through 6 for Saturday.
   int getWeekEndStart() {
-    final String jscode1 = 'new LocaleInfo("$locale").getWeekEndStart()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return int.parse(result);
+    return (_info['weekendStart'] as int?) ??
+        (_defaultInfo['weekendStart'] as int);
   }
 
   /// Returns the day of week that ends weekend in the current locale.
   ///
   /// Days are still numbered the standard way with 0 for Sunday through 6 for Saturday.
   int getWeekEndEnd() {
-    final String jscode1 = 'new LocaleInfo("$locale").getWeekEndEnd()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return int.parse(result);
+    return (_info['weekendEnd'] as int?) ?? (_defaultInfo['weekendEnd'] as int);
   }
 
   /// Return the default time zone for this locale.
   String getTimeZone() {
-    final String jscode1 = 'new LocaleInfo("$locale").getTimeZone()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+    return (_info['timezone'] as String?) ??
+        (_defaultInfo['timezone'] as String);
   }
 
   /// Return the decimal separator for formatted numbers in this locale
   String getDecimalSeparator() {
-    final String jscode1 = 'new LocaleInfo("$locale").getDecimalSeparator()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+    return (_numfmt['decimalChar'] as String?) ?? '.';
   }
 
   /// Return the decimal separator for formatted numbers in this locale for native script.
   String getNativeDecimalSeparator() {
-    final String jscode1 =
-        'new LocaleInfo("$locale").getNativeDecimalSeparator()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+    return (_nativeNumfmt?['decimalChar'] as String?) ?? getDecimalSeparator();
   }
 
   /// Return the separator character used to separate groups of digits on the
   /// integer side of the decimal character.
   String getGroupingSeparator() {
-    final String jscode1 = 'new LocaleInfo("$locale").getGroupingSeparator()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+    return (_numfmt['groupChar'] as String?) ?? ',';
   }
 
   /// Return the separator character used to separate groups of digits on the
   /// integer side of the decimal character for the native script.
   String getNativeGroupingSeparator() {
-    final String jscode1 =
-        'new LocaleInfo("$locale").getNativeGroupingSeparator()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+    return (_nativeNumfmt?['groupChar'] as String?) ?? getGroupingSeparator();
   }
 
   /// Return the minimum number of digits grouped together on the integer side for the first (primary) group.
   int getPrimaryGroupingDigits() {
-    final String jscode1 =
-        'new LocaleInfo("$locale").getPrimaryGroupingDigits()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return int.parse(result);
+    final dynamic val = _numfmt['prigroupSize'];
+    if (val == null) {
+      return 0;
+    }
+    return (val as num).toInt();
   }
 
   /// Return the minimum number of digits grouped together on the integer side for the second or more (secondary) group.
   int getSecondaryGroupingDigits() {
-    final String jscode1 =
-        'new LocaleInfo("$locale").getSecondaryGroupingDigits()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return int.parse(result);
+    final dynamic val = _numfmt['secgroupSize'];
+    if (val == null) {
+      return 0;
+    }
+    return (val as num).toInt();
   }
 
   /// Return the format template used to format percentages in this locale
   String getPercentageFormat() {
-    final String jscode1 = 'new LocaleInfo("$locale").getPercentageFormat()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+    return (_numfmt['pctFmt'] as String?) ?? '{n}%';
   }
 
   /// Return the format template used to format percentages in this locale with negative amounts
   String getNegativePercentageFormat() {
-    final String jscode1 =
-        'new LocaleInfo("$locale").getNegativePercentageFormat()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+    return (_numfmt['negativepctFmt'] as String?) ?? '-{n}%';
   }
 
   /// Return the symbol used for percentages in this locale.
   String getPercentageSymbol() {
-    final String jscode1 = 'new LocaleInfo("$locale").getPercentageSymbol()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+    return (_numfmt['pctChar'] as String?) ?? '%';
   }
 
   /// Return the symbol used for exponential in this locale.
   String getExponential() {
-    final String jscode1 = 'new LocaleInfo("$locale").getExponential()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+    return (_numfmt['exponential'] as String?) ?? 'E';
   }
 
   /// Return the symbol used for exponential in this locale for native script.
   String getNativeExponential() {
-    final String jscode1 = 'new LocaleInfo("$locale").getNativeExponential()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+    return (_nativeNumfmt?['exponential'] as String?) ?? getExponential();
   }
 
   /// Return the symbol used for percentages in this locale for native script.
   String getNativePercentageSymbol() {
-    final String jscode1 =
-        'new LocaleInfo("$locale").getNativePercentageSymbol()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+    return (_nativeNumfmt?['pctChar'] as String?) ?? getPercentageSymbol();
   }
 
   /// Return the format template used to format negative numbers in this locale.
   String getNegativeNumberFormat() {
-    final String jscode1 =
-        'new LocaleInfo("$locale").getNegativeNumberFormat()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+    return (_numfmt['negativenumFmt'] as String?) ?? '-{n}';
   }
 
   /// Return [CurrencyFormats] containing the format templates for formatting currencies in this locale.
   ///
   /// The object has a number of properties in it that each are a particular style of format.
   CurrencyFormats getCurrencyFormats() {
-    String result = '';
-
-    final String jscode1 =
-        'JSON.stringify(new LocaleInfo("$locale").getCurrencyFormats())';
-    result = ILibJS.instance.evaluate(jscode1).stringResult;
-
-    final Map<String, dynamic> map =
-        json.decode(result) as Map<String, dynamic>;
-
-    final CurrencyFormats cf = CurrencyFormats(
-      common: (map['common'] as String?) ?? '',
-      commonNegative: (map['commonNegative'] as String?) ?? '',
-      iso: (map['iso'] as String?) ?? '',
-      isoNegative: (map['isoNegative'] as String?) ?? '',
+    final Map<String, dynamic> cf =
+        (_numfmt['currencyFormats'] as Map<String, dynamic>?) ??
+            <String, dynamic>{};
+    return CurrencyFormats(
+      common: cf['common'] as String? ?? '',
+      commonNegative: cf['commonNegative'] as String? ?? '',
+      iso: cf['iso'] as String? ?? '',
+      isoNegative: cf['isoNegative'] as String? ?? '',
     );
-
-    return cf;
   }
 
   /// Return the currency that is legal in the locale or most commonly used in commerce.
   String getCurrency() {
-    final String jscode1 = 'new LocaleInfo("$locale").getCurrency()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+    return (_info['currency'] as String?) ??
+        (_defaultInfo['currency'] as String);
   }
 
   /// Return a string that describes the style of digits used by this locale.
   String getDigitsStyle() {
-    final String jscode1 = 'new LocaleInfo("$locale").getDigitsStyle()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+    if (_numfmt['useNative'] == true) {
+      return 'native';
+    }
+    if (_info.containsKey('native_numfmt')) {
+      return 'optional';
+    }
+    return 'western';
   }
 
   /// Return the digits of the default script if they are defined.
   String? getDigits() {
-    final String jscode1 = 'new LocaleInfo("$locale").getDigits()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    if (result == null || result.isEmpty || result == 'null') {
+    final dynamic val = _numfmt['digits'];
+    if (val == null || val.toString().isEmpty) {
       return null;
     }
-    return result;
+    return val as String?;
   }
 
   /// Return the digits of the native script if they are defined.
   String? getNativeDigits() {
-    final String jscode1 = 'new LocaleInfo("$locale").getNativeDigits()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result.isNotEmpty ? result : null;
+    if (_numfmt['useNative'] == true) {
+      final dynamic val = _numfmt['digits'];
+      if (val != null && val.toString().isNotEmpty) {
+        return val as String;
+      }
+    }
+    return _nativeNumfmt?['digits'] as String?;
   }
 
   /// Return the rounding mode used for numeric formatting in this locale.
   String getRoundingMode() {
-    final String jscode1 = 'new LocaleInfo("$locale").getRoundingMode()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+    return (_numfmt['roundingMode'] as String?) ?? 'halfdown';
   }
 
   /// Return the script used for the current locale.<br>
   /// If the current locale explicitly defines a script, then this script is returned.<br>
   /// If not, then the default script for the locale is returned.
   String getScript() {
-    final String jscode1 = 'new LocaleInfo("$locale").getScript()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+    return _localeObj.getScript() ?? getDefaultScript();
   }
 
   /// Return the default script used to write text in the language of this locale.
   String getDefaultScript() {
-    final String jscode1 = 'new LocaleInfo("$locale").getDefaultScript()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+    final dynamic scripts = _info['scripts'];
+    if (scripts is List && scripts.isNotEmpty) {
+      return scripts[0] as String;
+    }
+    return 'Latn';
   }
 
   /// Return an array of script codes used to write text in the current language.
   List<String> getAllScripts() {
-    final String jscode1 =
-        'JSON.stringify(new LocaleInfo("$locale").getAllScripts())';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return List<String>.from(json.decode(result) as List<dynamic>);
+    final dynamic scripts = _info['scripts'];
+    if (scripts is List) {
+      return List<String>.from(scripts);
+    }
+    return <String>['Latn'];
   }
 
   /// Return the default style of meridiems used in this locale.
   String getMeridiemsStyle() {
-    final String jscode1 = 'new LocaleInfo("$locale").getMeridiemsStyle()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+    return (_info['meridiems'] as String?) ?? 'gregorian';
   }
 
   /// Return the default PaperSize information in this locale.
   String getPaperSize() {
-    final String jscode1 = 'new LocaleInfo("$locale").getPaperSize()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+    final Map<String, dynamic>? paperSizes =
+        _info['paperSizes'] as Map<String, dynamic>?;
+    return (paperSizes?['regular'] as String?) ?? 'A4';
   }
 
   /// Return the default Delimiter QuotationStart information in this locale.
   String getDelimiterQuotationStart() {
-    final String jscode1 =
-        'new LocaleInfo("$locale").getDelimiterQuotationStart()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+    final Map<String, dynamic>? delimiter =
+        _info['delimiter'] as Map<String, dynamic>?;
+    return (delimiter?['quotationStart'] as String?) ?? '\u201c';
   }
 
   /// Return the default Delimiter QuotationEnd information in this locale.
   String getDelimiterQuotationEnd() {
-    final String jscode1 =
-        'new LocaleInfo("$locale").getDelimiterQuotationEnd()';
-    final String result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+    final Map<String, dynamic>? delimiter =
+        _info['delimiter'] as Map<String, dynamic>?;
+    return (delimiter?['quotationEnd'] as String?) ?? '\u201d';
   }
 }
 

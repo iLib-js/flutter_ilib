@@ -1,0 +1,10 @@
+{
+    "ilib.data.localeinfo": {
+        "clock": "24",
+        "currency": "MNT",
+        "firstDayOfWeek": 1,
+        "locale": "MN",
+        "region.name": "Mongolia",
+        "timezone": "Asia/Ulaanbaatar"
+    }
+}

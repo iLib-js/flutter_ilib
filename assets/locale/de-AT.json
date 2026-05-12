@@ -1,0 +1,12 @@
+{
+    "ilib.data.localeinfo": {
+        "locale": "de-AT",
+        "numfmt": {
+            "currencyFormats": {
+                "common": "{s} {n}",
+                "commonNegative": "-{s} {n}"
+            },
+            "groupChar": " "
+        }
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "ilib.data.localeinfo": {
+        "locale": "en-IN",
+        "numfmt": {
+            "secgroupSize": 2
+        }
+    }
+}

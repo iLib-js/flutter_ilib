@@ -1,0 +1,15 @@
+{
+    "ilib.data.localeinfo": {
+        "locale": "es-PA",
+        "numfmt": {
+            "currencyFormats": {
+                "common": "{s}{n}",
+                "commonNegative": "-{s}{n}"
+            },
+            "decimalChar": ".",
+            "groupChar": ",",
+            "negativepctFmt": "-{n}%",
+            "pctFmt": "{n}%"
+        }
+    }
+}

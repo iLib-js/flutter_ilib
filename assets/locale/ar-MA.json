@@ -1,0 +1,9 @@
+{
+    "ilib.data.localeinfo": {
+        "locale": "ar-MA",
+        "numfmt": {
+            "decimalChar": ",",
+            "groupChar": "."
+        }
+    }
+}

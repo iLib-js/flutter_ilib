@@ -1,0 +1,10 @@
+{
+    "ilib.data.localeinfo": {
+        "clock": "12",
+        "currency": "AUD",
+        "firstDayOfWeek": 1,
+        "locale": "AU",
+        "region.name": "Australia",
+        "timezone": "Australia/Sydney"
+    }
+}

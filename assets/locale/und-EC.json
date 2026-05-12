@@ -1,0 +1,10 @@
+{
+    "ilib.data.localeinfo": {
+        "clock": "12",
+        "currency": "USD",
+        "firstDayOfWeek": 1,
+        "locale": "EC",
+        "region.name": "Ecuador",
+        "timezone": "America/Guayaquil"
+    }
+}

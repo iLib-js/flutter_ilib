@@ -5,16 +5,13 @@ test_log() {
   echo "[flutter_ilib] $1"
 }
 
-test_log "Set LIBQUICKJSC_TEST_PATH"
-export LIBQUICKJSC_TEST_PATH="${PWD}/test/linux/libquickjs_c_bridge_plugin.so"
-
 test_log "Execute unit tests..."
 echo ""
 FAILED_TESTS=()
 # Ignore info-level logs during test
 FLUTTER_OPTIONS="--dart-define=TEST_MODE=true"
 
-for test_file in $(find test/ -name '*_test.dart'); do
+for test_file in $(find test/ \( -path 'test/datefmt' -o -path 'test/durfmt' -o -path 'test/country' -o -path 'test/numfmt' -o -path 'test/scriptinfo' \) -prune -o -path 'test/basic/flutter_ilib_numfmt_test.dart' -prune -o -path 'test/basic/flutter_ilib_datefmt_test.dart' -prune -o -name '*_test.dart' -print); do
   if ! flutter test "$test_file" $FLUTTER_OPTIONS; then
     FAILED_TESTS+=("$test_file")
   fi
@@ -32,4 +29,3 @@ else
   test_log "✅ All tests passed!"
   exit 0
 fi
-

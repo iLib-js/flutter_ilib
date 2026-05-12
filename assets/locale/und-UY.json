@@ -1,0 +1,10 @@
+{
+    "ilib.data.localeinfo": {
+        "clock": "12",
+        "currency": "UYU",
+        "firstDayOfWeek": 1,
+        "locale": "UY",
+        "region.name": "Uruguay",
+        "timezone": "America/Montevideo"
+    }
+}

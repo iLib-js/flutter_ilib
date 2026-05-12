@@ -1,0 +1,13 @@
+{
+    "ilib.data.localeinfo": {
+        "calendar": "persian",
+        "clock": "24",
+        "currency": "IRR",
+        "firstDayOfWeek": 6,
+        "locale": "IR",
+        "region.name": "Iran",
+        "timezone": "Asia/Tehran",
+        "weekendEnd": 5,
+        "weekendStart": 5
+    }
+}

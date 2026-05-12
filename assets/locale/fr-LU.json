@@ -1,0 +1,8 @@
+{
+    "ilib.data.localeinfo": {
+        "locale": "fr-LU",
+        "numfmt": {
+            "groupChar": "."
+        }
+    }
+}

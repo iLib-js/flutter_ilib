@@ -4,6 +4,16 @@ A wrapper plugin to conveniently use [iLib](https://github.com/iLib-js/iLib) in 
 The iLib is an internationalization library written in pure JavaScript.  
 This plugin uses the [flutter_js](https://pub.dev/packages/flutter_js) to make the JavaScript file work properly in the Flutter app.
 
+## 📚 Documentation
+
+For detailed documentation, see the **[docs/](./docs/)** folder:
+
+- **[Quick Reference](./docs/quick_reference.md)** - Get started with key APIs and common patterns
+- **[Architecture](./docs/architecture.md)** - Understand the system design and data flow
+- **[API Reference](./docs/api.md)** - Complete API documentation for all classes
+- **[Development Guide](./docs/development.md)** - Setup, testing, and contribution guidelines
+- **[Documentation Index](./docs/INDEX.md)** - Navigation guide for all documentation
+
 ## How to use
 ### Initialization
 Add the following import.
@@ -192,16 +202,7 @@ ctry.getCode('튀르키예');
 ## CLASS
 
 ### FlutterILib
-- Methods: `evaluateILib()` :
-    It allows to use any class of APIs from ILib.   
-    Convert the Javascript code you want to get as a result into a string and pass it as an argument.
-```dart
-String lo = 'am-ET';
-String jscode1 = 'new LocaleInfo("$lo").getCalendar()';
-_flutterIlibPlugin.evaluateILib(jscode1);
-// 'ethiopic'
-```
-To give a more efficient way, we provide some classes that can be easily used in a Flutter app.   
+We provide some classes that can be easily used in a Flutter app.   
 Currently, we have the following classes:
 - `ILibCaseMapper`
 - `ILibCountry`

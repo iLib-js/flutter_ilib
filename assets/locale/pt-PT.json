@@ -1,0 +1,18 @@
+{
+    "ilib.data.localeinfo": {
+        "delimiter": {
+            "alternateQuotationEnd": "”",
+            "alternateQuotationStart": "“",
+            "quotationEnd": "»",
+            "quotationStart": "«"
+        },
+        "locale": "pt-PT",
+        "numfmt": {
+            "currencyFormats": {
+                "common": "{n} {s}",
+                "commonNegative": "-{n} {s}"
+            },
+            "groupChar": " "
+        }
+    }
+}
