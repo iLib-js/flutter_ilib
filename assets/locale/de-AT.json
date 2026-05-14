@@ -8,5 +8,14 @@
             },
             "groupChar": " "
         }
+    },
+    "ilib.data.sysres": {
+        "LL1": "Jä",
+        "LLL1": "Jän",
+        "LLLL1": "Jänner",
+        "MMM1": "Jän.",
+        "MMM9": "Sep.",
+        "MMMM1": "Jänner",
+        "NN1": "Jä"
     }
 }
