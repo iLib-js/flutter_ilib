@@ -8,7 +8,7 @@
                 "commonNegative": "{s}-{n}"
             },
             "decimalChar": ".",
-            "groupChar": "'"
+            "groupChar": "’"
         }
     },
     "ilib.data.dateformats": {

@@ -3,7 +3,8 @@
         "locale": "ur-IN",
         "numfmt": {
             "currencyFormats": {
-                "commonNegative": "‎-‎{s}{n}"
+                "common": "{s} {n}",
+                "commonNegative": "‎-‎{s} {n}"
             },
             "decimalChar": "٫",
             "digits": "۰۱۲۳۴۵۶۷۸۹",
