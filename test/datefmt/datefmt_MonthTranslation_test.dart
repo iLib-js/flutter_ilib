@@ -8,8 +8,8 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [datefmt_MonthTranslation_test.dart] file.');
   setUpAll(() async {
-    final ILibJS ilibjsinstance = ILibJS.instance;
-    await ilibjsinstance.loadJS();
+    final ILibLoader ilibjsinstance = ILibLoader.instance;
+    await ilibjsinstance.loadJSON();
     ilibjsinstance.initILib();
     await ilibjsinstance.loadILibLocaleDataAll();
   });

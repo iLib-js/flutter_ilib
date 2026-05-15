@@ -10,9 +10,9 @@ void main() {
   debugPrint('Testing [datefmt_or_IN_test.dart] file.');
   setUpAll(() async {
     testPlatform = getTestPlatform();
-    await ILibJS.instance.loadJS();
-    ILibJS.instance.initILib();
-    await ILibJS.instance.loadILibLocaleData('or-IN');
+    await ILibLoader.instance.loadJSON();
+    ILibLoader.instance.initILib();
+    await ILibLoader.instance.loadILibLocaleData('or-IN');
   });
   group('format()', () {
     test('testDateFmtINSimpleShort_or_IN', () {
