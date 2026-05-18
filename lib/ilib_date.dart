@@ -1,3 +1,12 @@
+import 'calendar/coptic_date.dart';
+import 'calendar/ethiopic_date.dart';
+import 'calendar/gregorian_date.dart';
+import 'calendar/hebrew_date.dart';
+import 'calendar/ilib_date.dart';
+import 'calendar/islamic_date.dart';
+import 'calendar/julian_date.dart';
+import 'calendar/persian_algo_date.dart';
+import 'calendar/thaisolar_date.dart';
 import 'ilib_date_accessor.dart';
 
 class ILibDateOptions implements ILibDate {
@@ -53,83 +62,60 @@ class ILibDateOptions implements ILibDate {
   String? calendar;
   DateTime? dateTime;
 
-  @override
-  int getDayOfWeek() {
+  ILibCalendarDate _toCalendarDate() {
     final int y = year ?? 1;
     final int m = month ?? 1;
     final int d = day ?? 1;
-    // Dart DateTime.weekday: 1=Monday ~ 7=Sunday
-    final int dartWeekday = DateTime.utc(y, m, d).weekday;
-    // Convert to ilib: 0=Sunday ~ 6=Saturday
-    return dartWeekday % 7;
-  }
+    final int h = hour ?? 0;
+    final int min = minute ?? 0;
+    final int sec = second ?? 0;
+    final int ms = millisecond ?? 0;
+    final String cal = type ?? calendar ?? 'gregorian';
 
-  @override
-  int getDayOfYear() {
-    final int y = year ?? 1;
-    final int m = month ?? 1;
-    final int d = day ?? 1;
-    const List<int> cumLengths = <int>[
-      0, 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334
-    ];
-    int doy = cumLengths[m] + d;
-    if (m > 2 && _isLeapYear(y)) {
-      doy += 1;
+    switch (cal) {
+      case 'ethiopic':
+        return EthiopicDate(
+            year: y, month: m, day: d, hour: h, minute: min, second: sec, millisecond: ms);
+      case 'coptic':
+        return CopticDate(
+            year: y, month: m, day: d, hour: h, minute: min, second: sec, millisecond: ms);
+      case 'hebrew':
+        return HebrewDate(
+            year: y, month: m, day: d, hour: h, minute: min, second: sec, millisecond: ms);
+      case 'islamic':
+        return IslamicDate(
+            year: y, month: m, day: d, hour: h, minute: min, second: sec, millisecond: ms);
+      case 'julian':
+        return JulianDate(
+            year: y, month: m, day: d, hour: h, minute: min, second: sec, millisecond: ms);
+      case 'persian':
+      case 'persian-algo':
+        return PersianAlgoDate(
+            year: y, month: m, day: d, hour: h, minute: min, second: sec, millisecond: ms);
+      case 'thaisolar':
+        return ThaiSolarDate(
+            year: y, month: m, day: d, hour: h, minute: min, second: sec, millisecond: ms);
+      default:
+        return GregorianDate(
+            year: y, month: m, day: d, hour: h, minute: min, second: sec, millisecond: ms);
     }
-    return doy;
   }
 
   @override
-  int getWeekOfYear() {
-    final int y = year ?? 1;
-    final int m = month ?? 1;
-    final int d = day ?? 1;
-    final DateTime date = DateTime.utc(y, m, d);
-    final DateTime jan4 = DateTime.utc(y, 1, 4);
-    final int jan4Weekday = jan4.weekday; // 1=Mon~7=Sun
-    final DateTime startOfWeek1 =
-        jan4.subtract(Duration(days: jan4Weekday - 1));
-    final int diff = date.difference(startOfWeek1).inDays;
-    if (diff < 0) {
-      // belongs to last week of previous year
-      final DateTime prevJan4 = DateTime.utc(y - 1, 1, 4);
-      final int prevJan4Weekday = prevJan4.weekday;
-      final DateTime prevStartOfWeek1 =
-          prevJan4.subtract(Duration(days: prevJan4Weekday - 1));
-      return (date.difference(prevStartOfWeek1).inDays ~/ 7) + 1;
-    }
-    final int weekNum = (diff ~/ 7) + 1;
-    if (weekNum > 52) {
-      final DateTime nextJan4 = DateTime.utc(y + 1, 1, 4);
-      final int nextJan4Weekday = nextJan4.weekday;
-      final DateTime nextStartOfWeek1 =
-          nextJan4.subtract(Duration(days: nextJan4Weekday - 1));
-      if (date.compareTo(nextStartOfWeek1) >= 0) {
-        return 1;
-      }
-    }
-    return weekNum;
-  }
+  int getDayOfWeek() => _toCalendarDate().getDayOfWeek();
 
   @override
-  int getWeekOfMonth(int firstDayOfWeek) {
-    final int d = day ?? 1;
-    final int m = month ?? 1;
-    final int y = year ?? 1;
-    // Day of week of the 1st of this month (0=Sun~6=Sat)
-    final int firstDow = DateTime.utc(y, m, 1).weekday % 7;
-    final int offset = (firstDow - firstDayOfWeek + 7) % 7;
-    return ((d + offset - 1) ~/ 7) + 1;
-  }
+  int getDayOfYear() => _toCalendarDate().getDayOfYear();
 
   @override
-  int getEra() {
-    return (year ?? 1) > 0 ? 1 : 0;
-  }
+  int getWeekOfYear() => _toCalendarDate().getWeekOfYear();
 
-  static bool _isLeapYear(int year) {
-    return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
-  }
+  @override
+  int getWeekOfMonth(int firstDayOfWeek) =>
+      _toCalendarDate().getWeekOfMonth(firstDayOfWeek);
+
+  @override
+  int getEra() => _toCalendarDate().getEra();
 
   /// A string representation of parameters to call functions of iLib library properly
   String toJsonString() {
