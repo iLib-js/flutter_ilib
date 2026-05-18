@@ -1,135 +1,717 @@
-import 'dart:convert';
+import 'ilib_calendar.dart';
 import 'ilib_date.dart';
+import 'ilib_date_accessor.dart';
 import 'ilib_init.dart';
+import 'ilib_localeinfo.dart';
+import 'ilib_timezone.dart';
+import 'internal/ilib_utils.dart' as ilib_utils;
 
 class ILibDateFmt {
-  /// [options] Set the Options for formatting
   ILibDateFmt(ILibDateFmtOptions options) {
-    locale = options.locale;
-    type = options.type;
-    length = options.length;
-    date = options.date;
-    time = options.time;
-    calendar = options.calendar;
-    timezone = options.timezone;
-    clock = options.clock;
-    template = options.template;
-    meridiems = options.meridiems;
-    useNative = options.useNative;
+    _locale = options.locale ?? ilib_utils.getLocale();
+    _type = options.type ?? 'date';
+    _length = _mapLength(options.length ?? 'short');
+    _clock = options.clock;
+    _useNative = options.useNative;
 
-    //ILibJS.instance.loadILibLocaleData(locale);
-  }
-
-  String? locale;
-  String? type;
-  String? length;
-  String? timezone;
-  String? calendar;
-  String? date;
-  String? time;
-  String? clock;
-  String? template;
-  String? meridiems;
-  bool? useNative;
-
-  /// A string representation of parameters to call functions of iLib library properly
-  String toJsonString() {
-    String result = '';
-    String completeOption = '';
-
-    final Map<String, String> paramInfo = <String, String>{
-      'locale': '$locale',
-      'type': '$type',
-      'length': '$length',
-      'date': '$date',
-      'time': '$time',
-      'calendar': '$calendar',
-      'timezone': '$timezone',
-      'clock': '$clock',
-      'template': '$template',
-      'meridiems': '$meridiems',
-    };
-    paramInfo.forEach((String key, String value) {
-      if (value != 'null') {
-        result += '$key:"$value",';
-      }
-    });
-
-    if (useNative != null) {
-      result += 'useNative:$useNative,';
+    final ILibLocaleInfo locInfo = ILibLocaleInfo(_locale);
+    _timezone = options.timezone ?? locInfo.getTimeZone();
+    _calName = options.calendar ?? locInfo.getCalendar();
+    _calendar = ILibCalendar(_calName);
+    _clock ??= locInfo.getClock();
+    _meridiems = options.meridiems;
+    if (_meridiems == null || _meridiems == 'default') {
+      _meridiems = locInfo.getMeridiemsStyle();
     }
 
-    result =
-        result.isNotEmpty ? result.substring(0, result.length - 1) : result;
-    completeOption = '{$result}';
+    _dateComponents = _normalizeDateComponents(options.date ?? 'dmy');
+    _timeComponents = _normalizeTimeComponents(options.time ?? 'ahm');
 
-    return completeOption;
+    final Map<String, dynamic>? localeData =
+        ILibLoader.instance.getLocaleData(_locale);
+    _formats = (localeData?['ilib.data.dateformats'] as Map<String, dynamic>?) ??
+        <String, dynamic>{};
+    _sysres = (localeData?['ilib.data.sysres'] as Map<String, dynamic>?) ??
+        <String, dynamic>{};
+    _zoneInfo =
+        (localeData?['ilib.data.zoneinfo'] as Map<String, dynamic>?) ??
+            <String, dynamic>{};
+    final dynamic rawDayPeriods = _formats['dayPeriods'];
+    _dayPeriods =
+        (rawDayPeriods is List<dynamic>) ? rawDayPeriods : <dynamic>[];
+
+    if (options.template != null && options.template!.isNotEmpty) {
+      _template = options.template!;
+      if (options.clock != null) {
+        _massageTemplate();
+      } else {
+        _templateArr = _tokenize(_template);
+      }
+    } else {
+      _initTemplate();
+      _massageTemplate();
+    }
+
+    _initDigits(locInfo);
   }
 
-  /// Formats a particular date instance according to the settings of this formatter object
-  String format(ILibDateOptions date) {
-    String result = '';
-    final String formatOptions = toJsonString();
-    final String dateOptions = date.toJsonString();
-    result = ILibJS.instance
-        .evaluate(
-            'new DateFmt($formatOptions).format(DateFactory($dateOptions))')
-        .stringResult;
-    return result;
+  late String _locale;
+  late String _type;
+  late String _length;
+  String? _clock;
+  String? _timezone;
+  bool? _useNative;
+  late String _calName;
+  late ILibCalendar _calendar;
+  String? _meridiems;
+  late String _dateComponents;
+  late String _timeComponents;
+  late Map<String, dynamic> _formats;
+  late Map<String, dynamic> _sysres;
+  late Map<String, dynamic> _zoneInfo;
+  late List<dynamic> _dayPeriods;
+  String _template = '';
+  late List<String> _templateArr;
+  String? _digits;
+
+  String format(ILibDate date) {
+    ILibDate resolved = date;
+    if (date is ILibDateOptions) {
+      resolved = _resolveDateOptions(date);
+    }
+    return _formatTemplate(resolved, _templateArr);
   }
 
-  /// Returns the default clock from the locale is returned instead.
-  /// "12" or "24" depending on whether this formatter uses the 12-hour or 24-hour clock
+  ILibDateOptions _resolveDateOptions(ILibDateOptions date) {
+    if (date.dateTime != null) {
+      DateTime dt = date.dateTime!;
+      if (dt.isUtc && _timezone != null && _timezone!.isNotEmpty) {
+        final ILibTimeZone tz = ILibTimeZone(_timezone!, _zoneInfo);
+        final ILibDateOptions tempDate = ILibDateOptions(
+          year: dt.year,
+          month: dt.month,
+          day: dt.day,
+          hour: dt.hour,
+          minute: dt.minute,
+          second: dt.second,
+        );
+        final double offsetMinutes = tz.getOffsetMinutes(tempDate);
+        dt = dt.add(Duration(minutes: offsetMinutes.round()));
+      }
+      return ILibDateOptions(
+        locale: date.locale,
+        year: date.year ?? dt.year,
+        month: date.month ?? dt.month,
+        day: date.day ?? dt.day,
+        hour: date.hour ?? dt.hour,
+        minute: date.minute ?? dt.minute,
+        second: date.second ?? dt.second,
+        millisecond: date.millisecond ?? dt.millisecond,
+        timezone: date.timezone,
+        calendar: date.calendar,
+        type: date.type,
+      );
+    }
+    return date;
+  }
+
+  ILibCalendar getCalendar() => _calendar;
+
   int getClock() {
-    String result = '';
-    final String formatOptions = toJsonString();
-    final String jscode1 = 'new DateFmt($formatOptions).getClock()';
-    result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return int.parse(result);
+    return int.parse(_clock ?? '12');
   }
 
-  /// Return the template string that is used to format date/times for this formatter instance
   String getTemplate() {
-    String result = '';
-    final String formatOptions = toJsonString();
-    final String jscode1 = 'new DateFmt($formatOptions).getTemplate()';
-    result = ILibJS.instance.evaluate(jscode1).stringResult;
+    return _template;
+  }
+
+  List<MeridiemsInfo> getMeridiemsRange() {
+    switch (_meridiems) {
+      case 'chinese':
+        return <MeridiemsInfo>[
+          MeridiemsInfo(
+              name: _getSysString('azh0'), start: '00:00', end: '05:59'),
+          MeridiemsInfo(
+              name: _getSysString('azh1'), start: '06:00', end: '08:59'),
+          MeridiemsInfo(
+              name: _getSysString('azh2'), start: '09:00', end: '11:59'),
+          MeridiemsInfo(
+              name: _getSysString('azh3'), start: '12:00', end: '12:59'),
+          MeridiemsInfo(
+              name: _getSysString('azh4'), start: '13:00', end: '17:59'),
+          MeridiemsInfo(
+              name: _getSysString('azh5'), start: '18:00', end: '20:59'),
+          MeridiemsInfo(
+              name: _getSysString('azh6'), start: '21:00', end: '23:59'),
+        ];
+      case 'ethiopic':
+        return <MeridiemsInfo>[
+          MeridiemsInfo(
+              name: _getSysString('a0-ethiopic'),
+              start: '00:00',
+              end: '05:59'),
+          MeridiemsInfo(
+              name: _getSysString('a1-ethiopic'),
+              start: '06:00',
+              end: '06:00'),
+          MeridiemsInfo(
+              name: _getSysString('a2-ethiopic'),
+              start: '06:01',
+              end: '11:59'),
+          MeridiemsInfo(
+              name: _getSysString('a3-ethiopic'),
+              start: '12:00',
+              end: '17:59'),
+          MeridiemsInfo(
+              name: _getSysString('a4-ethiopic'),
+              start: '18:00',
+              end: '23:59'),
+        ];
+      default:
+        return <MeridiemsInfo>[
+          MeridiemsInfo(
+              name: _getSysString('a0'), start: '00:00', end: '11:59'),
+          MeridiemsInfo(
+              name: _getSysString('a1'), start: '12:00', end: '23:59'),
+        ];
+    }
+  }
+
+  String getDateComponentOrder() {
+    final Map<String, dynamic>? calFormats = _getCalendarFormats();
+    if (calFormats == null) {
+      return 'dmy';
+    }
+    final Map<String, dynamic>? dateFormats =
+        calFormats['date'] as Map<String, dynamic>?;
+    if (dateFormats == null) {
+      return 'dmy';
+    }
+    final String tmpl = _getLengthFormat(dateFormats['dmy'], 'l') ?? 'dMy';
+    return tmpl
+        .replaceAll(RegExp(r'[^dMy]'), '')
+        .replaceAll(RegExp(r'y+'), 'y')
+        .replaceAll(RegExp(r'd+'), 'd')
+        .replaceAll(RegExp(r'M+'), 'm');
+  }
+
+  // --- private methods ---
+
+  void _initTemplate() {
+    final Map<String, dynamic>? calFormats = _getCalendarFormats();
+    if (calFormats == null) {
+      _template = '';
+      _templateArr = <String>[];
+      return;
+    }
+
+    switch (_type) {
+      case 'datetime':
+        final String order =
+            _getLengthFormat(calFormats['order'], _length) ?? '{date} {time}';
+        final String datePart = _getFormat(
+                calFormats['date'] as Map<String, dynamic>?,
+                _dateComponents,
+                _length) ??
+            '';
+        final String timePart = _getFormat(
+                (calFormats['time'] as Map<String, dynamic>?)?[_clock]
+                    as Map<String, dynamic>?,
+                _timeComponents,
+                _length) ??
+            '';
+        _template = order
+            .replaceAll('{date}', datePart)
+            .replaceAll('{time}', timePart);
+        break;
+      case 'time':
+        _template = _getFormat(
+                (calFormats['time'] as Map<String, dynamic>?)?[_clock]
+                    as Map<String, dynamic>?,
+                _timeComponents,
+                _length) ??
+            '';
+        break;
+      default:
+        _template = _getFormat(
+                calFormats['date'] as Map<String, dynamic>?,
+                _dateComponents,
+                _length) ??
+            '';
+        break;
+    }
+  }
+
+  Map<String, dynamic>? _getCalendarFormats() {
+    final dynamic calEntry = _formats[_calName];
+    if (calEntry == null) {
+      return _formats['gregorian'] as Map<String, dynamic>?;
+    }
+    if (calEntry is String) {
+      return _formats[calEntry] as Map<String, dynamic>?;
+    }
+    return calEntry as Map<String, dynamic>?;
+  }
+
+  static const Map<String, String> _standAlones = <String, String>{
+    'm': 'l',
+    'my': 'mys',
+    'd': 'a',
+    'w': 'e',
+    'y': 'r',
+  };
+
+  String? _getFormat(
+      Map<String, dynamic>? obj, String components, String length) {
+    if (obj == null) {
+      return null;
+    }
+    if (_standAlones.containsKey(components)) {
+      final String? tmp =
+          _getFormatInternal(obj, _standAlones[components]!, length);
+      if (tmp != null) {
+        return tmp;
+      }
+    }
+    return _getFormatInternal(obj, components, length);
+  }
+
+  String? _getFormatInternal(
+      Map<String, dynamic> obj, String components, String length) {
+    final dynamic entry = obj[components];
+    if (entry == null) {
+      return null;
+    }
+    return _getLengthFormat(entry, length);
+  }
+
+  String? _getLengthFormat(dynamic obj, String length) {
+    if (obj is String) {
+      return obj;
+    }
+    if (obj is Map<String, dynamic>) {
+      return obj[length] as String?;
+    }
+    return null;
+  }
+
+  void _massageTemplate() {
+    if (_clock != null && _template.isNotEmpty) {
+      final StringBuffer temp = StringBuffer();
+      int i = 0;
+      while (i < _template.length) {
+        if (_template[i] == "'") {
+          temp.write(_template[i]);
+          i++;
+          while (i < _template.length && _template[i] != "'") {
+            temp.write(_template[i]);
+            i++;
+          }
+          if (i < _template.length) {
+            temp.write(_template[i]);
+            i++;
+          }
+        } else if (_clock == '24') {
+          if (_template[i] == 'K') {
+            temp.write('k');
+          } else if (_template[i] == 'h') {
+            temp.write('H');
+          } else {
+            temp.write(_template[i]);
+          }
+          i++;
+        } else if (_clock == '12') {
+          if (_template[i] == 'k') {
+            temp.write('K');
+          } else if (_template[i] == 'H') {
+            temp.write('h');
+          } else {
+            temp.write(_template[i]);
+          }
+          i++;
+        } else {
+          temp.write(_template[i]);
+          i++;
+        }
+      }
+      _template = temp.toString();
+    }
+
+    _templateArr = _tokenize(_template);
+  }
+
+  void _initDigits(ILibLocaleInfo locInfo) {
+    if (_useNative ?? false) {
+      _digits = locInfo.getNativeDigits();
+    } else if (_useNative == null && locInfo.getDigitsStyle() == 'native') {
+      _digits = locInfo.getNativeDigits();
+    }
+  }
+
+  List<String> _tokenize(String template) {
+    final List<String> arr = <String>[];
+    int i = 0;
+
+    while (i < template.length) {
+      final int start = i;
+      final String ch = template[i];
+
+      if (ch == "'") {
+        i++;
+        while (i < template.length && template[i] != "'") {
+          i++;
+        }
+        if (i < template.length) {
+          i++;
+        }
+      } else if (_isLetter(ch)) {
+        final String letter = template[i];
+        while (i < template.length && template[i] == letter) {
+          i++;
+        }
+      } else {
+        while (i < template.length &&
+            template[i] != "'" &&
+            !_isLetter(template[i])) {
+          i++;
+        }
+      }
+      arr.add(template.substring(start, i));
+    }
+
+    return arr;
+  }
+
+  static bool _isLetter(String ch) {
+    final int code = ch.codeUnitAt(0);
+    return (code >= 65 && code <= 90) || (code >= 97 && code <= 122);
+  }
+
+  String _formatTemplate(ILibDate date, List<String> templateArr) {
+    final StringBuffer str = StringBuffer();
+
+    for (int i = 0; i < templateArr.length; i++) {
+      switch (templateArr[i]) {
+        case 'd':
+          str.write(date.day ?? 1);
+          break;
+        case 'dd':
+          str.write((date.day ?? 1).toString().padLeft(2, '0'));
+          break;
+        case 'yy':
+          str.write(((date.year ?? 0) % 100).toString().padLeft(2, '0'));
+          break;
+        case 'yyyy':
+          str.write((date.year ?? 0).toString().padLeft(4, '0'));
+          break;
+        case 'M':
+          str.write(date.month ?? 1);
+          break;
+        case 'MM':
+          str.write((date.month ?? 1).toString().padLeft(2, '0'));
+          break;
+        case 'h':
+          int temp = (date.hour ?? 0) % 12;
+          if (temp == 0) {
+            temp = 12;
+          }
+          str.write(temp);
+          break;
+        case 'hh':
+          int temp = (date.hour ?? 0) % 12;
+          if (temp == 0) {
+            temp = 12;
+          }
+          str.write(temp.toString().padLeft(2, '0'));
+          break;
+        case 'K':
+          str.write((date.hour ?? 0) % 12);
+          break;
+        case 'KK':
+          str.write(((date.hour ?? 0) % 12).toString().padLeft(2, '0'));
+          break;
+        case 'H':
+          str.write(date.hour ?? 0);
+          break;
+        case 'HH':
+          str.write((date.hour ?? 0).toString().padLeft(2, '0'));
+          break;
+        case 'k':
+          str.write((date.hour ?? 0) == 0 ? 24 : date.hour);
+          break;
+        case 'kk':
+          final int kVal = (date.hour ?? 0) == 0 ? 24 : (date.hour ?? 0);
+          str.write(kVal.toString().padLeft(2, '0'));
+          break;
+        case 'm':
+          str.write(date.minute ?? 0);
+          break;
+        case 'mm':
+          str.write((date.minute ?? 0).toString().padLeft(2, '0'));
+          break;
+        case 's':
+          str.write(date.second ?? 0);
+          break;
+        case 'ss':
+          str.write((date.second ?? 0).toString().padLeft(2, '0'));
+          break;
+        case 'S':
+          str.write(date.millisecond ?? 0);
+          break;
+        case 'SSS':
+          str.write((date.millisecond ?? 0).toString().padLeft(3, '0'));
+          break;
+        case 'N':
+        case 'NN':
+        case 'MMM':
+        case 'MMMM':
+          final String key = '${templateArr[i]}${date.month ?? 1}';
+          str.write(_getSysString(key));
+          break;
+        case 'L':
+        case 'LL':
+        case 'LLL':
+        case 'LLLL':
+          final String lKey = '${templateArr[i]}${date.month ?? 1}';
+          String val = _getSysString(lKey);
+          if (val.isEmpty) {
+            final String mKey =
+                '${templateArr[i].replaceAll('L', 'M')}${date.month ?? 1}';
+            val = _getSysString(mKey);
+          }
+          str.write(val);
+          break;
+        case 'E':
+        case 'EE':
+        case 'EEE':
+        case 'EEEE':
+        case 'c':
+        case 'cc':
+        case 'ccc':
+        case 'cccc':
+          final String key = '${templateArr[i]}${date.getDayOfWeek()}';
+          str.write(_getSysString(key));
+          break;
+        case 'a':
+          str.write(_formatMeridiem(date));
+          break;
+        case 'B':
+          str.write(_findMeridiem(date.hour ?? 0, date.minute ?? 0));
+          break;
+        case 'G':
+          final String key = 'G${date.getEra()}';
+          str.write(_getSysString(key));
+          break;
+        case 'O':
+          str.write(_formatOrdinal(date.day ?? 1));
+          break;
+        case 'w':
+          str.write(date.getWeekOfYear());
+          break;
+        case 'ww':
+          str.write(date.getWeekOfYear().toString().padLeft(2, '0'));
+          break;
+        case 'D':
+          str.write(date.getDayOfYear());
+          break;
+        case 'DD':
+          str.write(date.getDayOfYear().toString().padLeft(2, '0'));
+          break;
+        case 'DDD':
+          str.write(date.getDayOfYear().toString().padLeft(3, '0'));
+          break;
+        case 'W':
+          final ILibLocaleInfo li = ILibLocaleInfo(_locale);
+          str.write(date.getWeekOfMonth(li.getFirstDayOfWeek()));
+          break;
+        case 'z':
+          str.write(_getTimezoneDisplay(date, 'standard'));
+          break;
+        case 'Z':
+          str.write(_getTimezoneDisplay(date, 'rfc822'));
+          break;
+        default:
+          str.write(templateArr[i].replaceAll("'", ''));
+          break;
+      }
+    }
+
+    String result = str.toString();
+    if (_digits != null) {
+      result = _mapDigits(result, _digits!);
+    }
     return result;
   }
 
-  /// Return the range of possible meridiems (times of day like "AM" or "PM") in this date formatter.
-  List<MeridiemsInfo> getMeridiemsRange() {
-    String result = '';
-    final String formatOptions = toJsonString();
-    final List<MeridiemsInfo> meridems = <MeridiemsInfo>[];
-    final String jscode1 =
-        'JSON.stringify(new DateFmt($formatOptions).getMeridiemsRange())';
-    result = ILibJS.instance.evaluate(jscode1).stringResult;
-    final dynamic meridiemlist = json.decode(result);
+  String _formatMeridiem(ILibDate date) {
+    final int hour = date.hour ?? 0;
+    final int minute = date.minute ?? 0;
+    String key;
 
-    meridiemlist.forEach((dynamic item) {
-      meridems.add(MeridiemsInfo(
-          name: item['name'].toString(),
-          start: item['start'].toString(),
-          end: item['end'].toString()));
-    });
+    switch (_meridiems) {
+      case 'chinese':
+        if (hour < 6) {
+          key = 'azh0';
+        } else if (hour < 9) {
+          key = 'azh1';
+        } else if (hour < 12) {
+          key = 'azh2';
+        } else if (hour < 13) {
+          key = 'azh3';
+        } else if (hour < 18) {
+          key = 'azh4';
+        } else if (hour < 21) {
+          key = 'azh5';
+        } else {
+          key = 'azh6';
+        }
+        break;
+      case 'ethiopic':
+        if (hour < 6) {
+          key = 'a0-ethiopic';
+        } else if (hour == 6 && minute == 0) {
+          key = 'a1-ethiopic';
+        } else if (hour >= 6 && hour < 12) {
+          key = 'a2-ethiopic';
+        } else if (hour >= 12 && hour < 18) {
+          key = 'a3-ethiopic';
+        } else {
+          key = 'a4-ethiopic';
+        }
+        break;
+      default:
+        key = hour < 12 ? 'a0' : 'a1';
+        break;
+    }
 
-    return meridems;
+    return _getSysString(key);
+  }
+
+  String _findMeridiem(int hours, int minutes) {
+    if (_dayPeriods.isEmpty) {
+      return '';
+    }
+    final int minuteOfDay = hours * 60 + minutes;
+    String shortestName = '';
+    int shortestLength = 2000;
+
+    for (int i = 0; i < _dayPeriods.length; i++) {
+      final Map<String, dynamic> period =
+          _dayPeriods[i] as Map<String, dynamic>;
+      final bool matches;
+      if (period.containsKey('at')) {
+        matches = minuteOfDay == (period['at'] as int);
+      } else {
+        final int from = period['from'] as int;
+        final int to = period['to'] as int;
+        if (from <= to) {
+          matches = minuteOfDay >= from && minuteOfDay < to;
+        } else {
+          matches = minuteOfDay >= from || minuteOfDay < to;
+        }
+      }
+
+      if (matches) {
+        final int length =
+            period.containsKey('at') ? 0 : ((period['to'] as int) - (period['from'] as int)).abs();
+        if (length < shortestLength) {
+          shortestLength = length;
+          final String periodCode = 'B$i';
+          shortestName = _getSysString(periodCode);
+        }
+      }
+    }
+
+    return shortestName;
+  }
+
+  String _formatOrdinal(int day) {
+    final String choiceStr = (_sysres['ordinalChoice-$_calName'] as String?) ??
+        (_sysres['ordinalChoice'] as String?) ??
+        '#{num}th';
+    return _parseChoice(choiceStr, day);
+  }
+
+  String _parseChoice(String choiceStr, int num) {
+    final List<String> choices = choiceStr.split('|');
+    String defaultVal = '$num';
+
+    for (final String choice in choices) {
+      final int hashIdx = choice.indexOf('#');
+      if (hashIdx == -1) {
+        continue;
+      }
+      final String condition = choice.substring(0, hashIdx);
+      final String value = choice.substring(hashIdx + 1);
+
+      if (condition.isEmpty) {
+        defaultVal = value.replaceAll('{num}', '$num');
+      } else {
+        final int? condNum = int.tryParse(condition);
+        if (condNum != null && condNum == num) {
+          return value.replaceAll('{num}', '$num');
+        }
+      }
+    }
+
+    return defaultVal;
+  }
+
+  String _getSysString(String key) {
+    return (_sysres['$key-$_calName'] as String?) ??
+        (_sysres[key] as String?) ??
+        '';
+  }
+
+  String _getTimezoneDisplay(ILibDate date, String style) {
+    if (_timezone == null || _timezone!.isEmpty) {
+      return '';
+    }
+    final ILibTimeZone tz = ILibTimeZone(_timezone!, _zoneInfo);
+    return tz.getDisplayName(date, style);
+  }
+
+  static String _mapDigits(String str, String digits) {
+    final StringBuffer result = StringBuffer();
+    for (int i = 0; i < str.length; i++) {
+      final int code = str.codeUnitAt(i);
+      if (code >= 48 && code <= 57) {
+        final int idx = code - 48;
+        result.write(digits[idx]);
+      } else {
+        result.write(str[i]);
+      }
+    }
+    return result.toString();
+  }
+
+  static String _mapLength(String length) {
+    switch (length) {
+      case 'short':
+        return 's';
+      case 'medium':
+        return 'm';
+      case 'long':
+        return 'l';
+      case 'full':
+        return 'f';
+      default:
+        return length;
+    }
+  }
+
+  static String _normalizeDateComponents(String components) {
+    final List<String> chars = components.split('')..sort();
+    return chars.join();
+  }
+
+  static String _normalizeTimeComponents(String components) {
+    final List<String> chars = components.split('')..sort();
+    return chars.join();
   }
 }
 
 class ILibDateFmtOptions {
-  /// [locale] Locales are specified either with a specifier string that follows the BCP-47 convention,<br>
-  /// [length] Specifies the length of the format to use.Valid values are "short", "medium", "long" and "full".<br>
-  /// [type] Specifies whether this formatter should format times only, dates only, or both times and dates together. Valid values are "time", "date", and "datetime".<br>
-  /// [calendar] The type of calendar to use for this format.<br>
-  /// [timezone] Time zone to use when formatting times.<br>
-  /// [useNative] The flag used to determine whether to use the native script settings for formatting the numbers.<br>
-  /// [date] This property tells which components of a date format to use. Valid values are: "dmwy", "dmy", "dmw", "dm", "my", "dw", "d", "m","n","y". Default components, if this property is not specified, is "dmy".<br>
-  /// [time] This property gives which components of a time format to use. Valid values for this property are: "ahmsz", "ahms", "hmsz", "hms", "ahmz", "ahm", hmz", ah", "hm", "ms", "h", "m", "s". Default value if this property is not specified is "hma".<br>
-  /// [clock] Hour format. Valid values: "12", "24".<br>
-  /// [template] Custom date/time format string.<br>
-  /// [meridiems] string that specifies what style of meridiems to use with this format. The choices are "default", "gregorian", "ethiopic", and "chinese".<br>
   ILibDateFmtOptions(
       {this.locale,
       this.length,
@@ -156,9 +738,6 @@ class ILibDateFmtOptions {
 }
 
 class MeridiemsInfo {
-  /// [name] The name of the meridiem.<br>
-  /// [start] The startTime of meridiem.<br>
-  /// [end] The endTime of meridiem.<br>
   MeridiemsInfo({this.name, this.start, this.end});
   String? name;
   String? start;
