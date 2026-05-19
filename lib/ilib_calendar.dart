@@ -5,6 +5,7 @@ import 'calendar/hebrew_cal.dart';
 import 'calendar/islamic_cal.dart';
 import 'calendar/julian_cal.dart';
 import 'calendar/persian_algo_cal.dart';
+import 'calendar/persian_cal.dart';
 import 'calendar/thaisolar_cal.dart';
 
 export 'calendar/calendar_utils.dart';
@@ -31,6 +32,9 @@ export 'calendar/julian_rata_die.dart';
 export 'calendar/persian_algo_cal.dart';
 export 'calendar/persian_algo_date.dart';
 export 'calendar/persian_algo_rata_die.dart';
+export 'calendar/persian_cal.dart';
+export 'calendar/persian_date.dart';
+export 'calendar/persian_rata_die.dart';
 export 'calendar/rata_die.dart';
 export 'calendar/thaisolar_cal.dart';
 export 'calendar/thaisolar_date.dart';
@@ -48,7 +52,7 @@ abstract class ILibCalendar {
       case 'islamic':
         return IslamicCal();
       case 'persian':
-        return PersianAlgoCal('persian');
+        return PersianCal();
       case 'persian-algo':
         return PersianAlgoCal();
       case 'ethiopic':

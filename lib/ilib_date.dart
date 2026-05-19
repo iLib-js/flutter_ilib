@@ -6,6 +6,7 @@ import 'calendar/ilib_date.dart';
 import 'calendar/islamic_date.dart';
 import 'calendar/julian_date.dart';
 import 'calendar/persian_algo_date.dart';
+import 'calendar/persian_date.dart';
 import 'calendar/thaisolar_date.dart';
 import 'ilib_date_accessor.dart';
 
@@ -89,6 +90,8 @@ class ILibDateOptions implements ILibDate {
         return JulianDate(
             year: y, month: m, day: d, hour: h, minute: min, second: sec, millisecond: ms);
       case 'persian':
+        return PersianDate(
+            year: y, month: m, day: d, hour: h, minute: min, second: sec, millisecond: ms);
       case 'persian-algo':
         return PersianAlgoDate(
             year: y, month: m, day: d, hour: h, minute: min, second: sec, millisecond: ms);

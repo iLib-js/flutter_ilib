@@ -209,6 +209,30 @@ lib/
 해당 캘린더의 `ILibCalendarDate` 인스턴스를 생성하고, `getDayOfWeek()` 등 모든
 날짜 계산 메서드를 위임합니다.
 
+## DateFmt Calendar Conversion Logic
+
+`ILibDateFmt.format()` 내부의 `_convertToFormatterCalendar()` 메서드는 JS `DateFmt.format()`
+(DateFmt.js:1537-1566)와 동일한 역할을 수행합니다:
+
+### 동작 규칙
+1. **캘린더가 다를 때** (e.g., Islamic 날짜 → Gregorian 포맷터):
+   - 입력 날짜를 `ILibCalendarDate`로 생성 → Julian Day 추출 → 포맷터 캘린더로 재생성
+2. **캘린더가 같을 때** (e.g., ThaiSolar 날짜 → ThaiSolar 포맷터):
+   - `ILibDateOptions`를 그대로 반환 (raw 값 유지, 정규화하지 않음)
+   - `_formatTemplate` 내에서 요일/주차 등 캘린더 계산이 필요한 토큰만 `_getCalendarDate()`로 lazy 변환
+
+### JS와의 차이점 주의
+- JS의 `GregorianDate`는 components로 생성 시 raw year/month/day를 정규화하지 않음
+  (존재하지 않는 날짜도 그대로 유지, e.g., 2011/2/29)
+- Dart의 `GregorianDate`는 항상 `_calcDateComponents()`로 정규화함
+- 따라서 캘린더가 같을 때 `ILibDateOptions` → `ILibCalendarDate` 변환을 하면 안 됨
+  (raw 값이 정규화되어 테스트 실패)
+
+### 관련 메서드 (`lib/ilib_datefmt.dart`)
+- `_convertToFormatterCalendar()` — 캘린더 변환 판단 및 실행
+- `_createCalendarDate()` — 캘린더 타입별 `ILibCalendarDate` 팩토리
+- `_getCalendarDate()` — `_formatTemplate` 내 lazy 캘린더 계산용
+
 ## Deferred Work
 - **Han Calendar**: lunar 계산(`_lunarLongitude`, `_newMoonTime` 등) 추가 필요. `ILibAstro`에 확장 예정.
 

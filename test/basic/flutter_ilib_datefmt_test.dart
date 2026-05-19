@@ -6,9 +6,11 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [flutter_ilib_datefmt_test.dart] file.');
   setUpAll(() async {
-    await ILibJS.instance.loadJS();
-    ILibJS.instance.initILib();
-    await ILibJS.instance.loadILibLocaleData('ko-KR');
+    await ILibLoader.instance.loadJSON();
+    ILibLoader.instance.initILib();
+    await ILibLoader.instance.loadILibLocaleData('ko-KR');
+    await ILibLoader.instance.loadILibLocaleData('en-US');
+    await ILibLoader.instance.loadILibLocaleData('en-GB');
   });
   group('format()', () {
     test('ILibDateFmt_no_Options', () {

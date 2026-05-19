@@ -79,7 +79,55 @@ class ILibDateFmt {
     if (date is ILibDateOptions) {
       resolved = _resolveDateOptions(date);
     }
+    resolved = _convertToFormatterCalendar(resolved);
     return _formatTemplate(resolved, _templateArr);
+  }
+
+  ILibDate _convertToFormatterCalendar(ILibDate date) {
+    String dateCalendar = _calName;
+    if (date is ILibDateOptions) {
+      dateCalendar = date.type ?? date.calendar ?? _calName;
+    } else if (date is ILibCalendarDate) {
+      dateCalendar = date.getCalendar();
+    }
+    if (dateCalendar == _calName) {
+      return date;
+    }
+    final ILibCalendarDate calDate = (date is ILibDateOptions)
+        ? _createCalendarDate(dateCalendar,
+            year: date.year, month: date.month, day: date.day,
+            hour: date.hour, minute: date.minute, second: date.second,
+            millisecond: date.millisecond)
+        : date as ILibCalendarDate;
+    final double jd = calDate.getJulianDay();
+    return _createCalendarDate(_calName, julianDay: jd);
+  }
+
+  ILibCalendarDate _createCalendarDate(String calendar, {
+    int? year, int? month, int? day,
+    int? hour, int? minute, int? second, int? millisecond,
+    double? julianDay,
+  }) {
+    switch (calendar) {
+      case 'ethiopic':
+        return EthiopicDate(year: year, month: month, day: day, hour: hour, minute: minute, second: second, millisecond: millisecond, julianDay: julianDay);
+      case 'coptic':
+        return CopticDate(year: year, month: month, day: day, hour: hour, minute: minute, second: second, millisecond: millisecond, julianDay: julianDay);
+      case 'hebrew':
+        return HebrewDate(year: year, month: month, day: day, hour: hour, minute: minute, second: second, millisecond: millisecond, julianDay: julianDay);
+      case 'islamic':
+        return IslamicDate(year: year, month: month, day: day, hour: hour, minute: minute, second: second, millisecond: millisecond, julianDay: julianDay);
+      case 'julian':
+        return JulianDate(year: year, month: month, day: day, hour: hour, minute: minute, second: second, millisecond: millisecond, julianDay: julianDay);
+      case 'persian':
+        return PersianDate(year: year, month: month, day: day, hour: hour, minute: minute, second: second, millisecond: millisecond, julianDay: julianDay);
+      case 'persian-algo':
+        return PersianAlgoDate(year: year, month: month, day: day, hour: hour, minute: minute, second: second, millisecond: millisecond, julianDay: julianDay);
+      case 'thaisolar':
+        return ThaiSolarDate(year: year, month: month, day: day, hour: hour, minute: minute, second: second, millisecond: millisecond, julianDay: julianDay);
+      default:
+        return GregorianDate(year: year, month: month, day: day, hour: hour, minute: minute, second: second, millisecond: millisecond, julianDay: julianDay);
+    }
   }
 
   ILibDateOptions _resolveDateOptions(ILibDateOptions date) {
@@ -387,8 +435,20 @@ class ILibDateFmt {
     return (code >= 65 && code <= 90) || (code >= 97 && code <= 122);
   }
 
+  ILibCalendarDate _getCalendarDate(ILibDate date) {
+    if (date is ILibCalendarDate) {
+      return date;
+    }
+    final ILibDateOptions opts = date as ILibDateOptions;
+    return _createCalendarDate(_calName,
+        year: opts.year, month: opts.month, day: opts.day,
+        hour: opts.hour, minute: opts.minute, second: opts.second,
+        millisecond: opts.millisecond);
+  }
+
   String _formatTemplate(ILibDate date, List<String> templateArr) {
     final StringBuffer str = StringBuffer();
+    ILibCalendarDate? calDate;
 
     for (int i = 0; i < templateArr.length; i++) {
       switch (templateArr[i]) {
@@ -489,7 +549,8 @@ class ILibDateFmt {
         case 'cc':
         case 'ccc':
         case 'cccc':
-          final String key = '${templateArr[i]}${date.getDayOfWeek()}';
+          calDate ??= _getCalendarDate(date);
+          final String key = '${templateArr[i]}${calDate.getDayOfWeek()}';
           str.write(_getSysString(key));
           break;
         case 'a':
@@ -499,30 +560,37 @@ class ILibDateFmt {
           str.write(_findMeridiem(date.hour ?? 0, date.minute ?? 0));
           break;
         case 'G':
-          final String key = 'G${date.getEra()}';
+          calDate ??= _getCalendarDate(date);
+          final String key = 'G${calDate.getEra()}';
           str.write(_getSysString(key));
           break;
         case 'O':
           str.write(_formatOrdinal(date.day ?? 1));
           break;
         case 'w':
-          str.write(date.getWeekOfYear());
+          calDate ??= _getCalendarDate(date);
+          str.write(calDate.getWeekOfYear());
           break;
         case 'ww':
-          str.write(date.getWeekOfYear().toString().padLeft(2, '0'));
+          calDate ??= _getCalendarDate(date);
+          str.write(calDate.getWeekOfYear().toString().padLeft(2, '0'));
           break;
         case 'D':
-          str.write(date.getDayOfYear());
+          calDate ??= _getCalendarDate(date);
+          str.write(calDate.getDayOfYear());
           break;
         case 'DD':
-          str.write(date.getDayOfYear().toString().padLeft(2, '0'));
+          calDate ??= _getCalendarDate(date);
+          str.write(calDate.getDayOfYear().toString().padLeft(2, '0'));
           break;
         case 'DDD':
-          str.write(date.getDayOfYear().toString().padLeft(3, '0'));
+          calDate ??= _getCalendarDate(date);
+          str.write(calDate.getDayOfYear().toString().padLeft(3, '0'));
           break;
         case 'W':
+          calDate ??= _getCalendarDate(date);
           final ILibLocaleInfo li = ILibLocaleInfo(_locale);
-          str.write(date.getWeekOfMonth(li.getFirstDayOfWeek()));
+          str.write(calDate.getWeekOfMonth(li.getFirstDayOfWeek()));
           break;
         case 'z':
           str.write(_getTimezoneDisplay(date, 'standard'));
