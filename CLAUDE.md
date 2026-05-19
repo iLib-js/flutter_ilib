@@ -76,7 +76,6 @@ Options → ILibLocaleInfo (determines locale, calendar, clock, meridiems)
 ### Step 1: Analyze JS Source
 - Original JS source: https://github.com/iLib-js/iLib → `js/lib/`
 - Original JS tests: https://github.com/iLib-js/iLib → `js/test/`
-- Local `ilib_js/` is a quick-reference copy (not the authoritative source)
 - Check `require()` dependencies
 
 ### Step 2: Verify JSON Data
@@ -200,6 +199,16 @@ lib/
 ### Public API Export
 - All public classes exported from `lib/flutter_ilib.dart`
 - Add export line when creating new files
+
+## Rata Die (RD)
+
+Rata Die ("fixed date") is a continuous day numbering system with epoch at Gregorian 0001-01-01 (RD = 1).
+Used as a common intermediate representation for converting between calendar systems.
+
+- Each calendar date class converts its components to RD via its `RataDie` class
+- Cross-calendar conversion: Date → RD → Julian Day → target calendar's RD → Date
+- `getDayOfWeek()` is computed from RD (`rd % 7`)
+- Julian Day = RD + calendar-specific epoch offset
 
 ## Calendar Type Mapping
 
