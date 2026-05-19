@@ -1,40 +1,42 @@
-# JS → Dart 변환 가이드
+# JS → Dart Conversion Guide
 
-flutter_ilib의 JavaScript interop 의존성을 순수 Dart로 전환하는 작업 가이드.
+Guide for converting flutter_ilib's JavaScript interop dependencies to pure Dart.
 
-## 배경
+## Background
 
-- **develop 브랜치**: `flutter_js` 패키지의 `JavascriptRuntime`을 사용하여 iLib JS 라이브러리를 런타임에 evaluate
-- **convertToDart 브랜치**: JS 런타임 제거 → JSON 로케일 데이터를 직접 로드하여 순수 Dart로 처리
+- **develop branch**: Uses `flutter_js` package's `JavascriptRuntime` to evaluate iLib JS library at runtime
+- **convertToDart branch**: Removes JS runtime → loads JSON locale data directly and processes in pure Dart
 
-## 변환 현황
+## Conversion Status
 
-### 완료
+### Completed
 
-| 클래스 | 파일 | 방식 |
-|--------|------|------|
-| `ILibLocaleInfo` | `lib/ilib_localeinfo.dart` | JSON 데이터 조회 |
-| `ILibLocale` | `lib/ilib_locale.dart` | 순수 Dart 파싱 |
-| `ILibCaseMapper` | `lib/ilib_casemapper.dart` | Dart Map 기반 매핑 |
-| `ILibLoader` | `lib/ilib_init.dart` | `rootBundle`로 JSON 로드 (구 `ILibJS`) |
-| `ILibDate` | `lib/ilib_date.dart` | JS 의존성 없음 |
+| Class | File | Approach |
+|-------|------|----------|
+| `ILibLocaleInfo` | `lib/ilib_localeinfo.dart` | JSON data lookup |
+| `ILibLocale` | `lib/ilib_locale.dart` | Pure Dart parsing |
+| `ILibCaseMapper` | `lib/ilib_casemapper.dart` | Dart Map-based mapping |
+| `ILibLoader` | `lib/ilib_init.dart` | JSON load via `rootBundle` (replaces `ILibJS`) |
+| `ILibDate` | `lib/ilib_date.dart` | No JS dependency |
+| `ILibDateFmt` | `lib/ilib_datefmt.dart` | Pure Dart formatting engine |
+| `ILibTimeZone` | `lib/ilib_timezone.dart` | DST calculation from zoneinfo JSON |
+| `ILibCalendar` | `lib/ilib_calendar.dart` + `lib/calendar/` | Calendar factory + all calendar types |
 
-### 미완료
+### Remaining
 
-| 클래스 | 파일 | JS 호출 수 | 우선순위 제안 |
-|--------|------|-----------|--------------|
-| `ILibCountry` | `lib/ilib_country.dart` | 5 | 1순위 — 구조 단순 |
-| `ILibScriptInfo` | `lib/ilib_scriptinfo.dart` | 7 | 2순위 — 구조 단순 |
-| `ILibDurationFmt` | `lib/ilib_durationfmt.dart` | 5 | 3순위 |
-| `ILibDateFmt` | `lib/ilib_datefmt.dart` | 6 | 4순위 — 로직 복잡 |
-| `ILibNumFmt` | `lib/ilib_numfmt.dart` | 14 | 5순위 — 가장 복잡 |
+| Class | File | JS Calls | Suggested Priority |
+|-------|------|----------|-------------------|
+| `ILibCountry` | `lib/ilib_country.dart` | 5 | 1st — simple structure |
+| `ILibScriptInfo` | `lib/ilib_scriptinfo.dart` | 7 | 2nd — simple structure |
+| `ILibDurationFmt` | `lib/ilib_durationfmt.dart` | 5 | 3rd |
+| `ILibNumFmt` | `lib/ilib_numfmt.dart` | 14 | 4th — most complex |
 
-## 변환 패턴
+## Conversion Pattern
 
 ### Before (JS interop)
 
 ```dart
-// develop 브랜치 — ILibJS.evaluate()로 JS 코드 실행
+// develop branch — executes JS code via ILibJS.evaluate()
 String getClock() {
   final String jscode = 'new LocaleInfo("$locale").getClock()';
   final String result = ILibJS.instance.evaluate(jscode).stringResult;
@@ -42,71 +44,71 @@ String getClock() {
 }
 ```
 
-### After (순수 Dart)
+### After (Pure Dart)
 
 ```dart
-// convertToDart 브랜치 — JSON 데이터에서 직접 조회
+// convertToDart branch — direct lookup from JSON data
 String getClock() {
   return (_info['clock'] as String?) ?? (_defaultInfo['clock'] as String);
 }
 ```
 
-## 변환 단계별 체크리스트
+## Step-by-Step Checklist
 
-### 1. 데이터 분석
+### 1. Data Analysis
 
-- [ ] `ilib_js/{ClassName}.js`에서 해당 클래스가 사용하는 데이터 키 파악
-- [ ] `assets/locale/root.json` 등에서 해당 데이터의 JSON 키 확인 (예: `ilib.data.localeinfo`)
-- [ ] 필요한 데이터가 JSON에 이미 존재하는지 검증
+- [ ] Identify data keys used by the class from `ilib_js/{ClassName}.js`
+- [ ] Verify JSON key in `assets/locale/root.json` (e.g., `ilib.data.localeinfo`)
+- [ ] Confirm required data already exists in JSON files
 
-### 2. 데이터 준비 (필요시)
+### 2. Data Preparation (if needed)
 
-- [ ] 누락된 데이터가 있으면 iLib 데이터 생성 도구로 JSON 파일 재생성
-- [ ] `assets/locale/` 에 파일 추가
-- [ ] `pubspec.yaml`의 assets 경로 확인
+- [ ] If data is missing, regenerate JSON files using iLib data generation tools
+- [ ] Add files to `assets/locale/`
+- [ ] Verify assets path in `pubspec.yaml`
 
-### 3. Dart 코드 작성
+### 3. Dart Code Implementation
 
-- [ ] 클래스 생성자에서 `ILibLoader.instance.getLocaleData(locale)` 사용
-- [ ] 데이터 키로 접근: `getLocaleData(locale)?['ilib.data.{클래스키}']`
-- [ ] `_defaultInfo` static const Map으로 기본값 정의
-- [ ] 각 getter를 `(_info['key'] as Type?) ?? fallback` 패턴으로 변환
-- [ ] `import 'ilib_init.dart'`에서 `ILibJS` → `ILibLoader` 참조 변경
+- [ ] Use `ILibLoader.instance.getLocaleData(locale)` in class constructor
+- [ ] Access data by key: `getLocaleData(locale)?['ilib.data.{classKey}']`
+- [ ] Define defaults as `_defaultInfo` static const Map
+- [ ] Convert each getter to `(_info['key'] as Type?) ?? fallback` pattern
+- [ ] Change `import 'ilib_init.dart'` reference from `ILibJS` to `ILibLoader`
 
-### 4. 정리
+### 4. Cleanup
 
-- [ ] `flutter_ilib.dart`의 export 확인
-- [ ] 기존 테스트 실행하여 동일 결과 확인
-- [ ] JS interop import 제거 (`flutter_js`, `dart:ffi` 등)
+- [ ] Verify exports in `flutter_ilib.dart`
+- [ ] Run existing tests to confirm identical results
+- [ ] Remove JS interop imports (`flutter_js`, `dart:ffi`, etc.)
 
-## 핵심 인프라
+## Core Infrastructure
 
 ### ILibLoader (lib/ilib_init.dart)
 
-변환의 핵심 컴포넌트. develop의 `ILibJS`를 대체.
+The core component of the conversion. Replaces `ILibJS` from the develop branch.
 
 ```dart
-// 싱글톤 접근
+// Singleton access
 ILibLoader.instance
 
-// 로케일 데이터 조회 (이미 머지된 Map 반환)
+// Locale data lookup (returns already-merged Map)
 Map<String, dynamic>? data = ILibLoader.instance.getLocaleData('ko-KR');
 
-// 특정 클래스 데이터 접근
+// Access class-specific data
 Map<String, dynamic>? localeInfo = data?['ilib.data.localeinfo'];
 ```
 
-### 데이터 로드 흐름
+### Data Load Flow
 
 ```
-앱 시작 → ILibLoader.loadJSON()
-       → getJSONDataPaths(locale)로 로드할 파일 목록 생성
-       → root.json → {lang}.json → und-{region}.json → {lang}-{region}.json 순서로 로드
-       → deepMerge로 계층적 병합
-       → _localeDataMap에 캐시
+App start → ILibLoader.loadJSON()
+         → getJSONDataPaths(locale) generates file list to load
+         → Load in order: root.json → {lang}.json → und-{region}.json → {lang}-{region}.json
+         → Hierarchical merge via deepMerge
+         → Cache in _localeDataMap
 ```
 
-### JSON 데이터 구조
+### JSON Data Structure
 
 ```json
 {
@@ -116,11 +118,13 @@ Map<String, dynamic>? localeInfo = data?['ilib.data.localeinfo'];
 }
 ```
 
-각 JSON 파일은 여러 `ilib.data.*` 키를 포함할 수 있음. 로드 후 deepMerge되어 최종 데이터 구성.
+Each JSON file may contain multiple `ilib.data.*` keys. After loading, they are deep-merged to compose the final data.
 
-## 참고 자료
+## Reference
 
-- `ilib_js/` — JS 원본 소스 (로직 참고용)
-- `assets/locale/` — 218개 JSON 로케일 데이터 파일 (iLib v14.21.0 기준)
-- `docs/architecture.md` — 전체 아키텍처 문서
-- `test/` — 기존 테스트 (변환 후 검증용)
+- Original JS source: https://github.com/iLib-js/iLib → `js/lib/`
+- Original JS tests: https://github.com/iLib-js/iLib → `js/test/`
+- Local `ilib_js/` — JS source copy (for quick reference only)
+- `assets/locale/` — 218 JSON locale data files (based on iLib v14.21.0)
+- `docs/architecture.md` — full architecture documentation
+- `test/` — existing tests (for post-conversion verification)

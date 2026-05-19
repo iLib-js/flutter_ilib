@@ -81,6 +81,7 @@ If you're an AI agent (Claude, Copilot, etc.), follow this sequence:
 | [architecture.md](./architecture.md) | System design and internals | Developers, AI | ~450 lines |
 | [api.md](./api.md) | Complete API reference | Developers, AI | ~400 lines |
 | [development.md](./development.md) | Setup, testing, contribution | Developers | ~500 lines |
+| [calendar-conversion.md](./calendar-conversion.md) | Calendar conversion logic in DateFmt | Developers, AI | ~180 lines |
 
 ### External Documentation
 

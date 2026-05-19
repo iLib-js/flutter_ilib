@@ -1,82 +1,82 @@
-# ILibDateFmt JS → Dart 변환 계획서
+# ILibDateFmt JS → Dart Conversion Plan
 
-## 개요
+## Overview
 
-`ILibDateFmt` 클래스를 JavaScript interop(`ILibJS.instance.evaluate()`)에서 순수 Dart 구현으로 전환합니다.
+Converting the `ILibDateFmt` class from JavaScript interop (`ILibJS.instance.evaluate()`) to a pure Dart implementation.
 
-### 현재 상태
+### Current State
 
-- **현재 구현**: 4개의 JS evaluate 호출 (`format`, `getClock`, `getTemplate`, `getMeridiemsRange`)
-- **테스트**: 88개 파일
-- **데이터**: `assets/locale/` JSON 파일에 필요한 모든 데이터가 이미 준비됨
-  - `ilib.data.dateformats` — 로케일별 날짜/시간 포맷 템플릿
-  - `ilib.data.sysres` — 번역 문자열 (월/요일 이름, AM/PM 등)
-  - `ilib.data.zoneinfo` — 타임존 정보 (DST 규칙 포함)
+- **Previous implementation**: 4 JS evaluate calls (`format`, `getClock`, `getTemplate`, `getMeridiemsRange`)
+- **Tests**: 88 files
+- **Data**: All required data already available in `assets/locale/` JSON files
+  - `ilib.data.dateformats` — locale-specific date/time format templates
+  - `ilib.data.sysres` — translated strings (month/day names, AM/PM, etc.)
+  - `ilib.data.zoneinfo` — timezone info (including DST rules)
 
-### 변환 범위
+### Conversion Scope
 
-- timezone 포매팅 포함 (z/Z 토큰)
-- 모든 캘린더 타입 지원 (gregorian, islamic, hebrew, ethiopic 등)
+- Includes timezone formatting (z/Z tokens)
+- Supports all calendar types (gregorian, islamic, hebrew, ethiopic, etc.)
 
 ---
 
-## 아키텍처
+## Architecture
 
-### 데이터 흐름
+### Data Flow
 
 ```
-ILibDateFmt 생성자
-  ├── ILibLocaleInfo → calendar, clock, meridiems 스타일 결정
+ILibDateFmt constructor
+  ├── ILibLocaleInfo → determines calendar, clock, meridiems style
   ├── ILibLoader.getLocaleData(locale)
-  │     ├── ['ilib.data.dateformats'] → 포맷 템플릿
-  │     ├── ['ilib.data.sysres'] → 번역 문자열
-  │     └── ['ilib.data.zoneinfo'] → 타임존 데이터
-  ├── _initTemplate() → 옵션에 따른 포맷 문자열 선택
-  ├── _massageTemplate() → clock에 따른 시간 토큰 보정
-  └── _tokenize() → 토큰 배열 생성
+  │     ├── ['ilib.data.dateformats'] → format templates
+  │     ├── ['ilib.data.sysres'] → translated strings
+  │     └── ['ilib.data.zoneinfo'] → timezone data
+  ├── _initTemplate() → selects format string based on options
+  ├── _massageTemplate() → adjusts time tokens based on clock
+  └── _tokenize() → generates token array
 
 format(date)
-  └── _formatTemplate(date, tokenArr) → 각 토큰을 날짜 값으로 치환
+  ├── _convertToFormatterCalendar(date) → calendar conversion if needed
+  └── _formatTemplate(date, tokenArr) → replaces each token with date values
 ```
 
-### 파일 구조
+### File Structure
 
 ```
 lib/
-├── ilib_datefmt.dart              ← 전면 재작성 (핵심)
-├── ilib_date.dart                 ← 계산 메서드 추가
-├── internal/
-│   └── ilib_timezone.dart         ← 새 파일 (타임존 유틸리티)
-└── flutter_ilib.dart              ← export 추가
+├── ilib_datefmt.dart              ← full rewrite (core)
+├── ilib_date.dart                 ← calculation methods added
+├── ilib_timezone.dart             ← timezone utility
+└── flutter_ilib.dart              ← export added
 ```
 
 ---
 
-## 구현 단계
+## Implementation Steps
 
-### Step 1: 타임존 유틸리티 (`lib/internal/ilib_timezone.dart`)
+### Step 1: Timezone Utility (`lib/ilib_timezone.dart`)
 
-`z`/`Z` 토큰 처리를 위한 내부 클래스.
+Internal class for `z`/`Z` token processing.
 
-**기능:**
-- `getDisplayName(date, style)` — "standard" 스타일: `PDT`, `PST` 등 약어 반환, "rfc822" 스타일: `UTC-0800` 형식 반환
-- `inDaylightTime(date)` — 주어진 날짜가 DST 기간인지 판별
+**Features:**
+- `getDisplayName(date, style)` — "standard" style: returns abbreviations like `PDT`, `PST`; "rfc822" style: returns format like `UTC-0800`
+- `inDaylightTime(date)` — determines if given date is in DST period
 
-**DST 판별 알고리즘:**
+**DST Detection Algorithm:**
 
-zoneinfo 데이터 구조:
+zoneinfo data structure:
 ```json
 {
-  "f": "P{c}T",          // 포맷 ({c}에 DST/Standard 문자 삽입)
-  "o": "-8:0",           // UTC 오프셋
-  "s": {                 // DST 시작 규칙 (Summer)
-    "c": "D",            // DST 시 {c}에 들어갈 문자
-    "m": 3,              // 월
-    "r": "0>8",          // 규칙: "일요일(0)이면서 8일 이후(>) 첫 번째 날"
-    "t": "2:0",          // 시각
-    "v": "1:0"           // 저축 시간 (1시간)
+  "f": "P{c}T",          // format ({c} replaced with DST/Standard character)
+  "o": "-8:0",           // UTC offset
+  "s": {                 // DST start rule (Summer)
+    "c": "D",            // character to insert at {c} during DST
+    "m": 3,              // month
+    "r": "0>8",          // rule: "Sunday(0) on or after(>) the 8th"
+    "t": "2:0",          // time
+    "v": "1:0"           // savings time (1 hour)
   },
-  "e": {                 // DST 종료 규칙 (End → Standard)
+  "e": {                 // DST end rule (End → Standard)
     "c": "S",
     "m": 11,
     "r": "0>1",
@@ -85,49 +85,49 @@ zoneinfo 데이터 구조:
 }
 ```
 
-규칙 문자열 `"r"` 해석:
-- `"0>8"` → 일요일(0)이 8일 이후(on or after)인 첫 날
-- `"0<15"` → 일요일(0)이 15일 이전(on or before)인 마지막 날
-- `"l0"` → 해당 월의 마지막 일요일(0)
-- `"f0"` → 해당 월의 첫 번째 일요일(0)
-- `"15"` → 해당 월 15일 (고정 날짜)
+Rule string `"r"` interpretation:
+- `"0>8"` → first Sunday(0) on or after the 8th
+- `"0<15"` → last Sunday(0) on or before the 15th
+- `"l0"` → last Sunday(0) of the month
+- `"f0"` → first Sunday(0) of the month
+- `"15"` → the 15th of the month (fixed date)
 
 ---
 
-### Step 2: 날짜 유틸리티 메서드 (`lib/ilib_date.dart`)
+### Step 2: Date Utility Methods (`lib/ilib_date.dart`)
 
-`ILibDateOptions`에 다음 계산 메서드를 추가:
+Add the following calculation methods to `ILibDateOptions`:
 
-| 메서드 | 설명 | 구현 방식 |
-|--------|------|-----------|
-| `getDayOfWeek()` | 0=일~6=토 | Dart `DateTime.weekday` 변환 (1=월~7=일 → 0=일~6=토) |
-| `getDayOfYear()` | 1~366 | 누적 월 길이 + 일 |
-| `getWeekOfYear()` | ISO 8601 주차 | 표준 ISO 주차 계산 |
-| `getWeekOfMonth(locale)` | 월 내 주차 | firstDayOfWeek 기준 계산 |
+| Method | Description | Implementation |
+|--------|-------------|----------------|
+| `getDayOfWeek()` | 0=Sun~6=Sat | Delegates to `_toCalendarDate().getDayOfWeek()` |
+| `getDayOfYear()` | 1~366 | Cumulative month lengths + day |
+| `getWeekOfYear()` | ISO 8601 week | Standard ISO week calculation |
+| `getWeekOfMonth(locale)` | Week within month | Calculated based on firstDayOfWeek |
 | `getEra()` | 0=BCE, 1=CE | `year > 0 ? 1 : 0` |
 
 ---
 
-### Step 3: ILibDateFmt 핵심 로직 재작성
+### Step 3: ILibDateFmt Core Logic Rewrite
 
-#### 3-1. 생성자
+#### 3-1. Constructor
 
 ```dart
 ILibDateFmt(ILibDateFmtOptions options) {
-  // 옵션 파싱
-  // ILibLocaleInfo에서 기본값 획득 (calendar, clock, meridiems)
-  // dateformats/sysres/zoneinfo 데이터 로드
-  // 템플릿 초기화 (template 옵션 없을 때)
+  // Parse options
+  // Get defaults from ILibLocaleInfo (calendar, clock, meridiems)
+  // Load dateformats/sysres/zoneinfo data
+  // Initialize template (when no template option provided)
 }
 ```
 
-#### 3-2. 포맷 선택 (`_initTemplate`)
+#### 3-2. Format Selection (`_initTemplate`)
 
-dateformats JSON 구조:
+dateformats JSON structure:
 ```json
 {
   "gregorian": {
-    "order": "{date} {time}",  // 또는 길이별 {"s":"...", "m":"...", ...}
+    "order": "{date} {time}",  // or length-specific {"s":"...", "m":"...", ...}
     "date": {
       "dmy": {"s": "M/d/yy", "m": "MMM d, yyyy", "l": "MMMM d, yyyy", "f": "MMMM d, yyyy"},
       "dm": {...}, "my": {...}, ...
@@ -141,71 +141,71 @@ dateformats JSON 구조:
 }
 ```
 
-타입별 처리:
+Processing by type:
 - `"date"` → `formats.date[dateComponents][length]`
 - `"time"` → `formats.time[clock][timeComponents][length]`
-- `"datetime"` → order 템플릿에 date와 time을 삽입
+- `"datetime"` → insert date and time into order template
 
-Stand-alone 포맷 fallback:
-- `"m"` → `"l"` (독립형 월)
-- `"d"` → `"a"` (독립형 일)
-- `"w"` → `"e"` (독립형 요일)
-- `"y"` → `"r"` (독립형 연도)
+Stand-alone format fallback:
+- `"m"` → `"l"` (stand-alone month)
+- `"d"` → `"a"` (stand-alone day)
+- `"w"` → `"e"` (stand-alone weekday)
+- `"y"` → `"r"` (stand-alone year)
 
-#### 3-3. 시간 보정 (`_massageTemplate`)
+#### 3-3. Clock Adjustment (`_massageTemplate`)
 
-- clock=24: 템플릿 내 `h`→`H`, `K`→`k` (따옴표 리터럴 내부는 보존)
-- clock=12: 템플릿 내 `H`→`h`, `k`→`K` (따옴표 리터럴 내부는 보존)
+- clock=24: replace `h`→`H`, `K`→`k` in template (preserve content inside quote literals)
+- clock=12: replace `H`→`h`, `k`→`K` in template (preserve content inside quote literals)
 
-#### 3-4. 토크나이저 (`_tokenize`)
+#### 3-4. Tokenizer (`_tokenize`)
 
 ```
 "d/MM/yyyy" → ["d", "/", "MM", "/", "yyyy"]
 "'El' d. 'de' MMMM" → ["'El'", " ", "d", ". ", "'de'", " ", "MMMM"]
 ```
 
-규칙:
-1. 따옴표(`'`) 시작 → 닫는 따옴표까지 하나의 토큰
-2. 알파벳 → 동일 문자 연속이 하나의 토큰
-3. 그 외 → 비-알파벳/비-따옴표 연속이 하나의 토큰
+Rules:
+1. Starts with quote (`'`) → single token until closing quote
+2. Alphabetic → consecutive same characters form one token
+3. Other → consecutive non-alpha/non-quote characters form one token
 
-#### 3-5. 포매팅 엔진 (`_formatTemplate`)
+#### 3-5. Formatting Engine (`_formatTemplate`)
 
-주요 토큰 매핑:
+Key token mapping:
 
-| 토큰 | 출력 | 데이터 소스 |
-|------|------|-------------|
-| `d`, `dd` | 일 (1, 01) | date.day |
-| `M`, `MM` | 월 숫자 | date.month |
-| `MMM`, `MMMM` | 월 이름 (약어/전체) | sysres[`MMM{month}`] |
-| `N`, `NN` | 월 이름 (1자/2자) | sysres[`N{month}`] |
-| `L`, `LL`, `LLL`, `LLLL` | 독립형 월 이름 | sysres (fallback: M 패턴) |
-| `E`~`EEEE` | 요일 이름 | sysres[`E{dow}`~`EEEE{dow}`] |
-| `c`~`cccc` | 독립형 요일 | sysres |
-| `yy`, `yyyy` | 연도 | date.year |
-| `h`, `hh` | 12시간 (0→12) | date.hour % 12 |
-| `H`, `HH` | 24시간 (0~23) | date.hour |
-| `K`, `KK` | 12시간 (0~11) | date.hour % 12 |
-| `k`, `kk` | 24시간 (0→24) | date.hour (0을 24로) |
-| `m`, `mm` | 분 | date.minute |
-| `s`, `ss` | 초 | date.second |
-| `S`, `SSS` | 밀리초 | date.millisecond |
-| `a` | AM/PM 또는 meridiems | sysres (스타일별 분기) |
-| `B` | dayPeriods 기반 | dayPeriods 배열 |
+| Token | Output | Data Source |
+|-------|--------|-------------|
+| `d`, `dd` | day (1, 01) | date.day |
+| `M`, `MM` | month number | date.month |
+| `MMM`, `MMMM` | month name (abbr/full) | sysres[`MMM{month}`] |
+| `N`, `NN` | month name (1-char/2-char) | sysres[`N{month}`] |
+| `L`, `LL`, `LLL`, `LLLL` | stand-alone month name | sysres (fallback: M pattern) |
+| `E`~`EEEE` | weekday name | sysres[`E{dow}`~`EEEE{dow}`] |
+| `c`~`cccc` | stand-alone weekday | sysres |
+| `yy`, `yyyy` | year | date.year |
+| `h`, `hh` | 12-hour (0→12) | date.hour % 12 |
+| `H`, `HH` | 24-hour (0~23) | date.hour |
+| `K`, `KK` | 12-hour (0~11) | date.hour % 12 |
+| `k`, `kk` | 24-hour (0→24) | date.hour (0 becomes 24) |
+| `m`, `mm` | minute | date.minute |
+| `s`, `ss` | second | date.second |
+| `S`, `SSS` | millisecond | date.millisecond |
+| `a` | AM/PM or meridiems | sysres (branched by style) |
+| `B` | dayPeriods-based | dayPeriods array |
 | `G` | Era (BCE/CE) | sysres[`G{era}`] |
-| `O` | 서수 (1st, 2nd...) | ordinalChoice 파싱 |
-| `w`, `ww` | 연중 주차 | getDayOfWeek 계산 |
-| `D`~`DDD` | 연중 일수 | getDayOfYear 계산 |
-| `W` | 월중 주차 | getWeekOfMonth 계산 |
-| `z` | 타임존 약어 | ILibTimeZone.getDisplayName(standard) |
-| `Z` | 타임존 RFC822 | ILibTimeZone.getDisplayName(rfc822) |
-| 따옴표 리터럴 | 따옴표 제거 후 그대로 | - |
+| `O` | ordinal (1st, 2nd...) | ordinalChoice parsing |
+| `w`, `ww` | week of year | calDate.getWeekOfYear() |
+| `D`~`DDD` | day of year | calDate.getDayOfYear() |
+| `W` | week of month | calDate.getWeekOfMonth() |
+| `z` | timezone abbreviation | ILibTimeZone.getDisplayName(standard) |
+| `Z` | timezone RFC822 | ILibTimeZone.getDisplayName(rfc822) |
+| quote literal | remove quotes, output as-is | - |
 
-마지막 단계: native digits 매핑 (useNative 옵션 또는 로케일 기본 설정에 따라)
+Final step: native digits mapping (based on useNative option or locale default)
 
-#### 3-6. sysres 조회 패턴
+#### 3-6. sysres Lookup Pattern
 
-캘린더별 키를 우선 조회:
+Calendar-specific key is checked first:
 ```dart
 String _getSysString(String key) {
   return (_sysres['$key-$_calName'] as String?) ??
@@ -215,40 +215,40 @@ String _getSysString(String key) {
 
 ---
 
-### Step 4: 보조 메서드
+### Step 4: Helper Methods
 
-| 메서드 | 동작 |
-|--------|------|
-| `getClock()` | clock 옵션 → `int` 반환 (12 또는 24) |
-| `getTemplate()` | 계산된 포맷 템플릿 문자열 반환 |
-| `getMeridiemsRange()` | 현재 meridiems 스타일에 따른 시간대 목록 반환 |
-| `getDateComponentOrder()` | "dmy", "mdy" 등 컴포넌트 순서 |
+| Method | Behavior |
+|--------|----------|
+| `getClock()` | clock option → returns `int` (12 or 24) |
+| `getTemplate()` | returns computed format template string |
+| `getMeridiemsRange()` | returns time period list based on current meridiems style |
+| `getDateComponentOrder()` | returns "dmy", "mdy", etc. component order |
 
-`getMeridiemsRange()` 스타일별 반환값:
-- **gregorian** (기본): AM(00:00~11:59), PM(12:00~23:59) — 2개
-- **chinese**: 凌晨/早上/上午/中午/下午/傍晚/晚上 — 7개
-- **ethiopic**: morning/noon/afternoon/evening/night — 5개
-
----
-
-### Step 5: ordinalChoice 파서
-
-`O` 토큰을 위한 choice 문자열 처리:
-
-입력: `"1#1st|2#2nd|3#3rd|21#21st|22#22nd|23#23rd|31#31st|#{num}th"`
-
-알고리즘:
-1. `|`로 분리
-2. 각 항목을 `#`로 분리하여 (조건, 값) 쌍 구성
-3. 입력 숫자에 정확히 매칭되는 조건 우선 적용
-4. 매칭 없으면 기본값(`#` 앞이 비어있는 것) 사용
-5. `{num}` 플레이스홀더를 실제 숫자로 치환
+`getMeridiemsRange()` return values by style:
+- **gregorian** (default): AM(00:00~11:59), PM(12:00~23:59) — 2 entries
+- **chinese**: 7 entries (dawn/morning/forenoon/noon/afternoon/evening/night)
+- **ethiopic**: 5 entries (morning/noon/afternoon/evening/night)
 
 ---
 
-### Step 6: 테스트 수정 & 통합
+### Step 5: ordinalChoice Parser
 
-#### 테스트 setUp 변경 (88개 파일)
+Choice string processing for the `O` token:
+
+Input: `"1#1st|2#2nd|3#3rd|21#21st|22#22nd|23#23rd|31#31st|#{num}th"`
+
+Algorithm:
+1. Split by `|`
+2. Split each item by `#` to form (condition, value) pairs
+3. Apply exact match for input number first
+4. If no match, use default (entry with empty condition before `#`)
+5. Replace `{num}` placeholder with actual number
+
+---
+
+### Step 6: Test Modification & Integration
+
+#### Test setUp Change (88 files)
 
 ```dart
 // Before (JS interop)
@@ -256,59 +256,60 @@ await ILibJS.instance.loadJS();
 ILibJS.instance.initILib();
 await ILibJS.instance.loadILibLocaleData('en-US');
 
-// After (순수 Dart)
+// After (Pure Dart)
 await ILibLoader.instance.loadJSON();
 ILibLoader.instance.initILib();
 await ILibLoader.instance.loadILibLocaleData('en-US');
 ```
 
-#### 기타 정리
+#### Other Cleanup
 
-- `flutter_ilib.dart`에 `export 'ilib_datefmt.dart'` 추가
-- `ILibDateFmt`에서 `ILibJS` import 제거
-- `toJsonString()` 메서드 제거
-- `execute_unit_test.sh`에서 datefmt 테스트 제외 조건 제거
-
----
-
-## 의존성 관계
-
-```
-Step 1 (TimeZone) ──────┐
-Step 2 (날짜 유틸리티) ──┼──→ Step 3 (DateFmt 핵심) → Step 4 (보조 메서드) → Step 6 (테스트)
-Step 5 (ordinalChoice) ─┘
-```
-
-Step 1, 2, 5는 서로 독립적이므로 병렬 진행 가능.
+- Add `export 'ilib_datefmt.dart'` to `flutter_ilib.dart`
+- Remove `ILibJS` import from `ILibDateFmt`
+- Remove `toJsonString()` method
+- Remove datefmt test exclusion from `execute_unit_test.sh`
 
 ---
 
-## 검증 방법
+## Dependency Graph
+
+```
+Step 1 (TimeZone) ──────────┐
+Step 2 (Date utilities) ────┼──→ Step 3 (DateFmt core) → Step 4 (Helper methods) → Step 6 (Tests)
+Step 5 (ordinalChoice) ─────┘
+```
+
+Steps 1, 2, and 5 are independent and can be done in parallel.
+
+---
+
+## Verification
 
 ```bash
-# 단위 테스트 (대표 로케일)
+# Unit tests (representative locales)
 flutter test test/datefmt/datefmt_en_US_test.dart
 flutter test test/datefmt/datefmt_ko_KR_test.dart
 flutter test test/datefmt/datefmt_ar_SA_test.dart
 
-# 특수 기능 테스트
+# Special feature tests
 flutter test test/datefmt/datefmt_Clock_test.dart
 flutter test test/datefmt/datefmt_Meridiems_test.dart
 
-# 전체 datefmt
+# All datefmt tests
 for f in test/datefmt/*_test.dart; do flutter test "$f"; done
 
-# 리그레션 (전체 프로젝트)
+# Regression (full project)
 ./execute_unit_test.sh
 ```
 
 ---
 
-## 주의사항
+## Important Notes
 
-1. **따옴표 리터럴 보존**: `_massageTemplate`의 clock 변환과 `_tokenize` 모두에서 `'...'` 내부를 건드리지 않아야 함
-2. **캘린더 alias**: `formats['islamic']`이 문자열 `"gregorian"`일 경우 `formats['gregorian']`을 사용
-3. **dayPeriods**: 일부 로케일(ko, zh 등)에 `dayPeriods` 배열이 존재 — `B` 토큰의 유연한 시간대 표현용
-4. **native digits**: 최종 출력 문자열의 모든 아라비아 숫자를 해당 스크립트 숫자로 매핑
-5. **length가 문자열일 수 있음**: dateformats의 값이 `{s, m, l, f}` 객체가 아닌 단일 문자열일 수 있음 (모든 길이에 동일 포맷)
-6. **en-US 데이터 없음**: `en-US.json`이 별도로 존재하지 않음. `root.json` → `en.json` → `und-US.json` 머지로 구성됨
+1. **Quote literal preservation**: Both `_massageTemplate` clock conversion and `_tokenize` must not modify content inside `'...'`
+2. **Calendar alias**: When `formats['islamic']` is the string `"gregorian"`, use `formats['gregorian']` instead
+3. **dayPeriods**: Some locales (ko, zh, etc.) have a `dayPeriods` array — used for flexible time period display via `B` token
+4. **Native digits**: Map all Arabic numerals in the final output string to the corresponding script digits
+5. **Length may be a string**: dateformats values can be a single string instead of `{s, m, l, f}` object (same format for all lengths)
+6. **No en-US data file**: `en-US.json` does not exist separately. Composed by merging `root.json` → `en.json` → `und-US.json`
+7. **Calendar conversion**: See [calendar-conversion.md](./calendar-conversion.md) for cross-calendar date conversion logic in `format()`
