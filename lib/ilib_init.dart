@@ -27,6 +27,8 @@ class ILibLoader extends ChangeNotifier {
   final Map<String, Map<String, dynamic>> _fileDataCache =
       <String, Map<String, dynamic>>{};
 
+  final Set<String> _availableAssets = <String>{};
+
   Map<String, dynamic>? getLocaleData(String locale) {
     return _localeDataMap[locale] ?? _mergeFromCache(locale);
   }
@@ -47,9 +49,29 @@ class ILibLoader extends ChangeNotifier {
     return null;
   }
 
+  Future<void> _loadAssetManifest() async {
+    if (_availableAssets.isNotEmpty) {
+      return;
+    }
+    try {
+      final String manifestContent =
+          await rootBundle.loadString('AssetManifest.json');
+      final Map<String, dynamic> manifest =
+          json.decode(manifestContent) as Map<String, dynamic>;
+      _availableAssets.addAll(manifest.keys);
+    } catch (err) {
+      logger.error('Failed to load AssetManifest.json: $err');
+    }
+  }
+
   Future<Map<String, dynamic>?> _loadFile(String path) async {
     if (_fileDataCache.containsKey(path)) {
       return _fileDataCache[path];
+    }
+    if (_availableAssets.isNotEmpty &&
+        !_availableAssets.contains(path) &&
+        !_availableAssets.contains(path.replaceFirst('packages/flutter_ilib/', ''))) {
+      return null;
     }
     try {
       final String content = await rootBundle.loadString(path);
@@ -60,8 +82,7 @@ class ILibLoader extends ChangeNotifier {
     } on FormatException catch (err) {
       logger.error('Invalid JSON format in $path: $err');
       return null;
-    } catch (err) {
-      logger.info('Locale data file not available, skipping: $path');
+    } catch (_) {
       return null;
     }
   }
@@ -105,6 +126,7 @@ class ILibLoader extends ChangeNotifier {
   }
 
   Future<void> loadJSON() async {
+    await _loadAssetManifest();
     final String curlocale = getLocale();
     if (isValidLocale(curlocale)) {
       await _loadLocaleData(curlocale);

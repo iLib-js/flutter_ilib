@@ -79,15 +79,15 @@ class _MyAppState extends State<MyApp> {
     }
 
     try {
-      //currentTime = getDateTimeFormatNow('en-US');
+      currentTime = getDateTimeFormatNow('en-US');
       currentTime = '12345';
     } on PlatformException {
       currentTime = 'Failed to get iLib DatFmt.';
     }
 
-    //results[0] = getDateTimeFormat(curLocale);
+    results[0] = getDateTimeFormat(curLocale);
     results[1] = getFirstDayOfWeek(curLocale);
-    //results[2] = getClock(curLocale);
+    results[2] = getClock(curLocale);
     //results[3] = getNumFmt(curLocale);
     //results[4] = getCountry(curLocale);
 
@@ -133,7 +133,7 @@ class _MyAppState extends State<MyApp> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               _customTextBox('Current Locale', curLocale),
-              //_customTextBox('DateTime (full)', newList[0]),
+              _customTextBox('DateTime (full)', newList[0]),
               _customTextBox('First Day Of the Week', newList[1]),
               _customTextBox('Clock (12 or 24)', newList[2]),
               //_customTextBox('Number Format', newList[3]),
@@ -152,7 +152,7 @@ class _MyAppState extends State<MyApp> {
                       onPressed: () {
                         curLocale = localeList[i];
                         _flutterIlibPlugin.loadLocaleData(curLocale);
-                        //results[0] = getDateTimeFormat(curLocale);
+                        results[0] = getDateTimeFormat(curLocale);
                         results[1] = getFirstDayOfWeek(curLocale);
                         //results[2] = getClock(curLocale);
                         //results[3] = getNumFmt(curLocale);
@@ -195,7 +195,7 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  /*String getDateTimeFormatNow(String lo) {
+  String getDateTimeFormatNow(String lo) {
     final ILibDateOptions dateOptions =
         ILibDateOptions(dateTime: DateTime.now());
     final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -219,7 +219,7 @@ class _MyAppState extends State<MyApp> {
         timezone: 'local');
     final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
     return fmt.format(dateOptions);
-  }*/
+  }
 
   String getFirstDayOfWeek(String curlo) {
     final ILibLocaleInfo locInfo = ILibLocaleInfo(curlo);
@@ -237,12 +237,12 @@ class _MyAppState extends State<MyApp> {
     return days[firstDay];
   }
 
-  /*String getClock(String curlo) {
+  String getClock(String curlo) {
     final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: curlo);
     final int clock = ILibDateFmt(fmtOptions).getClock();
     return '$clock';
   }
-
+  /*
   String getNumFmt(String curlo) {
     final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions(locale: curlo));
     return fmt.format(-111123456.785);
