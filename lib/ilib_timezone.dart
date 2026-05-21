@@ -86,11 +86,8 @@ class ILibTimeZone {
     final Map<String, dynamic> startRule = _zone!['s'] as Map<String, dynamic>;
     final Map<String, dynamic> endRule = _zone!['e'] as Map<String, dynamic>;
 
-    double startRd = _calcRuleStart(startRule, year);
-    double endRd = _calcRuleStart(endRule, year);
-
-    startRd -= _offset / 1440;
-    endRd -= (_offset + _dstSavings) / 1440;
+    final double startRd = _calcRuleStart(startRule, year);
+    final double endRd = _calcRuleStart(endRule, year);
 
     if (startRd < endRd) {
       return rd >= startRd && rd < endRd;
