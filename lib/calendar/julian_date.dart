@@ -1,3 +1,4 @@
+import 'calendar_utils.dart';
 import 'ilib_date.dart';
 import 'julian_cal.dart';
 import 'julian_rata_die.dart';
@@ -54,7 +55,7 @@ class JulianDate extends ILibCalendarDate {
     final int rdFloor = rd.floor();
     final int y = _year + (_year < 0 ? 1 : 0);
     final int y1 = y - 1;
-    final int yearStart = 365 * y1 + (y1 ~/ 4);
+    final int yearStart = 365 * y1 + floorDiv(y1, 4);
     final int dayOfYear = rdFloor - yearStart;
 
     final bool isLeap = _cal.isLeapYear(_year);

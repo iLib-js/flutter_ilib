@@ -79,18 +79,19 @@ class HebrewDate extends ILibCalendarDate {
 
     final double fractionalDay = rd - rd.floorToDouble();
     final int timeMs = (fractionalDay * 86400000).round();
-    if (timeMs >= 64800000) {
-      _hour = (timeMs - 64800000) ~/ 3600000 + 18;
-      final int rem = (timeMs - 64800000) % 3600000;
+    if (timeMs < 21600000) {
+      _hour = timeMs ~/ 3600000 + 18;
+      final int rem = timeMs % 3600000;
       _minute = rem ~/ 60000;
       _second = (rem % 60000) ~/ 1000;
       _millisecond = rem % 1000;
     } else {
-      final int adjustedMs = timeMs + 21600000;
+      final int adjustedMs = timeMs - 21600000;
       _hour = adjustedMs ~/ 3600000;
-      _minute = (adjustedMs % 3600000) ~/ 60000;
-      _second = (adjustedMs % 60000) ~/ 1000;
-      _millisecond = adjustedMs % 1000;
+      final int rem = adjustedMs % 3600000;
+      _minute = rem ~/ 60000;
+      _second = (rem % 60000) ~/ 1000;
+      _millisecond = rem % 1000;
     }
   }
 

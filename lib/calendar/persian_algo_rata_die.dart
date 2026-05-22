@@ -1,5 +1,4 @@
 import 'calendar_utils.dart';
-import 'persian_algo_cal.dart';
 import 'rata_die.dart';
 
 class PersianAlgoRataDie implements ILibRataDie {
@@ -39,8 +38,6 @@ class PersianAlgoRataDie implements ILibRataDie {
     0, 31, 62, 93, 124, 155, 186, 216, 246, 276, 306, 336, 365
   ];
 
-  static final PersianAlgoCal _cal = PersianAlgoCal();
-
   late double _rd;
 
   @override
@@ -78,9 +75,10 @@ class PersianAlgoRataDie implements ILibRataDie {
 
   static double _dateToRd(
       int year, int month, int day, int hour, int minute, int second, int millisecond) {
-    final int ecy = _cal.equivalentCycleYear(year);
-    final int y = ecy - 474;
-    final int rdOfYears = 1029983 * floorDiv(y, 2820) +
+    final int yOffset = year - (year >= 0 ? 474 : 473);
+    final int cycle = floorDiv(yOffset, 2820);
+    final int ecy = mod(yOffset, 2820) + 474;
+    final int rdOfYears = 1029983 * cycle +
         365 * (ecy - 1) +
         floorDiv(682 * ecy - 110, 2816);
     final int dayInYear = (month > 1 ? cumMonthLengths[month - 1] : 0) + day;
@@ -100,9 +98,10 @@ class PersianAlgoRataDie implements ILibRataDie {
   }
 
   static int _dateToRdYearStart(int year) {
-    final int ecy = _cal.equivalentCycleYear(year);
-    final int y = ecy - 474;
-    return 1029983 * floorDiv(y, 2820) +
+    final int yOffset = year - (year >= 0 ? 474 : 473);
+    final int cycle = floorDiv(yOffset, 2820);
+    final int ecy = mod(yOffset, 2820) + 474;
+    return 1029983 * cycle +
         365 * (ecy - 1) +
         floorDiv(682 * ecy - 110, 2816) +
         1;

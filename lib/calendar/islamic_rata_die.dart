@@ -85,6 +85,7 @@ class IslamicRataDie implements ILibRataDie {
   }
 
   static int calcYear(double rd) {
-    return (30 * rd.floor() + 10646) ~/ 10631;
+    final int year = (30 * rd.floor() + 10646) ~/ 10631;
+    return (year <= 0) ? year - 1 : year;
   }
 }
