@@ -14,7 +14,9 @@ class HebrewDate extends ILibCalendarDate {
       int? millisecond,
       double? julianDay,
       double? rd,
-      int? unixtime}) {
+      int? unixtime,
+      String? timezone}) {
+    _timezone = timezone;
     _rataDie = HebrewRataDie(
       year: year,
       month: month,
@@ -33,6 +35,7 @@ class HebrewDate extends ILibCalendarDate {
   static final HebrewCal _cal = HebrewCal();
 
   late HebrewRataDie _rataDie;
+  String? _timezone;
   late int _year;
   late int _month;
   late int _day;
@@ -139,6 +142,9 @@ class HebrewDate extends ILibCalendarDate {
 
   @override
   String getCalendar() => 'hebrew';
+
+  @override
+  String? get timezone => _timezone;
 
   @override
   ILibRataDie getRataDieInstance() => _rataDie;

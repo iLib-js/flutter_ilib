@@ -18,7 +18,7 @@ class CopticRataDie implements ILibRataDie {
     } else if (julianDay != null) {
       _rd = julianDay - epoch;
     } else if (unixtime != null) {
-      _rd = ILibRataDie.unixTimeToRd(unixtime);
+      _rd = ILibRataDie.unixTimeToRd(unixtime) + 1721424.5 - epoch;
     } else {
       _rd = _dateToRd(
         year ?? 1,

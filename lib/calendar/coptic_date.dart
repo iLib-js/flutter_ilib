@@ -13,7 +13,9 @@ class CopticDate extends ILibCalendarDate {
       int? millisecond,
       double? julianDay,
       double? rd,
-      int? unixtime}) {
+      int? unixtime,
+      String? timezone}) {
+    _timezone = timezone;
     _rataDie = CopticRataDie(
       year: year,
       month: month,
@@ -30,6 +32,7 @@ class CopticDate extends ILibCalendarDate {
   }
 
   late CopticRataDie _rataDie;
+  String? _timezone;
   late int _year;
   late int _month;
   late int _day;
@@ -101,6 +104,9 @@ class CopticDate extends ILibCalendarDate {
 
   @override
   String getCalendar() => 'coptic';
+
+  @override
+  String? get timezone => _timezone;
 
   @override
   ILibRataDie getRataDieInstance() => _rataDie;

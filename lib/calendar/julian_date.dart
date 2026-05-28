@@ -15,7 +15,9 @@ class JulianDate extends ILibCalendarDate {
       int? millisecond,
       double? julianDay,
       double? rd,
-      int? unixtime}) {
+      int? unixtime,
+      String? timezone}) {
+    _timezone = timezone;
     _rataDie = JulianRataDie(
       year: year,
       month: month,
@@ -40,6 +42,7 @@ class JulianDate extends ILibCalendarDate {
   ];
 
   late JulianRataDie _rataDie;
+  String? _timezone;
   late int _year;
   late int _month;
   late int _day;
@@ -112,6 +115,9 @@ class JulianDate extends ILibCalendarDate {
 
   @override
   String getCalendar() => 'julian';
+
+  @override
+  String? get timezone => _timezone;
 
   @override
   ILibRataDie getRataDieInstance() => _rataDie;

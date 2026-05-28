@@ -13,7 +13,9 @@ class PersianAlgoDate extends ILibCalendarDate {
       int? millisecond,
       double? julianDay,
       double? rd,
-      int? unixtime}) {
+      int? unixtime,
+      String? timezone}) {
+    _timezone = timezone;
     _rataDie = PersianAlgoRataDie(
       year: year,
       month: month,
@@ -30,6 +32,7 @@ class PersianAlgoDate extends ILibCalendarDate {
   }
 
   late PersianAlgoRataDie _rataDie;
+  String? _timezone;
   late int _year;
   late int _month;
   late int _day;
@@ -103,6 +106,9 @@ class PersianAlgoDate extends ILibCalendarDate {
 
   @override
   String getCalendar() => 'persian-algo';
+
+  @override
+  String? get timezone => _timezone;
 
   @override
   ILibRataDie getRataDieInstance() => _rataDie;

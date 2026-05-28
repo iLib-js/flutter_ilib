@@ -75,7 +75,15 @@ String getClock() {
 - [ ] Convert each getter to `(_info['key'] as Type?) ?? fallback` pattern
 - [ ] Change `import 'ilib_init.dart'` reference from `ILibJS` to `ILibLoader`
 
-### 4. Cleanup
+### 4. Test Conversion
+
+- [ ] Convert tests from `js/test/calendar/test{class}.js` to Dart
+- [ ] **NEVER modify test expected values** — if a test fails, the Dart implementation has a bug, not the test data
+- [ ] Test data (e.g., `testDatesCoptic` reference arrays) must match JS source exactly
+- [ ] If a JS test cannot be converted due to missing Dart features (setters, timezone offset), document it in `docs/test-mapping.md` under "Not Converted" with the reason
+- [ ] Dart-specific additional tests (getDayOfYear, getEra, etc.) go in a separate `*_extra_test.dart` file
+
+### 5. Cleanup
 
 - [ ] Verify exports in `flutter_ilib.dart`
 - [ ] Run existing tests to confirm identical results

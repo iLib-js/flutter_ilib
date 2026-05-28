@@ -41,6 +41,22 @@ abstract class ILibCalendarDate implements ILibDate {
   @override
   int getEra() => (getYears() < 1) ? -1 : 1;
 
+  int getTime() {
+    final double jd = getJulianDay();
+    if (jd < 2440587.5 || jd > 2465442.634803241) {
+      return -1;
+    }
+    return ((jd - 2440587.5) * 86400000).round();
+  }
+
+  int getTimeExtended() {
+    final double jd = getJulianDay();
+    if (jd < -97559412.5 || jd > 102440587.5) {
+      return -1;
+    }
+    return ((jd - 2440587.5) * 86400000).round();
+  }
+
   double firstSunday(int year) {
     final ILibRataDie firstDay = newRd(
       year: year,

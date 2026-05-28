@@ -14,7 +14,9 @@ class GregorianDate extends ILibCalendarDate {
       int? millisecond,
       double? julianDay,
       double? rd,
-      int? unixtime}) {
+      int? unixtime,
+      String? timezone}) {
+    _timezone = timezone;
     _rataDie = GregRataDie(
       year: year,
       month: month,
@@ -39,6 +41,7 @@ class GregorianDate extends ILibCalendarDate {
   ];
 
   late GregRataDie _rataDie;
+  String? _timezone;
   late int _year;
   late int _month;
   late int _day;
@@ -113,6 +116,9 @@ class GregorianDate extends ILibCalendarDate {
 
   @override
   String getCalendar() => 'gregorian';
+
+  @override
+  String? get timezone => _timezone;
 
   @override
   ILibRataDie getRataDieInstance() => _rataDie;

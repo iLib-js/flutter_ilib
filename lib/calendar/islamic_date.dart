@@ -13,7 +13,9 @@ class IslamicDate extends ILibCalendarDate {
       int? millisecond,
       double? julianDay,
       double? rd,
-      int? unixtime}) {
+      int? unixtime,
+      String? timezone}) {
+    _timezone = timezone;
     _rataDie = IslamicRataDie(
       year: year,
       month: month,
@@ -30,6 +32,7 @@ class IslamicDate extends ILibCalendarDate {
   }
 
   late IslamicRataDie _rataDie;
+  String? _timezone;
   late int _year;
   late int _month;
   late int _day;
@@ -105,6 +108,9 @@ class IslamicDate extends ILibCalendarDate {
 
   @override
   String getCalendar() => 'islamic';
+
+  @override
+  String? get timezone => _timezone;
 
   @override
   ILibRataDie getRataDieInstance() => _rataDie;

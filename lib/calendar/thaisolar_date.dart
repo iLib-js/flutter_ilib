@@ -15,7 +15,9 @@ class ThaiSolarDate extends ILibCalendarDate {
       int? millisecond,
       double? julianDay,
       double? rd,
-      int? unixtime}) {
+      int? unixtime,
+      String? timezone}) {
+    _timezone = timezone;
     _rataDie = ThaiSolarRataDie(
       year: year,
       month: month,
@@ -40,6 +42,7 @@ class ThaiSolarDate extends ILibCalendarDate {
   ];
 
   late ThaiSolarRataDie _rataDie;
+  String? _timezone;
   late int _year;
   late int _month;
   late int _day;
@@ -117,6 +120,9 @@ class ThaiSolarDate extends ILibCalendarDate {
 
   @override
   String getCalendar() => 'thaisolar';
+
+  @override
+  String? get timezone => _timezone;
 
   @override
   ILibRataDie getRataDieInstance() => _rataDie;
