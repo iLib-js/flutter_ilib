@@ -108,7 +108,7 @@ class PersianAlgoDate extends ILibCalendarDate {
   String getCalendar() => 'persian-algo';
 
   @override
-  String? get timezone => _timezone;
+  String? get timezone => _timezone ?? 'local';
 
   @override
   ILibRataDie getRataDieInstance() => _rataDie;

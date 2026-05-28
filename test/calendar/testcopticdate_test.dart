@@ -48,7 +48,7 @@ void main() {
     test('testCopticRataDieConstructorComponentsBig', () {
       final CopticRataDie crd = CopticRataDie(
           year: 1731, month: 2, day: 19, hour: 12, minute: 30, second: 12, millisecond: 0);
-      expect(crd.getRataDie(), closeTo(631931.5209722222, 0.0001));
+      expect(crd.getRataDie(), 631931.5209722222);
     });
     test('testCopticRataDieConstructorRD', () {
       final CopticRataDie crd = CopticRataDie(rataDie: 732323.2342345);
@@ -344,7 +344,7 @@ void main() {
             minute: td[5] as int,
             second: td[6] as int,
             millisecond: td[7] as int);
-        expect(cd.getJulianDay(), closeTo(td[0] as double, 0.0001));
+        expect(cd.getJulianDay(), td[0]);
         expect(cd.getDayOfWeek(), td[8]);
       });
     }
@@ -399,19 +399,19 @@ void main() {
     });
     test('testCopticDateGetTimeZoneDefault', () {
       final CopticDate cd = CopticDate(year: 1735, month: 9, day: 23);
-      expect(cd.timezone, isNull);
+      expect(cd.timezone, 'local');
     });
     test('testCopticDateInitWithUnixTimeRightTimeZone', () {
       final CopticDate cd = CopticDate(unixtime: 0);
-      expect(cd.timezone, isNull);
+      expect(cd.timezone, 'local');
     });
     test('testCopticDateInitWithJDRightTimeZone', () {
       final CopticDate cd = CopticDate(julianDay: 2440587.5);
-      expect(cd.timezone, isNull);
+      expect(cd.timezone, 'local');
     });
     test('testCopticDateInitWithRDRightTimeZone', () {
       final CopticDate cd = CopticDate(rd: 615559);
-      expect(cd.timezone, isNull);
+      expect(cd.timezone, 'local');
     });
   });
 

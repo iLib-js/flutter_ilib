@@ -144,7 +144,7 @@ class HebrewDate extends ILibCalendarDate {
   String getCalendar() => 'hebrew';
 
   @override
-  String? get timezone => _timezone;
+  String? get timezone => _timezone ?? 'local';
 
   @override
   ILibRataDie getRataDieInstance() => _rataDie;

@@ -117,7 +117,7 @@ class JulianDate extends ILibCalendarDate {
   String getCalendar() => 'julian';
 
   @override
-  String? get timezone => _timezone;
+  String? get timezone => _timezone ?? 'local';
 
   @override
   ILibRataDie getRataDieInstance() => _rataDie;

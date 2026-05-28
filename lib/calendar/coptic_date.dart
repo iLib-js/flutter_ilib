@@ -106,7 +106,7 @@ class CopticDate extends ILibCalendarDate {
   String getCalendar() => 'coptic';
 
   @override
-  String? get timezone => _timezone;
+  String? get timezone => _timezone ?? 'local';
 
   @override
   ILibRataDie getRataDieInstance() => _rataDie;

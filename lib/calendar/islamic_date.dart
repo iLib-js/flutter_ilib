@@ -110,7 +110,7 @@ class IslamicDate extends ILibCalendarDate {
   String getCalendar() => 'islamic';
 
   @override
-  String? get timezone => _timezone;
+  String? get timezone => _timezone ?? 'local';
 
   @override
   ILibRataDie getRataDieInstance() => _rataDie;
