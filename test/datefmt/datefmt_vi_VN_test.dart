@@ -121,7 +121,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), 'Th 5, 29 tháng 9, 2011');
+      expect(fmt.format(dateOptions), 'Thứ 5, 29 tháng 9, 2011');
     });
     test('testDateFmtAllComponentsFull_vi_VN', () {
       final ILibDateFmtOptions fmtOptions =

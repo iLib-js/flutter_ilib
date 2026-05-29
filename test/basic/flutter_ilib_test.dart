@@ -22,9 +22,9 @@ void main() {
     await ILibJS.instance.loadILibLocaleData('es-ES');
   });
   group('Basic', () {
-    test('getVersion', () => expect(flutterIlibPlugin.getVersion, '14.21.0'));
+    test('getVersion', () => expect(flutterIlibPlugin.getVersion, '14.22.0'));
     test('getCLDRVersion',
-        () => expect(flutterIlibPlugin.getCLDRVersion, '46.0'));
+        () => expect(flutterIlibPlugin.getCLDRVersion, '48.2'));
     test('isILibReady', () => expect(flutterIlibPlugin.isILibReady, true));
     test('evaluateILib', () {
       const String loko = 'ko-KR';
@@ -215,6 +215,11 @@ void main() {
     const String str =
         'new DurationFmt({locale:"$loc", length:"$length",style: "$style", useNative: false}).format({year: $year, month: $month, day: $day, hour: $hour, minute: $minute}).toString()';
 
-    expect(flutterIlibPlugin.evaluateILib(str), '‏2 سال 3 ماه 16 روز ‏5:23');
+    if (testPlatform == 'webOS') {
+      expect(flutterIlibPlugin.evaluateILib(str),
+          '‏2 سال و 3 ماه و 16 روز و ‏5:23');
+    } else {
+      expect(flutterIlibPlugin.evaluateILib(str), '‏2 سال 3 ماه 16 روز ‏5:23');
+    }
   });
 }
