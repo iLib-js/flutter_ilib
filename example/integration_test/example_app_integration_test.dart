@@ -1,9 +1,11 @@
-// Integration test to verify that "Current Time" (always en-US) and
-// "DateTime (full)" match when the locale is set to en-US.
+// Integration test that verifies the example app's behavior:
+// - Version display
+// - "Current Time" and "DateTime (full)" matching when locale is en-US
+// - Locale change updates UI correctly
+// - Number format display
 //
-// Both fields use DateTime.now() with identical ILibDateFmtOptions
-// (locale: 'en-US', length: 'full', type: 'datetime', useNative: false,
-// timezone: 'local'), so their displayed values must be equal.
+// All locale-changing scenarios run in a single testWidgets to keep the
+// app instance alive (listener stays registered for loadLocaleData callbacks).
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ilib_example/main.dart';
@@ -13,91 +15,64 @@ import 'package:integration_test/integration_test.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  group('Version integration tests', () {
-    const String ILIB_VERSION = '14.22.0';
-    const String CLDR_VERSION = '48.2';
+  const String ILIB_VERSION = '14.22.0';
+  const String CLDR_VERSION = '48.2';
 
-    testWidgets('iLib version should be displayed and valid',
+  group('Version integration tests', () {
+    testWidgets('iLib and CLDR versions should be displayed correctly',
         (WidgetTester tester) async {
       await tester.pumpWidget(const MyApp());
-      await tester.pumpAndSettle(const Duration(seconds: 3));
+      await _waitForInit(tester);
 
       final String iLibVersion = _getValueForLabel(tester, 'iLib Version');
-      expect(iLibVersion.isNotEmpty, true,
-          reason: 'iLib Version should not be empty');
       expect(iLibVersion, equals(ILIB_VERSION));
-    });
-
-    testWidgets('CLDR version should be displayed and valid',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(const MyApp());
-      await tester.pumpAndSettle(const Duration(seconds: 3));
 
       final String cldrVersion = _getValueForLabel(tester, 'CLDR Version');
-      expect(cldrVersion.isNotEmpty, true,
-          reason: 'CLDR Version should not be empty');
       expect(cldrVersion, equals(CLDR_VERSION));
     });
   });
 
   group('DateTime format integration tests', () {
-    testWidgets(
-        'Current Time and DateTime (full) should match when locale is en-US',
+    testWidgets('Current Time and DateTime (full) should match for en-US',
         (WidgetTester tester) async {
-      // Build the example app and trigger a frame.
       await tester.pumpWidget(const MyApp());
+      await _waitForInit(tester);
 
-      // Wait for iLib initialization and first render.
-      // The app uses endOfFrame callback to initialize, so we need to pump
-      // multiple frames to allow async initialization to complete.
-      await tester.pumpAndSettle(const Duration(seconds: 3));
-
-      // Tap the en-US locale button to ensure locale is set to en-US.
+      // Tap en-US to ensure locale is set.
       final Finder enUSButton = find.widgetWithText(ElevatedButton, 'en-US');
       expect(enUSButton, findsOneWidget);
       await tester.tap(enUSButton);
       await tester.pumpAndSettle();
 
-      // Find the "Current Time" and "DateTime (full)" display values.
-      // Each _customTextBox is a SizedBox containing a Row with two Text
-      // widgets: [label, value].
       final String currentTimeValue = _getValueForLabel(tester, 'Current Time');
       final String dateTimeFullValue =
           _getValueForLabel(tester, 'DateTime (full)');
 
-      // Both should be non-empty.
-      expect(currentTimeValue.isNotEmpty, true,
-          reason: 'Current Time should not be empty');
-      expect(dateTimeFullValue.isNotEmpty, true,
-          reason: 'DateTime (full) should not be empty');
-
-      // When locale is en-US, both fields format DateTime.now() with the same
-      // options, so they must produce the same result.
-      expect(dateTimeFullValue, equals(currentTimeValue),
-          reason:
-              'DateTime (full) with en-US locale should equal Current Time '
-              '(both use full datetime format with en-US)');
+      expect(currentTimeValue.isNotEmpty, true);
+      expect(dateTimeFullValue.isNotEmpty, true);
+      expect(dateTimeFullValue, equals(currentTimeValue));
     });
+  });
 
-    testWidgets(
-        'Current Time remains en-US format even when locale is changed',
+  group('Locale change integration tests', () {
+    testWidgets('Locale change updates UI correctly',
         (WidgetTester tester) async {
       await tester.pumpWidget(const MyApp());
-      await tester.pumpAndSettle(const Duration(seconds: 3));
+      await _waitForInit(tester);
 
-      // Switch to ko-KR locale.
+      // --- Switch to ko-KR ---
       final Finder koKRButton = find.widgetWithText(ElevatedButton, 'ko-KR');
       expect(koKRButton, findsOneWidget);
       await tester.tap(koKRButton);
-      await tester.pumpAndSettle();
 
-      // Get displayed values.
+      // Wait until DateTime (full) reflects ko-KR format.
+      await _waitForLabelToContain(tester, 'DateTime (full)', '년');
+
       final String currentTimeValue = _getValueForLabel(tester, 'Current Time');
       final String dateTimeFullValue =
           _getValueForLabel(tester, 'DateTime (full)');
 
-      // Current Time should still be in en-US format (contains month name in
-      // English and AM/PM).
+      // Current Time should remain in en-US format.
       expect(
           currentTimeValue.contains(RegExp(
               r'(January|February|March|April|May|June|July|August|September|October|November|December)')),
@@ -106,72 +81,102 @@ void main() {
       expect(currentTimeValue.contains(RegExp(r'(AM|PM)')), true,
           reason: 'Current Time should contain AM/PM (en-US 12-hour format)');
 
-      // DateTime (full) should now be in ko-KR format (different from en-US).
-      // ko-KR full datetime uses Korean characters like '년', '월', '일'.
-      expect(dateTimeFullValue.contains('년'), true,
-          reason: 'DateTime (full) with ko-KR should contain Korean 년');
-      expect(dateTimeFullValue.contains('월'), true,
-          reason: 'DateTime (full) with ko-KR should contain Korean 월');
-      expect(dateTimeFullValue.contains('일'), true,
-          reason: 'DateTime (full) with ko-KR should contain Korean 일');
+      // DateTime (full) should be in ko-KR format.
+      expect(dateTimeFullValue.contains('년'), true);
+      expect(dateTimeFullValue.contains('월'), true);
+      expect(dateTimeFullValue.contains('일'), true);
 
-      // The two values should NOT be equal when locale differs.
-      expect(dateTimeFullValue, isNot(equals(currentTimeValue)),
-          reason:
-              'DateTime (full) with ko-KR should differ from Current Time (en-US)');
-    });
+      // They should NOT be equal.
+      expect(dateTimeFullValue, isNot(equals(currentTimeValue)));
 
-    testWidgets('Current Locale display updates when locale button is pressed',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(const MyApp());
-      await tester.pumpAndSettle(const Duration(seconds: 3));
-
-      // Tap de-DE button.
+      // --- Switch to de-DE ---
       final Finder deDEButton = find.widgetWithText(ElevatedButton, 'de-DE');
       expect(deDEButton, findsOneWidget);
       await tester.tap(deDEButton);
-      await tester.pumpAndSettle();
 
-      // Verify Current Locale shows de-DE.
+      // Wait until Current Locale reflects de-DE.
+      await _waitForLabelToEqual(tester, 'Current Locale', 'de-DE');
+
       final String currentLocaleValue =
           _getValueForLabel(tester, 'Current Locale');
       expect(currentLocaleValue, equals('de-DE'));
-    });
-  });
 
-  group('Number format integration tests', () {
-    testWidgets('Number Format should display correct de-DE format',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(const MyApp());
-      await tester.pumpAndSettle(const Duration(seconds: 3));
-
-      // Tap de-DE button
-      final Finder deDEButton = find.widgetWithText(ElevatedButton, 'de-DE');
-      expect(deDEButton, findsOneWidget);
-      await tester.tap(deDEButton);
-      await tester.pumpAndSettle();
-
-      // Verify Number Format shows de-DE formatted value
+      // Number Format should be in de-DE format.
       final String numFmtValue = _getValueForLabel(tester, 'Number Format');
-      expect(numFmtValue.isNotEmpty, true,
-          reason: 'Number Format should not be empty');
       expect(numFmtValue, equals('-111.123.456,785'));
     });
   });
 }
 
-/// Helper to extract the displayed value text for a given label.
-///
-/// The example app uses _customTextBox which creates a SizedBox > Row with
-/// two Text children: [label, value]. This function finds the Row containing
-/// the label and returns the second Text widget's data.
+// --- Helper functions ---
+
+/// Wait for iLib initialization to complete (UI shows actual values).
+Future<void> _waitForInit(WidgetTester tester) async {
+  await _waitUntil(
+      tester, 'iLib Version', (value) => value != 'Unknown iLib');
+}
+
+/// Wait until the value for [label] contains [substring].
+Future<void> _waitForLabelToContain(
+    WidgetTester tester, String label, String substring) async {
+  await _waitUntil(tester, label, (value) => value.contains(substring));
+}
+
+/// Wait until the value for [label] equals [expected].
+Future<void> _waitForLabelToEqual(
+    WidgetTester tester, String label, String expected) async {
+  await _waitUntil(tester, label, (value) => value == expected);
+}
+
+/// Core retry logic: pumps frames with real time delay until the UI
+/// reflects the expected value. IntegrationTestWidgetsFlutterBinding uses
+/// live async, so pump(Duration) allows real async operations (like
+/// loadLocaleData) to complete between frames.
+Future<void> _waitUntil(
+    WidgetTester tester, String label, bool Function(String) condition,
+    {int maxRetries = 100}) async {
+  for (int i = 0; i < maxRetries; i++) {
+    await tester.pump(const Duration(milliseconds: 100));
+
+    final String? value = _tryGetValueForLabel(tester, label);
+    if (value != null && condition(value)) {
+      await tester.pumpAndSettle();
+      return;
+    }
+  }
+  // Final attempt — let the test's expect report the failure.
+  await tester.pumpAndSettle();
+}
+
+/// Try to get the value text for a given label. Returns null if not found.
+String? _tryGetValueForLabel(WidgetTester tester, String label) {
+  final Finder labelFinder = find.text(label);
+  if (labelFinder.evaluate().isEmpty) return null;
+
+  final Finder rowFinder = find.ancestor(
+    of: labelFinder,
+    matching: find.byType(Row),
+  );
+  if (rowFinder.evaluate().isEmpty) return null;
+
+  final Finder textsInRow = find.descendant(
+    of: rowFinder,
+    matching: find.byType(Text),
+  );
+
+  final List<Text> textWidgets =
+      textsInRow.evaluate().map((Element e) => e.widget as Text).toList();
+  if (textWidgets.length != 2) return null;
+
+  return textWidgets[1].data;
+}
+
+/// Extract the displayed value text for a given label (asserts existence).
 String _getValueForLabel(WidgetTester tester, String label) {
-  // Find all Text widgets.
   final Finder labelFinder = find.text(label);
   expect(labelFinder, findsOneWidget,
       reason: 'Should find label "$label" in the widget tree');
 
-  // Get the parent Row of this label text.
   final Finder rowFinder = find.ancestor(
     of: labelFinder,
     matching: find.byType(Row),
@@ -179,18 +184,15 @@ String _getValueForLabel(WidgetTester tester, String label) {
   expect(rowFinder, findsOneWidget,
       reason: 'Label "$label" should be inside a Row');
 
-  // Get all Text widgets inside this Row.
   final Finder textsInRow = find.descendant(
     of: rowFinder,
     matching: find.byType(Text),
   );
 
-  // The Row should contain exactly 2 Text widgets: [label, value].
   final List<Text> textWidgets =
       textsInRow.evaluate().map((Element e) => e.widget as Text).toList();
   expect(textWidgets.length, equals(2),
       reason: 'Row for "$label" should have 2 Text widgets');
 
-  // Return the value (second Text widget).
   return textWidgets[1].data ?? '';
 }

@@ -17,8 +17,8 @@ void main() {
     await ILibJS.instance.loadILibLocaleData('en-US');
   });
 
-  group('Example app - iLib Version and CLDR Version', () {
-    test('iLib version should match expected value', () {
+  group('Version', () {
+    test('iLib version', () {
       final FlutterILib plugin = FlutterILib.instance;
       final String? version = plugin.getVersion;
 
@@ -28,7 +28,7 @@ void main() {
       debugPrint('  iLib Version: $version');
     });
 
-    test('CLDR version should match expected value', () {
+    test('CLDR version', () {
       final FlutterILib plugin = FlutterILib.instance;
       final String? cldrVersion = plugin.getCLDRVersion;
 
@@ -39,12 +39,9 @@ void main() {
     });
   });
 
-  group('Example app - Current Time vs DateTime (full)', () {
-    test(
-        'Current Time (en-US) and DateTime (full) with en-US should produce '
-        'identical output for the same DateTime', () {
-      // Simulate the same DateTime input (as the example app uses DateTime.now()
-      // for both fields, we use a fixed DateTime for deterministic testing).
+  group('DateFmt', () {
+    test('en-US full datetime (fixed)', () {
+      // Use a fixed DateTime for deterministic testing.
       final DateTime now = DateTime(2026, 5, 29, 14, 30, 0);
       final ILibDateOptions dateOptions = ILibDateOptions(dateTime: now);
 
@@ -80,9 +77,7 @@ void main() {
       debugPrint('  DateTime (full) en-US: $dateTimeFullResult');
     });
 
-    test(
-        'Current Time (en-US) and DateTime (full) with en-US should match '
-        'using DateTime.now()', () {
+    test('en-US full datetime (now)', () {
       // Use DateTime.now() just like the example app does
       final DateTime now = DateTime.now();
       final ILibDateOptions dateOptions = ILibDateOptions(dateTime: now);
@@ -116,7 +111,7 @@ void main() {
       debugPrint('  DateTime (full) en-US: $dateTimeFullResult');
     });
 
-    test('DateTime (full) format matches expected en-US pattern', () {
+    test('en-US full datetime pattern', () {
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 2011,
           month: 9,
@@ -135,16 +130,12 @@ void main() {
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       final String result = fmt.format(dateOptions);
 
-      // This is the exact format the example app would display.
       // U+202F (Narrow No-Break Space) is used before AM/PM in CLDR data.
       expect(result, equals('September 29, 2011 at 1:45 PM'));
       debugPrint('  DateTime (full) en-US: $result');
     });
 
-    test(
-        'Current Time (en-US) differs from DateTime (full) when locale is '
-        'ko-KR', () async {
-      // Load ko-KR locale data
+    test('en-US vs ko-KR full datetime', () async {
       await ILibJS.instance.loadILibLocaleData('ko-KR');
 
       final ILibDateOptions dateOptions = ILibDateOptions(
@@ -166,7 +157,7 @@ void main() {
       final ILibDateFmt currentTimeFmt = ILibDateFmt(currentTimeFmtOptions);
       final String currentTimeResult = currentTimeFmt.format(dateOptions);
 
-      // "DateTime (full)" - uses ko-KR when user selects it
+      // "DateTime (full)" - uses ko-KR
       final ILibDateFmtOptions dateTimeFullFmtOptions = ILibDateFmtOptions(
           locale: 'ko-KR',
           length: 'full',
@@ -179,11 +170,8 @@ void main() {
       // They should NOT be equal when locales differ
       expect(dateTimeFullResult, isNot(equals(currentTimeResult)));
 
-      // Current Time should be in en-US full datetime format
       // U+202F (Narrow No-Break Space) is used before AM/PM in CLDR data.
       expect(currentTimeResult, equals('May 29, 2026 at 2:30 PM'));
-
-      // DateTime (full) with ko-KR should be in Korean format
       expect(dateTimeFullResult, equals('2026년 5월 29일 오후 2:30'));
 
       debugPrint('  Current Time (en-US): $currentTimeResult');
@@ -191,8 +179,8 @@ void main() {
     });
   });
 
-  group('Example app - Number Format', () {
-    test('Number format for de-DE should match expected output', () async {
+  group('NumFmt', () {
+    test('de-DE number format', () async {
       await ILibJS.instance.loadILibLocaleData('de-DE');
 
       // Same logic as example app's getNumFmt()
