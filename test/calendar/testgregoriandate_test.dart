@@ -363,6 +363,12 @@ void main() {
       final GregorianDate gd = GregorianDate(year: 2038, month: 1, day: 20);
       expect(gd.getTime(), -1);
     });
+    test('testGregDateGetTimeWithUTC', () {
+      // Date.UTC(2013, 10, 1) = 2013-11-01 00:00:00 UTC = 1383264000000
+      const int utc = 1383264000000;
+      final GregorianDate gd = GregorianDate(unixtime: utc);
+      expect(gd.getTime(), utc);
+    });
   });
 
   group('GregorianDate getTimeExtended', () {
@@ -400,9 +406,6 @@ void main() {
     });
   });
 
-  // onOrBefore/onOrAfter/before/after tests skipped — GregRataDie.onOrBefore
-  // uses a different modulus offset than JS GregorianDate.onOrBefore.
-  // Needs separate investigation of the modulus formula difference.
 
   group('GregorianDate getWeekOfYear', () {
     test('testGregDateTestGetWeekOfYearThisYear', () {
@@ -422,19 +425,18 @@ void main() {
           year: -2011, month: 10, day: 19, hour: 16, minute: 13, second: 12, millisecond: 232);
       expect(gd.getWeekOfYear(), 42);
     });
-    // Following 4 tests fail due to getWeekOfYear() implementation difference — needs investigation
     test('testGregDateTestGetWeekOfYearPreviousYear', () {
       final GregorianDate gd = GregorianDate(year: 2011, month: 1, day: 1);
       expect(gd.getWeekOfYear(), 52);
-    }, skip: 'getWeekOfYear implementation differs from JS');
+    });
     test('testGregDateTestGetWeekOfYearLastWeekLeap', () {
       final GregorianDate gd = GregorianDate(year: 2009, month: 12, day: 31);
       expect(gd.getWeekOfYear(), 53);
-    }, skip: 'getWeekOfYear implementation differs from JS');
+    });
     test('testGregDateTestGetWeekOfYearLastWeekRegular1', () {
       final GregorianDate gd = GregorianDate(year: 2010, month: 12, day: 31);
       expect(gd.getWeekOfYear(), 52);
-    }, skip: 'getWeekOfYear implementation differs from JS');
+    });
     test('testGregDateTestGetWeekOfYearLastWeekRegular2', () {
       final GregorianDate gd = GregorianDate(year: 2008, month: 12, day: 31);
       expect(gd.getWeekOfYear(), 1);
@@ -446,7 +448,7 @@ void main() {
     test('testGregDateTestGetWeekOfYearLastWeekRegular4', () {
       final GregorianDate gd = GregorianDate(year: 2006, month: 12, day: 31);
       expect(gd.getWeekOfYear(), 1);
-    }, skip: 'getWeekOfYear implementation differs from JS');
+    });
     test('testGregDateTestGetWeekOfYearLastWeekRegular5', () {
       final GregorianDate gd = GregorianDate(year: 2005, month: 12, day: 31);
       expect(gd.getWeekOfYear(), 52);
@@ -488,7 +490,7 @@ void main() {
     test('testGregDateGetWeekOfMonth1', () {
       final GregorianDate gd = GregorianDate(year: 2011, month: 10, day: 2);
       expect(gd.getWeekOfMonth(0), 1);
-    }, skip: 'getWeekOfMonth implementation differs from JS');
+    });
     test('testGregDateGetWeekOfMonth2', () {
       final GregorianDate gd = GregorianDate(year: 2011, month: 10, day: 11);
       expect(gd.getWeekOfMonth(0), 2);
@@ -504,19 +506,19 @@ void main() {
     test('testGregDateGetWeekOfMonth5', () {
       final GregorianDate gd = GregorianDate(year: 2011, month: 10, day: 30);
       expect(gd.getWeekOfMonth(0), 5);
-    }, skip: 'getWeekOfMonth implementation differs from JS');
+    });
     test('testGregDateGetWeekOfMonth6', () {
       final GregorianDate gd = GregorianDate(year: 2011, month: 9, day: 1);
       expect(gd.getWeekOfMonth(0), 0);
-    }, skip: 'getWeekOfMonth implementation differs from JS');
+    });
     test('testGregDateGetWeekOfMonth7', () {
       final GregorianDate gd = GregorianDate(year: 2011, month: 8, day: 1);
       expect(gd.getWeekOfMonth(0), 1);
-    }, skip: 'getWeekOfMonth implementation differs from JS');
+    });
     test('testGregDateGetWeekOfMonth8', () {
       final GregorianDate gd = GregorianDate(year: 2011, month: 7, day: 1);
       expect(gd.getWeekOfMonth(0), 0);
-    }, skip: 'getWeekOfMonth implementation differs from JS');
+    });
     test('testGregDateGetWeekOfMonth9', () {
       final GregorianDate gd = GregorianDate(year: 2011, month: 6, day: 1);
       expect(gd.getWeekOfMonth(0), 1);
@@ -524,10 +526,317 @@ void main() {
     test('testGregDateGetWeekOfMonthUS', () {
       final GregorianDate gd = GregorianDate(year: 2011, month: 5, day: 1);
       expect(gd.getWeekOfMonth(0), 1);
-    }, skip: 'getWeekOfMonth implementation differs from JS');
+    });
     test('testGregDateGetWeekOfMonthDE', () {
       final GregorianDate gd = GregorianDate(year: 2011, month: 5, day: 1);
       expect(gd.getWeekOfMonth(1), 0);
+    });
+  });
+
+  group('GregorianDate onOrBefore', () {
+    // 2010-01-01 is a Friday (dayOfWeek = 5)
+    test('testGregDateOnOrBeforeSun', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final double rd = gd.getRataDie();
+      expect(gd.onOrBefore(0).getRataDie(), rd - 5);
+    });
+    test('testGregDateOnOrBeforeMon', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final double rd = gd.getRataDie();
+      expect(gd.onOrBefore(1).getRataDie(), rd - 4);
+    });
+    test('testGregDateOnOrBeforeTue', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final double rd = gd.getRataDie();
+      expect(gd.onOrBefore(2).getRataDie(), rd - 3);
+    });
+    test('testGregDateOnOrBeforeWed', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final double rd = gd.getRataDie();
+      expect(gd.onOrBefore(3).getRataDie(), rd - 2);
+    });
+    test('testGregDateOnOrBeforeThu', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final double rd = gd.getRataDie();
+      expect(gd.onOrBefore(4).getRataDie(), rd - 1);
+    });
+    test('testGregDateOnOrBeforeFri', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final double rd = gd.getRataDie();
+      expect(gd.onOrBefore(5).getRataDie(), rd);
+    });
+    test('testGregDateOnOrBeforeSat', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final double rd = gd.getRataDie();
+      expect(gd.onOrBefore(6).getRataDie(), rd - 6);
+    });
+    test('testGregDateOnOrBeforeSunWithTime', () {
+      final GregorianDate gd =
+          GregorianDate(year: 2010, month: 1, day: 1, hour: 8);
+      expect(gd.getDayOfWeek(), 5);
+      final double rd = gd.getRataDie();
+      expect(gd.onOrBefore(0).getRataDie(), rd - 5);
+    });
+    test('testGregDateOnOrBeforeSunWithTimeZoneWestern1', () {
+      // 2014-04-26 23:59 LA = Saturday in LA, Sunday in UTC
+      final GregorianDate gd = GregorianDate(
+          year: 2014, month: 4, day: 26, hour: 23, minute: 59,
+          timezone: 'America/Los_Angeles');
+      expect(gd.getDayOfWeek(), 6);
+      final double rd = gd.getRataDie();
+      expect(gd.onOrBefore(0).getRataDie(), rd - 6);
+    });
+    test('testGregDateOnOrBeforeSunWithTimeZoneWestern2', () {
+      // 2014-04-27 00:00 LA = Sunday in LA and UTC
+      final GregorianDate gd = GregorianDate(
+          year: 2014, month: 4, day: 27, hour: 0, minute: 0,
+          timezone: 'America/Los_Angeles');
+      expect(gd.getDayOfWeek(), 0);
+      final double rd = gd.getRataDie();
+      expect(gd.onOrBefore(0).getRataDie(), rd);
+    });
+    test('testGregDateOnOrBeforeSunWithTimeZoneEastern1', () {
+      // 2014-04-27 00:00 Seoul = Saturday in UTC, Sunday in Seoul
+      final GregorianDate gd = GregorianDate(
+          year: 2014, month: 4, day: 27, hour: 0, minute: 0,
+          timezone: 'Asia/Seoul');
+      expect(gd.getDayOfWeek(), 0);
+      final double rd = gd.getRataDie();
+      expect(gd.onOrBefore(0).getRataDie(), rd);
+    });
+    test('testGregDateOnOrBeforeSunWithTimeZoneEastern2', () {
+      // 2014-04-26 23:59 Seoul = Saturday in Seoul and in UTC
+      final GregorianDate gd = GregorianDate(
+          year: 2014, month: 4, day: 26, hour: 23, minute: 59,
+          timezone: 'Asia/Seoul');
+      expect(gd.getDayOfWeek(), 6);
+      final double rd = gd.getRataDie();
+      expect(gd.onOrBefore(0).getRataDie(), rd - 6);
+    });
+  });
+
+  group('GregorianDate onOrAfter', () {
+    // 2010-01-01 is a Friday (dayOfWeek = 5)
+    test('testGregDateOnOrAfterSun', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final double rd = gd.getRataDie();
+      expect(gd.onOrAfter(0).getRataDie(), rd + 2);
+    });
+    test('testGregDateOnOrAfterMon', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final double rd = gd.getRataDie();
+      expect(gd.onOrAfter(1).getRataDie(), rd + 3);
+    });
+    test('testGregDateOnOrAfterTue', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final double rd = gd.getRataDie();
+      expect(gd.onOrAfter(2).getRataDie(), rd + 4);
+    });
+    test('testGregDateOnOrAfterWed', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final double rd = gd.getRataDie();
+      expect(gd.onOrAfter(3).getRataDie(), rd + 5);
+    });
+    test('testGregDateOnOrAfterThu', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final double rd = gd.getRataDie();
+      expect(gd.onOrAfter(4).getRataDie(), rd + 6);
+    });
+    test('testGregDateOnOrAfterFri', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final double rd = gd.getRataDie();
+      expect(gd.onOrAfter(5).getRataDie(), rd);
+    });
+    test('testGregDateOnOrAfterSat', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final double rd = gd.getRataDie();
+      expect(gd.onOrAfter(6).getRataDie(), rd + 1);
+    });
+    test('testGregDateOnOrAfterSunDate', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final ILibCalendarDate date = gd.onOrBefore(0);
+      expect(date.getYears(), 2009);
+      expect(date.getMonths(), 12);
+      expect(date.getDays(), 27);
+    });
+    test('testGregDateOnOrAfterMonDate', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final ILibCalendarDate date = gd.onOrAfter(1);
+      expect(date.getYears(), 2010);
+      expect(date.getMonths(), 1);
+      expect(date.getDays(), 4);
+    });
+    test('testGregDateOnOrAfterThuDate', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final ILibCalendarDate date = gd.onOrAfter(4);
+      expect(date.getYears(), 2010);
+      expect(date.getMonths(), 1);
+      expect(date.getDays(), 7);
+    });
+    test('testGregDateOnOrAfterFriDate', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final ILibCalendarDate date = gd.onOrAfter(5);
+      expect(date.getYears(), 2010);
+      expect(date.getMonths(), 1);
+      expect(date.getDays(), 1);
+    });
+  });
+
+  group('GregorianDate before', () {
+    // 2010-01-01 is a Friday (dayOfWeek = 5)
+    test('testGregDateBeforeSun', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final double rd = gd.getRataDie();
+      expect(gd.before(0).getRataDie(), rd - 5);
+    });
+    test('testGregDateBeforeMon', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final double rd = gd.getRataDie();
+      expect(gd.before(1).getRataDie(), rd - 4);
+    });
+    test('testGregDateBeforeTue', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final double rd = gd.getRataDie();
+      expect(gd.before(2).getRataDie(), rd - 3);
+    });
+    test('testGregDateBeforeWed', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final double rd = gd.getRataDie();
+      expect(gd.before(3).getRataDie(), rd - 2);
+    });
+    test('testGregDateBeforeThu', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final double rd = gd.getRataDie();
+      expect(gd.before(4).getRataDie(), rd - 1);
+    });
+    test('testGregDateBeforeFri', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final double rd = gd.getRataDie();
+      expect(gd.before(5).getRataDie(), rd - 7);
+    });
+    test('testGregDateBeforeSat', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final double rd = gd.getRataDie();
+      expect(gd.before(6).getRataDie(), rd - 6);
+    });
+    test('testGregDateBeforeSunDate', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final ILibCalendarDate date = gd.before(0);
+      expect(date.getYears(), 2009);
+      expect(date.getMonths(), 12);
+      expect(date.getDays(), 27);
+    });
+    test('testGregDateBeforeThuDate', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final ILibCalendarDate date = gd.before(4);
+      expect(date.getYears(), 2009);
+      expect(date.getMonths(), 12);
+      expect(date.getDays(), 31);
+    });
+    test('testGregDateBeforeFriDate', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final ILibCalendarDate date = gd.before(5);
+      expect(date.getYears(), 2009);
+      expect(date.getMonths(), 12);
+      expect(date.getDays(), 25);
+    });
+  });
+
+  group('GregorianDate after', () {
+    // 2010-01-01 is a Friday (dayOfWeek = 5)
+    test('testGregDateAfterSun', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final double rd = gd.getRataDie();
+      expect(gd.after(0).getRataDie(), rd + 2);
+    });
+    test('testGregDateAfterMon', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final double rd = gd.getRataDie();
+      expect(gd.after(1).getRataDie(), rd + 3);
+    });
+    test('testGregDateAfterTue', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final double rd = gd.getRataDie();
+      expect(gd.after(2).getRataDie(), rd + 4);
+    });
+    test('testGregDateAfterWed', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final double rd = gd.getRataDie();
+      expect(gd.after(3).getRataDie(), rd + 5);
+    });
+    test('testGregDateAfterThu', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final double rd = gd.getRataDie();
+      expect(gd.after(4).getRataDie(), rd + 6);
+    });
+    test('testGregDateAfterFri', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final double rd = gd.getRataDie();
+      expect(gd.after(5).getRataDie(), rd + 7);
+    });
+    test('testGregDateAfterSat', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final double rd = gd.getRataDie();
+      expect(gd.after(6).getRataDie(), rd + 1);
+    });
+    test('testGregDateAfterSunDate', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final ILibCalendarDate date = gd.after(0);
+      expect(date.getYears(), 2010);
+      expect(date.getMonths(), 1);
+      expect(date.getDays(), 3);
+    });
+    test('testGregDateAfterFriDate', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final ILibCalendarDate date = gd.after(5);
+      expect(date.getYears(), 2010);
+      expect(date.getMonths(), 1);
+      expect(date.getDays(), 8);
+    });
+    test('testGregDateAfterSatDate', () {
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      expect(gd.getDayOfWeek(), 5);
+      final ILibCalendarDate date = gd.after(6);
+      expect(date.getYears(), 2010);
+      expect(date.getMonths(), 1);
+      expect(date.getDays(), 2);
     });
   });
 

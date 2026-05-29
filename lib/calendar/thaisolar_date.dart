@@ -109,8 +109,6 @@ class ThaiSolarDate extends ILibCalendarDate {
     return GregRataDie.calcDayOfYear(gregYear, _month, _day);
   }
 
-  @override
-  int getEra() => 1;
 
   @override
   double getRataDie() => _rataDie.getRataDie();
