@@ -138,4 +138,9 @@ class PersianDate extends ILibCalendarDate {
   ILibRataDie newRdFromRd(double rd) {
     return PersianRataDie(rataDie: rd);
   }
+
+  @override
+  PersianDate newDateFromRd(double rd) {
+    return PersianDate(rd: rd);
+  }
 }

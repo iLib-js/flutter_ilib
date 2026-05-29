@@ -213,4 +213,9 @@ class HebrewDate extends ILibCalendarDate {
   ILibRataDie newRdFromRd(double rd) {
     return HebrewRataDie(rataDie: rd);
   }
+
+  @override
+  HebrewDate newDateFromRd(double rd) {
+    return HebrewDate(rd: rd);
+  }
 }

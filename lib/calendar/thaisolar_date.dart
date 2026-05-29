@@ -152,4 +152,9 @@ class ThaiSolarDate extends ILibCalendarDate {
   ILibRataDie newRdFromRd(double rd) {
     return ThaiSolarRataDie(rataDie: rd);
   }
+
+  @override
+  ThaiSolarDate newDateFromRd(double rd) {
+    return ThaiSolarDate(rd: rd);
+  }
 }

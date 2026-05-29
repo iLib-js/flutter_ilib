@@ -113,6 +113,28 @@ abstract class ILibCalendarDate implements ILibDate {
     return (rd - weekStart) ~/ 7 + 1;
   }
 
+  ILibCalendarDate onOrBefore(int dayOfWeek) {
+    final double rd = getRataDieInstance().onOrBefore(dayOfWeek);
+    return newDateFromRd(rd);
+  }
+
+  ILibCalendarDate onOrAfter(int dayOfWeek) {
+    final double rd = getRataDieInstance().onOrAfter(dayOfWeek);
+    return newDateFromRd(rd);
+  }
+
+  ILibCalendarDate before(int dayOfWeek) {
+    final double rd = getRataDieInstance().before(dayOfWeek);
+    return newDateFromRd(rd);
+  }
+
+  ILibCalendarDate after(int dayOfWeek) {
+    final double rd = getRataDieInstance().after(dayOfWeek);
+    return newDateFromRd(rd);
+  }
+
+  ILibCalendarDate newDateFromRd(double rd);
+
   ILibRataDie newRd({
     required int year,
     required int month,

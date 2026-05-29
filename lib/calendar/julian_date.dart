@@ -147,4 +147,9 @@ class JulianDate extends ILibCalendarDate {
   ILibRataDie newRdFromRd(double rd) {
     return JulianRataDie(rataDie: rd);
   }
+
+  @override
+  JulianDate newDateFromRd(double rd) {
+    return JulianDate(rd: rd);
+  }
 }

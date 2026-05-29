@@ -59,25 +59,28 @@ class HebrewRataDie implements ILibRataDie {
     return mod(rd + 1, 7);
   }
 
+  double _onOrBefore(double rd, int dayOfWeek) {
+    return rd - mod(rd.floor() - dayOfWeek + 1, 7).toDouble();
+  }
+
   @override
   double onOrBefore(int dayOfWeek, {double offset = 0}) {
-    final double rd = _rd + offset;
-    return rd.floor() - mod(rd.floor() - dayOfWeek + 1, 7).toDouble();
+    return _onOrBefore(_rd + offset, dayOfWeek) - offset;
   }
 
   @override
   double onOrAfter(int dayOfWeek, {double offset = 0}) {
-    return onOrBefore(dayOfWeek, offset: offset) + 7;
+    return _onOrBefore(_rd + 6 + offset, dayOfWeek) - offset;
   }
 
   @override
   double before(int dayOfWeek, {double offset = 0}) {
-    return onOrBefore(dayOfWeek, offset: offset) - 1;
+    return _onOrBefore(_rd - 1 + offset, dayOfWeek) - offset;
   }
 
   @override
   double after(int dayOfWeek, {double offset = 0}) {
-    return onOrBefore(dayOfWeek, offset: offset) + 6;
+    return _onOrBefore(_rd + 7 + offset, dayOfWeek) - offset;
   }
 
   static double _dateToRd(

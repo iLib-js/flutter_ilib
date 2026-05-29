@@ -140,4 +140,9 @@ class IslamicDate extends ILibCalendarDate {
   ILibRataDie newRdFromRd(double rd) {
     return IslamicRataDie(rataDie: rd);
   }
+
+  @override
+  IslamicDate newDateFromRd(double rd) {
+    return IslamicDate(rd: rd);
+  }
 }

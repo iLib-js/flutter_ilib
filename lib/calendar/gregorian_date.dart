@@ -148,4 +148,9 @@ class GregorianDate extends ILibCalendarDate {
   ILibRataDie newRdFromRd(double rd) {
     return GregRataDie(rataDie: rd);
   }
+
+  @override
+  GregorianDate newDateFromRd(double rd) {
+    return GregorianDate(rd: rd);
+  }
 }

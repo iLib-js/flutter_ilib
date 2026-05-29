@@ -136,4 +136,9 @@ class EthiopicDate extends ILibCalendarDate {
   ILibRataDie newRdFromRd(double rd) {
     return EthiopicRataDie(rataDie: rd);
   }
+
+  @override
+  EthiopicDate newDateFromRd(double rd) {
+    return EthiopicDate(rd: rd);
+  }
 }

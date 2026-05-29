@@ -5,18 +5,9 @@ abstract class ILibRataDie {
   double getJulianDay();
   int getDayOfWeek({double offset = 0});
   double onOrBefore(int dayOfWeek, {double offset = 0});
-
-  double onOrAfter(int dayOfWeek, {double offset = 0}) {
-    return onOrBefore(dayOfWeek, offset: offset) + 7;
-  }
-
-  double before(int dayOfWeek, {double offset = 0}) {
-    return onOrBefore(dayOfWeek, offset: offset) - 1;
-  }
-
-  double after(int dayOfWeek, {double offset = 0}) {
-    return onOrBefore(dayOfWeek, offset: offset) + 6;
-  }
+  double onOrAfter(int dayOfWeek, {double offset = 0});
+  double before(int dayOfWeek, {double offset = 0});
+  double after(int dayOfWeek, {double offset = 0});
 
   static double unixTimeToRd(int millis) {
     return 719163.0 + millis / 86400000.0;

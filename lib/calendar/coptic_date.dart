@@ -136,4 +136,9 @@ class CopticDate extends ILibCalendarDate {
   ILibRataDie newRdFromRd(double rd) {
     return CopticRataDie(rataDie: rd);
   }
+
+  @override
+  CopticDate newDateFromRd(double rd) {
+    return CopticDate(rd: rd);
+  }
 }
