@@ -18,6 +18,8 @@
 
 set -e
 
+PROJECT_ROOT="${PWD}"
+
 test_log() {
   echo "[flutter_ilib] $1"
 }
@@ -67,13 +69,21 @@ run_integration_tests() {
   # Widget-based integration tests (must run from example/ directory)
   test_log "Execute widget-based integration tests (example/integration_test/)..."
   echo ""
+  local previous_libquickjsc_path="${LIBQUICKJSC_PATH:-}"
   pushd example > /dev/null
+  export LIBQUICKJSC_PATH="${PROJECT_ROOT}/test/linux/libquickjs_c_bridge_plugin.so"
   for test_file in $(find integration_test/ -name '*_test.dart'); do
     if ! run_linux_flutter_test "$test_file" $FLUTTER_OPTIONS -d linux; then
       FAILED_TESTS+=("example/$test_file")
     fi
   done
   popd > /dev/null
+
+  if [[ -n "$previous_libquickjsc_path" ]]; then
+    export LIBQUICKJSC_PATH="$previous_libquickjsc_path"
+  else
+    unset LIBQUICKJSC_PATH
+  fi
 }
 
 # --- Option handling ---
