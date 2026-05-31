@@ -22,6 +22,18 @@ test_log() {
   echo "[flutter_ilib] $1"
 }
 
+run_linux_flutter_test() {
+  local test_file="$1"
+  shift
+
+  if [[ -z "${DISPLAY:-}" ]] && command -v xvfb-run > /dev/null; then
+    xvfb-run -a flutter test "$test_file" "$@"
+    return
+  fi
+
+  flutter test "$test_file" "$@"
+}
+
 # --- Common setup ---
 test_log "Set LIBQUICKJSC_TEST_PATH"
 export LIBQUICKJSC_TEST_PATH="${PWD}/test/linux/libquickjs_c_bridge_plugin.so"
@@ -57,7 +69,7 @@ run_integration_tests() {
   echo ""
   pushd example > /dev/null
   for test_file in $(find integration_test/ -name '*_test.dart'); do
-    if ! flutter test "$test_file" $FLUTTER_OPTIONS -d linux; then
+    if ! run_linux_flutter_test "$test_file" $FLUTTER_OPTIONS -d linux; then
       FAILED_TESTS+=("example/$test_file")
     fi
   done
