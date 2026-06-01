@@ -1,8 +1,19 @@
 import 'ilib_date_accessor.dart';
+import 'ilib_init.dart';
+import 'ilib_localeinfo.dart';
+import 'internal/ilib_utils.dart';
 
 class ILibTimeZone {
-  ILibTimeZone(this._id, Map<String, dynamic> allZoneData) {
-    _zone = allZoneData[_id] as Map<String, dynamic>?;
+  ILibTimeZone(String id, [Map<String, dynamic>? allZoneData]) : _id = id {
+    allZoneData ??= _getZoneData();
+    final Object? entry = allZoneData[_id];
+    if (entry is String) {
+      _zone = allZoneData[entry] as Map<String, dynamic>?;
+    } else if (entry is Map<String, dynamic>) {
+      _zone = entry;
+    } else {
+      _zone = allZoneData['Etc/UTC'] as Map<String, dynamic>?;
+    }
     if (_zone != null) {
       _offset = _parseOffset(_zone!['o'] as String? ?? '0:0');
       if (_zone!.containsKey('s') && _zone!.containsKey('e')) {
@@ -12,6 +23,49 @@ class ILibTimeZone {
     }
   }
 
+  ILibTimeZone.fromOffset(int offsetMinutes)
+      : _id = _offsetToRfc822(offsetMinutes) {
+    _offset = offsetMinutes.toDouble();
+    _dstSavings = 0;
+  }
+
+  ILibTimeZone.fromLocale(String locale, [Map<String, dynamic>? allZoneData])
+      : this(ILibLocaleInfo(locale).getTimeZone(), allZoneData);
+
+  ILibTimeZone.defaultZone([Map<String, dynamic>? allZoneData])
+      : this(ILibLocaleInfo(currentLocale).getTimeZone(), allZoneData);
+
+  static String _offsetToRfc822(int offsetMinutes) {
+    if (offsetMinutes == 0) {
+      return 'UTC';
+    }
+    final String sign = offsetMinutes > 0 ? '+' : '-';
+    final int abs = offsetMinutes.abs();
+    final int h = abs ~/ 60;
+    final int m = abs % 60;
+    return 'UTC$sign${h.toString().padLeft(2, '0')}${m.toString().padLeft(2, '0')}';
+  }
+
+  static Map<String, dynamic> _getZoneData() {
+    final Map<String, dynamic>? localeData =
+        ILibLoader.instance.getLocaleData(currentLocale);
+    return (localeData?['ilib.data.zoneinfo'] as Map<String, dynamic>?) ??
+        <String, dynamic>{};
+  }
+
+  static List<String> getAvailableIds([String? country]) {
+    final Map<String, dynamic> zoneData = _getZoneData();
+    if (country == null) {
+      return <String>['local', ...zoneData.keys];
+    }
+    return zoneData.entries
+        .where((MapEntry<String, dynamic> e) =>
+            e.value is Map<String, dynamic> &&
+            (e.value as Map<String, dynamic>)['c'] == country)
+        .map((MapEntry<String, dynamic> e) => e.key)
+        .toList();
+  }
+
   final String _id;
   Map<String, dynamic>? _zone;
   double _offset = 0;
@@ -19,13 +73,39 @@ class ILibTimeZone {
 
   String getId() => _id;
 
+  Map<String, int> getRawOffset() => _minutesToHm(_offset);
+
+  double getRawOffsetMinutes() => _offset;
+
+  String getRawOffsetStr() => _minutesToStr(_offset);
+
+  Map<String, int> getDSTSavings() =>
+      _minutesToHm(_useDaylightTime() ? _dstSavings : 0);
+
+  double getDSTSavingsMinutes() => _useDaylightTime() ? _dstSavings : 0;
+
+  String getDSTSavingsStr() => _minutesToStr(getDSTSavingsMinutes());
+
+  bool useDaylightTime() => _useDaylightTime();
+
+  String getCountry() => (_zone?['c'] as String?) ?? '';
+
+  Map<String, int> getOffset(ILibDate date) =>
+      _minutesToHm(getOffsetMinutes(date));
+
   double getOffsetMinutes(ILibDate date) {
     return _offset + (inDaylightTime(date) ? _dstSavings : 0);
   }
 
+  String getOffsetStr(ILibDate date) => _minutesToStr(getOffsetMinutes(date));
+
+  int getOffsetMillis(ILibDate date) => (getOffsetMinutes(date) * 60000).round();
+
+  int getRawOffsetMillis() => (_offset * 60000).round();
+
   String getDisplayName(ILibDate date, String style) {
     if (_zone == null) {
-      return 'UTC';
+      return _formatRfc822(_offset);
     }
 
     switch (style) {
@@ -216,6 +296,21 @@ class ILibTimeZone {
     final double h = double.parse(parts[0]);
     final double m = parts.length > 1 ? double.parse(parts[1]) : 0;
     return h.abs() * 60 + m;
+  }
+
+  static Map<String, int> _minutesToHm(double minutes) {
+    final int h = minutes ~/ 60;
+    final int m = (minutes.abs() % 60).round();
+    if (m == 0) {
+      return <String, int>{'h': h};
+    }
+    return <String, int>{'h': h, 'm': m};
+  }
+
+  static String _minutesToStr(double minutes) {
+    final int h = minutes ~/ 60;
+    final int m = (minutes.abs() % 60).round();
+    return '$h:$m';
   }
 
   String _formatRfc822(double offsetMinutes) {

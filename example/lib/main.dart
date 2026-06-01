@@ -80,7 +80,6 @@ class _MyAppState extends State<MyApp> {
 
     try {
       currentTime = getDateTimeFormatNow('en-US');
-      currentTime = '12345';
     } on PlatformException {
       currentTime = 'Failed to get iLib DatFmt.';
     }
