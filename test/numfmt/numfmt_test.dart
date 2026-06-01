@@ -1838,7 +1838,7 @@ void main() {
           type: 'currency', locale: 'ur-IN', useNative: true, currency: 'INR'));
 
       expect(fmt, isNotNull);
-      expect(fmt.format(100110.57), '₹ ۱۰۰٬۱۱۰٫۵۷');
+      expect(fmt.format(100110.57), '₹۱۰۰٬۱۱۰٫۵۷');
     });
 
     test('testNumFmtCurrencyFormatNegativeNativeCurrencyForLocale_ur_IN1', () {
@@ -1846,7 +1846,7 @@ void main() {
           type: 'currency', locale: 'ur-IN', useNative: true, currency: 'INR'));
 
       expect(fmt, isNotNull);
-      expect(fmt.format(-100110.57), '‎-‎₹ ۱۰۰٬۱۱۰٫۵۷');
+      expect(fmt.format(-100110.57), '‎-‎₹۱۰۰٬۱۱۰٫۵۷');
     });
 
     test('testNumFmtCurrencyFormatCorrectCurrencyForLocale_ur_IN', () {
@@ -1854,7 +1854,7 @@ void main() {
           type: 'currency', locale: 'ur-IN', currency: 'INR'));
 
       expect(fmt, isNotNull);
-      expect(fmt.format(100110.57), '₹ ۱۰۰٬۱۱۰٫۵۷');
+      expect(fmt.format(100110.57), '₹۱۰۰٬۱۱۰٫۵۷');
     });
 
     test('testNumFmtPercentageFormatRegular_ur_IN', () {
@@ -2241,7 +2241,7 @@ void main() {
           type: 'currency', locale: 'es-CO', currency: 'COP'));
 
       expect(fmt, isNotNull);
-      expect(fmt.format(100110.57), r'$ 100.110,57');
+      expect(fmt.format(100110.57), r'$ 100.111');
     });
 
     test('testNumFmtPercentageFormatRegular_es_CO', () {
@@ -2448,7 +2448,7 @@ void main() {
           type: 'currency', locale: 'hu-HU', currency: 'HUF'));
 
       expect(fmt, isNotNull);
-      expect(fmt.format(100110.57), '100 110,57 Ft');
+      expect(fmt.format(100110.57), '100 111 Ft');
     });
 
     test('testNumFmtPercentageFormatRegular_hu_HU', () {
@@ -2602,7 +2602,7 @@ void main() {
           type: 'currency', locale: 'ar-SA', currency: 'SAR'));
 
       expect(fmt, isNotNull);
-      expect(fmt.format(100110.57), '‏١٠٠٬١١٠٫٥٧ ر.س');
+      expect(fmt.format(100110.57), '‏١٠٠٬١١٠٫٥٧ ⃁');
     });
 
     test('testNumFmtCurrencyFormatCorrectNegativeCurrencyForLocale_ar_SA', () {
@@ -2610,7 +2610,7 @@ void main() {
           type: 'currency', locale: 'ar-SA', currency: 'SAR'));
 
       expect(fmt, isNotNull);
-      expect(fmt.format(-100110.57), '؜-‏١٠٠٬١١٠٫٥٧ ر.س');
+      expect(fmt.format(-100110.57), '؜-‏١٠٠٬١١٠٫٥٧ ⃁');
     });
 
     test('testNumFmtPercentageFormatRegular_ar_SA', () {
@@ -2640,10 +2640,10 @@ void main() {
 
     test('testNumFmtCurrencyFormatCorrectCurrencyForLocale_bg_BG', () {
       final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions(
-          type: 'currency', locale: 'bg-BG', currency: 'BGN'));
+          type: 'currency', locale: 'bg-BG', currency: 'EUR'));
 
       expect(fmt, isNotNull);
-      expect(fmt.format(100110.57), '100 110,57 лв');
+      expect(fmt.format(100110.57), '100 110,57 €');
     });
 
     test('testNumFmtPercentageFormatRegular_bg_BG', () {
@@ -2780,9 +2780,9 @@ void main() {
 
       expect(fmt, isNotNull);
       if (testPlatform == 'webOS') {
-        expect(fmt.format(100110.57), '۱۰۰٫۱۱۱ ؜﷼');
+        expect(fmt.format(100110.57), '۱۰۰٫۱۱۱ ؜ریال');
       } else {
-        expect(fmt.format(100110.57), '‎﷼۱۰۰٬۱۱۱');
+        expect(fmt.format(100110.57), '‎ریال۱۰۰٬۱۱۱');
       }
     });
 
@@ -2793,9 +2793,9 @@ void main() {
       expect(fmt, isNotNull);
 
       if (testPlatform == 'webOS') {
-        expect(fmt.format(-100110.57), '؜۱۰۰٫۱۱۱- ؜﷼');
+        expect(fmt.format(-100110.57), '؜۱۰۰٫۱۱۱- ؜ریال');
       } else {
-        expect(fmt.format(-100110.57), '‎−‎﷼۱۰۰٬۱۱۱');
+        expect(fmt.format(-100110.57), '‎−‎ریال۱۰۰٬۱۱۱');
       }
     });
 
@@ -2913,7 +2913,7 @@ void main() {
           type: 'currency', locale: 'id-ID', currency: 'IDR'));
 
       expect(fmt, isNotNull);
-      expect(fmt.format(100110.57), 'Rp100.110,57');
+      expect(fmt.format(100110.57), 'Rp100.111');
     });
 
     test('testNumFmtPercentageFormatRegular_id_ID', () {
@@ -3466,7 +3466,7 @@ void main() {
           type: 'currency', locale: 'en-PK', currency: 'PKR'));
 
       expect(fmt, isNotNull);
-      expect(fmt.format(100110.57), 'Rs100,110.57');
+      expect(fmt.format(100110.57), 'Rs100,111');
     });
 
     test('testNumFmtPercentageFormatRegular_en_PK', () {
@@ -3482,7 +3482,7 @@ void main() {
           type: 'currency', locale: 'en-PK', currency: 'PKR'));
 
       expect(fmt, isNotNull);
-      expect(fmt.format(-100110.57), '-Rs100,110.57');
+      expect(fmt.format(-100110.57), '-Rs100,111');
     });
 
     //test cases for en-PH

@@ -77,9 +77,16 @@ void main() {
           type: 'currency',
           useNative: false,
           currency: li.getCurrency()));
-      expect(li.getCurrencyFormats().common, '‏{n} {s}');
-      expect(li.getCurrencyFormats().commonNegative, '؜-‏{n} {s}');
-      expect(curfmt.format(57.05), '‏57 ﺩ.ﻉ.'); //IQD
+
+      if (testPlatform == 'webOS') {
+        expect(li.getCurrencyFormats().common, '‏{n} {s}');
+        expect(li.getCurrencyFormats().commonNegative, '؜-‏{n} {s}');
+        expect(curfmt.format(57.05), '‏57 د.ع.'); //IQD
+      } else {
+        expect(li.getCurrencyFormats().common, '‏{n} {s}');
+        expect(li.getCurrencyFormats().commonNegative, '؜-‏{n} {s}');
+        expect(curfmt.format(57.05), '‏57 د.ع.‏'); //IQD
+      }
     });
     test('testNumFmt_ar_MA', () {
       final ILibLocaleInfo li = ILibLocaleInfo('ar-MA');
@@ -153,7 +160,7 @@ void main() {
           currency: li.getCurrency()));
       expect(li.getCurrencyFormats().common, '{n} {s}');
       expect(li.getCurrencyFormats().commonNegative, '-{n} {s}');
-      expect(curfmt.format(57.05), '57,05 лв'); // BGN
+      expect(curfmt.format(57.05), '57,05 €'); // BGN
     });
     test('testNumFmt_bn_IN', () {
       final ILibLocaleInfo li = ILibLocaleInfo('bn-IN');
@@ -298,8 +305,8 @@ void main() {
       final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions(
           locale: 'de-CH', type: 'standard', useNative: false));
       expect(li.getDecimalSeparator(), '.');
-      expect(li.getGroupingSeparator(), '’');
-      expect(fmt.format(123456789.45), '123’456’789.45');
+      expect(li.getGroupingSeparator(), '\'');
+      expect(fmt.format(123456789.45), '123\'456\'789.45');
 
       final ILibNumFmt pctfmt = ILibNumFmt(ILibNumFmtOptions(
           locale: 'de-CH', type: 'percentage', useNative: false));
@@ -567,7 +574,12 @@ void main() {
           currency: li.getCurrency()));
       expect(li.getCurrencyFormats().common, '{s}{n}');
       expect(li.getCurrencyFormats().commonNegative, '-{s}{n}');
-      expect(curfmt.format(57.05), r'$57.05'); //HKD
+
+      if (testPlatform == 'webOS') {
+        expect(curfmt.format(57.05), r'HK$57.05'); //HKD
+      } else {
+        expect(curfmt.format(57.05), r'$57.05'); //HKD
+      }
     });
     test('testNumFmt_en_IE', () {
       final ILibLocaleInfo li = ILibLocaleInfo('en-IE');
@@ -1096,7 +1108,7 @@ void main() {
           currency: li.getCurrency()));
       expect(li.getCurrencyFormats().common, '{s} {n}');
       expect(li.getCurrencyFormats().commonNegative, '-{s} {n}');
-      expect(curfmt.format(57.05), r'$ 57,05'); //COP
+      expect(curfmt.format(57.05), r'$ 57'); //COP
     });
     test('testNumFmt_es_DO', () {
       final ILibLocaleInfo li = ILibLocaleInfo('es-DO');
@@ -1500,11 +1512,11 @@ void main() {
       if (testPlatform == 'webOS') {
         expect(li.getCurrencyFormats().common, '{n} ؜{s}');
         expect(li.getCurrencyFormats().commonNegative, '؜{n}- ؜{s}');
-        expect(curfmt.format(57.05), '57 ؜﷼');
+        expect(curfmt.format(57.05), '57 ؜ریال');
       } else {
         expect(li.getCurrencyFormats().common, '‎{s}{n}');
         expect(li.getCurrencyFormats().commonNegative, '‎−‎{s}{n}');
-        expect(curfmt.format(57.05), '‎﷼57'); //IRR
+        expect(curfmt.format(57.05), '‎ریال57'); //IRR
       }
     });
     test('testNumFmt_fi_FI', () {
@@ -1581,8 +1593,8 @@ void main() {
       final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions(
           locale: 'fr-CH', type: 'standard', useNative: false));
       expect(li.getDecimalSeparator(), ',');
-      expect(li.getGroupingSeparator(), ' ');
-      expect(fmt.format(123456789.45), '123 456 789,45');
+      expect(li.getGroupingSeparator(), '\'');
+      expect(fmt.format(123456789.45), '123\'456\'789,45');
 
       final ILibNumFmt pctfmt = ILibNumFmt(ILibNumFmtOptions(
           locale: 'fr-CH', type: 'percentage', useNative: false));
@@ -1804,7 +1816,7 @@ void main() {
           currency: li.getCurrency()));
       expect(li.getCurrencyFormats().common, '{n} {s}');
       expect(li.getCurrencyFormats().commonNegative, '−{n} {s}');
-      expect(curfmt.format(57.05), '57,05 Ft'); //HUF
+      expect(curfmt.format(57.05), '57 Ft'); //HUF
     });
     test('testNumFmt_id_ID', () {
       final ILibLocaleInfo li = ILibLocaleInfo('id-ID');
@@ -1827,7 +1839,7 @@ void main() {
           currency: li.getCurrency()));
       expect(li.getCurrencyFormats().common, '{s}{n}');
       expect(li.getCurrencyFormats().commonNegative, '-{s}{n}');
-      expect(curfmt.format(57.05), 'Rp57,05'); //IDR
+      expect(curfmt.format(57.05), 'Rp57'); //IDR
     });
     test('testNumFmt_is_IS', () {
       final ILibLocaleInfo li = ILibLocaleInfo('is-IS');
@@ -1857,8 +1869,8 @@ void main() {
       final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions(
           locale: 'it-CH', type: 'standard', useNative: false));
       expect(li.getDecimalSeparator(), '.');
-      expect(li.getGroupingSeparator(), '’');
-      expect(fmt.format(123456789.45), '123’456’789.45');
+      expect(li.getGroupingSeparator(), '\'');
+      expect(fmt.format(123456789.45), '123\'456\'789.45');
 
       final ILibNumFmt pctfmt = ILibNumFmt(ILibNumFmtOptions(
           locale: 'it-CH', type: 'percentage', useNative: false));
@@ -1994,14 +2006,26 @@ void main() {
       final ILibLocaleInfo li = ILibLocaleInfo('ku-IQ');
       final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions(
           locale: 'ku-IQ', type: 'standard', useNative: false));
-      expect(li.getDecimalSeparator(), '٫');
-      expect(li.getGroupingSeparator(), '٬');
-      expect(fmt.format(123456789.45), '123٬456٬789٫45');
+      if (testPlatform == 'webOS') {
+        expect(li.getDecimalSeparator(), ',');
+        expect(li.getGroupingSeparator(), '.');
+        expect(fmt.format(123456789.45), '123.456.789,45');
+      } else {
+        expect(li.getDecimalSeparator(), ',');
+        expect(li.getGroupingSeparator(), '.');
+        expect(fmt.format(123456789.45), '123.456.789,45');
+      }
       final ILibNumFmt pctfmt = ILibNumFmt(ILibNumFmtOptions(
           locale: 'ku-IQ', type: 'percentage', useNative: false));
-      expect(li.getPercentageFormat(), '{n} ٪');
-      expect(li.getNegativePercentageFormat(), '‏-{n} ٪');
-      expect(pctfmt.format(34), '34 ٪');
+      if (testPlatform == 'webOS') {
+        expect(li.getPercentageFormat(), '%{n}');
+        expect(li.getNegativePercentageFormat(), '-%{n}');
+        expect(pctfmt.format(34), '%34');
+      } else {
+        expect(li.getPercentageFormat(), '%{n}');
+        expect(li.getNegativePercentageFormat(), '-%{n}');
+        expect(pctfmt.format(34), '%34');
+      }
 
       final ILibNumFmt curfmt = ILibNumFmt(ILibNumFmtOptions(
           locale: 'ku-IQ',
@@ -2009,8 +2033,13 @@ void main() {
           useNative: false,
           currency: li.getCurrency()));
       expect(li.getCurrencyFormats().common, '{n} {s}');
-      expect(li.getCurrencyFormats().commonNegative, '‏-{n} {s}');
-      expect(curfmt.format(57.05), '57 ﺩ.ﻉ.'); //IQD
+      if (testPlatform == 'webOS') {
+        expect(li.getCurrencyFormats().commonNegative, '-{n} {s}');
+        expect(curfmt.format(57.05), '57 د.ع.'); //IQD
+      } else {
+        expect(li.getCurrencyFormats().commonNegative, '-{n} {s}');
+        expect(curfmt.format(57.05), '57 د.ع.‏'); //IQD
+      }
     });
     test('testNumFmt_lt_LT', () {
       final ILibLocaleInfo li = ILibLocaleInfo('lt-LT');
@@ -2355,7 +2384,7 @@ void main() {
           currency: li.getCurrency()));
       expect(li.getCurrencyFormats().common, '{n} {s}');
       expect(li.getCurrencyFormats().commonNegative, '-{n} {s}');
-      expect(curfmt.format(57.05), '57 дин.'); //RSD
+      expect(curfmt.format(57.05), '57,05 дин.'); //RSD
     });
     test('testNumFmt_sr_Latn_RS', () {
       final ILibLocaleInfo li = ILibLocaleInfo('sr-Latn-RS');
@@ -2378,7 +2407,7 @@ void main() {
           currency: li.getCurrency()));
       expect(li.getCurrencyFormats().common, '{n} {s}');
       expect(li.getCurrencyFormats().commonNegative, '-{n} {s}');
-      expect(curfmt.format(57.05), '57 дин.'); //RSD
+      expect(curfmt.format(57.05), '57,05 дин.'); //RSD
     });
     test('testNumFmt_ru_BY', () {
       final ILibLocaleInfo li = ILibLocaleInfo('ru-BY');
@@ -2859,9 +2888,9 @@ void main() {
           type: 'currency',
           useNative: false,
           currency: li.getCurrency()));
-      expect(li.getCurrencyFormats().common, '{s} {n}');
-      expect(li.getCurrencyFormats().commonNegative, '‎-‎{s} {n}');
-      expect(curfmt.format(57.05), '₹ 57٫05'); //INR
+      expect(li.getCurrencyFormats().common, '{s}{n}');
+      expect(li.getCurrencyFormats().commonNegative, '‎-‎{s}{n}');
+      expect(curfmt.format(57.05), '₹57٫05'); //INR
     });
     test('testNumFmt_uz_Latn_UZ', () {
       final ILibLocaleInfo li = ILibLocaleInfo('uz-Latn-UZ');
@@ -2884,7 +2913,11 @@ void main() {
           currency: li.getCurrency()));
       expect(li.getCurrencyFormats().common, '{n} {s}');
       expect(li.getCurrencyFormats().commonNegative, '-{n} {s}');
-      expect(curfmt.format(57.05), '57,05 лв'); //UZS
+      if (testPlatform == 'webOS') {
+        expect(curfmt.format(57.05), '57,05 UZS');
+      } else {
+        expect(curfmt.format(57.05), '57,05 лв'); //UZS
+      }
     });
     test('testNumFmt_vi_VN', () {
       final ILibLocaleInfo li = ILibLocaleInfo('vi-VN');
@@ -2953,7 +2986,11 @@ void main() {
           currency: li.getCurrency()));
       expect(li.getCurrencyFormats().common, '{s}{n}');
       expect(li.getCurrencyFormats().commonNegative, '-{s}{n}');
-      expect(curfmt.format(57.05), r'$57.05'); //HKD
+      if (testPlatform == 'webOS') {
+        expect(curfmt.format(57.05), r'HK$57.05'); //HKD
+      } else {
+        expect(curfmt.format(57.05), r'$57.05'); //HKD
+      }
     });
     test('testNumFmt_zh_Hant_TW', () {
       final ILibLocaleInfo li = ILibLocaleInfo('zh-Hant-TW');
@@ -2976,15 +3013,19 @@ void main() {
           currency: li.getCurrency()));
       expect(li.getCurrencyFormats().common, '{s}{n}');
       expect(li.getCurrencyFormats().commonNegative, '-{s}{n}');
-      expect(curfmt.format(57.05), r'$57.05'); //TWD
+      if (testPlatform == 'webOS') {
+        expect(curfmt.format(57.05), r'NT$57.05'); //TWD
+      } else {
+        expect(curfmt.format(57.05), r'$57.05'); //TWD
+      }
     });
     test('testNumFmt_en_GE', () {
       final ILibLocaleInfo li = ILibLocaleInfo('en-GE');
       final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions(
           locale: 'en-GE', type: 'standard', useNative: false));
-      expect(li.getDecimalSeparator(), '.');
-      expect(li.getGroupingSeparator(), ',');
-      expect(fmt.format(123456789.45), '123,456,789.45');
+      expect(li.getDecimalSeparator(), ',');
+      expect(li.getGroupingSeparator(), ' ');
+      expect(fmt.format(123456789.45), '123 456 789,45');
 
       final ILibNumFmt pctfmt = ILibNumFmt(ILibNumFmtOptions(
           locale: 'en-GE', type: 'percentage', useNative: false));
@@ -2997,9 +3038,9 @@ void main() {
           type: 'currency',
           useNative: false,
           currency: li.getCurrency()));
-      expect(li.getCurrencyFormats().common, '{s}{n}');
-      expect(li.getCurrencyFormats().commonNegative, '-{s}{n}');
-      expect(curfmt.format(57.05), '₾57.05'); //GEL
+      expect(li.getCurrencyFormats().common, '{n} {s}');
+      expect(li.getCurrencyFormats().commonNegative, '-{n} {s}');
+      expect(curfmt.format(57.05), '57,05 ₾'); //GEL
     });
     test('testNumFmt_en_CN', () {
       final ILibLocaleInfo li = ILibLocaleInfo('en-CN');
@@ -3068,7 +3109,12 @@ void main() {
           currency: li.getCurrency()));
       expect(li.getCurrencyFormats().common, '{s}{n}');
       expect(li.getCurrencyFormats().commonNegative, '-{s}{n}');
-      expect(curfmt.format(57.05), r'$57.05'); //TWD
+
+      if (testPlatform == 'webOS') {
+        expect(curfmt.format(57.05), r'NT$57.05'); //TWD
+      } else {
+        expect(curfmt.format(57.05), r'$57.05'); //TWD
+      }
     });
     test('testNumFmt_mn_MN', () {
       final ILibLocaleInfo li = ILibLocaleInfo('mn-MN');
@@ -3323,7 +3369,7 @@ void main() {
           currency: li.getCurrency()));
       expect(li.getCurrencyFormats().common, '‏{n} {s}');
       expect(li.getCurrencyFormats().commonNegative, '؜-‏{n} {s}');
-      expect(curfmt.format(57.05), '‏57٫05 ر.س'); //SAR
+      expect(curfmt.format(57.05), '‏57٫05 ⃁'); //SAR
     });
     test('testNumFmt_ka_GE', () {
       final ILibLocaleInfo li = ILibLocaleInfo('ka-GE');

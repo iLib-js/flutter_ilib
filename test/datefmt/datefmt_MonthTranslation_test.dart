@@ -165,8 +165,8 @@ void main() {
   });
   group('testMonthTranslate_bn_IN', () {
     final Map<int, String> expectedResult = <int, String>{
-      1: 'জানুয়ারী',
-      2: 'ফেব্রুয়ারী',
+      1: 'জানুয়ারি',
+      2: 'ফেব্রুয়ারি',
       3: 'মার্চ',
       4: 'এপ্রিল',
       5: 'মে',
@@ -770,8 +770,8 @@ void main() {
       3: 'Mar',
       4: 'Apr',
       5: 'May',
-      6: 'June',
-      7: 'July',
+      6: 'Jun',
+      7: 'Jul',
       8: 'Aug',
       9: 'Sept',
       10: 'Oct',
@@ -3708,7 +3708,7 @@ void main() {
       7: 'जुलाई',
       8: 'अगस्त',
       9: 'सितंबर',
-      10: 'अक्तूबर',
+      10: 'अक्टूबर',
       11: 'नवंबर',
       12: 'दिसंबर',
     };
@@ -3738,7 +3738,7 @@ void main() {
       7: 'जुल॰',
       8: 'अग॰',
       9: 'सित॰',
-      10: 'अक्तू॰',
+      10: 'अक्टू॰',
       11: 'नव॰',
       12: 'दिस॰',
     };
@@ -4299,19 +4299,20 @@ void main() {
   });
   group('testMonthTranslate_ku_IQ', () {
     final Map<int, String> expectedResult = <int, String>{
-      1: 'کانوونی دووەم',
-      2: 'شوبات',
-      3: 'ئازار',
-      4: 'نیسان',
-      5: 'ئایار',
-      6: 'حوزەیران',
-      7: 'تەمووز',
-      8: 'ئاب',
-      9: 'ئەیلوول',
-      10: 'تشرینی یەکەم',
-      11: 'تشرینی دووەم',
-      12: 'کانونی یەکەم',
+      1: 'rêbendan',
+      2: 'sibat',
+      3: 'adar',
+      4: 'nîsan',
+      5: 'gulan',
+      6: 'hezîran',
+      7: 'tîrmeh',
+      8: 'tebax',
+      9: 'îlon',
+      10: 'cotmeh',
+      11: 'mijdar',
+      12: 'berfanbar'
     };
+
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -4329,19 +4330,20 @@ void main() {
   });
   group('testMonthTranslate_ku_IQ_medium', () {
     final Map<int, String> expectedResult = <int, String>{
-      1: 'کانوونی دووەم',
-      2: 'شوبات',
-      3: 'ئازار',
-      4: 'نیسان',
-      5: 'ئایار',
-      6: 'حوزەیران',
-      7: 'تەمووز',
-      8: 'ئاب',
-      9: 'ئەیلوول',
-      10: 'تشرینی یەکەم',
-      11: 'تشرینی دووەم',
-      12: 'کانونی یەکەم'
+      1: 'rbn',
+      2: 'sbt',
+      3: 'adr',
+      4: 'nsn',
+      5: 'gln',
+      6: 'hzr',
+      7: 'trm',
+      8: 'tbx',
+      9: 'îln',
+      10: 'cot',
+      11: 'mjd',
+      12: 'brf'
     };
+
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
