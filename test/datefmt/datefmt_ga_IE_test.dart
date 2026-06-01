@@ -6,9 +6,9 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [datefmt_ga_IE_test.dart] file.');
   setUpAll(() async {
-    await ILibJS.instance.loadJS();
-    ILibJS.instance.initILib();
-    await ILibJS.instance.loadILibLocaleData('ga-IE');
+    await ILibLoader.instance.loadJSON();
+    ILibLoader.instance.initILib();
+    await ILibLoader.instance.loadILibLocaleData('ga-IE');
   });
   group('format()', () {
     test('testDateFmtSimpleShort_ga_IE', () {

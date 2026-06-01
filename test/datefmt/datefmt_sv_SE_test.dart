@@ -6,9 +6,9 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [datefmt_sv_SE_test.dart] file.');
   setUpAll(() async {
-    await ILibJS.instance.loadJS();
-    ILibJS.instance.initILib();
-    await ILibJS.instance.loadILibLocaleData('sv-SE');
+    await ILibLoader.instance.loadJSON();
+    ILibLoader.instance.initILib();
+    await ILibLoader.instance.loadILibLocaleData('sv-SE');
   });
   group('format()', () {
     test('testDateFmtSimpleShort_sv_SE', () {

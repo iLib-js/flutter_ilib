@@ -1,0 +1,20 @@
+{
+    "ilib.data.dateformats": {
+        "gregorian": {
+            "time": {
+                "12": {
+                    "ah": "h a",
+                    "ahm": "h:mma",
+                    "ahms": "h:mm:ssa",
+                    "ahmsz": "h:mm:ssa z",
+                    "ahmz": "h:mma z",
+                    "h": "h",
+                    "hm": "h:mm",
+                    "hms": "h:mm:ss",
+                    "hmsz": "h:mm:ss z",
+                    "hmz": "h:mm z"
+                }
+            }
+        }
+    }
+}

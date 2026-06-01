@@ -10,9 +10,9 @@ void main() {
   debugPrint('Testing [datefmt_he_IL_test.dart] file.');
   setUpAll(() async {
     testPlatform = getTestPlatform();
-    await ILibJS.instance.loadJS();
-    ILibJS.instance.initILib();
-    await ILibJS.instance.loadILibLocaleData('he-IL');
+    await ILibLoader.instance.loadJSON();
+    ILibLoader.instance.initILib();
+    await ILibLoader.instance.loadILibLocaleData('he-IL');
   });
   group('format()', () {
     test('testDateFmtSimpleShort_he_IL', () {

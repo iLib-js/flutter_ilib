@@ -10,9 +10,9 @@ void main() {
   debugPrint('Testing [datefmt_fa_IR_test.dart] file.');
   setUpAll(() async {
     testPlatform = getTestPlatform();
-    await ILibJS.instance.loadJS();
-    ILibJS.instance.initILib();
-    await ILibJS.instance.loadILibLocaleData('fa-IR');
+    await ILibLoader.instance.loadJSON();
+    ILibLoader.instance.initILib();
+    await ILibLoader.instance.loadILibLocaleData('fa-IR');
   });
   group('format()', () {
     test('SimpleShort_fa_IR', () {

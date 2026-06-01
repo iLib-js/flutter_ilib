@@ -9,5 +9,105 @@
         "numfmt": {
             "groupChar": " "
         }
+    },
+    "ilib.data.dateformats": {
+        "gregorian": {
+            "date": {
+                "dm": {
+                    "s": "MM-dd"
+                },
+                "dmw": {
+                    "s": "E MM-dd"
+                },
+                "dmwy": {
+                    "s": "E yyyy-MM-dd"
+                },
+                "dmy": {
+                    "s": "yyyy-MM-dd"
+                },
+                "my": {
+                    "s": "yyyy-MM"
+                }
+            },
+            "range": {
+                "c00": {
+                    "s": "{sy}-{sm}-{sd} {st} – {et}"
+                },
+                "c01": {
+                    "s": "{sy}-{sm}-{sd} {st} – {ey}-{em}-{ed} {et}"
+                },
+                "c02": {
+                    "s": "{sy}-{sm}-{sd} {st} – {ey}-{em}-{ed} {et}"
+                },
+                "c03": {
+                    "s": "{sy}-{sm}-{sd} {st} – {ey}-{em}-{ed} {et}"
+                },
+                "c10": {
+                    "s": "{sy}-{sm}-{sd} – {ed}"
+                },
+                "c11": {
+                    "s": "{sy}-{sm}-{sd} – {ey}-{em}-{ed}"
+                },
+                "c12": {
+                    "s": "{sy}-{sm}-{sd} – {ey}-{em}-{ed}"
+                },
+                "c20": {
+                    "s": "{sy}-{sm} – {ey}-{em}"
+                }
+            },
+            "time": {
+                "12": {
+                    "ah": "h 'h' a",
+                    "ahm": "hh 'h' mm a",
+                    "ahms": "hh 'h' mm 'min' ss 's' a",
+                    "ahmsz": "hh 'h' mm 'min' ss 's' a z",
+                    "ahmz": "hh 'h' mm a z",
+                    "h": "hh",
+                    "hm": "hh 'h' mm",
+                    "hms": "hh 'h' mm 'min' ss 's'",
+                    "hmsz": "hh 'h' mm 'min' ss 's' z",
+                    "hmz": "hh 'h' mm z",
+                    "ms": "mm 'min' ss"
+                },
+                "24": {
+                    "ahm": "HH 'h' mm",
+                    "ahms": "HH 'h' mm 'min' ss 's'",
+                    "ahmsz": "HH 'h' mm 'min' ss 's' z",
+                    "ahmz": "HH 'h' mm z",
+                    "hm": "HH 'h' mm",
+                    "hms": "HH 'h' mm 'min' ss 's'",
+                    "hmsz": "HH 'h' mm 'min' ss 's' z",
+                    "hmz": "HH 'h' mm z",
+                    "ms": "mm 'min' ss"
+                }
+            }
+        }
+    },
+    "ilib.data.sysres": {
+        "#{num} ms": "one#{num} ms|#{num} ms",
+        "#{num}w": "one#{num}sem|#{num}sem",
+        "1#1 day|#{num} days": "one#{num} jour|#{num} jours",
+        "1#1 hour|#{num} hours": "one#{num} heure|#{num} heures",
+        "1#1 hr|#{num} hrs": "one#{num} h|#{num} h",
+        "1#1 millisecond|#{num} milliseconds": "one#{num} milliseconde|#{num} millisecondes",
+        "1#1 min|#{num} min": "one#{num} min|#{num} min",
+        "1#1 mi|#{num} min": "one#{num}m|#{num}m",
+        "1#1 month|#{num} months": "one#{num} mois|#{num} mois",
+        "1#1 mon|#{num} mons": "one#{num} m.|#{num} m.",
+        "1#1 mo|#{num} mos": "one#{num}m|#{num}m",
+        "1#1 second|#{num} seconds": "one#{num} seconde|#{num} secondes",
+        "1#1 sec|#{num} sec": "one#{num} s|#{num} s",
+        "1#1 week|#{num} weeks": "one#{num} semaine|#{num} semaines",
+        "1#1 wk|#{num} wks": "one#{num} sem.|#{num} sem.",
+        "1#1 yr|#{num} yrs": "one#{num} an|#{num} ans",
+        "B2": "a.m.",
+        "B6": "p.m.",
+        "MMM7": "juill.",
+        "a0": "a.m.",
+        "a1": "p.m.",
+        "durationLongDays": "one#{num} j|#{num} j",
+        "durationMediumWeeks": "one#{num}sem|#{num}sem",
+        "durationShortMinutes": "one#{num}m|#{num}m",
+        "durationShortMonths": "one#{num}m|#{num}m"
     }
 }

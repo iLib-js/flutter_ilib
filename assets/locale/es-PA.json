@@ -11,5 +11,116 @@
             "negativepctFmt": "-{n}%",
             "pctFmt": "{n}%"
         }
+    },
+    "ilib.data.dateformats": {
+        "gregorian": {
+            "date": {
+                "d": {
+                    "m": "dd",
+                    "s": "dd"
+                },
+                "dm": {
+                    "m": "MM/dd",
+                    "s": "MM/dd"
+                },
+                "dmw": {
+                    "m": "EE, MM/dd",
+                    "s": "E, MM/dd"
+                },
+                "dmwy": {
+                    "m": "EE, MM/dd/yyyy",
+                    "s": "E, MM/dd/yy"
+                },
+                "dmy": {
+                    "m": "MM/dd/yyyy",
+                    "s": "MM/dd/yy"
+                },
+                "dw": {
+                    "m": "EE, dd",
+                    "s": "E, dd"
+                },
+                "m": {
+                    "m": "MM",
+                    "s": "MM"
+                },
+                "my": {
+                    "m": "MM/yyyy",
+                    "s": "MM/yy"
+                }
+            },
+            "range": {
+                "c00": {
+                    "m": "{sm}/{sd}/{sy}, {st} – {et}",
+                    "s": "{sm}/{sd}/{sy}, {st} – {et}"
+                },
+                "c01": {
+                    "m": "{sm}/{sd}/{sy}, {st} – {em}/{ed}/{ey}, {et}",
+                    "s": "{sm}/{sd}/{sy}, {st} – {em}/{ed}/{ey}, {et}"
+                },
+                "c02": {
+                    "m": "{sm}/{sd}/{sy}, {st} – {em}/{ed}/{ey}, {et}",
+                    "s": "{sm}/{sd}/{sy}, {st} – {em}/{ed}/{ey}, {et}"
+                },
+                "c03": {
+                    "m": "{sm}/{sd}/{sy}, {st} – {em}/{ed}/{ey}, {et}",
+                    "s": "{sm}/{sd}/{sy}, {st} – {em}/{ed}/{ey}, {et}"
+                },
+                "c10": {
+                    "m": "{sm}/{sd} – {ed}/{ey}",
+                    "s": "{sm}/{sd}/{sy} – {em}/{ed}/{ey}"
+                },
+                "c11": {
+                    "m": "{sm}/{sd} – {em}/{ed}/{ey}",
+                    "s": "{sm}/{sd} – {em}/{ed}/{ey}"
+                },
+                "c12": {
+                    "m": "{sm}/{sd}/{sy} – {em}/{ed}/{ey}",
+                    "s": "{sm}/{sd}/{sy} – {em}/{ed}/{ey}"
+                },
+                "c20": {
+                    "m": "{sm}/{sy} – {em}/{ey}"
+                }
+            },
+            "time": {
+                "12": {
+                    "ahm": "h:mm a",
+                    "ahms": "h:mm:ss a",
+                    "ahmsz": "h:mm:ss a z",
+                    "ahmz": "h:mm a z"
+                },
+                "24": {
+                    "ah": "HH",
+                    "ahm": "HH:mm",
+                    "ahms": "HH:mm:ss",
+                    "ahmsz": "HH:mm:ss z",
+                    "ahmz": "HH:mm z",
+                    "h": "HH",
+                    "hm": "HH:mm",
+                    "hms": "HH:mm:ss",
+                    "hmsz": "HH:mm:ss z",
+                    "hmz": "HH:mm z"
+                }
+            }
+        }
+    },
+    "ilib.data.sysres": {
+        "#in {num}d": "one#dentro de {num} día|#dentro de {num} días",
+        "#{num}d": "one#{num}d.|#{num}dd.",
+        "#{num}d ago": "one#hace {num} día|#hace {num} días",
+        "#{num}w": "one#{num}sem.|#{num}sems.",
+        "#{num}y": "one#{num}a.|#{num}aa.",
+        "1#1 dy|#{num} dys": "one#{num}d.|#{num}dd.",
+        "1#1 mon|#{num} mons": "one#{num} m.|#{num} mm.",
+        "1#1 mo|#{num} mos": "one#{num}m.|#{num}mm.",
+        "1#1 wk|#{num} wks": "one#{num} sem.|#{num} sems.",
+        "1#1 yr|#{num} yrs": "one#{num} a.|#{num} aa.",
+        "B3": "mediodía",
+        "E3": "M",
+        "G-1": "a.e.c.",
+        "G1": "e.c.",
+        "durationLongDays": "one#{num} d.|#{num} dd.",
+        "durationMediumWeeks": "one#{num}sem.|#{num}sems.",
+        "durationMediumYears": "one#{num}a.|#{num}aa.",
+        "durationShortMonths": "one#{num}m.|#{num}mm."
     }
 }
