@@ -138,6 +138,7 @@ class ILibLoader extends ChangeNotifier {
       logger.warn('Invalid locale: $curlocale, no locale-specific data loaded');
     }
 
+    initILib();
     logger.info('Notifying listeners after JSON loading');
     notifyListeners();
   }

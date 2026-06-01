@@ -7,7 +7,6 @@ void main() {
   debugPrint('Testing [datefmt_es_ES_test.dart] file.');
   setUpAll(() async {
     await ILibLoader.instance.loadJSON();
-    ILibLoader.instance.initILib();
     await ILibLoader.instance.loadILibLocaleData('es-ES');
   });
   group('format()', () {

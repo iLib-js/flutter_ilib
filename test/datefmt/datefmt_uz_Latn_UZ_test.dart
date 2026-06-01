@@ -7,7 +7,6 @@ void main() {
   debugPrint('Testing [datefmt_uz_Latn_UZ_test.dart] file.');
   setUpAll(() async {
     await ILibLoader.instance.loadJSON();
-    ILibLoader.instance.initILib();
     await ILibLoader.instance.loadILibLocaleData('uz-Latn-UZ');
   });
   group('format()', () {
