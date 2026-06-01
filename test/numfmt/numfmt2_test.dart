@@ -160,7 +160,7 @@ void main() {
           currency: li.getCurrency()));
       expect(li.getCurrencyFormats().common, '{n} {s}');
       expect(li.getCurrencyFormats().commonNegative, '-{n} {s}');
-      expect(curfmt.format(57.05), '57,05 €'); // BGN
+      expect(curfmt.format(57.05), '57,05 €'); // EUR
     });
     test('testNumFmt_bn_IN', () {
       final ILibLocaleInfo li = ILibLocaleInfo('bn-IN');
