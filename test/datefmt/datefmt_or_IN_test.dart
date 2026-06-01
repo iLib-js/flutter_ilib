@@ -11,7 +11,6 @@ void main() {
   setUpAll(() async {
     testPlatform = getTestPlatform();
     await ILibLoader.instance.loadJSON();
-    ILibLoader.instance.initILib();
     await ILibLoader.instance.loadILibLocaleData('or-IN');
   });
   group('format()', () {

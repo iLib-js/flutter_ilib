@@ -7,7 +7,6 @@ void main() {
   debugPrint('Testing [datefmt_gu_IN_test.dart] file.');
   setUpAll(() async {
     await ILibLoader.instance.loadJSON();
-    ILibLoader.instance.initILib();
     await ILibLoader.instance.loadILibLocaleData('gu-IN');
   });
   group('format()', () {

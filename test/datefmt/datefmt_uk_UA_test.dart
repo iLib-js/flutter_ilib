@@ -7,7 +7,6 @@ void main() {
   debugPrint('Testing [datefmt_uk_UA_test.dart] file.');
   setUpAll(() async {
     await ILibLoader.instance.loadJSON();
-    ILibLoader.instance.initILib();
     await ILibLoader.instance.loadILibLocaleData('uk-UA');
   });
   group('format()', () {

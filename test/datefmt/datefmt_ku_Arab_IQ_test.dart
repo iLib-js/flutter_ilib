@@ -7,7 +7,6 @@ void main() {
   debugPrint('Testing [datefmt_ku_Arab_IQ_test.dart] file.');
   setUpAll(() async {
     await ILibLoader.instance.loadJSON();
-    ILibLoader.instance.initILib();
     await ILibLoader.instance.loadILibLocaleData('ku-Arab-IQ');
   });
   group('format()', () {

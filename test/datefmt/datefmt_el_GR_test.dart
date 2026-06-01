@@ -7,7 +7,6 @@ void main() {
   debugPrint('Testing [datefmt_el_GR_test.dart] file.');
   setUpAll(() async {
     await ILibLoader.instance.loadJSON();
-    ILibLoader.instance.initILib();
     await ILibLoader.instance.loadILibLocaleData('el-GR');
   });
   group('format()', () {
