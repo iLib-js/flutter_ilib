@@ -21,6 +21,7 @@ export 'calendar/gregorian_date.dart';
 export 'calendar/hebrew_cal.dart';
 export 'calendar/hebrew_date.dart';
 export 'calendar/hebrew_rata_die.dart';
+export 'calendar/ilib_astro.dart';
 export 'calendar/ilib_date.dart';
 export 'calendar/islamic_cal.dart';
 export 'calendar/islamic_date.dart';

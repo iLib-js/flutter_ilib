@@ -127,11 +127,15 @@ class ILibLoader extends ChangeNotifier {
 
   Future<void> loadJSON() async {
     await _loadAssetManifest();
+
+    // Always load root.json first as it contains locale-independent data (e.g. astro)
+    await _loadFile('packages/flutter_ilib/assets/locale/root.json');
+
     final String curlocale = getLocale();
     if (isValidLocale(curlocale)) {
       await _loadLocaleData(curlocale);
     } else {
-      logger.warn('Invalid locale: $curlocale, no data loaded');
+      logger.warn('Invalid locale: $curlocale, no locale-specific data loaded');
     }
 
     logger.info('Notifying listeners after JSON loading');

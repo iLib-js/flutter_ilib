@@ -1,7 +1,10 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart' show visibleForTesting;
+
 import '../ilib_init.dart';
 import '../internal/ilib_utils.dart';
+import 'greg_rata_die.dart';
 
 class ILibAstro {
   ILibAstro._();
@@ -186,6 +189,236 @@ class ILibAstro {
       'deltaPsi': dp / (3600.0 * 10000.0),
       'deltaEpsilon': de / (3600.0 * 10000.0),
     };
+  }
+
+  static double _poly(double x, List<dynamic> coefficients) {
+    double result = (coefficients[0] as num).toDouble();
+    double xpow = x;
+    for (int i = 1; i < coefficients.length; i++) {
+      result += (coefficients[i] as num).toDouble() * xpow;
+      xpow *= x;
+    }
+    return result;
+  }
+
+  @visibleForTesting
+  static double ephemerisCorrection(double jd) {
+    final int year = GregRataDie.calcYear(jd - 1721424.5);
+
+    if (1988 <= year && year <= 2019) {
+      return (year - 1933) / 86400;
+    }
+
+    if (1800 <= year && year <= 1987) {
+      final GregRataDie jul1 =
+          GregRataDie(year: year, month: 7, day: 1, hour: 0, minute: 0, second: 0, millisecond: 0);
+      final double theta = (jul1.getRataDie() - 693596) / 36525;
+      final Map<String, dynamic> data = _getData();
+      final List<dynamic> coeffs = (1900 <= year)
+          ? data['_coeff19th'] as List<dynamic>
+          : data['_coeff18th'] as List<dynamic>;
+      return _poly(theta, coeffs);
+    }
+
+    if (1620 <= year && year <= 1799) {
+      final double y = (year - 1600).toDouble();
+      return (196.58333 - 4.0675 * y + 0.0219167 * y * y) / 86400;
+    }
+
+    final GregRataDie jan1 =
+        GregRataDie(year: year, month: 1, day: 1, hour: 0, minute: 0, second: 0, millisecond: 0);
+    final double x = 0.5 + (jan1.getRataDie() - 660724);
+    return ((x * x / 41048480) - 15) / 86400;
+  }
+
+  static double _ephemerisFromUniversal(double jd) {
+    return jd + ephemerisCorrection(jd);
+  }
+
+  static double _universalFromEphemeris(double jd) {
+    return jd - ephemerisCorrection(jd);
+  }
+
+  @visibleForTesting
+  static double julianCenturies(double jd) {
+    return (_ephemerisFromUniversal(jd) - 2451545.0) / 36525.0;
+  }
+
+  @visibleForTesting
+  static double aberration(double c) {
+    return 9.74e-05 * _dcos(177.63 + 35999.01847999999 * c) - 0.005575;
+  }
+
+  @visibleForTesting
+  static double nutation2(double c) {
+    final Map<String, dynamic> data = _getData();
+    final List<dynamic> nutCoeffA = data['_nutCoeffA'] as List<dynamic>;
+    final List<dynamic> nutCoeffB = data['_nutCoeffB'] as List<dynamic>;
+    final double a = _poly(c, nutCoeffA);
+    final double b = _poly(c, nutCoeffB);
+    return -0.004778 * _dsin(a) - 0.0003667 * _dsin(b);
+  }
+
+  static double solarLongitude(double jd) {
+    final Map<String, dynamic> data = _getData();
+    final double c = julianCenturies(jd);
+    final List<dynamic> solarCoeff = data['_solarLongCoeff'] as List<dynamic>;
+    final List<dynamic> solarAddends = data['_solarLongAddends'] as List<dynamic>;
+    final List<dynamic> solarMultipliers = data['_solarLongMultipliers'] as List<dynamic>;
+
+    double longitude = 0;
+    for (int i = 0; i < solarCoeff.length; i++) {
+      longitude += (solarCoeff[i] as num).toDouble() *
+          _dsin((solarAddends[i] as num).toDouble() +
+              (solarMultipliers[i] as num).toDouble() * c);
+    }
+    longitude *= 5.729577951308232e-06;
+    longitude += 282.77718340000001 + 36000.769537439999 * c;
+    longitude += aberration(c) + nutation2(c);
+    return _fixangle(longitude);
+  }
+
+  static double _bisectionSearch(double start, double end, double tolerance,
+      double Function(double) testFn) {
+    double lo = start;
+    double hi = end;
+    while (hi - lo > tolerance) {
+      final double mid = (lo + hi) / 2;
+      if (testFn(mid) > 0) {
+        hi = mid;
+      } else {
+        lo = mid;
+      }
+    }
+    return (lo + hi) / 2;
+  }
+
+  static double nextSolarLongitude(double jd, double longitude) {
+    const double rate = 365.242189 / 360.0;
+    final double tau = jd + rate * _fixangle(longitude - solarLongitude(jd));
+    final double start = jd > tau - 5.0 ? jd : tau - 5.0;
+    final double end = tau + 5.0;
+    return _bisectionSearch(start, end, 1e-6, (double l) {
+      return 180 - _fixangle(solarLongitude(l) - longitude);
+    });
+  }
+
+  static double lunarLongitude(double jd) {
+    final Map<String, dynamic> data = _getData();
+    final double c = julianCenturies(jd);
+    final double meanMoon = _fixangle(_poly(c, data['_meanMoonCoeff'] as List<dynamic>));
+    final double elongation = _fixangle(_poly(c, data['_elongationCoeff'] as List<dynamic>));
+    final double solarAnomaly = _fixangle(_poly(c, data['_solarAnomalyCoeff'] as List<dynamic>));
+    final double lunarAnomaly = _fixangle(_poly(c, data['_lunarAnomalyCoeff'] as List<dynamic>));
+    final double moonNode = _fixangle(_poly(c, data['_moonFromNodeCoeff'] as List<dynamic>));
+    final double e = _poly(c, data['_eCoeff'] as List<dynamic>);
+
+    final List<dynamic> lunarElongCoeff = data['_lunarElongationLongCoeff'] as List<dynamic>;
+    final List<dynamic> solarAnomalyCoeff = data['_solarAnomalyLongCoeff'] as List<dynamic>;
+    final List<dynamic> lunarAnomalyCoeff = data['_lunarAnomalyLongCoeff'] as List<dynamic>;
+    final List<dynamic> moonNodeCoeff = data['_moonFromNodeLongCoeff'] as List<dynamic>;
+    final List<dynamic> sineCoeff = data['_sineCoeff'] as List<dynamic>;
+
+    double sum = 0;
+    for (int i = 0; i < lunarElongCoeff.length; i++) {
+      final int x = (solarAnomalyCoeff[i] as num).toInt();
+      sum += (sineCoeff[i] as num).toDouble() * pow(e, x.abs()) *
+          _dsin((lunarElongCoeff[i] as num).toDouble() * elongation +
+              x * solarAnomaly +
+              (lunarAnomalyCoeff[i] as num).toDouble() * lunarAnomaly +
+              (moonNodeCoeff[i] as num).toDouble() * moonNode);
+    }
+    final double longitude = sum / 1000000;
+    final double venus = 3958.0 / 1000000 * _dsin(119.75 + c * 131.84899999999999);
+    final double jupiter = 318.0 / 1000000 * _dsin(53.090000000000003 + c * 479264.28999999998);
+    final double flatEarth = 1962.0 / 1000000 * _dsin(meanMoon - moonNode);
+
+    return _fixangle(meanMoon + longitude + venus + jupiter + flatEarth + nutation2(c));
+  }
+
+  static double _lunarSolarAngle(double jd) {
+    return _fixangle(lunarLongitude(jd) - solarLongitude(jd));
+  }
+
+  static double newMoonTime(double n) {
+    final Map<String, dynamic> data = _getData();
+    final double k = n - 24724;
+    final double c = k / 1236.8499999999999;
+    final double approx = _poly(c, data['_nmApproxCoeff'] as List<dynamic>);
+    final double capE = _poly(c, data['_nmCapECoeff'] as List<dynamic>);
+    final double solarAnomaly = _poly(c, data['_nmSolarAnomalyCoeff'] as List<dynamic>);
+    final double lunarAnomaly = _poly(c, data['_nmLunarAnomalyCoeff'] as List<dynamic>);
+    final double moonArgument = _poly(c, data['_nmMoonArgumentCoeff'] as List<dynamic>);
+    final double capOmega = _poly(c, data['_nmCapOmegaCoeff'] as List<dynamic>);
+
+    double correction = -0.00017 * _dsin(capOmega);
+    final List<dynamic> nmSineCoeff = data['_nmSineCoeff'] as List<dynamic>;
+    final List<dynamic> nmEFactor = data['_nmEFactor'] as List<dynamic>;
+    final List<dynamic> nmSolarCoeff = data['_nmSolarCoeff'] as List<dynamic>;
+    final List<dynamic> nmLunarCoeff = data['_nmLunarCoeff'] as List<dynamic>;
+    final List<dynamic> nmMoonCoeff = data['_nmMoonCoeff'] as List<dynamic>;
+
+    for (int i = 0; i < nmSineCoeff.length; i++) {
+      correction += (nmSineCoeff[i] as num).toDouble() *
+          pow(capE, (nmEFactor[i] as num).toDouble()) *
+          _dsin((nmSolarCoeff[i] as num).toDouble() * solarAnomaly +
+              (nmLunarCoeff[i] as num).toDouble() * lunarAnomaly +
+              (nmMoonCoeff[i] as num).toDouble() * moonArgument);
+    }
+
+    double additional = 0;
+    final List<dynamic> nmAddConst = data['_nmAddConst'] as List<dynamic>;
+    final List<dynamic> nmAddCoeff = data['_nmAddCoeff'] as List<dynamic>;
+    final List<dynamic> nmAddFactor = data['_nmAddFactor'] as List<dynamic>;
+
+    for (int i = 0; i < nmAddConst.length; i++) {
+      additional += (nmAddFactor[i] as num).toDouble() *
+          _dsin((nmAddConst[i] as num).toDouble() + (nmAddCoeff[i] as num).toDouble() * k);
+    }
+
+    final double extra = 0.000325 * _dsin(_poly(c, data['_nmExtra'] as List<dynamic>));
+    return _universalFromEphemeris(approx + correction + extra + additional + 1721424.5);
+  }
+
+  static double newMoonBefore(double jd) {
+    final double phase = _lunarSolarAngle(jd);
+    double guess =
+        ((jd - 11.450086114414322 - 1721424.5) / 29.530588853000001 - phase / 360).round() - 1;
+    double current = newMoonTime(guess);
+    double last = current;
+    while (current < jd) {
+      guess++;
+      last = current;
+      current = newMoonTime(guess);
+    }
+    return last;
+  }
+
+  static double newMoonAtOrAfter(double jd) {
+    final double phase = _lunarSolarAngle(jd);
+    double guess =
+        ((jd - 11.450086114414322 - 1721424.5) / 29.530588853000001 - phase / 360).roundToDouble();
+    double current;
+    while ((current = newMoonTime(guess)) < jd) {
+      guess++;
+    }
+    return current;
+  }
+
+  static double floorToJD(double jd) {
+    return (jd - 0.5).floorToDouble() + 0.5;
+  }
+
+  static double ceilToJD(double jd) {
+    return (jd + 0.5).ceilToDouble() - 0.5;
+  }
+
+  static double universalFromLocal(double local, double zone) {
+    return local - zone / 1440;
+  }
+
+  static double localFromUniversal(double universal, double zone) {
+    return universal + zone / 1440;
   }
 
   static double equationOfTime(double jd) {
