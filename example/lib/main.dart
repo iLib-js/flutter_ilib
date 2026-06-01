@@ -52,15 +52,16 @@ class _MyAppState extends State<MyApp> {
       if (!mounted) {
         return;
       }
-      if (!_flutterIlibPlugin.isILibReady) {
-        _flutterIlibPlugin.addListener(() => updateState());
-      } else {
+      _flutterIlibPlugin.addListener(() => updateState());
+      if (_flutterIlibPlugin.isILibReady) {
         updateState();
       }
     });
   }
 
   void updateState() {
+    if (!mounted) return;
+
     String iLibVersion;
     String currentTime;
     String iLibCLDRVersion;
