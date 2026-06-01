@@ -7,7 +7,6 @@ void main() {
   debugPrint('Testing [datefmt_km_KH_test.dart] file.');
   setUpAll(() async {
     await ILibLoader.instance.loadJSON();
-    ILibLoader.instance.initILib();
     await ILibLoader.instance.loadILibLocaleData('km-KH');
   });
   group('format()', () {

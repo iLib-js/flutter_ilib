@@ -7,7 +7,6 @@ void main() {
   debugPrint('Testing [datefmt_zh_CN_test.dart] file.');
   setUpAll(() async {
     await ILibLoader.instance.loadJSON();
-    ILibLoader.instance.initILib();
     await ILibLoader.instance.loadILibLocaleData('zh-Hans-CN');
   });
   group('format()', () {

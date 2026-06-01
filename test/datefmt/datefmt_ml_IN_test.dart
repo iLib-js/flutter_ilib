@@ -7,7 +7,6 @@ void main() {
   debugPrint('Testing [datefmt_ml_IN_test.dart] file.');
   setUpAll(() async {
     await ILibLoader.instance.loadJSON();
-    ILibLoader.instance.initILib();
     await ILibLoader.instance.loadILibLocaleData('ml-IN');
   });
   group('format()', () {
