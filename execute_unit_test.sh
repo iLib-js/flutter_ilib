@@ -38,7 +38,7 @@ run_linux_flutter_test() {
 
 # --- Common setup ---
 test_log "Set LIBQUICKJSC_TEST_PATH"
-export LIBQUICKJSC_TEST_PATH="${PWD}/test/linux/libquickjs_c_bridge_plugin.so"
+export LIBQUICKJSC_TEST_PATH="${PROJECT_ROOT}/test/linux/libquickjs_c_bridge_plugin.so"
 
 FAILED_TESTS=()
 # Suppress info-level logs during test execution
