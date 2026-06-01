@@ -200,7 +200,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29 सप्टेंबर, 2011 रोजी 1:45 PM');
+      expect(fmt.format(dateOptions), '29 सप्टेंबर, 2011 रोजी 1:45 PM वाजता');
     });
     test('testDateFmtINDateTimeSimpleFull_mr_IN', () {
       final ILibDateFmtOptions fmtOptions =
