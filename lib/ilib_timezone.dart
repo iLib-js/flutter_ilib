@@ -58,12 +58,12 @@ class ILibTimeZone {
     if (country == null) {
       return <String>['local', ...zoneData.keys];
     }
-    return zoneData.entries
-        .where((MapEntry<String, dynamic> e) =>
-            e.value is Map<String, dynamic> &&
-            (e.value as Map<String, dynamic>)['c'] == country)
-        .map((MapEntry<String, dynamic> e) => e.key)
-        .toList();
+    final Map<String, dynamic>? zonetab =
+        zoneData['zonetab'] as Map<String, dynamic>?;
+    if (zonetab != null && zonetab.containsKey(country)) {
+      return List<String>.from(zonetab[country] as List<dynamic>);
+    }
+    return <String>[];
   }
 
   final String _id;

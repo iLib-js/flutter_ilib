@@ -722,30 +722,29 @@ void main() {
 
     test('testTZGetAvailableIdsByCountryRightLength', () {
       final List<String> zones = ILibTimeZone.getAvailableIds('US');
-      expect(zones.length, 40);
+      expect(zones.length, 48);
     });
 
-    // Skip: zonetab.json not included in assets, deprecated aliases missing
     test('testTZGetAvailableIdsByCountry2RightLength', () {
       final List<String> zones = ILibTimeZone.getAvailableIds('SG');
       expect(zones.length, 2);
-    }, skip: 'zonetab.json not included — no deprecated aliases');
+    });
 
     test('testTZGetAvailableIdsByCountry2RightContents', () {
       final List<String> zones = ILibTimeZone.getAvailableIds('SG');
       expect(zones.contains('Asia/Singapore'), true);
       expect(zones.contains('Singapore'), true);
-    }, skip: 'zonetab.json not included — no deprecated aliases');
+    });
 
     test('testTZGetAvailableIdsByCountry3RightLength', () {
       final List<String> zones = ILibTimeZone.getAvailableIds('IN');
       expect(zones.length, 2);
-    }, skip: 'zonetab.json not included — no deprecated aliases');
+    });
 
     test('testTZGetAvailableIdsByCountry3RightContents', () {
       final List<String> zones = ILibTimeZone.getAvailableIds('IN');
       expect(zones.contains('Asia/Kolkata'), true);
       expect(zones.contains('Asia/Calcutta'), true);
-    }, skip: 'zonetab.json not included — no deprecated aliases');
+    });
   });
 }
