@@ -7,7 +7,6 @@ void main() {
   debugPrint('Testing [flutter_ilib_datefmt_test.dart] file.');
   setUpAll(() async {
     await ILibLoader.instance.loadJSON();
-    ILibLoader.instance.initILib();
     await ILibLoader.instance.loadILibLocaleData('ko-KR');
     await ILibLoader.instance.loadILibLocaleData('en-US');
     await ILibLoader.instance.loadILibLocaleData('en-GB');
