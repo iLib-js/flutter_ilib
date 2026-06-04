@@ -9,7 +9,6 @@ void main() {
   setUpAll(() async {
     flutterIlibPlugin = FlutterILib.instance;
     await ILibLoader.instance.loadJSON();
-    ILibLoader.instance.initILib();
   });
   group('Basic', () {
     test('getCLDRVersion',

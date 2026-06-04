@@ -8,7 +8,6 @@ void main() {
   setUpAll(() async {
     final ILibLoader ilibjsinstance = ILibLoader.instance;
     await ilibjsinstance.loadJSON();
-    ilibjsinstance.initILib();
     await ilibjsinstance.loadILibLocaleData('ar-SA');
     await ilibjsinstance.loadILibLocaleData('de-DE');
     await ilibjsinstance.loadILibLocaleData('ko-KR');

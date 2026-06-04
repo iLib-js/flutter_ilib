@@ -8,7 +8,6 @@ void main() {
   setUpAll(() async {
     final ILibJS ilibjsinstance = ILibJS.instance;
     await ilibjsinstance.loadJS();
-    ilibjsinstance.initILib();
   });
 
   group('iLibNumFmt-format()', () {
