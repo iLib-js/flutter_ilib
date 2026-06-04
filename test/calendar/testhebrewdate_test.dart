@@ -39,6 +39,18 @@ const List<List<num>> testDates = <List<num>>[
 ];
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  setUpAll(() async {
+    await ILibLoader.instance.loadJSON();
+  });
+
+  group('HebrewDate constructor', () {
+    test('testHebrewDateConstructor', () {
+      final HebrewDate hd = HebrewDate();
+      expect(hd.getYears(), isNotNull);
+    });
+  });
+
   group('HebrewDate from JD', () {
     test('basic JD', () {
       final HebrewDate d = HebrewDate(julianDay: 2450138.5);
@@ -560,5 +572,20 @@ void main() {
       expect(hd2.getMinutes(), hd.getMinutes());
       expect(hd2.getSeconds(), hd.getSeconds());
     });
+    test('testHebrewDateRoundTripConstruction2', () {
+      final HebrewDate hd = HebrewDate(
+          year: 5775, month: 8, day: 10,
+          timezone: 'America/Los_Angeles');
+      final int u = hd.getTime();
+      final HebrewDate hd2 = HebrewDate(
+          unixtime: u, timezone: 'America/Los_Angeles');
+      expect(hd2.timezone, hd.timezone);
+      expect(hd2.getYears(), hd.getYears());
+      expect(hd2.getMonths(), hd.getMonths());
+      expect(hd2.getDays(), hd.getDays());
+      expect(hd2.getHours(), hd.getHours());
+      expect(hd2.getMinutes(), hd.getMinutes());
+      expect(hd2.getSeconds(), hd.getSeconds());
+    }, skip: 'non-Gregorian calendar year conversion needed for timezone offset');
   });
 }

@@ -13,6 +13,28 @@ abstract class ILibRataDie {
     return 719163.0 + millis / 86400000.0;
   }
 
+  static double nowToRd(double epoch) {
+    return unixTimeToRd(DateTime.now().millisecondsSinceEpoch) +
+        1721424.5 - epoch;
+  }
+
+  static bool hasDateComponents(
+      {int? year,
+      int? month,
+      int? day,
+      int? hour,
+      int? minute,
+      int? second,
+      int? millisecond}) {
+    return year != null ||
+        month != null ||
+        day != null ||
+        hour != null ||
+        minute != null ||
+        second != null ||
+        millisecond != null;
+  }
+
   static double timeToRd(int hour, int minute, int second, int millisecond) {
     return (hour * 3600000 + minute * 60000 + second * 1000 + millisecond) /
         86400000.0;

@@ -1,3 +1,4 @@
+import '../ilib_localeinfo.dart';
 import 'greg_rata_die.dart';
 import 'gregorian_cal.dart';
 import 'ilib_date.dart';
@@ -15,21 +16,30 @@ class GregorianDate extends ILibCalendarDate {
       double? julianDay,
       double? rd,
       int? unixtime,
+      String? locale,
       String? timezone}) {
-    _timezone = timezone;
-    _rataDie = GregRataDie(
-      year: year,
-      month: month,
-      day: day,
-      hour: hour,
-      minute: minute,
-      second: second,
-      millisecond: millisecond,
-      julianDay: julianDay,
-      rataDie: rd,
-      unixtime: unixtime,
-    );
-    _calcDateComponents();
+    _timezone =
+        timezone ?? (locale != null ? ILibLocaleInfo(locale).getTimeZone() : null);
+    final bool fromComponents = julianDay == null && rd == null && unixtime == null &&
+        ILibRataDie.hasDateComponents(year: year, month: month, day: day,
+            hour: hour, minute: minute, second: second, millisecond: millisecond);
+    if (fromComponents) {
+      _year = year ?? 0;
+      _month = month ?? 1;
+      _day = day ?? 1;
+      _hour = hour ?? 0;
+      _minute = minute ?? 0;
+      _second = second ?? 0;
+      _millisecond = millisecond ?? 0;
+      _rataDie = GregRataDie(
+          year: year, month: month, day: day, hour: hour,
+          minute: minute, second: second, millisecond: millisecond);
+      _rataDie = GregRataDie(rataDie: adjustRdForTimezone(_rataDie.getRataDie()));
+    } else {
+      _rataDie = GregRataDie(
+          julianDay: julianDay, rataDie: rd, unixtime: unixtime);
+      _calcDateComponents();
+    }
   }
 
   static final GregorianCal _cal = GregorianCal();
@@ -51,7 +61,14 @@ class GregorianDate extends ILibCalendarDate {
   late int _millisecond;
 
   void _calcDateComponents() {
-    final double rd = _rataDie.getRataDie();
+    _decomposeRd(_rataDie.getRataDie());
+    calcTimezoneOffset();
+    if (tzOffsetDays != 0) {
+      _decomposeRd(getWallClockRd());
+    }
+  }
+
+  void _decomposeRd(double rd) {
     _year = GregRataDie.calcYear(rd);
 
     final int rdFloor = rd.floor();
@@ -98,7 +115,10 @@ class GregorianDate extends ILibCalendarDate {
   int getMilliseconds() => _millisecond;
 
   @override
-  int getDayOfWeek() => _rataDie.getDayOfWeek();
+  int getDayOfWeek() {
+    final int rd = getWallClockRd().floor();
+    return rd % 7;
+  }
 
   @override
   int getDayOfYear() {

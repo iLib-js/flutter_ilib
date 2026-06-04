@@ -43,9 +43,15 @@ void main() {
   setUpAll(() async {
     await ILibLoader.instance.loadJSON();
     await ILibLoader.instance.loadILibLocaleData('am-ET');
+    await ILibLoader.instance.loadILibLocaleData('de-DE');
+    await ILibLoader.instance.loadILibLocaleData('ja-JP');
   });
 
   group('EthiopicRataDie constructor', () {
+    test('testEthiopicRataDieConstructor', () {
+      final EthiopicRataDie erd = EthiopicRataDie();
+      expect(erd.getRataDie(), isNotNull);
+    });
     test('testEthiopicRataDieConstructorComponents', () {
       final EthiopicRataDie erd = EthiopicRataDie(
           year: 1, month: 1, day: 1, hour: 0, minute: 0, second: 0, millisecond: 0);
@@ -120,6 +126,13 @@ void main() {
     test('testEthiopicRataDieGetTimeExtendedTooBigForRegularGetTime', () {
       final EthiopicDate ed = EthiopicDate(julianDay: 2465443.634803241);
       expect(ed.getTimeExtended(), 2147570047000);
+    });
+  });
+
+  group('EthiopicDate constructor', () {
+    test('testEthiopicDateConstructor', () {
+      final EthiopicDate ed = EthiopicDate();
+      expect(ed.getYears(), isNotNull);
     });
   });
 
@@ -394,6 +407,101 @@ void main() {
       expect(ed2.getMinutes(), ed.getMinutes());
       expect(ed2.getSeconds(), ed.getSeconds());
     });
+    test('testEthiopicDateRoundTripConstruction2', () {
+      final EthiopicDate ed = EthiopicDate(
+          year: 2014, month: 10, day: 20,
+          timezone: 'America/Los_Angeles');
+      final int u = ed.getTime();
+      final EthiopicDate ed2 = EthiopicDate(
+          unixtime: u, timezone: 'America/Los_Angeles');
+      expect(ed2.timezone, ed.timezone);
+      expect(ed2.getYears(), ed.getYears());
+      expect(ed2.getMonths(), ed.getMonths());
+      expect(ed2.getDays(), ed.getDays());
+      expect(ed2.getHours(), ed.getHours());
+      expect(ed2.getMinutes(), ed.getMinutes());
+      expect(ed2.getSeconds(), ed.getSeconds());
+    }, skip: 'non-Gregorian calendar year conversion needed for timezone offset');
+  });
+
+  group('EthiopicDate current time', () {
+    test('testEthiopicDateCurrentTimeWithTimeZone', () {
+      final EthiopicDate ed =
+          EthiopicDate(timezone: 'America/Los_Angeles');
+      final int now = DateTime.now().millisecondsSinceEpoch;
+      expect((ed.getTime() - now).abs(), lessThan(50));
+    });
+  });
+
+  group('EthiopicDate convert from julianday', () {
+    test('testEthiopicDateConvertYears', () {
+      for (int i = 0; i < testDatesEthiopic.length; i++) {
+        final EthiopicDate ed =
+            EthiopicDate(julianDay: testDatesEthiopic[i][0].toDouble());
+        expect(ed.getYears(), testDatesEthiopic[i][1],
+            reason: 'jd=${testDatesEthiopic[i][0]}');
+      }
+    });
+    test('testEthiopicDateConvertMonths', () {
+      for (int i = 0; i < testDatesEthiopic.length; i++) {
+        final EthiopicDate ed =
+            EthiopicDate(julianDay: testDatesEthiopic[i][0].toDouble());
+        expect(ed.getMonths(), testDatesEthiopic[i][2],
+            reason: 'jd=${testDatesEthiopic[i][0]}');
+      }
+    });
+    test('testEthiopicDateConvertDays', () {
+      for (int i = 0; i < testDatesEthiopic.length; i++) {
+        final EthiopicDate ed =
+            EthiopicDate(julianDay: testDatesEthiopic[i][0].toDouble());
+        expect(ed.getDays(), testDatesEthiopic[i][3],
+            reason: 'jd=${testDatesEthiopic[i][0]}');
+      }
+    });
+    test('testEthiopicDateConvertHours', () {
+      for (int i = 0; i < testDatesEthiopic.length; i++) {
+        final EthiopicDate ed =
+            EthiopicDate(julianDay: testDatesEthiopic[i][0].toDouble());
+        expect(ed.getHours(), testDatesEthiopic[i][4],
+            reason: 'jd=${testDatesEthiopic[i][0]}');
+      }
+    });
+    test('testEthiopicDateConvertDayOfWeek', () {
+      for (int i = 0; i < testDatesEthiopic.length; i++) {
+        final EthiopicDate ed =
+            EthiopicDate(julianDay: testDatesEthiopic[i][0].toDouble());
+        expect(ed.getDayOfWeek(), testDatesEthiopic[i][8],
+            reason: 'jd=${testDatesEthiopic[i][0]}');
+      }
+    });
+    test('testEthiopicDateConvertOther', () {
+      for (int i = 0; i < testDatesEthiopic.length; i++) {
+        final EthiopicDate ed =
+            EthiopicDate(julianDay: testDatesEthiopic[i][0].toDouble());
+        expect(ed.getMinutes(), testDatesEthiopic[i][5],
+            reason: 'jd=${testDatesEthiopic[i][0]} minutes');
+        expect(ed.getSeconds(), testDatesEthiopic[i][6],
+            reason: 'jd=${testDatesEthiopic[i][0]} seconds');
+        expect(ed.getMilliseconds(), testDatesEthiopic[i][7],
+            reason: 'jd=${testDatesEthiopic[i][0]} milliseconds');
+      }
+    });
+    test('testEthiopicDateGetJulianDay', () {
+      for (int i = 0; i < testDatesEthiopic.length; i++) {
+        final EthiopicDate ed = EthiopicDate(
+            year: testDatesEthiopic[i][1] as int,
+            month: testDatesEthiopic[i][2] as int,
+            day: testDatesEthiopic[i][3] as int,
+            hour: testDatesEthiopic[i][4] as int,
+            minute: testDatesEthiopic[i][5] as int,
+            second: testDatesEthiopic[i][6] as int,
+            millisecond: testDatesEthiopic[i][7] as int);
+        expect(ed.getJulianDay(), testDatesEthiopic[i][0],
+            reason: 'index=$i');
+        expect(ed.getDayOfWeek(), testDatesEthiopic[i][8],
+            reason: 'index=$i dayOfWeek');
+      }
+    });
   });
 
   group('EthiopicDate getTimeZone', () {
@@ -424,6 +532,24 @@ void main() {
     test('testEthiopicDateGetCalendar', () {
       final EthiopicDate ed = EthiopicDate(year: 2010, month: 1, day: 1);
       expect(ed.getCalendar(), 'ethiopic');
+    });
+  });
+
+  group('EthiopicDate getTimeZone by locale', () {
+    test('testEthiopicDateGetTimeZoneByLocaleDE', () {
+      final EthiopicDate ed =
+          EthiopicDate(year: 2011, month: 3, day: 8, locale: 'de-DE');
+      expect(ed.timezone, 'Europe/Berlin');
+    });
+    test('testEthiopicDateGetTimeZoneByLocaleJP', () {
+      final EthiopicDate ed =
+          EthiopicDate(year: 2011, month: 3, day: 8, locale: 'ja-JP');
+      expect(ed.timezone, 'Asia/Tokyo');
+    });
+    test('testEthiopicDateGetTimeZoneByLocaleBogus', () {
+      final EthiopicDate ed =
+          EthiopicDate(year: 2011, month: 3, day: 8, locale: 'zz-ZZ');
+      expect(ed.timezone, 'Etc/UTC');
     });
   });
 

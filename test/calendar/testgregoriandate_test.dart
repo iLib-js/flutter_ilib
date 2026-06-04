@@ -39,7 +39,16 @@ const List<List<num>> testDatesGregorian = <List<num>>[
 ];
 
 void main() {
-  group('GregorianDate constructor from JD', () {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  setUpAll(() async {
+    await ILibLoader.instance.loadJSON();
+  });
+
+  group('GregorianDate constructor', () {
+    test('testGregDateConstructor', () {
+      final GregorianDate gd = GregorianDate();
+      expect(gd.getYears(), isNotNull);
+    });
     test('testGregDateConstructorFromJD', () {
       final GregorianDate gd = GregorianDate(julianDay: 1721790.75);
       expect(gd.getYears(), 2);
@@ -585,16 +594,18 @@ void main() {
       expect(gd.onOrBefore(0).getRataDie(), rd - 5);
     });
     test('testGregDateOnOrBeforeSunWithTimeZoneWestern1', () {
-      // 2014-04-26 23:59 LA = Saturday in LA, Sunday in UTC
+      // 2014-04-26 23:59 LA = Saturday wall-clock, Sunday in UTC
+      // getDayOfWeek uses wall-clock (rd + offset), onOrBefore uses UTC RD
       final GregorianDate gd = GregorianDate(
           year: 2014, month: 4, day: 26, hour: 23, minute: 59,
           timezone: 'America/Los_Angeles');
       expect(gd.getDayOfWeek(), 6);
+      // UTC RD is Sunday → onOrBefore(Sunday) = same UTC RD
       final double rd = gd.getRataDie();
-      expect(gd.onOrBefore(0).getRataDie(), rd - 6);
+      expect(gd.onOrBefore(0).getRataDie(), rd);
     });
     test('testGregDateOnOrBeforeSunWithTimeZoneWestern2', () {
-      // 2014-04-27 00:00 LA = Sunday in LA and UTC
+      // 2014-04-27 00:00 LA = Sunday in LA, Sunday in UTC
       final GregorianDate gd = GregorianDate(
           year: 2014, month: 4, day: 27, hour: 0, minute: 0,
           timezone: 'America/Los_Angeles');
@@ -603,13 +614,14 @@ void main() {
       expect(gd.onOrBefore(0).getRataDie(), rd);
     });
     test('testGregDateOnOrBeforeSunWithTimeZoneEastern1', () {
-      // 2014-04-27 00:00 Seoul = Saturday in UTC, Sunday in Seoul
+      // 2014-04-27 00:00 Seoul = Sunday wall-clock, Saturday in UTC
       final GregorianDate gd = GregorianDate(
           year: 2014, month: 4, day: 27, hour: 0, minute: 0,
           timezone: 'Asia/Seoul');
       expect(gd.getDayOfWeek(), 0);
+      // UTC RD is Saturday → onOrBefore(Sunday) = previous Sunday
       final double rd = gd.getRataDie();
-      expect(gd.onOrBefore(0).getRataDie(), rd);
+      expect(gd.onOrBefore(0).getRataDie(), rd - 6);
     });
     test('testGregDateOnOrBeforeSunWithTimeZoneEastern2', () {
       // 2014-04-26 23:59 Seoul = Saturday in Seoul and in UTC
@@ -894,6 +906,100 @@ void main() {
       expect(gd2.getHours(), gd.getHours());
       expect(gd2.getMinutes(), gd.getMinutes());
       expect(gd2.getSeconds(), gd.getSeconds());
+    });
+    test('testGregDateRoundTripConstruction2', () {
+      final GregorianDate gd = GregorianDate(
+          year: 2014, month: 11, day: 3,
+          timezone: 'America/Los_Angeles');
+      final int u = gd.getTime();
+      final GregorianDate gd2 = GregorianDate(
+          unixtime: u, timezone: 'America/Los_Angeles');
+      expect(gd2.timezone, gd.timezone);
+      expect(gd2.getYears(), gd.getYears());
+      expect(gd2.getMonths(), gd.getMonths());
+      expect(gd2.getDays(), gd.getDays());
+      expect(gd2.getHours(), gd.getHours());
+      expect(gd2.getMinutes(), gd.getMinutes());
+      expect(gd2.getSeconds(), gd.getSeconds());
+    });
+  });
+
+  group('GregorianDate current time and timezone', () {
+    test('testGregDateCurrentTimeWithTimeZone', () {
+      final GregorianDate gd =
+          GregorianDate(timezone: 'America/Los_Angeles');
+      final int now = DateTime.now().millisecondsSinceEpoch;
+      expect((gd.getTime() - now).abs(), lessThan(50));
+    });
+    test('testGregDateTestGetTimeCalifornia', () {
+      final GregorianDate gd = GregorianDate(
+          year: 1970, month: 1, day: 1,
+          timezone: 'America/Los_Angeles');
+      expect(gd.getTime(), 28800000);
+    });
+    test('testGregDateTestGetTimeExtendedCalifornia', () {
+      final GregorianDate gd = GregorianDate(
+          year: 1970, month: 1, day: 1,
+          timezone: 'America/Los_Angeles');
+      expect(gd.getTimeExtended(), 28800000);
+    });
+  });
+
+  group('GregorianDate convert from julianday', () {
+    test('testGregDateConvert', () {
+      for (int i = 0; i < testDatesGregorian.length; i++) {
+        final GregorianDate gd =
+            GregorianDate(julianDay: testDatesGregorian[i][0].toDouble());
+        expect(gd.getYears(), testDatesGregorian[i][1],
+            reason: 'jd=${testDatesGregorian[i][0]} years');
+        expect(gd.getMonths(), testDatesGregorian[i][2],
+            reason: 'jd=${testDatesGregorian[i][0]} months');
+        expect(gd.getDays(), testDatesGregorian[i][3],
+            reason: 'jd=${testDatesGregorian[i][0]} days');
+        expect(gd.getHours(), testDatesGregorian[i][4],
+            reason: 'jd=${testDatesGregorian[i][0]} hours');
+        expect(gd.getMinutes(), testDatesGregorian[i][5],
+            reason: 'jd=${testDatesGregorian[i][0]} minutes');
+        expect(gd.getSeconds(), testDatesGregorian[i][6],
+            reason: 'jd=${testDatesGregorian[i][0]} seconds');
+        expect(gd.getMilliseconds(), testDatesGregorian[i][7],
+            reason: 'jd=${testDatesGregorian[i][0]} milliseconds');
+        expect(gd.getDayOfWeek(), testDatesGregorian[i][8],
+            reason: 'jd=${testDatesGregorian[i][0]} dayOfWeek');
+      }
+    });
+    test('testGregDateGetJulianDay', () {
+      for (int i = 0; i < testDatesGregorian.length; i++) {
+        final GregorianDate gd = GregorianDate(
+            year: testDatesGregorian[i][1] as int,
+            month: testDatesGregorian[i][2] as int,
+            day: testDatesGregorian[i][3] as int,
+            hour: testDatesGregorian[i][4] as int,
+            minute: testDatesGregorian[i][5] as int,
+            second: testDatesGregorian[i][6] as int,
+            millisecond: testDatesGregorian[i][7] as int);
+        expect(gd.getJulianDay(), testDatesGregorian[i][0],
+            reason: 'index=$i');
+        expect(gd.getDayOfWeek(), testDatesGregorian[i][8],
+            reason: 'index=$i dayOfWeek');
+      }
+    });
+  });
+
+  group('GregorianDate getTimeZone by locale', () {
+    setUpAll(() async {
+      await ILibLoader.instance.loadILibLocaleData('de-DE');
+    });
+
+    test('testGregDateGetTimeZoneByLocale', () {
+      final GregorianDate gd =
+          GregorianDate(year: 2011, month: 3, day: 8, locale: 'de-DE');
+      expect(gd.timezone, 'Europe/Berlin');
+    });
+    test('testGregDateGetTimeZoneByLocaleBogus', () {
+      final GregorianDate gd =
+          GregorianDate(year: 2011, month: 3, day: 8, locale: 'zz-ZZ');
+      expect(gd.timezone, 'Etc/UTC');
     });
   });
 

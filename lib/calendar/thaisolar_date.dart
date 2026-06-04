@@ -1,3 +1,4 @@
+import '../ilib_localeinfo.dart';
 import 'greg_rata_die.dart';
 import 'gregorian_cal.dart';
 import 'ilib_date.dart';
@@ -16,21 +17,32 @@ class ThaiSolarDate extends ILibCalendarDate {
       double? julianDay,
       double? rd,
       int? unixtime,
+      String? locale,
       String? timezone}) {
-    _timezone = timezone;
-    _rataDie = ThaiSolarRataDie(
-      year: year,
-      month: month,
-      day: day,
-      hour: hour,
-      minute: minute,
-      second: second,
-      millisecond: millisecond,
-      julianDay: julianDay,
-      rataDie: rd,
-      unixtime: unixtime,
-    );
-    _calcDateComponents();
+    _timezone =
+        timezone ?? (locale != null ? ILibLocaleInfo(locale).getTimeZone() : null);
+    final bool fromComponents = julianDay == null && rd == null && unixtime == null &&
+        ILibRataDie.hasDateComponents(year: year, month: month, day: day,
+            hour: hour, minute: minute, second: second, millisecond: millisecond);
+    if (fromComponents) {
+      _year = year ?? 0;
+      _month = month ?? 1;
+      _day = day ?? 1;
+      _hour = hour ?? 0;
+      _minute = minute ?? 0;
+      _second = second ?? 0;
+      _millisecond = millisecond ?? 0;
+      _rataDie = ThaiSolarRataDie(
+          year: year, month: month, day: day, hour: hour,
+          minute: minute, second: second, millisecond: millisecond);
+      final double adjustedGregRd = adjustRdForTimezone(
+          _rataDie.getRataDie() - 198327);
+      _rataDie = ThaiSolarRataDie(rataDie: adjustedGregRd + 198327);
+    } else {
+      _rataDie = ThaiSolarRataDie(
+          julianDay: julianDay, rataDie: rd, unixtime: unixtime);
+      _calcDateComponents();
+    }
   }
 
   static final GregorianCal _cal = GregorianCal();
@@ -52,8 +64,14 @@ class ThaiSolarDate extends ILibCalendarDate {
   late int _millisecond;
 
   void _calcDateComponents() {
-    final GregRataDie greg = _rataDie.getGregRataDie();
-    final double rd = greg.getRataDie();
+    _decomposeRd(_rataDie.getGregRataDie().getRataDie());
+    calcTimezoneOffset();
+    if (tzOffsetDays != 0) {
+      _decomposeRd(getWallClockRd() - 198327);
+    }
+  }
+
+  void _decomposeRd(double rd) {
     final int gregYear = GregRataDie.calcYear(rd);
     _year = gregYear + 543;
 

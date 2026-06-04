@@ -1,3 +1,4 @@
+import '../ilib_localeinfo.dart';
 import 'calendar_utils.dart';
 import 'ilib_date.dart';
 import 'julian_cal.dart';
@@ -16,21 +17,30 @@ class JulianDate extends ILibCalendarDate {
       double? julianDay,
       double? rd,
       int? unixtime,
+      String? locale,
       String? timezone}) {
-    _timezone = timezone;
-    _rataDie = JulianRataDie(
-      year: year,
-      month: month,
-      day: day,
-      hour: hour,
-      minute: minute,
-      second: second,
-      millisecond: millisecond,
-      julianDay: julianDay,
-      rataDie: rd,
-      unixtime: unixtime,
-    );
-    _calcDateComponents();
+    _timezone =
+        timezone ?? (locale != null ? ILibLocaleInfo(locale).getTimeZone() : null);
+    final bool fromComponents = julianDay == null && rd == null && unixtime == null &&
+        ILibRataDie.hasDateComponents(year: year, month: month, day: day,
+            hour: hour, minute: minute, second: second, millisecond: millisecond);
+    if (fromComponents) {
+      _year = year ?? 0;
+      _month = month ?? 1;
+      _day = day ?? 1;
+      _hour = hour ?? 0;
+      _minute = minute ?? 0;
+      _second = second ?? 0;
+      _millisecond = millisecond ?? 0;
+      _rataDie = JulianRataDie(
+          year: year, month: month, day: day, hour: hour,
+          minute: minute, second: second, millisecond: millisecond);
+      _rataDie = JulianRataDie(rataDie: adjustRdForTimezone(_rataDie.getRataDie()));
+    } else {
+      _rataDie = JulianRataDie(
+          julianDay: julianDay, rataDie: rd, unixtime: unixtime);
+      _calcDateComponents();
+    }
   }
 
   static final JulianCal _cal = JulianCal();
@@ -52,7 +62,18 @@ class JulianDate extends ILibCalendarDate {
   late int _millisecond;
 
   void _calcDateComponents() {
-    final double rd = _rataDie.getRataDie();
+    _decomposeRd(_rataDie.getRataDie());
+  }
+
+  void _calcDateComponentsOLD() {
+    _decomposeRd(_rataDie.getRataDie());
+    calcTimezoneOffset();
+    if (tzOffsetDays != 0) {
+      _decomposeRd(getWallClockRd());
+    }
+  }
+
+  void _decomposeRd(double rd) {
     _year = JulianRataDie.calcYear(rd);
 
     final int rdFloor = rd.floor();

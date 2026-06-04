@@ -20,16 +20,15 @@ class HebrewRataDie implements ILibRataDie {
       _rd = julianDay - epoch;
     } else if (unixtime != null) {
       _rd = ILibRataDie.unixTimeToRd(unixtime) + 1721424.5 - epoch;
-    } else {
+    } else if (ILibRataDie.hasDateComponents(
+        year: year, month: month, day: day, hour: hour,
+        minute: minute, second: second, millisecond: millisecond)) {
       _rd = _dateToRd(
-        year ?? 1,
-        month ?? 7,
-        day ?? 1,
-        hour ?? 0,
-        minute ?? 0,
-        second ?? 0,
-        millisecond ?? 0,
+        year ?? 1, month ?? 7, day ?? 1,
+        hour ?? 0, minute ?? 0, second ?? 0, millisecond ?? 0,
       );
+    } else {
+      _rd = ILibRataDie.nowToRd(epoch);
     }
   }
 

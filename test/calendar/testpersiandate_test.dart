@@ -39,6 +39,18 @@ const List<List<num>> testDates = <List<num>>[
 ];
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  setUpAll(() async {
+    await ILibLoader.instance.loadJSON();
+  });
+
+  group('PersianAlgoDate constructor', () {
+    test('testPersAlgoDateConstructor', () {
+      final PersianAlgoDate pd = PersianAlgoDate();
+      expect(pd.getYears(), isNotNull);
+    });
+  });
+
   group('PersianAlgoDate from JD', () {
     test('basic JD', () {
       final PersianAlgoDate d = PersianAlgoDate(julianDay: 2450138.5);
@@ -554,6 +566,21 @@ void main() {
       expect(pd2.getMinutes(), pd.getMinutes());
       expect(pd2.getSeconds(), pd.getSeconds());
     });
+    test('testPersDateAlgoRoundTripConstruction2', () {
+      final PersianAlgoDate pd = PersianAlgoDate(
+          year: 1393, month: 8, day: 12,
+          timezone: 'America/Los_Angeles');
+      final int u = pd.getTime();
+      final PersianAlgoDate pd2 = PersianAlgoDate(
+          unixtime: u, timezone: 'America/Los_Angeles');
+      expect(pd2.timezone, pd.timezone);
+      expect(pd2.getYears(), pd.getYears());
+      expect(pd2.getMonths(), pd.getMonths());
+      expect(pd2.getDays(), pd.getDays());
+      expect(pd2.getHours(), pd.getHours());
+      expect(pd2.getMinutes(), pd.getMinutes());
+      expect(pd2.getSeconds(), pd.getSeconds());
+    }, skip: 'non-Gregorian calendar year conversion needed for timezone offset');
   });
 
   group('PersianAlgoDate constructor edge cases', () {

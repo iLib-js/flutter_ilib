@@ -1,3 +1,4 @@
+import '../ilib_localeinfo.dart';
 import 'ilib_date.dart';
 import 'persian_rata_die.dart';
 import 'rata_die.dart';
@@ -14,21 +15,30 @@ class PersianDate extends ILibCalendarDate {
       double? julianDay,
       double? rd,
       int? unixtime,
+      String? locale,
       String? timezone}) {
-    _timezone = timezone;
-    _rataDie = PersianRataDie(
-      year: year,
-      month: month,
-      day: day,
-      hour: hour,
-      minute: minute,
-      second: second,
-      millisecond: millisecond,
-      julianDay: julianDay,
-      rataDie: rd,
-      unixtime: unixtime,
-    );
-    _calcDateComponents();
+    _timezone =
+        timezone ?? (locale != null ? ILibLocaleInfo(locale).getTimeZone() : null);
+    final bool fromComponents = julianDay == null && rd == null && unixtime == null &&
+        ILibRataDie.hasDateComponents(year: year, month: month, day: day,
+            hour: hour, minute: minute, second: second, millisecond: millisecond);
+    if (fromComponents) {
+      _year = year ?? 0;
+      _month = month ?? 1;
+      _day = day ?? 1;
+      _hour = hour ?? 0;
+      _minute = minute ?? 0;
+      _second = second ?? 0;
+      _millisecond = millisecond ?? 0;
+      _rataDie = PersianRataDie(
+          year: year, month: month, day: day, hour: hour,
+          minute: minute, second: second, millisecond: millisecond);
+      _rataDie = PersianRataDie(rataDie: adjustRdForTimezone(_rataDie.getRataDie()));
+    } else {
+      _rataDie = PersianRataDie(
+          julianDay: julianDay, rataDie: rd, unixtime: unixtime);
+      _calcDateComponents();
+    }
   }
 
   late PersianRataDie _rataDie;
@@ -42,17 +52,23 @@ class PersianDate extends ILibCalendarDate {
   late int _millisecond;
 
   void _calcDateComponents() {
-    final double rd = _rataDie.getRataDie();
+    _decomposeRd(_rataDie.getRataDie());
+  }
+
+  void _calcDateComponentsOLD() {
+    _decomposeRd(_rataDie.getRataDie());
+    calcTimezoneOffset();
+    if (tzOffsetDays != 0) {
+      _decomposeRd(getWallClockRd());
+    }
+  }
+
+  void _decomposeRd(double rd) {
     _year = PersianRataDie.calcYear(rd);
 
     final PersianRataDie yearStart = PersianRataDie(
-      year: _year,
-      month: 1,
-      day: 1,
-      hour: 0,
-      minute: 0,
-      second: 0,
-      millisecond: 0,
+      year: _year, month: 1, day: 1,
+      hour: 0, minute: 0, second: 0, millisecond: 0,
     );
     final int dayOfYear = (rd - yearStart.getRataDie()).floor() + 1;
 

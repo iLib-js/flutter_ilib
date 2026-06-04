@@ -39,6 +39,18 @@ const List<List<num>> testDates = <List<num>>[
 ];
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  setUpAll(() async {
+    await ILibLoader.instance.loadJSON();
+  });
+
+  group('ThaiSolarDate constructor', () {
+    test('testThaiSolarDateConstructor', () {
+      final ThaiSolarDate td = ThaiSolarDate();
+      expect(td.getYears(), isNotNull);
+    });
+  });
+
   group('ThaiSolarDate from JD', () {
     test('basic JD', () {
       final ThaiSolarDate d = ThaiSolarDate(julianDay: 2450138.5);
@@ -502,6 +514,30 @@ void main() {
       expect(td2.getMinutes(), td.getMinutes());
       expect(td2.getSeconds(), td.getSeconds());
     });
+    test('testThaiSolarDateRoundTripConstruction2', () {
+      final ThaiSolarDate td = ThaiSolarDate(
+          year: 2557, month: 11, day: 3,
+          timezone: 'America/Los_Angeles');
+      final int u = td.getTime();
+      final ThaiSolarDate td2 = ThaiSolarDate(
+          unixtime: u, timezone: 'America/Los_Angeles');
+      expect(td2.timezone, td.timezone);
+      expect(td2.getYears(), td.getYears());
+      expect(td2.getMonths(), td.getMonths());
+      expect(td2.getDays(), td.getDays());
+      expect(td2.getHours(), td.getHours());
+      expect(td2.getMinutes(), td.getMinutes());
+      expect(td2.getSeconds(), td.getSeconds());
+    });
+  });
+
+  group('ThaiSolarDate current time', () {
+    test('testThaiSolarDateCurrentTimeWithTimeZone', () {
+      final ThaiSolarDate td =
+          ThaiSolarDate(timezone: 'America/Los_Angeles');
+      final int now = DateTime.now().millisecondsSinceEpoch;
+      expect((td.getTime() - now).abs(), lessThan(50));
+    });
   });
 
   group('ThaiSolarDate constructor from RD', () {
@@ -831,6 +867,23 @@ void main() {
     test('testThaiSolarDateGetTimeZoneDefault', () {
       final ThaiSolarDate td = ThaiSolarDate(year: 2554, month: 3, day: 8);
       expect(td.timezone, 'local');
+    });
+  });
+
+  group('ThaiSolarDate getTimeZone by locale', () {
+    setUpAll(() async {
+      await ILibLoader.instance.loadILibLocaleData('de-DE');
+    });
+
+    test('testThaiSolarDateGetTimeZoneByLocale', () {
+      final ThaiSolarDate td =
+          ThaiSolarDate(year: 2554, month: 3, day: 8, locale: 'de-DE');
+      expect(td.timezone, 'Europe/Berlin');
+    });
+    test('testThaiSolarDateGetTimeZoneByLocaleBogus', () {
+      final ThaiSolarDate td =
+          ThaiSolarDate(year: 2554, month: 3, day: 8, locale: 'zz-ZZ');
+      expect(td.timezone, 'Etc/UTC');
     });
   });
 }

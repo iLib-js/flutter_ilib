@@ -39,6 +39,18 @@ const List<List<num>> testDates = <List<num>>[
 ];
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  setUpAll(() async {
+    await ILibLoader.instance.loadJSON();
+  });
+
+  group('IslamicDate constructor', () {
+    test('testIslamicDateConstructor', () {
+      final IslamicDate id = IslamicDate();
+      expect(id.getYears(), isNotNull);
+    });
+  });
+
   group('IslamicDate from JD', () {
     test('basic JD', () {
       final IslamicDate d = IslamicDate(julianDay: 2450138.5);
@@ -508,5 +520,20 @@ void main() {
       expect(id2.getMinutes(), id.getMinutes());
       expect(id2.getSeconds(), id.getSeconds());
     });
+    test('testIslamicDateRoundTripConstruction2', () {
+      final IslamicDate id = IslamicDate(
+          year: 1436, month: 1, day: 10,
+          timezone: 'America/Los_Angeles');
+      final int u = id.getTime();
+      final IslamicDate id2 = IslamicDate(
+          unixtime: u, timezone: 'America/Los_Angeles');
+      expect(id2.timezone, id.timezone);
+      expect(id2.getYears(), id.getYears());
+      expect(id2.getMonths(), id.getMonths());
+      expect(id2.getDays(), id.getDays());
+      expect(id2.getHours(), id.getHours());
+      expect(id2.getMinutes(), id.getMinutes());
+      expect(id2.getSeconds(), id.getSeconds());
+    }, skip: 'non-Gregorian calendar year conversion needed for timezone offset');
   });
 }

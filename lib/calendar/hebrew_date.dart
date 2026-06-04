@@ -1,3 +1,4 @@
+import '../ilib_localeinfo.dart';
 import 'hebrew_cal.dart';
 import 'hebrew_rata_die.dart';
 import 'ilib_date.dart';
@@ -15,21 +16,30 @@ class HebrewDate extends ILibCalendarDate {
       double? julianDay,
       double? rd,
       int? unixtime,
+      String? locale,
       String? timezone}) {
-    _timezone = timezone;
-    _rataDie = HebrewRataDie(
-      year: year,
-      month: month,
-      day: day,
-      hour: hour,
-      minute: minute,
-      second: second,
-      millisecond: millisecond,
-      julianDay: julianDay,
-      rataDie: rd,
-      unixtime: unixtime,
-    );
-    _calcDateComponents();
+    _timezone =
+        timezone ?? (locale != null ? ILibLocaleInfo(locale).getTimeZone() : null);
+    final bool fromComponents = julianDay == null && rd == null && unixtime == null &&
+        ILibRataDie.hasDateComponents(year: year, month: month, day: day,
+            hour: hour, minute: minute, second: second, millisecond: millisecond);
+    if (fromComponents) {
+      _year = year ?? 0;
+      _month = month ?? 7;
+      _day = day ?? 1;
+      _hour = hour ?? 0;
+      _minute = minute ?? 0;
+      _second = second ?? 0;
+      _millisecond = millisecond ?? 0;
+      _rataDie = HebrewRataDie(
+          year: year, month: month, day: day, hour: hour,
+          minute: minute, second: second, millisecond: millisecond);
+      _rataDie = HebrewRataDie(rataDie: adjustRdForTimezone(_rataDie.getRataDie()));
+    } else {
+      _rataDie = HebrewRataDie(
+          julianDay: julianDay, rataDie: rd, unixtime: unixtime);
+      _calcDateComponents();
+    }
   }
 
   static final HebrewCal _cal = HebrewCal();
@@ -45,7 +55,18 @@ class HebrewDate extends ILibCalendarDate {
   late int _millisecond;
 
   void _calcDateComponents() {
-    final double rd = _rataDie.getRataDie();
+    _decomposeRd(_rataDie.getRataDie());
+  }
+
+  void _calcDateComponentsOLD() {
+    _decomposeRd(_rataDie.getRataDie());
+    calcTimezoneOffset();
+    if (tzOffsetDays != 0) {
+      _decomposeRd(getWallClockRd());
+    }
+  }
+
+  void _decomposeRd(double rd) {
     _year = HebrewRataDie.calcYear(rd);
 
     final int newYearRd = HebrewCal.newYear(_year);

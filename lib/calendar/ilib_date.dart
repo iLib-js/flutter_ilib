@@ -1,4 +1,5 @@
 import '../ilib_date_accessor.dart';
+import '../ilib_timezone.dart';
 import 'rata_die.dart';
 
 abstract class ILibCalendarDate implements ILibDate {
@@ -40,6 +41,29 @@ abstract class ILibCalendarDate implements ILibDate {
 
   @override
   int getEra() => (getYears() < 1) ? -1 : 1;
+
+  double tzOffsetDays = 0;
+
+  double adjustRdForTimezone(double rd) {
+    final String? tz = timezone;
+    if (tz == null || tz == 'local') {
+      return rd;
+    }
+    final ILibTimeZone tzObj = ILibTimeZone(tz);
+    tzOffsetDays = tzObj.getOffsetMinutes(this) / 1440.0;
+    return rd - tzOffsetDays;
+  }
+
+  double getWallClockRd() => getRataDie() + tzOffsetDays;
+
+  void calcTimezoneOffset() {
+    final String? tz = timezone;
+    if (tz == null || tz == 'local') {
+      return;
+    }
+    final ILibTimeZone tzObj = ILibTimeZone(tz);
+    tzOffsetDays = tzObj.getOffsetMinutes(this) / 1440.0;
+  }
 
   int getTime() {
     final double jd = getJulianDay();

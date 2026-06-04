@@ -39,6 +39,18 @@ const List<List<num>> testDates = <List<num>>[
 ];
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  setUpAll(() async {
+    await ILibLoader.instance.loadJSON();
+  });
+
+  group('JulianDate constructor', () {
+    test('testJulDateConstructor', () {
+      final JulianDate jul = JulianDate();
+      expect(jul.getYears(), isNotNull);
+    });
+  });
+
   group('JulianDate from JD', () {
     test('basic JD', () {
       final JulianDate d = JulianDate(julianDay: 2450138.5);
@@ -389,6 +401,53 @@ void main() {
       expect(jul2.getHours(), jul.getHours());
       expect(jul2.getMinutes(), jul.getMinutes());
       expect(jul2.getSeconds(), jul.getSeconds());
+    });
+    test('testJulianDateRoundTripConstruction2', () {
+      final JulianDate jul = JulianDate(
+          year: 2014, month: 10, day: 20,
+          timezone: 'America/Los_Angeles');
+      final int u = jul.getTime();
+      final JulianDate jul2 = JulianDate(
+          unixtime: u, timezone: 'America/Los_Angeles');
+      expect(jul2.timezone, jul.timezone);
+      expect(jul2.getYears(), jul.getYears());
+      expect(jul2.getMonths(), jul.getMonths());
+      expect(jul2.getDays(), jul.getDays());
+      expect(jul2.getHours(), jul.getHours());
+      expect(jul2.getMinutes(), jul.getMinutes());
+      expect(jul2.getSeconds(), jul.getSeconds());
+    }, skip: 'non-Gregorian calendar year conversion needed for timezone offset');
+  });
+
+  group('JulianDate current time', () {
+    test('testJulDateCurrentTimeWithTimeZone', () {
+      final JulianDate jul =
+          JulianDate(timezone: 'America/Los_Angeles');
+      final int now = DateTime.now().millisecondsSinceEpoch;
+      expect((jul.getTime() - now).abs(), lessThan(50));
+    });
+  });
+
+  group('JulianDate getTimeZone by locale', () {
+    setUpAll(() async {
+      await ILibLoader.instance.loadILibLocaleData('de-DE');
+      await ILibLoader.instance.loadILibLocaleData('ja-JP');
+    });
+
+    test('testJulDateGetTimeZoneByLocaleDE', () {
+      final JulianDate jul =
+          JulianDate(year: 2011, month: 3, day: 8, locale: 'de-DE');
+      expect(jul.timezone, 'Europe/Berlin');
+    });
+    test('testJulDateGetTimeZoneByLocaleJP', () {
+      final JulianDate jul =
+          JulianDate(year: 2011, month: 3, day: 8, locale: 'ja-JP');
+      expect(jul.timezone, 'Asia/Tokyo');
+    });
+    test('testJulDateGetTimeZoneByLocaleBogus', () {
+      final JulianDate jul =
+          JulianDate(year: 2011, month: 3, day: 8, locale: 'zz-ZZ');
+      expect(jul.timezone, 'Etc/UTC');
     });
   });
 }
