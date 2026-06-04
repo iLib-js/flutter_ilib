@@ -108,10 +108,11 @@ Change setUpAll from `ILibJS` to `ILibLoader`:
 ```dart
 setUpAll(() async {
   await ILibLoader.instance.loadJSON();
-  ILibLoader.instance.initILib();
   await ILibLoader.instance.loadILibLocaleData('en-US');
 });
 ```
+Note: `initILib()` is called internally by `loadJSON()` — no separate call needed.
+Pure calculation classes (Calendar, RataDie) can be tested without locale loading.
 
 ### Step 5: Verify
 ```bash
@@ -149,7 +150,8 @@ lib/
 ├── ilib_init.dart              # ILibLoader
 ├── ilib_locale.dart            # BCP-47 locale
 ├── ilib_localeinfo.dart        # locale metadata
-├── ilib_date.dart              # date options/calculation
+├── ilib_date.dart              # ILibDateOptions (date options/calculation)
+├── ilib_date_accessor.dart     # ILibDate interface (year/month/day accessors)
 ├── ilib_datefmt.dart           # date formatting engine
 ├── ilib_timezone.dart          # timezone/DST
 ├── ilib_calendar.dart          # Calendar factory + abstract base
@@ -158,20 +160,21 @@ lib/
 ├── ilib_durationfmt.dart       # [unconverted] duration format
 ├── ilib_numfmt.dart            # [unconverted] number format
 ├── ilib_scriptinfo.dart        # [unconverted] script info
-├── calendar/                   # individual calendar implementations
-│   ├── calendar_utils.dart     # mod() helper
+├── calendar/
+│   ├── rata_die.dart           # ILibRataDie abstract base (shared static methods)
+│   ├── ilib_date.dart          # ILibCalendarDate abstract base
+│   ├── calendar_utils.dart     # mod(), floorDiv() helpers
 │   ├── ilib_astro.dart         # astronomical calculation utility
-│   ├── gregorian_cal.dart
-│   ├── thaisolar_cal.dart
-│   ├── julian_cal.dart
-│   ├── islamic_cal.dart
-│   ├── persian_algo_cal.dart   # Algorithmic (2820-year cycle)
-│   ├── persian_cal.dart        # Astronomical (equinox-based)
-│   ├── persian_date.dart       # Astronomical Persian date
-│   ├── persian_rata_die.dart   # Astronomical Persian RD
-│   ├── ethiopic_cal.dart
-│   ├── coptic_cal.dart
-│   └── hebrew_cal.dart
+│   ├── julian_day.dart         # Julian Day helper
+│   ├── gregorian_cal.dart      # + gregorian_date.dart + greg_rata_die.dart
+│   ├── thaisolar_cal.dart      # + thaisolar_date.dart + thaisolar_rata_die.dart
+│   ├── julian_cal.dart         # + julian_date.dart + julian_rata_die.dart
+│   ├── islamic_cal.dart        # + islamic_date.dart + islamic_rata_die.dart
+│   ├── hebrew_cal.dart         # + hebrew_date.dart + hebrew_rata_die.dart
+│   ├── ethiopic_cal.dart       # + ethiopic_date.dart + ethiopic_rata_die.dart
+│   ├── coptic_cal.dart         # + coptic_date.dart + coptic_rata_die.dart
+│   ├── persian_cal.dart        # + persian_date.dart + persian_rata_die.dart (astronomical)
+│   └── persian_algo_cal.dart   # + persian_algo_date.dart + persian_algo_rata_die.dart (algorithmic)
 └── internal/
     ├── ilib_utils.dart         # getLocale(), getJSONDataPaths(), etc.
     └── logger/
@@ -209,6 +212,26 @@ Used as a common intermediate representation for converting between calendar sys
 - Cross-calendar conversion: Date → RD → Julian Day → target calendar's RD → Date
 - `getDayOfWeek()` is computed from RD (`rd % 7`)
 - Julian Day = RD + calendar-specific epoch offset
+
+### Base Class: `ILibRataDie` (`lib/calendar/rata_die.dart`)
+Common logic for all 9 RataDie subclasses lives in the base class.
+When adding new shared logic, add a static method to `ILibRataDie` instead of duplicating across subclasses.
+
+Shared static methods:
+- `unixTimeToRd(millis)` — convert Unix timestamp to Gregorian RD
+- `nowToRd(epoch)` — convert `DateTime.now()` to calendar-specific RD
+- `hasDateComponents(...)` — check if any date parameter is non-null
+- `timeToRd(h, m, s, ms)` — convert time components to fractional RD
+- `dayOfWeekFromRd(rd, offset)` — compute day of week from RD
+
+### Calendar Date Class Common Pattern
+All 9 calendar date classes (`lib/calendar/*_date.dart`) follow the same constructor pattern:
+- Parameters: `year?, month?, day?, hour?, minute?, second?, millisecond?, julianDay?, rd?, unixtime?, locale?, timezone?`
+- `locale` derives timezone via `ILibLocaleInfo(locale).getTimeZone()` (explicit `timezone` takes precedence)
+- No-arg construction uses `DateTime.now()` as fallback (matches JS `RataDie.js:109-112`)
+
+**Principle**: When the same change applies to all 9 classes, add a shared method to the base
+(`ILibRataDie` or `ILibCalendarDate`) and call it from subclasses — do not duplicate.
 
 ## Calendar Type Mapping
 
@@ -285,6 +308,13 @@ the JS `DateFmt.format()` logic (DateFmt.js:1537-1566):
    when created from raw components. This is by design — the workaround is to
    not create `ILibCalendarDate` from raw user input when formatting.
 
+6. **No-arg construction uses current time**:
+   `CopticDate()` (no parameters) creates a date for `DateTime.now()`, not
+   year=1/month=1/day=1. This matches JS `RataDie.js:109-112`. The fallback
+   triggers only when ALL parameters (year, month, day, hour, minute, second,
+   millisecond, julianDay, rd, unixtime) are null. If any single date component
+   is provided, the others default to their calendar-specific defaults (usually 1/1/1).
+
 ## Detailed Documentation
 
 For in-depth explanations, see `docs/`:
@@ -296,17 +326,33 @@ For in-depth explanations, see `docs/`:
 
 ## Deferred Work
 - **Han Calendar**: needs lunar calculations (`_lunarLongitude`, `_newMoonTime`, etc.). Planned as extension to `ILibAstro`.
+- **Timezone RD adjustment — non-Gregorian calendar year issue**:
+  Calendar date classes now store UTC-adjusted RD (matching JS `_init()` / `_calcDateComponents()`).
+  `GregorianDate` works correctly. Non-Gregorian calendars (Coptic, Ethiopic, Islamic, Hebrew, etc.)
+  have a bug: `ILibTimeZone.inDaylightTime()` interprets `date.year` as Gregorian year, but receives
+  calendar-specific year (e.g., Coptic 1738 instead of Gregorian ~2022). This causes wrong DST offset.
+  **Fix required**: convert calendar year → Gregorian year before calling timezone offset calculation.
+  Affects: `adjustRdForTimezone()` in fromComponents path, `calcTimezoneOffset()` in else path.
+  GregorianDate and ThaiSolarDate (year - 543 = Gregorian) are not affected.
+  Related JS code: `GregorianDate._calcDateComponents()` lines 350-367.
+  Related tests: `testXxxDateRoundTripConstruction2` with timezone, `testXxxDateGetTimeCalifornia`.
 
 ## Running Tests
 ```bash
-# Specific test file
-flutter test test/calendar/calendar_test.dart
+# All calendar tests
+flutter test test/calendar/
+
+# All timezone tests
+flutter test test/timezone/
 
 # Basic test suite
 flutter test test/basic/
 
 # All datefmt tests
 flutter test test/datefmt/
+
+# Specific test file
+flutter test test/calendar/testcopticdate_test.dart
 
 # Static analysis
 flutter analyze

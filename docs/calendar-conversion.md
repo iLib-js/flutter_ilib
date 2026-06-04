@@ -79,21 +79,32 @@ this.day = parseInt(params.day, 10) || 1;
 // _calcDateComponents() is NOT called when components are provided
 ```
 
-In Dart, `GregorianDate` always normalizes:
+In Dart, `GregorianDate` now follows the same pattern (JS-identical):
 
 ```dart
-// Dart: always normalizes
+// Dart: fromComponents path preserves raw values (matches JS)
 GregorianDate({int? year, int? month, int? day, ...}) {
-    _rataDie = GregRataDie(year: year, month: month, day: day, ...);
-    _calcDateComponents(); // always called — normalizes invalid dates
+    if (fromComponents) {
+        _year = year ?? 0;  // raw values stored directly
+        _month = month ?? 1;
+        _day = day ?? 1;
+        // ...
+        _rataDie = GregRataDie(year: year, ...);
+        _rataDie = GregRataDie(rataDie: adjustRdForTimezone(...)); // UTC RD
+        // _calcDateComponents() NOT called — raw components preserved
+    } else {
+        _rataDie = GregRataDie(julianDay/rd/unixtime);
+        _calcDateComponents(); // decomposes UTC RD → wall-clock components
+    }
 }
 ```
 
-This means:
-- JS: `GregorianDate(2011, 2, 29)` → keeps `month=2, day=29` (Feb 29, 2011 doesn't exist)
-- Dart: `GregorianDate(year: 2011, month: 2, day: 29)` → normalizes to `month=3, day=1`
+This means both JS and Dart now preserve raw components for `fromComponents` path.
+However, when used via `ILibDateFmt.format()`, `ILibDateOptions` is still returned as-is
+for same-calendar formatting to avoid any normalization edge cases.
 
-**Therefore, when calendars match, we must return `ILibDateOptions` as-is to preserve raw values.**
+**Note**: The `_calcDateComponents()` path (unixtime/jd/rd) decomposes UTC RD into
+wall-clock components by adding back the timezone offset (`calcTimezoneOffset()`).
 
 ### Day-of-Week Problem and Solution
 

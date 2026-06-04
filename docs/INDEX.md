@@ -82,6 +82,10 @@ If you're an AI agent (Claude, Copilot, etc.), follow this sequence:
 | [api.md](./api.md) | Complete API reference | Developers, AI | ~400 lines |
 | [development.md](./development.md) | Setup, testing, contribution | Developers | ~500 lines |
 | [calendar-conversion.md](./calendar-conversion.md) | Calendar conversion logic in DateFmt | Developers, AI | ~180 lines |
+| [date-calendar-architecture.md](./date-calendar-architecture.md) | Date & calendar system layers, constructor pattern | Developers, AI | ~200 lines |
+| [datefmt-conversion-plan.md](./datefmt-conversion-plan.md) | DateFmt implementation details (tokens, templates, DST) | Developers, AI | ~200 lines |
+| [conversion-guide.md](./conversion-guide.md) | General JS→Dart conversion checklist | Developers | ~150 lines |
+| [test-mapping.md](./test-mapping.md) | JS→Dart test file mapping, not-converted patterns | Developers, AI | ~250 lines |
 
 ### External Documentation
 
