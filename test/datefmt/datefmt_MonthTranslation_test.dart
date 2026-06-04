@@ -10,7 +10,6 @@ void main() {
   setUpAll(() async {
     final ILibLoader ilibjsinstance = ILibLoader.instance;
     await ilibjsinstance.loadJSON();
-    ilibjsinstance.initILib();
     await ilibjsinstance.loadILibLocaleDataAll();
   });
   group('testMonthTranslate_ar_EG', () {

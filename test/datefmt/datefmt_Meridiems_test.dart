@@ -12,7 +12,6 @@ void main() {
     testPlatform = getTestPlatform();
     final ILibLoader ilibjsinstance = ILibLoader.instance;
     await ilibjsinstance.loadJSON();
-    ilibjsinstance.initILib();
     await ilibjsinstance.loadILibLocaleDataAll();
   });
   group('getMeridiems()', () {
