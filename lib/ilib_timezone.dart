@@ -13,7 +13,12 @@ class ILibTimeZone {
     } else if (entry is Map<String, dynamic>) {
       _zone = entry;
     } else {
+      // Unknown zone id: fall back to Etc/UTC, including its id (mirrors JS TimeZone,
+      // where getId() returns "Etc/UTC" for an unrecognized zone). 'local' is preserved.
       _zone = allZoneData['Etc/UTC'] as Map<String, dynamic>?;
+      if (_id != 'local') {
+        _id = 'Etc/UTC';
+      }
     }
     if (_zone != null) {
       _offset = _parseOffset(_zone!['o'] as String? ?? '0:0');
@@ -67,7 +72,7 @@ class ILibTimeZone {
     return <String>[];
   }
 
-  final String _id;
+  String _id;
   Map<String, dynamic>? _zone;
   double _offset = 0;
   double _dstSavings = 60;
@@ -104,7 +109,7 @@ class ILibTimeZone {
 
   int getRawOffsetMillis() => (_offset * 60000).round();
 
-  String getDisplayName(ILibDate date, String style) {
+  String getDisplayName(ILibDate date, [String style = '']) {
     if (_zone == null) {
       return _formatRfc822(_offset);
     }
@@ -180,6 +185,14 @@ class ILibTimeZone {
       // then the offset.
       startRd -= _offset / 1440;
       endRd -= (_offset + _dstSavings) / 1440;
+    }
+
+    // Magic overlap hour at the end of DST: the same local wall time occurs twice.
+    // When the date carries an explicit dst flag and falls in that window, trust it
+    // (mirrors JS inDaylightTime).
+    final bool? dst = date.dst;
+    if (dst != null && rd < endRd && endRd - rd <= _dstSavings / 1440) {
+      return dst;
     }
 
     if (startRd < endRd) {

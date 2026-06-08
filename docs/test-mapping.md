@@ -148,7 +148,7 @@ These were extracted from the single monolithic `js/test/testdatefmt.js` file, s
 
 | Dart Test File | iLib JS Source File | Notes |
 |---|---|---|
-| `test/timezone/timezone_test.dart` | `js/test/testtimezone.js` | ILibTimeZone |
+| `test/timezone/timezone_test.dart` | `js/test/calendar/testtimezone.js` | ILibTimeZone |
 | `test/timezone/timezone_extra_test.dart` | — | flutter_ilib-specific (additional timezone tests) |
 
 ## Basic Tests (flutter_ilib-specific)

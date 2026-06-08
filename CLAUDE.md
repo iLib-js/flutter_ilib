@@ -365,6 +365,15 @@ carry the timezone it should be interpreted in (matching the JS tests, which bui
 `GregorianDate({timezone: ..., ...})`). The `testTZInDaylightTime*` / `testTZGetOffset*` DST-boundary
 tests therefore set `timezone:` on their `ILibDateOptions`.
 
+4. **DST overlap disambiguation (`dst` flag)**: at the end of DST the same local wall time occurs
+   twice (e.g. 2014-11-02 01:30 in LA is both 08:30 UTC in PDT and 09:30 UTC in PST). `ILibDate`
+   carries an optional `bool? dst` (on the interface, `ILibCalendarDate`, and `ILibDateOptions`,
+   threaded through every calendar date constructor and `_toCalendarDate()`). `inDaylightTime()` has
+   the JS magic-overlap rule — `if (dst != null && rd < endRd && endRd - rd <= dstSavings/1440)
+   return dst;` — so the flag both selects the right offset at construction (shifting the stored
+   instant: `dst:true` → 08:30 UTC, `dst:false` → 09:30 UTC) and drives `getDisplayName` (PDT vs PST).
+   The block is gated on `dst != null`, so dates without it are unaffected.
+
 ## Running Tests
 ```bash
 # All calendar tests

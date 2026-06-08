@@ -29,6 +29,9 @@ abstract class ILibCalendarDate implements ILibDate {
   String? get timezone => 'local';
 
   @override
+  bool? dst;
+
+  @override
   double getRataDie();
   @override
   double getJulianDay();

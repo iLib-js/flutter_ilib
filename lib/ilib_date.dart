@@ -39,7 +39,8 @@ class ILibDateOptions implements ILibDate {
       this.timezone,
       this.calendar,
       this.dateTime,
-      this.type});
+      this.type,
+      this.dst});
   String? locale;
   @override
   int? year;
@@ -62,6 +63,8 @@ class ILibDateOptions implements ILibDate {
   String? type;
   String? calendar;
   DateTime? dateTime;
+  @override
+  bool? dst;
 
   ILibCalendarDate _toCalendarDate() {
     final int y = year ?? 1;
@@ -81,39 +84,39 @@ class ILibDateOptions implements ILibDate {
       case 'ethiopic':
         return EthiopicDate(
             year: y, month: m, day: d, hour: h, minute: min, second: sec,
-            millisecond: ms, unixtime: ut, timezone: timezone);
+            millisecond: ms, unixtime: ut, timezone: timezone, dst: dst);
       case 'coptic':
         return CopticDate(
             year: y, month: m, day: d, hour: h, minute: min, second: sec,
-            millisecond: ms, unixtime: ut, timezone: timezone);
+            millisecond: ms, unixtime: ut, timezone: timezone, dst: dst);
       case 'hebrew':
         return HebrewDate(
             year: y, month: m, day: d, hour: h, minute: min, second: sec,
-            millisecond: ms, unixtime: ut, timezone: timezone);
+            millisecond: ms, unixtime: ut, timezone: timezone, dst: dst);
       case 'islamic':
         return IslamicDate(
             year: y, month: m, day: d, hour: h, minute: min, second: sec,
-            millisecond: ms, unixtime: ut, timezone: timezone);
+            millisecond: ms, unixtime: ut, timezone: timezone, dst: dst);
       case 'julian':
         return JulianDate(
             year: y, month: m, day: d, hour: h, minute: min, second: sec,
-            millisecond: ms, unixtime: ut, timezone: timezone);
+            millisecond: ms, unixtime: ut, timezone: timezone, dst: dst);
       case 'persian':
         return PersianDate(
             year: y, month: m, day: d, hour: h, minute: min, second: sec,
-            millisecond: ms, unixtime: ut, timezone: timezone);
+            millisecond: ms, unixtime: ut, timezone: timezone, dst: dst);
       case 'persian-algo':
         return PersianAlgoDate(
             year: y, month: m, day: d, hour: h, minute: min, second: sec,
-            millisecond: ms, unixtime: ut, timezone: timezone);
+            millisecond: ms, unixtime: ut, timezone: timezone, dst: dst);
       case 'thaisolar':
         return ThaiSolarDate(
             year: y, month: m, day: d, hour: h, minute: min, second: sec,
-            millisecond: ms, unixtime: ut, timezone: timezone);
+            millisecond: ms, unixtime: ut, timezone: timezone, dst: dst);
       default:
         return GregorianDate(
             year: y, month: m, day: d, hour: h, minute: min, second: sec,
-            millisecond: ms, unixtime: ut, timezone: timezone);
+            millisecond: ms, unixtime: ut, timezone: timezone, dst: dst);
     }
   }
 

@@ -165,7 +165,7 @@ Matches JS `_init()` / `_init2()` / `_calcDateComponents()` pattern.
 | API | `ILibDateFmt` | Formats dates with locale/timezone/calendar support |
 | API | `ILibTimeZone` | Timezone offset and DST calculation |
 | API | `ILibCalendar` | Abstract factory for calendar rules (leap year, month length) |
-| Date | `ILibCalendarDate` | Abstract base: `getTime()`, `adjustRdForTimezone()`, `getWallClockRd()`, `calcTimezoneOffset()`, `tzOffsetDays` |
+| Date | `ILibCalendarDate` | Abstract base: instant accessors `getRataDie()`, `getJulianDay()`, `getTime()`, `getTimeExtended()`, `getCalendar()` (all on the `ILibDate` interface), `adjustRdForTimezone()`, `getWallClockRd()`, `calcTimezoneOffset()`, `tzOffsetDays`, optional `dst` flag (DST overlap disambiguation) |
 | Date | `GregorianDate`, `IslamicDate`, ... | Concrete: two-path constructor, `_decomposeRd()` |
 | RD | `ILibRataDie` | Abstract base: `nowToRd(epoch)`, `hasDateComponents()`, `unixTimeToRd()` |
 | RD | `GregRataDie`, `IslamicRataDie`, ... | Concrete RD: `DateTime.now()` fallback when no params |

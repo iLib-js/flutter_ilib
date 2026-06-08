@@ -7,6 +7,9 @@ abstract class ILibDate {
   int? get second;
   int? get millisecond;
   String? get timezone;
+  // Optional DST disambiguation for the overlap hour at the end of DST (when the same
+  // local wall time occurs twice). null = unspecified. Mirrors JS IDate.dst.
+  bool? get dst;
   int getDayOfWeek();
   int getWeekOfYear();
   int getDayOfYear();

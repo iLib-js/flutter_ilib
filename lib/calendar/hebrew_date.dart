@@ -17,9 +17,11 @@ class HebrewDate extends ILibCalendarDate {
       double? rd,
       int? unixtime,
       String? locale,
-      String? timezone}) {
+      String? timezone,
+      bool? dst}) {
     _timezone =
         timezone ?? (locale != null ? ILibLocaleInfo(locale).getTimeZone() : null);
+    this.dst = dst;
     final bool fromComponents = julianDay == null && rd == null && unixtime == null &&
         ILibRataDie.hasDateComponents(year: year, month: month, day: day,
             hour: hour, minute: minute, second: second, millisecond: millisecond);
