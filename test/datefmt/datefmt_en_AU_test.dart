@@ -281,7 +281,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '9');
+      expect(fmt.format(dateOptions), 'S');
     });
     test('testDateFmtAUShortDateComponentsN', () {
       final ILibDateFmtOptions fmtOptions =

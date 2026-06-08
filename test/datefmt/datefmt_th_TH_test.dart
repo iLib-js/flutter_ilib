@@ -1047,7 +1047,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), 'พฤ.ที่ 29 กันยายน 2554');
+      expect(fmt.format(dateOptions), 'พฤหัสที่ 29 กันยายน 2554');
     });
     test('testDateFmtFullDMWY_th_TH', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -1181,7 +1181,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), 'พฤ.ที่ 29 กันยายน');
+      expect(fmt.format(dateOptions), 'พฤหัสที่ 29 กันยายน');
     });
     test('testDateFmtFullDMW_th_TH', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -1373,7 +1373,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), 'พฤ.ที่ 29');
+      expect(fmt.format(dateOptions), 'พฤหัสที่ 29');
     });
     test('testDateFmtFullDW_th_TH', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
