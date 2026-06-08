@@ -29,7 +29,7 @@ class ILibJS extends ChangeNotifier {
 
     final String curlocale = getLocale();
     final String dataPath = getJSDataPath(curlocale);
-    if (!fileList.contains(dataPath)) {
+    if (dataPath.isNotEmpty && !fileList.contains(dataPath)) {
       _loadLocaleJSResult = await rootBundle.loadString(dataPath);
       fileList.add(dataPath);
     }

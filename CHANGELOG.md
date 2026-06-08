@@ -2,6 +2,7 @@
 * Update the iLib files to version 14.22.0.
   * iLib version 14.22.0 incorporates CLDR 48.2
 * Update unit test expectations for locale formatting changes introduced by CLDR 48.2, including webOS-specific expectations where results still differ from upstream.
+* Fix empty asset path crash in loadJS when locale is invalid
 
 ## 1.8.0
 * Implement `ILibCountry` class for Country Information
