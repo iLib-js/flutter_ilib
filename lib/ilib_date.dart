@@ -72,35 +72,48 @@ class ILibDateOptions implements ILibDate {
     final int sec = second ?? 0;
     final int ms = millisecond ?? 0;
     final String cal = type ?? calendar ?? 'gregorian';
+    // Mirror JS DateFactory: pass the unambiguous UTC-based params through and let the
+    // calendar date constructor resolve precedence (unixtime over components). A Flutter
+    // DateTime is an absolute instant, so it maps to unixtime as well.
+    final int? ut = unixtime ?? dateTime?.millisecondsSinceEpoch;
 
     switch (cal) {
       case 'ethiopic':
         return EthiopicDate(
-            year: y, month: m, day: d, hour: h, minute: min, second: sec, millisecond: ms);
+            year: y, month: m, day: d, hour: h, minute: min, second: sec,
+            millisecond: ms, unixtime: ut, timezone: timezone);
       case 'coptic':
         return CopticDate(
-            year: y, month: m, day: d, hour: h, minute: min, second: sec, millisecond: ms);
+            year: y, month: m, day: d, hour: h, minute: min, second: sec,
+            millisecond: ms, unixtime: ut, timezone: timezone);
       case 'hebrew':
         return HebrewDate(
-            year: y, month: m, day: d, hour: h, minute: min, second: sec, millisecond: ms);
+            year: y, month: m, day: d, hour: h, minute: min, second: sec,
+            millisecond: ms, unixtime: ut, timezone: timezone);
       case 'islamic':
         return IslamicDate(
-            year: y, month: m, day: d, hour: h, minute: min, second: sec, millisecond: ms);
+            year: y, month: m, day: d, hour: h, minute: min, second: sec,
+            millisecond: ms, unixtime: ut, timezone: timezone);
       case 'julian':
         return JulianDate(
-            year: y, month: m, day: d, hour: h, minute: min, second: sec, millisecond: ms);
+            year: y, month: m, day: d, hour: h, minute: min, second: sec,
+            millisecond: ms, unixtime: ut, timezone: timezone);
       case 'persian':
         return PersianDate(
-            year: y, month: m, day: d, hour: h, minute: min, second: sec, millisecond: ms);
+            year: y, month: m, day: d, hour: h, minute: min, second: sec,
+            millisecond: ms, unixtime: ut, timezone: timezone);
       case 'persian-algo':
         return PersianAlgoDate(
-            year: y, month: m, day: d, hour: h, minute: min, second: sec, millisecond: ms);
+            year: y, month: m, day: d, hour: h, minute: min, second: sec,
+            millisecond: ms, unixtime: ut, timezone: timezone);
       case 'thaisolar':
         return ThaiSolarDate(
-            year: y, month: m, day: d, hour: h, minute: min, second: sec, millisecond: ms);
+            year: y, month: m, day: d, hour: h, minute: min, second: sec,
+            millisecond: ms, unixtime: ut, timezone: timezone);
       default:
         return GregorianDate(
-            year: y, month: m, day: d, hour: h, minute: min, second: sec, millisecond: ms);
+            year: y, month: m, day: d, hour: h, minute: min, second: sec,
+            millisecond: ms, unixtime: ut, timezone: timezone);
     }
   }
 
@@ -119,6 +132,21 @@ class ILibDateOptions implements ILibDate {
 
   @override
   int getEra() => _toCalendarDate().getEra();
+
+  @override
+  double getRataDie() => _toCalendarDate().getRataDie();
+
+  @override
+  double getJulianDay() => _toCalendarDate().getJulianDay();
+
+  @override
+  int getTime() => _toCalendarDate().getTime();
+
+  @override
+  int getTimeExtended() => _toCalendarDate().getTimeExtended();
+
+  @override
+  String getCalendar() => type ?? calendar ?? 'gregorian';
 
   /// A string representation of parameters to call functions of iLib library properly
   String toJsonString() {

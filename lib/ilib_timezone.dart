@@ -1,3 +1,4 @@
+import 'calendar/greg_rata_die.dart';
 import 'ilib_date_accessor.dart';
 import 'ilib_init.dart';
 import 'ilib_localeinfo.dart';
@@ -93,7 +94,7 @@ class ILibTimeZone {
   Map<String, int> getOffset(ILibDate date) =>
       _minutesToHm(getOffsetMinutes(date));
 
-  double getOffsetMinutes(ILibDate date, {bool? wallTime}) {
+  double getOffsetMinutes(ILibDate date, {bool wallTime = false}) {
     return _offset + (inDaylightTime(date, wallTime: wallTime) ? _dstSavings : 0);
   }
 
@@ -146,7 +147,7 @@ class ILibTimeZone {
     }
   }
 
-  bool inDaylightTime(ILibDate date, {bool? wallTime}) {
+  bool inDaylightTime(ILibDate date, {bool wallTime = false}) {
     if (_zone == null) {
       return false;
     }
@@ -154,14 +155,12 @@ class ILibTimeZone {
       return false;
     }
 
-    final int year = date.year ?? DateTime.now().year;
-    final int month = date.month ?? 1;
-    final int day = date.day ?? 1;
-    final int hour = date.hour ?? 0;
-    final int minute = date.minute ?? 0;
-    final int second = date.second ?? 0;
-
-    final double rd = _toRd(year, month, day, hour, minute, second);
+    // The Gregorian RD of the date's instant, regardless of its calendar (mirrors JS:
+    // gregorian dates use date.rd directly, others convert through getTimeExtended()).
+    // getJulianDay() is the absolute Julian Day, so subtracting the Gregorian epoch
+    // yields the Gregorian RD in the same time base the rules are evaluated against.
+    final double rd = date.getJulianDay() - GregRataDie.epoch;
+    final int year = GregRataDie.calcYear(rd);
 
     final Map<String, dynamic> startRule = _zone!['s'] as Map<String, dynamic>;
     final Map<String, dynamic> endRule = _zone!['e'] as Map<String, dynamic>;
@@ -170,20 +169,15 @@ class ILibTimeZone {
     double startRd = _calcRuleStart(startRule, year);
     double endRd = _calcRuleStart(endRule, year);
 
-    // wallTime null  -> legacy comparison: rd and boundaries are both treated as
-    //                   local wall time with no conversion (default public API).
-    // wallTime true   -> rd is local wall time; skip the missing hour at the start
-    //                   of DST (mirrors JS inDaylightTime wallTime=true).
-    // wallTime false  -> rd is a UTC instant; convert the boundaries to UTC so they
-    //                   can be compared directly (mirrors JS getOffsetMillis). When
-    //                   DST starts the time is standard already, so subtract the
-    //                   offset; when DST ends it is daylight already, so subtract the
-    //                   DST savings then the offset.
-    if (wallTime == null) {
-      // legacy: compare rd directly to the wall-time boundaries.
-    } else if (wallTime) {
+    if (wallTime) {
+      // rd is local wall time: skip the missing hour at the start of DST when
+      // standard time ends and daylight time begins.
       startRd += _dstSavings / 1440;
     } else {
+      // rd is a UTC instant: convert the boundaries to UTC so they can be compared
+      // directly. When DST starts the time is standard already, so subtract the
+      // offset; when DST ends it is daylight already, so subtract the DST savings
+      // then the offset.
       startRd -= _offset / 1440;
       endRd -= (_offset + _dstSavings) / 1440;
     }

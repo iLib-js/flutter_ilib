@@ -1,6 +1,5 @@
 import '../ilib_date_accessor.dart';
 import '../ilib_timezone.dart';
-import 'gregorian_date.dart';
 import 'rata_die.dart';
 
 abstract class ILibCalendarDate implements ILibDate {
@@ -29,8 +28,11 @@ abstract class ILibCalendarDate implements ILibDate {
   @override
   String? get timezone => 'local';
 
+  @override
   double getRataDie();
+  @override
   double getJulianDay();
+  @override
   String getCalendar();
   ILibRataDie getRataDieInstance();
 
@@ -45,19 +47,17 @@ abstract class ILibCalendarDate implements ILibDate {
 
   double tzOffsetDays = 0;
 
-  // Timezone DST offset is computed from Gregorian year/month/day, so non-Gregorian
-  // calendars must present a Gregorian view of the same instant (via absolute Julian Day).
-  ILibDate _gregorianViewForOffset() => GregorianDate(julianDay: getJulianDay());
-
   double adjustRdForTimezone(double rd) {
     final String? tz = timezone;
     if (tz == null || tz == 'local') {
       return rd;
     }
     final ILibTimeZone tzObj = ILibTimeZone(tz);
-    // From-components path: the Gregorian view holds local wall-clock time, which is
-    // exactly what the default (wall-time) DST comparison expects.
-    tzOffsetDays = tzObj.getOffsetMinutes(_gregorianViewForOffset()) / 1440.0;
+    // From-components path: getJulianDay() still holds the local wall-clock instant,
+    // so the DST boundaries are compared in wall time (mirrors JS
+    // _getOffsetMillisWallTime). inDaylightTime() derives the Gregorian RD/year from
+    // the instant, so non-Gregorian calendars need no separate Gregorian view.
+    tzOffsetDays = tzObj.getOffsetMinutes(this, wallTime: true) / 1440.0;
     return rd - tzOffsetDays;
   }
 
@@ -69,12 +69,12 @@ abstract class ILibCalendarDate implements ILibDate {
       return;
     }
     final ILibTimeZone tzObj = ILibTimeZone(tz);
-    // From-UTC-instant path: the Gregorian view holds a UTC instant, so the DST
+    // From-UTC-instant path: getJulianDay() holds the UTC instant, so the DST
     // boundaries are converted to UTC for comparison (mirrors JS getOffsetMillis).
-    tzOffsetDays =
-        tzObj.getOffsetMinutes(_gregorianViewForOffset(), wallTime: false) / 1440.0;
+    tzOffsetDays = tzObj.getOffsetMinutes(this) / 1440.0;
   }
 
+  @override
   int getTime() {
     final double jd = getJulianDay();
     if (jd < 2440587.5 || jd > 2465442.634803241) {
@@ -83,6 +83,7 @@ abstract class ILibCalendarDate implements ILibDate {
     return ((jd - 2440587.5) * 86400000).round();
   }
 
+  @override
   int getTimeExtended() {
     final double jd = getJulianDay();
     if (jd < -97559412.5 || jd > 102440587.5) {

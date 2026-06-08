@@ -285,6 +285,11 @@ the JS `DateFmt.format()` logic (DateFmt.js:1537-1566):
    JS keeps raw values. Never convert `ILibDateOptions` → `ILibCalendarDate` when
    calendars match — use raw values for formatting, `_getCalendarDate()` only for
    calendar-dependent calculations.
+   Note: `ILibDateOptions`'s instant accessors (`getRataDie`/`getJulianDay`/`getTime`/
+   `getTimeExtended`) intentionally go through `_toCalendarDate()` and therefore normalize.
+   That is correct — an instant is well-defined even for an invalid date (Feb 29 → Mar 1
+   yields the right rd). The no-normalize rule applies only to the *display* year/month/day
+   used while formatting, never to the computed instant.
 
 2. **`ILibDateOptions._toCalendarDate()` defaults to `'gregorian'`**:
    When `type` and `calendar` are both null, it assumes Gregorian. This breaks
@@ -328,32 +333,37 @@ For in-depth explanations, see `docs/`:
 - **Han Calendar**: needs lunar calculations (`_lunarLongitude`, `_newMoonTime`, etc.). Planned as extension to `ILibAstro`.
 
 ## Timezone DST Offset (resolved)
-All `testXxxDateRoundTripConstruction2` tests (with timezone) now pass for every calendar.
-Two issues were fixed:
+All `testXxxDateRoundTripConstruction2` tests (with timezone) pass for every calendar, and
+`ILibTimeZone` now mirrors the JS `TimeZone`/`IDate` structure.
 
-1. **Non-Gregorian calendar year in DST lookup**: `ILibTimeZone.inDaylightTime()` interprets
-   `date.year` as a Gregorian year. Calendar date classes present a Gregorian view of the same
-   instant via `_gregorianViewForOffset()` (`GregorianDate(julianDay: getJulianDay())`) in
-   `lib/calendar/ilib_date.dart`, so the offset is always computed from Gregorian components.
+1. **`ILibDate` exposes the instant (JS `IDate` parity)**: `getRataDie()`, `getJulianDay()`,
+   `getTime()`, `getTimeExtended()`, `getCalendar()` are on the `ILibDate` interface.
+   `ILibCalendarDate` already implements them; `ILibDateOptions` delegates to `_toCalendarDate()`,
+   which now also forwards `unixtime`/`timezone` (and maps a Flutter `DateTime` to `unixtime`) so
+   the instant honours those fields. `locale` is intentionally NOT forwarded — our calendar
+   constructors derive a timezone from a locale, which would silently shift the instant of the many
+   locale-bearing `ILibDateOptions`; only an explicit `timezone`/`unixtime` defines the instant.
 
-2. **Wall-time vs UTC DST boundaries** (mirrors JS `TimeZone.inDaylightTime(date, wallTime)`):
-   `inDaylightTime(date, {bool? wallTime})` now has three modes —
-   `null` (legacy: compare rd directly to wall boundaries; default public API),
-   `false` (UTC: convert boundaries to UTC, `startRd -= offset/1440`,
-   `endRd -= (offset + dstSavings)/1440`; used by the from-unixtime/JD path
-   `calcTimezoneOffset()`), and `true` (wall: `startRd += dstSavings/1440`).
-   The from-components path (`adjustRdForTimezone()`) uses the legacy default since its view
-   already holds local wall-clock time. This fixes the off-by-one-hour offset on DST-transition days
-   (e.g. Julian 2014/10/20 → Gregorian 2014/11/2, the LA fall-back day).
+2. **`inDaylightTime` is instant-based** (mirrors JS): it derives the Gregorian RD and year from the
+   date's instant — `rd = date.getJulianDay() - GregRataDie.epoch`, `year = GregRataDie.calcYear(rd)` —
+   so any calendar (and the calendar-year bug) is handled without a separate Gregorian view
+   (`_gregorianViewForOffset()` was removed). The `wallTime` flag matches JS:
+   `false` (default, UTC): convert boundaries to UTC — `startRd -= offset/1440`,
+   `endRd -= (offset + dstSavings)/1440`; `true` (wall): `startRd += dstSavings/1440`.
+   `calcTimezoneOffset()` (from-unixtime/JD) passes `this` with `wallTime=false`;
+   `adjustRdForTimezone()` (from-components) passes `this` with `wallTime=true`. This fixes the
+   off-by-one-hour offset on DST-transition days (e.g. Julian 2014/10/20 → Gregorian 2014/11/2,
+   the LA fall-back day).
 
 3. **Float precision at day boundaries**: `ILibRataDie.snapToMillis()` rounds an rd to millisecond
    resolution (mirrors iLib `RataDie` storing `halfup((jd - epoch) * 86400000) / 86400000`). Applied
    in every `*RataDie` constructor's `julianDay`/`unixtime` branches so a `getTime()` round-trip lands
    on an exact instant instead of `...999999999` (which would decompose to the previous day / hour 24).
 
-Note: `inDaylightTime`'s public default stays legacy (no boundary conversion) because `ILibDate`
-does not expose a UTC rata die the way JS's `IDate.rd` does; the existing `testTZInDaylightTime*` /
-`testTZGetOffset*` unit tests pass raw wall-clock `ILibDateOptions` and rely on that contract.
+Because `inDaylightTime` reads the instant, a date passed to `getOffset()`/`inDaylightTime()` must
+carry the timezone it should be interpreted in (matching the JS tests, which build
+`GregorianDate({timezone: ..., ...})`). The `testTZInDaylightTime*` / `testTZGetOffset*` DST-boundary
+tests therefore set `timezone:` on their `ILibDateOptions`.
 
 ## Running Tests
 ```bash

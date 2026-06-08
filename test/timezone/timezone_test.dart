@@ -261,29 +261,32 @@ void main() {
 
     test('testTZGetOffsetRightAfterDSTStart', () {
       final ILibTimeZone tz = ILibTimeZone('America/Los_Angeles');
-      final ILibDateOptions gd = ILibDateOptions(
-          year: 2011, month: 3, day: 13, hour: 2, minute: 0, second: 0);
+      final ILibDateOptions gd =
+          ILibDateOptions(timezone: 'Etc/UTC', unixtime: 1394359260000);
+      // 2 minutes later
       expect(tz.getOffset(gd), <String, int>{'h': -7});
     });
 
     test('testTZGetOffsetRightBeforeDSTEnd', () {
       final ILibTimeZone tz = ILibTimeZone('America/Los_Angeles');
       final ILibDateOptions gd = ILibDateOptions(
-          year: 2014, month: 11, day: 2, hour: 1, minute: 59, second: 59);
+          timezone: 'Etc/UTC', unixtime: 1414918740000); // 11/2/2014 at 1:59am
       expect(tz.getOffset(gd), <String, int>{'h': -7});
     });
 
     test('testTZGetOffsetRightAfterDSTEnd', () {
       final ILibTimeZone tz = ILibTimeZone('America/Los_Angeles');
-      final ILibDateOptions gd = ILibDateOptions(
-          year: 2014, month: 11, day: 2, hour: 2, minute: 0, second: 0);
+      final ILibDateOptions gd =
+          ILibDateOptions(timezone: 'Etc/UTC', unixtime: 1414918860000);
+      // 2 minutes later
       expect(tz.getOffset(gd), <String, int>{'h': -8});
     });
 
     test('testTZGetOffsetRightAfterDST', () {
       final ILibTimeZone tz = ILibTimeZone('America/Los_Angeles');
       final ILibDateOptions gd = ILibDateOptions(
-          year: 2014, month: 3, day: 9, hour: 3, minute: 1, second: 0);
+          year: 2014, month: 3, day: 9, hour: 3, minute: 1, second: 0,
+          timezone: 'America/Los_Angeles');
       expect(tz.getOffset(gd), <String, int>{'h': -7});
     });
 
@@ -371,49 +374,56 @@ void main() {
     test('testTZInDaylightTimeJustAfterStart', () {
       final ILibTimeZone tz = ILibTimeZone('America/Los_Angeles');
       final ILibDateOptions gd = ILibDateOptions(
-          year: 2011, month: 3, day: 13, hour: 2, minute: 0, second: 0);
+          year: 2011, month: 3, day: 13, hour: 2, minute: 0, second: 0,
+          timezone: 'America/Los_Angeles');
       expect(tz.inDaylightTime(gd), true);
     });
 
     test('testTZInDaylightTimeJustBeforeEnd', () {
       final ILibTimeZone tz = ILibTimeZone('America/Los_Angeles');
       final ILibDateOptions gd = ILibDateOptions(
-          year: 2014, month: 11, day: 2, hour: 1, minute: 59, second: 59);
+          year: 2014, month: 11, day: 2, hour: 1, minute: 59, second: 59,
+          timezone: 'America/Los_Angeles');
       expect(tz.inDaylightTime(gd), true);
     });
 
     test('testTZInDaylightTimeJustAfterEnd', () {
       final ILibTimeZone tz = ILibTimeZone('America/Los_Angeles');
       final ILibDateOptions gd = ILibDateOptions(
-          year: 2014, month: 11, day: 2, hour: 2, minute: 0, second: 0);
+          year: 2014, month: 11, day: 2, hour: 2, minute: 0, second: 0,
+          timezone: 'America/Los_Angeles');
       expect(tz.inDaylightTime(gd), false);
     });
 
     test('testTZInDaylightTimeJustBeforeStartDownUnder', () {
       final ILibTimeZone tz = ILibTimeZone('Australia/Sydney');
       final ILibDateOptions gd = ILibDateOptions(
-          year: 2014, month: 10, day: 5, hour: 1, minute: 59, second: 59);
+          year: 2014, month: 10, day: 5, hour: 1, minute: 59, second: 59,
+          timezone: 'Australia/Sydney');
       expect(tz.inDaylightTime(gd), false);
     });
 
     test('testTZInDaylightTimeJustAfterStartDownUnder', () {
       final ILibTimeZone tz = ILibTimeZone('Australia/Sydney');
       final ILibDateOptions gd = ILibDateOptions(
-          year: 2014, month: 10, day: 5, hour: 2, minute: 0, second: 0);
+          year: 2014, month: 10, day: 5, hour: 2, minute: 0, second: 0,
+          timezone: 'Australia/Sydney');
       expect(tz.inDaylightTime(gd), true);
     });
 
     test('testTZInDaylightTimeJustBeforeEndDownUnder', () {
       final ILibTimeZone tz = ILibTimeZone('Australia/Sydney');
       final ILibDateOptions gd = ILibDateOptions(
-          year: 2011, month: 4, day: 3, hour: 2, minute: 59, second: 59);
+          year: 2011, month: 4, day: 3, hour: 2, minute: 59, second: 59,
+          timezone: 'Australia/Sydney');
       expect(tz.inDaylightTime(gd), true);
     });
 
     test('testTZInDaylightTimeJustAfterEndDownUnder', () {
       final ILibTimeZone tz = ILibTimeZone('Australia/Sydney');
       final ILibDateOptions gd = ILibDateOptions(
-          year: 2011, month: 4, day: 3, hour: 3, minute: 0, second: 0);
+          year: 2011, month: 4, day: 3, hour: 3, minute: 0, second: 0,
+          timezone: 'Australia/Sydney');
       expect(tz.inDaylightTime(gd), false);
     });
   });
