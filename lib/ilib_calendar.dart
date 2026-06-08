@@ -7,6 +7,7 @@ import 'calendar/julian_cal.dart';
 import 'calendar/persian_algo_cal.dart';
 import 'calendar/persian_cal.dart';
 import 'calendar/thaisolar_cal.dart';
+import 'ilib_localeinfo.dart';
 
 export 'calendar/calendar_utils.dart';
 export 'calendar/coptic_cal.dart';
@@ -68,6 +69,12 @@ abstract class ILibCalendar {
         throw ArgumentError('Unknown calendar type: $type');
     }
   }
+
+  /// Create the calendar commonly used in the given locale (mirrors JS
+  /// CalendarFactory({locale: ...})). Falls back to the locale's default
+  /// calendar, which is gregorian when the locale data specifies none.
+  factory ILibCalendar.fromLocale(String locale) =>
+      ILibCalendar(ILibLocaleInfo(locale).getCalendar());
 
   String getType();
   int getNumMonths(int year);

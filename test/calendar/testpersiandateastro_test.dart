@@ -511,4 +511,229 @@ void main() {
       expect(pd2.getSeconds(), pd.getSeconds());
     });
   });
+
+  // JS constructs a PersianDate and calls pd._calcYear(rd). _calcYear is private in
+  // Dart, so exercise the same year-from-rd calculation via the public path:
+  // PersianDate(rd: ...).getYears() (which _decomposeRd derives from calcYear).
+  group('PersianDate calcYear (astronomical)', () {
+    test('testPersDateAstroCalcYearPositive1', () {
+      expect(PersianDate(rd: 1).getYears(), 1);
+    });
+    test('testPersDateAstroCalcYearPositive2', () {
+      expect(PersianDate(rd: 365).getYears(), 1);
+    });
+    test('testPersDateAstroCalcYearPositive3', () {
+      expect(PersianDate(rd: 366).getYears(), 2);
+    });
+    test('testPersDateAstroCalcYearPositive4', () {
+      expect(PersianDate(rd: 730).getYears(), 2);
+    });
+    test('testPersDateAstroCalcYearPositive5', () {
+      expect(PersianDate(rd: 731).getYears(), 3);
+    });
+    test('testPersDateAstroCalcYearPositive6', () {
+      expect(PersianDate(rd: 1095).getYears(), 3);
+    });
+    test('testPersDateAstroCalcYearPositive7', () {
+      expect(PersianDate(rd: 1096).getYears(), 4);
+    });
+    test('testPersDateAstroCalcYearPositive8', () {
+      expect(PersianDate(rd: 1461).getYears(), 4);
+    });
+    test('testPersDateAstroCalcYearPositive9', () {
+      expect(PersianDate(rd: 1462).getYears(), 5);
+    });
+    test('testPersDateAstroCalcYearPositive10', () {
+      expect(PersianDate(rd: 1826).getYears(), 5);
+    });
+    test('testPersDateAstroCalcYearPositive11', () {
+      expect(PersianDate(rd: 1827).getYears(), 6);
+    });
+    test('testPersDateAstroCalcYearNegative0', () {
+      expect(PersianDate(rd: 0).getYears(), 0);
+    });
+    test('testPersDateAstroCalcYearNegative1', () {
+      expect(PersianDate(rd: -1).getYears(), 0);
+    });
+    test('testPersDateAstroCalcYearNegative2', () {
+      expect(PersianDate(rd: -365).getYears(), 0);
+    });
+    test('testPersDateAstroCalcYearNegative3', () {
+      expect(PersianDate(rd: -366).getYears(), -1);
+    });
+    test('testPersDateAstroCalcYearNegative4', () {
+      expect(PersianDate(rd: -730).getYears(), -1);
+    });
+    test('testPersDateAstroCalcYearNegative5', () {
+      expect(PersianDate(rd: -731).getYears(), -2);
+    });
+    test('testPersDateAstroCalcYearNegative6', () {
+      expect(PersianDate(rd: -441089).getYears(), -1207);
+    });
+  });
+
+  group('PersRataDie from date components', () {
+    PersianRataDie rd(int year, int month, int day) => PersianRataDie(
+        year: year, month: month, day: day,
+        hour: 0, minute: 0, second: 0, millisecond: 0);
+
+    test('testPersRataDieAstroConstructorFromDateComponents1', () {
+      expect(rd(1, 1, 1).getRataDie(), 1);
+    });
+    test('testPersRataDieAstroConstructorFromDateComponents2', () {
+      expect(rd(0, 12, 30).getRataDie(), 0);
+    });
+    test('testPersRataDieAstroConstructorFromDateComponents3', () {
+      expect(rd(1, 12, 29).getRataDie(), 365);
+    });
+    test('testPersRataDieAstroConstructorFromDateComponents4', () {
+      expect(rd(2, 1, 1).getRataDie(), 366);
+    });
+    test('testPersRataDieAstroConstructorFromDateComponents5', () {
+      expect(rd(1, 1, 31).getRataDie(), 31);
+    });
+    test('testPersRataDieAstroConstructorFromDateComponents6', () {
+      expect(rd(1, 2, 1).getRataDie(), 32);
+    });
+    test('testPersRataDieAstroConstructorFromDateComponents7', () {
+      expect(rd(2, 12, 29).getRataDie(), 730);
+    });
+    test('testPersRataDieAstroConstructorFromDateComponents8', () {
+      expect(rd(3, 1, 1).getRataDie(), 731);
+    });
+    test('testPersRataDieAstroConstructorFromDateComponents9', () {
+      expect(rd(3, 12, 29).getRataDie(), 1095);
+    });
+    test('testPersRataDieAstroConstructorFromDateComponents10', () {
+      expect(rd(4, 1, 1).getRataDie(), 1096);
+    });
+    test('testPersRataDieAstroConstructorFromDateComponents11', () {
+      expect(rd(4, 12, 30).getRataDie(), 1461);
+    });
+    test('testPersRataDieAstroConstructorFromDateComponents12', () {
+      expect(rd(5, 1, 1).getRataDie(), 1462);
+    });
+    test('testPersRataDieAstroConstructorFromDateComponents13', () {
+      expect(rd(5, 12, 29).getRataDie(), 1826);
+    });
+    test('testPersRataDieAstroConstructorFromDateComponents14', () {
+      expect(rd(6, 1, 1).getRataDie(), 1827);
+    });
+    test('testPersRataDieAstroConstructorFromDateComponents15', () {
+      expect(rd(-1207, 5, 1).getRataDie(), -441088);
+    });
+  });
+
+  group('PersianDate getDayOfWeek', () {
+    test('testGetDayOfWeek1', () {
+      final PersianDate pd = PersianDate(year: 1393, month: 3, day: 16);
+      expect(pd.getDayOfWeek(), 5);
+    });
+    test('testGetDayOfWeekWithTime', () {
+      final PersianDate pd = PersianDate(
+          year: 1393, month: 3, day: 16, hour: 8, minute: 39, second: 34);
+      expect(pd.getDayOfWeek(), 5);
+    });
+  });
+
+  group('PersianDate constructor', () {
+    test('testPersDateAstroConstructor', () {
+      expect(PersianDate(), isNotNull);
+    });
+
+    test('testPersDateAstroConstructorFromJD', () {
+      final PersianDate pd = PersianDate(julianDay: 1948685.5);
+      expect(pd.getRataDie(), 366);
+      expect(pd.getYears(), 2);
+      expect(pd.getMonths(), 1);
+      expect(pd.getDays(), 1);
+      expect(pd.getHours(), 0);
+      expect(pd.getMinutes(), 0);
+      expect(pd.getSeconds(), 0);
+      expect(pd.getMilliseconds(), 0);
+    });
+
+    test('testPersDateAstroAfterLeapYear', () {
+      // Far 1, 0005, 9:36am
+      final PersianDate pd = PersianDate(julianDay: 1949781.9);
+      expect(pd.getRataDie(), 1462.4);
+      expect(pd.getYears(), 5);
+      expect(pd.getMonths(), 1);
+      expect(pd.getDays(), 1);
+      expect(pd.getHours(), 9);
+      expect(pd.getMinutes(), 36);
+      expect(pd.getSeconds(), 0);
+      expect(pd.getMilliseconds(), 0);
+    });
+
+    test('testPersDateAstroLastDayOfLeapYear', () {
+      // Esf 30, 0004, 9:36am
+      final PersianDate pd = PersianDate(julianDay: 1949780.9);
+      expect(pd.getRataDie(), 1461.4);
+      expect(pd.getYears(), 4);
+      expect(pd.getMonths(), 12);
+      expect(pd.getDays(), 30);
+      expect(pd.getHours(), 9);
+      expect(pd.getMinutes(), 36);
+      expect(pd.getSeconds(), 0);
+      expect(pd.getMilliseconds(), 0);
+    });
+
+    test('testPersDateAstroConstructorCopy', () {
+      final PersianDate pd = PersianDate(
+          year: 1392, month: 9, day: 23,
+          hour: 16, minute: 7, second: 12, millisecond: 123);
+      expect(pd.getYears(), 1392);
+      expect(pd.getMonths(), 9);
+      expect(pd.getDays(), 23);
+      expect(pd.getHours(), 16);
+      expect(pd.getMinutes(), 7);
+      expect(pd.getSeconds(), 12);
+      expect(pd.getMilliseconds(), 123);
+    });
+
+    test('testPersDateAstroConstructorNearDSTWithExplicitTimeZone', () {
+      final PersianDate pd = PersianDate(
+          year: 1397, month: 1, day: 3, hour: 21, minute: 13,
+          locale: 'fa-IR', timezone: 'Asia/Tehran');
+      expect(pd.getJulianDay(), 2458201.238194444);
+    });
+  });
+
+  group('PersianDate getWeekOfMonth', () {
+    // JS calls getWeekOfMonth("fa-IR"); the Dart API takes the first day of week as
+    // an int, and Iran's first day of week is Saturday (6).
+    test('testPersDateAstroGetWeekOfMonthIR10', () {
+      expect(PersianDate(year: 1388, month: 8, day: 1).getWeekOfMonth(6), 0);
+    });
+    test('testPersDateAstroGetWeekOfMonthIR11', () {
+      expect(PersianDate(year: 1388, month: 9, day: 1).getWeekOfMonth(6), 1);
+    });
+    test('testPersDateAstroGetWeekOfMonthIR12', () {
+      expect(PersianDate(year: 1388, month: 10, day: 1).getWeekOfMonth(6), 1);
+    });
+    test('testPersDateAstroGetWeekOfMonthIR13', () {
+      expect(PersianDate(year: 1388, month: 11, day: 1).getWeekOfMonth(6), 0);
+    });
+    test('testPersDateAstroGetWeekOfMonthIR14', () {
+      expect(PersianDate(year: 1388, month: 12, day: 1).getWeekOfMonth(6), 1);
+    });
+  });
+
+  group('PersianDate round-trip construction 2', () {
+    test('testPersDateAstroRoundTripConstruction2', () {
+      final PersianDate pd = PersianDate(
+          year: 1393, month: 8, day: 12, timezone: 'America/Los_Angeles');
+      final int u = pd.getTime();
+      final PersianDate pd2 = PersianDate(
+          unixtime: u, timezone: 'America/Los_Angeles');
+      expect(pd2.timezone, pd.timezone);
+      expect(pd2.getYears(), pd.getYears());
+      expect(pd2.getMonths(), pd.getMonths());
+      expect(pd2.getDays(), pd.getDays());
+      expect(pd2.getHours(), pd.getHours());
+      expect(pd2.getMinutes(), pd.getMinutes());
+      expect(pd2.getSeconds(), pd.getSeconds());
+    });
+  });
 }

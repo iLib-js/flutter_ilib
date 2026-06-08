@@ -605,57 +605,60 @@ void main() {
     });
   });
 
-  group('PersianAlgoRataDie calcYear', () {
+  // JS constructs a PersianAlgoDate and calls pd._calcYear(rd). _calcYear is private in
+  // Dart, so exercise the same year-from-rd calculation via the public path:
+  // PersianAlgoDate(rd: ...).getYears() (which _decomposeRd derives from calcYear).
+  group('PersianAlgoDate calcYear (algorithmic)', () {
     test('testPersAlgoDateCalcYearPositive1', () {
-      expect(PersianAlgoRataDie.calcYear(1), 1);
+      expect(PersianAlgoDate(rd: 1).getYears(), 1);
     });
     test('testPersAlgoDateCalcYearPositive2', () {
-      expect(PersianAlgoRataDie.calcYear(365), 1);
+      expect(PersianAlgoDate(rd: 365).getYears(), 1);
     });
     test('testPersAlgoDateCalcYearPositive3', () {
-      expect(PersianAlgoRataDie.calcYear(366), 2);
+      expect(PersianAlgoDate(rd: 366).getYears(), 2);
     });
     test('testPersAlgoDateCalcYearPositive4', () {
-      expect(PersianAlgoRataDie.calcYear(730), 2);
+      expect(PersianAlgoDate(rd: 730).getYears(), 2);
     });
     test('testPersAlgoDateCalcYearPositive5', () {
-      expect(PersianAlgoRataDie.calcYear(731), 3);
+      expect(PersianAlgoDate(rd: 731).getYears(), 3);
     });
     test('testPersAlgoDateCalcYearPositive6', () {
-      expect(PersianAlgoRataDie.calcYear(1095), 3);
+      expect(PersianAlgoDate(rd: 1095).getYears(), 3);
     });
     test('testPersAlgoDateCalcYearPositive7', () {
-      expect(PersianAlgoRataDie.calcYear(1096), 4);
+      expect(PersianAlgoDate(rd: 1096).getYears(), 4);
     });
     test('testPersAlgoDateCalcYearPositive8', () {
-      expect(PersianAlgoRataDie.calcYear(1461), 4);
+      expect(PersianAlgoDate(rd: 1461).getYears(), 4);
     });
     test('testPersAlgoDateCalcYearPositive9', () {
-      expect(PersianAlgoRataDie.calcYear(1462), 5);
+      expect(PersianAlgoDate(rd: 1462).getYears(), 5);
     });
     test('testPersAlgoDateCalcYearPositive10', () {
-      expect(PersianAlgoRataDie.calcYear(1826), 5);
+      expect(PersianAlgoDate(rd: 1826).getYears(), 5);
     });
     test('testPersAlgoDateCalcYearPositive11', () {
-      expect(PersianAlgoRataDie.calcYear(1827), 6);
+      expect(PersianAlgoDate(rd: 1827).getYears(), 6);
     });
     test('testPersAlgoDateCalcYearNegative1', () {
-      expect(PersianAlgoRataDie.calcYear(0), -1);
+      expect(PersianAlgoDate(rd: 0).getYears(), -1);
     });
     test('testPersAlgoDateCalcYearNegative2', () {
-      expect(PersianAlgoRataDie.calcYear(-365), -1);
+      expect(PersianAlgoDate(rd: -365).getYears(), -1);
     });
     test('testPersAlgoDateCalcYearNegative3', () {
-      expect(PersianAlgoRataDie.calcYear(-366), -2);
+      expect(PersianAlgoDate(rd: -366).getYears(), -2);
     });
     test('testPersAlgoDateCalcYearNegative4', () {
-      expect(PersianAlgoRataDie.calcYear(-730), -2);
+      expect(PersianAlgoDate(rd: -730).getYears(), -2);
     });
     test('testPersAlgoDateCalcYearNegative5', () {
-      expect(PersianAlgoRataDie.calcYear(-731), -3);
+      expect(PersianAlgoDate(rd: -731).getYears(), -3);
     });
     test('testPersAlgoDateCalcYearNegative6', () {
-      expect(PersianAlgoRataDie.calcYear(-441089), -1208);
+      expect(PersianAlgoDate(rd: -441089).getYears(), -1208);
     });
   });
 }
