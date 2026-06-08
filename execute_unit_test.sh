@@ -40,29 +40,34 @@ run_linux_flutter_test() {
 test_log "Set LIBQUICKJSC_TEST_PATH"
 export LIBQUICKJSC_TEST_PATH="${PROJECT_ROOT}/test/linux/libquickjs_c_bridge_plugin.so"
 
-FAILED_TESTS=()
+FAILED_UNIT_TESTS=()
+FAILED_INTEGRATION_TESTS=()
+RUN_UNIT_TESTS=false
+RUN_INTEGRATION_TESTS=false
 # Suppress info-level logs during test execution
 FLUTTER_OPTIONS="--dart-define=TEST_MODE=true"
 
 # --- Test functions ---
 
 run_unit_tests() {
+  RUN_UNIT_TESTS=true
   test_log "Execute unit tests (test/)..."
   echo ""
   for test_file in $(find test/ -path 'test/integration' -prune -o -name '*_test.dart' -print); do
     if ! flutter test "$test_file" $FLUTTER_OPTIONS; then
-      FAILED_TESTS+=("$test_file")
+      FAILED_UNIT_TESTS+=("$test_file")
     fi
   done
 }
 
 run_integration_tests() {
+  RUN_INTEGRATION_TESTS=true
   # API-level integration tests
   test_log "Execute API-level integration tests (test/integration/)..."
   echo ""
   for test_file in $(find test/integration/ -name '*_test.dart'); do
     if ! flutter test "$test_file" $FLUTTER_OPTIONS; then
-      FAILED_TESTS+=("$test_file")
+      FAILED_INTEGRATION_TESTS+=("$test_file")
     fi
   done
 
@@ -74,7 +79,7 @@ run_integration_tests() {
   export LIBQUICKJSC_PATH="${PROJECT_ROOT}/test/linux/libquickjs_c_bridge_plugin.so"
   for test_file in $(find integration_test/ -name '*_test.dart'); do
     if ! run_linux_flutter_test "$test_file" $FLUTTER_OPTIONS -d linux; then
-      FAILED_TESTS+=("example/$test_file")
+      FAILED_INTEGRATION_TESTS+=("example/$test_file")
     fi
   done
   popd > /dev/null
@@ -107,13 +112,36 @@ case "$MODE" in
     ;;
 esac
 
+echo ""
+echo "-------------------------------------"
 # --- Report results ---
-if [[ ${#FAILED_TESTS[@]} -gt 0 ]]; then
+if [[ "$RUN_UNIT_TESTS" == true ]]; then
   echo ""
-  test_log "** Failed tests **"
-  for failed in "${FAILED_TESTS[@]}"; do
-    echo " ❌ $failed"
-  done
+  test_log "[unit] result"
+  if [[ ${#FAILED_UNIT_TESTS[@]} -gt 0 ]]; then
+    echo " ❌ failed"
+    for failed in "${FAILED_UNIT_TESTS[@]}"; do
+      echo "   - $failed"
+    done
+  else
+    echo " ✅ passed"
+  fi
+fi
+
+if [[ "$RUN_INTEGRATION_TESTS" == true ]]; then
+  echo ""
+  test_log "[integration] result"
+  if [[ ${#FAILED_INTEGRATION_TESTS[@]} -gt 0 ]]; then
+    echo " ❌ failed"
+    for failed in "${FAILED_INTEGRATION_TESTS[@]}"; do
+      echo "   - $failed"
+    done
+  else
+    echo " ✅ passed"
+  fi
+fi
+
+if [[ ${#FAILED_UNIT_TESTS[@]} -gt 0 || ${#FAILED_INTEGRATION_TESTS[@]} -gt 0 ]]; then
   exit 1
 else
   echo ""
