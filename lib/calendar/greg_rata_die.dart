@@ -16,9 +16,9 @@ class GregRataDie implements ILibRataDie {
     if (rataDie != null) {
       _rd = rataDie;
     } else if (julianDay != null) {
-      _rd = julianDay - epoch;
+      _rd = ILibRataDie.snapToMillis(julianDay - epoch);
     } else if (unixtime != null) {
-      _rd = _unixTimeToRd(unixtime);
+      _rd = ILibRataDie.snapToMillis(_unixTimeToRd(unixtime));
     } else if (ILibRataDie.hasDateComponents(
         year: year, month: month, day: day, hour: hour,
         minute: minute, second: second, millisecond: millisecond)) {

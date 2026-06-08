@@ -416,7 +416,7 @@ void main() {
       expect(jul2.getHours(), jul.getHours());
       expect(jul2.getMinutes(), jul.getMinutes());
       expect(jul2.getSeconds(), jul.getSeconds());
-    }, skip: 'non-Gregorian calendar year conversion needed for timezone offset');
+    });
   });
 
   group('JulianDate current time', () {

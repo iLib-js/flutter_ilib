@@ -580,7 +580,7 @@ void main() {
       expect(pd2.getHours(), pd.getHours());
       expect(pd2.getMinutes(), pd.getMinutes());
       expect(pd2.getSeconds(), pd.getSeconds());
-    }, skip: 'non-Gregorian calendar year conversion needed for timezone offset');
+    });
   });
 
   group('PersianAlgoDate constructor edge cases', () {

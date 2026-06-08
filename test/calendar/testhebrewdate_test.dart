@@ -586,6 +586,6 @@ void main() {
       expect(hd2.getHours(), hd.getHours());
       expect(hd2.getMinutes(), hd.getMinutes());
       expect(hd2.getSeconds(), hd.getSeconds());
-    }, skip: 'non-Gregorian calendar year conversion needed for timezone offset');
+    });
   });
 }

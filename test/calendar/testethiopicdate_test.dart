@@ -421,7 +421,7 @@ void main() {
       expect(ed2.getHours(), ed.getHours());
       expect(ed2.getMinutes(), ed.getMinutes());
       expect(ed2.getSeconds(), ed.getSeconds());
-    }, skip: 'non-Gregorian calendar year conversion needed for timezone offset');
+    });
   });
 
   group('EthiopicDate current time', () {

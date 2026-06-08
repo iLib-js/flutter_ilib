@@ -415,7 +415,7 @@ void main() {
       expect(cd2.getHours(), cd.getHours());
       expect(cd2.getMinutes(), cd.getMinutes());
       expect(cd2.getSeconds(), cd.getSeconds());
-    }, skip: 'non-Gregorian calendar year conversion needed for timezone offset');
+    });
   });
 
   group('CopticDate current time', () {

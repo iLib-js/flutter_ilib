@@ -35,6 +35,13 @@ abstract class ILibRataDie {
         millisecond != null;
   }
 
+  // Round a rata die to millisecond resolution, mirroring iLib RataDie which stores
+  // `halfup((jd - epoch) * 86400000) / 86400000`. This removes sub-millisecond
+  // floating-point noise so day boundaries decompose consistently.
+  static double snapToMillis(double rd) {
+    return (rd * 86400000).round() / 86400000.0;
+  }
+
   static double timeToRd(int hour, int minute, int second, int millisecond) {
     return (hour * 3600000 + minute * 60000 + second * 1000 + millisecond) /
         86400000.0;

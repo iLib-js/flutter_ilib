@@ -326,16 +326,34 @@ For in-depth explanations, see `docs/`:
 
 ## Deferred Work
 - **Han Calendar**: needs lunar calculations (`_lunarLongitude`, `_newMoonTime`, etc.). Planned as extension to `ILibAstro`.
-- **Timezone RD adjustment — non-Gregorian calendar year issue**:
-  Calendar date classes now store UTC-adjusted RD (matching JS `_init()` / `_calcDateComponents()`).
-  `GregorianDate` works correctly. Non-Gregorian calendars (Coptic, Ethiopic, Islamic, Hebrew, etc.)
-  have a bug: `ILibTimeZone.inDaylightTime()` interprets `date.year` as Gregorian year, but receives
-  calendar-specific year (e.g., Coptic 1738 instead of Gregorian ~2022). This causes wrong DST offset.
-  **Fix required**: convert calendar year → Gregorian year before calling timezone offset calculation.
-  Affects: `adjustRdForTimezone()` in fromComponents path, `calcTimezoneOffset()` in else path.
-  GregorianDate and ThaiSolarDate (year - 543 = Gregorian) are not affected.
-  Related JS code: `GregorianDate._calcDateComponents()` lines 350-367.
-  Related tests: `testXxxDateRoundTripConstruction2` with timezone, `testXxxDateGetTimeCalifornia`.
+
+## Timezone DST Offset (resolved)
+All `testXxxDateRoundTripConstruction2` tests (with timezone) now pass for every calendar.
+Two issues were fixed:
+
+1. **Non-Gregorian calendar year in DST lookup**: `ILibTimeZone.inDaylightTime()` interprets
+   `date.year` as a Gregorian year. Calendar date classes present a Gregorian view of the same
+   instant via `_gregorianViewForOffset()` (`GregorianDate(julianDay: getJulianDay())`) in
+   `lib/calendar/ilib_date.dart`, so the offset is always computed from Gregorian components.
+
+2. **Wall-time vs UTC DST boundaries** (mirrors JS `TimeZone.inDaylightTime(date, wallTime)`):
+   `inDaylightTime(date, {bool? wallTime})` now has three modes —
+   `null` (legacy: compare rd directly to wall boundaries; default public API),
+   `false` (UTC: convert boundaries to UTC, `startRd -= offset/1440`,
+   `endRd -= (offset + dstSavings)/1440`; used by the from-unixtime/JD path
+   `calcTimezoneOffset()`), and `true` (wall: `startRd += dstSavings/1440`).
+   The from-components path (`adjustRdForTimezone()`) uses the legacy default since its view
+   already holds local wall-clock time. This fixes the off-by-one-hour offset on DST-transition days
+   (e.g. Julian 2014/10/20 → Gregorian 2014/11/2, the LA fall-back day).
+
+3. **Float precision at day boundaries**: `ILibRataDie.snapToMillis()` rounds an rd to millisecond
+   resolution (mirrors iLib `RataDie` storing `halfup((jd - epoch) * 86400000) / 86400000`). Applied
+   in every `*RataDie` constructor's `julianDay`/`unixtime` branches so a `getTime()` round-trip lands
+   on an exact instant instead of `...999999999` (which would decompose to the previous day / hour 24).
+
+Note: `inDaylightTime`'s public default stays legacy (no boundary conversion) because `ILibDate`
+does not expose a UTC rata die the way JS's `IDate.rd` does; the existing `testTZInDaylightTime*` /
+`testTZGetOffset*` unit tests pass raw wall-clock `ILibDateOptions` and rely on that contract.
 
 ## Running Tests
 ```bash

@@ -53,10 +53,6 @@ class PersianDate extends ILibCalendarDate {
 
   void _calcDateComponents() {
     _decomposeRd(_rataDie.getRataDie());
-  }
-
-  void _calcDateComponentsOLD() {
-    _decomposeRd(_rataDie.getRataDie());
     calcTimezoneOffset();
     if (tzOffsetDays != 0) {
       _decomposeRd(getWallClockRd());

@@ -93,8 +93,8 @@ class ILibTimeZone {
   Map<String, int> getOffset(ILibDate date) =>
       _minutesToHm(getOffsetMinutes(date));
 
-  double getOffsetMinutes(ILibDate date) {
-    return _offset + (inDaylightTime(date) ? _dstSavings : 0);
+  double getOffsetMinutes(ILibDate date, {bool? wallTime}) {
+    return _offset + (inDaylightTime(date, wallTime: wallTime) ? _dstSavings : 0);
   }
 
   String getOffsetStr(ILibDate date) => _minutesToStr(getOffsetMinutes(date));
@@ -146,7 +146,7 @@ class ILibTimeZone {
     }
   }
 
-  bool inDaylightTime(ILibDate date) {
+  bool inDaylightTime(ILibDate date, {bool? wallTime}) {
     if (_zone == null) {
       return false;
     }
@@ -166,8 +166,27 @@ class ILibTimeZone {
     final Map<String, dynamic> startRule = _zone!['s'] as Map<String, dynamic>;
     final Map<String, dynamic> endRule = _zone!['e'] as Map<String, dynamic>;
 
-    final double startRd = _calcRuleStart(startRule, year);
-    final double endRd = _calcRuleStart(endRule, year);
+    // These calculate the start/end in local wall time.
+    double startRd = _calcRuleStart(startRule, year);
+    double endRd = _calcRuleStart(endRule, year);
+
+    // wallTime null  -> legacy comparison: rd and boundaries are both treated as
+    //                   local wall time with no conversion (default public API).
+    // wallTime true   -> rd is local wall time; skip the missing hour at the start
+    //                   of DST (mirrors JS inDaylightTime wallTime=true).
+    // wallTime false  -> rd is a UTC instant; convert the boundaries to UTC so they
+    //                   can be compared directly (mirrors JS getOffsetMillis). When
+    //                   DST starts the time is standard already, so subtract the
+    //                   offset; when DST ends it is daylight already, so subtract the
+    //                   DST savings then the offset.
+    if (wallTime == null) {
+      // legacy: compare rd directly to the wall-time boundaries.
+    } else if (wallTime) {
+      startRd += _dstSavings / 1440;
+    } else {
+      startRd -= _offset / 1440;
+      endRd -= (_offset + _dstSavings) / 1440;
+    }
 
     if (startRd < endRd) {
       return rd >= startRd && rd < endRd;
