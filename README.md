@@ -96,6 +96,12 @@ fmt.format(dateOptions);
 // '2024년 6월 27일 오전 10:42'
 ```
 
+> **Note on `timezone: 'local'`:** in this Dart port, `'local'`, `'Etc/UTC'`, and an
+> omitted timezone are currently treated identically — all UTC (offset 0). This differs
+> from iLib's JS, where `'local'` is the device's system time zone. See
+> [docs/local-timezone-support.md](docs/local-timezone-support.md) for details and the
+> path to full system-timezone support.
+
 ### Duration Formatting
 
 ```dart

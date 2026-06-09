@@ -133,6 +133,9 @@ If you're an AI agent (Claude, Copilot, etc.), follow this sequence:
 - Algorithm: [architecture.md#step-by-step-process](./architecture.md#step-by-step-process)
 - Merging: [architecture.md#deep-merge-strategy](./architecture.md#deep-merge-strategy)
 
+**Timezone**
+- System `'local'` support (design / deferred): [local-timezone-support.md](./local-timezone-support.md)
+
 **APIs**
 - ILibLocale: [api.md#iliblocale-api](./api.md#iliblocale-api)
 - ILibLocaleInfo: [api.md#iliblocaleinfo-api](./api.md#iliblocaleinfo-api)

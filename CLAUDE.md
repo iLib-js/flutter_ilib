@@ -328,6 +328,36 @@ the JS `DateFmt.format()` logic (DateFmt.js:1537-1566):
    millisecond, julianDay, rd, unixtime) are null. If any single date component
    is provided, the others default to their calendar-specific defaults (usually 1/1/1).
 
+7. **No timezone / `'local'` means UTC (offset 0), NOT the system timezone**:
+   In JS, omitting `timezone` defaults to `"local"`, and iLib resolves that against the
+   intrinsic `Date` (the *system* timezone) — so a no-timezone JS date is machine-dependent.
+   Dart does NOT implement the system-local path: both `adjustRdForTimezone()` and
+   `calcTimezoneOffset()` short-circuit on `tz == null || tz == 'local'` and apply **no
+   offset** (`tzOffsetDays = 0`), i.e. the wall-clock components are treated as the UTC
+   instant. (`ILibTimeZone('local')` likewise falls back to the Etc/UTC offset of 0 while
+   keeping `getId() == 'local'`.)
+   Consequences:
+   - **In Dart, `timezone: 'Etc/UTC'`, `timezone: 'local'`, and omitting `timezone` are all
+     behaviorally identical** — every one resolves to offset 0 (UTC), so they produce the same
+     instant and the same wall-clock components. This is a **deliberate divergence from JS**,
+     where `'Etc/UTC'` (always offset 0) and `'local'` (the *system* timezone) differ on any
+     non-UTC machine and yield different instants. So a Dart test that sets `'local'` is NOT
+     exercising a system-timezone path the way the JS original does — it collapses to UTC.
+     Tests still set the JS-original value (`'Etc/UTC'` or `'local'`) for 1:1 construction
+     fidelity, but the reader must know the two are indistinguishable at runtime in Dart.
+   - **A no-timezone Dart date == an `Etc/UTC` date.** It is NOT equal to the JS no-timezone
+     (local) result on a non-UTC machine. The JS calendar tests avoid this by setting
+     `timezone: "Etc/UTC"` explicitly for deterministic UTC output; the Dart conversions
+     should mirror that (set `timezone: 'Etc/UTC'` wherever the JS test does) so construction
+     is 1:1. Omitting it happens to pass only because Dart's no-tz already behaves as UTC.
+   - JS `*Local*` tests (`testTZInDaylightTimeLocalTrue/False`, `testTZConstructUsingLocalID`,
+     `testTZGetRawOffsetMillisLocal`, …) and no-arg-vs-system-`Date` checks
+     (`testXxxDateConstructorEmpty`, `testGregDateGetTimeWithUnixTime`) depend on the system
+     timezone, so they are **N/A** in Dart or ported as deterministic round-trips.
+   - Supporting a real `'local'` would mean removing the short-circuit and wiring in the
+     platform's local offset (e.g. `DateTime` local / a tz plugin); it would also make those
+     `*Local*` tests portable, at the cost of machine-dependent results.
+
 ## Detailed Documentation
 
 For in-depth explanations, see `docs/`:
@@ -336,9 +366,11 @@ For in-depth explanations, see `docs/`:
 - [docs/conversion-guide.md](docs/conversion-guide.md) — General JS→Dart conversion checklist
 - [docs/architecture.md](docs/architecture.md) — System architecture and data loading
 - [docs/api.md](docs/api.md) — Public API reference
+- [docs/local-timezone-support.md](docs/local-timezone-support.md) — How JS `timezone: 'local'` (system tz) could be implemented in Dart; current divergence + two strategies + Flutter-recommended approach
 
 ## Deferred Work
 - **Han Calendar**: needs lunar calculations (`_lunarLongitude`, `_newMoonTime`, etc.). Planned as extension to `ILibAstro`.
+- **System `'local'` timezone**: Dart treats `'local'` == `'Etc/UTC'` == no-tz (all offset 0, UTC), diverging from JS where `'local'` is the system timezone. Implementing the real system-tz path (Flutter-recommended: `flutter_timezone` resolving the IANA id into the existing `ILibTimeZone` engine) is designed but not done. See [docs/local-timezone-support.md](docs/local-timezone-support.md).
 
 ## Timezone DST Offset (resolved)
 All `testXxxDateRoundTripConstruction2` tests (with timezone) pass for every calendar, and
