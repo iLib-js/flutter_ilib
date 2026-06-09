@@ -53,8 +53,8 @@ void main() {
       expect(erd.getRataDie(), isNotNull);
     });
     test('testEthiopicRataDieConstructorComponents', () {
-      final EthiopicRataDie erd = EthiopicRataDie(
-          year: 1, month: 1, day: 1, hour: 0, minute: 0, second: 0, millisecond: 0);
+      final EthiopicRataDie erd =
+          EthiopicRataDie(year: 1, month: 1, day: 1, hour: 0, minute: 0, second: 0, millisecond: 0);
       expect(erd.getRataDie(), 1);
     });
     test('testEthiopicRataDieConstructorComponentsBig', () {
@@ -138,7 +138,7 @@ void main() {
 
   group('EthiopicDate constructor from JD', () {
     test('testEthiopicDateConstructorFromJD', () {
-      final EthiopicDate ed = EthiopicDate(julianDay: 1724586.75);
+      final EthiopicDate ed = EthiopicDate(julianDay: 1724586.75, timezone: 'Etc/UTC');
       expect(ed.getYears(), 2);
       expect(ed.getMonths(), 1);
       expect(ed.getDays(), 2);
@@ -151,7 +151,7 @@ void main() {
 
   group('EthiopicDate constructor from unixtime', () {
     test('testEthiopicDateConstructorUnixTime', () {
-      final EthiopicDate ed = EthiopicDate(unixtime: 0);
+      final EthiopicDate ed = EthiopicDate(unixtime: 0, timezone: 'Etc/UTC');
       expect(ed.getYears(), 1962);
       expect(ed.getMonths(), 4);
       expect(ed.getDays(), 22);
@@ -164,7 +164,7 @@ void main() {
 
   group('EthiopicDate after leap year', () {
     test('testEthiopicDateAfterLeapYear', () {
-      final EthiopicDate ed = EthiopicDate(julianDay: 1725316.75);
+      final EthiopicDate ed = EthiopicDate(julianDay: 1725316.75, timezone: 'Etc/UTC');
       expect(ed.getYears(), 4);
       expect(ed.getMonths(), 1);
       expect(ed.getDays(), 1);
@@ -177,7 +177,7 @@ void main() {
 
   group('EthiopicDate from RD month/year transitions', () {
     test('testEthiopicDateFirstMonthEndRightBeforeDateChange', () {
-      final EthiopicDate ed = EthiopicDate(rd: 733087.9583333333);
+      final EthiopicDate ed = EthiopicDate(rd: 733087.9583333333, timezone: 'Etc/UTC');
       expect(ed.getYears(), 2008);
       expect(ed.getMonths(), 1);
       expect(ed.getDays(), 30);
@@ -187,7 +187,7 @@ void main() {
       expect(ed.getMilliseconds(), 0);
     });
     test('testEthiopicDateSecondMonthStartNoonAfterDateChange', () {
-      final EthiopicDate ed = EthiopicDate(rd: 733088.041666667);
+      final EthiopicDate ed = EthiopicDate(rd: 733088.041666667, timezone: 'Etc/UTC');
       expect(ed.getYears(), 2008);
       expect(ed.getMonths(), 2);
       expect(ed.getDays(), 1);
@@ -197,7 +197,7 @@ void main() {
       expect(ed.getMilliseconds(), 0);
     });
     test('testEthiopicDateLastMonthLeapYear', () {
-      final EthiopicDate ed = EthiopicDate(rd: 733057);
+      final EthiopicDate ed = EthiopicDate(rd: 733057, timezone: 'Etc/UTC');
       expect(ed.getYears(), 2007);
       expect(ed.getMonths(), 13);
       expect(ed.getDays(), 6);
@@ -207,7 +207,7 @@ void main() {
       expect(ed.getMilliseconds(), 0);
     });
     test('testEthiopicDateFirstMonthAfterLeapYear', () {
-      final EthiopicDate ed = EthiopicDate(rd: 733058);
+      final EthiopicDate ed = EthiopicDate(rd: 733058, timezone: 'Etc/UTC');
       expect(ed.getYears(), 2008);
       expect(ed.getMonths(), 1);
       expect(ed.getDays(), 1);
@@ -217,7 +217,7 @@ void main() {
       expect(ed.getMilliseconds(), 0);
     });
     test('testEthiopicDateThirdMonthEnd', () {
-      final EthiopicDate ed = EthiopicDate(rd: 733147);
+      final EthiopicDate ed = EthiopicDate(rd: 733147, timezone: 'Etc/UTC');
       expect(ed.getYears(), 2008);
       expect(ed.getMonths(), 3);
       expect(ed.getDays(), 30);
@@ -227,7 +227,7 @@ void main() {
       expect(ed.getMilliseconds(), 0);
     });
     test('testEthiopicDateFourthMonthStart', () {
-      final EthiopicDate ed = EthiopicDate(rd: 733148);
+      final EthiopicDate ed = EthiopicDate(rd: 733148, timezone: 'Etc/UTC');
       expect(ed.getYears(), 2008);
       expect(ed.getMonths(), 4);
       expect(ed.getDays(), 1);
@@ -237,7 +237,7 @@ void main() {
       expect(ed.getMilliseconds(), 0);
     });
     test('testEthiopicDateLastMonthEndNonLeapYear', () {
-      final EthiopicDate ed = EthiopicDate(rd: 733422);
+      final EthiopicDate ed = EthiopicDate(rd: 733422, timezone: 'Etc/UTC');
       expect(ed.getYears(), 2008);
       expect(ed.getMonths(), 13);
       expect(ed.getDays(), 5);
@@ -247,7 +247,7 @@ void main() {
       expect(ed.getMilliseconds(), 0);
     });
     test('testEthiopicDateFirstMonthStartNonLeapYear', () {
-      final EthiopicDate ed = EthiopicDate(rd: 733423);
+      final EthiopicDate ed = EthiopicDate(rd: 733423, timezone: 'Etc/UTC');
       expect(ed.getYears(), 2009);
       expect(ed.getMonths(), 1);
       expect(ed.getDays(), 1);
@@ -260,7 +260,7 @@ void main() {
 
   group('EthiopicDate from RD year boundaries', () {
     test('testEthiopicDateEndOfYearZeroRd', () {
-      final EthiopicDate ed = EthiopicDate(rd: 0);
+      final EthiopicDate ed = EthiopicDate(rd: 0, timezone: 'Etc/UTC');
       expect(ed.getYears(), 0);
       expect(ed.getMonths(), 13);
       expect(ed.getDays(), 5);
@@ -270,7 +270,7 @@ void main() {
       expect(ed.getMilliseconds(), 0);
     });
     test('testEthiopicDateBeginningOfYearOneRd', () {
-      final EthiopicDate ed = EthiopicDate(rd: 1);
+      final EthiopicDate ed = EthiopicDate(rd: 1, timezone: 'Etc/UTC');
       expect(ed.getYears(), 1);
       expect(ed.getMonths(), 1);
       expect(ed.getDays(), 1);
@@ -280,7 +280,7 @@ void main() {
       expect(ed.getMilliseconds(), 0);
     });
     test('testEthiopicDateAlmostEndOfYearOneRd', () {
-      final EthiopicDate ed = EthiopicDate(rd: 364);
+      final EthiopicDate ed = EthiopicDate(rd: 364, timezone: 'Etc/UTC');
       expect(ed.getYears(), 1);
       expect(ed.getMonths(), 13);
       expect(ed.getDays(), 4);
@@ -290,7 +290,7 @@ void main() {
       expect(ed.getMilliseconds(), 0);
     });
     test('testEthiopicDateEndOfYearOneRd', () {
-      final EthiopicDate ed = EthiopicDate(rd: 365);
+      final EthiopicDate ed = EthiopicDate(rd: 365, timezone: 'Etc/UTC');
       expect(ed.getYears(), 1);
       expect(ed.getMonths(), 13);
       expect(ed.getDays(), 5);
@@ -300,7 +300,7 @@ void main() {
       expect(ed.getMilliseconds(), 0);
     });
     test('testEthiopicDateBeginningOfYear2Rd', () {
-      final EthiopicDate ed = EthiopicDate(rd: 366);
+      final EthiopicDate ed = EthiopicDate(rd: 366, timezone: 'Etc/UTC');
       expect(ed.getYears(), 2);
       expect(ed.getMonths(), 1);
       expect(ed.getDays(), 1);
@@ -315,7 +315,7 @@ void main() {
     for (int i = 0; i < testDatesEthiopic.length; i++) {
       final List<num> td = testDatesEthiopic[i];
       test('testEthiopicDateConvert$i', () {
-        final EthiopicDate ed = EthiopicDate(julianDay: td[0] as double);
+        final EthiopicDate ed = EthiopicDate(julianDay: td[0] as double, timezone: 'Etc/UTC');
         expect(ed.getYears(), td[1]);
         expect(ed.getMonths(), td[2]);
         expect(ed.getDays(), td[3]);
@@ -331,7 +331,7 @@ void main() {
     for (int i = 0; i < testDatesEthiopic.length; i++) {
       final List<num> td = testDatesEthiopic[i];
       test('testEthiopicDateGetDayOfWeek$i', () {
-        final EthiopicDate ed = EthiopicDate(julianDay: td[0] as double);
+        final EthiopicDate ed = EthiopicDate(julianDay: td[0] as double, timezone: 'Etc/UTC');
         expect(ed.getDayOfWeek(), td[8]);
       });
     }
@@ -340,7 +340,14 @@ void main() {
   group('EthiopicDate constructor from components', () {
     test('testEthiopicDateConstructorFull', () {
       final EthiopicDate ed = EthiopicDate(
-          year: 2011, month: 9, day: 23, hour: 16, minute: 7, second: 12, millisecond: 123);
+          year: 2011,
+          month: 9,
+          day: 23,
+          hour: 16,
+          minute: 7,
+          second: 12,
+          millisecond: 123,
+          timezone: 'Etc/UTC');
       expect(ed.getYears(), 2011);
       expect(ed.getMonths(), 9);
       expect(ed.getDays(), 23);
@@ -362,7 +369,8 @@ void main() {
             hour: td[4] as int,
             minute: td[5] as int,
             second: td[6] as int,
-            millisecond: td[7] as int);
+            millisecond: td[7] as int,
+            timezone: 'Etc/UTC');
         expect(ed.getJulianDay(), td[0]);
         expect(ed.getDayOfWeek(), td[8]);
       });
@@ -371,26 +379,28 @@ void main() {
 
   group('EthiopicDate getTime', () {
     test('testEthiopicDateTestGetTimeZero', () {
-      final EthiopicDate ed = EthiopicDate(year: 1962, month: 4, day: 22, hour: 18);
+      final EthiopicDate ed =
+          EthiopicDate(year: 1962, month: 4, day: 22, hour: 18, timezone: 'Etc/UTC');
       expect(ed.getTime(), 0);
     });
     test('testEthiopicDateTestGetTime', () {
       final EthiopicDate ed =
-          EthiopicDate(year: 1962, month: 4, day: 22, hour: 21, minute: 30);
+          EthiopicDate(year: 1962, month: 4, day: 22, hour: 21, minute: 30, timezone: 'Etc/UTC');
       expect(ed.getTime(), 12600000);
     });
     test('testEthiopicDateTestGetTimeTooEarly', () {
-      final EthiopicDate ed = EthiopicDate(year: 1962, month: 4, day: 22, hour: 16);
+      final EthiopicDate ed =
+          EthiopicDate(year: 1962, month: 4, day: 22, hour: 16, timezone: 'Etc/UTC');
       expect(ed.getTime(), -1);
     });
     test('testEthiopicDateTestGetTimeTooLate', () {
       final EthiopicDate ed = EthiopicDate(
-          year: 2030, month: 5, day: 10, hour: 21, minute: 14, second: 8);
+          year: 2030, month: 5, day: 10, hour: 21, minute: 14, second: 8, timezone: 'Etc/UTC');
       expect(ed.getTime(), -1);
     });
     test('testEthiopicDateTestGetTimeExtendedNotTooLate', () {
       final EthiopicDate ed = EthiopicDate(
-          year: 2030, month: 5, day: 10, hour: 21, minute: 14, second: 8);
+          year: 2030, month: 5, day: 10, hour: 21, minute: 14, second: 8, timezone: 'Etc/UTC');
       expect(ed.getTimeExtended(), 2147483648000);
     });
   });
@@ -408,12 +418,10 @@ void main() {
       expect(ed2.getSeconds(), ed.getSeconds());
     });
     test('testEthiopicDateRoundTripConstruction2', () {
-      final EthiopicDate ed = EthiopicDate(
-          year: 2014, month: 10, day: 20,
-          timezone: 'America/Los_Angeles');
+      final EthiopicDate ed =
+          EthiopicDate(year: 2014, month: 10, day: 20, timezone: 'America/Los_Angeles');
       final int u = ed.getTime();
-      final EthiopicDate ed2 = EthiopicDate(
-          unixtime: u, timezone: 'America/Los_Angeles');
+      final EthiopicDate ed2 = EthiopicDate(unixtime: u, timezone: 'America/Los_Angeles');
       expect(ed2.timezone, ed.timezone);
       expect(ed2.getYears(), ed.getYears());
       expect(ed2.getMonths(), ed.getMonths());
@@ -426,8 +434,7 @@ void main() {
 
   group('EthiopicDate current time', () {
     test('testEthiopicDateCurrentTimeWithTimeZone', () {
-      final EthiopicDate ed =
-          EthiopicDate(timezone: 'America/Los_Angeles');
+      final EthiopicDate ed = EthiopicDate(timezone: 'America/Los_Angeles');
       final int now = DateTime.now().millisecondsSinceEpoch;
       expect((ed.getTime() - now).abs(), lessThan(50));
     });
@@ -437,47 +444,42 @@ void main() {
     test('testEthiopicDateConvertYears', () {
       for (int i = 0; i < testDatesEthiopic.length; i++) {
         final EthiopicDate ed =
-            EthiopicDate(julianDay: testDatesEthiopic[i][0].toDouble());
-        expect(ed.getYears(), testDatesEthiopic[i][1],
-            reason: 'jd=${testDatesEthiopic[i][0]}');
+            EthiopicDate(julianDay: testDatesEthiopic[i][0].toDouble(), timezone: 'Etc/UTC');
+        expect(ed.getYears(), testDatesEthiopic[i][1], reason: 'jd=${testDatesEthiopic[i][0]}');
       }
     });
     test('testEthiopicDateConvertMonths', () {
       for (int i = 0; i < testDatesEthiopic.length; i++) {
         final EthiopicDate ed =
-            EthiopicDate(julianDay: testDatesEthiopic[i][0].toDouble());
-        expect(ed.getMonths(), testDatesEthiopic[i][2],
-            reason: 'jd=${testDatesEthiopic[i][0]}');
+            EthiopicDate(julianDay: testDatesEthiopic[i][0].toDouble(), timezone: 'Etc/UTC');
+        expect(ed.getMonths(), testDatesEthiopic[i][2], reason: 'jd=${testDatesEthiopic[i][0]}');
       }
     });
     test('testEthiopicDateConvertDays', () {
       for (int i = 0; i < testDatesEthiopic.length; i++) {
         final EthiopicDate ed =
-            EthiopicDate(julianDay: testDatesEthiopic[i][0].toDouble());
-        expect(ed.getDays(), testDatesEthiopic[i][3],
-            reason: 'jd=${testDatesEthiopic[i][0]}');
+            EthiopicDate(julianDay: testDatesEthiopic[i][0].toDouble(), timezone: 'Etc/UTC');
+        expect(ed.getDays(), testDatesEthiopic[i][3], reason: 'jd=${testDatesEthiopic[i][0]}');
       }
     });
     test('testEthiopicDateConvertHours', () {
       for (int i = 0; i < testDatesEthiopic.length; i++) {
         final EthiopicDate ed =
-            EthiopicDate(julianDay: testDatesEthiopic[i][0].toDouble());
-        expect(ed.getHours(), testDatesEthiopic[i][4],
-            reason: 'jd=${testDatesEthiopic[i][0]}');
+            EthiopicDate(julianDay: testDatesEthiopic[i][0].toDouble(), timezone: 'Etc/UTC');
+        expect(ed.getHours(), testDatesEthiopic[i][4], reason: 'jd=${testDatesEthiopic[i][0]}');
       }
     });
     test('testEthiopicDateConvertDayOfWeek', () {
       for (int i = 0; i < testDatesEthiopic.length; i++) {
         final EthiopicDate ed =
-            EthiopicDate(julianDay: testDatesEthiopic[i][0].toDouble());
-        expect(ed.getDayOfWeek(), testDatesEthiopic[i][8],
-            reason: 'jd=${testDatesEthiopic[i][0]}');
+            EthiopicDate(julianDay: testDatesEthiopic[i][0].toDouble(), timezone: 'Etc/UTC');
+        expect(ed.getDayOfWeek(), testDatesEthiopic[i][8], reason: 'jd=${testDatesEthiopic[i][0]}');
       }
     });
     test('testEthiopicDateConvertOther', () {
       for (int i = 0; i < testDatesEthiopic.length; i++) {
         final EthiopicDate ed =
-            EthiopicDate(julianDay: testDatesEthiopic[i][0].toDouble());
+            EthiopicDate(julianDay: testDatesEthiopic[i][0].toDouble(), timezone: 'Etc/UTC');
         expect(ed.getMinutes(), testDatesEthiopic[i][5],
             reason: 'jd=${testDatesEthiopic[i][0]} minutes');
         expect(ed.getSeconds(), testDatesEthiopic[i][6],
@@ -495,19 +497,18 @@ void main() {
             hour: testDatesEthiopic[i][4] as int,
             minute: testDatesEthiopic[i][5] as int,
             second: testDatesEthiopic[i][6] as int,
-            millisecond: testDatesEthiopic[i][7] as int);
-        expect(ed.getJulianDay(), testDatesEthiopic[i][0],
-            reason: 'index=$i');
-        expect(ed.getDayOfWeek(), testDatesEthiopic[i][8],
-            reason: 'index=$i dayOfWeek');
+            millisecond: testDatesEthiopic[i][7] as int,
+            timezone: 'Etc/UTC');
+        expect(ed.getJulianDay(), testDatesEthiopic[i][0], reason: 'index=$i');
+        expect(ed.getDayOfWeek(), testDatesEthiopic[i][8], reason: 'index=$i dayOfWeek');
       }
     });
   });
 
   group('EthiopicDate getTimeZone', () {
     test('testEthiopicDateGetTimeZone', () {
-      final EthiopicDate ed = EthiopicDate(
-          year: 2011, month: 3, day: 8, timezone: 'America/Los_Angeles');
+      final EthiopicDate ed =
+          EthiopicDate(year: 2011, month: 3, day: 8, timezone: 'America/Los_Angeles');
       expect(ed.timezone, 'America/Los_Angeles');
     });
     test('testEthiopicDateGetTimeZoneDefault', () {
@@ -530,18 +531,15 @@ void main() {
 
   group('EthiopicDate getTimeZone by locale', () {
     test('testEthiopicDateGetTimeZoneByLocaleDE', () {
-      final EthiopicDate ed =
-          EthiopicDate(year: 2011, month: 3, day: 8, locale: 'de-DE');
+      final EthiopicDate ed = EthiopicDate(year: 2011, month: 3, day: 8, locale: 'de-DE');
       expect(ed.timezone, 'Europe/Berlin');
     });
     test('testEthiopicDateGetTimeZoneByLocaleJP', () {
-      final EthiopicDate ed =
-          EthiopicDate(year: 2011, month: 3, day: 8, locale: 'ja-JP');
+      final EthiopicDate ed = EthiopicDate(year: 2011, month: 3, day: 8, locale: 'ja-JP');
       expect(ed.timezone, 'Asia/Tokyo');
     });
     test('testEthiopicDateGetTimeZoneByLocaleBogus', () {
-      final EthiopicDate ed =
-          EthiopicDate(year: 2011, month: 3, day: 8, locale: 'zz-ZZ');
+      final EthiopicDate ed = EthiopicDate(year: 2011, month: 3, day: 8, locale: 'zz-ZZ');
       expect(ed.timezone, 'Etc/UTC');
     });
   });
@@ -552,8 +550,13 @@ void main() {
           locale: 'am-ET', date: 'dmy', length: 'full', timezone: 'Africa/Addis_Ababa');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 2021, month: 8, day: 20, hour: 1, minute: 0,
-          type: 'gregorian', timezone: 'Africa/Addis_Ababa');
+          year: 2021,
+          month: 8,
+          day: 20,
+          hour: 1,
+          minute: 0,
+          type: 'gregorian',
+          timezone: 'Africa/Addis_Ababa');
       expect(fmt.format(dateOptions), '13 ነሐሴ 2013');
     });
     test('testEthiopicDateConversion_weekday', () {
@@ -561,8 +564,13 @@ void main() {
           locale: 'am-ET', date: 'dmwy', length: 'full', timezone: 'Africa/Addis_Ababa');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 2021, month: 8, day: 20, hour: 1, minute: 0,
-          type: 'gregorian', timezone: 'Africa/Addis_Ababa');
+          year: 2021,
+          month: 8,
+          day: 20,
+          hour: 1,
+          minute: 0,
+          type: 'gregorian',
+          timezone: 'Africa/Addis_Ababa');
       expect(fmt.format(dateOptions), 'ሐሙስ፣ 13 ነሐሴ 2013');
     });
     test('testEthiopicDateConversion2', () {
@@ -570,8 +578,13 @@ void main() {
           locale: 'am-ET', date: 'dmy', length: 'full', timezone: 'Africa/Addis_Ababa');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 2021, month: 8, day: 20, hour: 14, minute: 30,
-          type: 'gregorian', timezone: 'Africa/Addis_Ababa');
+          year: 2021,
+          month: 8,
+          day: 20,
+          hour: 14,
+          minute: 30,
+          type: 'gregorian',
+          timezone: 'Africa/Addis_Ababa');
       expect(fmt.format(dateOptions), '14 ነሐሴ 2013');
     });
     test('testEthiopicDateConversion2_weekday', () {
@@ -579,8 +592,13 @@ void main() {
           locale: 'am-ET', date: 'dmwy', length: 'full', timezone: 'Africa/Addis_Ababa');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 2021, month: 8, day: 20, hour: 14, minute: 30,
-          type: 'gregorian', timezone: 'Africa/Addis_Ababa');
+          year: 2021,
+          month: 8,
+          day: 20,
+          hour: 14,
+          minute: 30,
+          type: 'gregorian',
+          timezone: 'Africa/Addis_Ababa');
       expect(fmt.format(dateOptions), 'ዓርብ፣ 14 ነሐሴ 2013');
     });
     test('testEthiopicDateConversion3', () {
@@ -588,8 +606,13 @@ void main() {
           locale: 'am-ET', date: 'dmy', length: 'full', timezone: 'Africa/Addis_Ababa');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 2021, month: 8, day: 20, hour: 3, minute: 43,
-          type: 'gregorian', timezone: 'Africa/Addis_Ababa');
+          year: 2021,
+          month: 8,
+          day: 20,
+          hour: 3,
+          minute: 43,
+          type: 'gregorian',
+          timezone: 'Africa/Addis_Ababa');
       expect(fmt.format(dateOptions), '13 ነሐሴ 2013');
     });
     test('testEthiopicDateConversion3_weekday', () {
@@ -597,8 +620,13 @@ void main() {
           locale: 'am-ET', date: 'dmwy', length: 'full', timezone: 'Africa/Addis_Ababa');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 2021, month: 8, day: 20, hour: 3, minute: 43,
-          type: 'gregorian', timezone: 'Africa/Addis_Ababa');
+          year: 2021,
+          month: 8,
+          day: 20,
+          hour: 3,
+          minute: 43,
+          type: 'gregorian',
+          timezone: 'Africa/Addis_Ababa');
       expect(fmt.format(dateOptions), 'ሐሙስ፣ 13 ነሐሴ 2013');
     });
     test('testEthiopicDateConversion4', () {
@@ -606,8 +634,13 @@ void main() {
           locale: 'am-ET', date: 'dmy', length: 'full', timezone: 'Africa/Addis_Ababa');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 2021, month: 8, day: 20, hour: 19, minute: 0,
-          type: 'gregorian', timezone: 'Africa/Addis_Ababa');
+          year: 2021,
+          month: 8,
+          day: 20,
+          hour: 19,
+          minute: 0,
+          type: 'gregorian',
+          timezone: 'Africa/Addis_Ababa');
       expect(fmt.format(dateOptions), '14 ነሐሴ 2013');
     });
     test('testEthiopicDateConversion4_weekday', () {
@@ -615,8 +648,13 @@ void main() {
           locale: 'am-ET', date: 'dmwy', length: 'full', timezone: 'Africa/Addis_Ababa');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       final ILibDateOptions dateOptions = ILibDateOptions(
-          year: 2021, month: 8, day: 20, hour: 19, minute: 0,
-          type: 'gregorian', timezone: 'Africa/Addis_Ababa');
+          year: 2021,
+          month: 8,
+          day: 20,
+          hour: 19,
+          minute: 0,
+          type: 'gregorian',
+          timezone: 'Africa/Addis_Ababa');
       expect(fmt.format(dateOptions), 'ዓርብ፣ 14 ነሐሴ 2013');
     });
   });
@@ -624,8 +662,13 @@ void main() {
   group('EthiopicDate constructor copy', () {
     test('testEthiopicDateConstructorCopy', () {
       final EthiopicDate ed = EthiopicDate(
-          year: 2011, month: 9, day: 23,
-          hour: 16, minute: 7, second: 12, millisecond: 123,
+          year: 2011,
+          month: 9,
+          day: 23,
+          hour: 16,
+          minute: 7,
+          second: 12,
+          millisecond: 123,
           timezone: 'Etc/UTC');
       expect(ed.getYears(), 2011);
       expect(ed.getMonths(), 9);

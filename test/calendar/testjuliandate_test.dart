@@ -82,7 +82,7 @@ void main() {
     for (int i = 0; i < testDates.length; i++) {
       final List<num> td = testDates[i];
       test('JD ${td[0]} gives year ${td[1]}, month ${td[2]}, day ${td[3]}', () {
-        final JulianDate d = JulianDate(julianDay: td[0] as double);
+        final JulianDate d = JulianDate(julianDay: td[0] as double, timezone: 'Etc/UTC');
         expect(d.getYears(), td[1] as int);
         expect(d.getMonths(), td[2] as int);
         expect(d.getDays(), td[3] as int);
@@ -98,7 +98,7 @@ void main() {
     for (int i = 0; i < testDates.length; i++) {
       final List<num> td = testDates[i];
       test('${td[1]}/${td[2]}/${td[3]} dow=${td[8]}', () {
-        final JulianDate d = JulianDate(julianDay: td[0] as double);
+        final JulianDate d = JulianDate(julianDay: td[0] as double, timezone: 'Etc/UTC');
         expect(d.getDayOfWeek(), td[8] as int);
       });
     }
@@ -113,7 +113,7 @@ void main() {
 
   group('JulianDate constructor', () {
     test('testJulDateConstructorFromJD', () {
-      final JulianDate jul = JulianDate(julianDay: 1721790.75);
+      final JulianDate jul = JulianDate(julianDay: 1721790.75, timezone: 'Etc/UTC');
       expect(jul.getYears(), 2);
       expect(jul.getMonths(), 1);
       expect(jul.getDays(), 3);
@@ -123,7 +123,7 @@ void main() {
       expect(jul.getMilliseconds(), 0);
     });
     test('testJulDateConstructorUnixTime', () {
-      final JulianDate jul = JulianDate(unixtime: 61000);
+      final JulianDate jul = JulianDate(unixtime: 61000, timezone: 'Etc/UTC');
       expect(jul.getYears(), 1969);
       expect(jul.getMonths(), 12);
       expect(jul.getDays(), 19);
@@ -134,7 +134,14 @@ void main() {
     });
     test('testJulDateConstructorFull', () {
       final JulianDate jul = JulianDate(
-          year: 2011, month: 9, day: 23, hour: 16, minute: 7, second: 12, millisecond: 123);
+          year: 2011,
+          month: 9,
+          day: 23,
+          hour: 16,
+          minute: 7,
+          second: 12,
+          millisecond: 123,
+          timezone: 'Etc/UTC');
       expect(jul.getYears(), 2011);
       expect(jul.getMonths(), 9);
       expect(jul.getDays(), 23);
@@ -144,7 +151,7 @@ void main() {
       expect(jul.getMilliseconds(), 123);
     });
     test('testJulDateAfterLeapYear', () {
-      final JulianDate jul = JulianDate(julianDay: 1723071.9);
+      final JulianDate jul = JulianDate(julianDay: 1723071.9, timezone: 'Etc/UTC');
       expect(jul.getYears(), 5);
       expect(jul.getMonths(), 7);
       expect(jul.getDays(), 7);
@@ -154,7 +161,7 @@ void main() {
       expect(jul.getMilliseconds(), 0);
     });
     test('testJulDateAfterCentury', () {
-      final JulianDate jul = JulianDate(julianDay: 1758231.8);
+      final JulianDate jul = JulianDate(julianDay: 1758231.8, timezone: 'Etc/UTC');
       expect(jul.getYears(), 101);
       expect(jul.getMonths(), 10);
       expect(jul.getDays(), 11);
@@ -164,7 +171,7 @@ void main() {
       expect(jul.getMilliseconds(), 0);
     });
     test('testJulDateAfterQuadCentury', () {
-      final JulianDate jul = JulianDate(julianDay: 1867706.833333333333);
+      final JulianDate jul = JulianDate(julianDay: 1867706.833333333333, timezone: 'Etc/UTC');
       expect(jul.getYears(), 401);
       expect(jul.getMonths(), 7);
       expect(jul.getDays(), 3);
@@ -177,118 +184,118 @@ void main() {
 
   group('JulianDate date boundaries from RD', () {
     test('testJulDateJan31Midnight', () {
-      final JulianDate d = JulianDate(rd: 734548);
+      final JulianDate d = JulianDate(rd: 734548, timezone: 'Etc/UTC');
       expect(d.getYears(), 2012);
       expect(d.getMonths(), 1);
       expect(d.getDays(), 31);
       expect(d.getHours(), 0);
     });
     test('testJulDateJan31Noon', () {
-      final JulianDate d = JulianDate(rd: 734548.5);
+      final JulianDate d = JulianDate(rd: 734548.5, timezone: 'Etc/UTC');
       expect(d.getYears(), 2012);
       expect(d.getMonths(), 1);
       expect(d.getDays(), 31);
       expect(d.getHours(), 12);
     });
     test('testJulDateFeb1', () {
-      final JulianDate d = JulianDate(rd: 734549.5);
+      final JulianDate d = JulianDate(rd: 734549.5, timezone: 'Etc/UTC');
       expect(d.getYears(), 2012);
       expect(d.getMonths(), 2);
       expect(d.getDays(), 1);
       expect(d.getHours(), 12);
     });
     test('testJulDateFeb28LeapYear', () {
-      final JulianDate d = JulianDate(rd: 734576.5);
+      final JulianDate d = JulianDate(rd: 734576.5, timezone: 'Etc/UTC');
       expect(d.getYears(), 2012);
       expect(d.getMonths(), 2);
       expect(d.getDays(), 28);
     });
     test('testJulDateFeb29LeapYear', () {
-      final JulianDate d = JulianDate(rd: 734577.5);
+      final JulianDate d = JulianDate(rd: 734577.5, timezone: 'Etc/UTC');
       expect(d.getYears(), 2012);
       expect(d.getMonths(), 2);
       expect(d.getDays(), 29);
     });
     test('testJulDateMar1LeapYear', () {
-      final JulianDate d = JulianDate(rd: 734578.5);
+      final JulianDate d = JulianDate(rd: 734578.5, timezone: 'Etc/UTC');
       expect(d.getYears(), 2012);
       expect(d.getMonths(), 3);
       expect(d.getDays(), 1);
     });
     test('testJulDateMar31LeapYear', () {
-      final JulianDate d = JulianDate(rd: 734608.5);
+      final JulianDate d = JulianDate(rd: 734608.5, timezone: 'Etc/UTC');
       expect(d.getYears(), 2012);
       expect(d.getMonths(), 3);
       expect(d.getDays(), 31);
     });
     test('testJulDateApr1LeapYear', () {
-      final JulianDate d = JulianDate(rd: 734609.5);
+      final JulianDate d = JulianDate(rd: 734609.5, timezone: 'Etc/UTC');
       expect(d.getYears(), 2012);
       expect(d.getMonths(), 4);
       expect(d.getDays(), 1);
     });
     test('testJulDateDec31LeapYear', () {
-      final JulianDate d = JulianDate(rd: 734883.5);
+      final JulianDate d = JulianDate(rd: 734883.5, timezone: 'Etc/UTC');
       expect(d.getYears(), 2012);
       expect(d.getMonths(), 12);
       expect(d.getDays(), 31);
     });
     test('testJulDateJan1NonLeapYear', () {
-      final JulianDate d = JulianDate(rd: 734884.5);
+      final JulianDate d = JulianDate(rd: 734884.5, timezone: 'Etc/UTC');
       expect(d.getYears(), 2013);
       expect(d.getMonths(), 1);
       expect(d.getDays(), 1);
     });
     test('testJulDateFeb28NonLeapYear', () {
-      final JulianDate d = JulianDate(rd: 734942.5);
+      final JulianDate d = JulianDate(rd: 734942.5, timezone: 'Etc/UTC');
       expect(d.getYears(), 2013);
       expect(d.getMonths(), 2);
       expect(d.getDays(), 28);
     });
     test('testJulDateMar1NonLeapYear', () {
-      final JulianDate d = JulianDate(rd: 734943.5);
+      final JulianDate d = JulianDate(rd: 734943.5, timezone: 'Etc/UTC');
       expect(d.getYears(), 2013);
       expect(d.getMonths(), 3);
       expect(d.getDays(), 1);
     });
     test('testJulDateMar31NonLeapYear', () {
-      final JulianDate d = JulianDate(rd: 734973.5);
+      final JulianDate d = JulianDate(rd: 734973.5, timezone: 'Etc/UTC');
       expect(d.getYears(), 2013);
       expect(d.getMonths(), 3);
       expect(d.getDays(), 31);
     });
     test('testJulDateApr1NonLeapYear', () {
-      final JulianDate d = JulianDate(rd: 734974.5);
+      final JulianDate d = JulianDate(rd: 734974.5, timezone: 'Etc/UTC');
       expect(d.getYears(), 2013);
       expect(d.getMonths(), 4);
       expect(d.getDays(), 1);
     });
     test('testJulDateEndOfYearMinus1Rd', () {
-      final JulianDate d = JulianDate(rd: 0);
+      final JulianDate d = JulianDate(rd: 0, timezone: 'Etc/UTC');
       expect(d.getYears(), -1);
       expect(d.getMonths(), 12);
       expect(d.getDays(), 31);
     });
     test('testJulDateBeginningOfYearRd', () {
-      final JulianDate d = JulianDate(rd: 1);
+      final JulianDate d = JulianDate(rd: 1, timezone: 'Etc/UTC');
       expect(d.getYears(), 1);
       expect(d.getMonths(), 1);
       expect(d.getDays(), 1);
     });
     test('testJulDateAlmostEndOfYearRd', () {
-      final JulianDate d = JulianDate(rd: 364);
+      final JulianDate d = JulianDate(rd: 364, timezone: 'Etc/UTC');
       expect(d.getYears(), 1);
       expect(d.getMonths(), 12);
       expect(d.getDays(), 30);
     });
     test('testJulDateEndOfYearRd', () {
-      final JulianDate d = JulianDate(rd: 365);
+      final JulianDate d = JulianDate(rd: 365, timezone: 'Etc/UTC');
       expect(d.getYears(), 1);
       expect(d.getMonths(), 12);
       expect(d.getDays(), 31);
     });
     test('testJulDateBeginningOfYear2Rd', () {
-      final JulianDate d = JulianDate(rd: 366);
+      final JulianDate d = JulianDate(rd: 366, timezone: 'Etc/UTC');
       expect(d.getYears(), 2);
       expect(d.getMonths(), 1);
       expect(d.getDays(), 1);
@@ -299,7 +306,7 @@ void main() {
     test('testJulDateConvert', () {
       for (int i = 0; i < testDates.length; i++) {
         final List<num> td = testDates[i];
-        final JulianDate jul = JulianDate(julianDay: td[0] as double);
+        final JulianDate jul = JulianDate(julianDay: td[0] as double, timezone: 'Etc/UTC');
         expect(jul.getYears(), td[1] as int);
         expect(jul.getMonths(), td[2] as int);
         expect(jul.getDays(), td[3] as int);
@@ -319,7 +326,8 @@ void main() {
             hour: td[4] as int,
             minute: td[5] as int,
             second: td[6] as int,
-            millisecond: td[7] as int);
+            millisecond: td[7] as int,
+            timezone: 'Etc/UTC');
         expect(jul.getJulianDay(), td[0]);
         expect(jul.getDayOfWeek(), td[8]);
       }
@@ -328,19 +336,20 @@ void main() {
 
   group('JulianDate getTime', () {
     test('testJulDateTestGetTimeZero', () {
-      final JulianDate jul = JulianDate(year: 1969, month: 12, day: 19);
+      final JulianDate jul = JulianDate(year: 1969, month: 12, day: 19, timezone: 'Etc/UTC');
       expect(jul.getTime(), 0);
     });
     test('testJulDateTestGetTime', () {
-      final JulianDate jul = JulianDate(year: 1969, month: 12, day: 21, hour: 8, minute: 30);
+      final JulianDate jul =
+          JulianDate(year: 1969, month: 12, day: 21, hour: 8, minute: 30, timezone: 'Etc/UTC');
       expect(jul.getTime(), 203400000);
     });
     test('testJulDateTestGetTimeTooEarly', () {
-      final JulianDate jul = JulianDate(year: 1960, month: 1, day: 1);
+      final JulianDate jul = JulianDate(year: 1960, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(jul.getTime(), -1);
     });
     test('testJulDateTestGetTimeTooLate', () {
-      final JulianDate jul = JulianDate(year: 2040, month: 1, day: 1);
+      final JulianDate jul = JulianDate(year: 2040, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(jul.getTime(), -1);
     });
   });

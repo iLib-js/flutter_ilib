@@ -50,7 +50,7 @@ void main() {
       expect(gd.getYears(), isNotNull);
     });
     test('testGregDateConstructorFromJD', () {
-      final GregorianDate gd = GregorianDate(julianDay: 1721790.75);
+      final GregorianDate gd = GregorianDate(julianDay: 1721790.75, timezone: 'Etc/UTC');
       expect(gd.getYears(), 2);
       expect(gd.getMonths(), 1);
       expect(gd.getDays(), 1);
@@ -60,7 +60,7 @@ void main() {
       expect(gd.getMilliseconds(), 0);
     });
     test('testGregDateAfterLeapYear', () {
-      final GregorianDate gd = GregorianDate(julianDay: 1723071.9);
+      final GregorianDate gd = GregorianDate(julianDay: 1723071.9, timezone: 'Etc/UTC');
       expect(gd.getYears(), 5);
       expect(gd.getMonths(), 7);
       expect(gd.getDays(), 5);
@@ -70,7 +70,7 @@ void main() {
       expect(gd.getMilliseconds(), 0);
     });
     test('testGregDateAfterCentury', () {
-      final GregorianDate gd = GregorianDate(julianDay: 1758231.8);
+      final GregorianDate gd = GregorianDate(julianDay: 1758231.8, timezone: 'Etc/UTC');
       expect(gd.getYears(), 101);
       expect(gd.getMonths(), 10);
       expect(gd.getDays(), 10);
@@ -80,7 +80,7 @@ void main() {
       expect(gd.getMilliseconds(), 0);
     });
     test('testGregDateAfterQuadCentury', () {
-      final GregorianDate gd = GregorianDate(julianDay: 1867706.833333333333);
+      final GregorianDate gd = GregorianDate(julianDay: 1867706.833333333333, timezone: 'Etc/UTC');
       expect(gd.getYears(), 401);
       expect(gd.getMonths(), 7);
       expect(gd.getDays(), 4);
@@ -90,37 +90,37 @@ void main() {
       expect(gd.getMilliseconds(), 0);
     });
     test('testGregDateEndOfYear', () {
-      final GregorianDate gd = GregorianDate(julianDay: 2455196.5);
+      final GregorianDate gd = GregorianDate(julianDay: 2455196.5, timezone: 'Etc/UTC');
       expect(gd.getYears(), 2009);
       expect(gd.getMonths(), 12);
       expect(gd.getDays(), 31);
     });
     test('testGregDateBeginningOfYear', () {
-      final GregorianDate gd = GregorianDate(julianDay: 2455197.5);
+      final GregorianDate gd = GregorianDate(julianDay: 2455197.5, timezone: 'Etc/UTC');
       expect(gd.getYears(), 2010);
       expect(gd.getMonths(), 1);
       expect(gd.getDays(), 1);
     });
     test('testGregDateEndOfYearLeapYear', () {
-      final GregorianDate gd = GregorianDate(julianDay: 2454831.5);
+      final GregorianDate gd = GregorianDate(julianDay: 2454831.5, timezone: 'Etc/UTC');
       expect(gd.getYears(), 2008);
       expect(gd.getMonths(), 12);
       expect(gd.getDays(), 31);
     });
     test('testGregDateBeginningOfYearAfterLeapYear', () {
-      final GregorianDate gd = GregorianDate(julianDay: 2454832.5);
+      final GregorianDate gd = GregorianDate(julianDay: 2454832.5, timezone: 'Etc/UTC');
       expect(gd.getYears(), 2009);
       expect(gd.getMonths(), 1);
       expect(gd.getDays(), 1);
     });
     test('testGregDateEndOfYear0RJd', () {
-      final GregorianDate gd = GregorianDate(julianDay: 1721424.5);
+      final GregorianDate gd = GregorianDate(julianDay: 1721424.5, timezone: 'Etc/UTC');
       expect(gd.getYears(), 0);
       expect(gd.getMonths(), 12);
       expect(gd.getDays(), 31);
     });
     test('testGregDateJan1Midnight', () {
-      final GregorianDate gd = GregorianDate(julianDay: 2455197.5);
+      final GregorianDate gd = GregorianDate(julianDay: 2455197.5, timezone: 'Etc/UTC');
       expect(gd.getYears(), 2010);
       expect(gd.getMonths(), 1);
       expect(gd.getDays(), 1);
@@ -133,7 +133,7 @@ void main() {
 
   group('GregorianDate from RD', () {
     test('testGregDateJan31Midnight', () {
-      final GregorianDate gd = GregorianDate(rd: 734533);
+      final GregorianDate gd = GregorianDate(rd: 734533, timezone: 'Etc/UTC');
       expect(gd.getYears(), 2012);
       expect(gd.getMonths(), 1);
       expect(gd.getDays(), 31);
@@ -143,7 +143,7 @@ void main() {
       expect(gd.getMilliseconds(), 0);
     });
     test('testGregDateJan31Noon', () {
-      final GregorianDate gd = GregorianDate(rd: 734533.5);
+      final GregorianDate gd = GregorianDate(rd: 734533.5, timezone: 'Etc/UTC');
       expect(gd.getYears(), 2012);
       expect(gd.getMonths(), 1);
       expect(gd.getDays(), 31);
@@ -153,115 +153,115 @@ void main() {
       expect(gd.getMilliseconds(), 0);
     });
     test('testGregDateFeb1', () {
-      final GregorianDate gd = GregorianDate(rd: 734534.5);
+      final GregorianDate gd = GregorianDate(rd: 734534.5, timezone: 'Etc/UTC');
       expect(gd.getYears(), 2012);
       expect(gd.getMonths(), 2);
       expect(gd.getDays(), 1);
       expect(gd.getHours(), 12);
     });
     test('testGregDateFeb28LeapYear', () {
-      final GregorianDate gd = GregorianDate(rd: 734561.5);
+      final GregorianDate gd = GregorianDate(rd: 734561.5, timezone: 'Etc/UTC');
       expect(gd.getYears(), 2012);
       expect(gd.getMonths(), 2);
       expect(gd.getDays(), 28);
       expect(gd.getHours(), 12);
     });
     test('testGregDateFeb29LeapYear', () {
-      final GregorianDate gd = GregorianDate(rd: 734562.5);
+      final GregorianDate gd = GregorianDate(rd: 734562.5, timezone: 'Etc/UTC');
       expect(gd.getYears(), 2012);
       expect(gd.getMonths(), 2);
       expect(gd.getDays(), 29);
       expect(gd.getHours(), 12);
     });
     test('testGregDateMar1LeapYear', () {
-      final GregorianDate gd = GregorianDate(rd: 734563.5);
+      final GregorianDate gd = GregorianDate(rd: 734563.5, timezone: 'Etc/UTC');
       expect(gd.getYears(), 2012);
       expect(gd.getMonths(), 3);
       expect(gd.getDays(), 1);
       expect(gd.getHours(), 12);
     });
     test('testGregDateMar31LeapYear', () {
-      final GregorianDate gd = GregorianDate(rd: 734593.5);
+      final GregorianDate gd = GregorianDate(rd: 734593.5, timezone: 'Etc/UTC');
       expect(gd.getYears(), 2012);
       expect(gd.getMonths(), 3);
       expect(gd.getDays(), 31);
       expect(gd.getHours(), 12);
     });
     test('testGregDateApr1LeapYear', () {
-      final GregorianDate gd = GregorianDate(rd: 734594.5);
+      final GregorianDate gd = GregorianDate(rd: 734594.5, timezone: 'Etc/UTC');
       expect(gd.getYears(), 2012);
       expect(gd.getMonths(), 4);
       expect(gd.getDays(), 1);
       expect(gd.getHours(), 12);
     });
     test('testGregDateDec31LeapYear', () {
-      final GregorianDate gd = GregorianDate(rd: 734868.5);
+      final GregorianDate gd = GregorianDate(rd: 734868.5, timezone: 'Etc/UTC');
       expect(gd.getYears(), 2012);
       expect(gd.getMonths(), 12);
       expect(gd.getDays(), 31);
       expect(gd.getHours(), 12);
     });
     test('testGregDateJan1NonLeapYear', () {
-      final GregorianDate gd = GregorianDate(rd: 734869.5);
+      final GregorianDate gd = GregorianDate(rd: 734869.5, timezone: 'Etc/UTC');
       expect(gd.getYears(), 2013);
       expect(gd.getMonths(), 1);
       expect(gd.getDays(), 1);
       expect(gd.getHours(), 12);
     });
     test('testGregDateFeb28NonLeapYear', () {
-      final GregorianDate gd = GregorianDate(rd: 734927.5);
+      final GregorianDate gd = GregorianDate(rd: 734927.5, timezone: 'Etc/UTC');
       expect(gd.getYears(), 2013);
       expect(gd.getMonths(), 2);
       expect(gd.getDays(), 28);
       expect(gd.getHours(), 12);
     });
     test('testGregDateMar1NonLeapYear', () {
-      final GregorianDate gd = GregorianDate(rd: 734928.5);
+      final GregorianDate gd = GregorianDate(rd: 734928.5, timezone: 'Etc/UTC');
       expect(gd.getYears(), 2013);
       expect(gd.getMonths(), 3);
       expect(gd.getDays(), 1);
       expect(gd.getHours(), 12);
     });
     test('testGregDateMar31NonLeapYear', () {
-      final GregorianDate gd = GregorianDate(rd: 734958.5);
+      final GregorianDate gd = GregorianDate(rd: 734958.5, timezone: 'Etc/UTC');
       expect(gd.getYears(), 2013);
       expect(gd.getMonths(), 3);
       expect(gd.getDays(), 31);
       expect(gd.getHours(), 12);
     });
     test('testGregDateApr1NonLeapYear', () {
-      final GregorianDate gd = GregorianDate(rd: 734959.5);
+      final GregorianDate gd = GregorianDate(rd: 734959.5, timezone: 'Etc/UTC');
       expect(gd.getYears(), 2013);
       expect(gd.getMonths(), 4);
       expect(gd.getDays(), 1);
       expect(gd.getHours(), 12);
     });
     test('testGregDateEndOfYear0Rd', () {
-      final GregorianDate gd = GregorianDate(rd: 0);
+      final GregorianDate gd = GregorianDate(rd: 0, timezone: 'Etc/UTC');
       expect(gd.getYears(), 0);
       expect(gd.getMonths(), 12);
       expect(gd.getDays(), 31);
     });
     test('testGregDateBeginningOfYearRd', () {
-      final GregorianDate gd = GregorianDate(rd: 1);
+      final GregorianDate gd = GregorianDate(rd: 1, timezone: 'Etc/UTC');
       expect(gd.getYears(), 1);
       expect(gd.getMonths(), 1);
       expect(gd.getDays(), 1);
     });
     test('testGregDateAlmostEndOfYearRd', () {
-      final GregorianDate gd = GregorianDate(rd: 364);
+      final GregorianDate gd = GregorianDate(rd: 364, timezone: 'Etc/UTC');
       expect(gd.getYears(), 1);
       expect(gd.getMonths(), 12);
       expect(gd.getDays(), 30);
     });
     test('testGregDateEndOfYearRd', () {
-      final GregorianDate gd = GregorianDate(rd: 365);
+      final GregorianDate gd = GregorianDate(rd: 365, timezone: 'Etc/UTC');
       expect(gd.getYears(), 1);
       expect(gd.getMonths(), 12);
       expect(gd.getDays(), 31);
     });
     test('testGregDateBeginningOfYear2Rd', () {
-      final GregorianDate gd = GregorianDate(rd: 366);
+      final GregorianDate gd = GregorianDate(rd: 366, timezone: 'Etc/UTC');
       expect(gd.getYears(), 2);
       expect(gd.getMonths(), 1);
       expect(gd.getDays(), 1);
@@ -270,7 +270,7 @@ void main() {
 
   group('GregorianDate constructor from unixtime', () {
     test('testGregDateConstructorUnixTime', () {
-      final GregorianDate gd = GregorianDate(unixtime: 61000);
+      final GregorianDate gd = GregorianDate(unixtime: 61000, timezone: 'Etc/UTC');
       expect(gd.getYears(), 1970);
       expect(gd.getMonths(), 1);
       expect(gd.getDays(), 1);
@@ -299,7 +299,7 @@ void main() {
     for (int i = 0; i < testDatesGregorian.length; i++) {
       final List<num> td = testDatesGregorian[i];
       test('testGregDateConvert$i', () {
-        final GregorianDate gd = GregorianDate(julianDay: td[0] as double);
+        final GregorianDate gd = GregorianDate(julianDay: td[0] as double, timezone: 'Etc/UTC');
         expect(gd.getYears(), td[1]);
         expect(gd.getMonths(), td[2]);
         expect(gd.getDays(), td[3]);
@@ -323,7 +323,8 @@ void main() {
             hour: td[4] as int,
             minute: td[5] as int,
             second: td[6] as int,
-            millisecond: td[7] as int);
+            millisecond: td[7] as int,
+            timezone: 'Etc/UTC');
         expect(gd.getJulianDay(), td[0]);
         expect(gd.getDayOfWeek(), td[8]);
       });
@@ -332,44 +333,44 @@ void main() {
 
   group('GregorianDate getDayOfWeek', () {
     test('testGetDayOfWeek1', () {
-      final GregorianDate gd = GregorianDate(year: 2011, month: 9, day: 30);
+      final GregorianDate gd = GregorianDate(year: 2011, month: 9, day: 30, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
     });
     test('testGetDayOfWeekWithTime', () {
-      final GregorianDate gd =
-          GregorianDate(year: 2011, month: 9, day: 30, hour: 8, minute: 39, second: 34);
+      final GregorianDate gd = GregorianDate(
+          year: 2011, month: 9, day: 30, hour: 8, minute: 39, second: 34, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
     });
     test('testGetDayOfWeek2', () {
-      final GregorianDate gd = GregorianDate(year: 1648, month: 6, day: 10);
+      final GregorianDate gd = GregorianDate(year: 1648, month: 6, day: 10, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 3);
     });
     test('testGetDayOfWeek3', () {
-      final GregorianDate gd = GregorianDate(year: 1190, month: 3, day: 23);
+      final GregorianDate gd = GregorianDate(year: 1190, month: 3, day: 23, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
     });
     test('testGetDayOfWeek4', () {
-      final GregorianDate gd = GregorianDate(year: -586, month: 7, day: 24);
+      final GregorianDate gd = GregorianDate(year: -586, month: 7, day: 24, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 0);
     });
   });
 
   group('GregorianDate getTime', () {
     test('testGregDateTestGetTimeZero', () {
-      final GregorianDate gd = GregorianDate(year: 1970, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 1970, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getTime(), 0);
     });
     test('testGregDateTestGetTime', () {
       final GregorianDate gd =
-          GregorianDate(year: 1970, month: 1, day: 3, hour: 8, minute: 30);
+          GregorianDate(year: 1970, month: 1, day: 3, hour: 8, minute: 30, timezone: 'Etc/UTC');
       expect(gd.getTime(), 203400000);
     });
     test('testGregDateTestGetTimeTooEarly', () {
-      final GregorianDate gd = GregorianDate(year: 1969, month: 12, day: 31);
+      final GregorianDate gd = GregorianDate(year: 1969, month: 12, day: 31, timezone: 'Etc/UTC');
       expect(gd.getTime(), -1);
     });
     test('testGregDateTestGetTimeTooLate', () {
-      final GregorianDate gd = GregorianDate(year: 2038, month: 1, day: 20);
+      final GregorianDate gd = GregorianDate(year: 2038, month: 1, day: 20, timezone: 'Etc/UTC');
       expect(gd.getTime(), -1);
     });
     test('testGregDateGetTimeWithUTC', () {
@@ -382,162 +383,168 @@ void main() {
 
   group('GregorianDate getTimeExtended', () {
     test('testGregDateTestGetTimeExtendedZero', () {
-      final GregorianDate gd = GregorianDate(year: 1970, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 1970, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getTimeExtended(), 0);
     });
     test('testGregDateTestGetTimeExtended', () {
       final GregorianDate gd =
-          GregorianDate(year: 1970, month: 1, day: 3, hour: 8, minute: 30);
+          GregorianDate(year: 1970, month: 1, day: 3, hour: 8, minute: 30, timezone: 'Etc/UTC');
       expect(gd.getTimeExtended(), 203400000);
     });
     test('testGregDateTestGetTimeExtendedTooEarlyForRegularUnixTime', () {
-      final GregorianDate gd = GregorianDate(year: 1969, month: 12, day: 31);
+      final GregorianDate gd = GregorianDate(year: 1969, month: 12, day: 31, timezone: 'Etc/UTC');
       expect(gd.getTimeExtended(), -86400000);
     });
     test('testGregDateTestGetTimeExtendedTooLateForRegularUnixTime', () {
-      final GregorianDate gd = GregorianDate(year: 2038, month: 1, day: 20);
+      final GregorianDate gd = GregorianDate(year: 2038, month: 1, day: 20, timezone: 'Etc/UTC');
       expect(gd.getTimeExtended(), 2147558400000);
     });
     test('testGregDateTestGetTimeExtendedTooEarlyForExtendedUnixTime', () {
-      final GregorianDate gd = GregorianDate(year: -271821, month: 4, day: 18);
+      final GregorianDate gd = GregorianDate(year: -271821, month: 4, day: 18, timezone: 'Etc/UTC');
       expect(gd.getTimeExtended(), -1);
     });
     test('testGregDateTestGetTimeExtendedTooLateForExtendedUnixTime', () {
-      final GregorianDate gd = GregorianDate(year: 275760, month: 9, day: 20);
+      final GregorianDate gd = GregorianDate(year: 275760, month: 9, day: 20, timezone: 'Etc/UTC');
       expect(gd.getTimeExtended(), -1);
     });
   });
 
   group('GregorianDate getRataDie', () {
     test('testGregDateGetRataDie', () {
-      final GregorianDate gd = GregorianDate(year: 2011, month: 3, day: 8);
+      final GregorianDate gd = GregorianDate(year: 2011, month: 3, day: 8, timezone: 'Etc/UTC');
       expect(gd.getRataDie(), 734204);
     });
   });
 
-
   group('GregorianDate getWeekOfYear', () {
     test('testGregDateTestGetWeekOfYearThisYear', () {
-      final GregorianDate gd = GregorianDate(year: 2011, month: 1, day: 7);
+      final GregorianDate gd = GregorianDate(year: 2011, month: 1, day: 7, timezone: 'Etc/UTC');
       expect(gd.getWeekOfYear(), 1);
     });
     test('testGregDateTestGetWeekOfYearThisYear2', () {
-      final GregorianDate gd = GregorianDate(year: 2011, month: 1, day: 25);
+      final GregorianDate gd = GregorianDate(year: 2011, month: 1, day: 25, timezone: 'Etc/UTC');
       expect(gd.getWeekOfYear(), 4);
     });
     test('testGregDateTestGetWeekOfYearThisYear3', () {
-      final GregorianDate gd = GregorianDate(year: 2011, month: 10, day: 19);
+      final GregorianDate gd = GregorianDate(year: 2011, month: 10, day: 19, timezone: 'Etc/UTC');
       expect(gd.getWeekOfYear(), 42);
     });
     test('testGregDateTestGetWeekOfYearThisYearWithTime', () {
       final GregorianDate gd = GregorianDate(
-          year: -2011, month: 10, day: 19, hour: 16, minute: 13, second: 12, millisecond: 232);
+          year: -2011,
+          month: 10,
+          day: 19,
+          hour: 16,
+          minute: 13,
+          second: 12,
+          millisecond: 232,
+          timezone: 'Etc/UTC');
       expect(gd.getWeekOfYear(), 42);
     });
     test('testGregDateTestGetWeekOfYearPreviousYear', () {
-      final GregorianDate gd = GregorianDate(year: 2011, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2011, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getWeekOfYear(), 52);
     });
     test('testGregDateTestGetWeekOfYearLastWeekLeap', () {
-      final GregorianDate gd = GregorianDate(year: 2009, month: 12, day: 31);
+      final GregorianDate gd = GregorianDate(year: 2009, month: 12, day: 31, timezone: 'Etc/UTC');
       expect(gd.getWeekOfYear(), 53);
     });
     test('testGregDateTestGetWeekOfYearLastWeekRegular1', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 12, day: 31);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 12, day: 31, timezone: 'Etc/UTC');
       expect(gd.getWeekOfYear(), 52);
     });
     test('testGregDateTestGetWeekOfYearLastWeekRegular2', () {
-      final GregorianDate gd = GregorianDate(year: 2008, month: 12, day: 31);
+      final GregorianDate gd = GregorianDate(year: 2008, month: 12, day: 31, timezone: 'Etc/UTC');
       expect(gd.getWeekOfYear(), 1);
     });
     test('testGregDateTestGetWeekOfYearLastWeekRegular3', () {
-      final GregorianDate gd = GregorianDate(year: 2007, month: 12, day: 31);
+      final GregorianDate gd = GregorianDate(year: 2007, month: 12, day: 31, timezone: 'Etc/UTC');
       expect(gd.getWeekOfYear(), 1);
     });
     test('testGregDateTestGetWeekOfYearLastWeekRegular4', () {
-      final GregorianDate gd = GregorianDate(year: 2006, month: 12, day: 31);
+      final GregorianDate gd = GregorianDate(year: 2006, month: 12, day: 31, timezone: 'Etc/UTC');
       expect(gd.getWeekOfYear(), 1);
     });
     test('testGregDateTestGetWeekOfYearLastWeekRegular5', () {
-      final GregorianDate gd = GregorianDate(year: 2005, month: 12, day: 31);
+      final GregorianDate gd = GregorianDate(year: 2005, month: 12, day: 31, timezone: 'Etc/UTC');
       expect(gd.getWeekOfYear(), 52);
     });
     test('testGregDateTestGetWeekOfYearLastWeekRegular6', () {
-      final GregorianDate gd = GregorianDate(year: 2011, month: 12, day: 31);
+      final GregorianDate gd = GregorianDate(year: 2011, month: 12, day: 31, timezone: 'Etc/UTC');
       expect(gd.getWeekOfYear(), 52);
     });
   });
 
   group('GregorianDate getDayOfYear', () {
     test('testGregDateGetDayOfYearFirstDay', () {
-      final GregorianDate gd = GregorianDate(year: 2011, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2011, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfYear(), 1);
     });
     test('testGregDateGetDayOfYearPaddysDay', () {
-      final GregorianDate gd = GregorianDate(year: 2011, month: 3, day: 17);
+      final GregorianDate gd = GregorianDate(year: 2011, month: 3, day: 17, timezone: 'Etc/UTC');
       expect(gd.getDayOfYear(), 76);
     });
     test('testGregDateGetDayOfYearPaddysDayLeapYear', () {
-      final GregorianDate gd = GregorianDate(year: 2008, month: 3, day: 17);
+      final GregorianDate gd = GregorianDate(year: 2008, month: 3, day: 17, timezone: 'Etc/UTC');
       expect(gd.getDayOfYear(), 77);
     });
     test('testGregDateGetDayOfYearLastDay', () {
-      final GregorianDate gd = GregorianDate(year: 2011, month: 12, day: 31);
+      final GregorianDate gd = GregorianDate(year: 2011, month: 12, day: 31, timezone: 'Etc/UTC');
       expect(gd.getDayOfYear(), 365);
     });
     test('testGregDateGetDayOfYearLastDayLeapYear', () {
-      final GregorianDate gd = GregorianDate(year: 2008, month: 12, day: 31);
+      final GregorianDate gd = GregorianDate(year: 2008, month: 12, day: 31, timezone: 'Etc/UTC');
       expect(gd.getDayOfYear(), 366);
     });
   });
 
   group('GregorianDate getWeekOfMonth', () {
     test('testGregDateGetWeekOfMonth0', () {
-      final GregorianDate gd = GregorianDate(year: 2011, month: 10, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2011, month: 10, day: 1, timezone: 'Etc/UTC');
       expect(gd.getWeekOfMonth(0), 0);
     });
     test('testGregDateGetWeekOfMonth1', () {
-      final GregorianDate gd = GregorianDate(year: 2011, month: 10, day: 2);
+      final GregorianDate gd = GregorianDate(year: 2011, month: 10, day: 2, timezone: 'Etc/UTC');
       expect(gd.getWeekOfMonth(0), 1);
     });
     test('testGregDateGetWeekOfMonth2', () {
-      final GregorianDate gd = GregorianDate(year: 2011, month: 10, day: 11);
+      final GregorianDate gd = GregorianDate(year: 2011, month: 10, day: 11, timezone: 'Etc/UTC');
       expect(gd.getWeekOfMonth(0), 2);
     });
     test('testGregDateGetWeekOfMonth3', () {
-      final GregorianDate gd = GregorianDate(year: 2011, month: 10, day: 20);
+      final GregorianDate gd = GregorianDate(year: 2011, month: 10, day: 20, timezone: 'Etc/UTC');
       expect(gd.getWeekOfMonth(0), 3);
     });
     test('testGregDateGetWeekOfMonth4', () {
-      final GregorianDate gd = GregorianDate(year: 2011, month: 10, day: 29);
+      final GregorianDate gd = GregorianDate(year: 2011, month: 10, day: 29, timezone: 'Etc/UTC');
       expect(gd.getWeekOfMonth(0), 4);
     });
     test('testGregDateGetWeekOfMonth5', () {
-      final GregorianDate gd = GregorianDate(year: 2011, month: 10, day: 30);
+      final GregorianDate gd = GregorianDate(year: 2011, month: 10, day: 30, timezone: 'Etc/UTC');
       expect(gd.getWeekOfMonth(0), 5);
     });
     test('testGregDateGetWeekOfMonth6', () {
-      final GregorianDate gd = GregorianDate(year: 2011, month: 9, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2011, month: 9, day: 1, timezone: 'Etc/UTC');
       expect(gd.getWeekOfMonth(0), 0);
     });
     test('testGregDateGetWeekOfMonth7', () {
-      final GregorianDate gd = GregorianDate(year: 2011, month: 8, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2011, month: 8, day: 1, timezone: 'Etc/UTC');
       expect(gd.getWeekOfMonth(0), 1);
     });
     test('testGregDateGetWeekOfMonth8', () {
-      final GregorianDate gd = GregorianDate(year: 2011, month: 7, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2011, month: 7, day: 1, timezone: 'Etc/UTC');
       expect(gd.getWeekOfMonth(0), 0);
     });
     test('testGregDateGetWeekOfMonth9', () {
-      final GregorianDate gd = GregorianDate(year: 2011, month: 6, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2011, month: 6, day: 1, timezone: 'Etc/UTC');
       expect(gd.getWeekOfMonth(0), 1);
     });
     test('testGregDateGetWeekOfMonthUS', () {
-      final GregorianDate gd = GregorianDate(year: 2011, month: 5, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2011, month: 5, day: 1, timezone: 'Etc/UTC');
       expect(gd.getWeekOfMonth(0), 1);
     });
     test('testGregDateGetWeekOfMonthDE', () {
-      final GregorianDate gd = GregorianDate(year: 2011, month: 5, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2011, month: 5, day: 1, timezone: 'Etc/UTC');
       expect(gd.getWeekOfMonth(1), 0);
     });
   });
@@ -545,50 +552,50 @@ void main() {
   group('GregorianDate onOrBefore', () {
     // 2010-01-01 is a Friday (dayOfWeek = 5)
     test('testGregDateOnOrBeforeSun', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final double rd = gd.getRataDie();
       expect(gd.onOrBefore(0).getRataDie(), rd - 5);
     });
     test('testGregDateOnOrBeforeMon', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final double rd = gd.getRataDie();
       expect(gd.onOrBefore(1).getRataDie(), rd - 4);
     });
     test('testGregDateOnOrBeforeTue', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final double rd = gd.getRataDie();
       expect(gd.onOrBefore(2).getRataDie(), rd - 3);
     });
     test('testGregDateOnOrBeforeWed', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final double rd = gd.getRataDie();
       expect(gd.onOrBefore(3).getRataDie(), rd - 2);
     });
     test('testGregDateOnOrBeforeThu', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final double rd = gd.getRataDie();
       expect(gd.onOrBefore(4).getRataDie(), rd - 1);
     });
     test('testGregDateOnOrBeforeFri', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final double rd = gd.getRataDie();
       expect(gd.onOrBefore(5).getRataDie(), rd);
     });
     test('testGregDateOnOrBeforeSat', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final double rd = gd.getRataDie();
       expect(gd.onOrBefore(6).getRataDie(), rd - 6);
     });
     test('testGregDateOnOrBeforeSunWithTime', () {
       final GregorianDate gd =
-          GregorianDate(year: 2010, month: 1, day: 1, hour: 8);
+          GregorianDate(year: 2010, month: 1, day: 1, hour: 8, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final double rd = gd.getRataDie();
       expect(gd.onOrBefore(0).getRataDie(), rd - 5);
@@ -597,8 +604,7 @@ void main() {
       // 2014-04-26 23:59 LA = Saturday wall-clock, Sunday in UTC
       // getDayOfWeek uses wall-clock (rd + offset), onOrBefore uses UTC RD
       final GregorianDate gd = GregorianDate(
-          year: 2014, month: 4, day: 26, hour: 23, minute: 59,
-          timezone: 'America/Los_Angeles');
+          year: 2014, month: 4, day: 26, hour: 23, minute: 59, timezone: 'America/Los_Angeles');
       expect(gd.getDayOfWeek(), 6);
       // UTC RD is Sunday → onOrBefore(Sunday) = same UTC RD
       final double rd = gd.getRataDie();
@@ -607,17 +613,15 @@ void main() {
     test('testGregDateOnOrBeforeSunWithTimeZoneWestern2', () {
       // 2014-04-27 00:00 LA = Sunday in LA, Sunday in UTC
       final GregorianDate gd = GregorianDate(
-          year: 2014, month: 4, day: 27, hour: 0, minute: 0,
-          timezone: 'America/Los_Angeles');
+          year: 2014, month: 4, day: 27, hour: 0, minute: 0, timezone: 'America/Los_Angeles');
       expect(gd.getDayOfWeek(), 0);
       final double rd = gd.getRataDie();
       expect(gd.onOrBefore(0).getRataDie(), rd);
     });
     test('testGregDateOnOrBeforeSunWithTimeZoneEastern1', () {
       // 2014-04-27 00:00 Seoul = Sunday wall-clock, Saturday in UTC
-      final GregorianDate gd = GregorianDate(
-          year: 2014, month: 4, day: 27, hour: 0, minute: 0,
-          timezone: 'Asia/Seoul');
+      final GregorianDate gd =
+          GregorianDate(year: 2014, month: 4, day: 27, hour: 0, minute: 0, timezone: 'Asia/Seoul');
       expect(gd.getDayOfWeek(), 0);
       // UTC RD is Saturday → onOrBefore(Sunday) = previous Sunday
       final double rd = gd.getRataDie();
@@ -626,8 +630,7 @@ void main() {
     test('testGregDateOnOrBeforeSunWithTimeZoneEastern2', () {
       // 2014-04-26 23:59 Seoul = Saturday in Seoul and in UTC
       final GregorianDate gd = GregorianDate(
-          year: 2014, month: 4, day: 26, hour: 23, minute: 59,
-          timezone: 'Asia/Seoul');
+          year: 2014, month: 4, day: 26, hour: 23, minute: 59, timezone: 'Asia/Seoul');
       expect(gd.getDayOfWeek(), 6);
       final double rd = gd.getRataDie();
       expect(gd.onOrBefore(0).getRataDie(), rd - 6);
@@ -637,49 +640,49 @@ void main() {
   group('GregorianDate onOrAfter', () {
     // 2010-01-01 is a Friday (dayOfWeek = 5)
     test('testGregDateOnOrAfterSun', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final double rd = gd.getRataDie();
       expect(gd.onOrAfter(0).getRataDie(), rd + 2);
     });
     test('testGregDateOnOrAfterMon', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final double rd = gd.getRataDie();
       expect(gd.onOrAfter(1).getRataDie(), rd + 3);
     });
     test('testGregDateOnOrAfterTue', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final double rd = gd.getRataDie();
       expect(gd.onOrAfter(2).getRataDie(), rd + 4);
     });
     test('testGregDateOnOrAfterWed', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final double rd = gd.getRataDie();
       expect(gd.onOrAfter(3).getRataDie(), rd + 5);
     });
     test('testGregDateOnOrAfterThu', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final double rd = gd.getRataDie();
       expect(gd.onOrAfter(4).getRataDie(), rd + 6);
     });
     test('testGregDateOnOrAfterFri', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final double rd = gd.getRataDie();
       expect(gd.onOrAfter(5).getRataDie(), rd);
     });
     test('testGregDateOnOrAfterSat', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final double rd = gd.getRataDie();
       expect(gd.onOrAfter(6).getRataDie(), rd + 1);
     });
     test('testGregDateOnOrAfterSunDate', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final ILibCalendarDate date = gd.onOrBefore(0);
       expect(date.getYears(), 2009);
@@ -687,7 +690,7 @@ void main() {
       expect(date.getDays(), 27);
     });
     test('testGregDateOnOrAfterMonDate', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final ILibCalendarDate date = gd.onOrAfter(1);
       expect(date.getYears(), 2010);
@@ -695,7 +698,7 @@ void main() {
       expect(date.getDays(), 4);
     });
     test('testGregDateOnOrAfterThuDate', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final ILibCalendarDate date = gd.onOrAfter(4);
       expect(date.getYears(), 2010);
@@ -703,7 +706,7 @@ void main() {
       expect(date.getDays(), 7);
     });
     test('testGregDateOnOrAfterFriDate', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final ILibCalendarDate date = gd.onOrAfter(5);
       expect(date.getYears(), 2010);
@@ -715,49 +718,49 @@ void main() {
   group('GregorianDate before', () {
     // 2010-01-01 is a Friday (dayOfWeek = 5)
     test('testGregDateBeforeSun', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final double rd = gd.getRataDie();
       expect(gd.before(0).getRataDie(), rd - 5);
     });
     test('testGregDateBeforeMon', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final double rd = gd.getRataDie();
       expect(gd.before(1).getRataDie(), rd - 4);
     });
     test('testGregDateBeforeTue', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final double rd = gd.getRataDie();
       expect(gd.before(2).getRataDie(), rd - 3);
     });
     test('testGregDateBeforeWed', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final double rd = gd.getRataDie();
       expect(gd.before(3).getRataDie(), rd - 2);
     });
     test('testGregDateBeforeThu', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final double rd = gd.getRataDie();
       expect(gd.before(4).getRataDie(), rd - 1);
     });
     test('testGregDateBeforeFri', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final double rd = gd.getRataDie();
       expect(gd.before(5).getRataDie(), rd - 7);
     });
     test('testGregDateBeforeSat', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final double rd = gd.getRataDie();
       expect(gd.before(6).getRataDie(), rd - 6);
     });
     test('testGregDateBeforeSunDate', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final ILibCalendarDate date = gd.before(0);
       expect(date.getYears(), 2009);
@@ -765,7 +768,7 @@ void main() {
       expect(date.getDays(), 27);
     });
     test('testGregDateBeforeThuDate', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final ILibCalendarDate date = gd.before(4);
       expect(date.getYears(), 2009);
@@ -773,7 +776,7 @@ void main() {
       expect(date.getDays(), 31);
     });
     test('testGregDateBeforeFriDate', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final ILibCalendarDate date = gd.before(5);
       expect(date.getYears(), 2009);
@@ -785,49 +788,49 @@ void main() {
   group('GregorianDate after', () {
     // 2010-01-01 is a Friday (dayOfWeek = 5)
     test('testGregDateAfterSun', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final double rd = gd.getRataDie();
       expect(gd.after(0).getRataDie(), rd + 2);
     });
     test('testGregDateAfterMon', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final double rd = gd.getRataDie();
       expect(gd.after(1).getRataDie(), rd + 3);
     });
     test('testGregDateAfterTue', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final double rd = gd.getRataDie();
       expect(gd.after(2).getRataDie(), rd + 4);
     });
     test('testGregDateAfterWed', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final double rd = gd.getRataDie();
       expect(gd.after(3).getRataDie(), rd + 5);
     });
     test('testGregDateAfterThu', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final double rd = gd.getRataDie();
       expect(gd.after(4).getRataDie(), rd + 6);
     });
     test('testGregDateAfterFri', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final double rd = gd.getRataDie();
       expect(gd.after(5).getRataDie(), rd + 7);
     });
     test('testGregDateAfterSat', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final double rd = gd.getRataDie();
       expect(gd.after(6).getRataDie(), rd + 1);
     });
     test('testGregDateAfterSunDate', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final ILibCalendarDate date = gd.after(0);
       expect(date.getYears(), 2010);
@@ -835,7 +838,7 @@ void main() {
       expect(date.getDays(), 3);
     });
     test('testGregDateAfterFriDate', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final ILibCalendarDate date = gd.after(5);
       expect(date.getYears(), 2010);
@@ -843,7 +846,7 @@ void main() {
       expect(date.getDays(), 8);
     });
     test('testGregDateAfterSatDate', () {
-      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2010, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getDayOfWeek(), 5);
       final ILibCalendarDate date = gd.after(6);
       expect(date.getYears(), 2010);
@@ -854,19 +857,19 @@ void main() {
 
   group('GregorianDate getEra', () {
     test('testGregDateGetEraCE', () {
-      final GregorianDate gd = GregorianDate(year: 2011, month: 5, day: 1);
+      final GregorianDate gd = GregorianDate(year: 2011, month: 5, day: 1, timezone: 'Etc/UTC');
       expect(gd.getEra(), 1);
     });
     test('testGregDateGetEraBCE', () {
-      final GregorianDate gd = GregorianDate(year: -46, month: 5, day: 1);
+      final GregorianDate gd = GregorianDate(year: -46, month: 5, day: 1, timezone: 'Etc/UTC');
       expect(gd.getEra(), -1);
     });
     test('testGregDateGetEraCEYear1', () {
-      final GregorianDate gd = GregorianDate(year: 1, month: 1, day: 1);
+      final GregorianDate gd = GregorianDate(year: 1, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(gd.getEra(), 1);
     });
     test('testGregDateGetEraCEYear0', () {
-      final GregorianDate gd = GregorianDate(year: 0, month: 12, day: 31);
+      final GregorianDate gd = GregorianDate(year: 0, month: 12, day: 31, timezone: 'Etc/UTC');
       expect(gd.getEra(), -1);
     });
   });
@@ -908,12 +911,10 @@ void main() {
       expect(gd2.getSeconds(), gd.getSeconds());
     });
     test('testGregDateRoundTripConstruction2', () {
-      final GregorianDate gd = GregorianDate(
-          year: 2014, month: 11, day: 3,
-          timezone: 'America/Los_Angeles');
+      final GregorianDate gd =
+          GregorianDate(year: 2014, month: 11, day: 3, timezone: 'America/Los_Angeles');
       final int u = gd.getTime();
-      final GregorianDate gd2 = GregorianDate(
-          unixtime: u, timezone: 'America/Los_Angeles');
+      final GregorianDate gd2 = GregorianDate(unixtime: u, timezone: 'America/Los_Angeles');
       expect(gd2.timezone, gd.timezone);
       expect(gd2.getYears(), gd.getYears());
       expect(gd2.getMonths(), gd.getMonths());
@@ -926,21 +927,18 @@ void main() {
 
   group('GregorianDate current time and timezone', () {
     test('testGregDateCurrentTimeWithTimeZone', () {
-      final GregorianDate gd =
-          GregorianDate(timezone: 'America/Los_Angeles');
+      final GregorianDate gd = GregorianDate(timezone: 'America/Los_Angeles');
       final int now = DateTime.now().millisecondsSinceEpoch;
       expect((gd.getTime() - now).abs(), lessThan(50));
     });
     test('testGregDateTestGetTimeCalifornia', () {
-      final GregorianDate gd = GregorianDate(
-          year: 1970, month: 1, day: 1,
-          timezone: 'America/Los_Angeles');
+      final GregorianDate gd =
+          GregorianDate(year: 1970, month: 1, day: 1, timezone: 'America/Los_Angeles');
       expect(gd.getTime(), 28800000);
     });
     test('testGregDateTestGetTimeExtendedCalifornia', () {
-      final GregorianDate gd = GregorianDate(
-          year: 1970, month: 1, day: 1,
-          timezone: 'America/Los_Angeles');
+      final GregorianDate gd =
+          GregorianDate(year: 1970, month: 1, day: 1, timezone: 'America/Los_Angeles');
       expect(gd.getTimeExtended(), 28800000);
     });
   });
@@ -949,7 +947,7 @@ void main() {
     test('testGregDateConvert', () {
       for (int i = 0; i < testDatesGregorian.length; i++) {
         final GregorianDate gd =
-            GregorianDate(julianDay: testDatesGregorian[i][0].toDouble());
+            GregorianDate(julianDay: testDatesGregorian[i][0].toDouble(), timezone: 'Etc/UTC');
         expect(gd.getYears(), testDatesGregorian[i][1],
             reason: 'jd=${testDatesGregorian[i][0]} years');
         expect(gd.getMonths(), testDatesGregorian[i][2],
@@ -977,11 +975,10 @@ void main() {
             hour: testDatesGregorian[i][4] as int,
             minute: testDatesGregorian[i][5] as int,
             second: testDatesGregorian[i][6] as int,
-            millisecond: testDatesGregorian[i][7] as int);
-        expect(gd.getJulianDay(), testDatesGregorian[i][0],
-            reason: 'index=$i');
-        expect(gd.getDayOfWeek(), testDatesGregorian[i][8],
-            reason: 'index=$i dayOfWeek');
+            millisecond: testDatesGregorian[i][7] as int,
+            timezone: 'Etc/UTC');
+        expect(gd.getJulianDay(), testDatesGregorian[i][0], reason: 'index=$i');
+        expect(gd.getDayOfWeek(), testDatesGregorian[i][8], reason: 'index=$i dayOfWeek');
       }
     });
   });
@@ -992,27 +989,23 @@ void main() {
     });
 
     test('testGregDateGetTimeZoneByLocale', () {
-      final GregorianDate gd =
-          GregorianDate(year: 2011, month: 3, day: 8, locale: 'de-DE');
+      final GregorianDate gd = GregorianDate(year: 2011, month: 3, day: 8, locale: 'de-DE');
       expect(gd.timezone, 'Europe/Berlin');
     });
     test('testGregDateGetTimeZoneByLocaleBogus', () {
-      final GregorianDate gd =
-          GregorianDate(year: 2011, month: 3, day: 8, locale: 'zz-ZZ');
+      final GregorianDate gd = GregorianDate(year: 2011, month: 3, day: 8, locale: 'zz-ZZ');
       expect(gd.timezone, 'Etc/UTC');
     });
   });
 
   group('GregorianDate getDayOfWeek with timezone', () {
     test('testGetDayOfWeekWithTimezoneEastern', () {
-      final GregorianDate gd = GregorianDate(
-          year: 2014, month: 4, day: 25, timezone: 'Asia/Seoul');
+      final GregorianDate gd = GregorianDate(year: 2014, month: 4, day: 25, timezone: 'Asia/Seoul');
       expect(gd.getDayOfWeek(), 5);
     });
     test('testGetDayOfWeekWithTimezoneWestern', () {
       final GregorianDate gd = GregorianDate(
-          year: 2014, month: 4, day: 25, hour: 23, minute: 59,
-          timezone: 'America/Los_Angeles');
+          year: 2014, month: 4, day: 25, hour: 23, minute: 59, timezone: 'America/Los_Angeles');
       expect(gd.getDayOfWeek(), 5);
     });
   });
@@ -1043,8 +1036,7 @@ void main() {
     });
     test('testGregDateConstructorCopy', () {
       final GregorianDate gd = GregorianDate(
-          year: 2011, month: 9, day: 23,
-          hour: 16, minute: 7, second: 12, millisecond: 123);
+          year: 2011, month: 9, day: 23, hour: 16, minute: 7, second: 12, millisecond: 123);
       expect(gd.getYears(), 2011);
       expect(gd.getMonths(), 9);
       expect(gd.getDays(), 23);

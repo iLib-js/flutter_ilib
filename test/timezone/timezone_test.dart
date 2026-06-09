@@ -376,14 +376,16 @@ void main() {
     test('testTZInDaylightTimeTrue', () {
       final ILibTimeZone tz = ILibTimeZone('America/Los_Angeles');
       final ILibDateOptions gd = ILibDateOptions(
-          year: 2011, month: 7, day: 1, hour: 0, minute: 0, second: 0);
+          year: 2011, month: 7, day: 1, hour: 0, minute: 0, second: 0,
+          timezone: 'America/Los_Angeles');
       expect(tz.inDaylightTime(gd), true);
     });
 
     test('testTZInDaylightTimeFalse', () {
       final ILibTimeZone tz = ILibTimeZone('America/Los_Angeles');
       final ILibDateOptions gd = ILibDateOptions(
-          year: 2011, month: 12, day: 1, hour: 0, minute: 0, second: 0);
+          year: 2011, month: 12, day: 1, hour: 0, minute: 0, second: 0,
+          timezone: 'America/Los_Angeles');
       expect(tz.inDaylightTime(gd), false);
     });
 
@@ -407,7 +409,8 @@ void main() {
     test('testTZInDaylightTimeJustBeforeStart', () {
       final ILibTimeZone tz = ILibTimeZone('America/Los_Angeles');
       final ILibDateOptions gd = ILibDateOptions(
-          year: 2011, month: 3, day: 13, hour: 1, minute: 59, second: 59);
+          year: 2011, month: 3, day: 13, hour: 1, minute: 59, second: 59,
+          timezone: 'America/Los_Angeles');
       expect(tz.inDaylightTime(gd), false);
     });
 
