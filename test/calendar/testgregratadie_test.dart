@@ -443,4 +443,12 @@ void main() {
       expect(rd.after(0, offset: -0.33333333333), rd.getRataDie() + 7);
     });
   });
+
+  group('GregRataDie getTime', () {
+    test('testGregRataDieGetTimeWithDefaultTime', () {
+      final int before = DateTime.now().millisecondsSinceEpoch;
+      final int t = GregRataDie().getTime();
+      expect((t - before).abs() <= 1000, isTrue);
+    });
+  });
 }

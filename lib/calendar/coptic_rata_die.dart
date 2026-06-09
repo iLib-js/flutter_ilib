@@ -1,7 +1,7 @@
 import 'calendar_utils.dart';
 import 'rata_die.dart';
 
-class CopticRataDie implements ILibRataDie {
+class CopticRataDie extends ILibRataDie {
   CopticRataDie(
       {int? year,
       int? month,

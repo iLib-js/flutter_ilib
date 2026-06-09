@@ -1009,4 +1009,44 @@ void main() {
       expect(gd.getCalendar(), 'gregorian');
     });
   });
+
+  group('GregorianDate getDayOfWeek with timezone', () {
+    test('testGetDayOfWeekWithTimezoneEastern', () {
+      final GregorianDate gd = GregorianDate(
+          year: 2014, month: 4, day: 25, timezone: 'Asia/Seoul');
+      expect(gd.getDayOfWeek(), 5);
+    });
+    test('testGetDayOfWeekWithTimezoneWestern', () {
+      final GregorianDate gd = GregorianDate(
+          year: 2014, month: 4, day: 25, hour: 23, minute: 59,
+          timezone: 'America/Los_Angeles');
+      expect(gd.getDayOfWeek(), 5);
+    });
+  });
+
+  group('GregorianDate getTime / empty constructor', () {
+    test('testGregDateGetTimeWithUnixTime', () {
+      // JS compares against a local Date; the underlying check is that the unix
+      // time of 2011/3/8 00:00 (UTC) is correct.
+      final GregorianDate gd = GregorianDate(year: 2011, month: 3, day: 8);
+      expect(gd.getTime(), DateTime.utc(2011, 3, 8).millisecondsSinceEpoch);
+    });
+    test('testGregDateGetTimeWithDefaultTime', () {
+      final int before = DateTime.now().millisecondsSinceEpoch;
+      final int t = GregorianDate().getTime();
+      expect((t - before).abs() <= 1000, isTrue);
+    });
+    test('testGregDateConstructorEmpty', () {
+      // JS compares no-arg construction against the local system time; verify
+      // deterministically by round-tripping through getTime().
+      final GregorianDate gd = GregorianDate();
+      final GregorianDate gd2 = GregorianDate(unixtime: gd.getTime());
+      expect(gd2.getYears(), gd.getYears());
+      expect(gd2.getMonths(), gd.getMonths());
+      expect(gd2.getDays(), gd.getDays());
+      expect(gd2.getHours(), gd.getHours());
+      expect(gd2.getMinutes(), gd.getMinutes());
+      expect(gd2.getSeconds(), gd.getSeconds());
+    });
+  });
 }

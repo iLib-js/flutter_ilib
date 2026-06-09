@@ -450,4 +450,19 @@ void main() {
       expect(jul.timezone, 'Etc/UTC');
     });
   });
+
+  group('JulianDate round-trip construction', () {
+    test('testJulianDateRoundTripConstruction', () {
+      final JulianDate jd = JulianDate(year: 2014, month: 10, day: 20);
+      final int u = jd.getTime();
+      final JulianDate jd2 = JulianDate(unixtime: u);
+      expect(jd2.timezone, jd.timezone);
+      expect(jd2.getYears(), jd.getYears());
+      expect(jd2.getMonths(), jd.getMonths());
+      expect(jd2.getDays(), jd.getDays());
+      expect(jd2.getHours(), jd.getHours());
+      expect(jd2.getMinutes(), jd.getMinutes());
+      expect(jd2.getSeconds(), jd.getSeconds());
+    });
+  });
 }

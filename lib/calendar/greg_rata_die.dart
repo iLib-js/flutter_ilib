@@ -1,7 +1,7 @@
 import 'gregorian_cal.dart';
 import 'rata_die.dart';
 
-class GregRataDie implements ILibRataDie {
+class GregRataDie extends ILibRataDie {
   GregRataDie(
       {int? year,
       int? month,

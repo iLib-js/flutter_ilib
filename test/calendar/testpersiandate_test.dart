@@ -555,10 +555,11 @@ void main() {
   });
 
   group('PersianAlgoDate round-trip construction', () {
-    test('testPersAlgoDateRoundTripConstruction', () {
-      final PersianAlgoDate pd = PersianAlgoDate(year: 1393, month: 1, day: 10);
+    test('testPersDateAlgoRoundTripConstruction', () {
+      final PersianAlgoDate pd = PersianAlgoDate(year: 1393, month: 8, day: 12);
       final int u = pd.getTime();
       final PersianAlgoDate pd2 = PersianAlgoDate(unixtime: u);
+      expect(pd2.timezone, pd.timezone);
       expect(pd2.getYears(), pd.getYears());
       expect(pd2.getMonths(), pd.getMonths());
       expect(pd2.getDays(), pd.getDays());
@@ -661,4 +662,84 @@ void main() {
       expect(PersianAlgoDate(rd: -441089).getYears(), -1208);
     });
   });
+
+  group('PersianAlgoDate getDayOfWeek', () {
+    test('testGetDayOfWeek1', () {
+      final PersianAlgoDate pd = PersianAlgoDate(year: 1393, month: 3, day: 16);
+      expect(pd.getDayOfWeek(), 5);
+    });
+    test('testGetDayOfWeekWithTime', () {
+      final PersianAlgoDate pd = PersianAlgoDate(
+          year: 1393, month: 3, day: 16, hour: 8, minute: 39, second: 34);
+      expect(pd.getDayOfWeek(), 5);
+    });
+  });
+
+  group('PersAlgoRataDie from date components', () {
+    PersianAlgoRataDie rd(int year, int month, int day) => PersianAlgoRataDie(
+        year: year, month: month, day: day,
+        hour: 0, minute: 0, second: 0, millisecond: 0);
+
+    test('testPersAlgoRataDieConstructorFromDateComponents1', () {
+      expect(rd(1, 1, 1).getRataDie(), 1);
+    });
+    test('testPersAlgoRataDieConstructorFromDateComponents2', () {
+      expect(rd(-1, 12, 30).getRataDie(), 0);
+    });
+    test('testPersAlgoRataDieConstructorFromDateComponents3', () {
+      expect(rd(1, 12, 29).getRataDie(), 365);
+    });
+    test('testPersAlgoRataDieConstructorFromDateComponents4', () {
+      expect(rd(2, 1, 1).getRataDie(), 366);
+    });
+    test('testPersAlgoRataDieConstructorFromDateComponents5', () {
+      expect(rd(1, 1, 31).getRataDie(), 31);
+    });
+    test('testPersAlgoRataDieConstructorFromDateComponents6', () {
+      expect(rd(1, 2, 1).getRataDie(), 32);
+    });
+    test('testPersAlgoRataDieConstructorFromDateComponents7', () {
+      expect(rd(2, 12, 29).getRataDie(), 730);
+    });
+    test('testPersAlgoRataDieConstructorFromDateComponents8', () {
+      expect(rd(3, 1, 1).getRataDie(), 731);
+    });
+    test('testPersAlgoRataDieConstructorFromDateComponents9', () {
+      expect(rd(3, 12, 29).getRataDie(), 1095);
+    });
+    test('testPersAlgoRataDieConstructorFromDateComponents10', () {
+      expect(rd(4, 1, 1).getRataDie(), 1096);
+    });
+    test('testPersAlgoRataDieConstructorFromDateComponents11', () {
+      expect(rd(4, 12, 30).getRataDie(), 1461);
+    });
+    test('testPersAlgoRataDieConstructorFromDateComponents12', () {
+      expect(rd(5, 1, 1).getRataDie(), 1462);
+    });
+    test('testPersAlgoRataDieConstructorFromDateComponents13', () {
+      expect(rd(5, 12, 29).getRataDie(), 1826);
+    });
+    test('testPersAlgoRataDieConstructorFromDateComponents14', () {
+      expect(rd(6, 1, 1).getRataDie(), 1827);
+    });
+    test('testPersAlgoRataDieConstructorFromDateComponents15', () {
+      expect(rd(-1208, 5, 1).getRataDie(), -441088);
+    });
+  });
+
+  group('PersianAlgoDate constructor', () {
+    test('testPersAlgoDateConstructorCopy', () {
+      final PersianAlgoDate pd = PersianAlgoDate(
+          year: 1392, month: 9, day: 23,
+          hour: 16, minute: 7, second: 12, millisecond: 123);
+      expect(pd.getYears(), 1392);
+      expect(pd.getMonths(), 9);
+      expect(pd.getDays(), 23);
+      expect(pd.getHours(), 16);
+      expect(pd.getMinutes(), 7);
+      expect(pd.getSeconds(), 12);
+      expect(pd.getMilliseconds(), 123);
+    });
+  });
+
 }

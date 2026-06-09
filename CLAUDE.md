@@ -210,12 +210,16 @@ Used as a common intermediate representation for converting between calendar sys
 
 - Each calendar date class converts its components to RD via its `RataDie` class
 - Cross-calendar conversion: Date → RD → Julian Day → target calendar's RD → Date
-- `getDayOfWeek()` is computed from RD (`rd % 7`)
+- `getDayOfWeek()` is computed from the wall-clock RD: `mod(floor(rd + tzOffsetDays), 7)`.
+  Date classes pass `offset: tzOffsetDays` so the day reflects local time for tz-aware
+  dates (mirrors JS `mod(floor(rd + this.offset), 7)`); without a timezone the offset is 0.
 - Julian Day = RD + calendar-specific epoch offset
 
 ### Base Class: `ILibRataDie` (`lib/calendar/rata_die.dart`)
-Common logic for all 9 RataDie subclasses lives in the base class.
-When adding new shared logic, add a static method to `ILibRataDie` instead of duplicating across subclasses.
+Common logic for all 9 RataDie subclasses lives in the base class. The subclasses
+**`extends ILibRataDie`** (not `implements`) so they inherit its concrete instance
+methods. When adding new shared logic, add it to `ILibRataDie` instead of duplicating
+across subclasses.
 
 Shared static methods:
 - `unixTimeToRd(millis)` — convert Unix timestamp to Gregorian RD
@@ -223,10 +227,14 @@ Shared static methods:
 - `hasDateComponents(...)` — check if any date parameter is non-null
 - `timeToRd(h, m, s, ms)` — convert time components to fractional RD
 - `dayOfWeekFromRd(rd, offset)` — compute day of week from RD
+- `snapToMillis(rd)` — round an rd to millisecond resolution
+
+Shared concrete instance methods (mirror JS `RataDie`; all 9 provide `getJulianDay()`):
+- `getTime()` / `getTimeExtended()` — unix time of the instant from the Julian Day
 
 ### Calendar Date Class Common Pattern
 All 9 calendar date classes (`lib/calendar/*_date.dart`) follow the same constructor pattern:
-- Parameters: `year?, month?, day?, hour?, minute?, second?, millisecond?, julianDay?, rd?, unixtime?, locale?, timezone?`
+- Parameters: `year?, month?, day?, hour?, minute?, second?, millisecond?, julianDay?, rd?, unixtime?, locale?, timezone?, dst?`
 - `locale` derives timezone via `ILibLocaleInfo(locale).getTimeZone()` (explicit `timezone` takes precedence)
 - No-arg construction uses `DateTime.now()` as fallback (matches JS `RataDie.js:109-112`)
 

@@ -2,7 +2,7 @@ import 'calendar_utils.dart';
 import 'hebrew_cal.dart';
 import 'rata_die.dart';
 
-class HebrewRataDie implements ILibRataDie {
+class HebrewRataDie extends ILibRataDie {
   HebrewRataDie(
       {int? year,
       int? month,

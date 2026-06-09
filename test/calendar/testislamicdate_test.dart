@@ -536,4 +536,17 @@ void main() {
       expect(id2.getSeconds(), id.getSeconds());
     });
   });
+
+  group('IslamicDate getDayOfWeek', () {
+    test('testGetDayOfWeek1', () {
+      expect(IslamicDate(year: 1432, month: 11, day: 2).getDayOfWeek(), 5);
+    });
+    test('testGetDayOfWeekWithTime', () {
+      expect(
+          IslamicDate(year: 1432, month: 11, day: 2,
+                  hour: 8, minute: 39, second: 34)
+              .getDayOfWeek(),
+          5);
+    });
+  });
 }

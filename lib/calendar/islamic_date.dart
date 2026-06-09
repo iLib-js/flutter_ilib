@@ -104,7 +104,7 @@ class IslamicDate extends ILibCalendarDate {
   int getMilliseconds() => _millisecond;
 
   @override
-  int getDayOfWeek() => _rataDie.getDayOfWeek();
+  int getDayOfWeek() => _rataDie.getDayOfWeek(offset: tzOffsetDays);
 
   @override
   int getDayOfYear() {

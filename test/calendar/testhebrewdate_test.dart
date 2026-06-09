@@ -588,4 +588,17 @@ void main() {
       expect(hd2.getSeconds(), hd.getSeconds());
     });
   });
+
+  group('HebrewDate getDayOfWeek', () {
+    test('testGetDayOfWeek1', () {
+      expect(HebrewDate(year: 5772, month: 7, day: 2).getDayOfWeek(), 5);
+    });
+    test('testGetDayOfWeekWithTime', () {
+      expect(
+          HebrewDate(year: 5772, month: 7, day: 2,
+                  hour: 8, minute: 39, second: 34)
+              .getDayOfWeek(),
+          5);
+    });
+  });
 }

@@ -886,4 +886,87 @@ void main() {
       expect(td.timezone, 'Etc/UTC');
     });
   });
+
+  group('ThaiSolarDate getDayOfWeek', () {
+    test('testGetDayOfWeek1', () {
+      expect(ThaiSolarDate(year: 2554, month: 9, day: 30).getDayOfWeek(), 5);
+    });
+    test('testGetDayOfWeek2', () {
+      expect(ThaiSolarDate(year: 2191, month: 6, day: 10).getDayOfWeek(), 3);
+    });
+    test('testGetDayOfWeek3', () {
+      expect(ThaiSolarDate(year: 1733, month: 3, day: 23).getDayOfWeek(), 5);
+    });
+    test('testGetDayOfWeek4', () {
+      expect(ThaiSolarDate(year: -43, month: 7, day: 24).getDayOfWeek(), 0);
+    });
+    test('testGetDayOfWeekGregorianDay1', () {
+      expect(ThaiSolarDate(year: 544, month: 1, day: 1).getDayOfWeek(), 1);
+    });
+    test('testGetDayOfWeekGregorianDay1ByJD', () {
+      expect(ThaiSolarDate(julianDay: 1721424.5).getDayOfWeek(), 0);
+    });
+    test('testGetDayOfWeekSimple1', () {
+      expect(ThaiSolarDate(year: 1, month: 1, day: 1).getDayOfWeek(), 5);
+    });
+    test('testGetDayOfWeekSimple2', () {
+      expect(ThaiSolarDate(year: 0, month: 12, day: 31).getDayOfWeek(), 4);
+    });
+    test('testGetDayOfWeekSimple3', () {
+      expect(ThaiSolarDate(year: 1, month: 1, day: 2).getDayOfWeek(), 6);
+    });
+    test('testGetDayOfWeekSimple4', () {
+      expect(ThaiSolarDate(year: 1, month: 1, day: 3).getDayOfWeek(), 0);
+    });
+    test('testGetDayOfWeekSimple5', () {
+      expect(ThaiSolarDate(year: 1, month: 1, day: 4).getDayOfWeek(), 1);
+    });
+    test('testGetDayOfWeekWithTime', () {
+      expect(
+          ThaiSolarDate(year: 2554, month: 9, day: 30,
+                  hour: 8, minute: 39, second: 34)
+              .getDayOfWeek(),
+          5);
+    });
+    // JS passes string components; Dart is strongly typed, so use ints. The point
+    // is getDayOfWeek with an explicit timezone (the local wall day).
+    test('testThaiSolarDateGetDayOfWeekWithTZ', () {
+      final ThaiSolarDate td = ThaiSolarDate(
+          year: 2557, month: 4, day: 24,
+          hour: 20, minute: 52, second: 12, millisecond: 123,
+          timezone: 'America/Los_Angeles');
+      expect(td.getDayOfWeek(), 4);
+    });
+  });
+
+  group('ThaiSolarDate constructor', () {
+    // JS tests a copy constructor (new ThaiSolarDate(td2)); Dart takes named args,
+    // so construct from the same components and verify the getters.
+    test('testThaiSolarDateConstructorCopy', () {
+      final ThaiSolarDate td = ThaiSolarDate(
+          year: 2553, month: 9, day: 23,
+          hour: 16, minute: 7, second: 12, millisecond: 123);
+      expect(td.getYears(), 2553);
+      expect(td.getMonths(), 9);
+      expect(td.getDays(), 23);
+      expect(td.getHours(), 16);
+      expect(td.getMinutes(), 7);
+      expect(td.getSeconds(), 12);
+      expect(td.getMilliseconds(), 123);
+    });
+
+    // JS compares no-arg construction against the current system time, which depends
+    // on the local timezone; verify deterministically that the no-arg date is a valid
+    // current instant by round-tripping through getTime().
+    test('testThaiSolarDateConstructorEmpty', () {
+      final ThaiSolarDate td = ThaiSolarDate();
+      final ThaiSolarDate td2 = ThaiSolarDate(unixtime: td.getTime());
+      expect(td2.getYears(), td.getYears());
+      expect(td2.getMonths(), td.getMonths());
+      expect(td2.getDays(), td.getDays());
+      expect(td2.getHours(), td.getHours());
+      expect(td2.getMinutes(), td.getMinutes());
+      expect(td2.getSeconds(), td.getSeconds());
+    });
+  });
 }

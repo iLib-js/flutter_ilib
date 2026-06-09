@@ -164,10 +164,10 @@ Matches JS `_init()` / `_init2()` / `_calcDateComponents()` pattern.
 | API | `ILibDateOptions` | User-facing date options, implements `ILibDate` |
 | API | `ILibDateFmt` | Formats dates with locale/timezone/calendar support |
 | API | `ILibTimeZone` | Timezone offset and DST calculation |
-| API | `ILibCalendar` | Abstract factory for calendar rules (leap year, month length) |
+| API | `ILibCalendar` | Abstract factory for calendar rules (leap year, month length); `ILibCalendar(type)` or `ILibCalendar.fromLocale(locale)` |
 | Date | `ILibCalendarDate` | Abstract base: instant accessors `getRataDie()`, `getJulianDay()`, `getTime()`, `getTimeExtended()`, `getCalendar()` (all on the `ILibDate` interface), `adjustRdForTimezone()`, `getWallClockRd()`, `calcTimezoneOffset()`, `tzOffsetDays`, optional `dst` flag (DST overlap disambiguation) |
 | Date | `GregorianDate`, `IslamicDate`, ... | Concrete: two-path constructor, `_decomposeRd()` |
-| RD | `ILibRataDie` | Abstract base: `nowToRd(epoch)`, `hasDateComponents()`, `unixTimeToRd()` |
+| RD | `ILibRataDie` | Abstract base (subclasses `extends` it): static `nowToRd(epoch)`, `hasDateComponents()`, `unixTimeToRd()`, `snapToMillis()`; concrete `getTime()`/`getTimeExtended()` |
 | RD | `GregRataDie`, `IslamicRataDie`, ... | Concrete RD: `DateTime.now()` fallback when no params |
 | Util | `JulianDay` | Helper for Julian Day arithmetic |
 | Util | `ILibAstro` | Astronomical calculations (equinox, nutation) |

@@ -1,7 +1,7 @@
 import 'calendar_utils.dart';
 import 'rata_die.dart';
 
-class PersianAlgoRataDie implements ILibRataDie {
+class PersianAlgoRataDie extends ILibRataDie {
   PersianAlgoRataDie(
       {int? year,
       int? month,

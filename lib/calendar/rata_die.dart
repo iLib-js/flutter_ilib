@@ -9,6 +9,24 @@ abstract class ILibRataDie {
   double before(int dayOfWeek, {double offset = 0});
   double after(int dayOfWeek, {double offset = 0});
 
+  // Unix time of this rata die (mirrors JS RataDie.getTime/getTimeExtended).
+  // Returns -1 when the instant is outside the representable range.
+  int getTime() {
+    final double jd = getJulianDay();
+    if (jd < 2440587.5 || jd > 2465442.634803241) {
+      return -1;
+    }
+    return ((jd - 2440587.5) * 86400000).round();
+  }
+
+  int getTimeExtended() {
+    final double jd = getJulianDay();
+    if (jd < -97559412.5 || jd > 102440587.5) {
+      return -1;
+    }
+    return ((jd - 2440587.5) * 86400000).round();
+  }
+
   static double unixTimeToRd(int millis) {
     return 719163.0 + millis / 86400000.0;
   }

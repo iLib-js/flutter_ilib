@@ -1,7 +1,7 @@
 import 'greg_rata_die.dart';
 import 'rata_die.dart';
 
-class ThaiSolarRataDie implements ILibRataDie {
+class ThaiSolarRataDie extends ILibRataDie {
   ThaiSolarRataDie(
       {int? year,
       int? month,

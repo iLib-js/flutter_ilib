@@ -1,7 +1,7 @@
 import 'calendar_utils.dart';
 import 'rata_die.dart';
 
-class EthiopicRataDie implements ILibRataDie {
+class EthiopicRataDie extends ILibRataDie {
   EthiopicRataDie(
       {int? year,
       int? month,

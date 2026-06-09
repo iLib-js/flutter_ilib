@@ -3,7 +3,7 @@ import 'gregorian_date.dart';
 import 'ilib_astro.dart';
 import 'rata_die.dart';
 
-class PersianRataDie implements ILibRataDie {
+class PersianRataDie extends ILibRataDie {
   PersianRataDie(
       {int? year,
       int? month,

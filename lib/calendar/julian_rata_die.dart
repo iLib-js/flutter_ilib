@@ -2,7 +2,7 @@ import 'calendar_utils.dart';
 import 'julian_cal.dart';
 import 'rata_die.dart';
 
-class JulianRataDie implements ILibRataDie {
+class JulianRataDie extends ILibRataDie {
   JulianRataDie(
       {int? year,
       int? month,
