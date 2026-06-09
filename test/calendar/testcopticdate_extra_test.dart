@@ -39,4 +39,11 @@ void main() {
       expect(d.getEra(), -1);
     });
   });
+
+  group('CopticDate getCalendar', () {
+    test('testCopticDateGetCalendar', () {
+      final CopticDate cd = CopticDate(year: 1735, month: 1, day: 1);
+      expect(cd.getCalendar(), 'coptic');
+    });
+  });
 }

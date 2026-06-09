@@ -539,14 +539,33 @@ void main() {
 
   group('IslamicDate getDayOfWeek', () {
     test('testGetDayOfWeek1', () {
-      expect(IslamicDate(year: 1432, month: 11, day: 2).getDayOfWeek(), 5);
+      expect(
+          IslamicDate(year: 1432, month: 11, day: 2, timezone: 'Etc/UTC')
+              .getDayOfWeek(),
+          5);
     });
     test('testGetDayOfWeekWithTime', () {
       expect(
           IslamicDate(year: 1432, month: 11, day: 2,
-                  hour: 8, minute: 39, second: 34)
+                  hour: 8, minute: 39, second: 34, timezone: 'Etc/UTC')
               .getDayOfWeek(),
           5);
+    });
+  });
+
+  group('IslamicDate constructor copy', () {
+    test('testIslamicDateConstructorCopy', () {
+      final IslamicDate id = IslamicDate(
+          year: 2011, month: 9, day: 23,
+          hour: 16, minute: 7, second: 12, millisecond: 123,
+          timezone: 'Etc/UTC');
+      expect(id.getYears(), 2011);
+      expect(id.getMonths(), 9);
+      expect(id.getDays(), 23);
+      expect(id.getHours(), 16);
+      expect(id.getMinutes(), 7);
+      expect(id.getSeconds(), 12);
+      expect(id.getMilliseconds(), 123);
     });
   });
 }

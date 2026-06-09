@@ -556,9 +556,9 @@ void main() {
 
   group('PersianAlgoDate round-trip construction', () {
     test('testPersDateAlgoRoundTripConstruction', () {
-      final PersianAlgoDate pd = PersianAlgoDate(year: 1393, month: 8, day: 12);
+      final PersianAlgoDate pd = PersianAlgoDate(year: 1393, month: 8, day: 12, timezone: 'local');
       final int u = pd.getTime();
-      final PersianAlgoDate pd2 = PersianAlgoDate(unixtime: u);
+      final PersianAlgoDate pd2 = PersianAlgoDate(unixtime: u, timezone: 'local');
       expect(pd2.timezone, pd.timezone);
       expect(pd2.getYears(), pd.getYears());
       expect(pd2.getMonths(), pd.getMonths());
@@ -568,12 +568,10 @@ void main() {
       expect(pd2.getSeconds(), pd.getSeconds());
     });
     test('testPersDateAlgoRoundTripConstruction2', () {
-      final PersianAlgoDate pd = PersianAlgoDate(
-          year: 1393, month: 8, day: 12,
-          timezone: 'America/Los_Angeles');
+      final PersianAlgoDate pd =
+          PersianAlgoDate(year: 1393, month: 8, day: 12, timezone: 'America/Los_Angeles');
       final int u = pd.getTime();
-      final PersianAlgoDate pd2 = PersianAlgoDate(
-          unixtime: u, timezone: 'America/Los_Angeles');
+      final PersianAlgoDate pd2 = PersianAlgoDate(unixtime: u, timezone: 'America/Los_Angeles');
       expect(pd2.timezone, pd.timezone);
       expect(pd2.getYears(), pd.getYears());
       expect(pd2.getMonths(), pd.getMonths());
@@ -611,74 +609,74 @@ void main() {
   // PersianAlgoDate(rd: ...).getYears() (which _decomposeRd derives from calcYear).
   group('PersianAlgoDate calcYear (algorithmic)', () {
     test('testPersAlgoDateCalcYearPositive1', () {
-      expect(PersianAlgoDate(rd: 1).getYears(), 1);
+      expect(PersianAlgoDate(rd: 1, timezone: 'Etc/UTC').getYears(), 1);
     });
     test('testPersAlgoDateCalcYearPositive2', () {
-      expect(PersianAlgoDate(rd: 365).getYears(), 1);
+      expect(PersianAlgoDate(rd: 365, timezone: 'Etc/UTC').getYears(), 1);
     });
     test('testPersAlgoDateCalcYearPositive3', () {
-      expect(PersianAlgoDate(rd: 366).getYears(), 2);
+      expect(PersianAlgoDate(rd: 366, timezone: 'Etc/UTC').getYears(), 2);
     });
     test('testPersAlgoDateCalcYearPositive4', () {
-      expect(PersianAlgoDate(rd: 730).getYears(), 2);
+      expect(PersianAlgoDate(rd: 730, timezone: 'Etc/UTC').getYears(), 2);
     });
     test('testPersAlgoDateCalcYearPositive5', () {
-      expect(PersianAlgoDate(rd: 731).getYears(), 3);
+      expect(PersianAlgoDate(rd: 731, timezone: 'Etc/UTC').getYears(), 3);
     });
     test('testPersAlgoDateCalcYearPositive6', () {
-      expect(PersianAlgoDate(rd: 1095).getYears(), 3);
+      expect(PersianAlgoDate(rd: 1095, timezone: 'Etc/UTC').getYears(), 3);
     });
     test('testPersAlgoDateCalcYearPositive7', () {
-      expect(PersianAlgoDate(rd: 1096).getYears(), 4);
+      expect(PersianAlgoDate(rd: 1096, timezone: 'Etc/UTC').getYears(), 4);
     });
     test('testPersAlgoDateCalcYearPositive8', () {
-      expect(PersianAlgoDate(rd: 1461).getYears(), 4);
+      expect(PersianAlgoDate(rd: 1461, timezone: 'Etc/UTC').getYears(), 4);
     });
     test('testPersAlgoDateCalcYearPositive9', () {
-      expect(PersianAlgoDate(rd: 1462).getYears(), 5);
+      expect(PersianAlgoDate(rd: 1462, timezone: 'Etc/UTC').getYears(), 5);
     });
     test('testPersAlgoDateCalcYearPositive10', () {
-      expect(PersianAlgoDate(rd: 1826).getYears(), 5);
+      expect(PersianAlgoDate(rd: 1826, timezone: 'Etc/UTC').getYears(), 5);
     });
     test('testPersAlgoDateCalcYearPositive11', () {
-      expect(PersianAlgoDate(rd: 1827).getYears(), 6);
+      expect(PersianAlgoDate(rd: 1827, timezone: 'Etc/UTC').getYears(), 6);
     });
     test('testPersAlgoDateCalcYearNegative1', () {
-      expect(PersianAlgoDate(rd: 0).getYears(), -1);
+      expect(PersianAlgoDate(rd: 0, timezone: 'Etc/UTC').getYears(), -1);
     });
     test('testPersAlgoDateCalcYearNegative2', () {
-      expect(PersianAlgoDate(rd: -365).getYears(), -1);
+      expect(PersianAlgoDate(rd: -365, timezone: 'Etc/UTC').getYears(), -1);
     });
     test('testPersAlgoDateCalcYearNegative3', () {
-      expect(PersianAlgoDate(rd: -366).getYears(), -2);
+      expect(PersianAlgoDate(rd: -366, timezone: 'Etc/UTC').getYears(), -2);
     });
     test('testPersAlgoDateCalcYearNegative4', () {
-      expect(PersianAlgoDate(rd: -730).getYears(), -2);
+      expect(PersianAlgoDate(rd: -730, timezone: 'Etc/UTC').getYears(), -2);
     });
     test('testPersAlgoDateCalcYearNegative5', () {
-      expect(PersianAlgoDate(rd: -731).getYears(), -3);
+      expect(PersianAlgoDate(rd: -731, timezone: 'Etc/UTC').getYears(), -3);
     });
     test('testPersAlgoDateCalcYearNegative6', () {
-      expect(PersianAlgoDate(rd: -441089).getYears(), -1208);
+      expect(PersianAlgoDate(rd: -441089, timezone: 'Etc/UTC').getYears(), -1208);
     });
   });
 
   group('PersianAlgoDate getDayOfWeek', () {
     test('testGetDayOfWeek1', () {
-      final PersianAlgoDate pd = PersianAlgoDate(year: 1393, month: 3, day: 16);
+      final PersianAlgoDate pd =
+          PersianAlgoDate(year: 1393, month: 3, day: 16, timezone: 'Etc/UTC');
       expect(pd.getDayOfWeek(), 5);
     });
     test('testGetDayOfWeekWithTime', () {
       final PersianAlgoDate pd = PersianAlgoDate(
-          year: 1393, month: 3, day: 16, hour: 8, minute: 39, second: 34);
+          year: 1393, month: 3, day: 16, hour: 8, minute: 39, second: 34, timezone: 'Etc/UTC');
       expect(pd.getDayOfWeek(), 5);
     });
   });
 
   group('PersAlgoRataDie from date components', () {
     PersianAlgoRataDie rd(int year, int month, int day) => PersianAlgoRataDie(
-        year: year, month: month, day: day,
-        hour: 0, minute: 0, second: 0, millisecond: 0);
+        year: year, month: month, day: day, hour: 0, minute: 0, second: 0, millisecond: 0);
 
     test('testPersAlgoRataDieConstructorFromDateComponents1', () {
       expect(rd(1, 1, 1).getRataDie(), 1);
@@ -730,8 +728,14 @@ void main() {
   group('PersianAlgoDate constructor', () {
     test('testPersAlgoDateConstructorCopy', () {
       final PersianAlgoDate pd = PersianAlgoDate(
-          year: 1392, month: 9, day: 23,
-          hour: 16, minute: 7, second: 12, millisecond: 123);
+          year: 1392,
+          month: 9,
+          day: 23,
+          hour: 16,
+          minute: 7,
+          second: 12,
+          millisecond: 123,
+          timezone: 'Etc/UTC');
       expect(pd.getYears(), 1392);
       expect(pd.getMonths(), 9);
       expect(pd.getDays(), 23);
@@ -741,5 +745,4 @@ void main() {
       expect(pd.getMilliseconds(), 123);
     });
   });
-
 }

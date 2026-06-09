@@ -591,14 +591,33 @@ void main() {
 
   group('HebrewDate getDayOfWeek', () {
     test('testGetDayOfWeek1', () {
-      expect(HebrewDate(year: 5772, month: 7, day: 2).getDayOfWeek(), 5);
+      expect(
+          HebrewDate(year: 5772, month: 7, day: 2, timezone: 'Etc/UTC')
+              .getDayOfWeek(),
+          5);
     });
     test('testGetDayOfWeekWithTime', () {
       expect(
           HebrewDate(year: 5772, month: 7, day: 2,
-                  hour: 8, minute: 39, second: 34)
+                  hour: 8, minute: 39, second: 34, timezone: 'Etc/UTC')
               .getDayOfWeek(),
           5);
+    });
+  });
+
+  group('HebrewDate constructor copy', () {
+    test('testHebrewDateConstructorCopy', () {
+      final HebrewDate hd = HebrewDate(
+          year: 2011, month: 9, day: 23,
+          hour: 16, minute: 7, second: 12, millisecond: 123,
+          timezone: 'Etc/UTC');
+      expect(hd.getYears(), 2011);
+      expect(hd.getMonths(), 9);
+      expect(hd.getDays(), 23);
+      expect(hd.getHours(), 16);
+      expect(hd.getMinutes(), 7);
+      expect(hd.getSeconds(), 12);
+      expect(hd.getMilliseconds(), 123);
     });
   });
 }

@@ -528,13 +528,6 @@ void main() {
     });
   });
 
-  group('EthiopicDate getCalendar', () {
-    test('testEthiopicDateGetCalendar', () {
-      final EthiopicDate ed = EthiopicDate(year: 2010, month: 1, day: 1);
-      expect(ed.getCalendar(), 'ethiopic');
-    });
-  });
-
   group('EthiopicDate getTimeZone by locale', () {
     test('testEthiopicDateGetTimeZoneByLocaleDE', () {
       final EthiopicDate ed =
@@ -625,6 +618,22 @@ void main() {
           year: 2021, month: 8, day: 20, hour: 19, minute: 0,
           type: 'gregorian', timezone: 'Africa/Addis_Ababa');
       expect(fmt.format(dateOptions), 'ዓርብ፣ 14 ነሐሴ 2013');
+    });
+  });
+
+  group('EthiopicDate constructor copy', () {
+    test('testEthiopicDateConstructorCopy', () {
+      final EthiopicDate ed = EthiopicDate(
+          year: 2011, month: 9, day: 23,
+          hour: 16, minute: 7, second: 12, millisecond: 123,
+          timezone: 'Etc/UTC');
+      expect(ed.getYears(), 2011);
+      expect(ed.getMonths(), 9);
+      expect(ed.getDays(), 23);
+      expect(ed.getHours(), 16);
+      expect(ed.getMinutes(), 7);
+      expect(ed.getSeconds(), 12);
+      expect(ed.getMilliseconds(), 123);
     });
   });
 }

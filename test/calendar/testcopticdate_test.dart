@@ -523,13 +523,6 @@ void main() {
     });
   });
 
-  group('CopticDate getCalendar', () {
-    test('testCopticDateGetCalendar', () {
-      final CopticDate cd = CopticDate(year: 1735, month: 1, day: 1);
-      expect(cd.getCalendar(), 'coptic');
-    });
-  });
-
   group('CopticDate getTimeZone by locale', () {
     setUpAll(() async {
       await ILibLoader.instance.loadILibLocaleData('de-DE');
@@ -550,6 +543,22 @@ void main() {
       final CopticDate cd =
           CopticDate(year: 1735, month: 3, day: 8, locale: 'zz-ZZ');
       expect(cd.timezone, 'Etc/UTC');
+    });
+  });
+
+  group('CopticDate constructor copy', () {
+    test('testCopticDateConstructorCopy', () {
+      final CopticDate cd = CopticDate(
+          year: 1735, month: 9, day: 23,
+          hour: 16, minute: 7, second: 12, millisecond: 123,
+          timezone: 'Etc/UTC');
+      expect(cd.getYears(), 1735);
+      expect(cd.getMonths(), 9);
+      expect(cd.getDays(), 23);
+      expect(cd.getHours(), 16);
+      expect(cd.getMinutes(), 7);
+      expect(cd.getSeconds(), 12);
+      expect(cd.getMilliseconds(), 123);
     });
   });
 }

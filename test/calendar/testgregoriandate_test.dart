@@ -1003,13 +1003,6 @@ void main() {
     });
   });
 
-  group('GregorianDate getCalendar', () {
-    test('testGregDateGetCalendar', () {
-      final GregorianDate gd = GregorianDate(year: 2011, month: 1, day: 1);
-      expect(gd.getCalendar(), 'gregorian');
-    });
-  });
-
   group('GregorianDate getDayOfWeek with timezone', () {
     test('testGetDayOfWeekWithTimezoneEastern', () {
       final GregorianDate gd = GregorianDate(
@@ -1047,6 +1040,18 @@ void main() {
       expect(gd2.getHours(), gd.getHours());
       expect(gd2.getMinutes(), gd.getMinutes());
       expect(gd2.getSeconds(), gd.getSeconds());
+    });
+    test('testGregDateConstructorCopy', () {
+      final GregorianDate gd = GregorianDate(
+          year: 2011, month: 9, day: 23,
+          hour: 16, minute: 7, second: 12, millisecond: 123);
+      expect(gd.getYears(), 2011);
+      expect(gd.getMonths(), 9);
+      expect(gd.getDays(), 23);
+      expect(gd.getHours(), 16);
+      expect(gd.getMinutes(), 7);
+      expect(gd.getSeconds(), 12);
+      expect(gd.getMilliseconds(), 123);
     });
   });
 }

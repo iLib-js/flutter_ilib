@@ -27,7 +27,10 @@ JS source path base: `js/test/`
 | `test/calendar/testpersiandate_test.dart` | `js/test/testpersiandate.js` + `js/test/testpersianalgodate.js` | PersianDate + PersianAlgoDate (two files merged) |
 
 | `test/calendar/testcalendar_test.dart` | `js/test/calendar/testcalendar.js` | ILibCalendar factory: invalid input, getCalendars, type-based and locale-based (`fromLocale`) construction |
-| `test/calendar/testcopticdate_extra_test.dart` | — | flutter_ilib-specific (getDayOfYear, getEra) |
+| `test/calendar/testcopticdate_extra_test.dart` | — | flutter_ilib-specific (getDayOfYear, getEra, getCalendar) |
+| `test/calendar/testgregoriandate_extra_test.dart` | — | flutter_ilib-specific (getCalendar) |
+| `test/calendar/testethiopicdate_extra_test.dart` | — | flutter_ilib-specific (getCalendar) |
+| `test/calendar/testjuliandate_extra_test.dart` | — | flutter_ilib-specific (onOrBefore/onOrAfter with offset) |
 
 ## DateFmt Locale Tests
 
