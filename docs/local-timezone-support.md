@@ -1,9 +1,25 @@
 # Supporting JS `timezone: 'local'` in Dart
 
-Status: **deferred / design notes**. This documents how Dart currently handles
-`'local'`, why it diverges from JS, and what it would take to implement JS-faithful
-system-timezone behavior. Nothing here is implemented yet — it is the analysis captured
-so the work can be picked up later.
+Status: **IMPLEMENTED via Strategy A**. `ILibTimeZone('local')` now samples the OS
+DST-aware offset via Dart core `DateTime` (synchronous, no plugin), so `'local'` and
+no-timezone/no-locale dates behave as the system timezone — matching JS. The sections below
+keep the original analysis for context; **for the `'local'` path specifically, Strategy A
+(not B) is the JS-faithful mechanism**, because JS iLib also delegates `'local'` to the
+intrinsic `Date` rather than loading zoneinfo. Strategy B (`flutter_timezone` → IANA name →
+zoneinfo engine) remains optional future work, needed only if `getId()` must return the real
+zone name instead of `'local'`.
+
+Implementation summary:
+- `lib/ilib_timezone.dart`: `_isLocal`, `_offsetJan1`/`_offsetJun1` sampled in the
+  constructor; `isLocal` branches in `getOffsetMinutes`/`inDaylightTime`/`_useDaylightTime`;
+  injectable static hooks `sysOffsetMinutes`/`sysOffsetMinutesForInstant`/`sampleYear` (for
+  hermetic tests).
+- `lib/calendar/ilib_date.dart`: `adjustRdForTimezone`/`calcTimezoneOffset` only short-circuit
+  on a `null` raw `_timezone`; `'local'` flows to `ILibTimeZone('local')`.
+- `lib/ilib_date.dart`: `ILibDateOptions._toCalendarDate()` forwards `locale`.
+- `newDateFromRd` (all 9 calendar date classes) propagates the source `_timezone` to results.
+- Tests: ported `*Local*` tests in `test/timezone/timezone_test.dart`; Dart-only ones in
+  `timezone_extra_test.dart`; both emulate `America/Los_Angeles` via the injectable hooks.
 
 ## 1. Current behavior (the divergence)
 

@@ -53,7 +53,7 @@ void main() {
 
   group('JulianDate from JD', () {
     test('basic JD', () {
-      final JulianDate d = JulianDate(julianDay: 2450138.5);
+      final JulianDate d = JulianDate(julianDay: 2450138.5, timezone: 'Etc/UTC');
       expect(d.getYears(), 1996);
       expect(d.getMonths(), 2);
       expect(d.getDays(), 12);

@@ -52,7 +52,7 @@ abstract class ILibCalendarDate implements ILibDate {
 
   double adjustRdForTimezone(double rd) {
     final String? tz = timezone;
-    if (tz == null || tz == 'local') {
+    if (tz == null) {
       return rd;
     }
     final ILibTimeZone tzObj = ILibTimeZone(tz);
@@ -68,7 +68,7 @@ abstract class ILibCalendarDate implements ILibDate {
 
   void calcTimezoneOffset() {
     final String? tz = timezone;
-    if (tz == null || tz == 'local') {
+    if (tz == null) {
       return;
     }
     final ILibTimeZone tzObj = ILibTimeZone(tz);

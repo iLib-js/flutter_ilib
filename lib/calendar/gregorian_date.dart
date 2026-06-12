@@ -173,6 +173,6 @@ class GregorianDate extends ILibCalendarDate {
 
   @override
   GregorianDate newDateFromRd(double rd) {
-    return GregorianDate(rd: rd);
+    return GregorianDate(rd: rd, timezone: _timezone);
   }
 }

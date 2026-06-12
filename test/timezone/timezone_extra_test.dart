@@ -167,4 +167,105 @@ void main() {
       expect(tz.getDisplayName(gd, 'standard'), 'UTC');
     });
   });
+
+  // flutter_ilib-specific: system-timezone ('local') tests with no 1:1 JS counterpart.
+  // America/Los_Angeles is emulated hermetically via the injectable offset hooks so the
+  // tests are deterministic on any host (PST -480 in winter, PDT -420 in summer).
+  group('local timezone (system) extra', () {
+    late double Function(int, int, int, int, int) savedSysOffset;
+    late double Function(int) savedSysOffsetForInstant;
+    late int Function() savedSampleYear;
+
+    bool laIsDst(int month) => month > 3 && month < 11;
+
+    setUp(() {
+      savedSysOffset = ILibTimeZone.sysWallOffsetMinutes;
+      savedSysOffsetForInstant = ILibTimeZone.sysOffsetMinutesForInstant;
+      savedSampleYear = ILibTimeZone.sampleYear;
+      ILibTimeZone.sysWallOffsetMinutes =
+          (int y, int m, int d, int h, int mi) => laIsDst(m) ? -420.0 : -480.0;
+      ILibTimeZone.sysOffsetMinutesForInstant = (int ms) {
+        final DateTime d = DateTime.fromMillisecondsSinceEpoch(ms, isUtc: true);
+        return laIsDst(d.month) ? -420.0 : -480.0;
+      };
+      ILibTimeZone.sampleYear = () => 2011;
+    });
+
+    tearDown(() {
+      ILibTimeZone.sysWallOffsetMinutes = savedSysOffset;
+      ILibTimeZone.sysOffsetMinutesForInstant = savedSysOffsetForInstant;
+      ILibTimeZone.sampleYear = savedSampleYear;
+    });
+
+    test('testTZUseDaylightTimeLocal', () {
+      final ILibTimeZone tz = ILibTimeZone('local');
+      expect(tz.useDaylightTime(), true);
+    });
+
+    test('testTZGetOffsetLocalSummer', () {
+      final ILibTimeZone tz = ILibTimeZone('local');
+      final ILibDateOptions gd = ILibDateOptions(
+          timezone: 'local', unixtime: 1309478400000); // 2011-07-01 00:00 UTC
+      expect(tz.getOffset(gd), <String, int>{'h': -7});
+    });
+
+    test('testTZGetOffsetLocalWinter', () {
+      final ILibTimeZone tz = ILibTimeZone('local');
+      final ILibDateOptions gd = ILibDateOptions(
+          timezone: 'local', unixtime: 1325376000000); // 2012-01-01 00:00 UTC
+      expect(tz.getOffset(gd), <String, int>{'h': -8});
+    });
+  });
+
+  // flutter_ilib-specific: DST spring-forward gap (a non-existent wall time). Mirrors the
+  // JS GregorianDate._init hBefore correction — the typed wall time inside the missing hour
+  // is interpreted with the pre-transition (standard) offset. Emulates the real 2011
+  // America/Los_Angeles transition (PST->PDT at Mar 13 02:00) so it is deterministic.
+  group('local timezone spring-forward gap extra', () {
+    late double Function(int, int, int, int, int) savedSysOffset;
+    late double Function(int) savedSysOffsetForInstant;
+    late int Function() savedSampleYear;
+
+    // 2011 LA DST window: wall Mar 13 02:00 .. Nov 6 02:00 is PDT (-420); else PST (-480).
+    double laWall(int y, int mo, int d, int h, int mi) {
+      final bool afterStart =
+          mo > 3 || (mo == 3 && d > 13) || (mo == 3 && d == 13 && h >= 2);
+      final bool beforeEnd =
+          mo < 11 || (mo == 11 && d < 6) || (mo == 11 && d == 6 && h < 2);
+      return (afterStart && beforeEnd) ? -420.0 : -480.0;
+    }
+
+    setUp(() {
+      savedSysOffset = ILibTimeZone.sysWallOffsetMinutes;
+      savedSysOffsetForInstant = ILibTimeZone.sysOffsetMinutesForInstant;
+      savedSampleYear = ILibTimeZone.sampleYear;
+      ILibTimeZone.sysWallOffsetMinutes = laWall;
+      final int dstStart = DateTime.utc(2011, 3, 13, 10).millisecondsSinceEpoch;
+      final int dstEnd = DateTime.utc(2011, 11, 6, 9).millisecondsSinceEpoch;
+      ILibTimeZone.sysOffsetMinutesForInstant =
+          (int ms) => (ms >= dstStart && ms < dstEnd) ? -420.0 : -480.0;
+      ILibTimeZone.sampleYear = () => 2011;
+    });
+
+    tearDown(() {
+      ILibTimeZone.sysWallOffsetMinutes = savedSysOffset;
+      ILibTimeZone.sysOffsetMinutesForInstant = savedSysOffsetForInstant;
+      ILibTimeZone.sampleYear = savedSampleYear;
+    });
+
+    test('testTZLocalSpringForwardGapUsesStandardOffset', () {
+      // 2011-03-13 02:30 local does not exist. JS uses the pre-transition PST (-8h):
+      // 02:30 -> 10:30 UTC, NOT the post-transition PDT (-7h -> 09:30 UTC).
+      final GregorianDate gd = GregorianDate(
+          year: 2011, month: 3, day: 13, hour: 2, minute: 30, timezone: 'local');
+      expect(gd.getTime(), DateTime.utc(2011, 3, 13, 10, 30).millisecondsSinceEpoch);
+    });
+
+    test('testTZLocalNonGapUsesEngineOffset', () {
+      // A normal summer wall time is not in a gap: PDT (-7h), 02:30 -> 09:30 UTC.
+      final GregorianDate gd = GregorianDate(
+          year: 2011, month: 7, day: 1, hour: 2, minute: 30, timezone: 'local');
+      expect(gd.getTime(), DateTime.utc(2011, 7, 1, 9, 30).millisecondsSinceEpoch);
+    });
+  });
 }

@@ -53,7 +53,7 @@ void main() {
 
   group('ThaiSolarDate from JD', () {
     test('basic JD', () {
-      final ThaiSolarDate d = ThaiSolarDate(julianDay: 2450138.5);
+      final ThaiSolarDate d = ThaiSolarDate(julianDay: 2450138.5, timezone: 'Etc/UTC');
       expect(d.getYears(), 2539);
       expect(d.getMonths(), 2);
       expect(d.getDays(), 25);

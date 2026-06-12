@@ -155,6 +155,6 @@ class PersianDate extends ILibCalendarDate {
 
   @override
   PersianDate newDateFromRd(double rd) {
-    return PersianDate(rd: rd);
+    return PersianDate(rd: rd, timezone: _timezone);
   }
 }

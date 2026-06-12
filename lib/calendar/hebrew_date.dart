@@ -235,6 +235,6 @@ class HebrewDate extends ILibCalendarDate {
 
   @override
   HebrewDate newDateFromRd(double rd) {
-    return HebrewDate(rd: rd);
+    return HebrewDate(rd: rd, timezone: _timezone);
   }
 }

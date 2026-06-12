@@ -153,6 +153,6 @@ class CopticDate extends ILibCalendarDate {
 
   @override
   CopticDate newDateFromRd(double rd) {
-    return CopticDate(rd: rd);
+    return CopticDate(rd: rd, timezone: _timezone);
   }
 }

@@ -53,7 +53,7 @@ void main() {
 
   group('PersianAlgoDate from JD', () {
     test('basic JD', () {
-      final PersianAlgoDate d = PersianAlgoDate(julianDay: 2450138.5);
+      final PersianAlgoDate d = PersianAlgoDate(julianDay: 2450138.5, timezone: 'Etc/UTC');
       expect(d.getYears(), 1374);
       expect(d.getMonths(), 12);
       expect(d.getDays(), 6);

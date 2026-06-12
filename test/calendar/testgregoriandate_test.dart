@@ -1012,10 +1012,10 @@ void main() {
 
   group('GregorianDate getTime / empty constructor', () {
     test('testGregDateGetTimeWithUnixTime', () {
-      // JS compares against a local Date; the underlying check is that the unix
-      // time of 2011/3/8 00:00 (UTC) is correct.
+      // JS compares against a local Date: a no-timezone date is interpreted in the
+      // system zone, so its instant matches a local DateTime of the same wall time.
       final GregorianDate gd = GregorianDate(year: 2011, month: 3, day: 8);
-      expect(gd.getTime(), DateTime.utc(2011, 3, 8).millisecondsSinceEpoch);
+      expect(gd.getTime(), DateTime(2011, 3, 8).millisecondsSinceEpoch);
     });
     test('testGregDateGetTimeWithDefaultTime', () {
       final int before = DateTime.now().millisecondsSinceEpoch;

@@ -184,7 +184,14 @@ lib/
 
 ### Code Style
 - Must pass `flutter analyze`
-- Must pass `dart format --line-length 100 .` (100-char line length)
+- **Formatting — do NOT run `dart format` tree-wide.** The repo was formatted with an older
+  Dart (short style, ~100-col width) that the **Dart 3.7+ formatter cannot reproduce**, and the
+  files are mixed (some at width 80, some at 100). On Dart 3.8 neither `dart format` (defaults to
+  width 80) nor `dart format --line-length 100` (the deprecated flag silently switches to the new
+  "tall" style) reproduces the committed style — both reformat large swaths of untouched code into
+  huge noise diffs. **Match the surrounding style of the file you edit by hand** (short style,
+  ≤100 cols); leave other files untouched. A repo-wide reformat (pick tall or short + pin the
+  Dart SDK) should be its own separate commit, not mixed into feature work.
 - Explicit type declarations (`always_specify_types`)
 - Single quotes, `@override` annotation
 - No unnecessary comments
@@ -198,6 +205,14 @@ lib/
 - Test file location: feature-specific folders under `test/`
 - `TestWidgetsFlutterBinding.ensureInitialized()` required (for asset loading)
 - Pure calculation classes (Calendar, etc.) can be tested without locale loading
+- Use exact `expect(value, expected)` for integer dates, JD round-trips, and epoch
+  subtraction (these produce exact results). Reserve `closeTo` for calculations with
+  genuine floating-point division (e.g. `unixtime / 86400000`) — using it on exact
+  values hides precision bugs and weakens the test
+- **Tests converted 1:1 from an iLib JS test go in the main `*_test.dart`. Tests with no
+  JS counterpart (Dart-specific: extra accessors like getDayOfYear/getEra, `'local'`/
+  system-tz, offset variants) go in a sibling `*_extra_test.dart`** — never add Dart-only
+  cases to the JS-mirrored file (see docs/conversion-guide.md, docs/test-mapping.md)
 
 ### Public API Export
 - All public classes exported from `lib/flutter_ilib.dart`
@@ -328,35 +343,41 @@ the JS `DateFmt.format()` logic (DateFmt.js:1537-1566):
    millisecond, julianDay, rd, unixtime) are null. If any single date component
    is provided, the others default to their calendar-specific defaults (usually 1/1/1).
 
-7. **No timezone / `'local'` means UTC (offset 0), NOT the system timezone**:
-   In JS, omitting `timezone` defaults to `"local"`, and iLib resolves that against the
-   intrinsic `Date` (the *system* timezone) — so a no-timezone JS date is machine-dependent.
-   Dart does NOT implement the system-local path: both `adjustRdForTimezone()` and
-   `calcTimezoneOffset()` short-circuit on `tz == null || tz == 'local'` and apply **no
-   offset** (`tzOffsetDays = 0`), i.e. the wall-clock components are treated as the UTC
-   instant. (`ILibTimeZone('local')` likewise falls back to the Etc/UTC offset of 0 while
-   keeping `getId() == 'local'`.)
+7. **`'local'` is the system timezone (JS-faithful, Strategy A); only an absent `_timezone`
+   field stays UTC**:
+   Like JS, omitting `timezone` defaults to `"local"` and resolves against the platform — the
+   *system* timezone, DST-aware and machine-dependent. `ILibTimeZone('local')` samples the OS
+   offsets via Dart core `DateTime` (`offsetJan1`/`offsetJun1`, `_offset = min`,
+   `_dstSavings = abs(diff)`; `getId()` stays `'local'`). `adjustRdForTimezone()` /
+   `calcTimezoneOffset()` only short-circuit when the raw `_timezone` field is `null`
+   (no timezone *and* no locale → UTC); a `'local'` value flows through to the system offset.
+   This is **Strategy A** (delegate to the OS, synchronous, no plugin) — see
+   [docs/local-timezone-support.md](docs/local-timezone-support.md).
    Consequences:
-   - **In Dart, `timezone: 'Etc/UTC'`, `timezone: 'local'`, and omitting `timezone` are all
-     behaviorally identical** — every one resolves to offset 0 (UTC), so they produce the same
-     instant and the same wall-clock components. This is a **deliberate divergence from JS**,
-     where `'Etc/UTC'` (always offset 0) and `'local'` (the *system* timezone) differ on any
-     non-UTC machine and yield different instants. So a Dart test that sets `'local'` is NOT
-     exercising a system-timezone path the way the JS original does — it collapses to UTC.
-     Tests still set the JS-original value (`'Etc/UTC'` or `'local'`) for 1:1 construction
-     fidelity, but the reader must know the two are indistinguishable at runtime in Dart.
-   - **A no-timezone Dart date == an `Etc/UTC` date.** It is NOT equal to the JS no-timezone
-     (local) result on a non-UTC machine. The JS calendar tests avoid this by setting
-     `timezone: "Etc/UTC"` explicitly for deterministic UTC output; the Dart conversions
-     should mirror that (set `timezone: 'Etc/UTC'` wherever the JS test does) so construction
-     is 1:1. Omitting it happens to pass only because Dart's no-tz already behaves as UTC.
-   - JS `*Local*` tests (`testTZInDaylightTimeLocalTrue/False`, `testTZConstructUsingLocalID`,
-     `testTZGetRawOffsetMillisLocal`, …) and no-arg-vs-system-`Date` checks
-     (`testXxxDateConstructorEmpty`, `testGregDateGetTimeWithUnixTime`) depend on the system
-     timezone, so they are **N/A** in Dart or ported as deterministic round-trips.
-   - Supporting a real `'local'` would mean removing the short-circuit and wiring in the
-     platform's local offset (e.g. `DateTime` local / a tz plugin); it would also make those
-     `*Local*` tests portable, at the cost of machine-dependent results.
+   - **`timezone: 'local'` and `timezone: 'Etc/UTC'` now DIVERGE on any non-UTC host** (system
+     offset vs 0). They are no longer interchangeable. The `getTimezoneOffset` source is the OS,
+     so results depend on the host's `TZ`.
+   - **A Dart no-timezone *and* no-locale date is interpreted in the system zone** (matches JS).
+     Calendar tests that need deterministic output therefore set `timezone: 'Etc/UTC'` explicitly
+     (the ~600 calendar constructions do this, mirroring the JS originals); a few Dart-only
+     smoke tests pin `'Etc/UTC'` too. Do NOT rely on omitted-tz meaning UTC.
+   - **`locale` IS forwarded** through `ILibDateOptions._toCalendarDate()`, so a locale-only date
+     uses the locale's zone for its instant (JS step ②) — see point 1 below, now reversed.
+   - The DST-end overlap (`dst` flag) and the from-components vs from-instant split are handled in
+     `ILibTimeZone`'s `isLocal` branches (`getOffsetMinutes`/`inDaylightTime`), mirroring
+     `TimeZone.js` `getOffsetMillis`/`inDaylightTime`.
+   - **Spring-forward gap** (a non-existent wall time) uses the JS `GregorianDate._init` `hBefore`
+     rule (compare the wall hour's offset to the hour before; if it grew, the time is in the
+     missing hour → use the pre-transition/standard offset). Dart applies this in
+     `getOffsetMinutes`'s `isLocal` wall-time branch to **all calendars** — deliberately, unlike
+     JS which only has the `hBefore` block in `GregorianDate` (non-Gregorian JS calendars skip
+     gap correction; that inconsistency is an unintended JS artifact and is NOT replicated).
+   - **Test determinism**: `'local'`-dependent tests must be deterministic regardless of host.
+     The ported JS `*Local*` tests (`testTZInDaylightTimeLocalTrue/False`,
+     `testTZConstructUsingLocalID`, `testTZGetRawOffsetMillisLocal`) and the Dart-only ones
+     (`timezone_extra_test.dart`) emulate `America/Los_Angeles` via the injectable hooks
+     `ILibTimeZone.sysWallOffsetMinutes` / `sysOffsetMinutesForInstant` / `sampleYear` (overridden
+     in `setUp`, restored in `tearDown`) — no `TZ` pinning required.
 
 ## Detailed Documentation
 
@@ -370,7 +391,12 @@ For in-depth explanations, see `docs/`:
 
 ## Deferred Work
 - **Han Calendar**: needs lunar calculations (`_lunarLongitude`, `_newMoonTime`, etc.). Planned as extension to `ILibAstro`.
-- **System `'local'` timezone**: Dart treats `'local'` == `'Etc/UTC'` == no-tz (all offset 0, UTC), diverging from JS where `'local'` is the system timezone. Implementing the real system-tz path (Flutter-recommended: `flutter_timezone` resolving the IANA id into the existing `ILibTimeZone` engine) is designed but not done. See [docs/local-timezone-support.md](docs/local-timezone-support.md).
+- **System `'local'` timezone**: DONE (Strategy A — `ILibTimeZone('local')` samples the OS offset
+  via Dart core `DateTime`, synchronous, no plugin; `'local'` and no-tz dates are now the
+  DST-aware system timezone, matching JS). See Pitfall #7 and
+  [docs/local-timezone-support.md](docs/local-timezone-support.md). Optional future work
+  (Strategy B / `flutter_timezone`) is only needed if `getId()` must return the real IANA zone
+  name instead of `'local'`.
 
 ## Timezone DST Offset (resolved)
 All `testXxxDateRoundTripConstruction2` tests (with timezone) pass for every calendar, and
@@ -379,10 +405,11 @@ All `testXxxDateRoundTripConstruction2` tests (with timezone) pass for every cal
 1. **`ILibDate` exposes the instant (JS `IDate` parity)**: `getRataDie()`, `getJulianDay()`,
    `getTime()`, `getTimeExtended()`, `getCalendar()` are on the `ILibDate` interface.
    `ILibCalendarDate` already implements them; `ILibDateOptions` delegates to `_toCalendarDate()`,
-   which now also forwards `unixtime`/`timezone` (and maps a Flutter `DateTime` to `unixtime`) so
-   the instant honours those fields. `locale` is intentionally NOT forwarded — our calendar
-   constructors derive a timezone from a locale, which would silently shift the instant of the many
-   locale-bearing `ILibDateOptions`; only an explicit `timezone`/`unixtime` defines the instant.
+   which now also forwards `unixtime`/`timezone`/`locale` (and maps a Flutter `DateTime` to
+   `unixtime`) so the instant honours those fields. `locale` IS forwarded (JS-faithful, reversed
+   from the earlier UTC-only design): a locale-only date derives its zone from the locale
+   (`ILibLocaleInfo(locale).getTimeZone()`), shifting the instant accordingly. With no `timezone`
+   and no `locale`, the date defaults to `'local'` (system tz). See Pitfall #7.
 
 2. **`inDaylightTime` is instant-based** (mirrors JS): it derives the Gregorian RD and year from the
    date's instant — `rd = date.getJulianDay() - GregRataDie.epoch`, `year = GregRataDie.calcYear(rd)` —
