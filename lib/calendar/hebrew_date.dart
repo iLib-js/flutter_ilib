@@ -185,7 +185,8 @@ class HebrewDate extends ILibCalendarDate {
   }
 
   @override
-  int getWeekOfMonth(int firstDayOfWeek) {
+  int getWeekOfMonth(String? locale) {
+    final int firstDayOfWeek = ILibLocaleInfo(locale).getFirstDayOfWeek();
     final ILibRataDie first = HebrewRataDie(
       year: _year,
       month: _month,

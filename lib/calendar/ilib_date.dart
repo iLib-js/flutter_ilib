@@ -1,4 +1,5 @@
 import '../ilib_date_accessor.dart';
+import '../ilib_localeinfo.dart';
 import '../ilib_timezone.dart';
 import 'rata_die.dart';
 
@@ -129,7 +130,8 @@ abstract class ILibCalendarDate implements ILibDate {
   }
 
   @override
-  int getWeekOfMonth(int firstDayOfWeek) {
+  int getWeekOfMonth(String? locale) {
+    final int firstDayOfWeek = ILibLocaleInfo(locale).getFirstDayOfWeek();
     final ILibRataDie first = newRd(
       year: getYears(),
       month: getMonths(),

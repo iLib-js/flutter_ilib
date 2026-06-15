@@ -196,7 +196,7 @@ Key token mapping:
 | `O` | ordinal (1st, 2nd...) | ordinalChoice parsing |
 | `w`, `ww` | week of year | calDate.getWeekOfYear() |
 | `D`~`DDD` | day of year | calDate.getDayOfYear() |
-| `W` | week of month | calDate.getWeekOfMonth() |
+| `W` | week of month | calDate.getWeekOfMonth(locale) |
 | `z` | timezone abbreviation | ILibTimeZone.getDisplayName(standard) |
 | `Z` | timezone RFC822 | ILibTimeZone.getDisplayName(rfc822) |
 | quote literal | remove quotes, output as-is | - |

@@ -398,55 +398,59 @@ void main() {
   });
 
   group('ThaiSolarDate getWeekOfMonth', () {
+    setUpAll(() async {
+      await ILibLoader.instance.loadILibLocaleData('en-US');
+      await ILibLoader.instance.loadILibLocaleData('de-DE');
+    });
     // en-US: firstDayOfWeek = 0 (Sunday)
     test('testThaiSolarDateGetWeekOfMonth0', () {
       final ThaiSolarDate td = ThaiSolarDate(year: 2554, month: 10, day: 1, timezone: 'Etc/UTC');
-      expect(td.getWeekOfMonth(0), 0);
+      expect(td.getWeekOfMonth('en-US'), 0);
     });
     test('testThaiSolarDateGetWeekOfMonth1', () {
       final ThaiSolarDate td = ThaiSolarDate(year: 2554, month: 10, day: 2, timezone: 'Etc/UTC');
-      expect(td.getWeekOfMonth(0), 1);
+      expect(td.getWeekOfMonth('en-US'), 1);
     });
     test('testThaiSolarDateGetWeekOfMonth2', () {
       final ThaiSolarDate td = ThaiSolarDate(year: 2554, month: 10, day: 11, timezone: 'Etc/UTC');
-      expect(td.getWeekOfMonth(0), 2);
+      expect(td.getWeekOfMonth('en-US'), 2);
     });
     test('testThaiSolarDateGetWeekOfMonth3', () {
       final ThaiSolarDate td = ThaiSolarDate(year: 2554, month: 10, day: 20, timezone: 'Etc/UTC');
-      expect(td.getWeekOfMonth(0), 3);
+      expect(td.getWeekOfMonth('en-US'), 3);
     });
     test('testThaiSolarDateGetWeekOfMonth4', () {
       final ThaiSolarDate td = ThaiSolarDate(year: 2554, month: 10, day: 29, timezone: 'Etc/UTC');
-      expect(td.getWeekOfMonth(0), 4);
+      expect(td.getWeekOfMonth('en-US'), 4);
     });
     test('testThaiSolarDateGetWeekOfMonth5', () {
       final ThaiSolarDate td = ThaiSolarDate(year: 2554, month: 10, day: 30, timezone: 'Etc/UTC');
-      expect(td.getWeekOfMonth(0), 5);
+      expect(td.getWeekOfMonth('en-US'), 5);
     });
     test('testThaiSolarDateGetWeekOfMonth6', () {
       final ThaiSolarDate td = ThaiSolarDate(year: 2554, month: 9, day: 1, timezone: 'Etc/UTC');
-      expect(td.getWeekOfMonth(0), 0);
+      expect(td.getWeekOfMonth('en-US'), 0);
     });
     test('testThaiSolarDateGetWeekOfMonth7', () {
       final ThaiSolarDate td = ThaiSolarDate(year: 2554, month: 8, day: 1, timezone: 'Etc/UTC');
-      expect(td.getWeekOfMonth(0), 1);
+      expect(td.getWeekOfMonth('en-US'), 1);
     });
     test('testThaiSolarDateGetWeekOfMonth8', () {
       final ThaiSolarDate td = ThaiSolarDate(year: 2554, month: 7, day: 1, timezone: 'Etc/UTC');
-      expect(td.getWeekOfMonth(0), 0);
+      expect(td.getWeekOfMonth('en-US'), 0);
     });
     test('testThaiSolarDateGetWeekOfMonth9', () {
       final ThaiSolarDate td = ThaiSolarDate(year: 2554, month: 6, day: 1, timezone: 'Etc/UTC');
-      expect(td.getWeekOfMonth(0), 1);
+      expect(td.getWeekOfMonth('en-US'), 1);
     });
     test('testThaiSolarDateGetWeekOfMonthUS', () {
       final ThaiSolarDate td = ThaiSolarDate(year: 2554, month: 5, day: 1, timezone: 'Etc/UTC');
-      expect(td.getWeekOfMonth(0), 1);
+      expect(td.getWeekOfMonth('en-US'), 1);
     });
     test('testThaiSolarDateGetWeekOfMonthDE', () {
       // de-DE: firstDayOfWeek = 1 (Monday)
       final ThaiSolarDate td = ThaiSolarDate(year: 2554, month: 5, day: 1, timezone: 'Etc/UTC');
-      expect(td.getWeekOfMonth(1), 0);
+      expect(td.getWeekOfMonth('de-DE'), 0);
     });
   });
 

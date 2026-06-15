@@ -381,95 +381,98 @@ void main() {
   });
 
   group('PersianDate getWeekOfMonth', () {
-    // en-US: firstDayOfWeek = 0 (Sunday)
+    setUpAll(() async {
+      await ILibLoader.instance.loadILibLocaleData('en-US');
+      await ILibLoader.instance.loadILibLocaleData('de-DE');
+      await ILibLoader.instance.loadILibLocaleData('fa-IR');
+    });
     test('testPersDateAstroGetWeekOfMonth0', () {
       final PersianDate pd = PersianDate(year: 1388, month: 3, day: 1, timezone: 'Etc/UTC');
-      expect(pd.getWeekOfMonth(0), 0);
+      expect(pd.getWeekOfMonth('en-US'), 0);
     });
     test('testPersDateAstroGetWeekOfMonth1', () {
       final PersianDate pd = PersianDate(year: 1388, month: 3, day: 4, timezone: 'Etc/UTC');
-      expect(pd.getWeekOfMonth(0), 1);
+      expect(pd.getWeekOfMonth('en-US'), 1);
     });
     test('testPersDateAstroGetWeekOfMonth2', () {
       final PersianDate pd = PersianDate(year: 1388, month: 3, day: 11, timezone: 'Etc/UTC');
-      expect(pd.getWeekOfMonth(0), 2);
+      expect(pd.getWeekOfMonth('en-US'), 2);
     });
     test('testPersDateAstroGetWeekOfMonth3', () {
       final PersianDate pd = PersianDate(year: 1388, month: 3, day: 20, timezone: 'Etc/UTC');
-      expect(pd.getWeekOfMonth(0), 3);
+      expect(pd.getWeekOfMonth('en-US'), 3);
     });
     test('testPersDateAstroGetWeekOfMonth4', () {
       final PersianDate pd = PersianDate(year: 1388, month: 3, day: 29, timezone: 'Etc/UTC');
-      expect(pd.getWeekOfMonth(0), 4);
+      expect(pd.getWeekOfMonth('en-US'), 4);
     });
     test('testPersDateAstroGetWeekOfMonth5', () {
       final PersianDate pd = PersianDate(year: 1388, month: 3, day: 31, timezone: 'Etc/UTC');
-      expect(pd.getWeekOfMonth(0), 5);
+      expect(pd.getWeekOfMonth('en-US'), 5);
     });
     test('testPersDateAstroGetWeekOfMonth6', () {
       final PersianDate pd = PersianDate(year: 1388, month: 4, day: 1, timezone: 'Etc/UTC');
-      expect(pd.getWeekOfMonth(0), 1);
+      expect(pd.getWeekOfMonth('en-US'), 1);
     });
     test('testPersDateAstroGetWeekOfMonth7', () {
       final PersianDate pd = PersianDate(year: 1388, month: 5, day: 1, timezone: 'Etc/UTC');
-      expect(pd.getWeekOfMonth(0), 0);
+      expect(pd.getWeekOfMonth('en-US'), 0);
     });
     test('testPersDateAstroGetWeekOfMonth8', () {
       final PersianDate pd = PersianDate(year: 1388, month: 6, day: 1, timezone: 'Etc/UTC');
-      expect(pd.getWeekOfMonth(0), 1);
+      expect(pd.getWeekOfMonth('en-US'), 1);
     });
     test('testPersDateAstroGetWeekOfMonth9', () {
       final PersianDate pd = PersianDate(year: 1388, month: 7, day: 1, timezone: 'Etc/UTC');
-      expect(pd.getWeekOfMonth(0), 1);
+      expect(pd.getWeekOfMonth('en-US'), 1);
     });
-    // fa-IR: firstDayOfWeek = 6 (Saturday)
     test('testPersDateAstroGetWeekOfMonthIR0', () {
       final PersianDate pd = PersianDate(year: 1388, month: 3, day: 1, timezone: 'Etc/UTC');
-      expect(pd.getWeekOfMonth(6), 0);
+      expect(pd.getWeekOfMonth('fa-IR'), 0);
     });
     test('testPersDateAstroGetWeekOfMonthIR1', () {
       final PersianDate pd = PersianDate(year: 1388, month: 3, day: 4, timezone: 'Etc/UTC');
-      expect(pd.getWeekOfMonth(6), 1);
+      expect(pd.getWeekOfMonth('fa-IR'), 1);
     });
     test('testPersDateAstroGetWeekOfMonthIR2', () {
       final PersianDate pd = PersianDate(year: 1388, month: 3, day: 11, timezone: 'Etc/UTC');
-      expect(pd.getWeekOfMonth(6), 2);
+      expect(pd.getWeekOfMonth('fa-IR'), 2);
     });
     test('testPersDateAstroGetWeekOfMonthIR3', () {
       final PersianDate pd = PersianDate(year: 1388, month: 3, day: 20, timezone: 'Etc/UTC');
-      expect(pd.getWeekOfMonth(6), 3);
+      expect(pd.getWeekOfMonth('fa-IR'), 3);
     });
     test('testPersDateAstroGetWeekOfMonthIR4', () {
       final PersianDate pd = PersianDate(year: 1388, month: 3, day: 29, timezone: 'Etc/UTC');
-      expect(pd.getWeekOfMonth(6), 4);
+      expect(pd.getWeekOfMonth('fa-IR'), 4);
     });
     test('testPersDateAstroGetWeekOfMonthIR5', () {
       final PersianDate pd = PersianDate(year: 1388, month: 3, day: 31, timezone: 'Etc/UTC');
-      expect(pd.getWeekOfMonth(6), 5);
+      expect(pd.getWeekOfMonth('fa-IR'), 5);
     });
     test('testPersDateAstroGetWeekOfMonthIR6', () {
       final PersianDate pd = PersianDate(year: 1388, month: 4, day: 1, timezone: 'Etc/UTC');
-      expect(pd.getWeekOfMonth(6), 1);
+      expect(pd.getWeekOfMonth('fa-IR'), 1);
     });
     test('testPersDateAstroGetWeekOfMonthIR7', () {
       final PersianDate pd = PersianDate(year: 1388, month: 5, day: 1, timezone: 'Etc/UTC');
-      expect(pd.getWeekOfMonth(6), 0);
+      expect(pd.getWeekOfMonth('fa-IR'), 0);
     });
     test('testPersDateAstroGetWeekOfMonthIR8', () {
       final PersianDate pd = PersianDate(year: 1388, month: 6, day: 1, timezone: 'Etc/UTC');
-      expect(pd.getWeekOfMonth(6), 1);
+      expect(pd.getWeekOfMonth('fa-IR'), 1);
     });
     test('testPersDateAstroGetWeekOfMonthIR9', () {
       final PersianDate pd = PersianDate(year: 1388, month: 7, day: 1, timezone: 'Etc/UTC');
-      expect(pd.getWeekOfMonth(6), 0);
+      expect(pd.getWeekOfMonth('fa-IR'), 0);
     });
     test('testPersDateAstroGetWeekOfMonthUS', () {
       final PersianDate pd = PersianDate(year: 1388, month: 8, day: 1, timezone: 'Etc/UTC');
-      expect(pd.getWeekOfMonth(0), 0);
+      expect(pd.getWeekOfMonth('en-US'), 0);
     });
     test('testPersDateAstroGetWeekOfMonthDE', () {
       final PersianDate pd = PersianDate(year: 1388, month: 8, day: 1, timezone: 'Etc/UTC');
-      expect(pd.getWeekOfMonth(1), 0);
+      expect(pd.getWeekOfMonth('de-DE'), 0);
     });
   });
 
@@ -729,22 +732,28 @@ void main() {
   });
 
   group('PersianDate getWeekOfMonth', () {
-    // JS calls getWeekOfMonth("fa-IR"); the Dart API takes the first day of week as
-    // an int, and Iran's first day of week is Saturday (6).
+    setUpAll(() async {
+      await ILibLoader.instance.loadILibLocaleData('fa-IR');
+    });
     test('testPersDateAstroGetWeekOfMonthIR10', () {
-      expect(PersianDate(year: 1388, month: 8, day: 1, timezone: 'Etc/UTC').getWeekOfMonth(6), 0);
+      expect(
+          PersianDate(year: 1388, month: 8, day: 1, timezone: 'Etc/UTC').getWeekOfMonth('fa-IR'), 0);
     });
     test('testPersDateAstroGetWeekOfMonthIR11', () {
-      expect(PersianDate(year: 1388, month: 9, day: 1, timezone: 'Etc/UTC').getWeekOfMonth(6), 1);
+      expect(
+          PersianDate(year: 1388, month: 9, day: 1, timezone: 'Etc/UTC').getWeekOfMonth('fa-IR'), 1);
     });
     test('testPersDateAstroGetWeekOfMonthIR12', () {
-      expect(PersianDate(year: 1388, month: 10, day: 1, timezone: 'Etc/UTC').getWeekOfMonth(6), 1);
+      expect(PersianDate(year: 1388, month: 10, day: 1, timezone: 'Etc/UTC').getWeekOfMonth('fa-IR'),
+          1);
     });
     test('testPersDateAstroGetWeekOfMonthIR13', () {
-      expect(PersianDate(year: 1388, month: 11, day: 1, timezone: 'Etc/UTC').getWeekOfMonth(6), 0);
+      expect(PersianDate(year: 1388, month: 11, day: 1, timezone: 'Etc/UTC').getWeekOfMonth('fa-IR'),
+          0);
     });
     test('testPersDateAstroGetWeekOfMonthIR14', () {
-      expect(PersianDate(year: 1388, month: 12, day: 1, timezone: 'Etc/UTC').getWeekOfMonth(6), 1);
+      expect(PersianDate(year: 1388, month: 12, day: 1, timezone: 'Etc/UTC').getWeekOfMonth('fa-IR'),
+          1);
     });
   });
 

@@ -130,8 +130,8 @@ class ILibDateOptions implements ILibDate {
   int getWeekOfYear() => _toCalendarDate().getWeekOfYear();
 
   @override
-  int getWeekOfMonth(int firstDayOfWeek) =>
-      _toCalendarDate().getWeekOfMonth(firstDayOfWeek);
+  int getWeekOfMonth(String? locale) =>
+      _toCalendarDate().getWeekOfMonth(locale);
 
   @override
   int getEra() => _toCalendarDate().getEra();

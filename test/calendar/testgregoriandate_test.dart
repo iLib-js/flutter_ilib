@@ -499,53 +499,57 @@ void main() {
   });
 
   group('GregorianDate getWeekOfMonth', () {
+    setUpAll(() async {
+      await ILibLoader.instance.loadILibLocaleData('en-US');
+      await ILibLoader.instance.loadILibLocaleData('de-DE');
+    });
     test('testGregDateGetWeekOfMonth0', () {
       final GregorianDate gd = GregorianDate(year: 2011, month: 10, day: 1, timezone: 'Etc/UTC');
-      expect(gd.getWeekOfMonth(0), 0);
+      expect(gd.getWeekOfMonth('en-US'), 0);
     });
     test('testGregDateGetWeekOfMonth1', () {
       final GregorianDate gd = GregorianDate(year: 2011, month: 10, day: 2, timezone: 'Etc/UTC');
-      expect(gd.getWeekOfMonth(0), 1);
+      expect(gd.getWeekOfMonth('en-US'), 1);
     });
     test('testGregDateGetWeekOfMonth2', () {
       final GregorianDate gd = GregorianDate(year: 2011, month: 10, day: 11, timezone: 'Etc/UTC');
-      expect(gd.getWeekOfMonth(0), 2);
+      expect(gd.getWeekOfMonth('en-US'), 2);
     });
     test('testGregDateGetWeekOfMonth3', () {
       final GregorianDate gd = GregorianDate(year: 2011, month: 10, day: 20, timezone: 'Etc/UTC');
-      expect(gd.getWeekOfMonth(0), 3);
+      expect(gd.getWeekOfMonth('en-US'), 3);
     });
     test('testGregDateGetWeekOfMonth4', () {
       final GregorianDate gd = GregorianDate(year: 2011, month: 10, day: 29, timezone: 'Etc/UTC');
-      expect(gd.getWeekOfMonth(0), 4);
+      expect(gd.getWeekOfMonth('en-US'), 4);
     });
     test('testGregDateGetWeekOfMonth5', () {
       final GregorianDate gd = GregorianDate(year: 2011, month: 10, day: 30, timezone: 'Etc/UTC');
-      expect(gd.getWeekOfMonth(0), 5);
+      expect(gd.getWeekOfMonth('en-US'), 5);
     });
     test('testGregDateGetWeekOfMonth6', () {
       final GregorianDate gd = GregorianDate(year: 2011, month: 9, day: 1, timezone: 'Etc/UTC');
-      expect(gd.getWeekOfMonth(0), 0);
+      expect(gd.getWeekOfMonth('en-US'), 0);
     });
     test('testGregDateGetWeekOfMonth7', () {
       final GregorianDate gd = GregorianDate(year: 2011, month: 8, day: 1, timezone: 'Etc/UTC');
-      expect(gd.getWeekOfMonth(0), 1);
+      expect(gd.getWeekOfMonth('en-US'), 1);
     });
     test('testGregDateGetWeekOfMonth8', () {
       final GregorianDate gd = GregorianDate(year: 2011, month: 7, day: 1, timezone: 'Etc/UTC');
-      expect(gd.getWeekOfMonth(0), 0);
+      expect(gd.getWeekOfMonth('en-US'), 0);
     });
     test('testGregDateGetWeekOfMonth9', () {
       final GregorianDate gd = GregorianDate(year: 2011, month: 6, day: 1, timezone: 'Etc/UTC');
-      expect(gd.getWeekOfMonth(0), 1);
+      expect(gd.getWeekOfMonth('en-US'), 1);
     });
     test('testGregDateGetWeekOfMonthUS', () {
       final GregorianDate gd = GregorianDate(year: 2011, month: 5, day: 1, timezone: 'Etc/UTC');
-      expect(gd.getWeekOfMonth(0), 1);
+      expect(gd.getWeekOfMonth('en-US'), 1);
     });
     test('testGregDateGetWeekOfMonthDE', () {
       final GregorianDate gd = GregorianDate(year: 2011, month: 5, day: 1, timezone: 'Etc/UTC');
-      expect(gd.getWeekOfMonth(1), 0);
+      expect(gd.getWeekOfMonth('de-DE'), 0);
     });
   });
 

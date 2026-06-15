@@ -13,7 +13,9 @@ abstract class ILibDate {
   int getDayOfWeek();
   int getWeekOfYear();
   int getDayOfYear();
-  int getWeekOfMonth(int firstDayOfWeek);
+  // Mirrors JS IDate.getWeekOfMonth(locale): resolves the first day of week from the
+  // locale internally (via ILibLocaleInfo.getFirstDayOfWeek), not a pre-resolved int.
+  int getWeekOfMonth(String? locale);
   int getEra();
 
   // Instant accessors, mirroring the JS IDate surface (RataDie/getTime/getCalendar).

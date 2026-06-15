@@ -405,60 +405,65 @@ void main() {
   });
 
   group('HebrewDate getWeekOfMonth', () {
+    setUpAll(() async {
+      await ILibLoader.instance.loadILibLocaleData('he-IL');
+      await ILibLoader.instance.loadILibLocaleData('en-US');
+      await ILibLoader.instance.loadILibLocaleData('de-DE');
+    });
     // he-IL: firstDayOfWeek = 0 (Sunday)
     test('testHebrewDateGetWeekOfMonth0', () {
       final HebrewDate hd = HebrewDate(year: 5772, month: 9, day: 1, timezone: 'Etc/UTC');
-      expect(hd.getWeekOfMonth(0), 1);
+      expect(hd.getWeekOfMonth('he-IL'), 1);
     });
     test('testHebrewDateGetWeekOfMonth1', () {
       final HebrewDate hd = HebrewDate(year: 5772, month: 9, day: 2, timezone: 'Etc/UTC');
-      expect(hd.getWeekOfMonth(0), 1);
+      expect(hd.getWeekOfMonth('he-IL'), 1);
     });
     test('testHebrewDateGetWeekOfMonth2', () {
       final HebrewDate hd = HebrewDate(year: 5772, month: 9, day: 11, timezone: 'Etc/UTC');
-      expect(hd.getWeekOfMonth(0), 2);
+      expect(hd.getWeekOfMonth('he-IL'), 2);
     });
     test('testHebrewDateGetWeekOfMonth3', () {
       final HebrewDate hd = HebrewDate(year: 5772, month: 9, day: 20, timezone: 'Etc/UTC');
-      expect(hd.getWeekOfMonth(0), 3);
+      expect(hd.getWeekOfMonth('he-IL'), 3);
     });
     test('testHebrewDateGetWeekOfMonth4', () {
       final HebrewDate hd = HebrewDate(year: 5772, month: 9, day: 29, timezone: 'Etc/UTC');
-      expect(hd.getWeekOfMonth(0), 5);
+      expect(hd.getWeekOfMonth('he-IL'), 5);
     });
     test('testHebrewDateGetWeekOfMonth5', () {
       final HebrewDate hd = HebrewDate(year: 5772, month: 1, day: 30, timezone: 'Etc/UTC');
-      expect(hd.getWeekOfMonth(0), 5);
+      expect(hd.getWeekOfMonth('he-IL'), 5);
     });
     test('testHebrewDateGetWeekOfMonth6', () {
       final HebrewDate hd = HebrewDate(year: 5772, month: 4, day: 1, timezone: 'Etc/UTC');
-      expect(hd.getWeekOfMonth(0), 0);
+      expect(hd.getWeekOfMonth('he-IL'), 0);
     });
     test('testHebrewDateGetWeekOfMonth7', () {
       final HebrewDate hd = HebrewDate(year: 5772, month: 5, day: 1, timezone: 'Etc/UTC');
-      expect(hd.getWeekOfMonth(0), 0);
+      expect(hd.getWeekOfMonth('he-IL'), 0);
     });
     test('testHebrewDateGetWeekOfMonth8', () {
       final HebrewDate hd = HebrewDate(year: 5772, month: 6, day: 1, timezone: 'Etc/UTC');
-      expect(hd.getWeekOfMonth(0), 1);
+      expect(hd.getWeekOfMonth('he-IL'), 1);
     });
     test('testHebrewDateGetWeekOfMonth9', () {
       final HebrewDate hd = HebrewDate(year: 5772, month: 7, day: 1, timezone: 'Etc/UTC');
-      expect(hd.getWeekOfMonth(0), 0);
+      expect(hd.getWeekOfMonth('he-IL'), 0);
     });
     test('testHebrewDateGetWeekOfMonth10', () {
       final HebrewDate hd = HebrewDate(year: 5772, month: 8, day: 1, timezone: 'Etc/UTC');
-      expect(hd.getWeekOfMonth(0), 0);
+      expect(hd.getWeekOfMonth('he-IL'), 0);
     });
     test('testHebrewDateGetWeekOfMonthUS', () {
       // en-US: firstDayOfWeek = 0 (Sunday)
       final HebrewDate hd = HebrewDate(year: 5772, month: 8, day: 1, timezone: 'Etc/UTC');
-      expect(hd.getWeekOfMonth(0), 0);
+      expect(hd.getWeekOfMonth('en-US'), 0);
     });
     test('testHebrewDateGetWeekOfMonthDE', () {
       // de-DE: firstDayOfWeek = 1 (Monday)
       final HebrewDate hd = HebrewDate(year: 5772, month: 8, day: 1, timezone: 'Etc/UTC');
-      expect(hd.getWeekOfMonth(1), 0);
+      expect(hd.getWeekOfMonth('de-DE'), 0);
     });
   });
 

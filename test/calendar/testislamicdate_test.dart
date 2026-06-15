@@ -386,55 +386,59 @@ void main() {
   });
 
   group('IslamicDate getWeekOfMonth', () {
+    setUpAll(() async {
+      await ILibLoader.instance.loadILibLocaleData('en-US');
+      await ILibLoader.instance.loadILibLocaleData('de-DE');
+    });
     // en-US: firstDayOfWeek = 0 (Sunday)
     test('testIslamicDateGetWeekOfMonth0', () {
       final IslamicDate id = IslamicDate(year: 1432, month: 3, day: 1, timezone: 'Etc/UTC');
-      expect(id.getWeekOfMonth(0), 0);
+      expect(id.getWeekOfMonth('en-US'), 0);
     });
     test('testIslamicDateGetWeekOfMonth1', () {
       final IslamicDate id = IslamicDate(year: 1432, month: 3, day: 2, timezone: 'Etc/UTC');
-      expect(id.getWeekOfMonth(0), 1);
+      expect(id.getWeekOfMonth('en-US'), 1);
     });
     test('testIslamicDateGetWeekOfMonth2', () {
       final IslamicDate id = IslamicDate(year: 1432, month: 3, day: 11, timezone: 'Etc/UTC');
-      expect(id.getWeekOfMonth(0), 2);
+      expect(id.getWeekOfMonth('en-US'), 2);
     });
     test('testIslamicDateGetWeekOfMonth3', () {
       final IslamicDate id = IslamicDate(year: 1432, month: 3, day: 20, timezone: 'Etc/UTC');
-      expect(id.getWeekOfMonth(0), 3);
+      expect(id.getWeekOfMonth('en-US'), 3);
     });
     test('testIslamicDateGetWeekOfMonth4', () {
       final IslamicDate id = IslamicDate(year: 1432, month: 3, day: 29, timezone: 'Etc/UTC');
-      expect(id.getWeekOfMonth(0), 4);
+      expect(id.getWeekOfMonth('en-US'), 4);
     });
     test('testIslamicDateGetWeekOfMonth5', () {
       final IslamicDate id = IslamicDate(year: 1432, month: 3, day: 30, timezone: 'Etc/UTC');
-      expect(id.getWeekOfMonth(0), 5);
+      expect(id.getWeekOfMonth('en-US'), 5);
     });
     test('testIslamicDateGetWeekOfMonth6', () {
       final IslamicDate id = IslamicDate(year: 1432, month: 4, day: 1, timezone: 'Etc/UTC');
-      expect(id.getWeekOfMonth(0), 1);
+      expect(id.getWeekOfMonth('en-US'), 1);
     });
     test('testIslamicDateGetWeekOfMonth7', () {
       final IslamicDate id = IslamicDate(year: 1432, month: 5, day: 1, timezone: 'Etc/UTC');
-      expect(id.getWeekOfMonth(0), 1);
+      expect(id.getWeekOfMonth('en-US'), 1);
     });
     test('testIslamicDateGetWeekOfMonth8', () {
       final IslamicDate id = IslamicDate(year: 1432, month: 6, day: 1, timezone: 'Etc/UTC');
-      expect(id.getWeekOfMonth(0), 0);
+      expect(id.getWeekOfMonth('en-US'), 0);
     });
     test('testIslamicDateGetWeekOfMonth9', () {
       final IslamicDate id = IslamicDate(year: 1432, month: 7, day: 1, timezone: 'Etc/UTC');
-      expect(id.getWeekOfMonth(0), 0);
+      expect(id.getWeekOfMonth('en-US'), 0);
     });
     test('testIslamicDateGetWeekOfMonthUS', () {
       final IslamicDate id = IslamicDate(year: 1432, month: 8, day: 1, timezone: 'Etc/UTC');
-      expect(id.getWeekOfMonth(0), 1);
+      expect(id.getWeekOfMonth('en-US'), 1);
     });
     test('testIslamicDateGetWeekOfMonthDE', () {
       // de-DE: firstDayOfWeek = 1 (Monday), 8/1 is Sunday
       final IslamicDate id = IslamicDate(year: 1432, month: 8, day: 1, timezone: 'Etc/UTC');
-      expect(id.getWeekOfMonth(1), 0);
+      expect(id.getWeekOfMonth('de-DE'), 0);
     });
   });
 
