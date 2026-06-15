@@ -324,23 +324,23 @@ void main() {
     test('testJulDateGetTimeZone', () {
       final JulianDate jul =
           JulianDate(year: 2011, month: 3, day: 8, timezone: 'America/Los_Angeles');
-      expect(jul.timezone, 'America/Los_Angeles');
+      expect(jul.getTimeZone(), 'America/Los_Angeles');
     });
     test('testJulDateGetTimeZoneDefault', () {
       final JulianDate jul = JulianDate(year: 2011, month: 3, day: 8);
-      expect(jul.timezone, 'local');
+      expect(jul.getTimeZone(), 'local');
     });
     test('testJulDateInitWithUnixTimeRightTimeZone', () {
       final JulianDate jul = JulianDate(unixtime: 0);
-      expect(jul.timezone, 'local');
+      expect(jul.getTimeZone(), 'local');
     });
     test('testJulDateInitWithJDRightTimeZone', () {
       final JulianDate jul = JulianDate(julianDay: 0);
-      expect(jul.timezone, 'local');
+      expect(jul.getTimeZone(), 'local');
     });
     test('testJulDateInitWithRDRightTimeZone', () {
       final JulianDate jul = JulianDate(rd: 0);
-      expect(jul.timezone, 'local');
+      expect(jul.getTimeZone(), 'local');
     });
   });
 
@@ -349,7 +349,7 @@ void main() {
       final JulianDate jd = JulianDate(year: 2014, month: 10, day: 20, timezone: 'local');
       final int u = jd.getTime();
       final JulianDate jd2 = JulianDate(unixtime: u, timezone: 'local');
-      expect(jd2.timezone, jd.timezone);
+      expect(jd2.getTimeZone(), jd.getTimeZone());
       expect(jd2.getYears(), jd.getYears());
       expect(jd2.getMonths(), jd.getMonths());
       expect(jd2.getDays(), jd.getDays());
@@ -362,7 +362,7 @@ void main() {
           JulianDate(year: 2014, month: 10, day: 20, timezone: 'America/Los_Angeles');
       final int u = jul.getTime();
       final JulianDate jul2 = JulianDate(unixtime: u, timezone: 'America/Los_Angeles');
-      expect(jul2.timezone, jul.timezone);
+      expect(jul2.getTimeZone(), jul.getTimeZone());
       expect(jul2.getYears(), jul.getYears());
       expect(jul2.getMonths(), jul.getMonths());
       expect(jul2.getDays(), jul.getDays());
@@ -388,15 +388,15 @@ void main() {
 
     test('testJulDateGetTimeZoneByLocaleDE', () {
       final JulianDate jul = JulianDate(year: 2011, month: 3, day: 8, locale: 'de-DE');
-      expect(jul.timezone, 'Europe/Berlin');
+      expect(jul.getTimeZone(), 'Europe/Berlin');
     });
     test('testJulDateGetTimeZoneByLocaleJP', () {
       final JulianDate jul = JulianDate(year: 2011, month: 3, day: 8, locale: 'ja-JP');
-      expect(jul.timezone, 'Asia/Tokyo');
+      expect(jul.getTimeZone(), 'Asia/Tokyo');
     });
     test('testJulDateGetTimeZoneByLocaleBogus', () {
       final JulianDate jul = JulianDate(year: 2011, month: 3, day: 8, locale: 'zz-ZZ');
-      expect(jul.timezone, 'Etc/UTC');
+      expect(jul.getTimeZone(), 'Etc/UTC');
     });
   });
 

@@ -489,15 +489,15 @@ void main() {
   group('HebrewDate getTimeZone', () {
     test('testHebrewDateInitWithUnixTimeRightTimeZone', () {
       final HebrewDate hd = HebrewDate(unixtime: 0);
-      expect(hd.timezone, 'local');
+      expect(hd.getTimeZone(), 'local');
     });
     test('testHebrewDateInitWithJDRightTimeZone', () {
       final HebrewDate hd = HebrewDate(julianDay: 0);
-      expect(hd.timezone, 'local');
+      expect(hd.getTimeZone(), 'local');
     });
     test('testHebrewDateInitWithRDRightTimeZone', () {
       final HebrewDate hd = HebrewDate(rd: 0);
-      expect(hd.timezone, 'local');
+      expect(hd.getTimeZone(), 'local');
     });
   });
 
@@ -564,7 +564,7 @@ void main() {
           HebrewDate(year: 5775, month: 8, day: 3, timezone: 'local');
       final int u = hd.getTime();
       final HebrewDate hd2 = HebrewDate(unixtime: u, timezone: 'local');
-      expect(hd2.timezone, hd.timezone);
+      expect(hd2.getTimeZone(), hd.getTimeZone());
       expect(hd2.getYears(), hd.getYears());
       expect(hd2.getMonths(), hd.getMonths());
       expect(hd2.getDays(), hd.getDays());
@@ -577,7 +577,7 @@ void main() {
           HebrewDate(year: 5775, month: 8, day: 10, timezone: 'America/Los_Angeles');
       final int u = hd.getTime();
       final HebrewDate hd2 = HebrewDate(unixtime: u, timezone: 'America/Los_Angeles');
-      expect(hd2.timezone, hd.timezone);
+      expect(hd2.getTimeZone(), hd.getTimeZone());
       expect(hd2.getYears(), hd.getYears());
       expect(hd2.getMonths(), hd.getMonths());
       expect(hd2.getDays(), hd.getDays());

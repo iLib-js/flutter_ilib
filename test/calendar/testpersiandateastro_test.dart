@@ -498,15 +498,15 @@ void main() {
   group('PersianDate getTimeZone', () {
     test('testPersDateAstroInitWithUnixTimeRightTimeZone', () {
       final PersianDate pd = PersianDate(unixtime: 0);
-      expect(pd.timezone, 'local');
+      expect(pd.getTimeZone(), 'local');
     });
     test('testPersDateAstroInitWithJDRightTimeZone', () {
       final PersianDate pd = PersianDate(julianDay: 0);
-      expect(pd.timezone, 'local');
+      expect(pd.getTimeZone(), 'local');
     });
     test('testPersDateAstroInitWithRDRightTimeZone', () {
       final PersianDate pd = PersianDate(rd: 0);
-      expect(pd.timezone, 'local');
+      expect(pd.getTimeZone(), 'local');
     });
   });
 
@@ -523,7 +523,7 @@ void main() {
           PersianDate(year: 1393, month: 8, day: 12, timezone: 'local');
       final int u = pd.getTime();
       final PersianDate pd2 = PersianDate(unixtime: u, timezone: 'local');
-      expect(pd2.timezone, pd.timezone);
+      expect(pd2.getTimeZone(), pd.getTimeZone());
       expect(pd2.getYears(), pd.getYears());
       expect(pd2.getMonths(), pd.getMonths());
       expect(pd2.getDays(), pd.getDays());
@@ -763,7 +763,7 @@ void main() {
           PersianDate(year: 1393, month: 8, day: 12, timezone: 'America/Los_Angeles');
       final int u = pd.getTime();
       final PersianDate pd2 = PersianDate(unixtime: u, timezone: 'America/Los_Angeles');
-      expect(pd2.timezone, pd.timezone);
+      expect(pd2.getTimeZone(), pd.getTimeZone());
       expect(pd2.getYears(), pd.getYears());
       expect(pd2.getMonths(), pd.getMonths());
       expect(pd2.getDays(), pd.getDays());

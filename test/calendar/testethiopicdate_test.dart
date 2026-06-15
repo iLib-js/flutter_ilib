@@ -411,7 +411,7 @@ void main() {
           EthiopicDate(year: 2014, month: 10, day: 20, timezone: 'local');
       final int u = ed.getTime();
       final EthiopicDate ed2 = EthiopicDate(unixtime: u, timezone: 'local');
-      expect(ed2.timezone, ed.timezone);
+      expect(ed2.getTimeZone(), ed.getTimeZone());
       expect(ed2.getYears(), ed.getYears());
       expect(ed2.getMonths(), ed.getMonths());
       expect(ed2.getDays(), ed.getDays());
@@ -424,7 +424,7 @@ void main() {
           EthiopicDate(year: 2014, month: 10, day: 20, timezone: 'America/Los_Angeles');
       final int u = ed.getTime();
       final EthiopicDate ed2 = EthiopicDate(unixtime: u, timezone: 'America/Los_Angeles');
-      expect(ed2.timezone, ed.timezone);
+      expect(ed2.getTimeZone(), ed.getTimeZone());
       expect(ed2.getYears(), ed.getYears());
       expect(ed2.getMonths(), ed.getMonths());
       expect(ed2.getDays(), ed.getDays());
@@ -511,38 +511,38 @@ void main() {
     test('testEthiopicDateGetTimeZone', () {
       final EthiopicDate ed =
           EthiopicDate(year: 2011, month: 3, day: 8, timezone: 'America/Los_Angeles');
-      expect(ed.timezone, 'America/Los_Angeles');
+      expect(ed.getTimeZone(), 'America/Los_Angeles');
     });
     test('testEthiopicDateGetTimeZoneDefault', () {
       final EthiopicDate ed = EthiopicDate(year: 2011, month: 3, day: 8);
-      expect(ed.timezone, 'local');
+      expect(ed.getTimeZone(), 'local');
     });
     test('testEthiopicDateInitWithUnixTimeRightTimeZone', () {
       final EthiopicDate ed = EthiopicDate(unixtime: 0);
-      expect(ed.timezone, 'local');
+      expect(ed.getTimeZone(), 'local');
     });
     test('testEthiopicDateInitWithJDRightTimeZone', () {
       final EthiopicDate ed = EthiopicDate(julianDay: 2440587.5);
-      expect(ed.timezone, 'local');
+      expect(ed.getTimeZone(), 'local');
     });
     test('testEthiopicDateInitWithRDRightTimeZone', () {
       final EthiopicDate ed = EthiopicDate(rd: 716367.75);
-      expect(ed.timezone, 'local');
+      expect(ed.getTimeZone(), 'local');
     });
   });
 
   group('EthiopicDate getTimeZone by locale', () {
     test('testEthiopicDateGetTimeZoneByLocaleDE', () {
       final EthiopicDate ed = EthiopicDate(year: 2011, month: 3, day: 8, locale: 'de-DE');
-      expect(ed.timezone, 'Europe/Berlin');
+      expect(ed.getTimeZone(), 'Europe/Berlin');
     });
     test('testEthiopicDateGetTimeZoneByLocaleJP', () {
       final EthiopicDate ed = EthiopicDate(year: 2011, month: 3, day: 8, locale: 'ja-JP');
-      expect(ed.timezone, 'Asia/Tokyo');
+      expect(ed.getTimeZone(), 'Asia/Tokyo');
     });
     test('testEthiopicDateGetTimeZoneByLocaleBogus', () {
       final EthiopicDate ed = EthiopicDate(year: 2011, month: 3, day: 8, locale: 'zz-ZZ');
-      expect(ed.timezone, 'Etc/UTC');
+      expect(ed.getTimeZone(), 'Etc/UTC');
     });
   });
 

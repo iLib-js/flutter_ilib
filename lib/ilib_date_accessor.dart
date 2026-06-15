@@ -7,6 +7,10 @@ abstract class ILibDate {
   int? get second;
   int? get millisecond;
   String? get timezone;
+  // Mirrors JS IDate.getTimeZone(): the timezone of this date as a string. Method form
+  // kept alongside the `timezone` getter so JS code ports 1:1 (consistent with the other
+  // accessor methods like getYears()/getCalendar()).
+  String? getTimeZone();
   // Optional DST disambiguation for the overlap hour at the end of DST (when the same
   // local wall time occurs twice). null = unspecified. Mirrors JS IDate.dst.
   bool? get dst;

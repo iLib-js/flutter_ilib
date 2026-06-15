@@ -137,6 +137,9 @@ class ILibDateOptions implements ILibDate {
   int getEra() => _toCalendarDate().getEra();
 
   @override
+  String? getTimeZone() => timezone;
+
+  @override
   double getRataDie() => _toCalendarDate().getRataDie();
 
   @override

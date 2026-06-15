@@ -464,15 +464,15 @@ void main() {
   group('IslamicDate getTimeZone', () {
     test('testIslamicDateInitWithUnixTimeRightTimeZone', () {
       final IslamicDate id = IslamicDate(unixtime: 0);
-      expect(id.timezone, 'local');
+      expect(id.getTimeZone(), 'local');
     });
     test('testIslamicDateInitWithJDRightTimeZone', () {
       final IslamicDate id = IslamicDate(julianDay: 0);
-      expect(id.timezone, 'local');
+      expect(id.getTimeZone(), 'local');
     });
     test('testIslamicDateInitWithRDRightTimeZone', () {
       final IslamicDate id = IslamicDate(rd: 0);
-      expect(id.timezone, 'local');
+      expect(id.getTimeZone(), 'local');
     });
   });
 
@@ -506,7 +506,7 @@ void main() {
           IslamicDate(year: 1436, month: 1, day: 10, timezone: 'local');
       final int u = id.getTime();
       final IslamicDate id2 = IslamicDate(unixtime: u, timezone: 'local');
-      expect(id2.timezone, id.timezone);
+      expect(id2.getTimeZone(), id.getTimeZone());
       expect(id2.getYears(), id.getYears());
       expect(id2.getMonths(), id.getMonths());
       expect(id2.getDays(), id.getDays());
@@ -519,7 +519,7 @@ void main() {
           IslamicDate(year: 1436, month: 1, day: 10, timezone: 'America/Los_Angeles');
       final int u = id.getTime();
       final IslamicDate id2 = IslamicDate(unixtime: u, timezone: 'America/Los_Angeles');
-      expect(id2.timezone, id.timezone);
+      expect(id2.getTimeZone(), id.getTimeZone());
       expect(id2.getYears(), id.getYears());
       expect(id2.getMonths(), id.getMonths());
       expect(id2.getDays(), id.getDays());

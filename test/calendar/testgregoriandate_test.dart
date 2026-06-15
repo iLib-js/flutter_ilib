@@ -881,23 +881,23 @@ void main() {
     test('testGregDateGetTimeZone', () {
       final GregorianDate gd =
           GregorianDate(year: 2011, month: 3, day: 8, timezone: 'America/Los_Angeles');
-      expect(gd.timezone, 'America/Los_Angeles');
+      expect(gd.getTimeZone(), 'America/Los_Angeles');
     });
     test('testGregDateGetTimeZoneDefault', () {
       final GregorianDate gd = GregorianDate(year: 2011, month: 3, day: 8);
-      expect(gd.timezone, 'local');
+      expect(gd.getTimeZone(), 'local');
     });
     test('testGregDateInitWithUnixTimeRightTimeZone', () {
       final GregorianDate gd = GregorianDate(unixtime: 0);
-      expect(gd.timezone, 'local');
+      expect(gd.getTimeZone(), 'local');
     });
     test('testGregDateInitWithJDRightTimeZone', () {
       final GregorianDate gd = GregorianDate(julianDay: 0);
-      expect(gd.timezone, 'local');
+      expect(gd.getTimeZone(), 'local');
     });
     test('testGregDateInitWithRDRightTimeZone', () {
       final GregorianDate gd = GregorianDate(rd: 0);
-      expect(gd.timezone, 'local');
+      expect(gd.getTimeZone(), 'local');
     });
   });
 
@@ -907,7 +907,7 @@ void main() {
           GregorianDate(year: 2014, month: 11, day: 3, timezone: 'local');
       final int u = gd.getTime();
       final GregorianDate gd2 = GregorianDate(unixtime: u, timezone: 'local');
-      expect(gd2.timezone, gd.timezone);
+      expect(gd2.getTimeZone(), gd.getTimeZone());
       expect(gd2.getYears(), gd.getYears());
       expect(gd2.getMonths(), gd.getMonths());
       expect(gd2.getDays(), gd.getDays());
@@ -920,7 +920,7 @@ void main() {
           GregorianDate(year: 2014, month: 11, day: 3, timezone: 'America/Los_Angeles');
       final int u = gd.getTime();
       final GregorianDate gd2 = GregorianDate(unixtime: u, timezone: 'America/Los_Angeles');
-      expect(gd2.timezone, gd.timezone);
+      expect(gd2.getTimeZone(), gd.getTimeZone());
       expect(gd2.getYears(), gd.getYears());
       expect(gd2.getMonths(), gd.getMonths());
       expect(gd2.getDays(), gd.getDays());
@@ -995,11 +995,11 @@ void main() {
 
     test('testGregDateGetTimeZoneByLocale', () {
       final GregorianDate gd = GregorianDate(year: 2011, month: 3, day: 8, locale: 'de-DE');
-      expect(gd.timezone, 'Europe/Berlin');
+      expect(gd.getTimeZone(), 'Europe/Berlin');
     });
     test('testGregDateGetTimeZoneByLocaleBogus', () {
       final GregorianDate gd = GregorianDate(year: 2011, month: 3, day: 8, locale: 'zz-ZZ');
-      expect(gd.timezone, 'Etc/UTC');
+      expect(gd.getTimeZone(), 'Etc/UTC');
     });
   });
 
