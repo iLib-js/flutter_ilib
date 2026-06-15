@@ -1969,7 +1969,7 @@ void main() {
       final ILibLocaleInfo info = ILibLocaleInfo('fr-CH');
       expect(info, isNotNull);
 
-      expect(info.getGroupingSeparator(), ' ');
+      expect(info.getGroupingSeparator(), '\'');
     });
     test('testLocaleInfoGetNegativeNumberFormat_fr_CH', () {
       final ILibLocaleInfo info = ILibLocaleInfo('fr-CH');
@@ -2629,7 +2629,7 @@ void main() {
       final ILibLocaleInfo info = ILibLocaleInfo('it-CH');
       expect(info, isNotNull);
 
-      expect(info.getGroupingSeparator(), '’');
+      expect(info.getGroupingSeparator(), '\'');
     });
     test('testLocaleInfoGetPercentageFormat_it_CH', () {
       final ILibLocaleInfo info = ILibLocaleInfo('it-CH');
@@ -2923,19 +2923,19 @@ void main() {
     test('testLocaleInfoGetDecimalSeparatorfor_kuQ', () {
       final ILibLocaleInfo info = ILibLocaleInfo('ku-IQ');
       expect(info, isNotNull);
-      expect(info.getDecimalSeparator(), '٫');
+      expect(info.getDecimalSeparator(), ',');
     });
     test('testLocaleInfoGetGroupingSeparatorfor_ku', () {
       final ILibLocaleInfo info = ILibLocaleInfo('ku-IQ');
       expect(info, isNotNull);
 
-      expect(info.getGroupingSeparator(), '٬');
+      expect(info.getGroupingSeparator(), '.');
     });
     test('testLocaleInfoGetPercentageFormat_ku', () {
       final ILibLocaleInfo info = ILibLocaleInfo('ku-IQ');
       expect(info, isNotNull);
 
-      expect(info.getPercentageFormat(), '{n} ٪');
+      expect(info.getPercentageFormat(), '%{n}');
     });
     test('testLocaleInfoGetCurrencyFormat_ku', () {
       final ILibLocaleInfo info = ILibLocaleInfo('ku-IQ');
@@ -2947,19 +2947,19 @@ void main() {
       final ILibLocaleInfo info = ILibLocaleInfo('ku-IQ');
       expect(info, isNotNull);
 
-      expect(info.getNegativeNumberFormat(), '‏-{n}');
+      expect(info.getNegativeNumberFormat(), '-{n}');
     });
     test('testLocaleInfoGetNegativePercentageFormat_ku', () {
       final ILibLocaleInfo info = ILibLocaleInfo('ku-IQ');
       expect(info, isNotNull);
 
-      expect(info.getNegativePercentageFormat(), '‏-{n} ٪');
+      expect(info.getNegativePercentageFormat(), '-%{n}');
     });
     test('testLocaleInfoGetNegativeCurrencyFormat_ku', () {
       final ILibLocaleInfo info = ILibLocaleInfo('ku-IQ');
       expect(info, isNotNull);
 
-      expect(info.getCurrencyFormats().commonNegative, '‏-{n} {s}');
+      expect(info.getCurrencyFormats().commonNegative, '-{n} {s}');
     });
     test('testLocaleInfoGetPrimaryGroupingDigits_ku', () {
       final ILibLocaleInfo info = ILibLocaleInfo('ku-IQ');
@@ -4321,7 +4321,7 @@ void main() {
       final ILibLocaleInfo info = ILibLocaleInfo('ur-IN');
       expect(info, isNotNull);
 
-      expect(info.getCurrencyFormats().common, '{s} {n}');
+      expect(info.getCurrencyFormats().common, '{s}{n}');
     });
     test('testLocaleInfoGetNegativeNumberFormat_ur_IN', () {
       final ILibLocaleInfo info = ILibLocaleInfo('ur-IN');
@@ -4339,7 +4339,7 @@ void main() {
       final ILibLocaleInfo info = ILibLocaleInfo('ur-IN');
       expect(info, isNotNull);
 
-      expect(info.getCurrencyFormats().commonNegative, '‎-‎{s} {n}');
+      expect(info.getCurrencyFormats().commonNegative, '‎-‎{s}{n}');
     });
     test('testLocaleInfoGetPrimaryGroupingDigits_ur_IN', () {
       final ILibLocaleInfo info = ILibLocaleInfo('ur-IN');

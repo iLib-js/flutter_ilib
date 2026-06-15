@@ -7,13 +7,11 @@ import '../test_env.dart';
 void main() {
   late String testPlatform;
   TestWidgetsFlutterBinding.ensureInitialized();
-  debugPrint('Testing [datefmt_Clock_test.dart] file.');
+  debugPrint('Testing [durfmt_am_ET_test.dart] file.');
   setUpAll(() async {
     testPlatform = getTestPlatform();
-    final ILibJS ilibjsinstance = ILibJS.instance;
-    await ilibjsinstance.loadJS();
-    ilibjsinstance.initILib();
-    await ILibJS.instance.loadILibLocaleData('am-ET');
+    await ILibLoader.instance.loadJSON();
+    await ILibLoader.instance.loadILibLocaleData('am-ET');
   });
 
   group('ILibDurationFmt am-ET', () {

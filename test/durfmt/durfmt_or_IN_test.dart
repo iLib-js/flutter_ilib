@@ -10,10 +10,8 @@ void main() {
   debugPrint('Testing [durfmt_or_IN_test.dart] file.');
   setUpAll(() async {
     testPlatform = getTestPlatform();
-    final ILibJS ilibjsinstance = ILibJS.instance;
-    await ilibjsinstance.loadJS();
-    ilibjsinstance.initILib();
-    await ILibJS.instance.loadILibLocaleData('or-IN');
+    await ILibLoader.instance.loadJSON();
+    await ILibLoader.instance.loadILibLocaleData('or-IN');
   });
 
   group('ILibDurationFmt or-IN', () {

@@ -12,7 +12,7 @@ void main() {
   });
   group('Basic', () {
     test('getCLDRVersion',
-        () => expect(flutterIlibPlugin.getCLDRVersion, '46.0'));
+        () => expect(flutterIlibPlugin.getCLDRVersion, '48.2'));
     test('isILibReady', () => expect(flutterIlibPlugin.isILibReady, true));
   });
 }

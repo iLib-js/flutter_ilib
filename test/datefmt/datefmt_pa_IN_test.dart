@@ -91,8 +91,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      final String result =
-          (testPlatform == 'webOS') ? '1:45 PM' : '1:45 ਬਾ.ਦੁ.';
+      final String result = (testPlatform == 'webOS') ? '1:45 PM' : '1:45 PM';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINSimpleTimeShort_pa_IN1', () {
@@ -109,8 +108,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      final String result =
-          (testPlatform == 'webOS') ? '1:45 PM' : '1:45 ਬਾ.ਦੁ.';
+      final String result = (testPlatform == 'webOS') ? '1:45 PM' : '1:45 PM';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINSimpleTimeMedium_pa_IN', () {
@@ -127,8 +125,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      final String result =
-          (testPlatform == 'webOS') ? '1:45 PM' : '1:45 ਬਾ.ਦੁ.';
+      final String result = (testPlatform == 'webOS') ? '1:45 PM' : '1:45 PM';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINSimpleTimeLong_pa_IN', () {
@@ -145,8 +142,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      final String result =
-          (testPlatform == 'webOS') ? '1:45 PM' : '1:45 ਬਾ.ਦੁ.';
+      final String result = (testPlatform == 'webOS') ? '1:45 PM' : '1:45 PM';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINSimpleTimeFull_pa_IN', () {
@@ -163,8 +159,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      final String result =
-          (testPlatform == 'webOS') ? '1:45 PM' : '1:45 ਬਾ.ਦੁ.';
+      final String result = (testPlatform == 'webOS') ? '1:45 PM' : '1:45 PM';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINDateTimeSimpleShort_pa_IN', () {
@@ -181,9 +176,8 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      final String result = (testPlatform == 'webOS')
-          ? '29/9/11, 1:45 PM'
-          : '29/9/11, 1:45 ਬਾ.ਦੁ.';
+      final String result =
+          (testPlatform == 'webOS') ? '29/9/11, 1:45 PM' : '29/9/11, 1:45 PM';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINDateTimeSimpleMedium_pa_IN', () {
@@ -202,7 +196,7 @@ void main() {
           millisecond: 0);
       final String result = (testPlatform == 'webOS')
           ? '29 ਸਤੰ 2011, 1:45 PM'
-          : '29 ਸਤੰ 2011, 1:45 ਬਾ.ਦੁ.';
+          : '29 ਸਤੰ 2011, 1:45 PM';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINDateTimeSimpleLong_pa_IN', () {
@@ -221,7 +215,7 @@ void main() {
           millisecond: 0);
       final String result = (testPlatform == 'webOS')
           ? '29 ਸਤੰਬਰ 2011 1:45 PM'
-          : '29 ਸਤੰਬਰ 2011 1:45 ਬਾ.ਦੁ.';
+          : '29 ਸਤੰਬਰ 2011 1:45 PM';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINDateTimeSimpleFull_pa_IN', () {
@@ -240,7 +234,7 @@ void main() {
           millisecond: 0);
       final String result = (testPlatform == 'webOS')
           ? '29 ਸਤੰਬਰ 2011 1:45 PM'
-          : '29 ਸਤੰਬਰ 2011 1:45 ਬਾ.ਦੁ.';
+          : '29 ਸਤੰਬਰ 2011 1:45 PM';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINTypeDate_pa_IN', () {
@@ -273,8 +267,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      final String result =
-          (testPlatform == 'webOS') ? '1:45 PM' : '1:45 ਬਾ.ਦੁ.';
+      final String result = (testPlatform == 'webOS') ? '1:45 PM' : '1:45 PM';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINTypeDateTime_pa_IN', () {
@@ -291,9 +284,8 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      final String result = (testPlatform == 'webOS')
-          ? '29/9/11, 1:45 PM'
-          : '29/9/11, 1:45 ਬਾ.ਦੁ.';
+      final String result =
+          (testPlatform == 'webOS') ? '29/9/11, 1:45 PM' : '29/9/11, 1:45 PM';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINShortDateComponentsY_pa_IN', () {
@@ -662,8 +654,7 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      final String result =
-          (testPlatform == 'webOS') ? '1:45 PM' : '1:45 ਬਾ.ਦੁ.';
+      final String result = (testPlatform == 'webOS') ? '1:45 PM' : '1:45 PM';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINShortTimeComponentsHMZ_pa_IN', () {
@@ -681,7 +672,7 @@ void main() {
           second: 37,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? '1:45:37 PM IST' : '1:45:37 ਬਾ.ਦੁ. IST';
+          (testPlatform == 'webOS') ? '1:45:37 PM IST' : '1:45:37 PM IST';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINShortTimeComponentsHMAZ_pa_IN', () {
@@ -702,7 +693,7 @@ void main() {
           second: 37,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? '1:45:37 PM IST' : '1:45:37 ਬਾ.ਦੁ. IST';
+          (testPlatform == 'webOS') ? '1:45:37 PM IST' : '1:45:37 PM IST';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINShortTimeComponentsHMSA_pa_IN', () {
@@ -720,7 +711,7 @@ void main() {
           second: 37,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? '1:45:37 PM' : '1:45:37 ਬਾ.ਦੁ.';
+          (testPlatform == 'webOS') ? '1:45:37 PM' : '1:45:37 PM';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINShortTimeComponentsHMSZ_pa_IN', () {
@@ -741,7 +732,7 @@ void main() {
           second: 37,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? '1:45:37 PM IST' : '1:45:37 ਬਾ.ਦੁ. IST';
+          (testPlatform == 'webOS') ? '1:45:37 PM IST' : '1:45:37 PM IST';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINShortTimeComponentsHMSAZ_pa_IN', () {
@@ -762,7 +753,7 @@ void main() {
           second: 37,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? '1:45:37 PM IST' : '1:45:37 ਬਾ.ਦੁ. IST';
+          (testPlatform == 'webOS') ? '1:45:37 PM IST' : '1:45:37 PM IST';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINFullTimeComponentsS_pa_IN', () {
@@ -827,8 +818,7 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      final String result =
-          (testPlatform == 'webOS') ? '1:45 PM' : '1:45 ਬਾ.ਦੁ.';
+      final String result = (testPlatform == 'webOS') ? '1:45 PM' : '1:45 PM';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINFullTimeComponentsHMS_pa_IN', () {
@@ -846,7 +836,7 @@ void main() {
           second: 37,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? '1:45:37 PM' : '1:45:37 ਬਾ.ਦੁ.';
+          (testPlatform == 'webOS') ? '1:45:37 PM' : '1:45:37 PM';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINFullTimeComponentsHMA_pa_IN', () {
@@ -863,8 +853,7 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      final String result =
-          (testPlatform == 'webOS') ? '1:45 PM' : '1:45 ਬਾ.ਦੁ.';
+      final String result = (testPlatform == 'webOS') ? '1:45 PM' : '1:45 PM';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINFullTimeComponentsHMAZ_pa_IN', () {
@@ -886,7 +875,7 @@ void main() {
           second: 37,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? '1:45:37 PM IST' : '1:45:37 ਬਾ.ਦੁ. IST';
+          (testPlatform == 'webOS') ? '1:45:37 PM IST' : '1:45:37 PM IST';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINFullTimeComponentsHMSA_pa_IN', () {
@@ -904,7 +893,7 @@ void main() {
           second: 37,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? '1:45:37 PM' : '1:45:37 ਬਾ.ਦੁ.';
+          (testPlatform == 'webOS') ? '1:45:37 PM' : '1:45:37 PM';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINFullTimeComponentsHMSZ_pa_IN', () {
@@ -926,7 +915,7 @@ void main() {
           second: 37,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? '1:45:37 PM IST' : '1:45:37 ਬਾ.ਦੁ. IST';
+          (testPlatform == 'webOS') ? '1:45:37 PM IST' : '1:45:37 PM IST';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINFullTimeComponentsHMSAZ_pa_IN', () {
@@ -948,7 +937,7 @@ void main() {
           second: 37,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? '1:45:37 PM IST' : '1:45:37 ਬਾ.ਦੁ. IST';
+          (testPlatform == 'webOS') ? '1:45:37 PM IST' : '1:45:37 PM IST';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtINWithTimeZoneAndNoDST_pa_IN', () {
@@ -970,7 +959,7 @@ void main() {
           second: 37,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? '1:45:37 PM IST' : '1:45:37 ਬਾ.ਦੁ. IST';
+          (testPlatform == 'webOS') ? '1:45:37 PM IST' : '1:45:37 PM IST';
       expect(fmt.format(dateOptions), result);
     });
 

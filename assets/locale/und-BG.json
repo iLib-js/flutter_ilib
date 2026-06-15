@@ -1,7 +1,7 @@
 {
     "ilib.data.localeinfo": {
         "clock": "24",
-        "currency": "BGN",
+        "currency": "EUR",
         "firstDayOfWeek": 1,
         "locale": "BG",
         "region.name": "Bulgaria",
