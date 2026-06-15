@@ -516,9 +516,11 @@ void main() {
 
   group('PersianDate round-trip construction', () {
     test('testPersDateAstroRoundTripConstruction', () {
-      final PersianDate pd = PersianDate(year: 1393, month: 1, day: 10);
+      final PersianDate pd =
+          PersianDate(year: 1393, month: 8, day: 12, timezone: 'local');
       final int u = pd.getTime();
-      final PersianDate pd2 = PersianDate(unixtime: u);
+      final PersianDate pd2 = PersianDate(unixtime: u, timezone: 'local');
+      expect(pd2.timezone, pd.timezone);
       expect(pd2.getYears(), pd.getYears());
       expect(pd2.getMonths(), pd.getMonths());
       expect(pd2.getDays(), pd.getDays());

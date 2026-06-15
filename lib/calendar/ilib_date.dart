@@ -151,23 +151,29 @@ abstract class ILibCalendarDate implements ILibDate {
     return (rd - weekStart) ~/ 7 + 1;
   }
 
+  // Pass tzOffsetDays so the day-of-week is evaluated in wall-clock (local) time,
+  // consistent with getDayOfWeek() and JS (RataDie computes on rd+offset, then -offset).
   ILibCalendarDate onOrBefore(int dayOfWeek) {
-    final double rd = getRataDieInstance().onOrBefore(dayOfWeek);
+    final double rd =
+        getRataDieInstance().onOrBefore(dayOfWeek, offset: tzOffsetDays);
     return newDateFromRd(rd);
   }
 
   ILibCalendarDate onOrAfter(int dayOfWeek) {
-    final double rd = getRataDieInstance().onOrAfter(dayOfWeek);
+    final double rd =
+        getRataDieInstance().onOrAfter(dayOfWeek, offset: tzOffsetDays);
     return newDateFromRd(rd);
   }
 
   ILibCalendarDate before(int dayOfWeek) {
-    final double rd = getRataDieInstance().before(dayOfWeek);
+    final double rd =
+        getRataDieInstance().before(dayOfWeek, offset: tzOffsetDays);
     return newDateFromRd(rd);
   }
 
   ILibCalendarDate after(int dayOfWeek) {
-    final double rd = getRataDieInstance().after(dayOfWeek);
+    final double rd =
+        getRataDieInstance().after(dayOfWeek, offset: tzOffsetDays);
     return newDateFromRd(rd);
   }
 

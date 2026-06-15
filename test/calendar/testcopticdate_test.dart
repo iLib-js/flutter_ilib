@@ -400,9 +400,11 @@ void main() {
 
   group('CopticDate round-trip construction', () {
     test('testCopticDateRoundTripConstruction', () {
-      final CopticDate cd = CopticDate(year: 1738, month: 10, day: 20);
+      final CopticDate cd =
+          CopticDate(year: 1738, month: 10, day: 20, timezone: 'local');
       final int u = cd.getTime();
-      final CopticDate cd2 = CopticDate(unixtime: u);
+      final CopticDate cd2 = CopticDate(unixtime: u, timezone: 'local');
+      expect(cd2.timezone, cd.timezone);
       expect(cd2.getYears(), cd.getYears());
       expect(cd2.getMonths(), cd.getMonths());
       expect(cd2.getDays(), cd.getDays());

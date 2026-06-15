@@ -407,9 +407,11 @@ void main() {
 
   group('EthiopicDate round-trip construction', () {
     test('testEthiopicDateRoundTripConstruction', () {
-      final EthiopicDate ed = EthiopicDate(year: 2014, month: 10, day: 20);
+      final EthiopicDate ed =
+          EthiopicDate(year: 2014, month: 10, day: 20, timezone: 'local');
       final int u = ed.getTime();
-      final EthiopicDate ed2 = EthiopicDate(unixtime: u);
+      final EthiopicDate ed2 = EthiopicDate(unixtime: u, timezone: 'local');
+      expect(ed2.timezone, ed.timezone);
       expect(ed2.getYears(), ed.getYears());
       expect(ed2.getMonths(), ed.getMonths());
       expect(ed2.getDays(), ed.getDays());

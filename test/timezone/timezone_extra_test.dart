@@ -168,6 +168,49 @@ void main() {
     });
   });
 
+  // flutter_ilib-specific: a Flutter DateTime passed via ILibDateOptions(dateTime:) is the
+  // Dart equivalent of JS's "NonIDate" tests (a native JS Date converted internally by
+  // DateFactory._dateToIlib). The instant flows through unixtime, so getOffset /
+  // inDaylightTime / getDisplayName must yield the same result as the IDate (components)
+  // versions. America/Los_Angeles is data-driven (zoneinfo), so these are host-independent.
+  group('DateTime input (ILibDateOptions.dateTime)', () {
+    test('testTZGetOffsetDateTimeSummer', () {
+      final ILibTimeZone tz = ILibTimeZone('America/Los_Angeles');
+      final ILibDateOptions gd = ILibDateOptions(dateTime: DateTime.utc(2011, 8, 1));
+      expect(tz.getOffset(gd), <String, int>{'h': -7});
+    });
+
+    test('testTZGetOffsetDateTimeWinter', () {
+      final ILibTimeZone tz = ILibTimeZone('America/Los_Angeles');
+      final ILibDateOptions gd = ILibDateOptions(dateTime: DateTime.utc(2011, 12, 1));
+      expect(tz.getOffset(gd), <String, int>{'h': -8});
+    });
+
+    test('testTZInDaylightTimeDateTimeSummer', () {
+      final ILibTimeZone tz = ILibTimeZone('America/Los_Angeles');
+      final ILibDateOptions gd = ILibDateOptions(dateTime: DateTime.utc(2011, 8, 1));
+      expect(tz.inDaylightTime(gd), true);
+    });
+
+    test('testTZInDaylightTimeDateTimeWinter', () {
+      final ILibTimeZone tz = ILibTimeZone('America/Los_Angeles');
+      final ILibDateOptions gd = ILibDateOptions(dateTime: DateTime.utc(2011, 12, 1));
+      expect(tz.inDaylightTime(gd), false);
+    });
+
+    test('testTZDisplayNameDateTimeSummer', () {
+      final ILibTimeZone tz = ILibTimeZone('America/Los_Angeles');
+      final ILibDateOptions gd = ILibDateOptions(dateTime: DateTime.utc(2011, 8, 1));
+      expect(tz.getDisplayName(gd, 'standard'), 'PDT');
+    });
+
+    test('testTZDisplayNameDateTimeWinter', () {
+      final ILibTimeZone tz = ILibTimeZone('America/Los_Angeles');
+      final ILibDateOptions gd = ILibDateOptions(dateTime: DateTime.utc(2011, 12, 1));
+      expect(tz.getDisplayName(gd, 'standard'), 'PST');
+    });
+  });
+
   // flutter_ilib-specific: system-timezone ('local') tests with no 1:1 JS counterpart.
   // America/Los_Angeles is emulated hermetically via the injectable offset hooks so the
   // tests are deterministic on any host (PST -480 in winter, PDT -420 in summer).

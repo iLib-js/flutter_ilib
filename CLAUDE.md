@@ -228,6 +228,13 @@ Used as a common intermediate representation for converting between calendar sys
 - `getDayOfWeek()` is computed from the wall-clock RD: `mod(floor(rd + tzOffsetDays), 7)`.
   Date classes pass `offset: tzOffsetDays` so the day reflects local time for tz-aware
   dates (mirrors JS `mod(floor(rd + this.offset), 7)`); without a timezone the offset is 0.
+- `ILibCalendarDate.onOrBefore()/onOrAfter()/before()/after()` MUST also pass
+  `offset: tzOffsetDays` to the `RataDie` call so the target weekday is evaluated in
+  wall-clock (local) time — consistent with `getDayOfWeek()` and mirroring JS `IDate`
+  (`this.rd.onOrBefore(dow, this.offset)`). The `RataDie` formula is
+  `_onOrBefore(rd + offset, dow) - offset`. Omitting the offset evaluates the weekday in
+  UTC, which silently diverges from `getDayOfWeek()`/JS for tz-aware dates whose local day
+  differs from the UTC day (e.g. a date near UTC midnight in LA/Seoul).
 - Julian Day = RD + calendar-specific epoch offset
 
 ### Base Class: `ILibRataDie` (`lib/calendar/rata_die.dart`)

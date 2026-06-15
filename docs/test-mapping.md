@@ -30,7 +30,11 @@ JS source path base: `js/test/`
 | `test/calendar/testcopticdate_extra_test.dart` | — | flutter_ilib-specific (getDayOfYear, getEra, getCalendar) |
 | `test/calendar/testgregoriandate_extra_test.dart` | — | flutter_ilib-specific (getCalendar) |
 | `test/calendar/testethiopicdate_extra_test.dart` | — | flutter_ilib-specific (getCalendar) |
-| `test/calendar/testjuliandate_extra_test.dart` | — | flutter_ilib-specific (onOrBefore/onOrAfter with offset) |
+| `test/calendar/testjuliandate_extra_test.dart` | — | flutter_ilib-specific (onOrBefore/onOrAfter with offset; basic JD/date; getCalendar) |
+| `test/calendar/testhebrewdate_extra_test.dart` | — | flutter_ilib-specific (basic JD/date; getCalendar) |
+| `test/calendar/testislamicdate_extra_test.dart` | — | flutter_ilib-specific (basic JD/date; getCalendar) |
+| `test/calendar/testpersiandate_extra_test.dart` | — | flutter_ilib-specific (basic JD/date; getCalendar) |
+| `test/calendar/testthaisolardate_extra_test.dart` | — | flutter_ilib-specific (basic JD/date; getCalendar) |
 
 ## DateFmt Locale Tests
 
@@ -152,7 +156,7 @@ These were extracted from the single monolithic `js/test/testdatefmt.js` file, s
 | Dart Test File | iLib JS Source File | Notes |
 |---|---|---|
 | `test/timezone/timezone_test.dart` | `js/test/calendar/testtimezone.js` | ILibTimeZone |
-| `test/timezone/timezone_extra_test.dart` | — | flutter_ilib-specific (additional timezone tests) |
+| `test/timezone/timezone_extra_test.dart` | — | flutter_ilib-specific (additional timezone tests; system `'local'` tests; spring-forward gap; Flutter `DateTime` input) |
 
 ## Basic Tests (flutter_ilib-specific)
 

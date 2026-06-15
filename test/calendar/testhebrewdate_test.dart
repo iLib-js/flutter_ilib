@@ -97,14 +97,26 @@ void main() {
       expect(hd.getMilliseconds(), 123);
     });
     test('testHebrewDateConstructorFromRD', () {
-      final HebrewDate hd = HebrewDate(julianDay: 2450138.5, timezone: 'Etc/UTC');
-      expect(hd.getYears(), 5756);
-      expect(hd.getMonths(), 12);
-      expect(hd.getDays(), 5);
+      final HebrewDate hd = HebrewDate(rd: 357.25, timezone: 'Etc/UTC');
+      expect(hd.getRataDie(), 357.25);
+      expect(hd.getYears(), 2);
+      expect(hd.getMonths(), 7);
+      expect(hd.getDays(), 3);
+      expect(hd.getHours(), 0);
+      expect(hd.getMinutes(), 0);
+      expect(hd.getSeconds(), 0);
+      expect(hd.getMilliseconds(), 0);
     });
     test('testHebrewDateConstructorFromJD', () {
-      final HebrewDate hd = HebrewDate(julianDay: 2450138.5, timezone: 'Etc/UTC');
-      expect(hd.getJulianDay(), 2450138.5);
+      final HebrewDate hd = HebrewDate(julianDay: 348354.5, timezone: 'Etc/UTC');
+      expect(hd.getRataDie(), 357.25);
+      expect(hd.getYears(), 2);
+      expect(hd.getMonths(), 7);
+      expect(hd.getDays(), 3);
+      expect(hd.getHours(), 0);
+      expect(hd.getMinutes(), 0);
+      expect(hd.getSeconds(), 0);
+      expect(hd.getMilliseconds(), 0);
     });
   });
 
@@ -130,7 +142,7 @@ void main() {
     test('testHebrewDateGetJulianDay', () {
       for (int i = 0; i < testDates.length; i++) {
         final List<num> td = testDates[i];
-        final HebrewDate hd = HebrewDate(
+      final HebrewDate hd = HebrewDate(
             year: td[1] as int,
             month: td[2] as int,
             day: td[3] as int,
@@ -543,9 +555,11 @@ void main() {
 
   group('HebrewDate round-trip construction', () {
     test('testHebrewDateRoundTripConstruction', () {
-      final HebrewDate hd = HebrewDate(year: 5775, month: 8, day: 3);
+      final HebrewDate hd =
+          HebrewDate(year: 5775, month: 8, day: 3, timezone: 'local');
       final int u = hd.getTime();
-      final HebrewDate hd2 = HebrewDate(unixtime: u);
+      final HebrewDate hd2 = HebrewDate(unixtime: u, timezone: 'local');
+      expect(hd2.timezone, hd.timezone);
       expect(hd2.getYears(), hd.getYears());
       expect(hd2.getMonths(), hd.getMonths());
       expect(hd2.getDays(), hd.getDays());

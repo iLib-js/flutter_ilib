@@ -486,9 +486,11 @@ void main() {
 
   group('ThaiSolarDate round-trip construction', () {
     test('testThaiSolarDateRoundTripConstruction', () {
-      final ThaiSolarDate td = ThaiSolarDate(year: 2557, month: 11, day: 3);
+      final ThaiSolarDate td =
+          ThaiSolarDate(year: 2557, month: 11, day: 3, timezone: 'local');
       final int u = td.getTime();
-      final ThaiSolarDate td2 = ThaiSolarDate(unixtime: u);
+      final ThaiSolarDate td2 = ThaiSolarDate(unixtime: u, timezone: 'local');
+      expect(td2.timezone, td.timezone);
       expect(td2.getYears(), td.getYears());
       expect(td2.getMonths(), td.getMonths());
       expect(td2.getDays(), td.getDays());

@@ -97,8 +97,15 @@ void main() {
       expect(id.getMilliseconds(), 123);
     });
     test('testIslamicDateConstructorFromJD', () {
-      final IslamicDate id = IslamicDate(julianDay: 2450138.5, timezone: 'Etc/UTC');
-      expect(id.getJulianDay(), 2450138.5);
+      final IslamicDate id = IslamicDate(julianDay: 1948793.5, timezone: 'Etc/UTC');
+      expect(id.getRataDie(), 354);
+      expect(id.getYears(), 2);
+      expect(id.getMonths(), 1);
+      expect(id.getDays(), 1);
+      expect(id.getHours(), 0);
+      expect(id.getMinutes(), 0);
+      expect(id.getSeconds(), 0);
+      expect(id.getMilliseconds(), 0);
     });
     test('testIslamicDateAfterLeapYear', () {
       // Muh 1, 0003 AH, 9:36am
@@ -480,20 +487,22 @@ void main() {
       expect(id.getTime(), 203400000);
     });
     test('testIslamicDateTestGetTimeTooEarly', () {
-      final IslamicDate id = IslamicDate(julianDay: 2440586.5, timezone: 'Etc/UTC');
+      final IslamicDate id = IslamicDate(year: 1389, month: 10, day: 21, timezone: 'Etc/UTC');
       expect(id.getTime(), -1);
     });
     test('testIslamicDateTestGetTimeTooLate', () {
-      final IslamicDate id = IslamicDate(year: 1460, month: 10, day: 12, timezone: 'Etc/UTC');
+      final IslamicDate id = IslamicDate(year: 1459, month: 12, day: 13, timezone: 'Etc/UTC');
       expect(id.getTime(), -1);
     });
   });
 
   group('IslamicDate round-trip construction', () {
     test('testIslamicDateRoundTripConstruction', () {
-      final IslamicDate id = IslamicDate(year: 1436, month: 1, day: 10);
+      final IslamicDate id =
+          IslamicDate(year: 1436, month: 1, day: 10, timezone: 'local');
       final int u = id.getTime();
-      final IslamicDate id2 = IslamicDate(unixtime: u);
+      final IslamicDate id2 = IslamicDate(unixtime: u, timezone: 'local');
+      expect(id2.timezone, id.timezone);
       expect(id2.getYears(), id.getYears());
       expect(id2.getMonths(), id.getMonths());
       expect(id2.getDays(), id.getDays());
