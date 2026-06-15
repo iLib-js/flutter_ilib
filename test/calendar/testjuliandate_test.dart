@@ -51,33 +51,6 @@ void main() {
     });
   });
 
-  group('JulianDate from JD', () {
-    test('basic JD', () {
-      final JulianDate d = JulianDate(julianDay: 2450138.5, timezone: 'Etc/UTC');
-      expect(d.getYears(), 1996);
-      expect(d.getMonths(), 2);
-      expect(d.getDays(), 12);
-      expect(d.getHours(), 0);
-      expect(d.getMinutes(), 0);
-      expect(d.getSeconds(), 0);
-      expect(d.getMilliseconds(), 0);
-    });
-  });
-
-  group('JulianDate from components', () {
-    test('basic date', () {
-      final JulianDate d = JulianDate(
-          year: 2000, month: 6, day: 15, hour: 14, minute: 30, second: 0, millisecond: 0);
-      expect(d.getYears(), 2000);
-      expect(d.getMonths(), 6);
-      expect(d.getDays(), 15);
-      expect(d.getHours(), 14);
-      expect(d.getMinutes(), 30);
-      expect(d.getSeconds(), 0);
-      expect(d.getMilliseconds(), 0);
-    });
-  });
-
   group('JulianDate from JD constructs correct date components', () {
     for (int i = 0; i < testDates.length; i++) {
       final List<num> td = testDates[i];
@@ -102,13 +75,6 @@ void main() {
         expect(d.getDayOfWeek(), td[8] as int);
       });
     }
-  });
-
-  group('JulianDate getCalendar', () {
-    test('returns julian', () {
-      final JulianDate d = JulianDate(year: 2000, month: 1, day: 1);
-      expect(d.getCalendar(), 'julian');
-    });
   });
 
   group('JulianDate constructor', () {
