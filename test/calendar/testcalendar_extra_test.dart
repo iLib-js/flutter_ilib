@@ -14,5 +14,16 @@ void main() {
     test('han throws UnimplementedError', () {
       expect(() => ILibCalendar('han'), throwsA(isA<UnimplementedError>()));
     });
+    // The cal tests build calendars directly (e.g. PersianAlgoCal()), matching JS
+    // `new XxxCal()`. ILibCalendar('type') is the other public construction path;
+    // this smoke test confirms a factory-built calendar is fully functional (its
+    // calculation methods work), not just the right getType(). Includes the
+    // persian-algo type the cal tests construct.
+    test('factory-constructed calendars are functional', () {
+      expect(ILibCalendar('gregorian').getMonLength(2, 2012), 29);
+      expect(ILibCalendar('coptic').getNumMonths(1731), 13);
+      expect(ILibCalendar('persian-algo').isLeapYear(1395),
+          PersianAlgoCal().isLeapYear(1395));
+    });
   });
 }

@@ -41,6 +41,19 @@ void main() {
     test('testCalendarFactorySpecific', () {
       expect(ILibCalendar('julian').getType(), 'julian');
     });
+    // Verify the factory dispatches every supported type string to the matching
+    // calendar. JS testcalendar.js only checks one type via CalendarFactory; each
+    // calendar's own testcal_*.js uses `new XxxCal()` directly (which the Dart cal
+    // tests now mirror with direct construction), so this consolidates factory
+    // dispatch coverage for all types in the one factory test file.
+    test('testCalendarFactoryAllTypes', () {
+      for (final String type in <String>[
+        'gregorian', 'thaisolar', 'julian', 'islamic', 'persian',
+        'persian-algo', 'ethiopic', 'coptic', 'hebrew'
+      ]) {
+        expect(ILibCalendar(type).getType(), type);
+      }
+    });
   });
 
   // JS CalendarFactory({locale: ...}) -> ILibCalendar.fromLocale(...)

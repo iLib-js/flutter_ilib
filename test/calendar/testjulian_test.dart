@@ -4,91 +4,91 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('JulianCal', () {
     test('GetNumMonths', () {
-      final ILibCalendar cal = ILibCalendar('julian');
+      final ILibCalendar cal = JulianCal();
       expect(cal.getNumMonths(2011), 12);
     });
     test('getMonLength Jan', () {
-      final ILibCalendar cal = ILibCalendar('julian');
+      final ILibCalendar cal = JulianCal();
       expect(cal.getMonLength(1, 2011), 31);
     });
     test('getMonLength Feb', () {
-      final ILibCalendar cal = ILibCalendar('julian');
+      final ILibCalendar cal = JulianCal();
       expect(cal.getMonLength(2, 2011), 28);
     });
     test('getMonLength Feb LeapYear', () {
-      final ILibCalendar cal = ILibCalendar('julian');
+      final ILibCalendar cal = JulianCal();
       expect(cal.getMonLength(2, 2012), 29);
     });
     test('getMonLength Mar', () {
-      final ILibCalendar cal = ILibCalendar('julian');
+      final ILibCalendar cal = JulianCal();
       expect(cal.getMonLength(3, 2011), 31);
     });
     test('getMonLength Apr', () {
-      final ILibCalendar cal = ILibCalendar('julian');
+      final ILibCalendar cal = JulianCal();
       expect(cal.getMonLength(4, 2011), 30);
     });
     test('getMonLength May', () {
-      final ILibCalendar cal = ILibCalendar('julian');
+      final ILibCalendar cal = JulianCal();
       expect(cal.getMonLength(5, 2011), 31);
     });
     test('getMonLength Jun', () {
-      final ILibCalendar cal = ILibCalendar('julian');
+      final ILibCalendar cal = JulianCal();
       expect(cal.getMonLength(6, 2011), 30);
     });
     test('getMonLength Jul', () {
-      final ILibCalendar cal = ILibCalendar('julian');
+      final ILibCalendar cal = JulianCal();
       expect(cal.getMonLength(7, 2011), 31);
     });
     test('getMonLength Aug', () {
-      final ILibCalendar cal = ILibCalendar('julian');
+      final ILibCalendar cal = JulianCal();
       expect(cal.getMonLength(8, 2011), 31);
     });
     test('getMonLength Sep', () {
-      final ILibCalendar cal = ILibCalendar('julian');
+      final ILibCalendar cal = JulianCal();
       expect(cal.getMonLength(9, 2011), 30);
     });
     test('getMonLength Oct', () {
-      final ILibCalendar cal = ILibCalendar('julian');
+      final ILibCalendar cal = JulianCal();
       expect(cal.getMonLength(10, 2011), 31);
     });
     test('getMonLength Nov', () {
-      final ILibCalendar cal = ILibCalendar('julian');
+      final ILibCalendar cal = JulianCal();
       expect(cal.getMonLength(11, 2011), 30);
     });
     test('getMonLength Dec', () {
-      final ILibCalendar cal = ILibCalendar('julian');
+      final ILibCalendar cal = JulianCal();
       expect(cal.getMonLength(12, 2011), 31);
     });
     test('IsLeapYear', () {
-      final ILibCalendar cal = ILibCalendar('julian');
+      final ILibCalendar cal = JulianCal();
       expect(cal.isLeapYear(2012), true);
     });
     test('IsLeapYear BCE False', () {
-      final ILibCalendar cal = ILibCalendar('julian');
+      final ILibCalendar cal = JulianCal();
       expect(cal.isLeapYear(-3), false);
     });
     test('IsLeapYear BCE True', () {
-      final ILibCalendar cal = ILibCalendar('julian');
+      final ILibCalendar cal = JulianCal();
       expect(cal.isLeapYear(-1), true);
     });
     test('IsLeapYear Not', () {
-      final ILibCalendar cal = ILibCalendar('julian');
+      final ILibCalendar cal = JulianCal();
       expect(cal.isLeapYear(2011), false);
     });
     test('IsLeapYear OnCentury1', () {
-      final ILibCalendar cal = ILibCalendar('julian');
+      final ILibCalendar cal = JulianCal();
       expect(cal.isLeapYear(1700), true);
     });
     test('IsLeapYear OnCentury2', () {
-      final ILibCalendar cal = ILibCalendar('julian');
+      final ILibCalendar cal = JulianCal();
       expect(cal.isLeapYear(1800), true);
     });
     test('IsLeapYear OnCentury3', () {
-      final ILibCalendar cal = ILibCalendar('julian');
+      final ILibCalendar cal = JulianCal();
       expect(cal.isLeapYear(1900), true);
     });
     test('IsLeapYear OnQuadCentennial', () {
-      final ILibCalendar cal = ILibCalendar('julian');
+      final ILibCalendar cal = JulianCal();
       expect(cal.isLeapYear(2000), true);
     });
   });
