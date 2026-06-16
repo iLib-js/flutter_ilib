@@ -11,9 +11,7 @@ export 'ilib_casemapper.dart';
 export 'ilib_date.dart';
 export 'ilib_date_accessor.dart';
 export 'ilib_datefmt.dart';
-//export 'ilib_durationfmt.dart';
 export 'ilib_init.dart';
-//export 'ilib_numfmt.dart';
 export 'ilib_locale.dart';
 export 'ilib_localeinfo.dart';
 export 'ilib_timezone.dart';
@@ -35,6 +33,9 @@ class FlutterILib extends ChangeNotifier {
 
   /// Return the current version of flutter_ilib.
   String get getVersion => '2.0.0';
+
+  /// Return the current version of iLib.
+  String get getILibVersion => '14.22.0';
 
   /// Return the CLDR version currently adopted by iLib.
   String? get getCLDRVersion => '48.2';

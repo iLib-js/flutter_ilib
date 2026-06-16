@@ -11,6 +11,8 @@ void main() {
     await ILibLoader.instance.loadJSON();
   });
   group('Basic', () {
+    test('getILibVersion',
+        () => expect(flutterIlibPlugin.getILibVersion, '14.22.0'));
     test('getCLDRVersion',
         () => expect(flutterIlibPlugin.getCLDRVersion, '48.2'));
     test('isILibReady', () => expect(flutterIlibPlugin.isILibReady, true));
