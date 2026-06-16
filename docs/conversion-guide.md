@@ -81,6 +81,7 @@ String getClock() {
 - [ ] **NEVER modify test expected values** — if a test fails, the Dart implementation has a bug, not the test data
 - [ ] Test data (e.g., `testDatesCoptic` reference arrays) must match JS source exactly
 - [ ] If a JS test cannot be converted due to missing Dart features (setters, timezone offset), document it in `docs/test-mapping.md` under "Not Converted" with the reason
+- [ ] **Do NOT convert JS tests that use a locale not bundled under `assets/locale/`** (the 218 iLib v14.21.0 locales). The data is absent, so `ILibLocaleInfo`/`ILibTimeZone.fromLocale` fall back to defaults (e.g. `Etc/UTC`) and the JS expected value (e.g. `Asia/Ashgabat`) cannot be reproduced — N/A (e.g. `testTZGetDefaultFor_tk_TM`/`_tg_TJ`/`_wo_SN`/`_zu_ZA`/`_mt_MT`)
 - [ ] Dart-specific additional tests (getDayOfYear, getEra, etc.) go in a separate `*_extra_test.dart` file
 
 ### 5. Cleanup

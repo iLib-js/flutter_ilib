@@ -213,6 +213,12 @@ lib/
   JS counterpart (Dart-specific: extra accessors like getDayOfYear/getEra, `'local'`/
   system-tz, offset variants) go in a sibling `*_extra_test.dart`** — never add Dart-only
   cases to the JS-mirrored file (see docs/conversion-guide.md, docs/test-mapping.md)
+- **Do NOT convert JS tests that exercise a locale not in the bundled set under
+  `assets/locale/`** (the 218 iLib v14.21.0 locales). Without the locale data,
+  `ILibLocaleInfo`/`ILibTimeZone.fromLocale` fall back to defaults (e.g. `Etc/UTC`), so the
+  test cannot reproduce the JS expected value — these are N/A. (e.g. JS
+  `testTZGetDefaultFor_tk_TM`/`_tg_TJ`/`_wo_SN`/`_zu_ZA`/`_mt_MT` — tk/tg/wo/zu/mt and their
+  regions are not bundled.)
 
 ### Public API Export
 - All public classes exported from `lib/flutter_ilib.dart`
