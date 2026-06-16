@@ -446,9 +446,11 @@ void main() {
 
   group('GregRataDie getTime', () {
     test('testGregRataDieGetTimeWithDefaultTime', () {
+      // Dart-specific (no JS counterpart): no-arg construction uses the current
+      // time. Use the same 100ms tolerance as testGregDateGetTimeWithDefaultTime.
       final int before = DateTime.now().millisecondsSinceEpoch;
       final int t = GregRataDie().getTime();
-      expect((t - before).abs() <= 1000, isTrue);
+      expect((t - before).abs() <= 100, isTrue);
     });
   });
 }

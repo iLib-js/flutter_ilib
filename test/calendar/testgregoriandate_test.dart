@@ -933,8 +933,10 @@ void main() {
   group('GregorianDate current time and timezone', () {
     test('testGregDateCurrentTimeWithTimeZone', () {
       final GregorianDate gd = GregorianDate(timezone: 'America/Los_Angeles');
-      final int now = DateTime.now().millisecondsSinceEpoch;
-      expect((gd.getTime() - now).abs(), lessThan(50));
+      final int d = DateTime.now().millisecondsSinceEpoch;
+      // JS roughlyEqual(gd.getTime(), d.getTime(), 30): getTime() is the UTC
+      // instant, so a current-time date's instant equals now regardless of tz.
+      expect((gd.getTime() - d).abs() <= 30, isTrue);
     });
     test('testGregDateTestGetTimeCalifornia', () {
       final GregorianDate gd =
@@ -1023,9 +1025,10 @@ void main() {
       expect(gd.getTime(), DateTime(2011, 3, 8).millisecondsSinceEpoch);
     });
     test('testGregDateGetTimeWithDefaultTime', () {
-      final int before = DateTime.now().millisecondsSinceEpoch;
-      final int t = GregorianDate().getTime();
-      expect((t - before).abs() <= 1000, isTrue);
+      final int d = DateTime.now().millisecondsSinceEpoch;
+      final GregorianDate gd = GregorianDate();
+      // JS roughlyEqual(gd.getTime(), d.getTime(), 100): both capture ~now.
+      expect((gd.getTime() - d).abs() <= 100, isTrue);
     });
     test('testGregDateConstructorEmpty', () {
       // JS compares no-arg construction against the local system time; verify

@@ -521,7 +521,8 @@ void main() {
     test('testThaiSolarDateCurrentTimeWithTimeZone', () {
       final ThaiSolarDate td = ThaiSolarDate(timezone: 'America/Los_Angeles');
       final int now = DateTime.now().millisecondsSinceEpoch;
-      expect((td.getTime() - now).abs(), lessThan(50));
+      // JS roughlyEqual(td.getTime(), d.getTime(), 30).
+      expect((td.getTime() - now).abs(), lessThan(30));
     });
   });
 
