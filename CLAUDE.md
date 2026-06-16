@@ -352,13 +352,6 @@ the JS `DateFmt.format()` logic (DateFmt.js:1537-1566):
      platform's local offset (e.g. `DateTime` local / a tz plugin); it would also make those
      `*Local*` tests portable, at the cost of machine-dependent results.
 
-8. **NumFmt scientific notation last-digit difference (Dart vs JS)**:
-   `12345678901234567890000000000` formatted as scientific gives `1.2345678901234567E+28` in Dart
-   but `1.2345678901234568E+28` in JS. This is an IEEE 754 double precision limit — both languages
-   store the same 64-bit value but their `toStringAsExponential()` / `toExponential()` differ in the
-   last ULP rounding. Not a bug. Affects `testNumFmtNumberStyleScientific`, `testNumFmtNumberZAStyleScientific` (af) and
-   `testNumFmtNumberETStyleScientific` (am) — 3 tests total.
-
 ## Detailed Documentation
 
 For in-depth explanations, see `docs/`:

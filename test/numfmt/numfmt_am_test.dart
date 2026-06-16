@@ -122,9 +122,6 @@ void main() {
 
       expect(fmt.format(-123456789.4), '-123,456,789.4');
     });
-    // Known Pitfall #8: Dart toStringAsExponential() produces '...567' while
-    // JS toExponential() produces '...568' for the last ULP of this number
-    // (exceeds double's ~17 significant digits). Platform difference, not a bug.
     test('testNumFmtNumberETStyleScientific', () {
       final ILibNumFmt fmt =
           ILibNumFmt(ILibNumFmtOptions(locale: 'am-ET', style: 'scientific'));
@@ -132,7 +129,7 @@ void main() {
       expect(fmt, isNotNull);
 
       expect(fmt.format(12345678901234567890123456789.0),
-          '1.2345678901234567E+28');
+          '1.2345678901234568E+28');
     });
     test('testNumFmtNumberETStyleScientificSmall', () {
       final ILibNumFmt fmt =
