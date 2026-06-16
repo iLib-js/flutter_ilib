@@ -89,7 +89,7 @@ void main() {
     for (int i = 0; i < testDates.length; i++) {
       final List<num> d = testDates[i];
       test('JD ${d[0]} -> RD -> JD preserves value', () {
-        final GregRataDie rd = GregRataDie(julianDay: d[0] as double);
+        final GregRataDie rd = GregRataDie(julianDay: d[0].toDouble());
         expect(rd.getJulianDay(), d[0]);
       });
     }
@@ -165,8 +165,8 @@ void main() {
   group('GregRataDie convert', () {
     test('testGregRataDieConvert', () {
       for (int i = 0; i < testDates.length; i++) {
-        final GregRataDie rd = GregRataDie(julianDay: testDates[i][0] as double);
-        expect(rd.getRataDie(), (testDates[i][0] as double) - GregRataDie.epoch);
+        final GregRataDie rd = GregRataDie(julianDay: testDates[i][0].toDouble());
+        expect(rd.getRataDie(), testDates[i][0].toDouble() - GregRataDie.epoch);
       }
     });
   });

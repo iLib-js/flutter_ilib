@@ -55,7 +55,7 @@ void main() {
     for (int i = 0; i < testDates.length; i++) {
       final List<num> td = testDates[i];
       test('JD ${td[0]} gives year ${td[1]}, month ${td[2]}, day ${td[3]}', () {
-        final ThaiSolarDate d = ThaiSolarDate(julianDay: td[0] as double, timezone: 'Etc/UTC');
+        final ThaiSolarDate d = ThaiSolarDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
         expect(d.getYears(), td[1] as int);
         expect(d.getMonths(), td[2] as int);
         expect(d.getDays(), td[3] as int);
@@ -71,7 +71,7 @@ void main() {
     for (int i = 0; i < testDates.length; i++) {
       final List<num> td = testDates[i];
       test('${td[1]}/${td[2]}/${td[3]} dow=${td[8]}', () {
-        final ThaiSolarDate d = ThaiSolarDate(julianDay: td[0] as double, timezone: 'Etc/UTC');
+        final ThaiSolarDate d = ThaiSolarDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
         expect(d.getDayOfWeek(), td[8] as int);
       });
     }
@@ -113,7 +113,7 @@ void main() {
     test('testThaiSolarDateConvert', () {
       for (int i = 0; i < testDates.length; i++) {
         final List<num> td = testDates[i];
-        final ThaiSolarDate d = ThaiSolarDate(julianDay: td[0] as double, timezone: 'Etc/UTC');
+        final ThaiSolarDate d = ThaiSolarDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
         expect(d.getYears(), td[1] as int);
         expect(d.getMonths(), td[2] as int);
         expect(d.getDays(), td[3] as int);

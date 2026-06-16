@@ -309,7 +309,7 @@ void main() {
     for (int i = 0; i < testDatesCoptic.length; i++) {
       final List<num> td = testDatesCoptic[i];
       test('testCopticDateConvert$i', () {
-        final CopticDate cd = CopticDate(julianDay: td[0] as double, timezone: 'Etc/UTC');
+        final CopticDate cd = CopticDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
         expect(cd.getYears(), td[1]);
         expect(cd.getMonths(), td[2]);
         expect(cd.getDays(), td[3]);
@@ -325,7 +325,7 @@ void main() {
     for (int i = 0; i < testDatesCoptic.length; i++) {
       final List<num> td = testDatesCoptic[i];
       test('testCopticDateGetDayOfWeek$i', () {
-        final CopticDate cd = CopticDate(julianDay: td[0] as double, timezone: 'Etc/UTC');
+        final CopticDate cd = CopticDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
         expect(cd.getDayOfWeek(), td[8]);
       });
     }

@@ -299,7 +299,7 @@ void main() {
     for (int i = 0; i < testDatesGregorian.length; i++) {
       final List<num> td = testDatesGregorian[i];
       test('testGregDateConvert$i', () {
-        final GregorianDate gd = GregorianDate(julianDay: td[0] as double, timezone: 'Etc/UTC');
+        final GregorianDate gd = GregorianDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
         expect(gd.getYears(), td[1]);
         expect(gd.getMonths(), td[2]);
         expect(gd.getDays(), td[3]);

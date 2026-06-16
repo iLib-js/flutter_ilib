@@ -315,7 +315,7 @@ void main() {
     for (int i = 0; i < testDatesEthiopic.length; i++) {
       final List<num> td = testDatesEthiopic[i];
       test('testEthiopicDateConvert$i', () {
-        final EthiopicDate ed = EthiopicDate(julianDay: td[0] as double, timezone: 'Etc/UTC');
+        final EthiopicDate ed = EthiopicDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
         expect(ed.getYears(), td[1]);
         expect(ed.getMonths(), td[2]);
         expect(ed.getDays(), td[3]);
@@ -331,7 +331,7 @@ void main() {
     for (int i = 0; i < testDatesEthiopic.length; i++) {
       final List<num> td = testDatesEthiopic[i];
       test('testEthiopicDateGetDayOfWeek$i', () {
-        final EthiopicDate ed = EthiopicDate(julianDay: td[0] as double, timezone: 'Etc/UTC');
+        final EthiopicDate ed = EthiopicDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
         expect(ed.getDayOfWeek(), td[8]);
       });
     }
