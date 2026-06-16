@@ -43,8 +43,9 @@ export 'calendar/thaisolar_date.dart';
 export 'calendar/thaisolar_rata_die.dart';
 
 abstract class ILibCalendar {
-  factory ILibCalendar(String type) {
-    switch (type) {
+  // No-arg defaults to gregorian, mirroring JS CalendarFactory() with no options.
+  factory ILibCalendar([String? type]) {
+    switch (type ?? 'gregorian') {
       case 'gregorian':
         return GregorianCal();
       case 'thaisolar':
