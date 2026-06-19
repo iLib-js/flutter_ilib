@@ -51,45 +51,11 @@ void main() {
     });
   });
 
-  group('IslamicDate from JD', () {
-    test('basic JD', () {
-      final IslamicDate d = IslamicDate(julianDay: 2450138.5, timezone: 'Etc/UTC');
-      expect(d.getYears(), 1416);
-      expect(d.getMonths(), 10);
-      expect(d.getDays(), 5);
-      expect(d.getHours(), 0);
-      expect(d.getMinutes(), 0);
-      expect(d.getSeconds(), 0);
-      expect(d.getMilliseconds(), 0);
-    });
-  });
-
-  group('IslamicDate from components', () {
-    test('basic date', () {
-      final IslamicDate d = IslamicDate(
-          year: 1445,
-          month: 9,
-          day: 1,
-          hour: 5,
-          minute: 30,
-          second: 0,
-          millisecond: 0,
-          timezone: 'Etc/UTC');
-      expect(d.getYears(), 1445);
-      expect(d.getMonths(), 9);
-      expect(d.getDays(), 1);
-      expect(d.getHours(), 5);
-      expect(d.getMinutes(), 30);
-      expect(d.getSeconds(), 0);
-      expect(d.getMilliseconds(), 0);
-    });
-  });
-
   group('IslamicDate from JD constructs correct date components', () {
     for (int i = 0; i < testDates.length; i++) {
       final List<num> td = testDates[i];
       test('JD ${td[0]} gives year ${td[1]}, month ${td[2]}, day ${td[3]}', () {
-        final IslamicDate d = IslamicDate(julianDay: td[0] as double, timezone: 'Etc/UTC');
+        final IslamicDate d = IslamicDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
         expect(d.getYears(), td[1] as int);
         expect(d.getMonths(), td[2] as int);
         expect(d.getDays(), td[3] as int);
@@ -105,17 +71,10 @@ void main() {
     for (int i = 0; i < testDates.length; i++) {
       final List<num> td = testDates[i];
       test('${td[1]}/${td[2]}/${td[3]} dow=${td[8]}', () {
-        final IslamicDate d = IslamicDate(julianDay: td[0] as double, timezone: 'Etc/UTC');
+        final IslamicDate d = IslamicDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
         expect(d.getDayOfWeek(), td[8] as int);
       });
     }
-  });
-
-  group('IslamicDate getCalendar', () {
-    test('returns islamic', () {
-      final IslamicDate d = IslamicDate(year: 1445, month: 1, day: 1);
-      expect(d.getCalendar(), 'islamic');
-    });
   });
 
   group('IslamicDate constructor', () {
@@ -138,8 +97,15 @@ void main() {
       expect(id.getMilliseconds(), 123);
     });
     test('testIslamicDateConstructorFromJD', () {
-      final IslamicDate id = IslamicDate(julianDay: 2450138.5, timezone: 'Etc/UTC');
-      expect(id.getJulianDay(), 2450138.5);
+      final IslamicDate id = IslamicDate(julianDay: 1948793.5, timezone: 'Etc/UTC');
+      expect(id.getRataDie(), 354);
+      expect(id.getYears(), 2);
+      expect(id.getMonths(), 1);
+      expect(id.getDays(), 1);
+      expect(id.getHours(), 0);
+      expect(id.getMinutes(), 0);
+      expect(id.getSeconds(), 0);
+      expect(id.getMilliseconds(), 0);
     });
     test('testIslamicDateAfterLeapYear', () {
       // Muh 1, 0003 AH, 9:36am
@@ -159,7 +125,7 @@ void main() {
     test('testIslamicDateConvert', () {
       for (int i = 0; i < testDates.length; i++) {
         final List<num> td = testDates[i];
-        final IslamicDate id = IslamicDate(julianDay: td[0] as double, timezone: 'Etc/UTC');
+        final IslamicDate id = IslamicDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
         expect(id.getYears(), td[1] as int);
         expect(id.getMonths(), td[2] as int);
         expect(id.getDays(), td[3] as int);
@@ -420,55 +386,59 @@ void main() {
   });
 
   group('IslamicDate getWeekOfMonth', () {
+    setUpAll(() async {
+      await ILibLoader.instance.loadILibLocaleData('en-US');
+      await ILibLoader.instance.loadILibLocaleData('de-DE');
+    });
     // en-US: firstDayOfWeek = 0 (Sunday)
     test('testIslamicDateGetWeekOfMonth0', () {
       final IslamicDate id = IslamicDate(year: 1432, month: 3, day: 1, timezone: 'Etc/UTC');
-      expect(id.getWeekOfMonth(0), 0);
+      expect(id.getWeekOfMonth('en-US'), 0);
     });
     test('testIslamicDateGetWeekOfMonth1', () {
       final IslamicDate id = IslamicDate(year: 1432, month: 3, day: 2, timezone: 'Etc/UTC');
-      expect(id.getWeekOfMonth(0), 1);
+      expect(id.getWeekOfMonth('en-US'), 1);
     });
     test('testIslamicDateGetWeekOfMonth2', () {
       final IslamicDate id = IslamicDate(year: 1432, month: 3, day: 11, timezone: 'Etc/UTC');
-      expect(id.getWeekOfMonth(0), 2);
+      expect(id.getWeekOfMonth('en-US'), 2);
     });
     test('testIslamicDateGetWeekOfMonth3', () {
       final IslamicDate id = IslamicDate(year: 1432, month: 3, day: 20, timezone: 'Etc/UTC');
-      expect(id.getWeekOfMonth(0), 3);
+      expect(id.getWeekOfMonth('en-US'), 3);
     });
     test('testIslamicDateGetWeekOfMonth4', () {
       final IslamicDate id = IslamicDate(year: 1432, month: 3, day: 29, timezone: 'Etc/UTC');
-      expect(id.getWeekOfMonth(0), 4);
+      expect(id.getWeekOfMonth('en-US'), 4);
     });
     test('testIslamicDateGetWeekOfMonth5', () {
       final IslamicDate id = IslamicDate(year: 1432, month: 3, day: 30, timezone: 'Etc/UTC');
-      expect(id.getWeekOfMonth(0), 5);
+      expect(id.getWeekOfMonth('en-US'), 5);
     });
     test('testIslamicDateGetWeekOfMonth6', () {
       final IslamicDate id = IslamicDate(year: 1432, month: 4, day: 1, timezone: 'Etc/UTC');
-      expect(id.getWeekOfMonth(0), 1);
+      expect(id.getWeekOfMonth('en-US'), 1);
     });
     test('testIslamicDateGetWeekOfMonth7', () {
       final IslamicDate id = IslamicDate(year: 1432, month: 5, day: 1, timezone: 'Etc/UTC');
-      expect(id.getWeekOfMonth(0), 1);
+      expect(id.getWeekOfMonth('en-US'), 1);
     });
     test('testIslamicDateGetWeekOfMonth8', () {
       final IslamicDate id = IslamicDate(year: 1432, month: 6, day: 1, timezone: 'Etc/UTC');
-      expect(id.getWeekOfMonth(0), 0);
+      expect(id.getWeekOfMonth('en-US'), 0);
     });
     test('testIslamicDateGetWeekOfMonth9', () {
       final IslamicDate id = IslamicDate(year: 1432, month: 7, day: 1, timezone: 'Etc/UTC');
-      expect(id.getWeekOfMonth(0), 0);
+      expect(id.getWeekOfMonth('en-US'), 0);
     });
     test('testIslamicDateGetWeekOfMonthUS', () {
       final IslamicDate id = IslamicDate(year: 1432, month: 8, day: 1, timezone: 'Etc/UTC');
-      expect(id.getWeekOfMonth(0), 1);
+      expect(id.getWeekOfMonth('en-US'), 1);
     });
     test('testIslamicDateGetWeekOfMonthDE', () {
       // de-DE: firstDayOfWeek = 1 (Monday), 8/1 is Sunday
       final IslamicDate id = IslamicDate(year: 1432, month: 8, day: 1, timezone: 'Etc/UTC');
-      expect(id.getWeekOfMonth(1), 0);
+      expect(id.getWeekOfMonth('de-DE'), 0);
     });
   });
 
@@ -494,15 +464,15 @@ void main() {
   group('IslamicDate getTimeZone', () {
     test('testIslamicDateInitWithUnixTimeRightTimeZone', () {
       final IslamicDate id = IslamicDate(unixtime: 0);
-      expect(id.timezone, 'local');
+      expect(id.getTimeZone(), 'local');
     });
     test('testIslamicDateInitWithJDRightTimeZone', () {
       final IslamicDate id = IslamicDate(julianDay: 0);
-      expect(id.timezone, 'local');
+      expect(id.getTimeZone(), 'local');
     });
     test('testIslamicDateInitWithRDRightTimeZone', () {
       final IslamicDate id = IslamicDate(rd: 0);
-      expect(id.timezone, 'local');
+      expect(id.getTimeZone(), 'local');
     });
   });
 
@@ -521,20 +491,22 @@ void main() {
       expect(id.getTime(), 203400000);
     });
     test('testIslamicDateTestGetTimeTooEarly', () {
-      final IslamicDate id = IslamicDate(julianDay: 2440586.5, timezone: 'Etc/UTC');
+      final IslamicDate id = IslamicDate(year: 1389, month: 10, day: 21, timezone: 'Etc/UTC');
       expect(id.getTime(), -1);
     });
     test('testIslamicDateTestGetTimeTooLate', () {
-      final IslamicDate id = IslamicDate(year: 1460, month: 10, day: 12, timezone: 'Etc/UTC');
+      final IslamicDate id = IslamicDate(year: 1459, month: 12, day: 13, timezone: 'Etc/UTC');
       expect(id.getTime(), -1);
     });
   });
 
   group('IslamicDate round-trip construction', () {
     test('testIslamicDateRoundTripConstruction', () {
-      final IslamicDate id = IslamicDate(year: 1436, month: 1, day: 10);
+      final IslamicDate id =
+          IslamicDate(year: 1436, month: 1, day: 10, timezone: 'local');
       final int u = id.getTime();
-      final IslamicDate id2 = IslamicDate(unixtime: u);
+      final IslamicDate id2 = IslamicDate(unixtime: u, timezone: 'local');
+      expect(id2.getTimeZone(), id.getTimeZone());
       expect(id2.getYears(), id.getYears());
       expect(id2.getMonths(), id.getMonths());
       expect(id2.getDays(), id.getDays());
@@ -547,7 +519,7 @@ void main() {
           IslamicDate(year: 1436, month: 1, day: 10, timezone: 'America/Los_Angeles');
       final int u = id.getTime();
       final IslamicDate id2 = IslamicDate(unixtime: u, timezone: 'America/Los_Angeles');
-      expect(id2.timezone, id.timezone);
+      expect(id2.getTimeZone(), id.getTimeZone());
       expect(id2.getYears(), id.getYears());
       expect(id2.getMonths(), id.getMonths());
       expect(id2.getDays(), id.getDays());

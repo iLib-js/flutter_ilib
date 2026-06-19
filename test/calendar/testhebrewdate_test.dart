@@ -51,38 +51,11 @@ void main() {
     });
   });
 
-  group('HebrewDate from JD', () {
-    test('basic JD', () {
-      final HebrewDate d = HebrewDate(julianDay: 2450138.5);
-      expect(d.getYears(), 5756);
-      expect(d.getMonths(), 12);
-      expect(d.getDays(), 5);
-      expect(d.getHours(), 0);
-      expect(d.getMinutes(), 0);
-      expect(d.getSeconds(), 0);
-      expect(d.getMilliseconds(), 0);
-    });
-  });
-
-  group('HebrewDate from components', () {
-    test('basic date', () {
-      final HebrewDate d = HebrewDate(
-          year: 5784, month: 7, day: 15, hour: 10, minute: 30, second: 0, millisecond: 0);
-      expect(d.getYears(), 5784);
-      expect(d.getMonths(), 7);
-      expect(d.getDays(), 15);
-      expect(d.getHours(), 10);
-      expect(d.getMinutes(), 30);
-      expect(d.getSeconds(), 0);
-      expect(d.getMilliseconds(), 0);
-    });
-  });
-
   group('HebrewDate from JD constructs correct date components', () {
     for (int i = 0; i < testDates.length; i++) {
       final List<num> td = testDates[i];
       test('JD ${td[0]} gives year ${td[1]}, month ${td[2]}, day ${td[3]}', () {
-        final HebrewDate d = HebrewDate(julianDay: td[0] as double, timezone: 'Etc/UTC');
+        final HebrewDate d = HebrewDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
         expect(d.getYears(), td[1] as int);
         expect(d.getMonths(), td[2] as int);
         expect(d.getDays(), td[3] as int);
@@ -98,17 +71,10 @@ void main() {
     for (int i = 0; i < testDates.length; i++) {
       final List<num> td = testDates[i];
       test('${td[1]}/${td[2]}/${td[3]} dow=${td[8]}', () {
-        final HebrewDate d = HebrewDate(julianDay: td[0] as double, timezone: 'Etc/UTC');
+        final HebrewDate d = HebrewDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
         expect(d.getDayOfWeek(), td[8] as int);
       });
     }
-  });
-
-  group('HebrewDate getCalendar', () {
-    test('returns hebrew', () {
-      final HebrewDate d = HebrewDate(year: 5784, month: 1, day: 1);
-      expect(d.getCalendar(), 'hebrew');
-    });
   });
 
   group('HebrewDate constructor', () {
@@ -131,14 +97,26 @@ void main() {
       expect(hd.getMilliseconds(), 123);
     });
     test('testHebrewDateConstructorFromRD', () {
-      final HebrewDate hd = HebrewDate(julianDay: 2450138.5, timezone: 'Etc/UTC');
-      expect(hd.getYears(), 5756);
-      expect(hd.getMonths(), 12);
-      expect(hd.getDays(), 5);
+      final HebrewDate hd = HebrewDate(rd: 357.25, timezone: 'Etc/UTC');
+      expect(hd.getRataDie(), 357.25);
+      expect(hd.getYears(), 2);
+      expect(hd.getMonths(), 7);
+      expect(hd.getDays(), 3);
+      expect(hd.getHours(), 0);
+      expect(hd.getMinutes(), 0);
+      expect(hd.getSeconds(), 0);
+      expect(hd.getMilliseconds(), 0);
     });
     test('testHebrewDateConstructorFromJD', () {
-      final HebrewDate hd = HebrewDate(julianDay: 2450138.5, timezone: 'Etc/UTC');
-      expect(hd.getJulianDay(), 2450138.5);
+      final HebrewDate hd = HebrewDate(julianDay: 348354.5, timezone: 'Etc/UTC');
+      expect(hd.getRataDie(), 357.25);
+      expect(hd.getYears(), 2);
+      expect(hd.getMonths(), 7);
+      expect(hd.getDays(), 3);
+      expect(hd.getHours(), 0);
+      expect(hd.getMinutes(), 0);
+      expect(hd.getSeconds(), 0);
+      expect(hd.getMilliseconds(), 0);
     });
   });
 
@@ -146,8 +124,8 @@ void main() {
     test('testHebrewDateConvert', () {
       for (int i = 0; i < testDates.length; i++) {
         final List<num> td = testDates[i];
-        final HebrewDate hd = HebrewDate(julianDay: td[0] as double, timezone: 'Etc/UTC');
-        expect(hd.getRataDie(), (td[0] as double) - 347997.25);
+        final HebrewDate hd = HebrewDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
+        expect(hd.getRataDie(), td[0].toDouble() - 347997.25);
         expect(hd.getYears(), td[1] as int);
         expect(hd.getMonths(), td[2] as int);
         expect(hd.getDays(), td[3] as int);
@@ -164,7 +142,7 @@ void main() {
     test('testHebrewDateGetJulianDay', () {
       for (int i = 0; i < testDates.length; i++) {
         final List<num> td = testDates[i];
-        final HebrewDate hd = HebrewDate(
+      final HebrewDate hd = HebrewDate(
             year: td[1] as int,
             month: td[2] as int,
             day: td[3] as int,
@@ -427,60 +405,65 @@ void main() {
   });
 
   group('HebrewDate getWeekOfMonth', () {
+    setUpAll(() async {
+      await ILibLoader.instance.loadILibLocaleData('he-IL');
+      await ILibLoader.instance.loadILibLocaleData('en-US');
+      await ILibLoader.instance.loadILibLocaleData('de-DE');
+    });
     // he-IL: firstDayOfWeek = 0 (Sunday)
     test('testHebrewDateGetWeekOfMonth0', () {
       final HebrewDate hd = HebrewDate(year: 5772, month: 9, day: 1, timezone: 'Etc/UTC');
-      expect(hd.getWeekOfMonth(0), 1);
+      expect(hd.getWeekOfMonth('he-IL'), 1);
     });
     test('testHebrewDateGetWeekOfMonth1', () {
       final HebrewDate hd = HebrewDate(year: 5772, month: 9, day: 2, timezone: 'Etc/UTC');
-      expect(hd.getWeekOfMonth(0), 1);
+      expect(hd.getWeekOfMonth('he-IL'), 1);
     });
     test('testHebrewDateGetWeekOfMonth2', () {
       final HebrewDate hd = HebrewDate(year: 5772, month: 9, day: 11, timezone: 'Etc/UTC');
-      expect(hd.getWeekOfMonth(0), 2);
+      expect(hd.getWeekOfMonth('he-IL'), 2);
     });
     test('testHebrewDateGetWeekOfMonth3', () {
       final HebrewDate hd = HebrewDate(year: 5772, month: 9, day: 20, timezone: 'Etc/UTC');
-      expect(hd.getWeekOfMonth(0), 3);
+      expect(hd.getWeekOfMonth('he-IL'), 3);
     });
     test('testHebrewDateGetWeekOfMonth4', () {
       final HebrewDate hd = HebrewDate(year: 5772, month: 9, day: 29, timezone: 'Etc/UTC');
-      expect(hd.getWeekOfMonth(0), 5);
+      expect(hd.getWeekOfMonth('he-IL'), 5);
     });
     test('testHebrewDateGetWeekOfMonth5', () {
       final HebrewDate hd = HebrewDate(year: 5772, month: 1, day: 30, timezone: 'Etc/UTC');
-      expect(hd.getWeekOfMonth(0), 5);
+      expect(hd.getWeekOfMonth('he-IL'), 5);
     });
     test('testHebrewDateGetWeekOfMonth6', () {
       final HebrewDate hd = HebrewDate(year: 5772, month: 4, day: 1, timezone: 'Etc/UTC');
-      expect(hd.getWeekOfMonth(0), 0);
+      expect(hd.getWeekOfMonth('he-IL'), 0);
     });
     test('testHebrewDateGetWeekOfMonth7', () {
       final HebrewDate hd = HebrewDate(year: 5772, month: 5, day: 1, timezone: 'Etc/UTC');
-      expect(hd.getWeekOfMonth(0), 0);
+      expect(hd.getWeekOfMonth('he-IL'), 0);
     });
     test('testHebrewDateGetWeekOfMonth8', () {
       final HebrewDate hd = HebrewDate(year: 5772, month: 6, day: 1, timezone: 'Etc/UTC');
-      expect(hd.getWeekOfMonth(0), 1);
+      expect(hd.getWeekOfMonth('he-IL'), 1);
     });
     test('testHebrewDateGetWeekOfMonth9', () {
       final HebrewDate hd = HebrewDate(year: 5772, month: 7, day: 1, timezone: 'Etc/UTC');
-      expect(hd.getWeekOfMonth(0), 0);
+      expect(hd.getWeekOfMonth('he-IL'), 0);
     });
     test('testHebrewDateGetWeekOfMonth10', () {
       final HebrewDate hd = HebrewDate(year: 5772, month: 8, day: 1, timezone: 'Etc/UTC');
-      expect(hd.getWeekOfMonth(0), 0);
+      expect(hd.getWeekOfMonth('he-IL'), 0);
     });
     test('testHebrewDateGetWeekOfMonthUS', () {
       // en-US: firstDayOfWeek = 0 (Sunday)
       final HebrewDate hd = HebrewDate(year: 5772, month: 8, day: 1, timezone: 'Etc/UTC');
-      expect(hd.getWeekOfMonth(0), 0);
+      expect(hd.getWeekOfMonth('en-US'), 0);
     });
     test('testHebrewDateGetWeekOfMonthDE', () {
       // de-DE: firstDayOfWeek = 1 (Monday)
       final HebrewDate hd = HebrewDate(year: 5772, month: 8, day: 1, timezone: 'Etc/UTC');
-      expect(hd.getWeekOfMonth(1), 0);
+      expect(hd.getWeekOfMonth('de-DE'), 0);
     });
   });
 
@@ -506,15 +489,15 @@ void main() {
   group('HebrewDate getTimeZone', () {
     test('testHebrewDateInitWithUnixTimeRightTimeZone', () {
       final HebrewDate hd = HebrewDate(unixtime: 0);
-      expect(hd.timezone, 'local');
+      expect(hd.getTimeZone(), 'local');
     });
     test('testHebrewDateInitWithJDRightTimeZone', () {
       final HebrewDate hd = HebrewDate(julianDay: 0);
-      expect(hd.timezone, 'local');
+      expect(hd.getTimeZone(), 'local');
     });
     test('testHebrewDateInitWithRDRightTimeZone', () {
       final HebrewDate hd = HebrewDate(rd: 0);
-      expect(hd.timezone, 'local');
+      expect(hd.getTimeZone(), 'local');
     });
   });
 
@@ -577,9 +560,11 @@ void main() {
 
   group('HebrewDate round-trip construction', () {
     test('testHebrewDateRoundTripConstruction', () {
-      final HebrewDate hd = HebrewDate(year: 5775, month: 8, day: 3);
+      final HebrewDate hd =
+          HebrewDate(year: 5775, month: 8, day: 3, timezone: 'local');
       final int u = hd.getTime();
-      final HebrewDate hd2 = HebrewDate(unixtime: u);
+      final HebrewDate hd2 = HebrewDate(unixtime: u, timezone: 'local');
+      expect(hd2.getTimeZone(), hd.getTimeZone());
       expect(hd2.getYears(), hd.getYears());
       expect(hd2.getMonths(), hd.getMonths());
       expect(hd2.getDays(), hd.getDays());
@@ -592,7 +577,7 @@ void main() {
           HebrewDate(year: 5775, month: 8, day: 10, timezone: 'America/Los_Angeles');
       final int u = hd.getTime();
       final HebrewDate hd2 = HebrewDate(unixtime: u, timezone: 'America/Los_Angeles');
-      expect(hd2.timezone, hd.timezone);
+      expect(hd2.getTimeZone(), hd.getTimeZone());
       expect(hd2.getYears(), hd.getYears());
       expect(hd2.getMonths(), hd.getMonths());
       expect(hd2.getDays(), hd.getDays());

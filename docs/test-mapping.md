@@ -4,6 +4,11 @@ Mapping table showing which iLib JS test file (`github.com/iLib-js/iLib`) each f
 
 JS source path base: `js/test/`
 
+Scope: this covers the pure-Dart classes. The 4 classes still on JS interop — `ILibCountry`,
+`ILibScriptInfo`, `ILibNumFmt`, `ILibDurationFmt` — and their tests (`test/country/`,
+`test/scriptinfo/`, `test/numfmt/`, `test/durfmt/`) are not mapped here until those classes are
+converted.
+
 ## Calendar Tests
 
 | Dart Test File | iLib JS Source File | Notes |
@@ -15,6 +20,7 @@ JS source path base: `js/test/`
 | `test/calendar/testthaisolardate_test.dart` | `js/test/testthaisolardate.js` | ThaiSolarDate |
 | `test/calendar/testjulian_test.dart` | `js/test/testcal_julian.js` | JulianCal |
 | `test/calendar/testjuliandate_test.dart` | `js/test/testjuliandate.js` | JulianDate |
+| `test/calendar/testjulianday_test.dart` | `js/test/testjulianday.js` | JulianDay helper (getDate/getDays/getDayFraction/setDate/setDays/setDayFraction/addDate). `addDate` returns a new instance in Dart (JS mutates in place); see Not Converted for the one untranslatable case |
 | `test/calendar/testislamic_test.dart` | `js/test/testcal_islamic.js` | IslamicCal |
 | `test/calendar/testislamicdate_test.dart` | `js/test/testislamicdate.js` | IslamicDate |
 | `test/calendar/testhebrew_test.dart` | `js/test/testcal_hebrew.js` | HebrewCal |
@@ -23,14 +29,22 @@ JS source path base: `js/test/`
 | `test/calendar/testethiopicdate_test.dart` | `js/test/testethiopicdate.js` | EthiopicDate |
 | `test/calendar/testcoptic_test.dart` | `js/test/testcal_coptic.js` | CopticCal |
 | `test/calendar/testcopticdate_test.dart` | `js/test/testcopticdate.js` | CopticDate |
-| `test/calendar/testpersian_test.dart` | `js/test/testcal_persian.js` + `js/test/testcal_persianAlgo.js` | PersianCal + PersianAlgoCal (two files merged) |
-| `test/calendar/testpersiandate_test.dart` | `js/test/testpersiandate.js` + `js/test/testpersianalgodate.js` | PersianDate + PersianAlgoDate (two files merged) |
+| `test/calendar/testpersian_test.dart` | `js/test/calendar/testpersian.js` | PersianAlgoCal (algorithmic) — NOT merged with the astronomical one. Note: the JS file is named `testpersian.js` but uses `new PersianAlgoCal()` |
+| `test/calendar/testpersianastro_test.dart` | `js/test/calendar/testpersianastro.js` | PersianCal (astronomical, equinox-based) |
+| `test/calendar/testpersiandate_test.dart` | `js/test/calendar/testpersiandate.js` | PersianAlgoDate (algorithmic) — NOT merged. The JS file is named `testpersiandate.js` but uses `new PersianAlgoDate()` |
+| `test/calendar/testpersiandateastro_test.dart` | `js/test/calendar/testpersiandateastro.js` | PersianDate (astronomical, equinox-based) |
 
 | `test/calendar/testcalendar_test.dart` | `js/test/calendar/testcalendar.js` | ILibCalendar factory: invalid input, getCalendars, type-based and locale-based (`fromLocale`) construction |
+| `test/calendar/testastro_test.dart` | `js/test/calendar/testastro.js` | ILibAstro (ephemerisCorrection / julianCenturies / nutation / aberration / solar & lunar longitude / new-moon); each test loops `testDatesAstro1/2` with `roughlyEqual` tolerances |
+| `test/calendar/testcalendar_extra_test.dart` | — | flutter_ilib-specific (empty-string/`han` throw edge cases; a factory-built calendar is functional) |
 | `test/calendar/testcopticdate_extra_test.dart` | — | flutter_ilib-specific (getDayOfYear, getEra, getCalendar) |
 | `test/calendar/testgregoriandate_extra_test.dart` | — | flutter_ilib-specific (getCalendar) |
 | `test/calendar/testethiopicdate_extra_test.dart` | — | flutter_ilib-specific (getCalendar) |
-| `test/calendar/testjuliandate_extra_test.dart` | — | flutter_ilib-specific (onOrBefore/onOrAfter with offset) |
+| `test/calendar/testjuliandate_extra_test.dart` | — | flutter_ilib-specific (onOrBefore/onOrAfter with offset; basic JD/date; getCalendar) |
+| `test/calendar/testhebrewdate_extra_test.dart` | — | flutter_ilib-specific (basic JD/date; getCalendar) |
+| `test/calendar/testislamicdate_extra_test.dart` | — | flutter_ilib-specific (basic JD/date; getCalendar) |
+| `test/calendar/testpersiandate_extra_test.dart` | — | flutter_ilib-specific (basic JD/date; getCalendar) |
+| `test/calendar/testthaisolardate_extra_test.dart` | — | flutter_ilib-specific (basic JD/date; getCalendar) |
 
 ## DateFmt Locale Tests
 
@@ -152,7 +166,7 @@ These were extracted from the single monolithic `js/test/testdatefmt.js` file, s
 | Dart Test File | iLib JS Source File | Notes |
 |---|---|---|
 | `test/timezone/timezone_test.dart` | `js/test/calendar/testtimezone.js` | ILibTimeZone |
-| `test/timezone/timezone_extra_test.dart` | — | flutter_ilib-specific (additional timezone tests) |
+| `test/timezone/timezone_extra_test.dart` | — | flutter_ilib-specific (additional timezone tests; system `'local'` tests; spring-forward gap; Flutter `DateTime` input) |
 
 ## Basic Tests (flutter_ilib-specific)
 
@@ -180,6 +194,57 @@ The following JS test patterns are not converted for the same reason across all 
 
 Total: ~15 tests per calendar, ~135 tests across all 9 calendars.
 
+## Not Converted — Calendar (Cal) Tests
+
+| Test | File | Count | Reason |
+|---|---|---|---|
+| `testEthiopicGetMonLength14/15/16`, `testEthiopicIsLeapYear5/6` | `testethiopic.js` | 5 | JS passes `String`/`undefined` args (`getMonLength("15")`, `getMonLength(undefined)`, `isLeapYear("2009")`, `isLeapYear(undefined)`) to exercise dynamic-type coercion. Dart `getMonLength(int, int)` / `isLeapYear(int)` take non-nullable `int`, so `String`/`undefined` are not expressible (same reason as `*DateConstructorFullWithStrings`). The meaningful integer behavior is already covered — e.g. `getMonLength("13","2007") → 6` equals the Dart `GetMonLength 13 LeapYear` test (`getMonLength(13, 2007) → 6`). Only `testethiopic.js` has these edge tests; the other 8 cal test files do not. |
+| `testJulianDaySetDaysIgnoreFraction` | `testjulianday.js` | 1 | JS calls `setDays(2.9)` with a float to verify the fractional part is dropped. Dart `setDays(int)` takes a non-nullable `int`, so a float cannot be passed (same reason as `*DateConstructorFullWithStrings`). The other 9 JulianDay tests are converted. |
+
+## Commented-out / disabled in the JS source (not real tests)
+
+These appear as `testXxx: function` in the JS file but sit inside a `/* ... */` block
+comment, so they are **not active tests** in iLib either — not converted, and nothing to
+document beyond this note. (When auditing, a grep for `testXxx: function` can falsely flag
+these; check for an enclosing block comment.)
+
+| Test | File | Count | Reason |
+|---|---|---|---|
+| `testPersDateAstroConstructorBeforeDSTWithImplicitTimeZone`, `testPersDateAstroConstructorAfterDSTWithImplicitTimeZone` | `testpersiandateastro.js` | 2 | Block-commented in the JS source (lines ~626–693). The iLib note: *"Doesn't work on node because you cannot change the time zone after the first call to a Date method... To run these, temporarily set your TZ to 'Asia/Tehran' first, uncomment these, and run as normal."* They test `timezone: "local"` (system tz) around the Iran DST boundary. The constituent behavior is already covered: explicit Asia/Tehran + DST in `testPersDateAstroConstructorNearDSTWithExplicitTimeZone`, and the `'local'` = system-tz mechanism in `test/timezone/` (LA emulation via the injectable hooks). |
+
+## Not Converted — Timezone Tests
+
+`js/test/calendar/testtimezone.js` has 165 tests; `timezone_test.dart` converts the 125
+that apply. The 40 not converted fall into four categories, all due to JS-runtime/
+dynamic-typing features that don't exist in the Dart port:
+
+| Category | Count | Examples | Reason |
+|---|---|---|---|
+| `*NonIDate` | 22 | `testTZGetOffsetDSTNonIDate`, `testTZDisplayName*NonIDate`, `testTZInDaylightTime*NonIDate` | JS passes a native `Date` (or plain object) instead of an iLib `IDate`, e.g. `tz.getOffset(new Date(2011, 7, 1))`. Dart's `getOffset`/`inDaylightTime`/`getDisplayName` take a typed `ILibDate`, so a native date can't be passed. The `IDate` variant of each IS converted; the Dart-idiomatic "non-iLib date input" is provided separately via `DateTime` and tested in `timezone_extra_test.dart` (`testTZGetOffsetDateTime*`, `testTZInDaylightTimeDateTime*`, `testTZDisplayNameDateTime*`). |
+| `*WithLoader` / `*Asynch` | 10 | `testTZGetTimeZoneWithLoaderAsynch`, `testGetAvailableTimeZonesWithLoader`, `testTZGetTimeZoneForLocaleWithLoaderNoData` | Exercise the JS async loader callback (`ilib.setLoaderCallback(...)`, `sync: false`). Dart uses the synchronous asset-based `ILibLoader`; there is no async-callback loader to test. |
+| `*WithIlibString` | 3 | `testTZConstructorWithIlibString`, `testTZConstructorLocalWithIlibString`, `testTZGetWithIlibString` | Construct with an iLib `IString` wrapper (`new TimeZone({id: new IString("America/Los_Angeles")})`). Dart uses a plain `String`; there is no `IString` type. The `String` constructor IS covered. |
+| `testTZGetDefaultFor_{tg_TJ,tk_TM,wo_SN,zu_ZA}`, `testTZGetDefaultLocale_mt_MT` | 5 | — | Unsupported locales (tg/tk/wo/zu/mt not in the bundled 218); see the unsupported-locale rule in CLAUDE.md. |
+
+## Assertion Conversion Patterns
+
+These JS assertions are converted to a different (or no) Dart form because Dart's
+static type system / null safety makes the runtime check redundant. They are NOT
+"not converted" — the test still exists, only the assertion changes.
+
+| JS assertion | Dart equivalent | Why |
+|---|---|---|
+| `test.equal(typeof(x), 'object')` (the first assertion in most constructor/date tests) | **dropped** — the `final XxxDate x = XxxDate(...)` declaration is the compile-time guarantee | A Dart constructor returns the (non-null) type or throws; it can't return `undefined`/`null`/another type. A runtime `expect(x, isNotNull)` / `isA<XxxDate>()` would be always-true and is flagged by the analyzer. Construction failure still surfaces as an exception → test failure, so no coverage is lost. (~22 occurrences per calendar date file.) |
+| `test.equal(typeof(x), 'undefined')` (asserting a factory returned nothing for bad input) | `expect(() => XxxFactory(bad), throwsArgumentError)` | Dart factories throw on invalid input instead of returning `undefined` (e.g. `ILibCalendar('asdf')`). |
+
+## Construction Conversion Patterns
+
+How objects are constructed in the converted tests:
+
+| JS construction | Dart equivalent | Note |
+|---|---|---|
+| `new XxxCal()` (in each cal test file) | `XxxCal()` direct (e.g. `GregorianCal()`, `PersianAlgoCal()`) | The cal tests construct the calendar directly, 1:1 with JS and type-safe. The `ILibCalendar('type')` factory is the other public path — its type dispatch is covered once in `testcalendar_test.dart` (`testCalendarFactoryAllTypes`) and its functional output in `testcalendar_extra_test.dart`, rather than re-tested in every cal file. |
+| `new XxxDate({year: …, julianDay: …})` | `XxxDate(year: …, julianDay: …)` | Named parameters; the JS options object maps to Dart named args. A JS `julianDay` taken from a `List<List<num>>` data array needs `.toDouble()` (the `double` param can't receive a `num`); integer component columns use `as int`/value-compare. |
+
 ## Naming Convention Differences
 
 | Aspect | iLib JS | flutter_ilib Dart |
@@ -189,3 +254,10 @@ Total: ~15 tests per calendar, ~135 tests across all 9 calendars.
 | Calendar files | `testcal_{type}.js` | `test{type}_test.dart` |
 | Calendar date files | `test{type}date.js` | `test{type}date_test.dart` |
 | Large file splitting | Single file (e.g., `testdatefmt.js`) | Split by feature (Clock, Meridiems, Template, etc.) |
+| Calendar/cal test cases | `test{Type}{CamelCase}` (e.g. `testHebrewLastDayOfMonthNegative`) | Descriptive, prefix dropped (e.g. `lastDayOfMonth Negative`) — grep by the JS function name won't match |
+
+### Renamed cases (same assertion, different label)
+
+| JS test | Dart test | Note |
+|---|---|---|
+| `testJulianIsLeapYearNotOnCentury1/2/3` | `IsLeapYear OnCentury1/2/3` | The `Not` was dropped. The assertion is identical (`isLeapYear(1700/1800/1900) == true`): the Julian calendar has no century leap-year exception, so centuries ARE leap. The JS `NotOnCentury` name is a misnomer carried over from the Gregorian test (where those centuries are NOT leap); the Dart name is more accurate for Julian. |

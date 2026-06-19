@@ -23,12 +23,16 @@ maintained: true
 
 ## Core Classes
 
-| Class | Purpose | Import |
-|-------|---------|--------|
-| `ILibLocale` | Parse/validate locales | `flutter_ilib.dart` |
-| `ILibLocaleInfo` | Get locale information | `flutter_ilib.dart` |
-| `ILibDate` | Format dates by locale | `flutter_ilib.dart` |
-| `ILibCaseMapper` | Case conversion by locale | `flutter_ilib.dart` |
+All exported from `flutter_ilib.dart`.
+
+| Class | Purpose |
+|-------|---------|
+| `ILibLocale` | Parse/validate locales |
+| `ILibLocaleInfo` | Get locale information |
+| `ILibDate` / `ILibDateFmt` | Format dates by locale |
+| `ILibCalendar` (+ 9 calendars) | Calendar rules (month length, leap year) & date conversion |
+| `ILibTimeZone` | Timezone / DST |
+| `ILibCaseMapper` | Case conversion by locale |
 
 ## Common Usage
 
@@ -96,8 +100,7 @@ assets/locale/
 flutter pub get
 flutter test
 
-# Format & analyze
-dart format lib/ test/
+# Analyze (do NOT run `dart format` tree-wide — see development.md › Code Style)
 flutter analyze
 
 # Run specific test
@@ -140,9 +143,12 @@ mapper.toUpperCase(str)
 
 ## Recent Changes (v2.0.0)
 
-✅ Region-only locales: `MK`, `TR` now valid  
-✅ Path normalization: Regions use `und-MK.json` (hyphen)  
-✅ Tests updated: All 5 tests now match implementation  
+✅ Pure Dart: the locale / date / calendar / timezone path no longer uses JS interop —
+`ILibLocale`, `ILibLocaleInfo`, `ILibCaseMapper`, `ILibDate`/`ILibDateFmt`, the 9 calendars,
+`ILibTimeZone`, `ILibAstro` are all native Dart (reads `assets/locale/` JSON directly).
+Still on JS interop: `ILibCountry`, `ILibScriptInfo`, `ILibDurationFmt`, `ILibNumFmt`.  
+✅ Region-only locales (`MK`, `TR`); region files use `und-MK.json` (hyphen).  
+✅ Based on iLib v14.21.0 / CLDR 46.  
 
 ## Documentation
 
@@ -162,4 +168,4 @@ mapper.toUpperCase(str)
 
 ---
 
-*Last Updated: May 2026*
+*See CHANGELOG.md for version history.*

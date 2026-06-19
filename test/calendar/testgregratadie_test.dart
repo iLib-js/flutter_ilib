@@ -89,7 +89,7 @@ void main() {
     for (int i = 0; i < testDates.length; i++) {
       final List<num> d = testDates[i];
       test('JD ${d[0]} -> RD -> JD preserves value', () {
-        final GregRataDie rd = GregRataDie(julianDay: d[0] as double);
+        final GregRataDie rd = GregRataDie(julianDay: d[0].toDouble());
         expect(rd.getJulianDay(), d[0]);
       });
     }
@@ -165,8 +165,8 @@ void main() {
   group('GregRataDie convert', () {
     test('testGregRataDieConvert', () {
       for (int i = 0; i < testDates.length; i++) {
-        final GregRataDie rd = GregRataDie(julianDay: testDates[i][0] as double);
-        expect(rd.getRataDie(), (testDates[i][0] as double) - GregRataDie.epoch);
+        final GregRataDie rd = GregRataDie(julianDay: testDates[i][0].toDouble());
+        expect(rd.getRataDie(), testDates[i][0].toDouble() - GregRataDie.epoch);
       }
     });
   });
@@ -446,9 +446,11 @@ void main() {
 
   group('GregRataDie getTime', () {
     test('testGregRataDieGetTimeWithDefaultTime', () {
+      // Dart-specific (no JS counterpart): no-arg construction uses the current
+      // time. Use the same 100ms tolerance as testGregDateGetTimeWithDefaultTime.
       final int before = DateTime.now().millisecondsSinceEpoch;
       final int t = GregRataDie().getTime();
-      expect((t - before).abs() <= 1000, isTrue);
+      expect((t - before).abs() <= 100, isTrue);
     });
   });
 }

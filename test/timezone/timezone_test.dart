@@ -888,4 +888,59 @@ void main() {
       expect(zones.contains('Asia/Calcutta'), true);
     });
   });
+
+  // Ported JS *Local* tests. America/Los_Angeles is emulated hermetically via the
+  // injectable offset hooks so they are deterministic on any host (no TZ pinning).
+  group('local timezone (system)', () {
+    late double Function(int, int, int, int, int) savedSysOffset;
+    late double Function(int) savedSysOffsetForInstant;
+    late int Function() savedSampleYear;
+
+    bool laIsDst(int month) => month > 3 && month < 11;
+
+    setUp(() {
+      savedSysOffset = ILibTimeZone.sysWallOffsetMinutes;
+      savedSysOffsetForInstant = ILibTimeZone.sysOffsetMinutesForInstant;
+      savedSampleYear = ILibTimeZone.sampleYear;
+      ILibTimeZone.sysWallOffsetMinutes =
+          (int y, int m, int d, int h, int mi) => laIsDst(m) ? -420.0 : -480.0;
+      ILibTimeZone.sysOffsetMinutesForInstant = (int ms) {
+        final DateTime d = DateTime.fromMillisecondsSinceEpoch(ms, isUtc: true);
+        return laIsDst(d.month) ? -420.0 : -480.0;
+      };
+      ILibTimeZone.sampleYear = () => 2011;
+    });
+
+    tearDown(() {
+      ILibTimeZone.sysWallOffsetMinutes = savedSysOffset;
+      ILibTimeZone.sysOffsetMinutesForInstant = savedSysOffsetForInstant;
+      ILibTimeZone.sampleYear = savedSampleYear;
+    });
+
+    test('testTZConstructUsingLocalID', () {
+      final ILibTimeZone tz = ILibTimeZone('local');
+      expect(tz.getId(), 'local');
+    });
+
+    test('testTZGetRawOffsetMillisLocal', () {
+      final ILibTimeZone tz = ILibTimeZone('local');
+      expect(tz.getRawOffsetMillis(), -28800000);
+    });
+
+    test('testTZInDaylightTimeLocalTrue', () {
+      final ILibTimeZone tz = ILibTimeZone('local');
+      final ILibDateOptions gd = ILibDateOptions(
+          year: 2011, month: 7, day: 1, hour: 0, minute: 0, second: 0,
+          timezone: 'local');
+      expect(tz.inDaylightTime(gd), true);
+    });
+
+    test('testTZInDaylightTimeLocalFalse', () {
+      final ILibTimeZone tz = ILibTimeZone('local');
+      final ILibDateOptions gd = ILibDateOptions(
+          year: 2011, month: 12, day: 1, hour: 0, minute: 0, second: 0,
+          timezone: 'local');
+      expect(tz.inDaylightTime(gd), false);
+    });
+  });
 }

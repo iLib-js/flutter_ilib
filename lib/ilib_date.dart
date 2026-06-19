@@ -84,39 +84,39 @@ class ILibDateOptions implements ILibDate {
       case 'ethiopic':
         return EthiopicDate(
             year: y, month: m, day: d, hour: h, minute: min, second: sec,
-            millisecond: ms, unixtime: ut, timezone: timezone, dst: dst);
+            millisecond: ms, unixtime: ut, timezone: timezone, locale: locale, dst: dst);
       case 'coptic':
         return CopticDate(
             year: y, month: m, day: d, hour: h, minute: min, second: sec,
-            millisecond: ms, unixtime: ut, timezone: timezone, dst: dst);
+            millisecond: ms, unixtime: ut, timezone: timezone, locale: locale, dst: dst);
       case 'hebrew':
         return HebrewDate(
             year: y, month: m, day: d, hour: h, minute: min, second: sec,
-            millisecond: ms, unixtime: ut, timezone: timezone, dst: dst);
+            millisecond: ms, unixtime: ut, timezone: timezone, locale: locale, dst: dst);
       case 'islamic':
         return IslamicDate(
             year: y, month: m, day: d, hour: h, minute: min, second: sec,
-            millisecond: ms, unixtime: ut, timezone: timezone, dst: dst);
+            millisecond: ms, unixtime: ut, timezone: timezone, locale: locale, dst: dst);
       case 'julian':
         return JulianDate(
             year: y, month: m, day: d, hour: h, minute: min, second: sec,
-            millisecond: ms, unixtime: ut, timezone: timezone, dst: dst);
+            millisecond: ms, unixtime: ut, timezone: timezone, locale: locale, dst: dst);
       case 'persian':
         return PersianDate(
             year: y, month: m, day: d, hour: h, minute: min, second: sec,
-            millisecond: ms, unixtime: ut, timezone: timezone, dst: dst);
+            millisecond: ms, unixtime: ut, timezone: timezone, locale: locale, dst: dst);
       case 'persian-algo':
         return PersianAlgoDate(
             year: y, month: m, day: d, hour: h, minute: min, second: sec,
-            millisecond: ms, unixtime: ut, timezone: timezone, dst: dst);
+            millisecond: ms, unixtime: ut, timezone: timezone, locale: locale, dst: dst);
       case 'thaisolar':
         return ThaiSolarDate(
             year: y, month: m, day: d, hour: h, minute: min, second: sec,
-            millisecond: ms, unixtime: ut, timezone: timezone, dst: dst);
+            millisecond: ms, unixtime: ut, timezone: timezone, locale: locale, dst: dst);
       default:
         return GregorianDate(
             year: y, month: m, day: d, hour: h, minute: min, second: sec,
-            millisecond: ms, unixtime: ut, timezone: timezone, dst: dst);
+            millisecond: ms, unixtime: ut, timezone: timezone, locale: locale, dst: dst);
     }
   }
 
@@ -130,11 +130,14 @@ class ILibDateOptions implements ILibDate {
   int getWeekOfYear() => _toCalendarDate().getWeekOfYear();
 
   @override
-  int getWeekOfMonth(int firstDayOfWeek) =>
-      _toCalendarDate().getWeekOfMonth(firstDayOfWeek);
+  int getWeekOfMonth(String? locale) =>
+      _toCalendarDate().getWeekOfMonth(locale);
 
   @override
   int getEra() => _toCalendarDate().getEra();
+
+  @override
+  String? getTimeZone() => timezone;
 
   @override
   double getRataDie() => _toCalendarDate().getRataDie();

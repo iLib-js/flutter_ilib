@@ -38,32 +38,25 @@ flutter test
 ### IDE Setup
 
 #### VS Code
-```bash
-# Install Flutter extension
-# Install Dart extension
-# Install Dart: Code Metrics (optional)
-
-# In .vscode/settings.json:
+```jsonc
+// Install the Flutter and Dart extensions.
+// In .vscode/settings.json — do NOT format-on-save (see Code Style below):
 {
   "[dart]": {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "Dart-Code.dart-code"
+    "editor.formatOnSave": false
   }
 }
 ```
 
 ### Code Style & Formatting
 
-```bash
-# Format all Dart files
-dart format lib/ test/
-
-# Format specific file
-dart format lib/ilib_locale.dart
-
-# Check formatting without changing
-dart format --output=none lib/
-```
+**Do NOT run `dart format` tree-wide.** The repo was formatted with an older Dart (short style,
+~100-col width) that the Dart 3.7+ formatter cannot reproduce — both `dart format` (width 80) and
+`dart format --line-length 100` (deprecated; switches to the new "tall" style) reformat large
+swaths of untouched code into huge noise diffs. **Match the surrounding style of the file you edit
+by hand** (short style, ≤100 cols); leave other files untouched. A repo-wide reformat (pick one
+style + pin the Dart SDK) should be its own separate commit, never mixed into feature work. See
+CLAUDE.md › Conventions › Code Style.
 
 ### Static Analysis
 
@@ -122,33 +115,20 @@ code coverage/lcov.info  # View coverage report
 
 ```
 test/
-├── basic/
-│   └── flutter_ilib_utils_test.dart
-│       ├── getJSONDataPath tests
-│       ├── getJSONDataPaths tests
-│       ├── isValidLocale tests
-│       └── setLocale/getLocale tests
-│
-├── casemapper/
-│   └── case_mapper tests (by locale)
-│
-├── localeinfo/
-│   ├── localeinfo_test.dart
-│   │   ├── getRegionName tests
-│   │   ├── getLanguageName tests
-│   │   ├── getClock tests
-│   │   ├── getTimeZone tests
-│   │   ├── Number formatting tests
-│   │   └── Other locale info tests
-│   │
-│   └── localeinfo_dayofweek_test.dart
-│       ├── getFirstDayOfWeek tests
-│       ├── getWeekEndStart tests
-│       └── getWeekEndEnd tests
-│
-└── linux/
-    └── (Linux-specific tests)
+├── basic/        # getJSONDataPath(s), isValidLocale, setLocale/getLocale
+├── localeinfo/   # ILibLocaleInfo (region/language/clock/timezone, day-of-week)
+├── casemapper/   # ILibCaseMapper (upper/lower, by locale)
+├── country/      # ILibCountry
+├── scriptinfo/   # ILibScriptInfo
+├── numfmt/       # ILibNumFmt
+├── durfmt/       # ILibDurationFmt
+├── calendar/     # 9 calendars: test{type}_test (Cal), test{type}date_test (Date),
+│                 #   *_extra_test (Dart-only), testastro, testcalendar, testjulianday, ...
+├── timezone/     # ILibTimeZone (timezone_test, timezone_extra_test)
+└── datefmt/      # ILibDateFmt per-locale (datefmt_{locale}_test, ~88 files)
 ```
+
+JS↔Dart test file mapping and not-converted cases: `docs/test-mapping.md`.
 
 ### Writing Tests
 
@@ -200,14 +180,9 @@ expect(value, throwsException)        // Throws error
 ### Dart Only
 
 ```bash
-# Check syntax
+# Check syntax / static analysis
 dart analyze lib/
-
-# Format and check
-dart format lib/ --output=none
-
-# Compile snapshot (if needed)
-dart compile exe lib/flutter_ilib.dart -o output
+flutter analyze
 ```
 
 ## Code Conventions
@@ -223,9 +198,9 @@ String getLocaleData() { }
 class ILibLocale { }
 typedef LocaleCallback = void Function(String);
 
-// Constants: camelCase (private) or UPPER_SNAKE_CASE (public)
+// Constants: lowerCamelCase (Dart `constant_identifier_names` lint; analyze must pass)
 const int _defaultTimeoutMs = 5000;
-const String API_VERSION = '2.0.0';
+const String apiVersion = '2.0.0';
 
 // Private members: prefix with underscore
 String _privateField;
@@ -245,7 +220,7 @@ import 'relative/path.dart';
 part 'subfile.dart';
 
 // 3. Constants
-const String DEFAULT_LOCALE = 'en-US';
+const String defaultLocale = 'en-US';
 
 // 4. Types/Typedefs
 typedef LocaleCallback = void Function(String);
@@ -413,16 +388,13 @@ List<String> getJSONDataPaths(String? locale) {
 ### Before Committing
 
 ```bash
-# 1. Format code
-dart format lib/ test/
-
-# 2. Run analysis
+# 1. Run analysis (no tree-wide `dart format` — see Code Style)
 flutter analyze
 
-# 3. Run tests
+# 2. Run tests
 flutter test
 
-# 4. Create PR description
+# 3. Create PR description
 # Include:
 # - What changed and why
 # - Test results
@@ -536,16 +508,15 @@ final locales = myLocaleList.map(ILibLocale.new).toList();
 
 ### Profiling
 
+flutter_ilib is a pure-calculation library, so performance work means measuring calculation
+speed, not widget frames:
+
 ```bash
-# Run with timeline profiling
-flutter test --verbose --profile
+# Micro-benchmark pure Dart logic (format/calendar conversion) with package:benchmark_harness
+dart run --release benchmark/<bench>.dart   # ns/op; compare vs the JS-interop baseline
 
-# Check memory usage
-flutter test --coverage
-dart --enable-asserts analyze ...
-
-# Monitor performance events
-DevTools → Performance tab
+# App-level: run the example in profile mode and use DevTools (Performance / CPU / Memory)
+flutter run --profile      # not `flutter test`
 ```
 
 ---
@@ -555,16 +526,20 @@ DevTools → Performance tab
 ### Updating Docs
 
 1. **API Changes**:
-   - Update `flutter_ilib_api.md`
+   - Update `docs/api.md`
    - Add example if behavior changed
    - Update CHANGELOG.md
 
 2. **Architecture Changes**:
-   - Update `flutter_ilib_architecture.md`
+   - Update `docs/architecture.md` (or `docs/date-calendar-architecture.md`)
    - Add diagrams if helpful
    - Document new patterns
 
-3. **Developer Changes**:
+3. **Test conversion / not-converted cases**:
+   - Update `docs/test-mapping.md`
+   - Calendar/date/timezone rules: `docs/date-calendar-architecture.md`
+
+4. **Developer Changes**:
    - Update this file
    - Document new test patterns
    - Add troubleshooting section
@@ -587,7 +562,7 @@ Before releasing version X.Y.Z:
 
 - [ ] All tests passing (`flutter test`)
 - [ ] No analysis warnings (`flutter analyze`)
-- [ ] Code formatted (`dart format lib/ test/`)
+- [ ] Edited files match the surrounding hand style (no tree-wide `dart format` — see Code Style)
 - [ ] CHANGELOG.md updated
 - [ ] Version bumped in `pubspec.yaml`
 - [ ] Notable features documented in `Docs.md`
@@ -628,4 +603,4 @@ Before releasing version X.Y.Z:
 
 ---
 
-*Last Updated: May 2026*
+*See CHANGELOG.md for version history.*

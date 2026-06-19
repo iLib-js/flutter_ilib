@@ -1,4 +1,5 @@
 import '../ilib_date_accessor.dart';
+import '../ilib_localeinfo.dart';
 import '../ilib_timezone.dart';
 import 'rata_die.dart';
 
@@ -29,6 +30,9 @@ abstract class ILibCalendarDate implements ILibDate {
   String? get timezone => 'local';
 
   @override
+  String? getTimeZone() => timezone;
+
+  @override
   bool? dst;
 
   @override
@@ -52,7 +56,7 @@ abstract class ILibCalendarDate implements ILibDate {
 
   double adjustRdForTimezone(double rd) {
     final String? tz = timezone;
-    if (tz == null || tz == 'local') {
+    if (tz == null) {
       return rd;
     }
     final ILibTimeZone tzObj = ILibTimeZone(tz);
@@ -68,7 +72,7 @@ abstract class ILibCalendarDate implements ILibDate {
 
   void calcTimezoneOffset() {
     final String? tz = timezone;
-    if (tz == null || tz == 'local') {
+    if (tz == null) {
       return;
     }
     final ILibTimeZone tzObj = ILibTimeZone(tz);
@@ -129,7 +133,8 @@ abstract class ILibCalendarDate implements ILibDate {
   }
 
   @override
-  int getWeekOfMonth(int firstDayOfWeek) {
+  int getWeekOfMonth(String? locale) {
+    final int firstDayOfWeek = ILibLocaleInfo(locale).getFirstDayOfWeek();
     final ILibRataDie first = newRd(
       year: getYears(),
       month: getMonths(),
@@ -151,23 +156,29 @@ abstract class ILibCalendarDate implements ILibDate {
     return (rd - weekStart) ~/ 7 + 1;
   }
 
+  // Pass tzOffsetDays so the day-of-week is evaluated in wall-clock (local) time,
+  // consistent with getDayOfWeek() and JS (RataDie computes on rd+offset, then -offset).
   ILibCalendarDate onOrBefore(int dayOfWeek) {
-    final double rd = getRataDieInstance().onOrBefore(dayOfWeek);
+    final double rd =
+        getRataDieInstance().onOrBefore(dayOfWeek, offset: tzOffsetDays);
     return newDateFromRd(rd);
   }
 
   ILibCalendarDate onOrAfter(int dayOfWeek) {
-    final double rd = getRataDieInstance().onOrAfter(dayOfWeek);
+    final double rd =
+        getRataDieInstance().onOrAfter(dayOfWeek, offset: tzOffsetDays);
     return newDateFromRd(rd);
   }
 
   ILibCalendarDate before(int dayOfWeek) {
-    final double rd = getRataDieInstance().before(dayOfWeek);
+    final double rd =
+        getRataDieInstance().before(dayOfWeek, offset: tzOffsetDays);
     return newDateFromRd(rd);
   }
 
   ILibCalendarDate after(int dayOfWeek) {
-    final double rd = getRataDieInstance().after(dayOfWeek);
+    final double rd =
+        getRataDieInstance().after(dayOfWeek, offset: tzOffsetDays);
     return newDateFromRd(rd);
   }
 

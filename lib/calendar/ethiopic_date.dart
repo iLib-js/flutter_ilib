@@ -153,6 +153,6 @@ class EthiopicDate extends ILibCalendarDate {
 
   @override
   EthiopicDate newDateFromRd(double rd) {
-    return EthiopicDate(rd: rd);
+    return EthiopicDate(rd: rd, timezone: _timezone);
   }
 }

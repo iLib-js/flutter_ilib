@@ -13,14 +13,10 @@ void main() {
   });
 
   group('ILibCalendar factory', () {
-    test('unknown type throws ArgumentError', () {
+    // testCalendarFactoryUnknown: JS CalendarFactory({type: "asdf"}) returns
+    // undefined; the Dart factory throws ArgumentError for an unknown type.
+    test('testCalendarFactoryUnknown', () {
       expect(() => ILibCalendar('unknown'), throwsArgumentError);
-    });
-    test('empty string throws ArgumentError', () {
-      expect(() => ILibCalendar(''), throwsArgumentError);
-    });
-    test('han throws UnimplementedError', () {
-      expect(() => ILibCalendar('han'), throwsA(isA<UnimplementedError>()));
     });
     // testGetCalendars: JS asserts the exact set (equalIgnoringOrder). 'han' is
     // omitted here because the Han calendar is deferred / not yet implemented in the
@@ -32,13 +28,31 @@ void main() {
       });
     });
 
+    // testCalendarFactoryDefault: JS CalendarFactory() with no args returns a
+    // defined calendar; the Dart no-arg factory defaults to gregorian.
+    test('testCalendarFactoryDefault', () {
+      expect(ILibCalendar(), isNotNull);
+    });
     // testCalendarFactoryDefaultRightType: JS CalendarFactory() defaults to
-    // gregorian; the Dart factory takes the type explicitly.
+    // gregorian; the Dart no-arg factory does the same.
     test('testCalendarFactoryDefaultRightType', () {
-      expect(ILibCalendar('gregorian').getType(), 'gregorian');
+      expect(ILibCalendar().getType(), 'gregorian');
     });
     test('testCalendarFactorySpecific', () {
       expect(ILibCalendar('julian').getType(), 'julian');
+    });
+    // Verify the factory dispatches every supported type string to the matching
+    // calendar. JS testcalendar.js only checks one type via CalendarFactory; each
+    // calendar's own testcal_*.js uses `new XxxCal()` directly (which the Dart cal
+    // tests now mirror with direct construction), so this consolidates factory
+    // dispatch coverage for all types in the one factory test file.
+    test('testCalendarFactoryAllTypes', () {
+      for (final String type in <String>[
+        'gregorian', 'thaisolar', 'julian', 'islamic', 'persian',
+        'persian-algo', 'ethiopic', 'coptic', 'hebrew'
+      ]) {
+        expect(ILibCalendar(type).getType(), type);
+      }
     });
   });
 

@@ -1,22 +1,23 @@
-# ILibDateFmt JS → Dart Conversion Plan
+# ILibDateFmt Implementation Reference
 
 ## Overview
 
-Converting the `ILibDateFmt` class from JavaScript interop (`ILibJS.instance.evaluate()`) to a pure Dart implementation.
+`ILibDateFmt` is a pure-Dart formatter: it reads `assets/locale/` JSON and formats dates in Dart
+(it replaced the former JavaScript interop, `ILibJS.instance.evaluate()`). This file documents how
+the implemented formatter works — data flow, tokens, templates, DST, and the sysres lookup.
 
-### Current State
+### Data used
+- `ilib.data.dateformats` — locale-specific date/time format templates
+- `ilib.data.sysres` — translated strings (month/day names, AM/PM, etc.)
+- `ilib.data.zoneinfo` — timezone info (including DST rules)
 
-- **Previous implementation**: 4 JS evaluate calls (`format`, `getClock`, `getTemplate`, `getMeridiemsRange`)
-- **Tests**: 88 files
-- **Data**: All required data already available in `assets/locale/` JSON files
-  - `ilib.data.dateformats` — locale-specific date/time format templates
-  - `ilib.data.sysres` — translated strings (month/day names, AM/PM, etc.)
-  - `ilib.data.zoneinfo` — timezone info (including DST rules)
+### Scope
+- Timezone formatting (`z`/`Z` tokens)
+- All calendar types (gregorian, islamic, hebrew, ethiopic, etc.)
 
-### Conversion Scope
-
-- Includes timezone formatting (z/Z tokens)
-- Supports all calendar types (gregorian, islamic, hebrew, ethiopic, etc.)
+> History: this replaced 4 JS `evaluate` calls (`format`, `getClock`, `getTemplate`,
+> `getMeridiemsRange`) across 88 test files; the required JSON data already existed in
+> `assets/locale/`.
 
 ---
 
@@ -44,15 +45,15 @@ format(date)
 
 ```
 lib/
-├── ilib_datefmt.dart              ← full rewrite (core)
-├── ilib_date.dart                 ← calculation methods added
+├── ilib_datefmt.dart              ← core formatter
+├── ilib_date.dart                 ← date calculation methods
 ├── ilib_timezone.dart             ← timezone utility
-└── flutter_ilib.dart              ← export added
+└── flutter_ilib.dart              ← export
 ```
 
 ---
 
-## Implementation Steps
+## Implementation (by layer)
 
 ### Step 1: Timezone Utility (`lib/ilib_timezone.dart`)
 
@@ -96,7 +97,7 @@ Rule string `"r"` interpretation:
 
 ### Step 2: Date Utility Methods (`lib/ilib_date.dart`)
 
-Add the following calculation methods to `ILibDateOptions`:
+`ILibDateOptions` provides these calculation methods:
 
 | Method | Description | Implementation |
 |--------|-------------|----------------|
@@ -108,7 +109,7 @@ Add the following calculation methods to `ILibDateOptions`:
 
 ---
 
-### Step 3: ILibDateFmt Core Logic Rewrite
+### Step 3: ILibDateFmt Core Logic
 
 #### 3-1. Constructor
 
@@ -196,7 +197,7 @@ Key token mapping:
 | `O` | ordinal (1st, 2nd...) | ordinalChoice parsing |
 | `w`, `ww` | week of year | calDate.getWeekOfYear() |
 | `D`~`DDD` | day of year | calDate.getDayOfYear() |
-| `W` | week of month | calDate.getWeekOfMonth() |
+| `W` | week of month | calDate.getWeekOfMonth(locale) |
 | `z` | timezone abbreviation | ILibTimeZone.getDisplayName(standard) |
 | `Z` | timezone RFC822 | ILibTimeZone.getDisplayName(rfc822) |
 | quote literal | remove quotes, output as-is | - |
@@ -246,7 +247,7 @@ Algorithm:
 
 ---
 
-### Step 6: Test Modification & Integration
+### Step 6: Test Setup & Integration
 
 #### Test setUp Change (88 files)
 
@@ -262,12 +263,11 @@ ILibLoader.instance.initILib();
 await ILibLoader.instance.loadILibLocaleData('en-US');
 ```
 
-#### Other Cleanup
+#### Migration cleanup (done)
 
-- Add `export 'ilib_datefmt.dart'` to `flutter_ilib.dart`
-- Remove `ILibJS` import from `ILibDateFmt`
-- Remove `toJsonString()` method
-- Remove datefmt test exclusion from `execute_unit_test.sh`
+The one-time migration also added the `ilib_datefmt.dart` export to `flutter_ilib.dart`, removed
+the `ILibJS` import and `toJsonString()` from `ILibDateFmt`, and removed the datefmt test exclusion
+from `execute_unit_test.sh`.
 
 ---
 

@@ -155,6 +155,6 @@ class PersianAlgoDate extends ILibCalendarDate {
 
   @override
   PersianAlgoDate newDateFromRd(double rd) {
-    return PersianAlgoDate(rd: rd);
+    return PersianAlgoDate(rd: rd, timezone: _timezone);
   }
 }

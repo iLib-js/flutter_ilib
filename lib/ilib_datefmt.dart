@@ -589,8 +589,7 @@ class ILibDateFmt {
           break;
         case 'W':
           calDate ??= _getCalendarDate(date);
-          final ILibLocaleInfo li = ILibLocaleInfo(_locale);
-          str.write(calDate.getWeekOfMonth(li.getFirstDayOfWeek()));
+          str.write(calDate.getWeekOfMonth(_locale));
           break;
         case 'z':
           str.write(_getTimezoneDisplay(date, 'standard'));

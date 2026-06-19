@@ -13,7 +13,12 @@ Welcome to flutter_ilib documentation. This index helps you find the right docum
 
 If you're an AI agent (Claude, Copilot, etc.), follow this sequence:
 
-1. **[quick_reference.md](./quick_reference.md)** (Start here!)
+0. **[../CLAUDE.md](../CLAUDE.md)** (Read first — the project's source of truth)
+   - Project goal, conventions, and **must-follow rules** (formatting, testing, calendar/timezone)
+   - Conversion status and source versions (iLib v14.21.0 / CLDR 46)
+   - Links into the detailed `docs/` below
+
+1. **[quick_reference.md](./quick_reference.md)** (Start here for an overview!)
    - Quick facts and overview
    - Key classes and common usage
    - Commands reference
@@ -75,17 +80,19 @@ If you're an AI agent (Claude, Copilot, etc.), follow this sequence:
 
 ### Core Documentation
 
-| Document | Purpose | Audience | Length |
-|----------|---------|----------|--------|
-| [quick_reference.md](./quick_reference.md) | Quick overview and common patterns | Everyone | ~150 lines |
-| [architecture.md](./architecture.md) | System design and internals | Developers, AI | ~450 lines |
-| [api.md](./api.md) | Complete API reference | Developers, AI | ~400 lines |
-| [development.md](./development.md) | Setup, testing, contribution | Developers | ~500 lines |
-| [calendar-conversion.md](./calendar-conversion.md) | Calendar conversion logic in DateFmt | Developers, AI | ~180 lines |
-| [date-calendar-architecture.md](./date-calendar-architecture.md) | Date & calendar system layers, constructor pattern | Developers, AI | ~200 lines |
-| [datefmt-conversion-plan.md](./datefmt-conversion-plan.md) | DateFmt implementation details (tokens, templates, DST) | Developers, AI | ~200 lines |
-| [conversion-guide.md](./conversion-guide.md) | General JS→Dart conversion checklist | Developers | ~150 lines |
-| [test-mapping.md](./test-mapping.md) | JS→Dart test file mapping, not-converted patterns | Developers, AI | ~250 lines |
+| Document | Purpose | Audience |
+|----------|---------|----------|
+| [../CLAUDE.md](../CLAUDE.md) | Project source of truth: goal, conventions, must-follow rules, conversion status | Developers, AI |
+| [quick_reference.md](./quick_reference.md) | Quick overview and common patterns | Everyone |
+| [architecture.md](./architecture.md) | System design and internals | Developers, AI |
+| [api.md](./api.md) | Complete API reference | Developers, AI |
+| [development.md](./development.md) | Setup, testing, contribution | Developers |
+| [calendar-conversion.md](./calendar-conversion.md) | Calendar conversion logic in DateFmt | Developers, AI |
+| [date-calendar-architecture.md](./date-calendar-architecture.md) | Date & calendar system layers, constructor pattern, critical rules | Developers, AI |
+| [datefmt-conversion-plan.md](./datefmt-conversion-plan.md) | ILibDateFmt implementation reference (tokens, templates, DST) | Developers, AI |
+| [local-timezone-support.md](./local-timezone-support.md) | System `'local'` timezone — implemented (Strategy A) + optional Strategy B | Developers, AI |
+| [conversion-guide.md](./conversion-guide.md) | General JS→Dart conversion checklist | Developers |
+| [test-mapping.md](./test-mapping.md) | JS→Dart test file mapping, not-converted patterns | Developers, AI |
 
 ### External Documentation
 
@@ -134,7 +141,7 @@ If you're an AI agent (Claude, Copilot, etc.), follow this sequence:
 - Merging: [architecture.md#deep-merge-strategy](./architecture.md#deep-merge-strategy)
 
 **Timezone**
-- System `'local'` support (design / deferred): [local-timezone-support.md](./local-timezone-support.md)
+- System `'local'` support (implemented, Strategy A): [local-timezone-support.md](./local-timezone-support.md)
 
 **APIs**
 - ILibLocale: [api.md#iliblocale-api](./api.md#iliblocale-api)
@@ -176,7 +183,6 @@ If you're an AI agent (Claude, Copilot, etc.), follow this sequence:
 
 ### quick_reference.md
 - **Type**: Overview
-- **Size**: ~150 lines
 - **Difficulty**: Beginner
 - **Prerequisite**: None
 - **Topics**: Classes, Common patterns, Quick commands
@@ -184,7 +190,6 @@ If you're an AI agent (Claude, Copilot, etc.), follow this sequence:
 
 ### architecture.md
 - **Type**: Deep dive
-- **Size**: ~450 lines
 - **Difficulty**: Intermediate
 - **Prerequisite**: quick_reference.md
 - **Topics**: System design, Data flow, Component details
@@ -192,7 +197,6 @@ If you're an AI agent (Claude, Copilot, etc.), follow this sequence:
 
 ### api.md
 - **Type**: Reference
-- **Size**: ~400 lines
 - **Difficulty**: Intermediate
 - **Prerequisite**: quick_reference.md
 - **Topics**: All APIs, Methods, Examples
@@ -200,7 +204,6 @@ If you're an AI agent (Claude, Copilot, etc.), follow this sequence:
 
 ### development.md
 - **Type**: Guide
-- **Size**: ~500 lines
 - **Difficulty**: Intermediate-Advanced
 - **Prerequisite**: quick_reference.md, architecture.md
 - **Topics**: Setup, Testing, Code style, Contributing
@@ -255,17 +258,17 @@ development (Get hands-on)
 
 ## 📝 Document Status
 
-| Document | Status | Last Updated |
-|----------|--------|--------------|
-| quick_reference.md | ✅ Current | May 2026 |
-| architecture.md | ✅ Current | May 2026 |
-| api.md | ✅ Current | May 2026 |
-| development.md | ✅ Current | May 2026 |
-| README.md | ✅ Current | (See file) |
-| CHANGELOG.md | ✅ Current | (See file) |
+| Document | Status |
+|----------|--------|
+| quick_reference.md | ✅ Current |
+| architecture.md | ✅ Current |
+| api.md | ✅ Current |
+| development.md | ✅ Current |
+| README.md | ✅ Current |
+| CHANGELOG.md | ✅ Current |
 
 ---
 
 **Note**: This documentation is designed to be read by both humans and AI agents. Documents are self-contained but cross-referenced for completeness.
 
-*Last Updated: May 2026*
+*See CHANGELOG.md for version history.*

@@ -157,6 +157,6 @@ class IslamicDate extends ILibCalendarDate {
 
   @override
   IslamicDate newDateFromRd(double rd) {
-    return IslamicDate(rd: rd);
+    return IslamicDate(rd: rd, timezone: _timezone);
   }
 }

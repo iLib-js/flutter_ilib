@@ -51,38 +51,11 @@ void main() {
     });
   });
 
-  group('ThaiSolarDate from JD', () {
-    test('basic JD', () {
-      final ThaiSolarDate d = ThaiSolarDate(julianDay: 2450138.5);
-      expect(d.getYears(), 2539);
-      expect(d.getMonths(), 2);
-      expect(d.getDays(), 25);
-      expect(d.getHours(), 0);
-      expect(d.getMinutes(), 0);
-      expect(d.getSeconds(), 0);
-      expect(d.getMilliseconds(), 0);
-    });
-  });
-
-  group('ThaiSolarDate from components', () {
-    test('basic date', () {
-      final ThaiSolarDate d = ThaiSolarDate(
-          year: 2567, month: 3, day: 15, hour: 8, minute: 30, second: 0, millisecond: 0);
-      expect(d.getYears(), 2567);
-      expect(d.getMonths(), 3);
-      expect(d.getDays(), 15);
-      expect(d.getHours(), 8);
-      expect(d.getMinutes(), 30);
-      expect(d.getSeconds(), 0);
-      expect(d.getMilliseconds(), 0);
-    });
-  });
-
   group('ThaiSolarDate from JD constructs correct date components', () {
     for (int i = 0; i < testDates.length; i++) {
       final List<num> td = testDates[i];
       test('JD ${td[0]} gives year ${td[1]}, month ${td[2]}, day ${td[3]}', () {
-        final ThaiSolarDate d = ThaiSolarDate(julianDay: td[0] as double, timezone: 'Etc/UTC');
+        final ThaiSolarDate d = ThaiSolarDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
         expect(d.getYears(), td[1] as int);
         expect(d.getMonths(), td[2] as int);
         expect(d.getDays(), td[3] as int);
@@ -98,17 +71,10 @@ void main() {
     for (int i = 0; i < testDates.length; i++) {
       final List<num> td = testDates[i];
       test('${td[1]}/${td[2]}/${td[3]} dow=${td[8]}', () {
-        final ThaiSolarDate d = ThaiSolarDate(julianDay: td[0] as double, timezone: 'Etc/UTC');
+        final ThaiSolarDate d = ThaiSolarDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
         expect(d.getDayOfWeek(), td[8] as int);
       });
     }
-  });
-
-  group('ThaiSolarDate getCalendar', () {
-    test('returns thaisolar', () {
-      final ThaiSolarDate d = ThaiSolarDate(year: 2567, month: 1, day: 1);
-      expect(d.getCalendar(), 'thaisolar');
-    });
   });
 
   group('ThaiSolarDate constructor', () {
@@ -147,7 +113,7 @@ void main() {
     test('testThaiSolarDateConvert', () {
       for (int i = 0; i < testDates.length; i++) {
         final List<num> td = testDates[i];
-        final ThaiSolarDate d = ThaiSolarDate(julianDay: td[0] as double, timezone: 'Etc/UTC');
+        final ThaiSolarDate d = ThaiSolarDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
         expect(d.getYears(), td[1] as int);
         expect(d.getMonths(), td[2] as int);
         expect(d.getDays(), td[3] as int);
@@ -432,55 +398,59 @@ void main() {
   });
 
   group('ThaiSolarDate getWeekOfMonth', () {
+    setUpAll(() async {
+      await ILibLoader.instance.loadILibLocaleData('en-US');
+      await ILibLoader.instance.loadILibLocaleData('de-DE');
+    });
     // en-US: firstDayOfWeek = 0 (Sunday)
     test('testThaiSolarDateGetWeekOfMonth0', () {
       final ThaiSolarDate td = ThaiSolarDate(year: 2554, month: 10, day: 1, timezone: 'Etc/UTC');
-      expect(td.getWeekOfMonth(0), 0);
+      expect(td.getWeekOfMonth('en-US'), 0);
     });
     test('testThaiSolarDateGetWeekOfMonth1', () {
       final ThaiSolarDate td = ThaiSolarDate(year: 2554, month: 10, day: 2, timezone: 'Etc/UTC');
-      expect(td.getWeekOfMonth(0), 1);
+      expect(td.getWeekOfMonth('en-US'), 1);
     });
     test('testThaiSolarDateGetWeekOfMonth2', () {
       final ThaiSolarDate td = ThaiSolarDate(year: 2554, month: 10, day: 11, timezone: 'Etc/UTC');
-      expect(td.getWeekOfMonth(0), 2);
+      expect(td.getWeekOfMonth('en-US'), 2);
     });
     test('testThaiSolarDateGetWeekOfMonth3', () {
       final ThaiSolarDate td = ThaiSolarDate(year: 2554, month: 10, day: 20, timezone: 'Etc/UTC');
-      expect(td.getWeekOfMonth(0), 3);
+      expect(td.getWeekOfMonth('en-US'), 3);
     });
     test('testThaiSolarDateGetWeekOfMonth4', () {
       final ThaiSolarDate td = ThaiSolarDate(year: 2554, month: 10, day: 29, timezone: 'Etc/UTC');
-      expect(td.getWeekOfMonth(0), 4);
+      expect(td.getWeekOfMonth('en-US'), 4);
     });
     test('testThaiSolarDateGetWeekOfMonth5', () {
       final ThaiSolarDate td = ThaiSolarDate(year: 2554, month: 10, day: 30, timezone: 'Etc/UTC');
-      expect(td.getWeekOfMonth(0), 5);
+      expect(td.getWeekOfMonth('en-US'), 5);
     });
     test('testThaiSolarDateGetWeekOfMonth6', () {
       final ThaiSolarDate td = ThaiSolarDate(year: 2554, month: 9, day: 1, timezone: 'Etc/UTC');
-      expect(td.getWeekOfMonth(0), 0);
+      expect(td.getWeekOfMonth('en-US'), 0);
     });
     test('testThaiSolarDateGetWeekOfMonth7', () {
       final ThaiSolarDate td = ThaiSolarDate(year: 2554, month: 8, day: 1, timezone: 'Etc/UTC');
-      expect(td.getWeekOfMonth(0), 1);
+      expect(td.getWeekOfMonth('en-US'), 1);
     });
     test('testThaiSolarDateGetWeekOfMonth8', () {
       final ThaiSolarDate td = ThaiSolarDate(year: 2554, month: 7, day: 1, timezone: 'Etc/UTC');
-      expect(td.getWeekOfMonth(0), 0);
+      expect(td.getWeekOfMonth('en-US'), 0);
     });
     test('testThaiSolarDateGetWeekOfMonth9', () {
       final ThaiSolarDate td = ThaiSolarDate(year: 2554, month: 6, day: 1, timezone: 'Etc/UTC');
-      expect(td.getWeekOfMonth(0), 1);
+      expect(td.getWeekOfMonth('en-US'), 1);
     });
     test('testThaiSolarDateGetWeekOfMonthUS', () {
       final ThaiSolarDate td = ThaiSolarDate(year: 2554, month: 5, day: 1, timezone: 'Etc/UTC');
-      expect(td.getWeekOfMonth(0), 1);
+      expect(td.getWeekOfMonth('en-US'), 1);
     });
     test('testThaiSolarDateGetWeekOfMonthDE', () {
       // de-DE: firstDayOfWeek = 1 (Monday)
       final ThaiSolarDate td = ThaiSolarDate(year: 2554, month: 5, day: 1, timezone: 'Etc/UTC');
-      expect(td.getWeekOfMonth(1), 0);
+      expect(td.getWeekOfMonth('de-DE'), 0);
     });
   });
 
@@ -506,23 +476,25 @@ void main() {
   group('ThaiSolarDate getTimeZone', () {
     test('testThaiSolarDateInitWithUnixTimeRightTimeZone', () {
       final ThaiSolarDate td = ThaiSolarDate(unixtime: 0);
-      expect(td.timezone, 'local');
+      expect(td.getTimeZone(), 'local');
     });
     test('testThaiSolarDateInitWithJDRightTimeZone', () {
       final ThaiSolarDate td = ThaiSolarDate(julianDay: 0);
-      expect(td.timezone, 'local');
+      expect(td.getTimeZone(), 'local');
     });
     test('testThaiSolarDateInitWithRDRightTimeZone', () {
       final ThaiSolarDate td = ThaiSolarDate(rd: 0);
-      expect(td.timezone, 'local');
+      expect(td.getTimeZone(), 'local');
     });
   });
 
   group('ThaiSolarDate round-trip construction', () {
     test('testThaiSolarDateRoundTripConstruction', () {
-      final ThaiSolarDate td = ThaiSolarDate(year: 2557, month: 11, day: 3);
+      final ThaiSolarDate td =
+          ThaiSolarDate(year: 2557, month: 11, day: 3, timezone: 'local');
       final int u = td.getTime();
-      final ThaiSolarDate td2 = ThaiSolarDate(unixtime: u);
+      final ThaiSolarDate td2 = ThaiSolarDate(unixtime: u, timezone: 'local');
+      expect(td2.getTimeZone(), td.getTimeZone());
       expect(td2.getYears(), td.getYears());
       expect(td2.getMonths(), td.getMonths());
       expect(td2.getDays(), td.getDays());
@@ -535,7 +507,7 @@ void main() {
           ThaiSolarDate(year: 2557, month: 11, day: 3, timezone: 'America/Los_Angeles');
       final int u = td.getTime();
       final ThaiSolarDate td2 = ThaiSolarDate(unixtime: u, timezone: 'America/Los_Angeles');
-      expect(td2.timezone, td.timezone);
+      expect(td2.getTimeZone(), td.getTimeZone());
       expect(td2.getYears(), td.getYears());
       expect(td2.getMonths(), td.getMonths());
       expect(td2.getDays(), td.getDays());
@@ -549,7 +521,8 @@ void main() {
     test('testThaiSolarDateCurrentTimeWithTimeZone', () {
       final ThaiSolarDate td = ThaiSolarDate(timezone: 'America/Los_Angeles');
       final int now = DateTime.now().millisecondsSinceEpoch;
-      expect((td.getTime() - now).abs(), lessThan(50));
+      // JS roughlyEqual(td.getTime(), d.getTime(), 30).
+      expect((td.getTime() - now).abs(), lessThan(30));
     });
   });
 
@@ -876,11 +849,11 @@ void main() {
     test('testThaiSolarDateGetTimeZone', () {
       final ThaiSolarDate td =
           ThaiSolarDate(year: 2554, month: 3, day: 8, timezone: 'America/Los_Angeles');
-      expect(td.timezone, 'America/Los_Angeles');
+      expect(td.getTimeZone(), 'America/Los_Angeles');
     });
     test('testThaiSolarDateGetTimeZoneDefault', () {
       final ThaiSolarDate td = ThaiSolarDate(year: 2554, month: 3, day: 8);
-      expect(td.timezone, 'local');
+      expect(td.getTimeZone(), 'local');
     });
   });
 
@@ -891,11 +864,11 @@ void main() {
 
     test('testThaiSolarDateGetTimeZoneByLocale', () {
       final ThaiSolarDate td = ThaiSolarDate(year: 2554, month: 3, day: 8, locale: 'de-DE');
-      expect(td.timezone, 'Europe/Berlin');
+      expect(td.getTimeZone(), 'Europe/Berlin');
     });
     test('testThaiSolarDateGetTimeZoneByLocaleBogus', () {
       final ThaiSolarDate td = ThaiSolarDate(year: 2554, month: 3, day: 8, locale: 'zz-ZZ');
-      expect(td.timezone, 'Etc/UTC');
+      expect(td.getTimeZone(), 'Etc/UTC');
     });
   });
 

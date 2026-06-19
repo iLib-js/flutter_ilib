@@ -169,6 +169,6 @@ class JulianDate extends ILibCalendarDate {
 
   @override
   JulianDate newDateFromRd(double rd) {
-    return JulianDate(rd: rd);
+    return JulianDate(rd: rd, timezone: _timezone);
   }
 }

@@ -173,6 +173,6 @@ class ThaiSolarDate extends ILibCalendarDate {
 
   @override
   ThaiSolarDate newDateFromRd(double rd) {
-    return ThaiSolarDate(rd: rd);
+    return ThaiSolarDate(rd: rd, timezone: _timezone);
   }
 }
