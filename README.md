@@ -1,8 +1,14 @@
 # flutter_ilib
 
-A wrapper plugin to conveniently use [iLib](https://github.com/iLib-js/iLib) in Flutter app.  
-The iLib is an internationalization library written in pure JavaScript.  
-This plugin uses the [flutter_js](https://pub.dev/packages/flutter_js) to make the JavaScript file work properly in the Flutter app.
+A Flutter plugin that brings [iLib](https://github.com/iLib-js/iLib)'s internationalization (i18n)
+to Flutter apps — locale-aware date/number/duration formatting, calendars, case mapping, and
+locale information.
+
+- **v1.x**: ran the iLib JavaScript library through the
+  [flutter_js](https://pub.dev/packages/flutter_js) engine.
+- **v2.0+**: the JavaScript interop is removed. flutter_ilib is implemented in pure Dart and reads
+  iLib's CLDR-based locale data (JSON) directly, so no JavaScript runtime (and no `flutter_js`
+  dependency) is needed.
 
 ## 📚 Documentation
 
@@ -96,11 +102,10 @@ fmt.format(dateOptions);
 // '2024년 6월 27일 오전 10:42'
 ```
 
-> **Note on `timezone: 'local'`:** in this Dart port, `'local'`, `'Etc/UTC'`, and an
-> omitted timezone are currently treated identically — all UTC (offset 0). This differs
-> from iLib's JS, where `'local'` is the device's system time zone. See
-> [docs/local-timezone-support.md](docs/local-timezone-support.md) for details and the
-> path to full system-timezone support.
+> **Note on `timezone: 'local'`:** `'local'` resolves to the device's DST-aware system time
+> zone (matching iLib's JS), so it differs from `'Etc/UTC'` on a non-UTC host. An omitted
+> timezone defaults to `'local'`. See
+> [docs/local-timezone-support.md](docs/local-timezone-support.md) for details.
 
 ### Duration Formatting
 
@@ -285,17 +290,21 @@ vi-VN,zh-Hans-CN,zh-Hant-HK,zh-Hant-TW
 
 ## TEST
 ### Run the Unit Test
-On Linux, you need to export an environment variable called `LIBQUICKJSC_TEST_PATH` pointing to the file `libquickjs_c_bridge_plugin.so`.
+
+**v2.0+**: tests run in pure Dart — no JavaScript bridge or environment variable is required.
+
+```
+flutter test
+```
+
+**v1.x**: required a QuickJS bridge. On Linux you had to export `LIBQUICKJSC_TEST_PATH` pointing to
+`libquickjs_c_bridge_plugin.so` before running the tests:
 
 ```
 export LIBQUICKJSC_TEST_PATH="${PWD}/test/linux/libquickjs_c_bridge_plugin.so"
 flutter test test/flutter_ilib_test.dart
 ```
-We have the script file for the above works to do everything at once.
 
-```
-./execute_unit_test.sh
-```
 > **Note**  
 > Logging behavior has been updated and logs are printed by default during tests.  
 > To suppress verbose logs during testing, add `--dart-define=TEST_MODE=true` option.  
