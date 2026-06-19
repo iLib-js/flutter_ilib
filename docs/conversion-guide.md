@@ -134,6 +134,6 @@ Each JSON file may contain multiple `ilib.data.*` keys. After loading, they are 
 - Original JS source: https://github.com/iLib-js/iLib → `js/lib/`
 - Original JS tests: https://github.com/iLib-js/iLib → `js/test/`
 - Local `ilib_js/` — JS source copy (for quick reference only)
-- `assets/locale/` — 218 JSON locale data files (based on iLib v14.21.0)
+- `assets/locale/` — hierarchical JSON locale data covering the supported locales (root → lang → region → lang-region; ~251 files), generated from iLib v14.21.0
 - `docs/architecture.md` — full architecture documentation
 - `test/` — existing tests (for post-conversion verification)

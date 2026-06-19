@@ -212,3 +212,51 @@ lib/
     +-- julian_cal.dart / julian_date.dart / julian_rata_die.dart
     +-- thaisolar_cal.dart / thaisolar_date.dart / thaisolar_rata_die.dart
 ```
+
+## Testing: which classes need data loading
+
+Pure-math classes have no `ilib.data.*` dependency, so their tests run as plain unit tests —
+**no** `loadJSON`/`loadILibLocaleData` and **no** `TestWidgetsFlutterBinding.ensureInitialized()`:
+
+- `Cal` classes (`GregorianCal`, …) — `getMonLength`/`isLeapYear`/`getNumMonths`
+- `RataDie` classes — RD/JD math
+- `JulianDay` helper
+
+e.g. `testgregorian_test.dart`, `testgregratadie_test.dart`, `testjulianday_test.dart` load nothing.
+
+Exceptions (these tests DO load / need the binding):
+- **`ILibAstro`** reads `ilib.data.astro` (equinox/nutation coefficients) → astro tests load.
+- **Calendar *date* classes** are not pure — a no-timezone date samples the system `'local'`
+  zone, and locale-bearing dates resolve a timezone — so their tests load locale data and/or pin
+  `timezone: 'Etc/UTC'` for determinism.
+
+## Critical rules (must follow when editing calendar/date/timezone code)
+
+- **Weekday offset** — `getDayOfWeek()` AND `onOrBefore()/onOrAfter()/before()/after()` MUST pass
+  `offset: tzOffsetDays` to the `RataDie` call (`_onOrBefore(rd+offset, dow) - offset`) so the
+  weekday is evaluated in wall-clock time. Omitting it evaluates in UTC and silently diverges from
+  JS for tz-aware dates near UTC midnight (LA/Seoul).
+- **Format calendar-dependent tokens with the formatter's calendar** — Dart calendar date classes
+  preserve raw display components on the from-components path (no `_calcDateComponents()`,
+  JS-identical: `GregorianDate(2011, 2, 29).getDays() == 29`); `_calcDateComponents()` runs only on
+  the julianDay/rd/unixtime path. The computed *instant* still reflects the calendar arithmetic
+  (Feb 29 → Mar 1's rd), which is correct. In DateFmt same-calendar formatting, return
+  `ILibDateOptions` as-is and compute calendar-dependent tokens (day-of-week, week-of-year, era…)
+  via `_getCalendarDate()` with the *formatter's* calendar — do NOT route through `_toCalendarDate()`
+  (it defaults to `'gregorian'` and mis-reads a non-gregorian date, e.g. ThaiSolar 2554 as Gregorian
+  2554). See `calendar-conversion.md`.
+- **Formatter calendar fallback** — `_toCalendarDate()` defaults to `'gregorian'` when
+  `type`/`calendar` are null; `_formatTemplate` must use the *formatter's* calendar (`_calName`),
+  not gregorian, for calendar-dependent tokens (else ThaiSolar 2554 reads as Gregorian).
+- **Base classes** — shared logic goes in `ILibRataDie`/`ILibCalendarDate` (9 subclasses `extends`
+  and inherit); never duplicate across the 9.
+- **Constructor pattern** — params `year?…millisecond?, julianDay?, rd?, unixtime?, locale?,
+  timezone?, dst?`. `locale` derives tz via `ILibLocaleInfo(locale).getTimeZone()` (explicit
+  `timezone` wins). No-arg (ALL params null) → `DateTime.now()`; one component given → rest 1/1/1.
+- **ThaiSolar year = Gregorian + 543** — `ThaiSolarRataDie` subtracts 543, computing via Gregorian RD.
+- **`'local'` = the DST-aware system timezone** — omitting `timezone` resolves to the system zone
+  (machine/`TZ`-dependent), NOT UTC; only `null` tz AND `null` locale stays UTC (a locale forwards
+  its zone). `'local'` ≠ `'Etc/UTC'` on non-UTC hosts, so tests needing determinism set
+  `timezone: 'Etc/UTC'` (the ~600 calendar constructions do). `inDaylightTime` is instant-based; the
+  `dst` flag disambiguates the DST-end overlap; `'local'` tests use injectable hooks. See
+  `local-timezone-support.md`.

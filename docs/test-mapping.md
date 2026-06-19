@@ -4,6 +4,11 @@ Mapping table showing which iLib JS test file (`github.com/iLib-js/iLib`) each f
 
 JS source path base: `js/test/`
 
+Scope: this covers the pure-Dart classes. The 4 classes still on JS interop — `ILibCountry`,
+`ILibScriptInfo`, `ILibNumFmt`, `ILibDurationFmt` — and their tests (`test/country/`,
+`test/scriptinfo/`, `test/numfmt/`, `test/durfmt/`) are not mapped here until those classes are
+converted.
+
 ## Calendar Tests
 
 | Dart Test File | iLib JS Source File | Notes |
@@ -30,6 +35,8 @@ JS source path base: `js/test/`
 | `test/calendar/testpersiandateastro_test.dart` | `js/test/calendar/testpersiandateastro.js` | PersianDate (astronomical, equinox-based) |
 
 | `test/calendar/testcalendar_test.dart` | `js/test/calendar/testcalendar.js` | ILibCalendar factory: invalid input, getCalendars, type-based and locale-based (`fromLocale`) construction |
+| `test/calendar/testastro_test.dart` | `js/test/calendar/testastro.js` | ILibAstro (ephemerisCorrection / julianCenturies / nutation / aberration / solar & lunar longitude / new-moon); each test loops `testDatesAstro1/2` with `roughlyEqual` tolerances |
+| `test/calendar/testcalendar_extra_test.dart` | — | flutter_ilib-specific (empty-string/`han` throw edge cases; a factory-built calendar is functional) |
 | `test/calendar/testcopticdate_extra_test.dart` | — | flutter_ilib-specific (getDayOfYear, getEra, getCalendar) |
 | `test/calendar/testgregoriandate_extra_test.dart` | — | flutter_ilib-specific (getCalendar) |
 | `test/calendar/testethiopicdate_extra_test.dart` | — | flutter_ilib-specific (getCalendar) |
