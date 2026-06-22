@@ -20,12 +20,20 @@ class JulianDate extends ILibCalendarDate {
       String? locale,
       String? timezone,
       bool? dst}) {
-    _timezone =
-        timezone ?? (locale != null ? ILibLocaleInfo(locale).getTimeZone() : null);
+    _timezone = timezone ??
+        (locale != null ? ILibLocaleInfo(locale).getTimeZone() : null);
     this.dst = dst;
-    final bool fromComponents = julianDay == null && rd == null && unixtime == null &&
-        ILibRataDie.hasDateComponents(year: year, month: month, day: day,
-            hour: hour, minute: minute, second: second, millisecond: millisecond);
+    final bool fromComponents = julianDay == null &&
+        rd == null &&
+        unixtime == null &&
+        ILibRataDie.hasDateComponents(
+            year: year,
+            month: month,
+            day: day,
+            hour: hour,
+            minute: minute,
+            second: second,
+            millisecond: millisecond);
     if (fromComponents) {
       _year = year ?? 0;
       _month = month ?? 1;
@@ -35,22 +43,52 @@ class JulianDate extends ILibCalendarDate {
       _second = second ?? 0;
       _millisecond = millisecond ?? 0;
       _rataDie = JulianRataDie(
-          year: year, month: month, day: day, hour: hour,
-          minute: minute, second: second, millisecond: millisecond);
-      _rataDie = JulianRataDie(rataDie: adjustRdForTimezone(_rataDie.getRataDie()));
+          year: year,
+          month: month,
+          day: day,
+          hour: hour,
+          minute: minute,
+          second: second,
+          millisecond: millisecond);
+      _rataDie =
+          JulianRataDie(rataDie: adjustRdForTimezone(_rataDie.getRataDie()));
     } else {
-      _rataDie = JulianRataDie(
-          julianDay: julianDay, rataDie: rd, unixtime: unixtime);
+      _rataDie =
+          JulianRataDie(julianDay: julianDay, rataDie: rd, unixtime: unixtime);
       _calcDateComponents();
     }
   }
 
   static final JulianCal _cal = JulianCal();
   static const List<int> _cumMonthLengths = <int>[
-    0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365
+    0,
+    31,
+    59,
+    90,
+    120,
+    151,
+    181,
+    212,
+    243,
+    273,
+    304,
+    334,
+    365
   ];
   static const List<int> _cumMonthLengthsLeap = <int>[
-    0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366
+    0,
+    31,
+    60,
+    91,
+    121,
+    152,
+    182,
+    213,
+    244,
+    274,
+    305,
+    335,
+    366
   ];
 
   late JulianRataDie _rataDie;
@@ -81,7 +119,8 @@ class JulianDate extends ILibCalendarDate {
     final int dayOfYear = rdFloor - yearStart;
 
     final bool isLeap = _cal.isLeapYear(_year);
-    final List<int> cumLengths = isLeap ? _cumMonthLengthsLeap : _cumMonthLengths;
+    final List<int> cumLengths =
+        isLeap ? _cumMonthLengthsLeap : _cumMonthLengths;
 
     _month = 1;
     for (int i = cumLengths.length - 1; i >= 1; i--) {

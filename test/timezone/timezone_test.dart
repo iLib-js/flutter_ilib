@@ -220,36 +220,21 @@ void main() {
     test('testTZDisplayNameNoLetterForDST', () {
       final ILibTimeZone tz = ILibTimeZone('Europe/Berlin');
       final ILibDateOptions gd = ILibDateOptions(
-          year: 2011,
-          month: 12,
-          day: 29,
-          hour: 13,
-          minute: 45,
-          second: 37);
+          year: 2011, month: 12, day: 29, hour: 13, minute: 45, second: 37);
       expect(tz.getDisplayName(gd, 'standard'), 'CET');
     });
 
     test('testTZDisplayNameStandardID', () {
       final ILibTimeZone tz = ILibTimeZone('Asia/Jakarta');
       final ILibDateOptions gd = ILibDateOptions(
-          year: 2011,
-          month: 12,
-          day: 29,
-          hour: 13,
-          minute: 45,
-          second: 37);
+          year: 2011, month: 12, day: 29, hour: 13, minute: 45, second: 37);
       expect(tz.getDisplayName(gd, 'standard'), 'WIB');
     });
 
     test('testTZDisplayNameLongID', () {
       final ILibTimeZone tz = ILibTimeZone('Asia/Jakarta');
       final ILibDateOptions gd = ILibDateOptions(
-          year: 2011,
-          month: 12,
-          day: 29,
-          hour: 13,
-          minute: 45,
-          second: 37);
+          year: 2011, month: 12, day: 29, hour: 13, minute: 45, second: 37);
       expect(tz.getDisplayName(gd, 'long'), 'SE Asia Standard Time');
     });
 
@@ -258,7 +243,11 @@ void main() {
       // this is in the magic overlap hour at the end of DST
       final ILibDateOptions gd = ILibDateOptions(
           timezone: 'America/Los_Angeles',
-          year: 2014, month: 11, day: 2, hour: 1, minute: 30,
+          year: 2014,
+          month: 11,
+          day: 2,
+          hour: 1,
+          minute: 30,
           dst: false);
       expect(tz.getDisplayName(gd, 'standard'), 'PST');
     });
@@ -268,7 +257,11 @@ void main() {
       // this is in the magic overlap hour at the end of DST
       final ILibDateOptions gd = ILibDateOptions(
           timezone: 'America/Los_Angeles',
-          year: 2014, month: 11, day: 2, hour: 1, minute: 30,
+          year: 2014,
+          month: 11,
+          day: 2,
+          hour: 1,
+          minute: 30,
           dst: true);
       expect(tz.getDisplayName(gd, 'standard'), 'PDT');
     });
@@ -322,7 +315,12 @@ void main() {
     test('testTZGetOffsetRightAfterDST', () {
       final ILibTimeZone tz = ILibTimeZone('America/Los_Angeles');
       final ILibDateOptions gd = ILibDateOptions(
-          year: 2014, month: 3, day: 9, hour: 3, minute: 1, second: 0,
+          year: 2014,
+          month: 3,
+          day: 9,
+          hour: 3,
+          minute: 1,
+          second: 0,
           timezone: 'America/Los_Angeles');
       expect(tz.getOffset(gd), <String, int>{'h': -7});
     });
@@ -376,7 +374,12 @@ void main() {
     test('testTZInDaylightTimeTrue', () {
       final ILibTimeZone tz = ILibTimeZone('America/Los_Angeles');
       final ILibDateOptions gd = ILibDateOptions(
-          year: 2011, month: 7, day: 1, hour: 0, minute: 0, second: 0,
+          year: 2011,
+          month: 7,
+          day: 1,
+          hour: 0,
+          minute: 0,
+          second: 0,
           timezone: 'America/Los_Angeles');
       expect(tz.inDaylightTime(gd), true);
     });
@@ -384,7 +387,12 @@ void main() {
     test('testTZInDaylightTimeFalse', () {
       final ILibTimeZone tz = ILibTimeZone('America/Los_Angeles');
       final ILibDateOptions gd = ILibDateOptions(
-          year: 2011, month: 12, day: 1, hour: 0, minute: 0, second: 0,
+          year: 2011,
+          month: 12,
+          day: 1,
+          hour: 0,
+          minute: 0,
+          second: 0,
           timezone: 'America/Los_Angeles');
       expect(tz.inDaylightTime(gd), false);
     });
@@ -394,7 +402,12 @@ void main() {
       // JS passes a bogus timezone on the date; it falls back to UTC and is
       // irrelevant because the America/Phoenix zone itself has no DST.
       final ILibDateOptions gd = ILibDateOptions(
-          year: 2011, month: 7, day: 1, hour: 0, minute: 0, second: 0,
+          year: 2011,
+          month: 7,
+          day: 1,
+          hour: 0,
+          minute: 0,
+          second: 0,
           timezone: 'Australia/Phoenix');
       expect(tz.inDaylightTime(gd), false);
     });
@@ -409,7 +422,12 @@ void main() {
     test('testTZInDaylightTimeJustBeforeStart', () {
       final ILibTimeZone tz = ILibTimeZone('America/Los_Angeles');
       final ILibDateOptions gd = ILibDateOptions(
-          year: 2011, month: 3, day: 13, hour: 1, minute: 59, second: 59,
+          year: 2011,
+          month: 3,
+          day: 13,
+          hour: 1,
+          minute: 59,
+          second: 59,
           timezone: 'America/Los_Angeles');
       expect(tz.inDaylightTime(gd), false);
     });
@@ -417,7 +435,12 @@ void main() {
     test('testTZInDaylightTimeJustAfterStart', () {
       final ILibTimeZone tz = ILibTimeZone('America/Los_Angeles');
       final ILibDateOptions gd = ILibDateOptions(
-          year: 2011, month: 3, day: 13, hour: 2, minute: 0, second: 0,
+          year: 2011,
+          month: 3,
+          day: 13,
+          hour: 2,
+          minute: 0,
+          second: 0,
           timezone: 'America/Los_Angeles');
       expect(tz.inDaylightTime(gd), true);
     });
@@ -425,7 +448,12 @@ void main() {
     test('testTZInDaylightTimeJustBeforeEnd', () {
       final ILibTimeZone tz = ILibTimeZone('America/Los_Angeles');
       final ILibDateOptions gd = ILibDateOptions(
-          year: 2014, month: 11, day: 2, hour: 1, minute: 59, second: 59,
+          year: 2014,
+          month: 11,
+          day: 2,
+          hour: 1,
+          minute: 59,
+          second: 59,
           timezone: 'America/Los_Angeles');
       expect(tz.inDaylightTime(gd), true);
     });
@@ -433,7 +461,12 @@ void main() {
     test('testTZInDaylightTimeJustAfterEnd', () {
       final ILibTimeZone tz = ILibTimeZone('America/Los_Angeles');
       final ILibDateOptions gd = ILibDateOptions(
-          year: 2014, month: 11, day: 2, hour: 2, minute: 0, second: 0,
+          year: 2014,
+          month: 11,
+          day: 2,
+          hour: 2,
+          minute: 0,
+          second: 0,
           timezone: 'America/Los_Angeles');
       expect(tz.inDaylightTime(gd), false);
     });
@@ -441,7 +474,12 @@ void main() {
     test('testTZInDaylightTimeJustBeforeStartDownUnder', () {
       final ILibTimeZone tz = ILibTimeZone('Australia/Sydney');
       final ILibDateOptions gd = ILibDateOptions(
-          year: 2014, month: 10, day: 5, hour: 1, minute: 59, second: 59,
+          year: 2014,
+          month: 10,
+          day: 5,
+          hour: 1,
+          minute: 59,
+          second: 59,
           timezone: 'Australia/Sydney');
       expect(tz.inDaylightTime(gd), false);
     });
@@ -449,7 +487,12 @@ void main() {
     test('testTZInDaylightTimeJustAfterStartDownUnder', () {
       final ILibTimeZone tz = ILibTimeZone('Australia/Sydney');
       final ILibDateOptions gd = ILibDateOptions(
-          year: 2014, month: 10, day: 5, hour: 2, minute: 0, second: 0,
+          year: 2014,
+          month: 10,
+          day: 5,
+          hour: 2,
+          minute: 0,
+          second: 0,
           timezone: 'Australia/Sydney');
       expect(tz.inDaylightTime(gd), true);
     });
@@ -457,7 +500,12 @@ void main() {
     test('testTZInDaylightTimeJustBeforeEndDownUnder', () {
       final ILibTimeZone tz = ILibTimeZone('Australia/Sydney');
       final ILibDateOptions gd = ILibDateOptions(
-          year: 2011, month: 4, day: 3, hour: 2, minute: 59, second: 59,
+          year: 2011,
+          month: 4,
+          day: 3,
+          hour: 2,
+          minute: 59,
+          second: 59,
           timezone: 'Australia/Sydney');
       expect(tz.inDaylightTime(gd), true);
     });
@@ -465,7 +513,12 @@ void main() {
     test('testTZInDaylightTimeJustAfterEndDownUnder', () {
       final ILibTimeZone tz = ILibTimeZone('Australia/Sydney');
       final ILibDateOptions gd = ILibDateOptions(
-          year: 2011, month: 4, day: 3, hour: 3, minute: 0, second: 0,
+          year: 2011,
+          month: 4,
+          day: 3,
+          hour: 3,
+          minute: 0,
+          second: 0,
           timezone: 'Australia/Sydney');
       expect(tz.inDaylightTime(gd), false);
     });
@@ -519,10 +572,20 @@ void main() {
     test('testTZLinkedZonesInDST', () {
       final ILibTimeZone tz = ILibTimeZone('Europe/Zagreb');
       final ILibDateOptions jan1 = ILibDateOptions(
-          year: 2014, month: 1, day: 1, hour: 0, minute: 0, second: 0,
+          year: 2014,
+          month: 1,
+          day: 1,
+          hour: 0,
+          minute: 0,
+          second: 0,
           timezone: 'Etc/UTC');
       final ILibDateOptions jul1 = ILibDateOptions(
-          year: 2014, month: 7, day: 1, hour: 0, minute: 0, second: 0,
+          year: 2014,
+          month: 7,
+          day: 1,
+          hour: 0,
+          minute: 0,
+          second: 0,
           timezone: 'Etc/UTC');
       expect(tz.inDaylightTime(jan1), false);
       expect(tz.inDaylightTime(jul1), true);
@@ -531,10 +594,20 @@ void main() {
     test('testTZLinkedZonesRightOffset', () {
       final ILibTimeZone tz = ILibTimeZone('Europe/Zagreb');
       final ILibDateOptions jan1 = ILibDateOptions(
-          year: 2014, month: 1, day: 1, hour: 0, minute: 0, second: 0,
+          year: 2014,
+          month: 1,
+          day: 1,
+          hour: 0,
+          minute: 0,
+          second: 0,
           timezone: 'Etc/UTC');
       final ILibDateOptions jul1 = ILibDateOptions(
-          year: 2014, month: 7, day: 1, hour: 0, minute: 0, second: 0,
+          year: 2014,
+          month: 7,
+          day: 1,
+          hour: 0,
+          minute: 0,
+          second: 0,
           timezone: 'Etc/UTC');
       expect(tz.getOffset(jan1), <String, int>{'h': 1});
       expect(tz.getOffset(jul1), <String, int>{'h': 2});
@@ -548,10 +621,20 @@ void main() {
     test('testTZLinkedZonesInDST2', () {
       final ILibTimeZone tz = ILibTimeZone('Europe/Bratislava');
       final ILibDateOptions jan1 = ILibDateOptions(
-          year: 2014, month: 1, day: 1, hour: 0, minute: 0, second: 0,
+          year: 2014,
+          month: 1,
+          day: 1,
+          hour: 0,
+          minute: 0,
+          second: 0,
           timezone: 'Etc/UTC');
       final ILibDateOptions jul1 = ILibDateOptions(
-          year: 2014, month: 7, day: 1, hour: 0, minute: 0, second: 0,
+          year: 2014,
+          month: 7,
+          day: 1,
+          hour: 0,
+          minute: 0,
+          second: 0,
           timezone: 'Etc/UTC');
       expect(tz.inDaylightTime(jan1), false);
       expect(tz.inDaylightTime(jul1), true);
@@ -560,10 +643,20 @@ void main() {
     test('testTZLinkedZonesRightOffset2', () {
       final ILibTimeZone tz = ILibTimeZone('Europe/Bratislava');
       final ILibDateOptions jan1 = ILibDateOptions(
-          year: 2014, month: 1, day: 1, hour: 0, minute: 0, second: 0,
+          year: 2014,
+          month: 1,
+          day: 1,
+          hour: 0,
+          minute: 0,
+          second: 0,
           timezone: 'Etc/UTC');
       final ILibDateOptions jul1 = ILibDateOptions(
-          year: 2014, month: 7, day: 1, hour: 0, minute: 0, second: 0,
+          year: 2014,
+          month: 7,
+          day: 1,
+          hour: 0,
+          minute: 0,
+          second: 0,
           timezone: 'Etc/UTC');
       expect(tz.getOffset(jan1), <String, int>{'h': 1});
       expect(tz.getOffset(jul1), <String, int>{'h': 2});
@@ -858,21 +951,54 @@ void main() {
     test('testTZGetAvailableIdsByCountryRightContents', () {
       final List<String> zones = ILibTimeZone.getAvailableIds('US');
       const List<String> expected = <String>[
-        'America/New_York', 'America/Detroit', 'America/Kentucky/Louisville',
-        'America/Kentucky/Monticello', 'America/Indiana/Indianapolis',
-        'America/Indiana/Vincennes', 'America/Indiana/Winamac',
-        'America/Indiana/Marengo', 'America/Indiana/Petersburg',
-        'America/Indiana/Vevay', 'America/Chicago', 'America/Indiana/Tell_City',
-        'America/Indiana/Knox', 'America/Menominee', 'America/North_Dakota/Center',
-        'America/North_Dakota/New_Salem', 'America/North_Dakota/Beulah',
-        'America/Denver', 'America/Boise', 'America/Phoenix', 'America/Los_Angeles',
-        'America/Anchorage', 'America/Juneau', 'America/Sitka', 'America/Yakutat',
-        'America/Nome', 'America/Adak', 'America/Metlakatla', 'Pacific/Honolulu',
-        'America/Atka', 'America/Fort_Wayne', 'America/Indianapolis',
-        'America/Knox_IN', 'America/Louisville', 'America/Shiprock', 'Navajo',
-        'Pacific/Johnston', 'US/Alaska', 'US/Aleutian', 'US/Arizona', 'US/Central',
-        'US/East-Indiana', 'US/Eastern', 'US/Hawaii', 'US/Indiana-Starke',
-        'US/Michigan', 'US/Mountain', 'US/Pacific'
+        'America/New_York',
+        'America/Detroit',
+        'America/Kentucky/Louisville',
+        'America/Kentucky/Monticello',
+        'America/Indiana/Indianapolis',
+        'America/Indiana/Vincennes',
+        'America/Indiana/Winamac',
+        'America/Indiana/Marengo',
+        'America/Indiana/Petersburg',
+        'America/Indiana/Vevay',
+        'America/Chicago',
+        'America/Indiana/Tell_City',
+        'America/Indiana/Knox',
+        'America/Menominee',
+        'America/North_Dakota/Center',
+        'America/North_Dakota/New_Salem',
+        'America/North_Dakota/Beulah',
+        'America/Denver',
+        'America/Boise',
+        'America/Phoenix',
+        'America/Los_Angeles',
+        'America/Anchorage',
+        'America/Juneau',
+        'America/Sitka',
+        'America/Yakutat',
+        'America/Nome',
+        'America/Adak',
+        'America/Metlakatla',
+        'Pacific/Honolulu',
+        'America/Atka',
+        'America/Fort_Wayne',
+        'America/Indianapolis',
+        'America/Knox_IN',
+        'America/Louisville',
+        'America/Shiprock',
+        'Navajo',
+        'Pacific/Johnston',
+        'US/Alaska',
+        'US/Aleutian',
+        'US/Arizona',
+        'US/Central',
+        'US/East-Indiana',
+        'US/Eastern',
+        'US/Hawaii',
+        'US/Indiana-Starke',
+        'US/Michigan',
+        'US/Mountain',
+        'US/Pacific'
       ];
       expect(zones.toSet(), expected.toSet());
     });
@@ -930,7 +1056,12 @@ void main() {
     test('testTZInDaylightTimeLocalTrue', () {
       final ILibTimeZone tz = ILibTimeZone('local');
       final ILibDateOptions gd = ILibDateOptions(
-          year: 2011, month: 7, day: 1, hour: 0, minute: 0, second: 0,
+          year: 2011,
+          month: 7,
+          day: 1,
+          hour: 0,
+          minute: 0,
+          second: 0,
           timezone: 'local');
       expect(tz.inDaylightTime(gd), true);
     });
@@ -938,7 +1069,12 @@ void main() {
     test('testTZInDaylightTimeLocalFalse', () {
       final ILibTimeZone tz = ILibTimeZone('local');
       final ILibDateOptions gd = ILibDateOptions(
-          year: 2011, month: 12, day: 1, hour: 0, minute: 0, second: 0,
+          year: 2011,
+          month: 12,
+          day: 1,
+          hour: 0,
+          minute: 0,
+          second: 0,
           timezone: 'local');
       expect(tz.inDaylightTime(gd), false);
     });

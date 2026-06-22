@@ -70,7 +70,8 @@ class ILibLoader extends ChangeNotifier {
     }
     if (_availableAssets.isNotEmpty &&
         !_availableAssets.contains(path) &&
-        !_availableAssets.contains(path.replaceFirst('packages/flutter_ilib/', ''))) {
+        !_availableAssets
+            .contains(path.replaceFirst('packages/flutter_ilib/', ''))) {
       return null;
     }
     try {

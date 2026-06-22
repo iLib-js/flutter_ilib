@@ -33,7 +33,8 @@ abstract class ILibRataDie {
 
   static double nowToRd(double epoch) {
     return unixTimeToRd(DateTime.now().millisecondsSinceEpoch) +
-        1721424.5 - epoch;
+        1721424.5 -
+        epoch;
   }
 
   static bool hasDateComponents(

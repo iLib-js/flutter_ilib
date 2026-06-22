@@ -48,7 +48,8 @@ void main() {
     for (int i = 0; i < testDates.length; i++) {
       final List<num> td = testDates[i];
       test('JD ${td[0]} gives year ${td[1]}, month ${td[2]}, day ${td[3]}', () {
-        final PersianDate d = PersianDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
+        final PersianDate d =
+            PersianDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
         expect(d.getYears(), td[1] as int);
         expect(d.getMonths(), td[2] as int);
         expect(d.getDays(), td[3] as int);
@@ -64,7 +65,8 @@ void main() {
     for (int i = 0; i < testDates.length; i++) {
       final List<num> td = testDates[i];
       test('${td[1]}/${td[2]}/${td[3]} dow=${td[8]}', () {
-        final PersianDate d = PersianDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
+        final PersianDate d =
+            PersianDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
         expect(d.getDayOfWeek(), td[8] as int);
       });
     }
@@ -74,7 +76,8 @@ void main() {
     test('testPersDateAstroConvert', () {
       for (int i = 0; i < testDates.length; i++) {
         final List<num> td = testDates[i];
-        final PersianDate pd = PersianDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
+        final PersianDate pd =
+            PersianDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
         expect(pd.getRataDie(), td[0].toDouble() - 1948319.5);
         expect(pd.getYears(), td[1] as int);
         expect(pd.getMonths(), td[2] as int);
@@ -126,7 +129,8 @@ void main() {
 
   group('PersianDate getTime', () {
     test('testPersDateAstroTestGetTimeZero', () {
-      final PersianDate pd = PersianDate(year: 1348, month: 10, day: 11, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1348, month: 10, day: 11, timezone: 'Etc/UTC');
       expect(pd.getTime(), 0);
     });
     test('testPersDateAstroTestGetTimeZeroJD', () {
@@ -134,16 +138,23 @@ void main() {
       expect(pd.getTime(), 0);
     });
     test('testPersDateAstroTestGetTime', () {
-      final PersianDate pd =
-          PersianDate(year: 1348, month: 10, day: 11, hour: 8, minute: 30, timezone: 'Etc/UTC');
+      final PersianDate pd = PersianDate(
+          year: 1348,
+          month: 10,
+          day: 11,
+          hour: 8,
+          minute: 30,
+          timezone: 'Etc/UTC');
       expect(pd.getTime(), 30600000);
     });
     test('testPersDateAstroTestGetTimeTooEarly', () {
-      final PersianDate pd = PersianDate(year: 1348, month: 10, day: 10, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1348, month: 10, day: 10, timezone: 'Etc/UTC');
       expect(pd.getTime(), -1);
     });
     test('testPersDateAstroTestGetTimeTooLate', () {
-      final PersianDate pd = PersianDate(year: 1416, month: 11, day: 1, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1416, month: 11, day: 1, timezone: 'Etc/UTC');
       expect(pd.getTime(), -1);
     });
   });
@@ -151,38 +162,45 @@ void main() {
   group('PersianDate onOrBefore', () {
     // 1388/9/27 is a Friday (dayOfWeek = 5)
     test('testPersDateAstroOnOrBeforeSun', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
       expect(pd.getDayOfWeek(), 5);
       final double rd = pd.getRataDie();
       expect(pd.onOrBefore(0).getRataDie(), rd - 5);
     });
     test('testPersDateAstroOnOrBeforeMon', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
       final double rd = pd.getRataDie();
       expect(pd.onOrBefore(1).getRataDie(), rd - 4);
     });
     test('testPersDateAstroOnOrBeforeTue', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
       final double rd = pd.getRataDie();
       expect(pd.onOrBefore(2).getRataDie(), rd - 3);
     });
     test('testPersDateAstroOnOrBeforeWed', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
       final double rd = pd.getRataDie();
       expect(pd.onOrBefore(3).getRataDie(), rd - 2);
     });
     test('testPersDateAstroOnOrBeforeThu', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
       final double rd = pd.getRataDie();
       expect(pd.onOrBefore(4).getRataDie(), rd - 1);
     });
     test('testPersDateAstroOnOrBeforeFri', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
       final double rd = pd.getRataDie();
       expect(pd.onOrBefore(5).getRataDie(), rd);
     });
     test('testPersDateAstroOnOrBeforeSat', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
       final double rd = pd.getRataDie();
       expect(pd.onOrBefore(6).getRataDie(), rd - 6);
     });
@@ -190,37 +208,44 @@ void main() {
 
   group('PersianDate onOrAfter', () {
     test('testPersDateAstroOnOrAfterSun', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
       final double rd = pd.getRataDie();
       expect(pd.onOrAfter(0).getRataDie(), rd + 2);
     });
     test('testPersDateAstroOnOrAfterMon', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
       final double rd = pd.getRataDie();
       expect(pd.onOrAfter(1).getRataDie(), rd + 3);
     });
     test('testPersDateAstroOnOrAfterTue', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
       final double rd = pd.getRataDie();
       expect(pd.onOrAfter(2).getRataDie(), rd + 4);
     });
     test('testPersDateAstroOnOrAfterWed', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
       final double rd = pd.getRataDie();
       expect(pd.onOrAfter(3).getRataDie(), rd + 5);
     });
     test('testPersDateAstroOnOrAfterThu', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
       final double rd = pd.getRataDie();
       expect(pd.onOrAfter(4).getRataDie(), rd + 6);
     });
     test('testPersDateAstroOnOrAfterFri', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
       final double rd = pd.getRataDie();
       expect(pd.onOrAfter(5).getRataDie(), rd);
     });
     test('testPersDateAstroOnOrAfterSat', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
       final double rd = pd.getRataDie();
       expect(pd.onOrAfter(6).getRataDie(), rd + 1);
     });
@@ -228,37 +253,44 @@ void main() {
 
   group('PersianDate before', () {
     test('testPersDateAstroBeforeSun', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
       final double rd = pd.getRataDie();
       expect(pd.before(0).getRataDie(), rd - 5);
     });
     test('testPersDateAstroBeforeMon', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
       final double rd = pd.getRataDie();
       expect(pd.before(1).getRataDie(), rd - 4);
     });
     test('testPersDateAstroBeforeTue', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
       final double rd = pd.getRataDie();
       expect(pd.before(2).getRataDie(), rd - 3);
     });
     test('testPersDateAstroBeforeWed', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
       final double rd = pd.getRataDie();
       expect(pd.before(3).getRataDie(), rd - 2);
     });
     test('testPersDateAstroBeforeThu', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
       final double rd = pd.getRataDie();
       expect(pd.before(4).getRataDie(), rd - 1);
     });
     test('testPersDateAstroBeforeFri', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
       final double rd = pd.getRataDie();
       expect(pd.before(5).getRataDie(), rd - 7);
     });
     test('testPersDateAstroBeforeSat', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
       final double rd = pd.getRataDie();
       expect(pd.before(6).getRataDie(), rd - 6);
     });
@@ -266,37 +298,44 @@ void main() {
 
   group('PersianDate after', () {
     test('testPersDateAstroAfterSun', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
       final double rd = pd.getRataDie();
       expect(pd.after(0).getRataDie(), rd + 2);
     });
     test('testPersDateAstroAfterMon', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
       final double rd = pd.getRataDie();
       expect(pd.after(1).getRataDie(), rd + 3);
     });
     test('testPersDateAstroAfterTue', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
       final double rd = pd.getRataDie();
       expect(pd.after(2).getRataDie(), rd + 4);
     });
     test('testPersDateAstroAfterWed', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
       final double rd = pd.getRataDie();
       expect(pd.after(3).getRataDie(), rd + 5);
     });
     test('testPersDateAstroAfterThu', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
       final double rd = pd.getRataDie();
       expect(pd.after(4).getRataDie(), rd + 6);
     });
     test('testPersDateAstroAfterFri', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
       final double rd = pd.getRataDie();
       expect(pd.after(5).getRataDie(), rd + 7);
     });
     test('testPersDateAstroAfterSat', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 9, day: 27, timezone: 'Etc/UTC');
       final double rd = pd.getRataDie();
       expect(pd.after(6).getRataDie(), rd + 1);
     });
@@ -304,15 +343,18 @@ void main() {
 
   group('PersianDate getWeekOfYear', () {
     test('testPersDateAstroTestGetWeekOfYearThisYear', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 2, day: 1, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 2, day: 1, timezone: 'Etc/UTC');
       expect(pd.getWeekOfYear(), 5);
     });
     test('testPersDateAstroTestGetWeekOfYearThisYear2', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 3, day: 19, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 3, day: 19, timezone: 'Etc/UTC');
       expect(pd.getWeekOfYear(), 12);
     });
     test('testPersDateAstroTestGetWeekOfYearThisYear3', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 12, day: 29, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 12, day: 29, timezone: 'Etc/UTC');
       expect(pd.getWeekOfYear(), 52);
     });
     test('testPersDateAstroTestGetWeekOfYearThisYearWithTime', () {
@@ -328,54 +370,66 @@ void main() {
       expect(pd.getWeekOfYear(), 52);
     });
     test('testPersDateAstroTestGetWeekOfYearPreviousYear', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 1, day: 1, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(pd.getWeekOfYear(), 53);
     });
     test('testPersDateAstroTestGetWeekOfYearLastWeekLeap', () {
-      final PersianDate pd = PersianDate(year: 1383, month: 12, day: 30, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1383, month: 12, day: 30, timezone: 'Etc/UTC');
       expect(pd.getWeekOfYear(), 1);
     });
     test('testPersDateAstroTestGetWeekOfYearLastWeekRegular1', () {
-      final PersianDate pd = PersianDate(year: 1389, month: 12, day: 29, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1389, month: 12, day: 29, timezone: 'Etc/UTC');
       expect(pd.getWeekOfYear(), 1);
     });
     test('testPersDateAstroTestGetWeekOfYearLastWeekRegular2', () {
-      final PersianDate pd = PersianDate(year: 1390, month: 12, day: 29, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1390, month: 12, day: 29, timezone: 'Etc/UTC');
       expect(pd.getWeekOfYear(), 1);
     });
     test('testPersDateAstroTestGetWeekOfYearLastWeekRegular3', () {
-      final PersianDate pd = PersianDate(year: 1391, month: 12, day: 30, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1391, month: 12, day: 30, timezone: 'Etc/UTC');
       expect(pd.getWeekOfYear(), 1);
     });
     test('testPersDateAstroTestGetWeekOfYearLastWeekRegular4', () {
-      final PersianDate pd = PersianDate(year: 1392, month: 12, day: 29, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1392, month: 12, day: 29, timezone: 'Etc/UTC');
       expect(pd.getWeekOfYear(), 53);
     });
     test('testPersDateAstroTestGetWeekOfYearLastWeekRegular5', () {
-      final PersianDate pd = PersianDate(year: 1393, month: 12, day: 29, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1393, month: 12, day: 29, timezone: 'Etc/UTC');
       expect(pd.getWeekOfYear(), 52);
     });
     test('testPersDateAstroTestGetWeekOfYearLastWeekRegular6', () {
-      final PersianDate pd = PersianDate(year: 1394, month: 12, day: 29, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1394, month: 12, day: 29, timezone: 'Etc/UTC');
       expect(pd.getWeekOfYear(), 52);
     });
   });
 
   group('PersianDate getDayOfYear', () {
     test('testPersDateAstroGetDayOfYearFirstDay', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 1, day: 1, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(pd.getDayOfYear(), 1);
     });
     test('testPersDateAstroGetDayOfYearMidYear', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 3, day: 17, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 3, day: 17, timezone: 'Etc/UTC');
       expect(pd.getDayOfYear(), 79);
     });
     test('testPersDateAstroGetDayOfYearLastDay', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 12, day: 29, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 12, day: 29, timezone: 'Etc/UTC');
       expect(pd.getDayOfYear(), 365);
     });
     test('testPersDateAstroGetDayOfYearLastDayLeapYear', () {
-      final PersianDate pd = PersianDate(year: 1387, month: 12, day: 30, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1387, month: 12, day: 30, timezone: 'Etc/UTC');
       expect(pd.getDayOfYear(), 366);
     });
   });
@@ -387,110 +441,136 @@ void main() {
       await ILibLoader.instance.loadILibLocaleData('fa-IR');
     });
     test('testPersDateAstroGetWeekOfMonth0', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 3, day: 1, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 3, day: 1, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('en-US'), 0);
     });
     test('testPersDateAstroGetWeekOfMonth1', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 3, day: 4, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 3, day: 4, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('en-US'), 1);
     });
     test('testPersDateAstroGetWeekOfMonth2', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 3, day: 11, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 3, day: 11, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('en-US'), 2);
     });
     test('testPersDateAstroGetWeekOfMonth3', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 3, day: 20, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 3, day: 20, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('en-US'), 3);
     });
     test('testPersDateAstroGetWeekOfMonth4', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 3, day: 29, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 3, day: 29, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('en-US'), 4);
     });
     test('testPersDateAstroGetWeekOfMonth5', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 3, day: 31, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 3, day: 31, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('en-US'), 5);
     });
     test('testPersDateAstroGetWeekOfMonth6', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 4, day: 1, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 4, day: 1, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('en-US'), 1);
     });
     test('testPersDateAstroGetWeekOfMonth7', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 5, day: 1, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 5, day: 1, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('en-US'), 0);
     });
     test('testPersDateAstroGetWeekOfMonth8', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 6, day: 1, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 6, day: 1, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('en-US'), 1);
     });
     test('testPersDateAstroGetWeekOfMonth9', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 7, day: 1, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 7, day: 1, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('en-US'), 1);
     });
     test('testPersDateAstroGetWeekOfMonthIR0', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 3, day: 1, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 3, day: 1, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('fa-IR'), 0);
     });
     test('testPersDateAstroGetWeekOfMonthIR1', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 3, day: 4, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 3, day: 4, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('fa-IR'), 1);
     });
     test('testPersDateAstroGetWeekOfMonthIR2', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 3, day: 11, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 3, day: 11, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('fa-IR'), 2);
     });
     test('testPersDateAstroGetWeekOfMonthIR3', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 3, day: 20, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 3, day: 20, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('fa-IR'), 3);
     });
     test('testPersDateAstroGetWeekOfMonthIR4', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 3, day: 29, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 3, day: 29, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('fa-IR'), 4);
     });
     test('testPersDateAstroGetWeekOfMonthIR5', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 3, day: 31, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 3, day: 31, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('fa-IR'), 5);
     });
     test('testPersDateAstroGetWeekOfMonthIR6', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 4, day: 1, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 4, day: 1, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('fa-IR'), 1);
     });
     test('testPersDateAstroGetWeekOfMonthIR7', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 5, day: 1, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 5, day: 1, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('fa-IR'), 0);
     });
     test('testPersDateAstroGetWeekOfMonthIR8', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 6, day: 1, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 6, day: 1, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('fa-IR'), 1);
     });
     test('testPersDateAstroGetWeekOfMonthIR9', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 7, day: 1, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 7, day: 1, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('fa-IR'), 0);
     });
     test('testPersDateAstroGetWeekOfMonthUS', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 8, day: 1, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 8, day: 1, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('en-US'), 0);
     });
     test('testPersDateAstroGetWeekOfMonthDE', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 8, day: 1, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 8, day: 1, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('de-DE'), 0);
     });
   });
 
   group('PersianDate getEra', () {
     test('testPersDateAstroGetEraAP', () {
-      final PersianDate pd = PersianDate(year: 1388, month: 5, day: 1, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1388, month: 5, day: 1, timezone: 'Etc/UTC');
       expect(pd.getEra(), 1);
     });
     test('testPersDateAstroGetEraBAP', () {
-      final PersianDate pd = PersianDate(year: -46, month: 5, day: 1, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: -46, month: 5, day: 1, timezone: 'Etc/UTC');
       expect(pd.getEra(), -1);
     });
     test('testPersDateAstroGetEraAPYear1', () {
-      final PersianDate pd = PersianDate(year: 1, month: 1, day: 1, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(pd.getEra(), 1);
     });
     test('testPersDateAstroGetEraBAPYear0', () {
-      final PersianDate pd = PersianDate(year: 0, month: 12, day: 29, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 0, month: 12, day: 29, timezone: 'Etc/UTC');
       expect(pd.getEra(), -1);
     });
   });
@@ -595,7 +675,13 @@ void main() {
 
   group('PersRataDie from date components', () {
     PersianRataDie rd(int year, int month, int day) => PersianRataDie(
-        year: year, month: month, day: day, hour: 0, minute: 0, second: 0, millisecond: 0);
+        year: year,
+        month: month,
+        day: day,
+        hour: 0,
+        minute: 0,
+        second: 0,
+        millisecond: 0);
 
     test('testPersRataDieAstroConstructorFromDateComponents1', () {
       expect(rd(1, 1, 1).getRataDie(), 1);
@@ -646,12 +732,19 @@ void main() {
 
   group('PersianDate getDayOfWeek', () {
     test('testGetDayOfWeek1', () {
-      final PersianDate pd = PersianDate(year: 1393, month: 3, day: 16, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(year: 1393, month: 3, day: 16, timezone: 'Etc/UTC');
       expect(pd.getDayOfWeek(), 5);
     });
     test('testGetDayOfWeekWithTime', () {
       final PersianDate pd = PersianDate(
-          year: 1393, month: 3, day: 16, hour: 8, minute: 39, second: 34, timezone: 'Etc/UTC');
+          year: 1393,
+          month: 3,
+          day: 16,
+          hour: 8,
+          minute: 39,
+          second: 34,
+          timezone: 'Etc/UTC');
       expect(pd.getDayOfWeek(), 5);
     });
   });
@@ -662,7 +755,8 @@ void main() {
     });
 
     test('testPersDateAstroConstructorFromJD', () {
-      final PersianDate pd = PersianDate(julianDay: 1948685.5, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(julianDay: 1948685.5, timezone: 'Etc/UTC');
       expect(pd.getRataDie(), 366);
       expect(pd.getYears(), 2);
       expect(pd.getMonths(), 1);
@@ -675,7 +769,8 @@ void main() {
 
     test('testPersDateAstroAfterLeapYear', () {
       // Far 1, 0005, 9:36am
-      final PersianDate pd = PersianDate(julianDay: 1949781.9, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(julianDay: 1949781.9, timezone: 'Etc/UTC');
       expect(pd.getRataDie(), 1462.4);
       expect(pd.getYears(), 5);
       expect(pd.getMonths(), 1);
@@ -688,7 +783,8 @@ void main() {
 
     test('testPersDateAstroLastDayOfLeapYear', () {
       // Esf 30, 0004, 9:36am
-      final PersianDate pd = PersianDate(julianDay: 1949780.9, timezone: 'Etc/UTC');
+      final PersianDate pd =
+          PersianDate(julianDay: 1949780.9, timezone: 'Etc/UTC');
       expect(pd.getRataDie(), 1461.4);
       expect(pd.getYears(), 4);
       expect(pd.getMonths(), 12);
@@ -737,32 +833,43 @@ void main() {
     });
     test('testPersDateAstroGetWeekOfMonthIR10', () {
       expect(
-          PersianDate(year: 1388, month: 8, day: 1, timezone: 'Etc/UTC').getWeekOfMonth('fa-IR'), 0);
+          PersianDate(year: 1388, month: 8, day: 1, timezone: 'Etc/UTC')
+              .getWeekOfMonth('fa-IR'),
+          0);
     });
     test('testPersDateAstroGetWeekOfMonthIR11', () {
       expect(
-          PersianDate(year: 1388, month: 9, day: 1, timezone: 'Etc/UTC').getWeekOfMonth('fa-IR'), 1);
+          PersianDate(year: 1388, month: 9, day: 1, timezone: 'Etc/UTC')
+              .getWeekOfMonth('fa-IR'),
+          1);
     });
     test('testPersDateAstroGetWeekOfMonthIR12', () {
-      expect(PersianDate(year: 1388, month: 10, day: 1, timezone: 'Etc/UTC').getWeekOfMonth('fa-IR'),
+      expect(
+          PersianDate(year: 1388, month: 10, day: 1, timezone: 'Etc/UTC')
+              .getWeekOfMonth('fa-IR'),
           1);
     });
     test('testPersDateAstroGetWeekOfMonthIR13', () {
-      expect(PersianDate(year: 1388, month: 11, day: 1, timezone: 'Etc/UTC').getWeekOfMonth('fa-IR'),
+      expect(
+          PersianDate(year: 1388, month: 11, day: 1, timezone: 'Etc/UTC')
+              .getWeekOfMonth('fa-IR'),
           0);
     });
     test('testPersDateAstroGetWeekOfMonthIR14', () {
-      expect(PersianDate(year: 1388, month: 12, day: 1, timezone: 'Etc/UTC').getWeekOfMonth('fa-IR'),
+      expect(
+          PersianDate(year: 1388, month: 12, day: 1, timezone: 'Etc/UTC')
+              .getWeekOfMonth('fa-IR'),
           1);
     });
   });
 
   group('PersianDate round-trip construction 2', () {
     test('testPersDateAstroRoundTripConstruction2', () {
-      final PersianDate pd =
-          PersianDate(year: 1393, month: 8, day: 12, timezone: 'America/Los_Angeles');
+      final PersianDate pd = PersianDate(
+          year: 1393, month: 8, day: 12, timezone: 'America/Los_Angeles');
       final int u = pd.getTime();
-      final PersianDate pd2 = PersianDate(unixtime: u, timezone: 'America/Los_Angeles');
+      final PersianDate pd2 =
+          PersianDate(unixtime: u, timezone: 'America/Los_Angeles');
       expect(pd2.getTimeZone(), pd.getTimeZone());
       expect(pd2.getYears(), pd.getYears());
       expect(pd2.getMonths(), pd.getMonths());

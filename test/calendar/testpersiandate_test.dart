@@ -55,7 +55,8 @@ void main() {
     for (int i = 0; i < testDates.length; i++) {
       final List<num> td = testDates[i];
       test('JD ${td[0]} gives year ${td[1]}, month ${td[2]}, day ${td[3]}', () {
-        final PersianAlgoDate d = PersianAlgoDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
+        final PersianAlgoDate d =
+            PersianAlgoDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
         expect(d.getYears(), td[1] as int);
         expect(d.getMonths(), td[2] as int);
         expect(d.getDays(), td[3] as int);
@@ -71,7 +72,8 @@ void main() {
     for (int i = 0; i < testDates.length; i++) {
       final List<num> td = testDates[i];
       test('${td[1]}/${td[2]}/${td[3]} dow=${td[8]}', () {
-        final PersianAlgoDate d = PersianAlgoDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
+        final PersianAlgoDate d =
+            PersianAlgoDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
         expect(d.getDayOfWeek(), td[8] as int);
       });
     }
@@ -102,7 +104,8 @@ void main() {
     test('testPersAlgoDateConvert', () {
       for (int i = 0; i < testDates.length; i++) {
         final List<num> td = testDates[i];
-        final PersianAlgoDate pd = PersianAlgoDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
+        final PersianAlgoDate pd =
+            PersianAlgoDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
         expect(pd.getRataDie(), td[0].toDouble() - 1948319.5);
         expect(pd.getYears(), td[1] as int);
         expect(pd.getMonths(), td[2] as int);
@@ -142,8 +145,13 @@ void main() {
       expect(pd.getTime(), 0);
     });
     test('testPersAlgoDateTestGetTime', () {
-      final PersianAlgoDate pd =
-          PersianAlgoDate(year: 1348, month: 10, day: 11, hour: 8, minute: 30, timezone: 'Etc/UTC');
+      final PersianAlgoDate pd = PersianAlgoDate(
+          year: 1348,
+          month: 10,
+          day: 11,
+          hour: 8,
+          minute: 30,
+          timezone: 'Etc/UTC');
       expect(pd.getTime(), 30600000);
     });
     test('testPersAlgoDateTestGetTimeTooEarly', () {
@@ -342,7 +350,8 @@ void main() {
 
   group('PersianAlgoDate getWeekOfYear', () {
     test('testPersAlgoDateTestGetWeekOfYearThisYear', () {
-      final PersianAlgoDate pd = PersianAlgoDate(year: 1388, month: 2, day: 1, timezone: 'Etc/UTC');
+      final PersianAlgoDate pd =
+          PersianAlgoDate(year: 1388, month: 2, day: 1, timezone: 'Etc/UTC');
       expect(pd.getWeekOfYear(), 5);
     });
     test('testPersAlgoDateTestGetWeekOfYearThisYear2', () {
@@ -368,7 +377,8 @@ void main() {
       expect(pd.getWeekOfYear(), 52);
     });
     test('testPersAlgoDateTestGetWeekOfYearPreviousYear', () {
-      final PersianAlgoDate pd = PersianAlgoDate(year: 1388, month: 1, day: 1, timezone: 'Etc/UTC');
+      final PersianAlgoDate pd =
+          PersianAlgoDate(year: 1388, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(pd.getWeekOfYear(), 53);
     });
     test('testPersAlgoDateTestGetWeekOfYearLastWeekLeap', () {
@@ -410,7 +420,8 @@ void main() {
 
   group('PersianAlgoDate getDayOfYear', () {
     test('testPersAlgoDateGetDayOfYearFirstDay', () {
-      final PersianAlgoDate pd = PersianAlgoDate(year: 1388, month: 1, day: 1, timezone: 'Etc/UTC');
+      final PersianAlgoDate pd =
+          PersianAlgoDate(year: 1388, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(pd.getDayOfYear(), 1);
     });
     test('testPersAlgoDateGetDayOfYearMidYear', () {
@@ -438,11 +449,13 @@ void main() {
     });
     // en-US: firstDayOfWeek = 0 (Sunday)
     test('testPersAlgoDateGetWeekOfMonth0', () {
-      final PersianAlgoDate pd = PersianAlgoDate(year: 1388, month: 3, day: 1, timezone: 'Etc/UTC');
+      final PersianAlgoDate pd =
+          PersianAlgoDate(year: 1388, month: 3, day: 1, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('en-US'), 0);
     });
     test('testPersAlgoDateGetWeekOfMonth1', () {
-      final PersianAlgoDate pd = PersianAlgoDate(year: 1388, month: 3, day: 4, timezone: 'Etc/UTC');
+      final PersianAlgoDate pd =
+          PersianAlgoDate(year: 1388, month: 3, day: 4, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('en-US'), 1);
     });
     test('testPersAlgoDateGetWeekOfMonth2', () {
@@ -466,28 +479,34 @@ void main() {
       expect(pd.getWeekOfMonth('en-US'), 5);
     });
     test('testPersAlgoDateGetWeekOfMonth6', () {
-      final PersianAlgoDate pd = PersianAlgoDate(year: 1388, month: 4, day: 1, timezone: 'Etc/UTC');
+      final PersianAlgoDate pd =
+          PersianAlgoDate(year: 1388, month: 4, day: 1, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('en-US'), 1);
     });
     test('testPersAlgoDateGetWeekOfMonth7', () {
-      final PersianAlgoDate pd = PersianAlgoDate(year: 1388, month: 5, day: 1, timezone: 'Etc/UTC');
+      final PersianAlgoDate pd =
+          PersianAlgoDate(year: 1388, month: 5, day: 1, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('en-US'), 0);
     });
     test('testPersAlgoDateGetWeekOfMonth8', () {
-      final PersianAlgoDate pd = PersianAlgoDate(year: 1388, month: 6, day: 1, timezone: 'Etc/UTC');
+      final PersianAlgoDate pd =
+          PersianAlgoDate(year: 1388, month: 6, day: 1, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('en-US'), 1);
     });
     test('testPersAlgoDateGetWeekOfMonth9', () {
-      final PersianAlgoDate pd = PersianAlgoDate(year: 1388, month: 7, day: 1, timezone: 'Etc/UTC');
+      final PersianAlgoDate pd =
+          PersianAlgoDate(year: 1388, month: 7, day: 1, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('en-US'), 1);
     });
     // fa-IR: firstDayOfWeek = 6 (Saturday)
     test('testPersAlgoDateGetWeekOfMonthIR0', () {
-      final PersianAlgoDate pd = PersianAlgoDate(year: 1388, month: 3, day: 1, timezone: 'Etc/UTC');
+      final PersianAlgoDate pd =
+          PersianAlgoDate(year: 1388, month: 3, day: 1, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('fa-IR'), 0);
     });
     test('testPersAlgoDateGetWeekOfMonthIR1', () {
-      final PersianAlgoDate pd = PersianAlgoDate(year: 1388, month: 3, day: 4, timezone: 'Etc/UTC');
+      final PersianAlgoDate pd =
+          PersianAlgoDate(year: 1388, month: 3, day: 4, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('fa-IR'), 1);
     });
     test('testPersAlgoDateGetWeekOfMonthIR2', () {
@@ -511,27 +530,33 @@ void main() {
       expect(pd.getWeekOfMonth('fa-IR'), 5);
     });
     test('testPersAlgoDateGetWeekOfMonthIR6', () {
-      final PersianAlgoDate pd = PersianAlgoDate(year: 1388, month: 4, day: 1, timezone: 'Etc/UTC');
+      final PersianAlgoDate pd =
+          PersianAlgoDate(year: 1388, month: 4, day: 1, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('fa-IR'), 1);
     });
     test('testPersAlgoDateGetWeekOfMonthIR7', () {
-      final PersianAlgoDate pd = PersianAlgoDate(year: 1388, month: 5, day: 1, timezone: 'Etc/UTC');
+      final PersianAlgoDate pd =
+          PersianAlgoDate(year: 1388, month: 5, day: 1, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('fa-IR'), 0);
     });
     test('testPersAlgoDateGetWeekOfMonthIR8', () {
-      final PersianAlgoDate pd = PersianAlgoDate(year: 1388, month: 6, day: 1, timezone: 'Etc/UTC');
+      final PersianAlgoDate pd =
+          PersianAlgoDate(year: 1388, month: 6, day: 1, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('fa-IR'), 1);
     });
     test('testPersAlgoDateGetWeekOfMonthIR9', () {
-      final PersianAlgoDate pd = PersianAlgoDate(year: 1388, month: 7, day: 1, timezone: 'Etc/UTC');
+      final PersianAlgoDate pd =
+          PersianAlgoDate(year: 1388, month: 7, day: 1, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('fa-IR'), 0);
     });
     test('testPersAlgoDateGetWeekOfMonthIR10', () {
-      final PersianAlgoDate pd = PersianAlgoDate(year: 1388, month: 8, day: 1, timezone: 'Etc/UTC');
+      final PersianAlgoDate pd =
+          PersianAlgoDate(year: 1388, month: 8, day: 1, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('fa-IR'), 0);
     });
     test('testPersAlgoDateGetWeekOfMonthIR11', () {
-      final PersianAlgoDate pd = PersianAlgoDate(year: 1388, month: 9, day: 1, timezone: 'Etc/UTC');
+      final PersianAlgoDate pd =
+          PersianAlgoDate(year: 1388, month: 9, day: 1, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('fa-IR'), 1);
     });
     test('testPersAlgoDateGetWeekOfMonthIR12', () {
@@ -550,31 +575,37 @@ void main() {
       expect(pd.getWeekOfMonth('fa-IR'), 1);
     });
     test('testPersAlgoDateGetWeekOfMonthUS', () {
-      final PersianAlgoDate pd = PersianAlgoDate(year: 1388, month: 8, day: 1, timezone: 'Etc/UTC');
+      final PersianAlgoDate pd =
+          PersianAlgoDate(year: 1388, month: 8, day: 1, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('en-US'), 0);
     });
     test('testPersAlgoDateGetWeekOfMonthDE', () {
       // de-DE: firstDayOfWeek = 1 (Monday)
-      final PersianAlgoDate pd = PersianAlgoDate(year: 1388, month: 8, day: 1, timezone: 'Etc/UTC');
+      final PersianAlgoDate pd =
+          PersianAlgoDate(year: 1388, month: 8, day: 1, timezone: 'Etc/UTC');
       expect(pd.getWeekOfMonth('de-DE'), 0);
     });
   });
 
   group('PersianAlgoDate getEra', () {
     test('testPersAlgoDateGetEraAP', () {
-      final PersianAlgoDate pd = PersianAlgoDate(year: 1388, month: 5, day: 1, timezone: 'Etc/UTC');
+      final PersianAlgoDate pd =
+          PersianAlgoDate(year: 1388, month: 5, day: 1, timezone: 'Etc/UTC');
       expect(pd.getEra(), 1);
     });
     test('testPersAlgoDateGetEraBAP', () {
-      final PersianAlgoDate pd = PersianAlgoDate(year: -46, month: 5, day: 1, timezone: 'Etc/UTC');
+      final PersianAlgoDate pd =
+          PersianAlgoDate(year: -46, month: 5, day: 1, timezone: 'Etc/UTC');
       expect(pd.getEra(), -1);
     });
     test('testPersAlgoDateGetEraAPYear1', () {
-      final PersianAlgoDate pd = PersianAlgoDate(year: 1, month: 1, day: 1, timezone: 'Etc/UTC');
+      final PersianAlgoDate pd =
+          PersianAlgoDate(year: 1, month: 1, day: 1, timezone: 'Etc/UTC');
       expect(pd.getEra(), 1);
     });
     test('testPersAlgoDateGetEraBAPYear0', () {
-      final PersianAlgoDate pd = PersianAlgoDate(year: 0, month: 12, day: 29, timezone: 'Etc/UTC');
+      final PersianAlgoDate pd =
+          PersianAlgoDate(year: 0, month: 12, day: 29, timezone: 'Etc/UTC');
       expect(pd.getEra(), -1);
     });
   });
@@ -596,9 +627,11 @@ void main() {
 
   group('PersianAlgoDate round-trip construction', () {
     test('testPersDateAlgoRoundTripConstruction', () {
-      final PersianAlgoDate pd = PersianAlgoDate(year: 1393, month: 8, day: 12, timezone: 'local');
+      final PersianAlgoDate pd =
+          PersianAlgoDate(year: 1393, month: 8, day: 12, timezone: 'local');
       final int u = pd.getTime();
-      final PersianAlgoDate pd2 = PersianAlgoDate(unixtime: u, timezone: 'local');
+      final PersianAlgoDate pd2 =
+          PersianAlgoDate(unixtime: u, timezone: 'local');
       expect(pd2.getTimeZone(), pd.getTimeZone());
       expect(pd2.getYears(), pd.getYears());
       expect(pd2.getMonths(), pd.getMonths());
@@ -608,10 +641,11 @@ void main() {
       expect(pd2.getSeconds(), pd.getSeconds());
     });
     test('testPersDateAlgoRoundTripConstruction2', () {
-      final PersianAlgoDate pd =
-          PersianAlgoDate(year: 1393, month: 8, day: 12, timezone: 'America/Los_Angeles');
+      final PersianAlgoDate pd = PersianAlgoDate(
+          year: 1393, month: 8, day: 12, timezone: 'America/Los_Angeles');
       final int u = pd.getTime();
-      final PersianAlgoDate pd2 = PersianAlgoDate(unixtime: u, timezone: 'America/Los_Angeles');
+      final PersianAlgoDate pd2 =
+          PersianAlgoDate(unixtime: u, timezone: 'America/Los_Angeles');
       expect(pd2.getTimeZone(), pd.getTimeZone());
       expect(pd2.getYears(), pd.getYears());
       expect(pd2.getMonths(), pd.getMonths());
@@ -624,7 +658,8 @@ void main() {
 
   group('PersianAlgoDate constructor edge cases', () {
     test('testPersAlgoDateConstructorFromJD', () {
-      final PersianAlgoDate pd = PersianAlgoDate(julianDay: 1948685.5, timezone: 'Etc/UTC');
+      final PersianAlgoDate pd =
+          PersianAlgoDate(julianDay: 1948685.5, timezone: 'Etc/UTC');
       expect(pd.getRataDie(), 366);
       expect(pd.getYears(), 2);
       expect(pd.getMonths(), 1);
@@ -632,7 +667,8 @@ void main() {
     });
     test('testPersAlgoDateAfterLeapYear', () {
       // Far 1, 0005, 9:36am
-      final PersianAlgoDate pd = PersianAlgoDate(julianDay: 1949781.9, timezone: 'Etc/UTC');
+      final PersianAlgoDate pd =
+          PersianAlgoDate(julianDay: 1949781.9, timezone: 'Etc/UTC');
       expect(pd.getRataDie(), closeTo(1462.4, 0.001));
       expect(pd.getYears(), 5);
       expect(pd.getMonths(), 1);
@@ -697,7 +733,8 @@ void main() {
       expect(PersianAlgoDate(rd: -731, timezone: 'Etc/UTC').getYears(), -3);
     });
     test('testPersAlgoDateCalcYearNegative6', () {
-      expect(PersianAlgoDate(rd: -441089, timezone: 'Etc/UTC').getYears(), -1208);
+      expect(
+          PersianAlgoDate(rd: -441089, timezone: 'Etc/UTC').getYears(), -1208);
     });
   });
 
@@ -709,14 +746,26 @@ void main() {
     });
     test('testGetDayOfWeekWithTime', () {
       final PersianAlgoDate pd = PersianAlgoDate(
-          year: 1393, month: 3, day: 16, hour: 8, minute: 39, second: 34, timezone: 'Etc/UTC');
+          year: 1393,
+          month: 3,
+          day: 16,
+          hour: 8,
+          minute: 39,
+          second: 34,
+          timezone: 'Etc/UTC');
       expect(pd.getDayOfWeek(), 5);
     });
   });
 
   group('PersAlgoRataDie from date components', () {
     PersianAlgoRataDie rd(int year, int month, int day) => PersianAlgoRataDie(
-        year: year, month: month, day: day, hour: 0, minute: 0, second: 0, millisecond: 0);
+        year: year,
+        month: month,
+        day: day,
+        hour: 0,
+        minute: 0,
+        second: 0,
+        millisecond: 0);
 
     test('testPersAlgoRataDieConstructorFromDateComponents1', () {
       expect(rd(1, 1, 1).getRataDie(), 1);

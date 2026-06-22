@@ -21,11 +21,21 @@ class PersianAlgoRataDie extends ILibRataDie {
       _rd = ILibRataDie.snapToMillis(
           ILibRataDie.unixTimeToRd(unixtime) + 1721424.5 - epoch);
     } else if (ILibRataDie.hasDateComponents(
-        year: year, month: month, day: day, hour: hour,
-        minute: minute, second: second, millisecond: millisecond)) {
+        year: year,
+        month: month,
+        day: day,
+        hour: hour,
+        minute: minute,
+        second: second,
+        millisecond: millisecond)) {
       _rd = _dateToRd(
-        year ?? 1, month ?? 1, day ?? 1,
-        hour ?? 0, minute ?? 0, second ?? 0, millisecond ?? 0,
+        year ?? 1,
+        month ?? 1,
+        day ?? 1,
+        hour ?? 0,
+        minute ?? 0,
+        second ?? 0,
+        millisecond ?? 0,
       );
     } else {
       _rd = ILibRataDie.nowToRd(epoch);
@@ -35,7 +45,19 @@ class PersianAlgoRataDie extends ILibRataDie {
   static const double epoch = 1948319.5;
 
   static const List<int> cumMonthLengths = <int>[
-    0, 31, 62, 93, 124, 155, 186, 216, 246, 276, 306, 336, 365
+    0,
+    31,
+    62,
+    93,
+    124,
+    155,
+    186,
+    216,
+    246,
+    276,
+    306,
+    336,
+    365
   ];
 
   late double _rd;
@@ -76,16 +98,16 @@ class PersianAlgoRataDie extends ILibRataDie {
     return _onOrBefore(_rd + 7 + offset, dayOfWeek) - offset;
   }
 
-  static double _dateToRd(
-      int year, int month, int day, int hour, int minute, int second, int millisecond) {
+  static double _dateToRd(int year, int month, int day, int hour, int minute,
+      int second, int millisecond) {
     final int yOffset = year - (year >= 0 ? 474 : 473);
     final int cycle = floorDiv(yOffset, 2820);
     final int ecy = mod(yOffset, 2820) + 474;
-    final int rdOfYears = 1029983 * cycle +
-        365 * (ecy - 1) +
-        floorDiv(682 * ecy - 110, 2816);
+    final int rdOfYears =
+        1029983 * cycle + 365 * (ecy - 1) + floorDiv(682 * ecy - 110, 2816);
     final int dayInYear = (month > 1 ? cumMonthLengths[month - 1] : 0) + day;
-    final double rdTime = ILibRataDie.timeToRd(hour, minute, second, millisecond);
+    final double rdTime =
+        ILibRataDie.timeToRd(hour, minute, second, millisecond);
     return rdOfYears + dayInYear + rdTime;
   }
 
@@ -93,9 +115,8 @@ class PersianAlgoRataDie extends ILibRataDie {
     final int d0 = rd.floor() - _dateToRdYearStart(475);
     final int n2820 = floorDiv(d0, 1029983);
     final int d1 = d0 - n2820 * 1029983;
-    final int y2820 = d1 == 1029982
-        ? 2820
-        : floorDiv(2816 * d1 + 1031337, 1028522);
+    final int y2820 =
+        d1 == 1029982 ? 2820 : floorDiv(2816 * d1 + 1031337, 1028522);
     final int year = 474 + 2820 * n2820 + y2820;
     return year > 0 ? year : year - 1;
   }

@@ -9,7 +9,8 @@ void main() {
 
   group('HebrewDate from JD', () {
     test('basic JD', () {
-      final HebrewDate d = HebrewDate(julianDay: 2450138.5, timezone: 'Etc/UTC');
+      final HebrewDate d =
+          HebrewDate(julianDay: 2450138.5, timezone: 'Etc/UTC');
       expect(d.getYears(), 5756);
       expect(d.getMonths(), 12);
       expect(d.getDays(), 5);
@@ -23,7 +24,13 @@ void main() {
   group('HebrewDate from components', () {
     test('basic date', () {
       final HebrewDate d = HebrewDate(
-          year: 5784, month: 7, day: 15, hour: 10, minute: 30, second: 0, millisecond: 0);
+          year: 5784,
+          month: 7,
+          day: 15,
+          hour: 10,
+          minute: 30,
+          second: 0,
+          millisecond: 0);
       expect(d.getYears(), 5784);
       expect(d.getMonths(), 7);
       expect(d.getDays(), 15);
