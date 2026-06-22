@@ -14,21 +14,8 @@ Reads JSON locale data directly and performs formatting/calculation in Dart.
   against the new JS expectations. See CHANGELOG.md for the version history.
 
 ## Architecture
-
-### Before (JS Interop)
-```dart
-String getClock() {
-  final String jscode = 'new LocaleInfo("$locale").getClock()';
-  return ILibJS.instance.evaluate(jscode).stringResult;
-}
-```
-
-### After (Pure Dart)
-```dart
-String getClock() {
-  return (_info['clock'] as String?) ?? (_defaultInfo['clock'] as String);
-}
-```
+Pure Dart: each class reads JSON locale data and computes natively (the old `flutter_js` interop is
+gone — see [docs/conversion-guide.md](docs/conversion-guide.md) for the before/after pattern).
 
 ### Data Flow
 ```
@@ -51,24 +38,7 @@ Options → ILibLocaleInfo (determines locale, calendar, clock, meridiems)
 | ILibDateFmt | `lib/ilib_datefmt.dart` | `ilib.data.dateformats` + `sysres` + `zoneinfo` |
 | ILibTimeZone | `lib/ilib_timezone.dart` | `ilib.data.zoneinfo` DST calculation |
 | ILibCalendar | `lib/ilib_calendar.dart` + `lib/calendar/` | Calendar factory + abstract base |
-| GregorianDate | `lib/calendar/gregorian_date.dart` | Gregorian date |
-| GregRataDie | `lib/calendar/greg_rata_die.dart` | Gregorian RD calculation |
-| ThaiSolarDate | `lib/calendar/thaisolar_date.dart` | Thai Solar date |
-| ThaiSolarRataDie | `lib/calendar/thaisolar_rata_die.dart` | Thai Solar RD calculation |
-| JulianDate | `lib/calendar/julian_date.dart` | Julian date |
-| JulianRataDie | `lib/calendar/julian_rata_die.dart` | Julian RD calculation |
-| IslamicDate | `lib/calendar/islamic_date.dart` | Islamic date |
-| IslamicRataDie | `lib/calendar/islamic_rata_die.dart` | Islamic RD calculation |
-| HebrewDate | `lib/calendar/hebrew_date.dart` | Hebrew date |
-| HebrewRataDie | `lib/calendar/hebrew_rata_die.dart` | Hebrew RD calculation |
-| EthiopicDate | `lib/calendar/ethiopic_date.dart` | Ethiopic date |
-| EthiopicRataDie | `lib/calendar/ethiopic_rata_die.dart` | Ethiopic RD calculation |
-| CopticDate | `lib/calendar/coptic_date.dart` | Coptic date |
-| CopticRataDie | `lib/calendar/coptic_rata_die.dart` | Coptic RD calculation |
-| PersianAlgoDate | `lib/calendar/persian_algo_date.dart` | Algorithmic (2820-year cycle) |
-| PersianAlgoRataDie | `lib/calendar/persian_algo_rata_die.dart` | Algorithmic RD calculation |
-| PersianDate | `lib/calendar/persian_date.dart` | Astronomical (equinox-based) |
-| PersianRataDie | `lib/calendar/persian_rata_die.dart` | Astronomical RD calculation |
+| 9 calendars | `lib/calendar/{name}_date.dart` + `{name}_rata_die.dart` | gregorian, thaisolar, julian, islamic, hebrew, ethiopic, coptic, persian (astronomical), persian-algo (algorithmic) — see [docs/date-calendar-architecture.md](docs/date-calendar-architecture.md) |
 | ILibAstro | `lib/calendar/ilib_astro.dart` | Astronomical calculation (`ilib.data.astro`) |
 | ILibDateOptions | `lib/ilib_date.dart` | `_toCalendarDate()` delegates per calendar |
 
@@ -86,54 +56,11 @@ not compile and are not exported** from `flutter_ilib.dart`. Porting them is the
 | ILibNumFmt | `lib/ilib_numfmt.dart` | 12 |
 
 ## Conversion Pattern (How to Convert a Class)
-
-### Step 1: Analyze JS Source
-- Original JS source: https://github.com/iLib-js/iLib → `js/lib/`
-- Original JS tests: https://github.com/iLib-js/iLib → `js/test/`
-- Check `require()` dependencies
-
-### Step 2: Verify JSON Data
-- Check data key in `assets/locale/root.json` (e.g., `ilib.data.numfmt`)
-- Examine actual data structure in locale-specific files
-
-### Step 3: Dart Implementation
-```dart
-class ILibXxx {
-  ILibXxx(String locale) {
-    final Map<String, dynamic>? localeData =
-        ILibLoader.instance.getLocaleData(locale);
-    _data = (localeData?['ilib.data.xxx'] as Map<String, dynamic>?) ??
-        <String, dynamic>{};
-  }
-
-  late Map<String, dynamic> _data;
-
-  // fallback defaults
-  static const Map<String, dynamic> _defaultData = <String, dynamic>{...};
-
-  String getSomething() {
-    return (_data['key'] as String?) ?? (_defaultData['key'] as String);
-  }
-}
-```
-
-### Step 4: Update Tests
-Change setUpAll from `ILibJS` to `ILibLoader`:
-```dart
-setUpAll(() async {
-  await ILibLoader.instance.loadJSON();
-  await ILibLoader.instance.loadILibLocaleData('en-US');
-});
-```
-Note: `initILib()` is called internally by `loadJSON()` — no separate call needed.
-Pure calculation classes (`Cal`/`RataDie`/`JulianDay`) can be tested without locale loading —
-see the Testing conventions below.
-
-### Step 5: Verify
-```bash
-flutter test test/{test_file}
-flutter analyze lib/{source_file}
-```
+See [docs/conversion-guide.md](docs/conversion-guide.md) for the full checklist (analyze JS source →
+verify JSON data → Dart implementation → convert tests → verify), the before/after example, and the
+`getLocaleData()` / `_defaultData` template. Test setup: `setUpAll` calls
+`ILibLoader.instance.loadJSON()` (which runs `initILib()` internally) + `loadILibLocaleData('en-US')`;
+pure-calculation classes need no locale loading (see Conventions › Testing).
 
 ## Key Infrastructure
 
@@ -284,21 +211,8 @@ For in-depth explanations, see `docs/`:
 
 ## Running Tests
 ```bash
-# All calendar tests
-flutter test test/calendar/
-
-# All timezone tests
-flutter test test/timezone/
-
-# Basic test suite
-flutter test test/basic/
-
-# All datefmt tests
-flutter test test/datefmt/
-
-# Specific test file
-flutter test test/calendar/testcopticdate_test.dart
-
-# Static analysis
-flutter analyze
+flutter test                 # all tests
+flutter test test/calendar/  # one suite (also: timezone/, basic/, datefmt/)
+flutter analyze              # static analysis
 ```
+See [docs/development.md](docs/development.md) › Testing for single-test / `-k` filter / coverage.
