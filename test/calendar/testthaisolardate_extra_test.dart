@@ -9,7 +9,8 @@ void main() {
 
   group('ThaiSolarDate from JD', () {
     test('basic JD', () {
-      final ThaiSolarDate d = ThaiSolarDate(julianDay: 2450138.5, timezone: 'Etc/UTC');
+      final ThaiSolarDate d =
+          ThaiSolarDate(julianDay: 2450138.5, timezone: 'Etc/UTC');
       expect(d.getYears(), 2539);
       expect(d.getMonths(), 2);
       expect(d.getDays(), 25);
@@ -23,7 +24,13 @@ void main() {
   group('ThaiSolarDate from components', () {
     test('basic date', () {
       final ThaiSolarDate d = ThaiSolarDate(
-          year: 2567, month: 3, day: 15, hour: 8, minute: 30, second: 0, millisecond: 0);
+          year: 2567,
+          month: 3,
+          day: 15,
+          hour: 8,
+          minute: 30,
+          second: 0,
+          millisecond: 0);
       expect(d.getYears(), 2567);
       expect(d.getMonths(), 3);
       expect(d.getDays(), 15);

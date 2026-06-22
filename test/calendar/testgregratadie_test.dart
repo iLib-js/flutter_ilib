@@ -62,7 +62,13 @@ void main() {
     });
     test('from full datetime components', () {
       final GregRataDie rd = GregRataDie(
-          year: 2011, month: 9, day: 23, hour: 16, minute: 7, second: 12, millisecond: 123);
+          year: 2011,
+          month: 9,
+          day: 23,
+          hour: 16,
+          minute: 7,
+          second: 12,
+          millisecond: 123);
       expect(rd.getRataDie(), 734403.6716680903);
     });
   });
@@ -132,12 +138,24 @@ void main() {
     });
     test('testGregRataDieConstructorFull', () {
       final GregRataDie rd = GregRataDie(
-          year: 2011, month: 9, day: 23, hour: 16, minute: 7, second: 12, millisecond: 123);
+          year: 2011,
+          month: 9,
+          day: 23,
+          hour: 16,
+          minute: 7,
+          second: 12,
+          millisecond: 123);
       expect(rd.getRataDie(), 734403.6716680903);
     });
     test('testGregRataDieConstructorCopy', () {
       final GregRataDie rd2 = GregRataDie(
-          year: 2011, month: 9, day: 23, hour: 16, minute: 7, second: 12, millisecond: 123);
+          year: 2011,
+          month: 9,
+          day: 23,
+          hour: 16,
+          minute: 7,
+          second: 12,
+          millisecond: 123);
       final GregRataDie rd = GregRataDie(rataDie: rd2.getRataDie());
       expect(rd.getRataDie(), 734403.6716680903);
     });
@@ -157,7 +175,13 @@ void main() {
     test('testGregRataDieConstructorFullWithStrings', () {
       // Dart doesn't accept strings, so this verifies same result as Full
       final GregRataDie rd = GregRataDie(
-          year: 2011, month: 9, day: 23, hour: 16, minute: 7, second: 12, millisecond: 123);
+          year: 2011,
+          month: 9,
+          day: 23,
+          hour: 16,
+          minute: 7,
+          second: 12,
+          millisecond: 123);
       expect(rd.getRataDie(), 734403.6716680903);
     });
   });
@@ -165,7 +189,8 @@ void main() {
   group('GregRataDie convert', () {
     test('testGregRataDieConvert', () {
       for (int i = 0; i < testDates.length; i++) {
-        final GregRataDie rd = GregRataDie(julianDay: testDates[i][0].toDouble());
+        final GregRataDie rd =
+            GregRataDie(julianDay: testDates[i][0].toDouble());
         expect(rd.getRataDie(), testDates[i][0].toDouble() - GregRataDie.epoch);
       }
     });
@@ -203,12 +228,14 @@ void main() {
     test('testGregRataDieTestGetTimeZero', () {
       final GregRataDie rd = GregRataDie(year: 1970, month: 1, day: 1);
       final double jd = rd.getJulianDay();
-      final int time =
-          (jd < 2440587.5 || jd > 2465442.634803241) ? -1 : ((jd - 2440587.5) * 86400000).round();
+      final int time = (jd < 2440587.5 || jd > 2465442.634803241)
+          ? -1
+          : ((jd - 2440587.5) * 86400000).round();
       expect(time, 0);
     });
     test('testGregRataDieTestGetTime', () {
-      final GregRataDie rd = GregRataDie(year: 1970, month: 1, day: 3, hour: 8, minute: 30);
+      final GregRataDie rd =
+          GregRataDie(year: 1970, month: 1, day: 3, hour: 8, minute: 30);
       final double jd = rd.getJulianDay();
       final int time = ((jd - 2440587.5) * 86400000).round();
       expect(time, 203400000);
@@ -216,22 +243,30 @@ void main() {
     test('testGregRataDieTestGetTimeTooEarly', () {
       final GregRataDie rd = GregRataDie(year: 1969, month: 12, day: 31);
       final double jd = rd.getJulianDay();
-      final int time =
-          (jd < 2440587.5 || jd > 2465442.634803241) ? -1 : ((jd - 2440587.5) * 86400000).round();
+      final int time = (jd < 2440587.5 || jd > 2465442.634803241)
+          ? -1
+          : ((jd - 2440587.5) * 86400000).round();
       expect(time, -1);
     });
     test('testGregRataDieTestGetTimeTooLate', () {
       final GregRataDie rd = GregRataDie(year: 2038, month: 1, day: 20);
       final double jd = rd.getJulianDay();
-      final int time =
-          (jd < 2440587.5 || jd > 2465442.634803241) ? -1 : ((jd - 2440587.5) * 86400000).round();
+      final int time = (jd < 2440587.5 || jd > 2465442.634803241)
+          ? -1
+          : ((jd - 2440587.5) * 86400000).round();
       expect(time, -1);
     });
     test('testGregRataDieGetTimeWithUnixTime', () {
       // Date.UTC(2011, 2, 8) = 2011-03-08 UTC = 1299542400000
       const int expected = 1299542400000;
-      final GregRataDie rd =
-          GregRataDie(year: 2011, month: 3, day: 8, hour: 0, minute: 0, second: 0, millisecond: 0);
+      final GregRataDie rd = GregRataDie(
+          year: 2011,
+          month: 3,
+          day: 8,
+          hour: 0,
+          minute: 0,
+          second: 0,
+          millisecond: 0);
       final double jd = rd.getJulianDay();
       final int time = ((jd - 2440587.5) * 86400000).round();
       expect(time, expected);
@@ -290,12 +325,14 @@ void main() {
     });
     test('testGregRataDieOnOrBeforeWithOffset1', () {
       // 2014-04-26 23:00 — Saturday in California (offset -8h = -0.333), Sunday in UTC
-      final GregRataDie rd = GregRataDie(year: 2014, month: 4, day: 26, hour: 23);
+      final GregRataDie rd =
+          GregRataDie(year: 2014, month: 4, day: 26, hour: 23);
       expect(rd.onOrBefore(0, offset: -0.33333333333), rd.getRataDie() - 6);
     });
     test('testGregRataDieOnOrBeforeWithOffset2', () {
       // 2014-04-27 08:00 — Sunday in California and UTC
-      final GregRataDie rd = GregRataDie(year: 2014, month: 4, day: 27, hour: 8);
+      final GregRataDie rd =
+          GregRataDie(year: 2014, month: 4, day: 27, hour: 8);
       expect(rd.onOrBefore(0, offset: -0.33333333333), rd.getRataDie());
     });
   });
@@ -338,12 +375,14 @@ void main() {
     });
     test('testGregRataDieOnOrAfterWithOffset1', () {
       // 2014-04-26 23:00 — Saturday in California, Sunday in UTC
-      final GregRataDie rd = GregRataDie(year: 2014, month: 4, day: 26, hour: 23);
+      final GregRataDie rd =
+          GregRataDie(year: 2014, month: 4, day: 26, hour: 23);
       expect(rd.onOrAfter(0, offset: -0.33333333333), rd.getRataDie() + 1);
     });
     test('testGregRataDieOnOrAfterWithOffset2', () {
       // 2014-04-27 08:00 — Sunday in California and UTC
-      final GregRataDie rd = GregRataDie(year: 2014, month: 4, day: 27, hour: 8);
+      final GregRataDie rd =
+          GregRataDie(year: 2014, month: 4, day: 27, hour: 8);
       expect(rd.onOrAfter(0, offset: -0.33333333333), rd.getRataDie());
     });
   });
@@ -386,12 +425,14 @@ void main() {
     });
     test('testGregRataDieBeforeWithOffset1', () {
       // 2014-04-27 23:00 — Sunday in California, Monday in UTC
-      final GregRataDie rd = GregRataDie(year: 2014, month: 4, day: 27, hour: 23);
+      final GregRataDie rd =
+          GregRataDie(year: 2014, month: 4, day: 27, hour: 23);
       expect(rd.before(0, offset: -0.33333333333), rd.getRataDie() - 7);
     });
     test('testGregRataDieBeforeWithOffset2', () {
       // 2014-04-28 08:00 — Monday in California and UTC
-      final GregRataDie rd = GregRataDie(year: 2014, month: 4, day: 28, hour: 8);
+      final GregRataDie rd =
+          GregRataDie(year: 2014, month: 4, day: 28, hour: 8);
       expect(rd.before(0, offset: -0.33333333333), rd.getRataDie() - 1);
     });
   });
@@ -434,12 +475,14 @@ void main() {
     });
     test('testGregRataDieAfterWithOffset1', () {
       // 2014-04-26 23:00 — Saturday in California, Sunday in UTC
-      final GregRataDie rd = GregRataDie(year: 2014, month: 4, day: 26, hour: 23);
+      final GregRataDie rd =
+          GregRataDie(year: 2014, month: 4, day: 26, hour: 23);
       expect(rd.after(0, offset: -0.33333333333), rd.getRataDie() + 1);
     });
     test('testGregRataDieAfterWithOffset2', () {
       // 2014-04-27 08:00 — Sunday in California and UTC
-      final GregRataDie rd = GregRataDie(year: 2014, month: 4, day: 27, hour: 8);
+      final GregRataDie rd =
+          GregRataDie(year: 2014, month: 4, day: 27, hour: 8);
       expect(rd.after(0, offset: -0.33333333333), rd.getRataDie() + 7);
     });
   });

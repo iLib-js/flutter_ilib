@@ -22,11 +22,21 @@ class JulianRataDie extends ILibRataDie {
       _rd = ILibRataDie.snapToMillis(
           ILibRataDie.unixTimeToRd(unixtime) + 1721424.5 - epoch);
     } else if (ILibRataDie.hasDateComponents(
-        year: year, month: month, day: day, hour: hour,
-        minute: minute, second: second, millisecond: millisecond)) {
+        year: year,
+        month: month,
+        day: day,
+        hour: hour,
+        minute: minute,
+        second: second,
+        millisecond: millisecond)) {
       _rd = _dateToRd(
-        year ?? 1, month ?? 1, day ?? 1,
-        hour ?? 0, minute ?? 0, second ?? 0, millisecond ?? 0,
+        year ?? 1,
+        month ?? 1,
+        day ?? 1,
+        hour ?? 0,
+        minute ?? 0,
+        second ?? 0,
+        millisecond ?? 0,
       );
     } else {
       _rd = ILibRataDie.nowToRd(epoch);
@@ -36,10 +46,34 @@ class JulianRataDie extends ILibRataDie {
   static const double epoch = 1721422.5;
 
   static const List<int> _cumMonthLengths = <int>[
-    0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365
+    0,
+    31,
+    59,
+    90,
+    120,
+    151,
+    181,
+    212,
+    243,
+    273,
+    304,
+    334,
+    365
   ];
   static const List<int> _cumMonthLengthsLeap = <int>[
-    0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366
+    0,
+    31,
+    60,
+    91,
+    121,
+    152,
+    182,
+    213,
+    244,
+    274,
+    305,
+    335,
+    366
   ];
 
   static final JulianCal _cal = JulianCal();
@@ -82,15 +116,17 @@ class JulianRataDie extends ILibRataDie {
     return _onOrBefore(_rd + 7 + offset, dayOfWeek) - offset;
   }
 
-  static double _dateToRd(
-      int year, int month, int day, int hour, int minute, int second, int millisecond) {
+  static double _dateToRd(int year, int month, int day, int hour, int minute,
+      int second, int millisecond) {
     final int y = year + (year < 0 ? 1 : 0);
     final int y1 = y - 1;
     final int years = 365 * y1 + floorDiv(y1, 4);
     final bool isLeap = _cal.isLeapYear(year);
-    final List<int> cumLengths = isLeap ? _cumMonthLengthsLeap : _cumMonthLengths;
+    final List<int> cumLengths =
+        isLeap ? _cumMonthLengthsLeap : _cumMonthLengths;
     final int dayInYear = (month > 1 ? cumLengths[month - 1] : 0) + day;
-    final double rdTime = ILibRataDie.timeToRd(hour, minute, second, millisecond);
+    final double rdTime =
+        ILibRataDie.timeToRd(hour, minute, second, millisecond);
     return years + dayInYear + rdTime;
   }
 
@@ -101,13 +137,15 @@ class JulianRataDie extends ILibRataDie {
 
   static int calcDayOfYear(int year, int month, int day) {
     final bool isLeap = _cal.isLeapYear(year);
-    final List<int> cumLengths = isLeap ? _cumMonthLengthsLeap : _cumMonthLengths;
+    final List<int> cumLengths =
+        isLeap ? _cumMonthLengthsLeap : _cumMonthLengths;
     return (month > 1 ? cumLengths[month - 1] : 0) + day;
   }
 
   static int calcMonthFromDayOfYear(int year, int dayOfYear) {
     final bool isLeap = _cal.isLeapYear(year);
-    final List<int> cumLengths = isLeap ? _cumMonthLengthsLeap : _cumMonthLengths;
+    final List<int> cumLengths =
+        isLeap ? _cumMonthLengthsLeap : _cumMonthLengths;
     for (int i = cumLengths.length - 1; i >= 1; i--) {
       if (dayOfYear > cumLengths[i - 1]) {
         return i;

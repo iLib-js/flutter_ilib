@@ -29,13 +29,13 @@ class ILibDateFmt {
 
     final Map<String, dynamic>? localeData =
         ILibLoader.instance.getLocaleData(_locale);
-    _formats = (localeData?['ilib.data.dateformats'] as Map<String, dynamic>?) ??
-        <String, dynamic>{};
+    _formats =
+        (localeData?['ilib.data.dateformats'] as Map<String, dynamic>?) ??
+            <String, dynamic>{};
     _sysres = (localeData?['ilib.data.sysres'] as Map<String, dynamic>?) ??
         <String, dynamic>{};
-    _zoneInfo =
-        (localeData?['ilib.data.zoneinfo'] as Map<String, dynamic>?) ??
-            <String, dynamic>{};
+    _zoneInfo = (localeData?['ilib.data.zoneinfo'] as Map<String, dynamic>?) ??
+        <String, dynamic>{};
     final dynamic rawDayPeriods = _formats['dayPeriods'];
     _dayPeriods =
         (rawDayPeriods is List<dynamic>) ? rawDayPeriods : <dynamic>[];
@@ -95,38 +95,120 @@ class ILibDateFmt {
     }
     final ILibCalendarDate calDate = (date is ILibDateOptions)
         ? _createCalendarDate(dateCalendar,
-            year: date.year, month: date.month, day: date.day,
-            hour: date.hour, minute: date.minute, second: date.second,
+            year: date.year,
+            month: date.month,
+            day: date.day,
+            hour: date.hour,
+            minute: date.minute,
+            second: date.second,
             millisecond: date.millisecond)
         : date as ILibCalendarDate;
     final double jd = calDate.getJulianDay();
     return _createCalendarDate(_calName, julianDay: jd);
   }
 
-  ILibCalendarDate _createCalendarDate(String calendar, {
-    int? year, int? month, int? day,
-    int? hour, int? minute, int? second, int? millisecond,
+  ILibCalendarDate _createCalendarDate(
+    String calendar, {
+    int? year,
+    int? month,
+    int? day,
+    int? hour,
+    int? minute,
+    int? second,
+    int? millisecond,
     double? julianDay,
   }) {
     switch (calendar) {
       case 'ethiopic':
-        return EthiopicDate(year: year, month: month, day: day, hour: hour, minute: minute, second: second, millisecond: millisecond, julianDay: julianDay);
+        return EthiopicDate(
+            year: year,
+            month: month,
+            day: day,
+            hour: hour,
+            minute: minute,
+            second: second,
+            millisecond: millisecond,
+            julianDay: julianDay);
       case 'coptic':
-        return CopticDate(year: year, month: month, day: day, hour: hour, minute: minute, second: second, millisecond: millisecond, julianDay: julianDay);
+        return CopticDate(
+            year: year,
+            month: month,
+            day: day,
+            hour: hour,
+            minute: minute,
+            second: second,
+            millisecond: millisecond,
+            julianDay: julianDay);
       case 'hebrew':
-        return HebrewDate(year: year, month: month, day: day, hour: hour, minute: minute, second: second, millisecond: millisecond, julianDay: julianDay);
+        return HebrewDate(
+            year: year,
+            month: month,
+            day: day,
+            hour: hour,
+            minute: minute,
+            second: second,
+            millisecond: millisecond,
+            julianDay: julianDay);
       case 'islamic':
-        return IslamicDate(year: year, month: month, day: day, hour: hour, minute: minute, second: second, millisecond: millisecond, julianDay: julianDay);
+        return IslamicDate(
+            year: year,
+            month: month,
+            day: day,
+            hour: hour,
+            minute: minute,
+            second: second,
+            millisecond: millisecond,
+            julianDay: julianDay);
       case 'julian':
-        return JulianDate(year: year, month: month, day: day, hour: hour, minute: minute, second: second, millisecond: millisecond, julianDay: julianDay);
+        return JulianDate(
+            year: year,
+            month: month,
+            day: day,
+            hour: hour,
+            minute: minute,
+            second: second,
+            millisecond: millisecond,
+            julianDay: julianDay);
       case 'persian':
-        return PersianDate(year: year, month: month, day: day, hour: hour, minute: minute, second: second, millisecond: millisecond, julianDay: julianDay);
+        return PersianDate(
+            year: year,
+            month: month,
+            day: day,
+            hour: hour,
+            minute: minute,
+            second: second,
+            millisecond: millisecond,
+            julianDay: julianDay);
       case 'persian-algo':
-        return PersianAlgoDate(year: year, month: month, day: day, hour: hour, minute: minute, second: second, millisecond: millisecond, julianDay: julianDay);
+        return PersianAlgoDate(
+            year: year,
+            month: month,
+            day: day,
+            hour: hour,
+            minute: minute,
+            second: second,
+            millisecond: millisecond,
+            julianDay: julianDay);
       case 'thaisolar':
-        return ThaiSolarDate(year: year, month: month, day: day, hour: hour, minute: minute, second: second, millisecond: millisecond, julianDay: julianDay);
+        return ThaiSolarDate(
+            year: year,
+            month: month,
+            day: day,
+            hour: hour,
+            minute: minute,
+            second: second,
+            millisecond: millisecond,
+            julianDay: julianDay);
       default:
-        return GregorianDate(year: year, month: month, day: day, hour: hour, minute: minute, second: second, millisecond: millisecond, julianDay: julianDay);
+        return GregorianDate(
+            year: year,
+            month: month,
+            day: day,
+            hour: hour,
+            minute: minute,
+            second: second,
+            millisecond: millisecond,
+            julianDay: julianDay);
     }
   }
 
@@ -195,25 +277,15 @@ class ILibDateFmt {
       case 'ethiopic':
         return <MeridiemsInfo>[
           MeridiemsInfo(
-              name: _getSysString('a0-ethiopic'),
-              start: '00:00',
-              end: '05:59'),
+              name: _getSysString('a0-ethiopic'), start: '00:00', end: '05:59'),
           MeridiemsInfo(
-              name: _getSysString('a1-ethiopic'),
-              start: '06:00',
-              end: '06:00'),
+              name: _getSysString('a1-ethiopic'), start: '06:00', end: '06:00'),
           MeridiemsInfo(
-              name: _getSysString('a2-ethiopic'),
-              start: '06:01',
-              end: '11:59'),
+              name: _getSysString('a2-ethiopic'), start: '06:01', end: '11:59'),
           MeridiemsInfo(
-              name: _getSysString('a3-ethiopic'),
-              start: '12:00',
-              end: '17:59'),
+              name: _getSysString('a3-ethiopic'), start: '12:00', end: '17:59'),
           MeridiemsInfo(
-              name: _getSysString('a4-ethiopic'),
-              start: '18:00',
-              end: '23:59'),
+              name: _getSysString('a4-ethiopic'), start: '18:00', end: '23:59'),
         ];
       default:
         return <MeridiemsInfo>[
@@ -268,9 +340,8 @@ class ILibDateFmt {
                 _timeComponents,
                 _length) ??
             '';
-        _template = order
-            .replaceAll('{date}', datePart)
-            .replaceAll('{time}', timePart);
+        _template =
+            order.replaceAll('{date}', datePart).replaceAll('{time}', timePart);
         break;
       case 'time':
         _template = _getFormat(
@@ -281,10 +352,8 @@ class ILibDateFmt {
             '';
         break;
       default:
-        _template = _getFormat(
-                calFormats['date'] as Map<String, dynamic>?,
-                _dateComponents,
-                _length) ??
+        _template = _getFormat(calFormats['date'] as Map<String, dynamic>?,
+                _dateComponents, _length) ??
             '';
         break;
     }
@@ -441,8 +510,12 @@ class ILibDateFmt {
     }
     final ILibDateOptions opts = date as ILibDateOptions;
     return _createCalendarDate(_calName,
-        year: opts.year, month: opts.month, day: opts.day,
-        hour: opts.hour, minute: opts.minute, second: opts.second,
+        year: opts.year,
+        month: opts.month,
+        day: opts.day,
+        hour: opts.hour,
+        minute: opts.minute,
+        second: opts.second,
         millisecond: opts.millisecond);
   }
 
@@ -679,8 +752,9 @@ class ILibDateFmt {
       }
 
       if (matches) {
-        final int length =
-            period.containsKey('at') ? 0 : ((period['to'] as int) - (period['from'] as int)).abs();
+        final int length = period.containsKey('at')
+            ? 0
+            : ((period['to'] as int) - (period['from'] as int)).abs();
         if (length < shortestLength) {
           shortestLength = length;
           final String periodCode = 'B$i';

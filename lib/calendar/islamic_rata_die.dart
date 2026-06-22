@@ -21,11 +21,21 @@ class IslamicRataDie extends ILibRataDie {
       _rd = ILibRataDie.snapToMillis(
           ILibRataDie.unixTimeToRd(unixtime) + 1721424.5 - epoch);
     } else if (ILibRataDie.hasDateComponents(
-        year: year, month: month, day: day, hour: hour,
-        minute: minute, second: second, millisecond: millisecond)) {
+        year: year,
+        month: month,
+        day: day,
+        hour: hour,
+        minute: minute,
+        second: second,
+        millisecond: millisecond)) {
       _rd = _dateToRd(
-        year ?? 1, month ?? 1, day ?? 1,
-        hour ?? 0, minute ?? 0, second ?? 0, millisecond ?? 0,
+        year ?? 1,
+        month ?? 1,
+        day ?? 1,
+        hour ?? 0,
+        minute ?? 0,
+        second ?? 0,
+        millisecond ?? 0,
       );
     } else {
       _rd = ILibRataDie.nowToRd(epoch);
@@ -35,7 +45,19 @@ class IslamicRataDie extends ILibRataDie {
   static const double epoch = 1948439.5;
 
   static const List<int> cumMonthLengths = <int>[
-    0, 30, 59, 89, 118, 148, 177, 207, 236, 266, 295, 325, 354
+    0,
+    30,
+    59,
+    89,
+    118,
+    148,
+    177,
+    207,
+    236,
+    266,
+    295,
+    325,
+    354
   ];
 
   late double _rd;
@@ -76,14 +98,15 @@ class IslamicRataDie extends ILibRataDie {
     return _onOrBefore(_rd + 7 + offset, dayOfWeek) - offset;
   }
 
-  static double _dateToRd(
-      int year, int month, int day, int hour, int minute, int second, int millisecond) {
+  static double _dateToRd(int year, int month, int day, int hour, int minute,
+      int second, int millisecond) {
     final int days = (year - 1) * 354 +
         (29.5 * (month - 1)).ceil() +
         day +
         floorDiv(3 + 11 * year, 30) -
         1;
-    final double rdTime = ILibRataDie.timeToRd(hour, minute, second, millisecond);
+    final double rdTime =
+        ILibRataDie.timeToRd(hour, minute, second, millisecond);
     return days + rdTime;
   }
 

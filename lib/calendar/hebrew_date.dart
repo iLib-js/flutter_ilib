@@ -19,12 +19,20 @@ class HebrewDate extends ILibCalendarDate {
       String? locale,
       String? timezone,
       bool? dst}) {
-    _timezone =
-        timezone ?? (locale != null ? ILibLocaleInfo(locale).getTimeZone() : null);
+    _timezone = timezone ??
+        (locale != null ? ILibLocaleInfo(locale).getTimeZone() : null);
     this.dst = dst;
-    final bool fromComponents = julianDay == null && rd == null && unixtime == null &&
-        ILibRataDie.hasDateComponents(year: year, month: month, day: day,
-            hour: hour, minute: minute, second: second, millisecond: millisecond);
+    final bool fromComponents = julianDay == null &&
+        rd == null &&
+        unixtime == null &&
+        ILibRataDie.hasDateComponents(
+            year: year,
+            month: month,
+            day: day,
+            hour: hour,
+            minute: minute,
+            second: second,
+            millisecond: millisecond);
     if (fromComponents) {
       _year = year ?? 0;
       _month = month ?? 7;
@@ -34,12 +42,18 @@ class HebrewDate extends ILibCalendarDate {
       _second = second ?? 0;
       _millisecond = millisecond ?? 0;
       _rataDie = HebrewRataDie(
-          year: year, month: month, day: day, hour: hour,
-          minute: minute, second: second, millisecond: millisecond);
-      _rataDie = HebrewRataDie(rataDie: adjustRdForTimezone(_rataDie.getRataDie()));
+          year: year,
+          month: month,
+          day: day,
+          hour: hour,
+          minute: minute,
+          second: second,
+          millisecond: millisecond);
+      _rataDie =
+          HebrewRataDie(rataDie: adjustRdForTimezone(_rataDie.getRataDie()));
     } else {
-      _rataDie = HebrewRataDie(
-          julianDay: julianDay, rataDie: rd, unixtime: unixtime);
+      _rataDie =
+          HebrewRataDie(julianDay: julianDay, rataDie: rd, unixtime: unixtime);
       _calcDateComponents();
     }
   }
@@ -71,8 +85,9 @@ class HebrewDate extends ILibCalendarDate {
     final double remainder = rd - newYearRd;
 
     final bool isLeap = _cal.isLeapYear(_year);
-    final List<int> table =
-        isLeap ? HebrewRataDie.cumMonthLengthsLeap : HebrewRataDie.cumMonthLengths;
+    final List<int> table = isLeap
+        ? HebrewRataDie.cumMonthLengthsLeap
+        : HebrewRataDie.cumMonthLengths;
 
     _month = 7;
     for (int i = 1; i <= table.length; i++) {

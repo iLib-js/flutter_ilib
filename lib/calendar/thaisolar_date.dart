@@ -20,12 +20,20 @@ class ThaiSolarDate extends ILibCalendarDate {
       String? locale,
       String? timezone,
       bool? dst}) {
-    _timezone =
-        timezone ?? (locale != null ? ILibLocaleInfo(locale).getTimeZone() : null);
+    _timezone = timezone ??
+        (locale != null ? ILibLocaleInfo(locale).getTimeZone() : null);
     this.dst = dst;
-    final bool fromComponents = julianDay == null && rd == null && unixtime == null &&
-        ILibRataDie.hasDateComponents(year: year, month: month, day: day,
-            hour: hour, minute: minute, second: second, millisecond: millisecond);
+    final bool fromComponents = julianDay == null &&
+        rd == null &&
+        unixtime == null &&
+        ILibRataDie.hasDateComponents(
+            year: year,
+            month: month,
+            day: day,
+            hour: hour,
+            minute: minute,
+            second: second,
+            millisecond: millisecond);
     if (fromComponents) {
       _year = year ?? 0;
       _month = month ?? 1;
@@ -35,10 +43,15 @@ class ThaiSolarDate extends ILibCalendarDate {
       _second = second ?? 0;
       _millisecond = millisecond ?? 0;
       _rataDie = ThaiSolarRataDie(
-          year: year, month: month, day: day, hour: hour,
-          minute: minute, second: second, millisecond: millisecond);
-      final double adjustedGregRd = adjustRdForTimezone(
-          _rataDie.getRataDie() - 198327);
+          year: year,
+          month: month,
+          day: day,
+          hour: hour,
+          minute: minute,
+          second: second,
+          millisecond: millisecond);
+      final double adjustedGregRd =
+          adjustRdForTimezone(_rataDie.getRataDie() - 198327);
       _rataDie = ThaiSolarRataDie(rataDie: adjustedGregRd + 198327);
     } else {
       _rataDie = ThaiSolarRataDie(
@@ -49,10 +62,34 @@ class ThaiSolarDate extends ILibCalendarDate {
 
   static final GregorianCal _cal = GregorianCal();
   static const List<int> _cumMonthLengths = <int>[
-    0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365
+    0,
+    31,
+    59,
+    90,
+    120,
+    151,
+    181,
+    212,
+    243,
+    273,
+    304,
+    334,
+    365
   ];
   static const List<int> _cumMonthLengthsLeap = <int>[
-    0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366
+    0,
+    31,
+    60,
+    91,
+    121,
+    152,
+    182,
+    213,
+    244,
+    274,
+    305,
+    335,
+    366
   ];
 
   late ThaiSolarRataDie _rataDie;
@@ -79,7 +116,8 @@ class ThaiSolarDate extends ILibCalendarDate {
 
     final int rdFloor = rd.floor();
     final bool isLeap = _cal.isLeapYear(gregYear);
-    final List<int> cumLengths = isLeap ? _cumMonthLengthsLeap : _cumMonthLengths;
+    final List<int> cumLengths =
+        isLeap ? _cumMonthLengthsLeap : _cumMonthLengths;
 
     final int y1 = gregYear - 1;
     final int yearStart = 365 * y1 +
@@ -128,7 +166,6 @@ class ThaiSolarDate extends ILibCalendarDate {
     final int gregYear = _year - 543;
     return GregRataDie.calcDayOfYear(gregYear, _month, _day);
   }
-
 
   @override
   double getRataDie() => _rataDie.getRataDie();

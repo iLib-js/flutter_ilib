@@ -20,12 +20,21 @@ class ThaiSolarRataDie extends ILibRataDie {
     } else if (unixtime != null) {
       _greg = GregRataDie(unixtime: unixtime);
     } else if (ILibRataDie.hasDateComponents(
-        year: year, month: month, day: day, hour: hour,
-        minute: minute, second: second, millisecond: millisecond)) {
+        year: year,
+        month: month,
+        day: day,
+        hour: hour,
+        minute: minute,
+        second: second,
+        millisecond: millisecond)) {
       _greg = GregRataDie(
         year: (year != null) ? year - 543 : null,
-        month: month, day: day, hour: hour,
-        minute: minute, second: second, millisecond: millisecond,
+        month: month,
+        day: day,
+        hour: hour,
+        minute: minute,
+        second: second,
+        millisecond: millisecond,
       );
     } else {
       _greg = GregRataDie();

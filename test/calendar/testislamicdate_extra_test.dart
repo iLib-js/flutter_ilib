@@ -9,7 +9,8 @@ void main() {
 
   group('IslamicDate from JD', () {
     test('basic JD', () {
-      final IslamicDate d = IslamicDate(julianDay: 2450138.5, timezone: 'Etc/UTC');
+      final IslamicDate d =
+          IslamicDate(julianDay: 2450138.5, timezone: 'Etc/UTC');
       expect(d.getYears(), 1416);
       expect(d.getMonths(), 10);
       expect(d.getDays(), 5);

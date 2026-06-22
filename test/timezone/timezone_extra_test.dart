@@ -176,37 +176,43 @@ void main() {
   group('DateTime input (ILibDateOptions.dateTime)', () {
     test('testTZGetOffsetDateTimeSummer', () {
       final ILibTimeZone tz = ILibTimeZone('America/Los_Angeles');
-      final ILibDateOptions gd = ILibDateOptions(dateTime: DateTime.utc(2011, 8, 1));
+      final ILibDateOptions gd =
+          ILibDateOptions(dateTime: DateTime.utc(2011, 8, 1));
       expect(tz.getOffset(gd), <String, int>{'h': -7});
     });
 
     test('testTZGetOffsetDateTimeWinter', () {
       final ILibTimeZone tz = ILibTimeZone('America/Los_Angeles');
-      final ILibDateOptions gd = ILibDateOptions(dateTime: DateTime.utc(2011, 12, 1));
+      final ILibDateOptions gd =
+          ILibDateOptions(dateTime: DateTime.utc(2011, 12, 1));
       expect(tz.getOffset(gd), <String, int>{'h': -8});
     });
 
     test('testTZInDaylightTimeDateTimeSummer', () {
       final ILibTimeZone tz = ILibTimeZone('America/Los_Angeles');
-      final ILibDateOptions gd = ILibDateOptions(dateTime: DateTime.utc(2011, 8, 1));
+      final ILibDateOptions gd =
+          ILibDateOptions(dateTime: DateTime.utc(2011, 8, 1));
       expect(tz.inDaylightTime(gd), true);
     });
 
     test('testTZInDaylightTimeDateTimeWinter', () {
       final ILibTimeZone tz = ILibTimeZone('America/Los_Angeles');
-      final ILibDateOptions gd = ILibDateOptions(dateTime: DateTime.utc(2011, 12, 1));
+      final ILibDateOptions gd =
+          ILibDateOptions(dateTime: DateTime.utc(2011, 12, 1));
       expect(tz.inDaylightTime(gd), false);
     });
 
     test('testTZDisplayNameDateTimeSummer', () {
       final ILibTimeZone tz = ILibTimeZone('America/Los_Angeles');
-      final ILibDateOptions gd = ILibDateOptions(dateTime: DateTime.utc(2011, 8, 1));
+      final ILibDateOptions gd =
+          ILibDateOptions(dateTime: DateTime.utc(2011, 8, 1));
       expect(tz.getDisplayName(gd, 'standard'), 'PDT');
     });
 
     test('testTZDisplayNameDateTimeWinter', () {
       final ILibTimeZone tz = ILibTimeZone('America/Los_Angeles');
-      final ILibDateOptions gd = ILibDateOptions(dateTime: DateTime.utc(2011, 12, 1));
+      final ILibDateOptions gd =
+          ILibDateOptions(dateTime: DateTime.utc(2011, 12, 1));
       expect(tz.getDisplayName(gd, 'standard'), 'PST');
     });
   });
@@ -300,15 +306,22 @@ void main() {
       // 2011-03-13 02:30 local does not exist. JS uses the pre-transition PST (-8h):
       // 02:30 -> 10:30 UTC, NOT the post-transition PDT (-7h -> 09:30 UTC).
       final GregorianDate gd = GregorianDate(
-          year: 2011, month: 3, day: 13, hour: 2, minute: 30, timezone: 'local');
-      expect(gd.getTime(), DateTime.utc(2011, 3, 13, 10, 30).millisecondsSinceEpoch);
+          year: 2011,
+          month: 3,
+          day: 13,
+          hour: 2,
+          minute: 30,
+          timezone: 'local');
+      expect(gd.getTime(),
+          DateTime.utc(2011, 3, 13, 10, 30).millisecondsSinceEpoch);
     });
 
     test('testTZLocalNonGapUsesEngineOffset', () {
       // A normal summer wall time is not in a gap: PDT (-7h), 02:30 -> 09:30 UTC.
       final GregorianDate gd = GregorianDate(
           year: 2011, month: 7, day: 1, hour: 2, minute: 30, timezone: 'local');
-      expect(gd.getTime(), DateTime.utc(2011, 7, 1, 9, 30).millisecondsSinceEpoch);
+      expect(
+          gd.getTime(), DateTime.utc(2011, 7, 1, 9, 30).millisecondsSinceEpoch);
     });
   });
 }

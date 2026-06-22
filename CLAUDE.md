@@ -212,15 +212,13 @@ lib/
 > (+ `calendar-conversion.md`, `local-timezone-support.md`) **before** changing it.
 
 ### Code Style
-- Must pass `flutter analyze`
-- **Formatting — do NOT run `dart format` tree-wide.** The repo was formatted with an older
-  Dart (short style, ~100-col width) that the **Dart 3.7+ formatter cannot reproduce**, and the
-  files are mixed (some at width 80, some at 100). On Dart 3.8 neither `dart format` (defaults to
-  width 80) nor `dart format --line-length 100` (the deprecated flag silently switches to the new
-  "tall" style) reproduces the committed style — both reformat large swaths of untouched code into
-  huge noise diffs. **Match the surrounding style of the file you edit by hand** (short style,
-  ≤100 cols); leave other files untouched. A repo-wide reformat (pick tall or short + pin the
-  Dart SDK) should be its own separate commit, not mixed into feature work.
+- `flutter analyze` must pass for the converted code (`lib/` minus the 4 unported classes and
+  their tests — those still reference the removed `ILibJS` and report errors until ported).
+- **Formatting — run `dart format`.** The repo is formatted with the **short style at
+  `page_width: 80`** (set in `analysis_options.yaml`; short because the package SDK floor is
+  < 3.7). Format-on-save is fine; run `dart format .` before committing. Switching to the modern
+  "tall" style would require raising the SDK floor to ≥ 3.7 and a one-time repo-wide reformat in
+  its own commit.
 - Explicit type declarations (`always_specify_types`)
 - Single quotes, `@override` annotation
 - No unnecessary comments

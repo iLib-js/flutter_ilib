@@ -2,7 +2,18 @@ import '../ilib_calendar.dart';
 
 class IslamicCal implements ILibCalendar {
   static const List<int> _monthLengths = <int>[
-    30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29
+    30,
+    29,
+    30,
+    29,
+    30,
+    29,
+    30,
+    29,
+    30,
+    29,
+    30,
+    29
   ];
 
   @override

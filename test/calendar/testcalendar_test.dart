@@ -6,7 +6,12 @@ void main() {
   setUpAll(() async {
     await ILibLoader.instance.loadJSON();
     for (final String locale in <String>[
-      'ar-AE', 'km-KH', 'az-Latn-AZ', 'si-LK', 'sw-Latn-KE', 'th-TH'
+      'ar-AE',
+      'km-KH',
+      'az-Latn-AZ',
+      'si-LK',
+      'sw-Latn-KE',
+      'th-TH'
     ]) {
       await ILibLoader.instance.loadILibLocaleData(locale);
     }
@@ -23,8 +28,15 @@ void main() {
     // Dart port (see CLAUDE.md Deferred Work) and ILibCalendar('han') throws.
     test('testGetCalendars', () {
       expect(ILibCalendar.getCalendars().toSet(), <String>{
-        'gregorian', 'thaisolar', 'julian', 'islamic', 'persian',
-        'persian-algo', 'ethiopic', 'coptic', 'hebrew'
+        'gregorian',
+        'thaisolar',
+        'julian',
+        'islamic',
+        'persian',
+        'persian-algo',
+        'ethiopic',
+        'coptic',
+        'hebrew'
       });
     });
 
@@ -48,8 +60,15 @@ void main() {
     // dispatch coverage for all types in the one factory test file.
     test('testCalendarFactoryAllTypes', () {
       for (final String type in <String>[
-        'gregorian', 'thaisolar', 'julian', 'islamic', 'persian',
-        'persian-algo', 'ethiopic', 'coptic', 'hebrew'
+        'gregorian',
+        'thaisolar',
+        'julian',
+        'islamic',
+        'persian',
+        'persian-algo',
+        'ethiopic',
+        'coptic',
+        'hebrew'
       ]) {
         expect(ILibCalendar(type).getType(), type);
       }
