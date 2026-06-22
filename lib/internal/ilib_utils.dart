@@ -51,7 +51,7 @@ List<String> getJSONDataPaths(String? locale) {
   paths.add('$base/$language.json');
 
   if (script != null) {
-    paths.add('$base/und_$script.json');
+    paths.add('$base/und-$script.json');
     paths.add('$base/$language-$script.json');
   }
 

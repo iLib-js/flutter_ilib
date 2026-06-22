@@ -65,7 +65,7 @@ Parse with ILibLocale → extract language, script, region
 Apply path generation rules:
   • root.json (always first)
   • {language}.json (if language exists)
-  • und_{script}.json (if script exists)
+  • und-{script}.json (if script exists)
   • {language}-{script}.json (if both exist)
   • und-{region}.json (if region exists)
   • {language}-{region}.json (if both exist)
@@ -81,7 +81,7 @@ Output: Array of file paths in priority order
 | `"ko"` | `[root.json, ko.json]` |
 | `"en-US"` | `[root.json, en.json, und-US.json, en-US.json]` |
 | `"MK"` (region) | `[root.json, und-MK.json]` |
-| `"zh-Hans-CN"` | `[root.json, zh.json, und_Hans.json, zh-Hans.json, und-CN.json, zh-CN.json, zh-Hans-CN.json]` |
+| `"zh-Hans-CN"` | `[root.json, zh.json, und-Hans.json, zh-Hans.json, und-CN.json, zh-CN.json, zh-Hans-CN.json]` |
 
 ### Deep Merge Strategy
 
@@ -342,10 +342,9 @@ bool isValidLocale(String lo) {
 
 ### 2. Path Normalization
 
-**Regions**: Use hyphens `und-{REGION}.json` (not underscore)  
-**Scripts**: Keep underscore `und_{SCRIPT}.json`
+Both region and script `und-*` fallbacks use a **hyphen**: `und-{REGION}.json`, `und-{SCRIPT}.json`.
 
-**Rationale**: Consistency with existing file naming conventions
+**Rationale**: Consistency with the bundled file naming (all `und-*` files use a hyphen).
 
 ### 3. Test Coverage Updates
 

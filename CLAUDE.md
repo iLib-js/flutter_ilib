@@ -72,9 +72,14 @@ Options → ILibLocaleInfo (determines locale, calendar, clock, meridiems)
 | ILibAstro | `lib/calendar/ilib_astro.dart` | Astronomical calculation (`ilib.data.astro`) |
 | ILibDateOptions | `lib/ilib_date.dart` | `_toCalendarDate()` delegates per calendar |
 
-### Remaining (Still uses ILibJS)
-| Class | File | ILibJS Calls |
-|-------|------|--------------|
+### Not yet ported (currently non-functional)
+The `ILibJS` interop bridge was removed in v2.0, but these classes were never converted to pure
+Dart — they still contain `ILibJS.instance.evaluate()` calls that no longer resolve, so they **do
+not compile and are not exported** from `flutter_ilib.dart`. Porting them is the remaining work
+(the count is the number of `evaluate()` calls to replace).
+
+| Class | File | `evaluate()` calls to port |
+|-------|------|----------------------------|
 | ILibCountry | `lib/ilib_country.dart` | 5 |
 | ILibScriptInfo | `lib/ilib_scriptinfo.dart` | 7 |
 | ILibDurationFmt | `lib/ilib_durationfmt.dart` | 4 |
@@ -139,13 +144,13 @@ flutter analyze lib/{source_file}
 - `loadILibLocaleData(locale)` — loads additional locale
 - JSON load order (least → most specific, deep-merged; **missing files are skipped**):
   `root.json` → `{lang}.json`
-  → *(if script)* `und_{script}.json` → `{lang}-{script}.json`
+  → *(if script)* `und-{script}.json` → `{lang}-{script}.json`
   → *(if region)* `und-{region}.json` → `{lang}-{region}.json`
   → *(if script **and** region)* `{lang}-{script}-{region}.json`
-  - Naming gotcha: the **script** fallback uses an **underscore** (`und_Hans.json`); the
-    **region** fallback uses a **hyphen** (`und-CN.json`).
+  - All `und-*` fallbacks use a hyphen (`und-Hans.json`, `und-CN.json`), matching the bundled
+    file naming.
   - e.g. `en-US`: `root` → `en` → `und-US` → `en-US`
-  - e.g. `zh-Hans-CN`: `root` → `zh` → `und_Hans` → `zh-Hans` → `und-CN` → `zh-CN` → `zh-Hans-CN`
+  - e.g. `zh-Hans-CN`: `root` → `zh` → `und-Hans` → `zh-Hans` → `und-CN` → `zh-CN` → `zh-Hans-CN`
   - (Implemented in `getJSONDataPaths()` in `lib/internal/ilib_utils.dart`.)
 
 ### JSON Data Keys
@@ -273,8 +278,9 @@ For in-depth explanations, see `docs/`:
   Strategy B (`flutter_timezone`) is only needed if `getId()` must return the real zone name
   (e.g. `Asia/Seoul`) instead of `'local'`. See
   [docs/local-timezone-support.md](docs/local-timezone-support.md).
-- The 4 classes still on JS interop (`ILibCountry`, `ILibScriptInfo`, `ILibDurationFmt`,
-  `ILibNumFmt`) — see Conversion Status.
+- The 4 unported classes (`ILibCountry`, `ILibScriptInfo`, `ILibDurationFmt`, `ILibNumFmt`) — they
+  still call the now-removed `ILibJS`, so they don't compile / aren't exported; see Conversion
+  Status.
 
 ## Running Tests
 ```bash
