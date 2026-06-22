@@ -11,7 +11,7 @@ name instead of `'local'` (see the last section).
 Implementation summary:
 - `lib/ilib_timezone.dart`: `_isLocal`, `_offsetJan1`/`_offsetJun1` sampled in the
   constructor; `isLocal` branches in `getOffsetMinutes`/`inDaylightTime`/`_useDaylightTime`;
-  injectable static hooks `sysOffsetMinutes`/`sysOffsetMinutesForInstant`/`sampleYear` (for
+  injectable static hooks `sysWallOffsetMinutes`/`sysOffsetMinutesForInstant`/`sampleYear` (for
   hermetic tests).
 - `lib/calendar/ilib_date.dart`: `adjustRdForTimezone`/`calcTimezoneOffset` only short-circuit
   on a `null` raw `_timezone`; `'local'` flows to `ILibTimeZone('local')`.

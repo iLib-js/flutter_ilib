@@ -213,8 +213,8 @@ Unix time. `ILibDateFmt` formats an `ILibDate` according to locale conventions.
 final date = ILibDateOptions(
   year: 2011, month: 9, day: 29,
   hour: 13, minute: 45, second: 0,
-  timezone: 'Etc/UTC',     // omitted ⇒ 'local' (system tz); see local-timezone-support.md
-  calendar: 'gregorian',   // omitted ⇒ locale default / gregorian
+  timezone: 'America/New_York',  // omitted ⇒ 'local' (system tz), unless a locale is set (its zone wins)
+  calendar: 'gregorian',         // omitted ⇒ locale default / gregorian
   locale: 'en-US',
 );
 
@@ -269,7 +269,7 @@ List<MeridiemsInfo> getMeridiemsRange();
 ### Examples
 
 ```dart
-final date = ILibDateOptions(year: 2011, month: 9, day: 29, timezone: 'Etc/UTC');
+final date = ILibDateOptions(year: 2011, month: 9, day: 29);
 
 // Short date
 print(ILibDateFmt(ILibDateFmtOptions(length: 'short')).format(date));   // '9/29/11'
@@ -279,8 +279,7 @@ print(ILibDateFmt(ILibDateFmtOptions(locale: 'en-US', length: 'long')).format(da
 // 'September 29, 2011'
 
 // Time only
-final t = ILibDateOptions(
-  year: 2011, month: 9, day: 29, hour: 13, minute: 45, timezone: 'Etc/UTC');
+final t = ILibDateOptions(year: 2011, month: 9, day: 29, hour: 13, minute: 45);
 print(ILibDateFmt(ILibDateFmtOptions(length: 'short', type: 'time')).format(t));  // '1:45 PM'
 ```
 

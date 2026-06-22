@@ -8,7 +8,7 @@ maintained: true
 
 # flutter_ilib Quick Reference
 
-**flutter_ilib** is a Flutter plugin wrapper that conveniently enables [iLib](https://github.com/iLib-js/iLib) library for internationalization (i18n) in Flutter apps.
+**flutter_ilib** is a Flutter internationalization (i18n) plugin based on [iLib](https://github.com/iLib-js/iLib) — implemented in pure Dart (v2.0+), reading iLib's CLDR locale data directly with no JavaScript runtime.
 
 ## Key Facts
 
@@ -47,11 +47,11 @@ print(info.getDecimalSeparator());  // '.'
 
 ### Date Formatting
 ```dart
-final date = ILibDate(DateTime.now());
-final formatted = date.format(ILibDateFmtOptions(
+final date = ILibDateOptions(year: 2026, month: 5, day: 6);
+final formatted = ILibDateFmt(ILibDateFmtOptions(
   locale: 'ko-KR',
-  length: 'long'
-));
+  length: 'long',
+)).format(date);
 ```
 
 ### Locale Parsing
@@ -81,16 +81,21 @@ Valid patterns:
 lib/
 ├── ilib_locale.dart         (Locale parsing)
 ├── ilib_localeinfo.dart     (Locale info)
-├── ilib_date.dart           (Date formatting)
+├── ilib_date.dart           (Date options/calculation)
+├── ilib_datefmt.dart        (Date/time formatting)
+├── ilib_timezone.dart       (Timezone / DST)
+├── ilib_calendar.dart       (Calendar factory; + calendar/ for the 9 calendars)
 ├── ilib_casemapper.dart     (Case conversion)
+├── ilib_init.dart           (ILibLoader: data load/merge)
 └── internal/
     └── ilib_utils.dart      (Utilities)
 
 assets/locale/
-├── root.json                (Base defaults)
-├── {language}.json          (Language files)
-├── und-{REGION}.json        (Region files)
-└── {language}-{REGION}.json (Full locale)
+├── root.json                       (Base defaults)
+├── {language}.json                 (Language files)
+├── und-{script}.json               (Script fallback, e.g. und-Hans)
+├── und-{region}.json               (Region fallback, e.g. und-US)
+└── {language}-{script}-{region}.json  (e.g. zh-Hans-CN)
 ```
 
 ## Quick Commands
@@ -129,10 +134,10 @@ info.getClock()              // '12' or '24'
 info.getDecimalSeparator()   // '.'
 ```
 
-### ILibDate
+### ILibDate / ILibDateFmt
 ```dart
-ILibDate(DateTime)
-date.format(ILibDateFmtOptions(...))
+final date = ILibDateOptions(year: ..., month: ..., day: ...);
+ILibDateFmt(ILibDateFmtOptions(...)).format(date)
 ```
 
 ### ILibCaseMapper
