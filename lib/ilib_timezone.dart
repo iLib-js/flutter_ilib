@@ -100,9 +100,11 @@ class ILibTimeZone {
           DateTime(y, m, d, h, mi).timeZoneOffset.inMinutes.toDouble();
 
   /// System time-zone offset (minutes east of UTC) at a given Unix-millis instant.
-  static double Function(int instantMs) sysOffsetMinutesForInstant =
-      (int ms) =>
-          DateTime.fromMillisecondsSinceEpoch(ms).timeZoneOffset.inMinutes.toDouble();
+  static double Function(int instantMs) sysOffsetMinutesForInstant = (int ms) =>
+      DateTime.fromMillisecondsSinceEpoch(ms)
+          .timeZoneOffset
+          .inMinutes
+          .toDouble();
 
   /// The year whose Jan/Jun offsets are sampled to classify standard vs daylight.
   static int Function() sampleYear = () => DateTime.now().year;
@@ -140,8 +142,9 @@ class ILibTimeZone {
         // wall clock is interpreted as if standard time still applied.
         // The Gregorian wall components are derived from the instant (calendar-agnostic),
         // since date.year/month/day are in the date's own calendar (ThaiSolar/Persian).
-        final DateTime wall =
-            DateTime.fromMillisecondsSinceEpoch(_instantMillis(date), isUtc: true);
+        final DateTime wall = DateTime.fromMillisecondsSinceEpoch(
+            _instantMillis(date),
+            isUtc: true);
         final double dOff = sysWallOffsetMinutes(
             wall.year, wall.month, wall.day, wall.hour, wall.minute);
         final double hbOff = sysWallOffsetMinutes(
@@ -154,9 +157,11 @@ class ILibTimeZone {
         return sysOffsetMinutesForInstant(_instantMillis(date));
       }
       // dst flag set (DST-end overlap): data-driven, mirrors JS dst-defined path.
-      return _offset + (inDaylightTime(date, wallTime: wallTime) ? _dstSavings : 0);
+      return _offset +
+          (inDaylightTime(date, wallTime: wallTime) ? _dstSavings : 0);
     }
-    return _offset + (inDaylightTime(date, wallTime: wallTime) ? _dstSavings : 0);
+    return _offset +
+        (inDaylightTime(date, wallTime: wallTime) ? _dstSavings : 0);
   }
 
   static int _instantMillis(ILibDate date) =>
@@ -164,7 +169,8 @@ class ILibTimeZone {
 
   String getOffsetStr(ILibDate date) => _minutesToStr(getOffsetMinutes(date));
 
-  int getOffsetMillis(ILibDate date) => (getOffsetMinutes(date) * 60000).round();
+  int getOffsetMillis(ILibDate date) =>
+      (getOffsetMinutes(date) * 60000).round();
 
   int getRawOffsetMillis() => (_offset * 60000).round();
 
@@ -182,8 +188,7 @@ class ILibTimeZone {
         final String? n = _zone!['n'] as String?;
         if (n != null) {
           if (n.contains('{c}')) {
-            final String str =
-                inDaylightTime(date) ? 'Daylight' : 'Standard';
+            final String str = inDaylightTime(date) ? 'Daylight' : 'Standard';
             return n.replaceAll('{c}', str);
           }
           return n;
@@ -280,9 +285,7 @@ class ILibTimeZone {
     if (_isLocal) {
       return _offsetJan1 != _offsetJun1;
     }
-    return _zone != null &&
-        _zone!.containsKey('s') &&
-        _zone!.containsKey('e');
+    return _zone != null && _zone!.containsKey('s') && _zone!.containsKey('e');
   }
 
   double _calcRuleStart(Map<String, dynamic> rule, int year) {
@@ -360,8 +363,7 @@ class ILibTimeZone {
 
   static double _toRd(int year, int month, int day,
       [int hour = 0, int minute = 0, int second = 0]) {
-    final int correction =
-        month <= 2 ? 0 : (_isLeapYear(year) ? -1 : -2);
+    final int correction = month <= 2 ? 0 : (_isLeapYear(year) ? -1 : -2);
 
     final int rd = 365 * (year - 1) +
         (year - 1) ~/ 4 -
@@ -380,7 +382,19 @@ class ILibTimeZone {
 
   static int _getMonthLength(int month, int year) {
     const List<int> lengths = <int>[
-      0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
+      0,
+      31,
+      28,
+      31,
+      30,
+      31,
+      30,
+      31,
+      31,
+      30,
+      31,
+      30,
+      31
     ];
     if (month == 2 && _isLeapYear(year)) {
       return 29;

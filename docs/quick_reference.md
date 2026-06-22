@@ -100,7 +100,8 @@ assets/locale/
 flutter pub get
 flutter test
 
-# Analyze (do NOT run `dart format` tree-wide — see development.md › Code Style)
+# Format & analyze
+dart format .
 flutter analyze
 
 # Run specific test

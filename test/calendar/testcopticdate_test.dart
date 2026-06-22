@@ -50,13 +50,25 @@ void main() {
       expect(crd.getRataDie(), isNotNull);
     });
     test('testCopticRataDieConstructorComponents', () {
-      final CopticRataDie crd =
-          CopticRataDie(year: 1, month: 1, day: 1, hour: 0, minute: 0, second: 0, millisecond: 0);
+      final CopticRataDie crd = CopticRataDie(
+          year: 1,
+          month: 1,
+          day: 1,
+          hour: 0,
+          minute: 0,
+          second: 0,
+          millisecond: 0);
       expect(crd.getRataDie(), 1);
     });
     test('testCopticRataDieConstructorComponentsBig', () {
       final CopticRataDie crd = CopticRataDie(
-          year: 1731, month: 2, day: 19, hour: 12, minute: 30, second: 12, millisecond: 0);
+          year: 1731,
+          month: 2,
+          day: 19,
+          hour: 12,
+          minute: 30,
+          second: 12,
+          millisecond: 0);
       expect(crd.getRataDie(), 631931.5209722222);
     });
     test('testCopticRataDieConstructorRD', () {
@@ -132,7 +144,8 @@ void main() {
       expect(cd.getYears(), isNotNull);
     });
     test('testCopticDateConstructorFromJD', () {
-      final CopticDate cd = CopticDate(julianDay: 1825395.5, timezone: 'Etc/UTC');
+      final CopticDate cd =
+          CopticDate(julianDay: 1825395.5, timezone: 'Etc/UTC');
       expect(cd.getYears(), 2);
       expect(cd.getMonths(), 1);
       expect(cd.getDays(), 2);
@@ -158,7 +171,8 @@ void main() {
 
   group('CopticDate after leap year', () {
     test('testCopticDateAfterLeapYear', () {
-      final CopticDate cd = CopticDate(julianDay: 1826125.5, timezone: 'Etc/UTC');
+      final CopticDate cd =
+          CopticDate(julianDay: 1826125.5, timezone: 'Etc/UTC');
       expect(cd.getYears(), 4);
       expect(cd.getMonths(), 1);
       expect(cd.getDays(), 1);
@@ -171,7 +185,8 @@ void main() {
 
   group('CopticDate from RD month/year transitions', () {
     test('testCopticDateFirstMonthEndRightBeforeDateChange', () {
-      final CopticDate cd = CopticDate(rd: 632263.9583333333, timezone: 'Etc/UTC');
+      final CopticDate cd =
+          CopticDate(rd: 632263.9583333333, timezone: 'Etc/UTC');
       expect(cd.getYears(), 1732);
       expect(cd.getMonths(), 1);
       expect(cd.getDays(), 15);
@@ -181,7 +196,8 @@ void main() {
       expect(cd.getMilliseconds(), 0);
     });
     test('testCopticDateSecondMonthStartNoonAfterDateChange', () {
-      final CopticDate cd = CopticDate(rd: 632265.2083333333, timezone: 'Etc/UTC');
+      final CopticDate cd =
+          CopticDate(rd: 632265.2083333333, timezone: 'Etc/UTC');
       expect(cd.getYears(), 1732);
       expect(cd.getMonths(), 1);
       expect(cd.getDays(), 17);
@@ -309,7 +325,8 @@ void main() {
     for (int i = 0; i < testDatesCoptic.length; i++) {
       final List<num> td = testDatesCoptic[i];
       test('testCopticDateConvert$i', () {
-        final CopticDate cd = CopticDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
+        final CopticDate cd =
+            CopticDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
         expect(cd.getYears(), td[1]);
         expect(cd.getMonths(), td[2]);
         expect(cd.getDays(), td[3]);
@@ -325,7 +342,8 @@ void main() {
     for (int i = 0; i < testDatesCoptic.length; i++) {
       final List<num> td = testDatesCoptic[i];
       test('testCopticDateGetDayOfWeek$i', () {
-        final CopticDate cd = CopticDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
+        final CopticDate cd =
+            CopticDate(julianDay: td[0].toDouble(), timezone: 'Etc/UTC');
         expect(cd.getDayOfWeek(), td[8]);
       });
     }
@@ -373,27 +391,45 @@ void main() {
 
   group('CopticDate getTime', () {
     test('testCopticDateTestGetTimeZero', () {
-      final CopticDate cd = CopticDate(year: 1686, month: 4, day: 23, hour: 0, timezone: 'Etc/UTC');
+      final CopticDate cd = CopticDate(
+          year: 1686, month: 4, day: 23, hour: 0, timezone: 'Etc/UTC');
       expect(cd.getTime(), 0);
     });
     test('testCopticDateTestGetTime', () {
-      final CopticDate cd =
-          CopticDate(year: 1686, month: 4, day: 23, hour: 3, minute: 30, timezone: 'Etc/UTC');
+      final CopticDate cd = CopticDate(
+          year: 1686,
+          month: 4,
+          day: 23,
+          hour: 3,
+          minute: 30,
+          timezone: 'Etc/UTC');
       expect(cd.getTime(), 12600000);
     });
     test('testCopticDateTestGetTimeTooEarly', () {
-      final CopticDate cd =
-          CopticDate(year: 1686, month: 4, day: 22, hour: 23, timezone: 'Etc/UTC');
+      final CopticDate cd = CopticDate(
+          year: 1686, month: 4, day: 22, hour: 23, timezone: 'Etc/UTC');
       expect(cd.getTime(), -1);
     });
     test('testCopticDateTestGetTimeTooLate', () {
       final CopticDate cd = CopticDate(
-          year: 1754, month: 5, day: 11, hour: 3, minute: 14, second: 8, timezone: 'Etc/UTC');
+          year: 1754,
+          month: 5,
+          day: 11,
+          hour: 3,
+          minute: 14,
+          second: 8,
+          timezone: 'Etc/UTC');
       expect(cd.getTime(), -1);
     });
     test('testCopticDateTestGetTimeExtendedNotTooLate', () {
       final CopticDate cd = CopticDate(
-          year: 1754, month: 5, day: 11, hour: 3, minute: 14, second: 8, timezone: 'Etc/UTC');
+          year: 1754,
+          month: 5,
+          day: 11,
+          hour: 3,
+          minute: 14,
+          second: 8,
+          timezone: 'Etc/UTC');
       expect(cd.getTimeExtended(), 2147483648000);
     });
   });
@@ -413,10 +449,11 @@ void main() {
       expect(cd2.getSeconds(), cd.getSeconds());
     });
     test('testCopticDateRoundTripConstruction2', () {
-      final CopticDate cd =
-          CopticDate(year: 1738, month: 10, day: 20, timezone: 'America/Los_Angeles');
+      final CopticDate cd = CopticDate(
+          year: 1738, month: 10, day: 20, timezone: 'America/Los_Angeles');
       final int u = cd.getTime();
-      final CopticDate cd2 = CopticDate(unixtime: u, timezone: 'America/Los_Angeles');
+      final CopticDate cd2 =
+          CopticDate(unixtime: u, timezone: 'America/Los_Angeles');
       expect(cd2.getTimeZone(), cd.getTimeZone());
       expect(cd2.getYears(), cd.getYears());
       expect(cd2.getMonths(), cd.getMonths());
@@ -438,43 +475,48 @@ void main() {
   group('CopticDate convert from julianday', () {
     test('testCopticDateConvertYears', () {
       for (int i = 0; i < testDatesCoptic.length; i++) {
-        final CopticDate cd =
-            CopticDate(julianDay: testDatesCoptic[i][0].toDouble(), timezone: 'Etc/UTC');
-        expect(cd.getYears(), testDatesCoptic[i][1], reason: 'jd=${testDatesCoptic[i][0]}');
+        final CopticDate cd = CopticDate(
+            julianDay: testDatesCoptic[i][0].toDouble(), timezone: 'Etc/UTC');
+        expect(cd.getYears(), testDatesCoptic[i][1],
+            reason: 'jd=${testDatesCoptic[i][0]}');
       }
     });
     test('testCopticDateConvertMonths', () {
       for (int i = 0; i < testDatesCoptic.length; i++) {
-        final CopticDate cd =
-            CopticDate(julianDay: testDatesCoptic[i][0].toDouble(), timezone: 'Etc/UTC');
-        expect(cd.getMonths(), testDatesCoptic[i][2], reason: 'jd=${testDatesCoptic[i][0]}');
+        final CopticDate cd = CopticDate(
+            julianDay: testDatesCoptic[i][0].toDouble(), timezone: 'Etc/UTC');
+        expect(cd.getMonths(), testDatesCoptic[i][2],
+            reason: 'jd=${testDatesCoptic[i][0]}');
       }
     });
     test('testCopticDateConvertDays', () {
       for (int i = 0; i < testDatesCoptic.length; i++) {
-        final CopticDate cd =
-            CopticDate(julianDay: testDatesCoptic[i][0].toDouble(), timezone: 'Etc/UTC');
-        expect(cd.getDays(), testDatesCoptic[i][3], reason: 'jd=${testDatesCoptic[i][0]}');
+        final CopticDate cd = CopticDate(
+            julianDay: testDatesCoptic[i][0].toDouble(), timezone: 'Etc/UTC');
+        expect(cd.getDays(), testDatesCoptic[i][3],
+            reason: 'jd=${testDatesCoptic[i][0]}');
       }
     });
     test('testCopticDateConvertHours', () {
       for (int i = 0; i < testDatesCoptic.length; i++) {
-        final CopticDate cd =
-            CopticDate(julianDay: testDatesCoptic[i][0].toDouble(), timezone: 'Etc/UTC');
-        expect(cd.getHours(), testDatesCoptic[i][4], reason: 'jd=${testDatesCoptic[i][0]}');
+        final CopticDate cd = CopticDate(
+            julianDay: testDatesCoptic[i][0].toDouble(), timezone: 'Etc/UTC');
+        expect(cd.getHours(), testDatesCoptic[i][4],
+            reason: 'jd=${testDatesCoptic[i][0]}');
       }
     });
     test('testCopticDateConvertDayOfWeek', () {
       for (int i = 0; i < testDatesCoptic.length; i++) {
-        final CopticDate cd =
-            CopticDate(julianDay: testDatesCoptic[i][0].toDouble(), timezone: 'Etc/UTC');
-        expect(cd.getDayOfWeek(), testDatesCoptic[i][8], reason: 'jd=${testDatesCoptic[i][0]}');
+        final CopticDate cd = CopticDate(
+            julianDay: testDatesCoptic[i][0].toDouble(), timezone: 'Etc/UTC');
+        expect(cd.getDayOfWeek(), testDatesCoptic[i][8],
+            reason: 'jd=${testDatesCoptic[i][0]}');
       }
     });
     test('testCopticDateConvertOther', () {
       for (int i = 0; i < testDatesCoptic.length; i++) {
-        final CopticDate cd =
-            CopticDate(julianDay: testDatesCoptic[i][0].toDouble(), timezone: 'Etc/UTC');
+        final CopticDate cd = CopticDate(
+            julianDay: testDatesCoptic[i][0].toDouble(), timezone: 'Etc/UTC');
         expect(cd.getMinutes(), testDatesCoptic[i][5],
             reason: 'jd=${testDatesCoptic[i][0]} minutes');
         expect(cd.getSeconds(), testDatesCoptic[i][6],
@@ -495,7 +537,8 @@ void main() {
             millisecond: testDatesCoptic[i][7] as int,
             timezone: 'Etc/UTC');
         expect(cd.getJulianDay(), testDatesCoptic[i][0], reason: 'index=$i');
-        expect(cd.getDayOfWeek(), testDatesCoptic[i][8], reason: 'index=$i dayOfWeek');
+        expect(cd.getDayOfWeek(), testDatesCoptic[i][8],
+            reason: 'index=$i dayOfWeek');
       }
     });
   });
@@ -537,15 +580,18 @@ void main() {
     });
 
     test('testCopticDateGetTimeZoneByLocaleDE', () {
-      final CopticDate cd = CopticDate(year: 1735, month: 3, day: 8, locale: 'de-DE');
+      final CopticDate cd =
+          CopticDate(year: 1735, month: 3, day: 8, locale: 'de-DE');
       expect(cd.getTimeZone(), 'Europe/Berlin');
     });
     test('testCopticDateGetTimeZoneByLocaleJP', () {
-      final CopticDate cd = CopticDate(year: 1735, month: 3, day: 8, locale: 'ja-JP');
+      final CopticDate cd =
+          CopticDate(year: 1735, month: 3, day: 8, locale: 'ja-JP');
       expect(cd.getTimeZone(), 'Asia/Tokyo');
     });
     test('testCopticDateGetTimeZoneByLocaleBogus', () {
-      final CopticDate cd = CopticDate(year: 1735, month: 3, day: 8, locale: 'zz-ZZ');
+      final CopticDate cd =
+          CopticDate(year: 1735, month: 3, day: 8, locale: 'zz-ZZ');
       expect(cd.getTimeZone(), 'Etc/UTC');
     });
   });

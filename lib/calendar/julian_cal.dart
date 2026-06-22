@@ -2,7 +2,18 @@ import '../ilib_calendar.dart';
 
 class JulianCal implements ILibCalendar {
   static const List<int> _monthLengths = <int>[
-    31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
+    31,
+    28,
+    31,
+    30,
+    31,
+    30,
+    31,
+    31,
+    30,
+    31,
+    30,
+    31
   ];
 
   @override

@@ -23,11 +23,21 @@ class PersianRataDie extends ILibRataDie {
       _rd = ILibRataDie.snapToMillis(
           ILibRataDie.unixTimeToRd(unixtime) + 1721424.5 - epoch);
     } else if (ILibRataDie.hasDateComponents(
-        year: year, month: month, day: day, hour: hour,
-        minute: minute, second: second, millisecond: millisecond)) {
+        year: year,
+        month: month,
+        day: day,
+        hour: hour,
+        minute: minute,
+        second: second,
+        millisecond: millisecond)) {
       _rd = _dateToRd(
-        year ?? 1, month ?? 1, day ?? 1,
-        hour ?? 0, minute ?? 0, second ?? 0, millisecond ?? 0,
+        year ?? 1,
+        month ?? 1,
+        day ?? 1,
+        hour ?? 0,
+        minute ?? 0,
+        second ?? 0,
+        millisecond ?? 0,
       );
     } else {
       _rd = ILibRataDie.nowToRd(epoch);
@@ -37,7 +47,19 @@ class PersianRataDie extends ILibRataDie {
   static const double epoch = 1948319.5;
 
   static const List<int> cumMonthLengths = <int>[
-    0, 31, 62, 93, 124, 155, 186, 216, 246, 276, 306, 336, 366
+    0,
+    31,
+    62,
+    93,
+    124,
+    155,
+    186,
+    216,
+    246,
+    276,
+    306,
+    336,
+    366
   ];
 
   late double _rd;
@@ -80,7 +102,8 @@ class PersianRataDie extends ILibRataDie {
 
   static double _tehranEquinox(int year) {
     final double equJED = ILibAstro.equinox(year, 0);
-    final double equJD = equJED - (ILibAstro.deltat(year.toDouble()) / (24 * 60 * 60));
+    final double equJD =
+        equJED - (ILibAstro.deltat(year.toDouble()) / (24 * 60 * 60));
     double eot = ILibAstro.equationOfTime(equJED) * 360;
     eot = (eot - 20 * (eot / 20).floorToDouble()) / 360;
     final double equAPP = equJD + eot;
@@ -109,8 +132,8 @@ class PersianRataDie extends ILibRataDie {
     return (year: year, equinox: equinox);
   }
 
-  static double _dateToRd(
-      int year, int month, int day, int hour, int minute, int second, int millisecond) {
+  static double _dateToRd(int year, int month, int day, int hour, int minute,
+      int second, int millisecond) {
     double guess = epoch + 1 + 365.24219878 * (year - 2);
     ({int year, double equinox}) adr = (year: year - 1, equinox: 0.0);
 

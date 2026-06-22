@@ -6,7 +6,18 @@ class PersianAlgoCal implements ILibCalendar {
   final String _type;
 
   static const List<int> _monthLengths = <int>[
-    31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29
+    31,
+    31,
+    31,
+    31,
+    31,
+    31,
+    30,
+    30,
+    30,
+    30,
+    30,
+    29
   ];
 
   @override

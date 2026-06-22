@@ -1,5 +1,7 @@
 class JulianDay {
-  JulianDay(double jd) : _days = jd.floor(), _fraction = jd - jd.floor();
+  JulianDay(double jd)
+      : _days = jd.floor(),
+        _fraction = jd - jd.floor();
 
   int _days;
   double _fraction;

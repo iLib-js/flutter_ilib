@@ -18,12 +18,20 @@ class PersianDate extends ILibCalendarDate {
       String? locale,
       String? timezone,
       bool? dst}) {
-    _timezone =
-        timezone ?? (locale != null ? ILibLocaleInfo(locale).getTimeZone() : null);
+    _timezone = timezone ??
+        (locale != null ? ILibLocaleInfo(locale).getTimeZone() : null);
     this.dst = dst;
-    final bool fromComponents = julianDay == null && rd == null && unixtime == null &&
-        ILibRataDie.hasDateComponents(year: year, month: month, day: day,
-            hour: hour, minute: minute, second: second, millisecond: millisecond);
+    final bool fromComponents = julianDay == null &&
+        rd == null &&
+        unixtime == null &&
+        ILibRataDie.hasDateComponents(
+            year: year,
+            month: month,
+            day: day,
+            hour: hour,
+            minute: minute,
+            second: second,
+            millisecond: millisecond);
     if (fromComponents) {
       _year = year ?? 0;
       _month = month ?? 1;
@@ -33,12 +41,18 @@ class PersianDate extends ILibCalendarDate {
       _second = second ?? 0;
       _millisecond = millisecond ?? 0;
       _rataDie = PersianRataDie(
-          year: year, month: month, day: day, hour: hour,
-          minute: minute, second: second, millisecond: millisecond);
-      _rataDie = PersianRataDie(rataDie: adjustRdForTimezone(_rataDie.getRataDie()));
+          year: year,
+          month: month,
+          day: day,
+          hour: hour,
+          minute: minute,
+          second: second,
+          millisecond: millisecond);
+      _rataDie =
+          PersianRataDie(rataDie: adjustRdForTimezone(_rataDie.getRataDie()));
     } else {
-      _rataDie = PersianRataDie(
-          julianDay: julianDay, rataDie: rd, unixtime: unixtime);
+      _rataDie =
+          PersianRataDie(julianDay: julianDay, rataDie: rd, unixtime: unixtime);
       _calcDateComponents();
     }
   }
@@ -65,8 +79,13 @@ class PersianDate extends ILibCalendarDate {
     _year = PersianRataDie.calcYear(rd);
 
     final PersianRataDie yearStart = PersianRataDie(
-      year: _year, month: 1, day: 1,
-      hour: 0, minute: 0, second: 0, millisecond: 0,
+      year: _year,
+      month: 1,
+      day: 1,
+      hour: 0,
+      minute: 0,
+      second: 0,
+      millisecond: 0,
     );
     final int dayOfYear = (rd - yearStart.getRataDie()).floor() + 1;
 

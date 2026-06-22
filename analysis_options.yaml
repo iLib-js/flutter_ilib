@@ -5,6 +5,13 @@
 # "DIFFERENT FROM FLUTTER/FLUTTER" below. The file is expected to
 # be kept in sync with the master file from the flutter repo.
 
+# DIFFERENT FROM FLUTTER/FLUTTER: lock the formatter page width so
+# `dart format` output is stable. The repo uses the short style (the
+# package SDK floor is < 3.7); 80 is the dart format default, made
+# explicit here so the formatting decision is documented.
+formatter:
+  page_width: 80
+
 analyzer:
   language:
     strict-casts: true

@@ -21,11 +21,21 @@ class EthiopicRataDie extends ILibRataDie {
       _rd = ILibRataDie.snapToMillis(
           ILibRataDie.unixTimeToRd(unixtime) + 1721424.5 - epoch);
     } else if (ILibRataDie.hasDateComponents(
-        year: year, month: month, day: day, hour: hour,
-        minute: minute, second: second, millisecond: millisecond)) {
+        year: year,
+        month: month,
+        day: day,
+        hour: hour,
+        minute: minute,
+        second: second,
+        millisecond: millisecond)) {
       _rd = _dateToRd(
-        year ?? 1, month ?? 1, day ?? 1,
-        hour ?? 0, minute ?? 0, second ?? 0, millisecond ?? 0,
+        year ?? 1,
+        month ?? 1,
+        day ?? 1,
+        hour ?? 0,
+        minute ?? 0,
+        second ?? 0,
+        millisecond ?? 0,
       );
     } else {
       _rd = ILibRataDie.nowToRd(epoch);
@@ -72,11 +82,12 @@ class EthiopicRataDie extends ILibRataDie {
     return _onOrBefore(_rd + 7 + offset, dayOfWeek) - offset;
   }
 
-  static double _dateToRd(
-      int year, int month, int day, int hour, int minute, int second, int millisecond) {
+  static double _dateToRd(int year, int month, int day, int hour, int minute,
+      int second, int millisecond) {
     final int years = 365 * (year - 1) + floorDiv(year, 4);
     final int dayInYear = (month - 1) * 30 + day;
-    final double rdTime = ILibRataDie.timeToRd(hour, minute, second, millisecond);
+    final double rdTime =
+        ILibRataDie.timeToRd(hour, minute, second, millisecond);
     return years + dayInYear + rdTime;
   }
 

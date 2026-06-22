@@ -40,23 +40,27 @@ flutter test
 #### VS Code
 ```jsonc
 // Install the Flutter and Dart extensions.
-// In .vscode/settings.json — do NOT format-on-save (see Code Style below):
+// In .vscode/settings.json — format-on-save is fine:
 {
   "[dart]": {
-    "editor.formatOnSave": false
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "Dart-Code.dart-code"
   }
 }
 ```
 
 ### Code Style & Formatting
 
-**Do NOT run `dart format` tree-wide.** The repo was formatted with an older Dart (short style,
-~100-col width) that the Dart 3.7+ formatter cannot reproduce — both `dart format` (width 80) and
-`dart format --line-length 100` (deprecated; switches to the new "tall" style) reformat large
-swaths of untouched code into huge noise diffs. **Match the surrounding style of the file you edit
-by hand** (short style, ≤100 cols); leave other files untouched. A repo-wide reformat (pick one
-style + pin the Dart SDK) should be its own separate commit, never mixed into feature work. See
-CLAUDE.md › Conventions › Code Style.
+**Run `dart format`.** The repo is formatted with the **short style at `page_width: 80`**, set in
+`analysis_options.yaml` (short because the package SDK floor is < 3.7). Format-on-save is fine; run
+`dart format .` before committing, and enforce it in CI with:
+
+```bash
+dart format --output=none --set-exit-if-changed .
+```
+
+Switching to the modern "tall" style would mean raising the SDK floor to ≥ 3.7 and doing a one-time
+repo-wide reformat in its own commit. See CLAUDE.md › Conventions › Code Style.
 
 ### Static Analysis
 
@@ -388,13 +392,16 @@ List<String> getJSONDataPaths(String? locale) {
 ### Before Committing
 
 ```bash
-# 1. Run analysis (no tree-wide `dart format` — see Code Style)
+# 1. Format
+dart format .
+
+# 2. Run analysis
 flutter analyze
 
-# 2. Run tests
+# 3. Run tests
 flutter test
 
-# 3. Create PR description
+# 4. Create PR description
 # Include:
 # - What changed and why
 # - Test results
@@ -562,7 +569,7 @@ Before releasing version X.Y.Z:
 
 - [ ] All tests passing (`flutter test`)
 - [ ] No analysis warnings (`flutter analyze`)
-- [ ] Edited files match the surrounding hand style (no tree-wide `dart format` — see Code Style)
+- [ ] Code formatted (`dart format .`)
 - [ ] CHANGELOG.md updated
 - [ ] Version bumped in `pubspec.yaml`
 - [ ] Notable features documented in `Docs.md`

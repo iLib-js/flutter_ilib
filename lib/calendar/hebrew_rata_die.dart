@@ -22,11 +22,21 @@ class HebrewRataDie extends ILibRataDie {
       _rd = ILibRataDie.snapToMillis(
           ILibRataDie.unixTimeToRd(unixtime) + 1721424.5 - epoch);
     } else if (ILibRataDie.hasDateComponents(
-        year: year, month: month, day: day, hour: hour,
-        minute: minute, second: second, millisecond: millisecond)) {
+        year: year,
+        month: month,
+        day: day,
+        hour: hour,
+        minute: minute,
+        second: second,
+        millisecond: millisecond)) {
       _rd = _dateToRd(
-        year ?? 1, month ?? 7, day ?? 1,
-        hour ?? 0, minute ?? 0, second ?? 0, millisecond ?? 0,
+        year ?? 1,
+        month ?? 7,
+        day ?? 1,
+        hour ?? 0,
+        minute ?? 0,
+        second ?? 0,
+        millisecond ?? 0,
       );
     } else {
       _rd = ILibRataDie.nowToRd(epoch);
@@ -36,11 +46,34 @@ class HebrewRataDie extends ILibRataDie {
   static const double epoch = 347997.25;
 
   static const List<int> cumMonthLengths = <int>[
-    176, 206, 235, 265, 294, 324, 0, 30, 59, 88, 117, 147
+    176,
+    206,
+    235,
+    265,
+    294,
+    324,
+    0,
+    30,
+    59,
+    88,
+    117,
+    147
   ];
 
   static const List<int> cumMonthLengthsLeap = <int>[
-    206, 236, 265, 295, 324, 354, 0, 30, 59, 88, 117, 147, 177
+    206,
+    236,
+    265,
+    295,
+    324,
+    354,
+    0,
+    30,
+    59,
+    88,
+    117,
+    147,
+    177
   ];
 
   static final HebrewCal _cal = HebrewCal();
@@ -83,8 +116,8 @@ class HebrewRataDie extends ILibRataDie {
     return _onOrBefore(_rd + 7 + offset, dayOfWeek) - offset;
   }
 
-  static double _dateToRd(
-      int year, int month, int day, int hour, int minute, int second, int millisecond) {
+  static double _dateToRd(int year, int month, int day, int hour, int minute,
+      int second, int millisecond) {
     final int elapsed = HebrewCal.elapsedDays(year);
     int days = elapsed + HebrewCal.newYearsCorrection(year, elapsed) + day - 1;
 

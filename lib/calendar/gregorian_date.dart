@@ -19,12 +19,20 @@ class GregorianDate extends ILibCalendarDate {
       String? locale,
       String? timezone,
       bool? dst}) {
-    _timezone =
-        timezone ?? (locale != null ? ILibLocaleInfo(locale).getTimeZone() : null);
+    _timezone = timezone ??
+        (locale != null ? ILibLocaleInfo(locale).getTimeZone() : null);
     this.dst = dst;
-    final bool fromComponents = julianDay == null && rd == null && unixtime == null &&
-        ILibRataDie.hasDateComponents(year: year, month: month, day: day,
-            hour: hour, minute: minute, second: second, millisecond: millisecond);
+    final bool fromComponents = julianDay == null &&
+        rd == null &&
+        unixtime == null &&
+        ILibRataDie.hasDateComponents(
+            year: year,
+            month: month,
+            day: day,
+            hour: hour,
+            minute: minute,
+            second: second,
+            millisecond: millisecond);
     if (fromComponents) {
       _year = year ?? 0;
       _month = month ?? 1;
@@ -34,22 +42,52 @@ class GregorianDate extends ILibCalendarDate {
       _second = second ?? 0;
       _millisecond = millisecond ?? 0;
       _rataDie = GregRataDie(
-          year: year, month: month, day: day, hour: hour,
-          minute: minute, second: second, millisecond: millisecond);
-      _rataDie = GregRataDie(rataDie: adjustRdForTimezone(_rataDie.getRataDie()));
+          year: year,
+          month: month,
+          day: day,
+          hour: hour,
+          minute: minute,
+          second: second,
+          millisecond: millisecond);
+      _rataDie =
+          GregRataDie(rataDie: adjustRdForTimezone(_rataDie.getRataDie()));
     } else {
-      _rataDie = GregRataDie(
-          julianDay: julianDay, rataDie: rd, unixtime: unixtime);
+      _rataDie =
+          GregRataDie(julianDay: julianDay, rataDie: rd, unixtime: unixtime);
       _calcDateComponents();
     }
   }
 
   static final GregorianCal _cal = GregorianCal();
   static const List<int> _cumMonthLengths = <int>[
-    0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365
+    0,
+    31,
+    59,
+    90,
+    120,
+    151,
+    181,
+    212,
+    243,
+    273,
+    304,
+    334,
+    365
   ];
   static const List<int> _cumMonthLengthsLeap = <int>[
-    0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366
+    0,
+    31,
+    60,
+    91,
+    121,
+    152,
+    182,
+    213,
+    244,
+    274,
+    305,
+    335,
+    366
   ];
 
   late GregRataDie _rataDie;
@@ -75,7 +113,8 @@ class GregorianDate extends ILibCalendarDate {
 
     final int rdFloor = rd.floor();
     final bool isLeap = _cal.isLeapYear(_year);
-    final List<int> cumLengths = isLeap ? _cumMonthLengthsLeap : _cumMonthLengths;
+    final List<int> cumLengths =
+        isLeap ? _cumMonthLengthsLeap : _cumMonthLengths;
 
     final int y1 = _year - 1;
     final int yearStart = 365 * y1 +
