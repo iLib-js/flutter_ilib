@@ -154,7 +154,7 @@ mapper.toUpperCase(str)
 `ILibTimeZone`, `ILibAstro` are all native Dart (reads `assets/locale/` JSON directly).
 Still on JS interop: `ILibCountry`, `ILibScriptInfo`, `ILibDurationFmt`, `ILibNumFmt`.  
 ✅ Region-only locales (`MK`, `TR`); region files use `und-MK.json` (hyphen).  
-✅ Based on iLib v14.21.0 / CLDR 46.  
+✅ Based on the pinned iLib / CLDR — see [CLAUDE.md › Source Versions](../CLAUDE.md).  
 
 ## Documentation
 

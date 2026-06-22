@@ -5,13 +5,22 @@ Remove iLib JavaScript interop (`flutter_js`) entirely and replace with pure Dar
 Reads JSON locale data directly and performs formatting/calculation in Dart.
 
 ## Source Versions (read before any upstream update)
+**This section is the single source of truth for the upstream versions.** Other docs reference it
+instead of repeating the numbers, so a version bump only changes the values here (plus the two
+point-in-time/public spots listed below).
+
 - **iLib JS source**: **v14.21.0** — all `lib/` Dart code and `test/` cases were converted
-  from the iLib JS at this version (`js/lib/` and `js/test/` of github.com/iLib-js/iLib).
-- **CLDR data**: **46.0** — the bundled `assets/locale/` JSON (218 locales) was generated from
+  from the iLib JS at this tag (`js/lib/` and `js/test/` of github.com/iLib-js/iLib;
+  `git checkout v14.21.0`).
+- **CLDR data**: **46** — the bundled `assets/locale/` JSON (218 locales) was generated from
   iLib v14.21.0, which incorporates CLDR 46.
 - When updating to a newer iLib/CLDR: bump the JS source and the generated locale data
   **together** (a JS-only or data-only bump will diverge), then re-run the converted tests
-  against the new JS expectations. See CHANGELOG.md for the version history.
+  against the new JS expectations.
+- **On a version bump, also update these two spots that intentionally state the version
+  independently** (everything else references this section):
+  - `README.md` — the public version note in the intro.
+  - `CHANGELOG.md` — add a new entry (the existing entries are frozen history; do not edit them).
 
 ## Architecture
 Pure Dart: each class reads JSON locale data and computes natively (the old `flutter_js` interop is
@@ -178,7 +187,7 @@ lib/
   system-tz, offset variants) go in a sibling `*_extra_test.dart`** — never add Dart-only
   cases to the JS-mirrored file (see docs/conversion-guide.md, docs/test-mapping.md)
 - **Do NOT convert JS tests that exercise a locale not in the bundled set under
-  `assets/locale/`** (the 218 iLib v14.21.0 locales). Without the locale data,
+  `assets/locale/`** (the 218 bundled iLib locales — see Source Versions). Without the locale data,
   `ILibLocaleInfo`/`ILibTimeZone.fromLocale` fall back to defaults (e.g. `Etc/UTC`), so the
   test cannot reproduce the JS expected value — these are N/A. (e.g. JS
   `testTZGetDefaultFor_tk_TM`/`_tg_TJ`/`_wo_SN`/`_zu_ZA`/`_mt_MT` — tk/tg/wo/zu/mt and their
