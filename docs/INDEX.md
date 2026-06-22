@@ -15,7 +15,7 @@ If you're an AI agent (Claude, Copilot, etc.), follow this sequence:
 
 0. **[../CLAUDE.md](../CLAUDE.md)** (Read first — the project's source of truth)
    - Project goal, conventions, and **must-follow rules** (formatting, testing, calendar/timezone)
-   - Conversion status and source versions (iLib v14.21.0 / CLDR 46)
+   - Conversion status and source versions (the iLib / CLDR baseline — single source of truth)
    - Links into the detailed `docs/` below
 
 1. **[quick_reference.md](./quick_reference.md)** (Start here for an overview!)

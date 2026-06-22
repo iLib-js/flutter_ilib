@@ -113,7 +113,7 @@ All calendars share this path:
 
 ### Key Rule
 
-- **Same calendar**: Use `ILibDateOptions` raw values directly (Dart normalizes dates, JS does not)
+- **Same calendar**: Use `ILibDateOptions` raw values directly — raw display components are preserved on the from-components path (JS-identical; no normalization)
 - **Different calendar**: Convert via Julian Day using `_convertToFormatterCalendar()`
 
 ## ILibAstro (Astronomical Calculation - Persian only)
