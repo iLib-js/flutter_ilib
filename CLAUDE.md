@@ -92,9 +92,12 @@ pure-calculation classes need no locale loading (see Conventions › Testing).
 
 ### Locale Data
 - `assets/locale/` holds the JSON data files for the full set of supported locales,
-  organized hierarchically (`root.json` → `{lang}.json` → `und-{region}.json` →
-  `{lang}-{region}.json`) and merged at load time. Multiple files combine to resolve one
-  locale, so the file count (~251) is larger than the locale count.
+  organized hierarchically and merged at load time. Most-general → most-specific:
+  `root.json` → `{lang}.json` → *(if script)* `und-{script}.json` → `{lang}-{script}.json`
+  → `und-{region}.json` → `{lang}-{region}.json` → *(script + region)* `{lang}-{script}-{region}.json`
+  (e.g. `zh-Hans-CN`). All `und-*` fallbacks use a hyphen. Multiple files combine to resolve one
+  locale, so the file count (~251) is larger than the locale count. Full order: see
+  [Key Infrastructure](#json-data-keys) / `getJSONDataPaths()`.
 - Version: see [Source Versions](#source-versions-read-before-any-upstream-update)
 
 ## File Structure

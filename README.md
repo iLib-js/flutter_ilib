@@ -13,6 +13,9 @@ locale information.
 > The change is internal only — the public API is the same across major versions, so your usage
 > code does not need to change when upgrading from v1.x to v2.0.
 
+The Dart implementation and the bundled locale data are based on **iLib v14.21.0** (which
+incorporates **CLDR 46**).
+
 ## 📚 Documentation
 
 For detailed documentation, see the **[docs/](./docs/)** folder:
