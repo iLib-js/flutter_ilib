@@ -98,6 +98,7 @@ converted.
 | `test/datefmt/datefmt_km_KH_test.dart` | `js/test/testdatefmt_km_KH.js` | |
 | `test/datefmt/datefmt_kn_IN_test.dart` | `js/test/testdatefmt_kn_IN.js` | |
 | `test/datefmt/datefmt_ko_KR_test.dart` | `js/test/testdatefmt_ko_KR.js` | |
+| `test/datefmt/datefmt_ko_KR_extra_test.dart` | — | flutter_ilib-specific (no JS counterpart): Dart-style `DateFmt_*` cases and Flutter `DateTime` (`ILibDateOptions.dateTime`) input |
 | `test/datefmt/datefmt_ku_Arab_IQ_test.dart` | `js/test/testdatefmt_ku_Arab_IQ.js` | |
 | `test/datefmt/datefmt_lt_LT_test.dart` | `js/test/testdatefmt_lt_LT.js` | |
 | `test/datefmt/datefmt_lv_LV_test.dart` | `js/test/testdatefmt_lv_LV.js` | |

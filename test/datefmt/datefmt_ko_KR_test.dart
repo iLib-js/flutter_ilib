@@ -959,63 +959,6 @@ void main() {
           millisecond: 0);
       expect(fmt.format(dateOptions), '1:45:37 KST');
     });
-    test('DateFmt_datetime_short_ko_KR', () {
-      final ILibDateOptions dateOptions =
-          ILibDateOptions(year: 2024, month: 3, day: 23, hour: 10, minute: 42);
-      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: 'ko-KR',
-          length: 'short',
-          type: 'datetime',
-          timezone: 'local');
-      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-      expect(fmt.format(dateOptions), '24. 3. 23. 오전 10:42');
-    });
-    test('DateFmt_date_full_ko_KR', () {
-      final ILibDateOptions dateOptions =
-          ILibDateOptions(year: 2024, month: 3, day: 23, hour: 10, minute: 42);
-      final ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: 'ko-KR', length: 'full');
-      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-      expect(fmt.format(dateOptions), '2024년 3월 23일');
-    });
-    test('DateFmt_date_short_ko_KR', () {
-      final ILibDateOptions dateOptions =
-          ILibDateOptions(year: 2024, month: 3, day: 23, hour: 10, minute: 42);
-      final ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: 'ko-KR', length: 'short');
-      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-      expect(fmt.format(dateOptions), '24. 3. 23.');
-    });
-    test('DateFmt_with_flutter_date_short_ko_KR', () {
-      final DateTime setdate = DateTime(2024, 5, 31, 13, 20);
-      final ILibDateOptions dateOptions = ILibDateOptions(dateTime: setdate);
-      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: 'ko-KR',
-          length: 'short',
-          type: 'datetime',
-          timezone: 'local');
-
-      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-      expect(fmt.format(dateOptions), '24. 5. 31. 오후 1:20');
-    });
-
-    test('DateFmt_with_flutter_date_full_ko_KR', () {
-      final DateTime setdate = DateTime(2024, 5, 31, 13, 20);
-      final ILibDateOptions dateOptions = ILibDateOptions(dateTime: setdate);
-      final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-          locale: 'ko-KR', length: 'full', type: 'datetime', timezone: 'local');
-      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-      expect(fmt.format(dateOptions), '2024년 5월 31일 오후 1:20');
-    });
-    test('DateFmt_with_flutter_date_full_ko_KR2', () {
-      final DateTime setdate = DateTime(2024, 5, 31, 13, 20);
-      final ILibDateOptions dateOptions =
-          ILibDateOptions(locale: 'ko-KR', dateTime: setdate);
-      final ILibDateFmtOptions fmtOptions =
-          ILibDateFmtOptions(locale: 'ko-KR', length: 'full', type: 'datetime');
-      final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
-      expect(fmt.format(dateOptions), '2024년 5월 31일 오후 1:20');
-    });
 
     test('testDateFmtTemplateClock12SwitchHH_ko_KR', () {
       final ILibDateFmtOptions fmtOptions =
