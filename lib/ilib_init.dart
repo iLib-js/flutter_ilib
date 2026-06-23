@@ -54,11 +54,7 @@ class ILibLoader extends ChangeNotifier {
       return;
     }
     try {
-      // Use the AssetManifest API rather than reading 'AssetManifest.json'
-      // directly: that file was deprecated in Flutter 3.16 (replaced by the
-      // binary 'AssetManifest.bin') and dropped from the build in a later
-      // release. Flutter 3.32.8 still emits it, but a newer stable (e.g. CI)
-      // does not, so the old path fails there. This API is version-safe.
+      // Removal of AssetManifest.json
       // See: https://docs.flutter.dev/release/breaking-changes/asset-manifest-dot-json
       final AssetManifest manifest =
           await AssetManifest.loadFromAssetBundle(rootBundle);
