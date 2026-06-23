@@ -37,6 +37,8 @@ ILibDateFmt constructor
   └── _tokenize() → generates token array
 
 format(date)
+  ├── _resolveDateOptions(date) → resolve a Flutter DateTime/unixtime to
+  │                               Gregorian wall-clock components (Notes #8)
   ├── _convertToFormatterCalendar(date) → calendar conversion if needed
   └── _formatTemplate(date, tokenArr) → replaces each token with date values
 ```
