@@ -146,7 +146,7 @@ These were extracted from the single monolithic `js/test/testdatefmt.js` file, s
 | `test/datefmt/datefmt_Meridiems_test.dart` | `js/test/testdatefmt.js` | getMeridiemsRange() tests |
 | `test/datefmt/datefmt_MonthTranslation_test.dart` | `js/test/testdatefmt.js` | Month name translation tests |
 | `test/datefmt/datefmt_WeekdayTranslation_test.dart` | `js/test/testdatefmt.js` | Weekday name translation tests |
-| `test/datefmt/datefmt_datetime_calendar_test.dart` | — | **flutter_ilib-specific**: `ILibDateOptions(dateTime:/unixtime:)` input (Flutter `DateTime`/Unix instant) converts to the locale's calendar — am-ET→ethiopic, fa-IR→persian |
+| `test/datefmt/datefmt_datetime_calendar_extra_test.dart` | — | **flutter_ilib-specific**: `ILibDateOptions(dateTime:/unixtime:)` input (Flutter `DateTime`/Unix instant) converts to the locale's calendar — am-ET→ethiopic, fa-IR→persian |
 
 > **Dart-specific input paths need their own coverage.** The JS-mirrored datefmt
 > tests above all pass dates as **calendar components** (`year/month/day`), which
