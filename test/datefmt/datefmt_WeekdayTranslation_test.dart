@@ -8527,15 +8527,26 @@ void main() {
     });
   });
   group('testWeekdayTranslation_ku_Arab_IQ', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'یەکشەممە',
-      1: 'دووشەممە',
-      2: 'سێشەممە',
-      3: 'چوارشەممە',
-      4: 'پێنجشەممە',
-      5: 'ھەینی',
-      6: 'شەممە'
-    };
+    final String testPlatform = getTestPlatform();
+    final Map<int, String> expectedResult = (testPlatform == 'webOS')
+        ? <int, String>{
+            0: 'یەکشەممە',
+            1: 'دووشەممە',
+            2: 'سێشەممە',
+            3: 'چوارشەممە',
+            4: 'پێنجشەممە',
+            5: 'ھەینی',
+            6: 'شەممە'
+          }
+        : <int, String>{
+            0: 'Sun',
+            1: 'Mon',
+            2: 'Tue',
+            3: 'Wed',
+            4: 'Thu',
+            5: 'Fri',
+            6: 'Sat'
+          };
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -8552,15 +8563,26 @@ void main() {
     });
   });
   group('testWeekdayTranslation_ku_Arab_IQ_long', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'یەکشەممە',
-      1: 'دووشەممە',
-      2: 'سێشەممە',
-      3: 'چوارشەممە',
-      4: 'پێنجشەممە',
-      5: 'ھەینی',
-      6: 'شەممە'
-    };
+    final String testPlatform = getTestPlatform();
+    final Map<int, String> expectedResult = (testPlatform == 'webOS')
+        ? <int, String>{
+            0: 'یەکشەممە',
+            1: 'دووشەممە',
+            2: 'سێشەممە',
+            3: 'چوارشەممە',
+            4: 'پێنجشەممە',
+            5: 'ھەینی',
+            6: 'شەممە'
+          }
+        : <int, String>{
+            0: 'Sun',
+            1: 'Mon',
+            2: 'Tue',
+            3: 'Wed',
+            4: 'Thu',
+            5: 'Fri',
+            6: 'Sat'
+          };
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -8577,15 +8599,26 @@ void main() {
     });
   });
   group('testWeekdayTranslation_ku_Arab_IQ_medium', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: '١ش',
-      1: '٢ش',
-      2: '٣ش',
-      3: '٤ش',
-      4: '٥ش',
-      5: 'ھ',
-      6: 'ش'
-    };
+    final String testPlatform = getTestPlatform();
+    final Map<int, String> expectedResult = (testPlatform == 'webOS')
+        ? <int, String>{
+            0: '١ش',
+            1: '٢ش',
+            2: '٣ش',
+            3: '٤ش',
+            4: '٥ش',
+            5: 'ھ',
+            6: 'ش'
+          }
+        : <int, String>{
+            0: 'Sun',
+            1: 'Mon',
+            2: 'Tue',
+            3: 'Wed',
+            4: 'Thu',
+            5: 'Fri',
+            6: 'Sat'
+          };
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -8602,15 +8635,10 @@ void main() {
     });
   });
   group('testWeekdayTranslation_ku_Arab_IQ_short', () {
-    final Map<int, String> expectedResult = <int, String>{
-      0: 'ی',
-      1: 'د',
-      2: 'س',
-      3: 'چ',
-      4: 'پ',
-      5: 'ھ',
-      6: 'ش'
-    };
+    final String testPlatform = getTestPlatform();
+    final Map<int, String> expectedResult = (testPlatform == 'webOS')
+        ? <int, String>{0: 'ی', 1: 'د', 2: 'س', 3: 'چ', 4: 'پ', 5: 'ھ', 6: 'ش'}
+        : <int, String>{0: 'S', 1: 'M', 2: 'T', 3: 'W', 4: 'T', 5: 'F', 6: 'S'};
     expectedResult.forEach((int num, String expected) {
       test(num, () {
         final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -9551,7 +9579,7 @@ void main() {
       3: 'ਬੁੱਧਵਾਰ',
       4: 'ਵੀਰਵਾਰ',
       5: 'ਸ਼ੁੱਕਰਵਾਰ',
-      6: 'ਸ਼ਨਿੱਚਰਵਾਰ'
+      6: 'ਸ਼ਨੀਵਾਰ'
     };
     expectedResult.forEach((int num, String expected) {
       test(num, () {
@@ -9576,7 +9604,7 @@ void main() {
       3: 'ਬੁੱਧ',
       4: 'ਵੀਰ',
       5: 'ਸ਼ੁੱਕਰ',
-      6: 'ਸ਼ਨਿੱਚਰ'
+      6: 'ਸ਼ਨੀ'
     };
     expectedResult.forEach((int num, String expected) {
       test(num, () {
@@ -9601,7 +9629,7 @@ void main() {
       3: 'ਬੁੱਧ',
       4: 'ਵੀਰ',
       5: 'ਸ਼ੁੱਕ',
-      6: 'ਸ਼ਨਿੱ'
+      6: 'ਸ਼ਨੀ'
     };
     expectedResult.forEach((int num, String expected) {
       test(num, () {
@@ -11896,13 +11924,13 @@ void main() {
   });
   group('testWeekdayTranslation_th_TH_long', () {
     final Map<int, String> expectedResult = <int, String>{
-      0: 'อา.',
-      1: 'จ.',
-      2: 'อ.',
-      3: 'พ.',
-      4: 'พฤ.',
-      5: 'ศ.',
-      6: 'ส.'
+      0: 'อาทิตย์',
+      1: 'จันทร์',
+      2: 'อังคาร',
+      3: 'พุธ',
+      4: 'พฤหัส',
+      5: 'ศุกร์',
+      6: 'เสาร์'
     };
     expectedResult.forEach((int num, String expected) {
       test(num, () {
@@ -12697,12 +12725,12 @@ void main() {
   group('testWeekdayTranslation_vi_VN_long', () {
     final Map<int, String> expectedResult = <int, String>{
       0: 'CN',
-      1: 'Th 2',
-      2: 'Th 3',
-      3: 'Th 4',
-      4: 'Th 5',
-      5: 'Th 6',
-      6: 'Th 7'
+      1: 'Thứ 2',
+      2: 'Thứ 3',
+      3: 'Thứ 4',
+      4: 'Thứ 5',
+      5: 'Thứ 6',
+      6: 'Thứ 7'
     };
     expectedResult.forEach((int num, String expected) {
       test(num, () {

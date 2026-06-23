@@ -10,10 +10,8 @@ void main() {
   debugPrint('Testing [durfmt_test.dart] file.');
   setUpAll(() async {
     testPlatform = getTestPlatform();
-    final ILibJS ilibjsinstance = ILibJS.instance;
-    await ilibjsinstance.loadJS();
-    ilibjsinstance.initILib();
-    await ilibjsinstance.loadILibLocaleDataAll();
+    await ILibLoader.instance.loadJSON();
+    await ILibLoader.instance.loadILibLocaleDataAll();
   });
 
   group('test_ILibDurationFmt', () {
@@ -347,8 +345,8 @@ void main() {
           millisecond: 1);
 
       final String result = (testPlatform == 'webOS')
-          ? '1 J., 1 M., 1 W., 1 T., 1 Std., 1 Min., 1 Sek., 1 ms'
-          : '1 J, 1 M, 1 W, 1 T, 1 Std., 1 Min., 1 Sek., 1 ms';
+          ? '1 J., 1 M., 1 W., 1 T., 1h, 1 Min., 1 Sek., 1ms'
+          : '1 J, 1 M, 1 W, 1 T, 1h, 1 Min., 1 Sek., 1ms';
       expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtFormatShortDEText', () {
@@ -367,8 +365,8 @@ void main() {
           second: 1,
           millisecond: 1);
       final String result = (testPlatform == 'webOS')
-          ? '1 J., 1 M., 1 W., 1 T., 1 Std., 1 Min., 1 Sek., 1 ms'
-          : '1 J, 1 M, 1 W, 1 T, 1 Std., 1 Min., 1 Sek., 1 ms';
+          ? '1 J., 1 M., 1 W., 1 T., 1h, 1 Min., 1 Sek., 1ms'
+          : '1 J, 1 M, 1 W, 1 T, 1h, 1 Min., 1 Sek., 1ms';
       expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtFormatShortDEClock', () {
@@ -409,8 +407,8 @@ void main() {
           second: 1,
           millisecond: 1);
       final String result = (testPlatform == 'webOS')
-          ? '1 J., 1 M., 1 W., 1 T., 1 Std., 1 Min., 1 Sek., 1 ms'
-          : '1 J, 1 M, 1 W, 1 T, 1 Std., 1 Min., 1 Sek., 1 ms';
+          ? '1 J., 1 M., 1 W., 1 T., 1h, 1 Min., 1 Sek., 1ms'
+          : '1 J, 1 M, 1 W, 1 T, 1h, 1 Min., 1 Sek., 1ms';
       expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtFormatLongDESingle', () {
@@ -1392,8 +1390,13 @@ void main() {
 
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
-      expect(
-          fmt.format(dateOptions), '1 an, 1 m., 1 sem., 1 j, 1 h, 1 min, 1 s');
+      if (testPlatform == 'webOS') {
+        expect(fmt.format(dateOptions),
+            '1 an, 1 m., 1 sem., 1 j, 1 h, 1 min, 1 s');
+      } else {
+        expect(fmt.format(dateOptions),
+            '1 an, 1 m., 1 sem., 1 j, 1 h, 1 min, 1 s');
+      }
     });
     test('testDurFmtFRCAFormatFull', () {
       final ILibDurationFmtOptions fmtOptions =
@@ -1404,7 +1407,7 @@ void main() {
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(fmt.format(dateOptions),
-          '1 an, 1 mois, 1 semaine, 1 jour, 1 heure, 1 minute et 1 seconde');
+          '1 an, 1 mois, 1 semaine, 1 jour, 1 heure, 1 minute et 1 seconde');
     });
     //test cases for ga-IE
     test('testDurFmtGAFormatShortDefaultStyle', () {
@@ -1925,7 +1928,7 @@ void main() {
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(fmt.format(dateOptions),
-          '1 ವರ್ಷವು, 1 ತಿಂಗಳು, 1 ವಾರವು, 1 ದಿನವು, 1 ಗಂಟೆಯು, 1 ನಿಮಿಷವು, 1 ಸೆಕೆಂಡ್');
+          '1 ವರ್ಷ, 1 ತಿಂಗಳು, 1 ವಾರವು, 1 ದಿನವು, 1 ಗಂಟೆ, 1 ನಿಮಿಷವು, 1 ಸೆಕೆಂಡ್');
     });
     //test cases for tamil(ta-IN)
     test('testDurFmtTAFormatShortDefaultStyle', () {
@@ -1980,7 +1983,7 @@ void main() {
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(fmt.format(dateOptions),
-          '1 ஆண்டு, 1 மாதம், 1 வாரம், 1 நாள், 1 மணிநேரம், 1 நிமிடம், 1 விநாடி');
+          '1 ஆண்டு, 1 மாதம், 1 வாரம், 1 நாள், 1 ம., 1 நிமி., 1 விநாடி');
     });
     test('testDurFmtTAFormatFull', () {
       final ILibDurationFmtOptions fmtOptions =
@@ -1991,7 +1994,7 @@ void main() {
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(fmt.format(dateOptions),
-          '1 ஆண்டு, 1 மாதம், 1 வாரம், 1 நாள், 1 மணிநேரம், 1 நிமிடம், 1 விநாடி');
+          '1 ஆண்டு, 1 மாதம், 1 வாரம், 1 நாள், 1 ம., 1 நிமி., 1 விநாடி');
     });
     //test cases for Malaylam(ml-IN)
     test('testDurFmtMLFormatShortDefaultStyle', () {
@@ -2203,7 +2206,7 @@ void main() {
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(fmt.format(dateOptions),
-          '১ বছর, ১ মাস, ১ সপ্তাহ, ১ দিন, ১ ঘন্টা, ১ মিনিট, ১ সেকেন্ড');
+          '১ বছর, ১ মাস, ১ সপ্তাহ, ১ দিন, ১ ঘণ্টা, ১ মিনিট, ১ সেকেন্ড');
     });
     test('testDurFmtBNFormatFull', () {
       final ILibDurationFmtOptions fmtOptions =
@@ -2214,7 +2217,7 @@ void main() {
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       expect(fmt.format(dateOptions),
-          '১ বছর, ১ মাস, ১ সপ্তাহ, ১ দিন, ১ ঘন্টা, ১ মিনিট, ১ সেকেন্ড');
+          '১ বছর, ১ মাস, ১ সপ্তাহ, ১ দিন, ১ ঘণ্টা, ১ মিনিট, ১ সেকেন্ড');
     });
     test('testDurFmtASFormatShortDefaultStyle', () {
       final ILibDurationFmtOptions fmtOptions =
@@ -2953,7 +2956,7 @@ void main() {
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       final String result = (testPlatform == 'webOS')
           ? '‏١س ١م ١هـ ١ر ١ک ١خ ١چ'
-          : '‏١س ١م ١ﻪـ ١ر ١ک ١خ ١چ';
+          : '‏1 y, 1 m, 1 w, 1 d, 1 h, 1 min, 1 s';
       expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtKUFormatShortText', () {
@@ -2966,7 +2969,7 @@ void main() {
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       final String result = (testPlatform == 'webOS')
           ? '‏١س ١م ١هـ ١ر ١ک ١خ ١چ'
-          : '‏١س ١م ١ﻪـ ١ر ١ک ١خ ١چ';
+          : '‏1 y, 1 m, 1 w, 1 d, 1 h, 1 min, 1 s';
       expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtKUFormatShortClock', () {
@@ -2979,7 +2982,7 @@ void main() {
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       final String result = (testPlatform == 'webOS')
           ? '‏١س ١م ١هـ ١ر ‏١:٠١:٠١'
-          : '‏١س ١م ١ﻪـ ١ر ‏١:٠١:٠١';
+          : '‏1 y, 1 m, 1 w, 1 d, 1:01:01';
       expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtKUFormatMedium', () {
@@ -2992,7 +2995,7 @@ void main() {
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
       final String result = (testPlatform == 'webOS')
           ? '‏١س ١م ١هـ ١ر ١ک ١خ ١چ'
-          : '‏١س ١م ١ﻪـ ١ر ١ک ١خ ١چ';
+          : '‏1 y, 1 m, 1 w, 1 d, 1 h, 1 min, 1 s';
       expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtKUFormatLong', () {
@@ -3003,8 +3006,10 @@ void main() {
 
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
-      expect(fmt.format(dateOptions),
-          '‏١ ساڵ ١ مانگ ١ هەفتە ١ رۆژ ١ کاتژ ١ خول ١ چرک');
+      final String result = (testPlatform == 'webOS')
+          ? '‏١ ساڵ ١ مانگ ١ هەفتە ١ رۆژ ١ کاتژ ١ خول ١ چرک'
+          : '‏1 y, 1 m, 1 w, 1 d, 1 h, 1 min, 1 s';
+      expect(fmt.format(dateOptions), result);
     });
     test('testDurFmtKUFormatFull', () {
       final ILibDurationFmtOptions fmtOptions =
@@ -3014,8 +3019,10 @@ void main() {
 
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
-      expect(fmt.format(dateOptions),
-          '‏١ ساڵ, ١ مانگ, ١ هەفتە, ١ رۆژ, ١ کاتژمێر, ١ خولەک,  ١ چرکە');
+      final String result = (testPlatform == 'webOS')
+          ? '‏١ ساڵ, ١ مانگ, ١ هەفتە, ١ رۆژ, ١ کاتژمێر, ١ خولەک,  ١ چرکە'
+          : '‏1 y, 1 m, 1 w, 1 d, 1 h, 1 min, 1 s';
+      expect(fmt.format(dateOptions), result);
     });
     //test cases for lt-LT
     test('testDurFmtLTFormatShortDefaultStyle', () {

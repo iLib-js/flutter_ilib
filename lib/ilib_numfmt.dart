@@ -1,209 +1,500 @@
 import 'ilib_init.dart';
+import 'ilib_localeinfo.dart';
+import 'internal/ilib_rounding.dart';
+import 'internal/ilib_utils.dart' as ilib_utils;
+
+/// Padding string of zeros for fraction formatting.
+const String _zeros = '00000000000000000000000000000000000000000000000000000000000000000000';
 
 class ILibNumFmt {
   /// [options] Set the Options for formatting
   ILibNumFmt(ILibNumFmtOptions options) {
-    locale = options.locale;
-    type = options.type;
-    currency = options.currency;
-    maxFractionDigits = options.maxFractionDigits;
-    minFractionDigits = options.minFractionDigits;
-    significantDigits = options.significantDigits;
-    roundingMode = options.roundingMode;
-    style = options.style;
-    useNative = options.useNative;
-  }
+    _locale = options.locale ?? ilib_utils.getLocale();
+    _type = _validType(options.type);
 
-  String? locale;
-  String? type;
-  String? currency;
-  int? maxFractionDigits;
-  int? minFractionDigits;
-  int? significantDigits;
-  String? style;
-  String? roundingMode;
-  bool? useNative;
+    final ILibLocaleInfo locInfo = ILibLocaleInfo(_locale);
 
-  /// A string representation of parameters to call functions of iLib library properly
-  String toJsonString() {
-    String result = '';
-    String completeOption = '';
-
-    final Map<String, String> paramInfo = <String, String>{
-      'locale': '$locale',
-      'type': '$type',
-      'currency': '$currency',
-      'maxFractionDigits': '$maxFractionDigits',
-      'minFractionDigits': '$minFractionDigits',
-      'significantDigits': '$significantDigits',
-      'style': '$style',
-      'roundingMode': '$roundingMode'
-    };
-    paramInfo.forEach((String key, String value) {
-      if (value != 'null') {
-        result += '$key:"$value",';
-      }
-    });
-
-    if (useNative != null) {
-      result += 'useNative:$useNative,';
+    // Resolve style
+    if (_type == 'currency') {
+      _style = (options.style == 'common' || options.style == 'iso') ? options.style! : 'common';
+    } else {
+      _style = options.style ?? 'standard';
     }
 
-    result =
-        result.isNotEmpty ? result.substring(0, result.length - 1) : result;
-    completeOption = '{$result}';
+    // Resolve fraction digits from options
+    _maxFractionDigits = options.maxFractionDigits;
+    _minFractionDigits = options.minFractionDigits;
+    _significantDigits = options.significantDigits;
 
-    return completeOption;
+    // Enforce limits on significantDigits
+    if (_significantDigits != null) {
+      if (_significantDigits! < 1) {
+        _significantDigits = 1;
+      }
+      if (_significantDigits! > 20) {
+        _significantDigits = 20;
+      }
+    }
+    // Enforce limits on minFractionDigits
+    if (_minFractionDigits != null) {
+      if (_minFractionDigits! < 0) {
+        _minFractionDigits = 0;
+      }
+      if (_minFractionDigits! > 20) {
+        _minFractionDigits = 20;
+      }
+    }
+
+    // Currency setup
+    if (_type == 'currency') {
+      _initCurrency(options.currency, locInfo);
+    }
+
+    // Percentage templates
+    if (_type == 'percentage') {
+      _template = locInfo.getPercentageFormat();
+      _templateNegative = locInfo.getNegativePercentageFormat();
+    }
+
+    // Number negative template
+    if (_type == 'number') {
+      _templateNegative = locInfo.getNegativeNumberFormat();
+    }
+
+    // Resolve rounding mode
+    _roundingMode = options.roundingMode ?? _currencyRoundingMode ?? locInfo.getRoundingMode();
+    _round = getRoundingFunction(_roundingMode);
+
+    // Resolve useNative
+    _resolveUseNative(options.useNative, locInfo);
+
+    // Init separators, grouping, digits
+    _init(locInfo);
   }
 
-  /// Format a number according to the settings of this number formatter instance
+  late String _locale;
+  late String _type;
+  late String _style;
+  late String _roundingMode;
+  late double Function(double) _round;
+  int? _maxFractionDigits;
+  int? _minFractionDigits;
+  int? _significantDigits;
+  late bool _useNative;
+  late String _decimalSeparator;
+  late String _groupingSeparator;
+  late int _prigroupSize;
+  late int _secgroupSize;
+  late String _exponentSymbol;
+  List<String>? _digits;
+
+  // Currency
+  String? _currencyCode;
+  String? _currencySign;
+  String? _currencyRoundingMode;
+
+  // Templates
+  String _template = '{n}';
+  String _templateNegative = '-{n}';
+
+  static String _validType(String? type) {
+    if (type == 'number' || type == 'currency' || type == 'percentage') {
+      return type!;
+    }
+    return 'number';
+  }
+
+  void _initCurrency(String? currency, ILibLocaleInfo locInfo) {
+    _currencyCode = currency;
+
+    final Map<String, dynamic>? localeData = ILibLoader.instance.getLocaleData(_locale);
+    final Map<String, dynamic>? allCurrencies =
+        localeData?['ilib.data.currency'] as Map<String, dynamic>?;
+    final Map<String, dynamic>? currInfo = (allCurrencies != null && _currencyCode != null)
+        ? allCurrencies[_currencyCode] as Map<String, dynamic>?
+        : null;
+
+    int currencyDecimals = 2;
+    if (currInfo != null) {
+      currencyDecimals = (currInfo['decimals'] as num?)?.toInt() ?? 2;
+      _currencySign = currInfo['sign'] as String? ?? _currencyCode;
+    } else {
+      _currencySign = _currencyCode;
+    }
+
+    // Set fraction digits to currency decimals if user didn't override
+    if (_maxFractionDigits == null && _minFractionDigits == null) {
+      _maxFractionDigits = currencyDecimals;
+      _minFractionDigits = currencyDecimals;
+    }
+
+    // Currency rounding mode
+    _currencyRoundingMode = currInfo?['roundingMode'] as String?;
+
+    // Currency format templates
+    final CurrencyFormats formats = locInfo.getCurrencyFormats();
+    if (_style == 'iso') {
+      final String isoFmt = formats.iso ?? '';
+      final String isoNeg = formats.isoNegative ?? '';
+      _template = isoFmt.isNotEmpty ? isoFmt : (formats.common ?? '{s} {n}');
+      _templateNegative = isoNeg.isNotEmpty ? isoNeg : (formats.commonNegative ?? '-{s} {n}');
+      _currencySign = _currencyCode;
+    } else {
+      _template = (formats.common?.isNotEmpty ?? false) ? formats.common! : '{s} {n}';
+      _templateNegative =
+          (formats.commonNegative?.isNotEmpty ?? false) ? formats.commonNegative! : '-{s} {n}';
+    }
+  }
+
+  void _resolveUseNative(bool? optionUseNative, ILibLocaleInfo locInfo) {
+    if (optionUseNative != null) {
+      _useNative = optionUseNative;
+    } else {
+      final String digitsStyle = locInfo.getDigitsStyle();
+      if (digitsStyle == 'native') {
+        _useNative = true;
+      } else if (digitsStyle == 'optional' && _style == 'native') {
+        _useNative = true;
+      } else {
+        _useNative = false;
+      }
+    }
+  }
+
+  void _init(ILibLocaleInfo locInfo) {
+    // Enforce min <= max
+    if (_maxFractionDigits != null &&
+        _minFractionDigits != null &&
+        _maxFractionDigits! >= 0 &&
+        _maxFractionDigits! < _minFractionDigits!) {
+      _minFractionDigits = _maxFractionDigits;
+    }
+
+    // Grouping
+    if (_style == 'nogrouping') {
+      _prigroupSize = 0;
+      _secgroupSize = 0;
+      _groupingSeparator = '';
+    } else {
+      _prigroupSize = locInfo.getPrimaryGroupingDigits();
+      _secgroupSize = locInfo.getSecondaryGroupingDigits();
+      _groupingSeparator =
+          _useNative ? locInfo.getNativeGroupingSeparator() : locInfo.getGroupingSeparator();
+    }
+
+    // Decimal separator
+    _decimalSeparator =
+        _useNative ? locInfo.getNativeDecimalSeparator() : locInfo.getDecimalSeparator();
+
+    // Native digits
+    if (_useNative) {
+      final String? nd = locInfo.getNativeDigits() ?? locInfo.getDigits();
+      if (nd != null && nd.isNotEmpty) {
+        _digits = nd.split('');
+      }
+    }
+
+    // Exponential symbol
+    _exponentSymbol = _useNative ? locInfo.getNativeExponential() : locInfo.getExponential();
+  }
+
+  String _mapDigits(String str) {
+    if (_digits == null) {
+      return str;
+    }
+    final StringBuffer result = StringBuffer();
+    for (int i = 0; i < str.length; i++) {
+      final int code = str.codeUnitAt(i);
+      if (code >= 48 && code <= 57) {
+        result.write(_digits![code - 48]);
+      } else {
+        result.write(str[i]);
+      }
+    }
+    return result.toString();
+  }
+
+  /// Apply constraints (significantDigits, maxFractionDigits, rounding) to a number.
+  double _constrain(double num) {
+    double result = num;
+    final String parts0 = num.abs().toString().split('.')[0];
+
+    // Apply significantDigits if it would result in fewer digits than maxFractionDigits
+    if (_significantDigits != null &&
+        _significantDigits! > 0 &&
+        (_maxFractionDigits == null ||
+            _maxFractionDigits! < 0 ||
+            parts0.length + _maxFractionDigits! > _significantDigits!)) {
+      result = significant(result, _significantDigits!, _round);
+    }
+
+    // Apply maxFractionDigits
+    if (_maxFractionDigits != null && _maxFractionDigits! > -1) {
+      result =
+          shiftDecimal(_round(shiftDecimal(result, _maxFractionDigits!)), -_maxFractionDigits!);
+    }
+
+    return result;
+  }
+
+  /// Format the number using standard (non-scientific) notation.
+  String _formatStandard(double num) {
+    final double absConstrained = _constrain(num).abs();
+
+    final List<String> parts = absConstrained.toString().split('.');
+    final String integral = parts[0];
+    String? fraction = parts.length > 1 ? parts[1] : null;
+
+    // Remove trailing zeros artifact from double conversion
+    // but only if no minFractionDigits is set
+    if (fraction == '0' &&
+        (_minFractionDigits == null || _minFractionDigits! <= 0) &&
+        (_maxFractionDigits == null || _maxFractionDigits! < 0)) {
+      fraction = null;
+    } else if (fraction == '0' && _maxFractionDigits != null && _maxFractionDigits == 0) {
+      fraction = null;
+    }
+
+    // Pad fraction to minFractionDigits
+    if (_minFractionDigits != null && _minFractionDigits! > 0) {
+      final String frac = fraction ?? '';
+      if (frac.length < _minFractionDigits!) {
+        fraction = frac + _zeros.substring(0, _minFractionDigits! - frac.length);
+      }
+    }
+
+    // Apply grouping
+    String formatted;
+    if (_secgroupSize > 0) {
+      formatted = _applySecondaryGrouping(integral);
+    } else if (_prigroupSize > 0) {
+      formatted = _applyPrimaryGrouping(integral);
+    } else {
+      formatted = integral;
+    }
+
+    // Add fractional part
+    if (fraction != null &&
+        fraction.isNotEmpty &&
+        ((_maxFractionDigits == null && _significantDigits == null) ||
+            (_maxFractionDigits != null && _maxFractionDigits! > 0) ||
+            (_significantDigits != null && _significantDigits! > 0))) {
+      formatted += _decimalSeparator + fraction;
+    }
+
+    // Native digit substitution
+    if (_digits != null) {
+      formatted = _mapDigits(formatted);
+    }
+
+    return formatted;
+  }
+
+  /// Apply primary-only grouping (e.g., Western style: 1,234,567).
+  String _applyPrimaryGrouping(String integral) {
+    if (integral.length <= _prigroupSize) {
+      return integral;
+    }
+    final StringBuffer result = StringBuffer();
+    int cycle = (integral.length - 1) % _prigroupSize;
+    for (int i = 0; i < integral.length - 1; i++) {
+      result.write(integral[i]);
+      if (cycle == 0) {
+        result.write(_groupingSeparator);
+      }
+      cycle = (cycle - 1) % _prigroupSize;
+      if (cycle < 0) {
+        cycle += _prigroupSize;
+      }
+    }
+    result.write(integral[integral.length - 1]);
+    return result.toString();
+  }
+
+  /// Apply secondary grouping (e.g., Indian style: 12,34,56,789).
+  String _applySecondaryGrouping(String integral) {
+    if (integral.length <= _prigroupSize) {
+      return integral;
+    }
+    // First group from right: prigroupSize
+    final int size3 = integral.length - _prigroupSize;
+    String result =
+        '${integral.substring(0, size3)}$_groupingSeparator${integral.substring(size3)}';
+
+    // Apply secondary grouping to the left part
+    String numSec = result.substring(0, result.indexOf(_groupingSeparator));
+    while (numSec.length > _secgroupSize) {
+      final int secSize3 = numSec.length - _secgroupSize;
+      result = '${result.substring(0, secSize3)}$_groupingSeparator${result.substring(secSize3)}';
+      numSec = result.substring(0, result.indexOf(_groupingSeparator));
+    }
+
+    return result;
+  }
+
+  /// Format the number using scientific notation.
+  String _formatScientific(double num) {
+    final double n = num.abs();
+    final String str = n.toStringAsExponential();
+    final List<String> expParts = str.split('e');
+    double significantPart = double.parse(expParts[0]);
+    final String exponent = expParts[1];
+
+    // Apply significant/fraction digit constraints to the significant part
+    if ((_maxFractionDigits != null && _maxFractionDigits! > 0) ||
+        (_significantDigits != null && _significantDigits! > 0)) {
+      int maxDigits = (_maxFractionDigits ?? 25) + 1;
+      if (_significantDigits != null && _significantDigits! > 0) {
+        if (maxDigits > _significantDigits!) {
+          maxDigits = _significantDigits!;
+        }
+      }
+      significantPart = significant(significantPart, maxDigits, _round);
+    }
+
+    final List<String> numParts = significantPart.toString().split('.');
+    final String integral = numParts[0];
+    String? fraction = numParts.length > 1 ? numParts[1] : null;
+
+    // Truncate fraction to maxFractionDigits
+    final int maxFrac = _maxFractionDigits ?? -1;
+    if (maxFrac >= 0 && fraction != null && fraction.length > maxFrac) {
+      fraction = fraction.substring(0, maxFrac);
+    }
+
+    // Pad fraction to minFractionDigits
+    final int minFrac = _minFractionDigits ?? -1;
+    if (minFrac > 0) {
+      final String frac = fraction ?? '';
+      if (frac.length < minFrac) {
+        fraction = frac + _zeros.substring(0, minFrac - frac.length);
+      }
+    }
+
+    String formatted = integral;
+    if (fraction != null && fraction.isNotEmpty && fraction != '0') {
+      formatted += _decimalSeparator + fraction;
+    } else if (minFrac > 0) {
+      formatted += _decimalSeparator + (fraction ?? _zeros.substring(0, minFrac));
+    }
+    formatted += _exponentSymbol + exponent;
+
+    if (_digits != null) {
+      formatted = _mapDigits(formatted);
+    }
+
+    return formatted;
+  }
+
+  /// Format a number according to the settings of this number formatter instance.
   String format(dynamic number) {
-    String result = '';
-    if (number != null) {
-      if (number is! num && number is! String) {
-        throw ArgumentError(
-            'Invalid argument type. Expected num or String, got ${number.runtimeType}');
-      }
-      if (number is num && (number.isNaN || number.isInfinite)) {
-        return number.toString();
-      }
-
-      final String formatOptions = toJsonString();
-      final String numStr = number is String ? number : number.toString();
-      result = ILibJS.instance
-          .evaluate('new NumFmt($formatOptions).format($numStr).toString()')
-          .stringResult;
+    if (number == null) {
+      return '';
     }
-    return result;
+    if (number is! num && number is! String) {
+      throw ArgumentError(
+          'Invalid argument type. Expected num or String, got ${number.runtimeType}');
+    }
+    if (number is num && (number.isNaN || number.isInfinite)) {
+      return number.toString();
+    }
+
+    final double n = number is String ? double.parse(number) : (number as num).toDouble();
+
+    if (_type == 'number') {
+      final String formatted = (_style == 'scientific') ? _formatScientific(n) : _formatStandard(n);
+      if (n < 0) {
+        return _templateNegative.replaceAll('{n}', formatted);
+      }
+      return formatted;
+    } else {
+      // currency or percentage
+      final String formatted = _formatStandard(n);
+      final String template = (n < 0) ? _templateNegative : _template;
+      String result = template.replaceAll('{n}', formatted);
+      if (_type == 'currency' && _currencySign != null) {
+        result = result.replaceAll('{s}', _currencySign!);
+      }
+      return result;
+    }
   }
 
-  /// Apply the constraints used in the current formatter to the given number
+  /// Apply the constraints used in the current formatter to the given number.
   String constrain(int number) {
-    String result = '';
-    final String formatOptions = toJsonString();
-    result = ILibJS.instance
-        .evaluate('new NumFmt($formatOptions).constrain($number).toString()')
-        .stringResult;
-
-    return result;
+    return _constrain(number.toDouble()).toString();
   }
 
-  /// Return the locale that was used to construct this number formatter object.<br>
-  /// If the locale was not given as parameter to the constructor, this method returns the default
-  /// locale of the system.
+  /// Return the locale that was used to construct this number formatter object.
   String getLocale() {
-    String result = '';
-    final String formatOptions = toJsonString();
-    final String jscode1 = 'new NumFmt($formatOptions).getLocale().toString()';
-    result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+    return _locale;
   }
 
   /// Return the type of formatter. Valid values are "number", "currency", and "percentage".
   String getType() {
-    String result = '';
-    final String formatOptions = toJsonString();
-    final String jscode1 = 'new NumFmt($formatOptions).getType()';
-    result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+    return _type;
   }
 
   /// Returns true if this formatter groups together digits in the integral
-  /// portion of a number, based on the options set up in the constructor
+  /// portion of a number.
   bool isGroupingUsed() {
-    String result = '';
-    final String formatOptions = toJsonString();
-    final String jscode1 = 'new NumFmt($formatOptions).isGroupingUsed()';
-    result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result.toLowerCase() == 'true';
+    return _prigroupSize > 0 && _style != 'nogrouping';
   }
 
-  /// Returns the maximum fraction digits set up in the constructor
+  /// Returns the maximum fraction digits set up in the constructor.
+  /// -1 means unlimited.
   int getMaxFractionDigits() {
-    String result = '';
-    final String formatOptions = toJsonString();
-    final String jscode1 = 'new NumFmt($formatOptions).getMaxFractionDigits()';
-    result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return int.parse(result);
+    return _maxFractionDigits ?? -1;
   }
 
-  /// Returns the minimum fraction digits set up in the constructor
+  /// Returns the minimum fraction digits set up in the constructor.
+  /// -1 means not set.
   int getMinFractionDigits() {
-    String result = '';
-    final String formatOptions = toJsonString();
-    final String jscode1 = 'new NumFmt($formatOptions).getMinFractionDigits()';
-    result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return int.parse(result);
+    return _minFractionDigits ?? -1;
   }
 
-  /// Returns the significant digits set up in the constructor
+  /// Returns the significant digits set up in the constructor.
+  /// -1 means not set.
   int getSignificantDigits() {
-    String result = '';
-    final String formatOptions = toJsonString();
-    final String jscode1 = 'new NumFmt($formatOptions).getSignificantDigits()';
-    result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return int.parse(result);
+    return _significantDigits ?? -1;
   }
 
-  /// Returns the ISO 4217 code for the currency that this formatter formats<br>
-  /// If this formatter's type is not "currency", then this method will return null.
-  int? getCurrency() {
-    String result = '';
-    final String formatOptions = toJsonString();
-    final String jscode1 = 'new NumFmt($formatOptions).getCurrency()';
-    result = ILibJS.instance.evaluate(jscode1).stringResult;
-
-    if (result == null || result.isEmpty || result == 'null') {
+  /// Returns the ISO 4217 code for the currency that this formatter formats.
+  /// Returns null if type is not "currency".
+  String? getCurrency() {
+    if (_type != 'currency') {
       return null;
     }
-
-    return int.parse(result);
+    return _currencyCode;
   }
 
-  /// Returns the rounding mode set up in the constructor.<br>
-  /// The rounding mode controls how numbers are rounded when the integral or fraction digits
-  /// of a number are limited.
+  /// Returns the rounding mode set up in the constructor.
   String getRoundingMode() {
-    String result = '';
-    final String formatOptions = toJsonString();
-    final String jscode1 = 'new NumFmt($formatOptions).getRoundingMode()';
-    result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+    return _roundingMode;
   }
 
-  /// Return the style that was used to construct this number formatter object.<br>
-  /// Valid values are for "currency": "common" (symbol) or "iso" (ISO code).<br>
-  /// for "number": "standard", "scientific", "native", or "nogrouping".<br>
+  /// Return the style that was used to construct this number formatter object.
   String getStyle() {
-    String result = '';
-    final String formatOptions = toJsonString();
-    final String jscode1 = 'new NumFmt($formatOptions).getStyle()';
-    result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+    return _style;
   }
 
-  /// Return true if this formatter uses native digits to format the number
+  /// Return true if this formatter uses native digits to format the number.
   bool getUseNative() {
-    String result = '';
-    final String formatOptions = toJsonString();
-    final String jscode1 = 'new NumFmt($formatOptions).getUseNative()';
-    result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result.toLowerCase() == 'true';
+    return _useNative;
   }
 }
 
 /// Options for configuring the number formatter.
 class ILibNumFmtOptions {
-  /// [locale] Locales are specified either with a specifier string that follows the BCP-47 convention.<br>
-  /// [useNative] The flag used to determine whether to use the native script settings for formatting the numbers.<br>
-  /// [type] The formatter type. Valid values: "number", "currency", "percentage". Default: "number".<br>
-  /// [currency] ISO 4217 currency code for "currency" type. Required for currency formatting.<br>
-  /// [maxFractionDigits] Maximum digits after the decimal. `-1` means unlimited, `0` means no fractional digits.<br>
-  /// [minFractionDigits] Minimum digits after the decimal. Pads with zeros if necessary.<br>
-  /// [significantDigits] Maximum significant digits, applied before and after the decimal.<br>
-  /// [roundingMode] Governs rounding behavior. Examples: "up", "down", "halfup", "halfeven".<br>
-  /// [style] Formatting style.<br>
-  /// For "currency": "common" (symbol) or "iso" (ISO code). For "number": "standard", "scientific", "native", or "nogrouping".<br>
+  /// [locale] Locales are specified either with a specifier string that follows the BCP-47 convention.
+  /// [useNative] The flag used to determine whether to use the native script settings for formatting the numbers.
+  /// [type] The formatter type. Valid values: "number", "currency", "percentage". Default: "number".
+  /// [currency] ISO 4217 currency code for "currency" type. Required for currency formatting.
+  /// [maxFractionDigits] Maximum digits after the decimal. `-1` means unlimited, `0` means no fractional digits.
+  /// [minFractionDigits] Minimum digits after the decimal. Pads with zeros if necessary.
+  /// [significantDigits] Maximum significant digits, applied before and after the decimal.
+  /// [roundingMode] Governs rounding behavior. Examples: "up", "down", "halfup", "halfeven".
+  /// [style] Formatting style.
+  /// For "currency": "common" (symbol) or "iso" (ISO code). For "number": "standard", "scientific", "native", or "nogrouping".
   ILibNumFmtOptions({
     this.locale,
     this.type,

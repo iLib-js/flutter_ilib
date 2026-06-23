@@ -1,10 +1,1 @@
-{
-    "ilib.data.localeinfo": {
-        "clock": "24",
-        "currency": "TRY",
-        "firstDayOfWeek": 1,
-        "locale": "TR",
-        "region.name": "Türkiye",
-        "timezone": "Europe/Istanbul"
-    }
-}
+{"ilib.data.localeinfo":{"clock":"24","currency":"TRY","firstDayOfWeek":1,"locale":"TR","region.name":"Türkiye","timezone":"Europe/Istanbul"}}

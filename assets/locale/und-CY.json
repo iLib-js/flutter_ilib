@@ -1,10 +1,1 @@
-{
-    "ilib.data.localeinfo": {
-        "clock": "12",
-        "currency": "EUR",
-        "firstDayOfWeek": 1,
-        "locale": "CY",
-        "region.name": "Cyprus",
-        "timezone": "Asia/Nicosia"
-    }
-}
+{"ilib.data.localeinfo":{"clock":"12","currency":"EUR","firstDayOfWeek":1,"locale":"CY","region.name":"Cyprus","timezone":"Asia/Nicosia"}}

@@ -1,10 +1,1 @@
-{
-    "ilib.data.localeinfo": {
-        "clock": "24",
-        "currency": "JPY",
-        "firstDayOfWeek": 0,
-        "locale": "JP",
-        "region.name": "Japan",
-        "timezone": "Asia/Tokyo"
-    }
-}
+{"ilib.data.localeinfo":{"clock":"24","currency":"JPY","firstDayOfWeek":0,"locale":"JP","region.name":"Japan","timezone":"Asia/Tokyo"}}

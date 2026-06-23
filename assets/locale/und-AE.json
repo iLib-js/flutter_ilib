@@ -1,10 +1,1 @@
-{
-    "ilib.data.localeinfo": {
-        "clock": "12",
-        "currency": "AED",
-        "firstDayOfWeek": 1,
-        "locale": "AE",
-        "region.name": "United Arab Emirates",
-        "timezone": "Asia/Dubai"
-    }
-}
+{"ilib.data.localeinfo":{"clock":"12","currency":"AED","firstDayOfWeek":1,"locale":"AE","region.name":"United Arab Emirates","timezone":"Asia/Dubai"}}

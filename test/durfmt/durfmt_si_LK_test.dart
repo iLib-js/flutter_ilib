@@ -10,10 +10,8 @@ void main() {
   debugPrint('Testing [durfmt_si_LK_test.dart] file.');
   setUpAll(() async {
     testPlatform = getTestPlatform();
-    final ILibJS ilibjsinstance = ILibJS.instance;
-    await ilibjsinstance.loadJS();
-    ilibjsinstance.initILib();
-    await ILibJS.instance.loadILibLocaleData('si-LK');
+    await ILibLoader.instance.loadJSON();
+    await ILibLoader.instance.loadILibLocaleData('si-LK');
   });
 
   group('ILibDurationFmt si-LK', () {

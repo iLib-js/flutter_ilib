@@ -10,10 +10,8 @@ void main() {
   debugPrint('Testing [durfmt_az_Latn_AZ_test.dart] file.');
   setUpAll(() async {
     testPlatform = getTestPlatform();
-    final ILibJS ilibjsinstance = ILibJS.instance;
-    await ilibjsinstance.loadJS();
-    ilibjsinstance.initILib();
-    await ILibJS.instance.loadILibLocaleData('az-LAtn-AZ');
+    await ILibLoader.instance.loadJSON();
+    await ILibLoader.instance.loadILibLocaleData('az-Latn-AZ');
   });
 
   group('ILibDurationFmt az-Latn-AZ', () {

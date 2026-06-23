@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../test_env.dart';
+
 void main() {
+  String testPlatform = '';
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [scriptinfo_test.dart] file.');
   setUpAll(() async {
+    testPlatform = getTestPlatform();
     final ILibJS ilibjsinstance = ILibJS.instance;
     await ilibjsinstance.loadJS();
     ilibjsinstance.initILib();
@@ -914,6 +918,14 @@ void main() {
 
     test('testScriptInfo_ku_IQ', () {
       final ILibLocaleInfo li = ILibLocaleInfo('ku-IQ');
+      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
+      expect(li, isNotNull);
+      expect(scinfo, isNotNull);
+      expect(li.getScript(), 'Latn');
+      expect(scinfo.getScriptDirection(), 'ltr');
+    });
+    test('testScriptInfo_ku_Arab_IQ', () {
+      final ILibLocaleInfo li = ILibLocaleInfo('ku-Arab-IQ');
       final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
       expect(li, isNotNull);
       expect(scinfo, isNotNull);

@@ -4,12 +4,10 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  debugPrint('Testing [numfmt_test.dart] file.');
+  debugPrint('Testing [numfmt_am_test.dart] file.');
   setUpAll(() async {
-    final ILibJS ilibjsinstance = ILibJS.instance;
-    await ilibjsinstance.loadJS();
-    ilibjsinstance.initILib();
-    await ILibJS.instance.loadILibLocaleData('am-ET');
+    await ILibLoader.instance.loadJSON();
+    await ILibLoader.instance.loadILibLocaleData('am-ET');
   });
 
   group('iLibNumFmt_am', () {

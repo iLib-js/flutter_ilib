@@ -1,10 +1,1 @@
-{
-    "ilib.data.localeinfo": {
-        "clock": "24",
-        "currency": "BGN",
-        "firstDayOfWeek": 1,
-        "locale": "BG",
-        "region.name": "Bulgaria",
-        "timezone": "Europe/Sofia"
-    }
-}
+{"ilib.data.localeinfo":{"clock":"24","currency":"EUR","firstDayOfWeek":1,"locale":"BG","region.name":"Bulgaria","timezone":"Europe/Sofia"}}

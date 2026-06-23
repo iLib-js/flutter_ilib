@@ -39,7 +39,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '2011, സെപ്റ്റം 29');
+      expect(fmt.format(dateOptions), '2011 സെപ്റ്റം 29');
     });
     test('testDateFmtINSimpleLong_ml_IN', () {
       final ILibDateFmtOptions fmtOptions =
@@ -55,7 +55,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '2011, സെപ്റ്റംബർ 29');
+      expect(fmt.format(dateOptions), '2011 സെപ്റ്റംബർ 29');
     });
     test('testDateFmtINSimpleFull_ml_IN', () {
       final ILibDateFmtOptions fmtOptions =
@@ -71,7 +71,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '2011, സെപ്റ്റംബർ 29');
+      expect(fmt.format(dateOptions), '2011 സെപ്റ്റംബർ 29');
     });
 
     test('testDateFmtINTypeDate_ml_IN', () {
@@ -313,7 +313,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '2011, സെപ്റ്റംബർ');
+      expect(fmt.format(dateOptions), '2011 സെപ്റ്റംബർ');
     });
     test('testDateFmtINFullDateComponentsDMY_ml_IN', () {
       final ILibDateFmtOptions fmtOptions =
@@ -329,7 +329,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '2011, സെപ്റ്റംബർ 29');
+      expect(fmt.format(dateOptions), '2011 സെപ്റ്റംബർ 29');
     });
     test('testDateFmtINFullDateComponentsWDM_ml_IN', () {
       final ILibDateFmtOptions fmtOptions =
@@ -361,7 +361,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '2011, സെപ്റ്റംബർ 29, വ്യാഴാഴ്‌ച');
+      expect(fmt.format(dateOptions), '2011 സെപ്റ്റംബർ 29, വ്യാഴാഴ്‌ച');
     });
     test('testDateFmtINShortTimeComponentsS_ml_IN', () {
       final ILibDateFmtOptions fmtOptions =

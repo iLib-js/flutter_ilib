@@ -1,10 +1,1 @@
-{
-    "ilib.data.localeinfo": {
-        "clock": "24",
-        "currency": "EUR",
-        "firstDayOfWeek": 1,
-        "locale": "LU",
-        "region.name": "Luxembourg",
-        "timezone": "Europe/Luxembourg"
-    }
-}
+{"ilib.data.localeinfo":{"clock":"24","currency":"EUR","firstDayOfWeek":1,"locale":"LU","region.name":"Luxembourg","timezone":"Europe/Luxembourg"}}
