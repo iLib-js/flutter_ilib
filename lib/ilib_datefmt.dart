@@ -213,8 +213,15 @@ class ILibDateFmt {
   }
 
   ILibDateOptions _resolveDateOptions(ILibDateOptions date) {
-    if (date.dateTime != null) {
-      DateTime dt = date.dateTime!;
+    // A Flutter `DateTime` or a `unixtime` is a Gregorian instant. Resolve it to
+    // Gregorian wall-clock components and mark it 'gregorian' so the formatter
+    // converts it to its own calendar (e.g. ethiopic for am-ET) instead of
+    // treating the raw Gregorian numbers as already in that calendar.
+    DateTime? dt = date.dateTime;
+    if (dt == null && date.unixtime != null) {
+      dt = DateTime.fromMillisecondsSinceEpoch(date.unixtime!, isUtc: true);
+    }
+    if (dt != null) {
       if (dt.isUtc && _timezone != null && _timezone!.isNotEmpty) {
         final ILibTimeZone tz = ILibTimeZone(_timezone!, _zoneInfo);
         final ILibDateOptions tempDate = ILibDateOptions(
@@ -238,7 +245,7 @@ class ILibDateFmt {
         second: date.second ?? dt.second,
         millisecond: date.millisecond ?? dt.millisecond,
         timezone: date.timezone,
-        calendar: date.calendar,
+        calendar: date.calendar ?? 'gregorian',
         type: date.type,
       );
     }
