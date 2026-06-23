@@ -59,6 +59,7 @@ class ILibLoader extends ChangeNotifier {
       // binary 'AssetManifest.bin') and dropped from the build in a later
       // release. Flutter 3.32.8 still emits it, but a newer stable (e.g. CI)
       // does not, so the old path fails there. This API is version-safe.
+      // See: https://docs.flutter.dev/release/breaking-changes/asset-manifest-dot-json
       final AssetManifest manifest =
           await AssetManifest.loadFromAssetBundle(rootBundle);
       _availableAssets.addAll(manifest.listAssets());
