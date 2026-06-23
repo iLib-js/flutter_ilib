@@ -153,7 +153,7 @@ class _MyAppState extends State<MyApp> {
                         _flutterIlibPlugin.loadLocaleData(curLocale);
                         results[0] = getDateTimeFormat(curLocale);
                         results[1] = getFirstDayOfWeek(curLocale);
-                        //results[2] = getClock(curLocale);
+                        results[2] = getClock(curLocale);
                         //results[3] = getNumFmt(curLocale);
                         //results[4] = getCountry(curLocale);
                         setState(() {
