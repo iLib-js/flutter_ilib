@@ -77,17 +77,6 @@ class ILibDateFmt {
   String format(ILibDate date) {
     ILibDate resolved = date;
     if (date is ILibDateOptions) {
-      // Mirror JS DateFactory._dateToIlib: a DateTime/unixtime is a Gregorian
-      // instant that becomes a concrete date in the formatter's (locale's)
-      // calendar, decomposed directly from the instant in the formatter's
-      // timezone — no Gregorian intermediate, no Julian-Day round-trip.
-      final int? instantMs =
-          date.unixtime ?? date.dateTime?.millisecondsSinceEpoch;
-      if (instantMs != null && date.calendar == null && date.type == null) {
-        resolved =
-            _createCalendarDate(_calName, unixtime: instantMs, timezone: _timezone);
-        return _formatTemplate(resolved, _templateArr);
-      }
       resolved = _resolveDateOptions(date);
     }
     resolved = _convertToFormatterCalendar(resolved);
@@ -128,8 +117,6 @@ class ILibDateFmt {
     int? second,
     int? millisecond,
     double? julianDay,
-    int? unixtime,
-    String? timezone,
   }) {
     switch (calendar) {
       case 'ethiopic':
@@ -141,9 +128,7 @@ class ILibDateFmt {
             minute: minute,
             second: second,
             millisecond: millisecond,
-            julianDay: julianDay,
-            unixtime: unixtime,
-            timezone: timezone);
+            julianDay: julianDay);
       case 'coptic':
         return CopticDate(
             year: year,
@@ -153,9 +138,7 @@ class ILibDateFmt {
             minute: minute,
             second: second,
             millisecond: millisecond,
-            julianDay: julianDay,
-            unixtime: unixtime,
-            timezone: timezone);
+            julianDay: julianDay);
       case 'hebrew':
         return HebrewDate(
             year: year,
@@ -165,9 +148,7 @@ class ILibDateFmt {
             minute: minute,
             second: second,
             millisecond: millisecond,
-            julianDay: julianDay,
-            unixtime: unixtime,
-            timezone: timezone);
+            julianDay: julianDay);
       case 'islamic':
         return IslamicDate(
             year: year,
@@ -177,9 +158,7 @@ class ILibDateFmt {
             minute: minute,
             second: second,
             millisecond: millisecond,
-            julianDay: julianDay,
-            unixtime: unixtime,
-            timezone: timezone);
+            julianDay: julianDay);
       case 'julian':
         return JulianDate(
             year: year,
@@ -189,9 +168,7 @@ class ILibDateFmt {
             minute: minute,
             second: second,
             millisecond: millisecond,
-            julianDay: julianDay,
-            unixtime: unixtime,
-            timezone: timezone);
+            julianDay: julianDay);
       case 'persian':
         return PersianDate(
             year: year,
@@ -201,9 +178,7 @@ class ILibDateFmt {
             minute: minute,
             second: second,
             millisecond: millisecond,
-            julianDay: julianDay,
-            unixtime: unixtime,
-            timezone: timezone);
+            julianDay: julianDay);
       case 'persian-algo':
         return PersianAlgoDate(
             year: year,
@@ -213,9 +188,7 @@ class ILibDateFmt {
             minute: minute,
             second: second,
             millisecond: millisecond,
-            julianDay: julianDay,
-            unixtime: unixtime,
-            timezone: timezone);
+            julianDay: julianDay);
       case 'thaisolar':
         return ThaiSolarDate(
             year: year,
@@ -225,9 +198,7 @@ class ILibDateFmt {
             minute: minute,
             second: second,
             millisecond: millisecond,
-            julianDay: julianDay,
-            unixtime: unixtime,
-            timezone: timezone);
+            julianDay: julianDay);
       default:
         return GregorianDate(
             year: year,
@@ -237,15 +208,20 @@ class ILibDateFmt {
             minute: minute,
             second: second,
             millisecond: millisecond,
-            julianDay: julianDay,
-            unixtime: unixtime,
-            timezone: timezone);
+            julianDay: julianDay);
     }
   }
 
   ILibDateOptions _resolveDateOptions(ILibDateOptions date) {
-    if (date.dateTime != null) {
-      DateTime dt = date.dateTime!;
+    // A Flutter `DateTime` or a `unixtime` is a Gregorian instant. Resolve it to
+    // Gregorian wall-clock components and mark it 'gregorian' so the formatter
+    // converts it to its own calendar (e.g. ethiopic for am-ET) instead of
+    // treating the raw Gregorian numbers as already in that calendar.
+    DateTime? dt = date.dateTime;
+    if (dt == null && date.unixtime != null) {
+      dt = DateTime.fromMillisecondsSinceEpoch(date.unixtime!, isUtc: true);
+    }
+    if (dt != null) {
       if (dt.isUtc && _timezone != null && _timezone!.isNotEmpty) {
         final ILibTimeZone tz = ILibTimeZone(_timezone!, _zoneInfo);
         final ILibDateOptions tempDate = ILibDateOptions(
@@ -269,7 +245,7 @@ class ILibDateFmt {
         second: date.second ?? dt.second,
         millisecond: date.millisecond ?? dt.millisecond,
         timezone: date.timezone,
-        calendar: date.calendar,
+        calendar: date.calendar ?? 'gregorian',
         type: date.type,
       );
     }
