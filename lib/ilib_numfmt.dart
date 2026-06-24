@@ -1,6 +1,6 @@
 import 'ilib_init.dart';
 import 'ilib_localeinfo.dart';
-import 'internal/ilib_rounding.dart';
+import 'internal/ilib_math_utils.dart';
 import 'internal/ilib_utils.dart' as ilib_utils;
 
 /// Padding string of zeros for fraction formatting.
@@ -337,12 +337,19 @@ class ILibNumFmt {
     final double n = num.abs();
     final String str = n.toStringAsExponential();
     final List<String> expParts = str.split('e');
-    double significantPart = double.parse(expParts[0]);
     final String exponent = expParts[1];
 
-    // Apply significant/fraction digit constraints to the significant part
-    if ((_maxFractionDigits != null && _maxFractionDigits! > 0) ||
-        (_significantDigits != null && _significantDigits! > 0)) {
+    // Only re-parse as double when digit constraints need rounding.
+    // Avoid unnecessary string→double→string round-trip which can lose
+    // the last significant digit due to IEEE 754 precision limits.
+    final bool needsConstraints =
+        (_maxFractionDigits != null && _maxFractionDigits! > 0) ||
+        (_significantDigits != null && _significantDigits! > 0);
+
+    String significandStr = expParts[0];
+
+    if (needsConstraints) {
+      double significantPart = double.parse(significandStr);
       int maxDigits = (_maxFractionDigits ?? 25) + 1;
       if (_significantDigits != null && _significantDigits! > 0) {
         if (maxDigits > _significantDigits!) {
@@ -350,9 +357,10 @@ class ILibNumFmt {
         }
       }
       significantPart = significant(significantPart, maxDigits, _round);
+      significandStr = significantPart.toString();
     }
 
-    final List<String> numParts = significantPart.toString().split('.');
+    final List<String> numParts = significandStr.split('.');
     final String integral = numParts[0];
     String? fraction = numParts.length > 1 ? numParts[1] : null;
 
