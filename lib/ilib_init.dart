@@ -54,13 +54,13 @@ class ILibLoader extends ChangeNotifier {
       return;
     }
     try {
-      final String manifestContent =
-          await rootBundle.loadString('AssetManifest.json');
-      final Map<String, dynamic> manifest =
-          json.decode(manifestContent) as Map<String, dynamic>;
-      _availableAssets.addAll(manifest.keys);
+      // Removal of AssetManifest.json
+      // See: https://docs.flutter.dev/release/breaking-changes/asset-manifest-dot-json
+      final AssetManifest manifest =
+          await AssetManifest.loadFromAssetBundle(rootBundle);
+      _availableAssets.addAll(manifest.listAssets());
     } catch (err) {
-      logger.error('Failed to load AssetManifest.json: $err');
+      logger.error('Failed to load asset manifest: $err');
     }
   }
 

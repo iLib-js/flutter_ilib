@@ -37,6 +37,8 @@ ILibDateFmt constructor
   └── _tokenize() → generates token array
 
 format(date)
+  ├── _resolveDateOptions(date) → resolve a Flutter DateTime/unixtime to
+  │                               Gregorian wall-clock components (Notes #8)
   ├── _convertToFormatterCalendar(date) → calendar conversion if needed
   └── _formatTemplate(date, tokenArr) → replaces each token with date values
 ```
@@ -313,3 +315,8 @@ for f in test/datefmt/*_test.dart; do flutter test "$f"; done
 5. **Length may be a string**: dateformats values can be a single string instead of `{s, m, l, f}` object (same format for all lengths)
 6. **No en-US data file**: `en-US.json` does not exist separately. Composed by merging `root.json` → `en.json` → `und-US.json`
 7. **Calendar conversion**: See [calendar-conversion.md](./calendar-conversion.md) for cross-calendar date conversion logic in `format()`
+8. **Flutter `DateTime`/`unixtime` input — distinguish naive vs. UTC, then convert the calendar**: a Flutter `DateTime` carries a kind. `format()` honours it (`_resolveDateOptions`):
+   - **naive `DateTime(...)`** (no zone): use its **wall components directly** (`dt.year`/`dt.hour`/…). This is host-independent (the wall value is the same on every machine) and matches `package:intl`, which formats a `DateTime`'s fields without shifting zones.
+   - **`DateTime.utc(...)` / `unixtime`** (an explicit instant): apply the **formatter's timezone** offset, then take the components — i.e. convert the instant into the target zone.
+
+   In both cases the resulting Gregorian date is then converted to the formatter's calendar via **Julian Day** when they differ (`_convertToFormatterCalendar`), so non-Gregorian locales show the converted date — am-ET → "16 ሰኔ 2018", **not** the raw Gregorian "23 የካቲት 2026". Do **not** treat a naive `DateTime` as a host-zone instant (via `millisecondsSinceEpoch`): that makes formatting host-dependent (passes on a KST dev box, fails on a UTC CI runner). JS's instant path *is* host-dependent for locally-constructed `Date`s, but that is a JS quirk worth diverging from for a Flutter API — naive `DateTime` input is Dart-specific and has no JS contract. Regression: `test/datefmt/datefmt_datetime_calendar_extra_test.dart`.
