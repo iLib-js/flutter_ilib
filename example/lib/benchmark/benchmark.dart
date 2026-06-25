@@ -3,13 +3,13 @@
 // Goal: compare this branch (pure Dart, v2.0+) against the JS-interop release
 // (v1.3.0) using the SAME workload, to confirm startup / per-op / memory gains.
 //
-// HOW TO RUN (do NOT use debug mode — it skews results):
-//   flutter run --profile -d linux -t lib/benchmark.dart
+// HOW TO RUN (do NOT use debug mode — it skews results), from example/:
+//   flutter run --profile -d linux -t lib/benchmark/benchmark.dart
 // The results are shown on screen AND printed to the console (look for `[BENCH]`).
 //
-// HOW TO COMPARE WITH v1.3.0:
+// HOW TO COMPARE WITH v1.3.0 (its example/ uses the released flat layout):
 //   git worktree add ../flutter_ilib-v1.3.0 v1.3.0
-//   cp lib/benchmark.dart ../flutter_ilib-v1.3.0/example/lib/benchmark.dart
+//   cp lib/benchmark/benchmark.dart ../flutter_ilib-v1.3.0/example/lib/benchmark.dart
 //   # v1.3.0 needs the QuickJS bridge built (see that tag's README / execute_unit_test.sh)
 //   cd ../flutter_ilib-v1.3.0/example && flutter run --profile -d linux -t lib/benchmark.dart
 // Then put the two result tables side by side.
@@ -23,9 +23,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 
-// Started at program load → measures "process start → iLib ready" (the JS-engine
-// boot cost that v2.0 removes).
-final Stopwatch _bootSw = Stopwatch()..start();
+// Measures "main() entry → iLib ready" (the JS-engine boot cost that v2.0
+// removes). NOTE: a top-level `Stopwatch()..start()` is lazily initialized on
+// first access (which is `.stop()` in _onReady), so it would report ~0 ms —
+// start it explicitly at the top of main() instead.
+final Stopwatch _bootSw = Stopwatch();
 
 // ---- Workload knobs ----------------------------------------------------------
 const List<String> _locales = <String>[
@@ -59,6 +61,7 @@ double _perOp(int iters, void Function() body) {
 }
 
 void main() {
+  _bootSw.start();
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const BenchmarkApp());
 }
