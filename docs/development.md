@@ -519,12 +519,17 @@ flutter_ilib is a pure-calculation library, so performance work means measuring 
 speed, not widget frames:
 
 ```bash
-# Micro-benchmark pure Dart logic (format/calendar conversion) with package:benchmark_harness
-dart run --release benchmark/<bench>.dart   # ns/op; compare vs the JS-interop baseline
+# Dedicated benchmark package (sibling of example/) — startup / per-op / memory,
+# incl. an A/B comparison vs the v1.3.0 JS-interop release. Profile mode only.
+cd benchmark
+flutter run --profile -d linux -t lib/benchmark.dart        # flutter_ilib workload
+flutter run --profile -d linux -t lib/benchmark_pure.dart   # empty-app baseline (engine floor)
 
 # App-level: run the example in profile mode and use DevTools (Performance / CPU / Memory)
-flutter run --profile      # not `flutter test`
+cd example && flutter run --profile      # not `flutter test`
 ```
+
+See [benchmark.md](./benchmark.md) for results and methodology.
 
 ---
 

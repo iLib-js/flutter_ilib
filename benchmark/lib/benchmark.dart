@@ -101,6 +101,10 @@ class _BenchmarkAppState extends State<BenchmarkApp> {
   }
 
   Future<void> _runBenchmark() async {
+    // Wall-clock of the whole measurement phase (locale load + every workload
+    // loop). Dominated by the per-op loops, so it aggregates the speed gap:
+    // v2.0 finishes in seconds where v1.3.0 takes minutes.
+    final Stopwatch totalSw = Stopwatch()..start();
     final List<String> lines = <String>[];
     void row(String label, String value) {
       lines.add('${label.padRight(26)} $value');
@@ -186,6 +190,9 @@ class _BenchmarkAppState extends State<BenchmarkApp> {
       row('RSS sustain r$r', '$rss MB');
     }
     row('RSS peak', '$peak MB');
+
+    totalSw.stop();
+    row('total run time', '${totalSw.elapsedMilliseconds} ms');
 
     if (!mounted) {
       return;
