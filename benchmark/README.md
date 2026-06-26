@@ -25,9 +25,20 @@ to quit when the run reaches `RSS peak`.
 ## Compare against v1.3.0 (JS interop)
 
 ```bash
+# 1) Linked working tree at the v1.3.0 tag (run `git fetch --tags` if it's missing).
 git worktree add ../flutter_ilib-v1.3.0 v1.3.0
+
+# 2) Copy this benchmark in (v1.3.0's example uses the flat lib/ layout).
 cp lib/benchmark.dart ../flutter_ilib-v1.3.0/example/lib/benchmark.dart
-cd ../flutter_ilib-v1.3.0/example && flutter run --profile -d linux -t lib/benchmark.dart
+
+# 3) Fetch deps and run. No manual QuickJS build needed — `flutter pub get` makes
+#    flutter_js bundle its prebuilt libquickjs_c_bridge_plugin.so.
+#    (LIBQUICKJSC_TEST_PATH / execute_unit_test.sh are only for `flutter test`.)
+cd ../flutter_ilib-v1.3.0/example
+flutter pub get
+flutter run --profile -d linux -t lib/benchmark.dart
+
+# When done: git worktree remove ../flutter_ilib-v1.3.0
 ```
 
 Full results and methodology: [`docs/benchmark.md`](../docs/benchmark.md).

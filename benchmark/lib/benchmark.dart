@@ -9,10 +9,19 @@
 //
 // HOW TO COMPARE WITH v1.3.0 (its example/ uses the released flat layout):
 //   git worktree add ../flutter_ilib-v1.3.0 v1.3.0
+//
+//   # 2) Copy this benchmark in. v1.3.0's example uses the flat lib/ layout.
 //   cp lib/benchmark.dart ../flutter_ilib-v1.3.0/example/lib/benchmark.dart
-//   # v1.3.0 needs the QuickJS bridge built (see that tag's README / execute_unit_test.sh)
-//   cd ../flutter_ilib-v1.3.0/example && flutter run --profile -d linux -t lib/benchmark.dart
-// Then put the two result tables side by side.
+//
+//   # 3) Fetch deps and run. No manual QuickJS build is needed: `flutter pub get`
+//   #    makes flutter_js bundle its prebuilt libquickjs_c_bridge_plugin.so.
+//   #    (LIBQUICKJSC_TEST_PATH / execute_unit_test.sh are only for `flutter test`.)
+//   cd ../flutter_ilib-v1.3.0/example
+//   flutter pub get
+//   flutter run --profile -d linux -t lib/benchmark.dart
+//
+//   # Put the two result tables side by side. When done:
+//   #   git worktree remove ../flutter_ilib-v1.3.0
 //
 // This file uses ONLY the public API shared by v1.3.0 and the current branch,
 // so the same file runs unmodified on both.
