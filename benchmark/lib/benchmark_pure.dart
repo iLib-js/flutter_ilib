@@ -4,8 +4,8 @@
 // Dart runtime use, and how long main()→first-frame takes. Subtract this from
 // the flutter_ilib / v1.3.0 numbers to see iLib's marginal cost.
 //
-// HOW TO RUN (from example/):
-//   flutter run --profile -d linux -t lib/benchmark/benchmark_pure.dart
+// HOW TO RUN (from benchmark/):
+//   flutter run --profile -d linux -t lib/benchmark_pure.dart
 
 import 'dart:async';
 import 'dart:io';

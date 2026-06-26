@@ -31,21 +31,21 @@ Flutter engine's own footprint.
 
 ## Setup
 
-- **Command** (from `example/`): `flutter run --profile -d linux -t lib/benchmark/benchmark.dart`
+- **Command** (from `benchmark/`): `flutter run --profile -d linux -t lib/benchmark.dart`
   (profile mode — debug numbers are not representative).
 - **Same machine, same `benchmark.dart`** for both versions (the file uses only the
   public API shared by v1.3.0 and the current branch).
 - **Three variants** (tables order them v1.3.0 → v2.0 → empty app):
   1. **v1.3.0** — `flutter_js` / QuickJS interop (`git worktree` at the `v1.3.0` tag).
   2. **v2.0** — current branch (pure Dart).
-  3. **Empty app** — a bare Flutter app with no `flutter_ilib` (`lib/benchmark/benchmark_pure.dart`); the framework floor.
+  3. **Empty app** — a bare Flutter app with no `flutter_ilib` (`benchmark/lib/benchmark_pure.dart`); the framework floor.
 - **Workload** (5 locales: en-US, en-GB, ko-KR, fa-IR, am-ET):
   `format()` reused ×5,000 · construct + `format()` ×5,000 · `LocaleInfo` lookup
   ×20,000 · then a sustained phase of 6 rounds × 5,000 ops (each round = format +
   LocaleInfo lookup), tracking RSS per round.
 
-> Reproduce: see the header of [`example/lib/benchmark/benchmark.dart`](../example/lib/benchmark/benchmark.dart)
-> (and [`example/lib/benchmark/benchmark_pure.dart`](../example/lib/benchmark/benchmark_pure.dart) for the
+> Reproduce: see the header of `benchmark/lib/benchmark.dart`
+> (and `benchmark/lib/benchmark_pure.dart` for the
 > baseline). Measurements below are from one representative run; per-op figures vary
 > ±10–20% run to run.
 

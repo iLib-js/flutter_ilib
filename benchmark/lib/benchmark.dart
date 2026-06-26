@@ -3,13 +3,13 @@
 // Goal: compare this branch (pure Dart, v2.0+) against the JS-interop release
 // (v1.3.0) using the SAME workload, to confirm startup / per-op / memory gains.
 //
-// HOW TO RUN (do NOT use debug mode — it skews results), from example/:
-//   flutter run --profile -d linux -t lib/benchmark/benchmark.dart
+// HOW TO RUN (do NOT use debug mode — it skews results), from benchmark/:
+//   flutter run --profile -d linux -t lib/benchmark.dart
 // The results are shown on screen AND printed to the console (look for `[BENCH]`).
 //
 // HOW TO COMPARE WITH v1.3.0 (its example/ uses the released flat layout):
 //   git worktree add ../flutter_ilib-v1.3.0 v1.3.0
-//   cp lib/benchmark/benchmark.dart ../flutter_ilib-v1.3.0/example/lib/benchmark.dart
+//   cp lib/benchmark.dart ../flutter_ilib-v1.3.0/example/lib/benchmark.dart
 //   # v1.3.0 needs the QuickJS bridge built (see that tag's README / execute_unit_test.sh)
 //   cd ../flutter_ilib-v1.3.0/example && flutter run --profile -d linux -t lib/benchmark.dart
 // Then put the two result tables side by side.
