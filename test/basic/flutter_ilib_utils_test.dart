@@ -6,7 +6,7 @@ const String _base = 'packages/flutter_ilib/assets/locale';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  debugPrint('Testing [flutter_ilib_test.dart] file.');
+  debugPrint('Testing [flutter_ilib_utils_test.dart] file.');
   setUpAll(() async {});
 
   group('utils', () {
