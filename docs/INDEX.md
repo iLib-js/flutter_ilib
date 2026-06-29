@@ -93,6 +93,7 @@ If you're an AI agent (Claude, Copilot, etc.), follow this sequence:
 | [local-timezone-support.md](./local-timezone-support.md) | System `'local'` timezone — implemented (Strategy A) + optional Strategy B | Developers, AI |
 | [conversion-guide.md](./conversion-guide.md) | General JS→Dart conversion checklist | Developers |
 | [test-mapping.md](./test-mapping.md) | JS→Dart test file mapping, not-converted patterns | Developers, AI |
+| [benchmark.md](./benchmark.md) | Performance & memory: v2.0 (pure Dart) vs v1.3.0 (JS interop) + empty-app baseline | Developers, AI |
 
 ### External Documentation
 
