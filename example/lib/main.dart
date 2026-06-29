@@ -148,9 +148,9 @@ class _MyAppState extends State<MyApp> {
                   for (int i = 0; i < localeList.length; i++)
                     ElevatedButton(
                       child: Text(localeList[i], style: buttonTextStyle),
-                      onPressed: () {
+                      onPressed: () async {
                         curLocale = localeList[i];
-                        _flutterIlibPlugin.loadLocaleData(curLocale);
+                        await _flutterIlibPlugin.loadLocaleData(curLocale);
                         _currentTimeFormat = getDateTimeFormatNow(curLocale);
                         results[0] = getDateTimeFormatFixed(curLocale);
                         results[1] = getFirstDayOfWeek(curLocale);
