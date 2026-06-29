@@ -43,6 +43,10 @@ Flutter engine's own footprint.
   `format()` reused ×5,000 · construct + `format()` ×5,000 · `LocaleInfo` lookup
   ×20,000 · then a sustained phase of 6 rounds × 5,000 ops (each round = format +
   LocaleInfo lookup), tracking RSS per round.
+- **Measured at**: v2.0 = `flutter_ilib` v2.0.0 (CLDR 46), library at commit
+  `0c0fe81` — tagged **`bench-baseline-2026-06`** so it stays referenceable even if
+  the branch is deleted · v1.3.0 = tag `v1.3.0` (`1235523`) · Flutter 3.32.8 ·
+  Ubuntu 22.04 · profile mode.
 
 > Reproduce: see the header of `benchmark/lib/benchmark.dart`
 > (and `benchmark/lib/benchmark_pure.dart` for the
