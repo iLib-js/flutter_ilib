@@ -12,7 +12,7 @@ point-in-time/public spots listed below).
 - **iLib JS source**: **v14.21.0** — all `lib/` Dart code and `test/` cases were converted
   from the iLib JS at this tag (`js/lib/` and `js/test/` of github.com/iLib-js/iLib;
   `git checkout v14.21.0`).
-- **CLDR data**: **46** — the bundled `assets/locale/` JSON (218 locales) was generated from
+- **CLDR data**: **48.2** — the bundled `assets/locale/` JSON (218 locales) was generated from
   iLib v14.21.0, which incorporates CLDR 46.
 - When updating to a newer iLib/CLDR: bump the JS source and the generated locale data
   **together** (a JS-only or data-only bump will diverge), then re-run the converted tests
