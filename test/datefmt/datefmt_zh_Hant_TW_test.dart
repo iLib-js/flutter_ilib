@@ -161,7 +161,7 @@ void main() {
           second: 0,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? '2011/9/29 13:45' : '2011/9/29 下午1:45';
+          (testPlatform == 'webOS') ? '2011/9/29 13:45' : '2011/9/29 下午1:45';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtDateTimeSimpleMedium_zh_Hant_TW', () {
@@ -266,7 +266,7 @@ void main() {
           second: 0,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? '2011/9/29 13:45' : '2011/9/29 下午1:45';
+          (testPlatform == 'webOS') ? '2011/9/29 13:45' : '2011/9/29 下午1:45';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortDateComponentsY_zh_Hant_TW', () {

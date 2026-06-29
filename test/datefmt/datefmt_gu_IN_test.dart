@@ -199,7 +199,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29 સપ્ટેમ્બર, 2011 એ 01:45 PM વાગ્યે');
+      expect(fmt.format(dateOptions), '29 સપ્ટેમ્બર, 2011 01:45 PM');
     });
     test('testDateFmtINDateTimeSimpleFull_gu_IN', () {
       final ILibDateFmtOptions fmtOptions =
@@ -215,7 +215,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29 સપ્ટેમ્બર, 2011 એ 01:45 PM વાગ્યે');
+      expect(fmt.format(dateOptions), '29 સપ્ટેમ્બર, 2011 01:45 PM');
     });
     test('testDateFmtINTypeDate_gu_IN', () {
       final ILibDateFmtOptions fmtOptions =

@@ -518,6 +518,11 @@ void main() {
       expect(loc, isNotNull);
       expect(loc.getLangSpec(), '');
     });
+    test('testLocaleIsValidLocaleTrueFull', () {
+      final ILibLocale loc = ILibLocale('zh-Hans-CN');
+      expect(loc, isNotNull);
+      expect(loc.isValid(), isTrue);
+    });
     test('testLocaleIsValidLocaleTrueLang', () {
       final ILibLocale loc = ILibLocale('de');
       expect(loc, isNotNull);

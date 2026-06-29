@@ -186,7 +186,7 @@ void main() {
           second: 0,
           millisecond: 0);
 
-      expect(fmt.format(dateOptions), '29 sentyabr 2011 at 13:45');
+      expect(fmt.format(dateOptions), '29 sentyabr 2011/13:45');
     });
     test('testDateFmtDateTimeSimpleFull_az_Latn_AZ', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(

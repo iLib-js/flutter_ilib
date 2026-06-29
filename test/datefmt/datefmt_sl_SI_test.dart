@@ -24,7 +24,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29. 9. 11');
+      expect(fmt.format(dateOptions), '29. 9. 2011');
     });
     test('testDateFmtSimpleMedium_sl_SI', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -161,7 +161,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29. 9. 11, 13:45');
+      expect(fmt.format(dateOptions), '29. 9. 2011, 13:45');
     });
     test('testDateFmtDateTimeSimpleMedium_sl_SI', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -235,7 +235,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29. 9. 11');
+      expect(fmt.format(dateOptions), '29. 9. 2011');
     });
     test('testDateFmtTypeTime_sl_SI', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -267,7 +267,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29. 9. 11, 13:45');
+      expect(fmt.format(dateOptions), '29. 9. 2011, 13:45');
     });
     test('testDateFmtShortDateComponentsY_sl_SI', () {
       final ILibDateFmtOptions fmtOptions =
@@ -283,7 +283,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '11');
+      expect(fmt.format(dateOptions), '2011');
     });
     test('testDateFmtShortDateComponentsM_sl_SI', () {
       final ILibDateFmtOptions fmtOptions =
@@ -363,7 +363,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '9. 11');
+      expect(fmt.format(dateOptions), '9. 2011');
     });
     test('testDateFmtShortDateComponentsDMY_sl_SI', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -379,7 +379,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29. 9. 11');
+      expect(fmt.format(dateOptions), '29. 9. 2011');
     });
     test('testDateFmtShortDateComponentsWDM_sl_SI', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -411,7 +411,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), 'č, 29. 9. 11');
+      expect(fmt.format(dateOptions), 'č, 29. 9. 2011');
     });
     test('testDateFmtFullDateComponentsY_sl_SI', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(

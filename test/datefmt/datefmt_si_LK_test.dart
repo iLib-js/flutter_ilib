@@ -40,7 +40,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '2011 සැප් 29');
+      expect(fmt.format(dateOptions), '2011 බිනර 29');
     });
     test('testDateFmtSimpleLong_si_LK', () {
       final ILibDateFmtOptions fmtOptions =
@@ -56,7 +56,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '2011 සැප්තැම්බර් 29');
+      expect(fmt.format(dateOptions), '2011 බිනර 29');
     });
     test('testDateFmtSimpleFull_si_LK', () {
       final ILibDateFmtOptions fmtOptions =
@@ -72,7 +72,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '2011 සැප්තැම්බර් 29');
+      expect(fmt.format(dateOptions), '2011 බිනර 29');
     });
     test('testDateFmtSimpleTimeShort_si_LK', () {
       final ILibDateFmtOptions fmtOptions =
@@ -168,7 +168,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '2011 සැප් 29, 13.45');
+      expect(fmt.format(dateOptions), '2011 බිනර 29, 13.45');
     });
     test('testDateFmtDateTimeSimpleLong_si_LK', () {
       final ILibDateFmtOptions fmtOptions =
@@ -185,7 +185,7 @@ void main() {
           second: 0,
           millisecond: 0);
 
-      expect(fmt.format(dateOptions), '2011 සැප්තැම්බර් 29 දින 13.45');
+      expect(fmt.format(dateOptions), '2011 බිනර 29 දින 13.45');
     });
     test('testDateFmtDateTimeSimpleFull_si_LK', () {
       final ILibDateFmtOptions fmtOptions =
@@ -201,7 +201,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '2011 සැප්තැම්බර් 29 දින 13.45');
+      expect(fmt.format(dateOptions), '2011 බිනර 29 දින 13.45');
     });
 
     test('testDateFmtTypeDate_si_LK', () {
@@ -301,7 +301,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), 'ස');
+      expect(fmt.format(dateOptions), 'බ');
     });
     test('testDateFmtShortDateComponentsD_si_LK', () {
       final ILibDateFmtOptions fmtOptions =
@@ -461,7 +461,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), 'සැප්තැම්බර් 29');
+      expect(fmt.format(dateOptions), 'බිනර 29');
     });
     test('testDateFmtFullDateComponentsMY_si_LK', () {
       final ILibDateFmtOptions fmtOptions =
@@ -477,7 +477,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '2011 සැප්තැම්බර්');
+      expect(fmt.format(dateOptions), '2011 බිනර');
     });
     test('testDateFmtFullDateComponentsDMY_si_LK', () {
       final ILibDateFmtOptions fmtOptions =
@@ -493,7 +493,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '2011 සැප්තැම්බර් 29');
+      expect(fmt.format(dateOptions), '2011 බිනර 29');
     });
     test('testDateFmtFullDateComponentsDMW_si_LK', () {
       final ILibDateFmtOptions fmtOptions =
@@ -509,7 +509,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), 'සැප්තැම්බර් 29, බ්‍රහස්පතින්දා');
+      expect(fmt.format(dateOptions), 'බිනර 29, බ්‍රහස්පතින්දා');
     });
     test('testDateFmtFullDateComponentsDMWY_si_LK', () {
       final ILibDateFmtOptions fmtOptions =
@@ -525,7 +525,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '2011 සැප්තැම්බර් 29, බ්‍රහස්පතින්දා');
+      expect(fmt.format(dateOptions), '2011 බිනර 29, බ්‍රහස්පතින්දා');
     });
     test('testDateFmtShortTimeComponentsS_si_LK', () {
       final ILibDateFmtOptions fmtOptions =

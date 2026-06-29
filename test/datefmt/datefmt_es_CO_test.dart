@@ -198,7 +198,8 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      expect(fmt.format(dateOptions), '29 de septiembre de 2011, 1:45 p. m.');
+      expect(
+          fmt.format(dateOptions), '29 de septiembre de 2011 a las 1:45 p. m.');
     });
     test('testDateFmtDateTimeSimpleFull_es_CO', () {
       final ILibDateFmtOptions fmtOptions =

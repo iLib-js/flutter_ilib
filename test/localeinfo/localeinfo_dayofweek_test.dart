@@ -175,7 +175,7 @@ void main() {
     });
     test('testWeekData_en_IS', () {
       final ILibLocaleInfo locInfo = ILibLocaleInfo('en-IS');
-      expect(locInfo.getFirstDayOfWeek(), 1);
+      expect(locInfo.getFirstDayOfWeek(), 0);
       expect(locInfo.getWeekEndStart(), 6);
       expect(locInfo.getWeekEndEnd(), 0);
     });
@@ -487,7 +487,7 @@ void main() {
     });
     test('testWeekData_is_IS', () {
       final ILibLocaleInfo locInfo = ILibLocaleInfo('is-IS');
-      expect(locInfo.getFirstDayOfWeek(), 1);
+      expect(locInfo.getFirstDayOfWeek(), 0);
       expect(locInfo.getWeekEndStart(), 6);
       expect(locInfo.getWeekEndEnd(), 0);
     });

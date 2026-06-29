@@ -11,10 +11,8 @@ void main() {
   debugPrint('Testing [durfmt_test.dart] file.');
   setUpAll(() async {
     testPlatform = getTestPlatform();
-    final ILibJS ilibjsinstance = ILibJS.instance;
-    await ilibjsinstance.loadJS();
-    ilibjsinstance.initILib();
-    await ilibjsinstance.loadILibLocaleDataAll();
+    await ILibLoader.instance.loadJSON();
+    await ILibLoader.instance.loadILibLocaleDataAll();
   });
 
   group('testDurFmt', () {
@@ -494,13 +492,13 @@ void main() {
       expect(textformatted_18[2], '18 বছর, 18 মাস, 18 সপ্তাহ, 18 দিন');
       expect(textformatted_18[3], '18 বছর, 18 মাস, 18 সপ্তাহ, 18 দিন');
 
-      expect(clockformatted_1[0], '1 ঘন্টা, 1 মিনিট, 1 সেকেন্ড');
-      expect(clockformatted_1[1], '1 ঘন্টা, 1 মিনিট, 1 সেকেন্ড');
+      expect(clockformatted_1[0], '1 ঘণ্টা, 1 মিনিট, 1 সেকেন্ড');
+      expect(clockformatted_1[1], '1 ঘণ্টা, 1 মিনিট, 1 সেকেন্ড');
       expect(clockformatted_1[2], '1 ঘঃ, 1 মিঃ, 1 সেঃ');
       expect(clockformatted_1[3], '1 ঘঃ, 1 মিঃ, 1 সেঃ');
 
-      expect(clockformatted_18[0], '18 ঘন্টা, 18 মিনিট, 18 সেকেন্ড');
-      expect(clockformatted_18[1], '18 ঘন্টা, 18 মিনিট, 18 সেকেন্ড');
+      expect(clockformatted_18[0], '18 ঘণ্টা, 18 মিনিট, 18 সেকেন্ড');
+      expect(clockformatted_18[1], '18 ঘণ্টা, 18 মিনিট, 18 সেকেন্ড');
       expect(clockformatted_18[2], '18 ঘঃ, 18 মিঃ, 18 সেঃ');
       expect(clockformatted_18[3], '18 ঘঃ, 18 মিঃ, 18 সেঃ');
     });
@@ -763,13 +761,13 @@ void main() {
 
       expect(clockformatted_1[0], '1 Stunde, 1 Minute und 1 Sekunde');
       expect(clockformatted_1[1], '1 Std., 1 Min., 1 Sek.');
-      expect(clockformatted_1[2], '1 Std., 1 Min., 1 Sek.');
-      expect(clockformatted_1[3], '1 Std., 1 Min., 1 Sek.');
+      expect(clockformatted_1[2], '1h, 1 Min., 1 Sek.');
+      expect(clockformatted_1[3], '1h, 1 Min., 1 Sek.');
 
       expect(clockformatted_2[0], '2 Stunden, 2 Minuten und 2 Sekunden');
       expect(clockformatted_2[1], '2 Std., 2 Min., 2 Sek.');
-      expect(clockformatted_2[2], '2 Std., 2 Min., 2 Sek.');
-      expect(clockformatted_2[3], '2 Std., 2 Min., 2 Sek.');
+      expect(clockformatted_2[2], '2h, 2 Min., 2 Sek.');
+      expect(clockformatted_2[3], '2h, 2 Min., 2 Sek.');
     });
 
     test('testDurFmt_de_CH', () {
@@ -822,13 +820,13 @@ void main() {
 
       expect(clockformatted_1[0], '1 Stunde, 1 Minute und 1 Sekunde');
       expect(clockformatted_1[1], '1 Std., 1 Min., 1 Sek.');
-      expect(clockformatted_1[2], '1 Std., 1 Min., 1 Sek.');
-      expect(clockformatted_1[3], '1 Std., 1 Min., 1 Sek.');
+      expect(clockformatted_1[2], '1h, 1 Min., 1 Sek.');
+      expect(clockformatted_1[3], '1h, 1 Min., 1 Sek.');
 
       expect(clockformatted_2[0], '2 Stunden, 2 Minuten und 2 Sekunden');
       expect(clockformatted_2[1], '2 Std., 2 Min., 2 Sek.');
-      expect(clockformatted_2[2], '2 Std., 2 Min., 2 Sek.');
-      expect(clockformatted_2[3], '2 Std., 2 Min., 2 Sek.');
+      expect(clockformatted_2[2], '2h, 2 Min., 2 Sek.');
+      expect(clockformatted_2[3], '2h, 2 Min., 2 Sek.');
     });
     test('testDurFmt_de_DE', () {
       // 1 16
@@ -880,13 +878,13 @@ void main() {
 
       expect(clockformatted_1[0], '1 Stunde, 1 Minute und 1 Sekunde');
       expect(clockformatted_1[1], '1 Std., 1 Min., 1 Sek.');
-      expect(clockformatted_1[2], '1 Std., 1 Min., 1 Sek.');
-      expect(clockformatted_1[3], '1 Std., 1 Min., 1 Sek.');
+      expect(clockformatted_1[2], '1h, 1 Min., 1 Sek.');
+      expect(clockformatted_1[3], '1h, 1 Min., 1 Sek.');
 
       expect(clockformatted_16[0], '16 Stunden, 16 Minuten und 16 Sekunden');
       expect(clockformatted_16[1], '16 Std., 16 Min., 16 Sek.');
-      expect(clockformatted_16[2], '16 Std., 16 Min., 16 Sek.');
-      expect(clockformatted_16[3], '16 Std., 16 Min., 16 Sek.');
+      expect(clockformatted_16[2], '16h, 16 Min., 16 Sek.');
+      expect(clockformatted_16[3], '16h, 16 Min., 16 Sek.');
     });
     test('testDurFmt_de_LU', () {
       // 1 17
@@ -938,13 +936,13 @@ void main() {
 
       expect(clockformatted_1[0], '1 Stunde, 1 Minute und 1 Sekunde');
       expect(clockformatted_1[1], '1 Std., 1 Min., 1 Sek.');
-      expect(clockformatted_1[2], '1 Std., 1 Min., 1 Sek.');
-      expect(clockformatted_1[3], '1 Std., 1 Min., 1 Sek.');
+      expect(clockformatted_1[2], '1h, 1 Min., 1 Sek.');
+      expect(clockformatted_1[3], '1h, 1 Min., 1 Sek.');
 
       expect(clockformatted_17[0], '17 Stunden, 17 Minuten und 17 Sekunden');
       expect(clockformatted_17[1], '17 Std., 17 Min., 17 Sek.');
-      expect(clockformatted_17[2], '17 Std., 17 Min., 17 Sek.');
-      expect(clockformatted_17[3], '17 Std., 17 Min., 17 Sek.');
+      expect(clockformatted_17[2], '17h, 17 Min., 17 Sek.');
+      expect(clockformatted_17[3], '17h, 17 Min., 17 Sek.');
     });
     test('testDurFmt_el_CY', () {
       // 1 2
@@ -3297,23 +3295,33 @@ void main() {
             .add(fmt.format(ILibDateOptions(hour: 17, minute: 17, second: 17)));
       }
 
-      expect(textformatted_1[0], '1 an, 1 mois, 1 semaine et 1 jour');
-      expect(textformatted_1[1], '1 an, 1 m., 1 sem., 1 j');
+      expect(textformatted_1[0], '1 an, 1 mois, 1 semaine et 1 jour');
+      if (testPlatform == 'webOS') {
+        expect(textformatted_1[1], '1 an, 1 m., 1 sem., 1 j');
+      } else {
+        expect(textformatted_1[1], '1 an, 1 m., 1 sem., 1 j');
+      }
       expect(textformatted_1[2], '1a, 1m, 1sem, 1j');
       expect(textformatted_1[3], '1a 1m 1sem 1j');
 
-      expect(textformatted_17[0], '17 ans, 17 mois, 17 semaines et 17 jours');
-      expect(textformatted_17[1], '17 ans, 17 m., 17 sem., 17 j');
+      expect(textformatted_17[0], '17 ans, 17 mois, 17 semaines et 17 jours');
+
+      if (testPlatform == 'webOS') {
+        expect(textformatted_17[1], '17 ans, 17 m., 17 sem., 17 j');
+      } else {
+        expect(textformatted_17[1], '17 ans, 17 m., 17 sem., 17 j');
+      }
+
       expect(textformatted_17[2], '17a, 17m, 17sem, 17j');
       expect(textformatted_17[3], '17a 17m 17sem 17j');
 
-      expect(clockformatted_1[0], '1 heure, 1 minute et 1 seconde');
-      expect(clockformatted_1[1], '1 h, 1 min, 1 s');
+      expect(clockformatted_1[0], '1 heure, 1 minute et 1 seconde');
+      expect(clockformatted_1[1], '1 h, 1 min, 1 s');
       expect(clockformatted_1[2], '1h, 1m, 1s');
       expect(clockformatted_1[3], '1h 1m 1s');
 
-      expect(clockformatted_17[0], '17 heures, 17 minutes et 17 secondes');
-      expect(clockformatted_17[1], '17 h, 17 min, 17 s');
+      expect(clockformatted_17[0], '17 heures, 17 minutes et 17 secondes');
+      expect(clockformatted_17[1], '17 h, 17 min, 17 s');
       expect(clockformatted_17[2], '17h, 17m, 17s');
       expect(clockformatted_17[3], '17h 17m 17s');
     });
@@ -4140,7 +4148,7 @@ void main() {
             .add(fmt.format(ILibDateOptions(hour: 2, minute: 2, second: 2)));
       }
 
-      expect(textformatted_1[0], '1 ವರ್ಷವು, 1 ತಿಂಗಳು, 1 ವಾರವು, 1 ದಿನವು');
+      expect(textformatted_1[0], '1 ವರ್ಷ, 1 ತಿಂಗಳು, 1 ವಾರವು, 1 ದಿನವು');
       expect(textformatted_1[1], '1 ವರ್ಷ, 1 ತಿಂ., 1 ವಾರ, 1 ದಿನ');
       expect(textformatted_1[2], '1ವ, 1ತಿಂ., 1ವಾ, 1ದಿ');
       expect(textformatted_1[3], '1ವ, 1ತಿಂ., 1ವಾ, 1ದಿ');
@@ -4150,7 +4158,7 @@ void main() {
       expect(textformatted_2[2], '2ವ, 2ತಿಂ., 2ವಾ, 2ದಿ');
       expect(textformatted_2[3], '2ವ, 2ತಿಂ., 2ವಾ, 2ದಿ');
 
-      expect(clockformatted_1[0], '1 ಗಂಟೆಯು, 1 ನಿಮಿಷವು, 1 ಸೆಕೆಂಡ್');
+      expect(clockformatted_1[0], '1 ಗಂಟೆ, 1 ನಿಮಿಷವು, 1 ಸೆಕೆಂಡ್');
       expect(clockformatted_1[1], '1 ಗಂ., 1 ನಿಮಿ, 1 ಸೆಕೆಂ');
       expect(clockformatted_1[2], '1ಗಂ., 1ನಿಮಿ, 1ಸೆಕೆಂ');
       expect(clockformatted_1[3], '1ಗಂ., 1ನಿಮಿ, 1ಸೆಕೆಂ');
@@ -4227,25 +4235,25 @@ void main() {
             .add(fmt.format(ILibDateOptions(hour: 2, minute: 2, second: 2)));
       }
 
-      expect(textformatted_1[0], '‏1 ساڵ, 1 مانگ, 1 هەفتە,  1 رۆژ');
-      expect(textformatted_1[1], '‏1 ساڵ 1 مانگ 1 هەفتە 1 رۆژ');
-      expect(textformatted_1[2], '‏1س 1م 1ﻪـ 1ر');
-      expect(textformatted_1[3], '‏1س 1م 1ﻪـ 1ر');
+      expect(textformatted_1[0], '1 sal, 1 meh, 1 hefte û 1 roj');
+      expect(textformatted_1[1], '1 sal, 1 m, 1 hf, 1 roj');
+      expect(textformatted_1[2], '1sl, 1m, 1hf, 1r');
+      expect(textformatted_1[3], '1sl 1m 1hf 1r');
 
-      expect(textformatted_2[0], '‏2 ساڵ, 2 مانگ, 2 هەفتە,  2 رۆژ');
-      expect(textformatted_2[1], '‏2 ساڵ 2 مانگ 2 هەفتە 2 رۆژ');
-      expect(textformatted_2[2], '‏2س 2م 2ﻪـ 2ر');
-      expect(textformatted_2[3], '‏2س 2م 2ﻪـ 2ر');
+      expect(textformatted_2[0], '2 sal, 2 meh, 2 hefte û 2 roj');
+      expect(textformatted_2[1], '2 sal, 2 m, 2 hf, 2 roj');
+      expect(textformatted_2[2], '2sl, 2m, 2hf, 2r');
+      expect(textformatted_2[3], '2sl 2m 2hf 2r');
 
-      expect(clockformatted_1[0], '‏1 کاتژمێر, 1 خولەک,  1 چرکە');
-      expect(clockformatted_1[1], '‏1 کاتژ 1 خول 1 چرک');
-      expect(clockformatted_1[2], '‏1ک 1خ 1چ');
-      expect(clockformatted_1[3], '‏1ک 1خ 1چ');
+      expect(clockformatted_1[0], '1 saet, 1 deqîqe û 1 sanîye');
+      expect(clockformatted_1[1], '1 st, 1 d, 1 sn');
+      expect(clockformatted_1[2], '1st, 1d, 1sn');
+      expect(clockformatted_1[3], '1st 1d 1sn');
 
-      expect(clockformatted_2[0], '‏2 کاتژمێر, 2 خولەک,  2 چرکە');
-      expect(clockformatted_2[1], '‏2 کاتژ 2 خول 2 چرک');
-      expect(clockformatted_2[2], '‏2ک 2خ 2چ');
-      expect(clockformatted_2[3], '‏2ک 2خ 2چ');
+      expect(clockformatted_2[0], '2 saet, 2 deqîqe û 2 saniye');
+      expect(clockformatted_2[1], '2 st, 2 d, 2 sn');
+      expect(clockformatted_2[2], '2st, 2d, 2sn');
+      expect(clockformatted_2[3], '2st 2d 2sn');
     });
     test('testDurFmt_lt_LT', () {
       // 21 9 11
@@ -5738,13 +5746,13 @@ void main() {
       expect(textformatted_2[2], '2 ஆ 2 மா 2 வா 2 நா');
       expect(textformatted_2[3], '2 ஆ 2 மா 2 வா 2 நா');
 
-      expect(clockformatted_1[0], '1 மணிநேரம், 1 நிமிடம், 1 விநாடி');
-      expect(clockformatted_1[1], '1 மணிநேரம், 1 நிமிடம், 1 விநாடி');
+      expect(clockformatted_1[0], '1 ம., 1 நிமி., 1 விநாடி');
+      expect(clockformatted_1[1], '1 ம., 1 நிமி., 1 விநாடி');
       expect(clockformatted_1[2], '1 ம.நே. 1 நிமி. 1 வி.');
       expect(clockformatted_1[3], '1 ம.நே. 1 நிமி. 1 வி.');
 
-      expect(clockformatted_2[0], '2 மணிநேரங்கள், 2 நிமிடங்கள், 2 விநாடிகள்');
-      expect(clockformatted_2[1], '2 மணிநேரம், 2 நிமிட, 2 விநாடி');
+      expect(clockformatted_2[0], '2 ம., 2 நிமிடங்கள், 2 விநாடிகள்');
+      expect(clockformatted_2[1], '2 ம., 2 நிமி., 2 விநாடி');
       expect(clockformatted_2[2], '2 ம.நே. 2 நிமி. 2 வி.');
       expect(clockformatted_2[3], '2 ம.நே. 2 நிமி. 2 வி.');
     });
@@ -6301,7 +6309,7 @@ void main() {
       expect(clockformatted_1[3], '1h 1m 1s');
 
       expect(clockformatted_2[0], '2 hours, 2 minutes, 2 seconds');
-      expect(clockformatted_2[1], '2 hr, 2 min, 2 sec');
+      expect(clockformatted_2[1], '2 hrs, 2 mins, 2 secs');
       expect(clockformatted_2[2], '2h, 2m, 2s');
       expect(clockformatted_2[3], '2h 2m 2s');
     });

@@ -287,7 +287,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      final String result = (testPlatform == 'webOS') ? '1:45 Safiya' : '01:45';
+      final String result = (testPlatform == 'webOS') ? '1:45 Safiya' : '01:45';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtSimpleTimeMedium_ha_Latn', () {
@@ -307,7 +307,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      final String result = (testPlatform == 'webOS') ? '1:45 Yamma' : '13:45';
+      final String result = (testPlatform == 'webOS') ? '1:45 Yamma' : '13:45';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtSimpleTimeLong_ha_Latn', () {
@@ -327,7 +327,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      final String result = (testPlatform == 'webOS') ? '1:45 Yamma' : '13:45';
+      final String result = (testPlatform == 'webOS') ? '1:45 Yamma' : '13:45';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtSimpleTimeFull_ha_Latn', () {
@@ -347,7 +347,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      final String result = (testPlatform == 'webOS') ? '1:45 Yamma' : '13:45';
+      final String result = (testPlatform == 'webOS') ? '1:45 Yamma' : '13:45';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtDateTimeSimpleShort_ha_Latn', () {
@@ -368,7 +368,7 @@ void main() {
           second: 0,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? '29/9/11, 1:45 Yamma' : '29/9/11, 13:45';
+          (testPlatform == 'webOS') ? '29/9/11, 1:45 Yamma' : '29/9/11, 13:45';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtDateTimeSimpleMedium_ha_Latn', () {
@@ -389,7 +389,7 @@ void main() {
           second: 0,
           millisecond: 0);
       final String result = (testPlatform == 'webOS')
-          ? '29 Sat, 2011, 1:45 Yamma'
+          ? '29 Sat, 2011, 1:45 Yamma'
           : '29 Sat, 2011, 13:45';
       expect(fmt.format(dateOptions), result);
     });
@@ -411,7 +411,7 @@ void main() {
           second: 0,
           millisecond: 0);
       final String result = (testPlatform == 'webOS')
-          ? '29 Satumba, 2011 da 1:45 Yamma'
+          ? '29 Satumba, 2011 da 1:45 Yamma'
           : '29 Satumba, 2011 da 13:45';
       expect(fmt.format(dateOptions), result);
     });
@@ -433,7 +433,7 @@ void main() {
           second: 0,
           millisecond: 0);
       final String result = (testPlatform == 'webOS')
-          ? '29 Satumba, 2011 da 1:45 Yamma'
+          ? '29 Satumba, 2011 da 1:45 Yamma'
           : '29 Satumba, 2011 da 13:45';
       expect(fmt.format(dateOptions), result);
     });
@@ -467,7 +467,7 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      final String result = (testPlatform == 'webOS') ? '1:45 Yamma' : '13:45';
+      final String result = (testPlatform == 'webOS') ? '1:45 Yamma' : '13:45';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtTypeDateTime_ha_Latn', () {
@@ -485,7 +485,7 @@ void main() {
           second: 0,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? '29/9/11, 1:45 Yamma' : '29/9/11, 13:45';
+          (testPlatform == 'webOS') ? '29/9/11, 1:45 Yamma' : '29/9/11, 13:45';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortDateComponentsY_ha_Latn', () {
@@ -907,7 +907,7 @@ void main() {
           second: 37,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? '1:45 Yamma WAT' : '13:45 WAT';
+          (testPlatform == 'webOS') ? '1:45 Yamma WAT' : '13:45 WAT';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortTimeComponentsHMSZ_ha_Latn', () {
@@ -949,7 +949,7 @@ void main() {
           second: 37,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? '1:45:37 Yamma WAT' : '13:45:37 WAT';
+          (testPlatform == 'webOS') ? '1:45:37 Yamma WAT' : '13:45:37 WAT';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtFullTimeComponentsS_ha_Latn', () {
@@ -1095,7 +1095,7 @@ void main() {
           second: 37,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? '1:45 Yamma WAT' : '13:45 WAT';
+          (testPlatform == 'webOS') ? '1:45 Yamma WAT' : '13:45 WAT';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtFullTimeComponentsHMSZ_ha_Latn', () {
@@ -1139,7 +1139,7 @@ void main() {
           second: 37,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? '1:45:37 Yamma WAT' : '13:45:37 WAT';
+          (testPlatform == 'webOS') ? '1:45:37 Yamma WAT' : '13:45:37 WAT';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtWithTimeZoneAndNoDST_ha_Latn', () {

@@ -1,4 +1,47 @@
 {
+    "ilib.data.plurals": {
+        "few": {
+            "and": [
+                {
+                    "eq": [
+                        "i",
+                        [
+                            2,
+                            4
+                        ]
+                    ]
+                },
+                {
+                    "eq": [
+                        "v",
+                        0
+                    ]
+                }
+            ]
+        },
+        "many": {
+            "neq": [
+                "v",
+                0
+            ]
+        },
+        "one": {
+            "and": [
+                {
+                    "eq": [
+                        "i",
+                        1
+                    ]
+                },
+                {
+                    "eq": [
+                        "v",
+                        0
+                    ]
+                }
+            ]
+        }
+    },
     "ilib.data.localeinfo": {
         "delimiter": {
             "alternateQuotationEnd": "‘",
@@ -93,9 +136,6 @@
                     "s": "d. M. yyyy"
                 },
                 "dw": {
-                    "f": "EEEE d",
-                    "l": "EEE d",
-                    "m": "EE d",
                     "s": "E d"
                 },
                 "l": {
@@ -105,13 +145,10 @@
                     "s": "L"
                 },
                 "m": {
-                    "f": "MMMM",
                     "l": "MMMM",
-                    "m": "M",
-                    "s": "M"
+                    "m": "M"
                 },
                 "my": {
-                    "f": "MMMM yyyy",
                     "l": "MMMM yyyy",
                     "m": "M. yyyy",
                     "s": "M. yyyy"
@@ -122,16 +159,7 @@
                     "m": "M. yyyy",
                     "s": "M. yyyy"
                 },
-                "w": {
-                    "f": "EEEE",
-                    "l": "EEE",
-                    "m": "EE",
-                    "s": "E"
-                },
                 "y": {
-                    "f": "yyyy",
-                    "l": "yyyy",
-                    "m": "yyyy",
                     "s": "yyyy"
                 }
             },
@@ -185,8 +213,6 @@
                     "s": "{sd}. {sm}. {sy} – {ed}. {em}. {ey}"
                 },
                 "c20": {
-                    "f": "{sm} {sy} – {em} {ey}",
-                    "l": "{sm} {sy} – {em} {ey}",
                     "m": "{sm}. {sy} – {em}. {ey}",
                     "s": "{sm}. {sy} – {em}. {ey}"
                 },
@@ -200,33 +226,10 @@
             "time": {
                 "12": {
                     "ah": "h a",
-                    "ahm": "h:mma",
-                    "ahms": "h:mm:ssa",
-                    "ahmsz": "h:mm:ssa z",
-                    "ahmz": "h:mma z",
-                    "h": "h",
-                    "hm": "h:mm",
-                    "hms": "h:mm:ss",
-                    "hmsz": "h:mm:ss z",
-                    "hmz": "h:mm z",
-                    "m": "mm",
-                    "ms": "mm:ss",
-                    "s": "ss"
-                },
-                "24": {
-                    "ah": "H",
-                    "ahm": "H:mm",
-                    "ahms": "H:mm:ss",
-                    "ahmsz": "H:mm:ss z",
-                    "ahmz": "H:mm z",
-                    "h": "H",
-                    "hm": "H:mm",
-                    "hms": "H:mm:ss",
-                    "hmsz": "H:mm:ss z",
-                    "hmz": "H:mm z",
-                    "m": "mm",
-                    "ms": "mm:ss",
-                    "s": "ss"
+                    "ahm": "h:mm a",
+                    "ahms": "h:mm:ss a",
+                    "ahmsz": "h:mm:ss a z",
+                    "ahmz": "h:mm a z"
                 }
             }
         }
@@ -433,8 +436,6 @@
         "NN7": "jú",
         "NN8": "au",
         "NN9": "se",
-        "a0": "AM",
-        "a1": "PM",
         "durationLongDays": "one#{num} deň|few#{num} dni|many#{num} dňa|#{num} dní",
         "durationMediumHours": "#{num} h",
         "durationMediumMillis": "#{num} ms",
@@ -447,52 +448,304 @@
         "finalSeparatorLong": ", ",
         "finalSeparatorMedium": ", ",
         "finalSeparatorShort": ", ",
-        "separatorFull": ", ",
-        "separatorLong": ", ",
         "separatorMedium": ", ",
         "separatorShort": ", "
     },
-    "ilib.data.plurals": {
-        "few": {
-            "and": [
-                {
-                    "eq": [
-                        "i",
-                        [
-                            2,
-                            4
-                        ]
-                    ]
-                },
-                {
-                    "eq": [
-                        "v",
-                        0
-                    ]
-                }
-            ]
-        },
-        "many": {
-            "neq": [
-                "v",
-                0
-            ]
-        },
-        "one": {
-            "and": [
-                {
-                    "eq": [
-                        "i",
-                        1
-                    ]
-                },
-                {
-                    "eq": [
-                        "v",
-                        0
-                    ]
-                }
-            ]
-        }
+    "ilib.data.ctryreverse": {
+        "142": "Ázia",
+        "143": "stredná Ázia",
+        "145": "západná Ázia",
+        "150": "Európa",
+        "151": "východná Európa",
+        "154": "severná Európa",
+        "155": "západná Európa",
+        "202": "subsaharská Afrika",
+        "419": "Latinská Amerika",
+        "001": "svet",
+        "002": "Afrika",
+        "003": "Severná Amerika",
+        "005": "Južná Amerika",
+        "009": "Oceánia",
+        "011": "západná Afrika",
+        "013": "Stredná Amerika",
+        "014": "východná Afrika",
+        "015": "severná Afrika",
+        "017": "stredná Afrika",
+        "018": "južné územia Afriky",
+        "019": "Amerika",
+        "021": "severné územia Ameriky",
+        "029": "Karibik",
+        "030": "východná Ázia",
+        "034": "južná Ázia",
+        "035": "juhovýchodná Ázia",
+        "039": "južná Európa",
+        "053": "Australázia",
+        "054": "Melanézia",
+        "057": "oblasť Mikronézie",
+        "061": "Polynézia",
+        "AC": "Ascension",
+        "AD": "Andorra",
+        "AE": "Spojené arabské emiráty",
+        "AF": "Afganistan",
+        "AG": "Antigua a Barbuda",
+        "AI": "Anguilla",
+        "AL": "Albánsko",
+        "AM": "Arménsko",
+        "AO": "Angola",
+        "AQ": "Antarktída",
+        "AR": "Argentína",
+        "AS": "Americká Samoa",
+        "AT": "Rakúsko",
+        "AU": "Austrália",
+        "AW": "Aruba",
+        "AX": "Alandy",
+        "AZ": "Azerbajdžan",
+        "BA": "Bosna a Hercegovina",
+        "BB": "Barbados",
+        "BD": "Bangladéš",
+        "BE": "Belgicko",
+        "BF": "Burkina Faso",
+        "BG": "Bulharsko",
+        "BH": "Bahrajn",
+        "BI": "Burundi",
+        "BJ": "Benin",
+        "BL": "Svätý Bartolomej",
+        "BM": "Bermudy",
+        "BN": "Brunej",
+        "BO": "Bolívia",
+        "BQ": "Karibské Holandsko",
+        "BR": "Brazília",
+        "BS": "Bahamy",
+        "BT": "Bhután",
+        "BV": "Bouvetov ostrov",
+        "BW": "Botswana",
+        "BY": "Bielorusko",
+        "BZ": "Belize",
+        "CA": "Kanada",
+        "CC": "Kokosové ostrovy",
+        "CD": "Konžská demokratická republika",
+        "CF": "Stredoafrická republika",
+        "CG": "Konžská republika",
+        "CH": "Švajčiarsko",
+        "CI": "Pobrežie Slonoviny",
+        "CK": "Cookove ostrovy",
+        "CL": "Čile",
+        "CM": "Kamerun",
+        "CN": "Čína",
+        "CO": "Kolumbia",
+        "CP": "Clipperton",
+        "CQ": "Sark",
+        "CR": "Kostarika",
+        "CU": "Kuba",
+        "CV": "Kapverdy",
+        "CW": "Curaçao",
+        "CX": "Vianočný ostrov",
+        "CY": "Cyprus",
+        "CZ": "Česko",
+        "DE": "Nemecko",
+        "DG": "Diego Garcia",
+        "DJ": "Džibutsko",
+        "DK": "Dánsko",
+        "DM": "Dominika",
+        "DO": "Dominikánska republika",
+        "DZ": "Alžírsko",
+        "EA": "Ceuta a Melilla",
+        "EC": "Ekvádor",
+        "EE": "Estónsko",
+        "EG": "Egypt",
+        "EH": "Západná Sahara",
+        "ER": "Eritrea",
+        "ES": "Španielsko",
+        "ET": "Etiópia",
+        "EU": "Európska únia",
+        "EZ": "eurozóna",
+        "FI": "Fínsko",
+        "FJ": "Fidži",
+        "FK": "Falklandy",
+        "FM": "Mikronézia",
+        "FO": "Faerské ostrovy",
+        "FR": "Francúzsko",
+        "GA": "Gabon",
+        "GB": "Spojené kráľovstvo",
+        "GD": "Grenada",
+        "GE": "Gruzínsko",
+        "GF": "Francúzska Guyana",
+        "GG": "Guernsey",
+        "GH": "Ghana",
+        "GI": "Gibraltár",
+        "GL": "Grónsko",
+        "GM": "Gambia",
+        "GN": "Guinea",
+        "GP": "Guadeloupe",
+        "GQ": "Rovníková Guinea",
+        "GR": "Grécko",
+        "GS": "Južná Georgia a Južné Sandwichove ostrovy",
+        "GT": "Guatemala",
+        "GU": "Guam",
+        "GW": "Guinea-Bissau",
+        "GY": "Guyana",
+        "HK": "Hongkong – OAO Číny",
+        "HM": "Heardov ostrov a Macdonaldove ostrovy",
+        "HN": "Honduras",
+        "HR": "Chorvátsko",
+        "HT": "Haiti",
+        "HU": "Maďarsko",
+        "IC": "Kanárske ostrovy",
+        "ID": "Indonézia",
+        "IE": "Írsko",
+        "IL": "Izrael",
+        "IM": "Ostrov Man",
+        "IN": "India",
+        "IO": "Britské indickooceánske územie",
+        "IQ": "Irak",
+        "IR": "Irán",
+        "IS": "Island",
+        "IT": "Taliansko",
+        "JE": "Jersey",
+        "JM": "Jamajka",
+        "JO": "Jordánsko",
+        "JP": "Japonsko",
+        "KE": "Keňa",
+        "KG": "Kirgizsko",
+        "KH": "Kambodža",
+        "KI": "Kiribati",
+        "KM": "Komory",
+        "KN": "Svätý Krištof a Nevis",
+        "KP": "Severná Kórea",
+        "KR": "Južná Kórea",
+        "KW": "Kuvajt",
+        "KY": "Kajmanie ostrovy",
+        "KZ": "Kazachstan",
+        "LA": "Laos",
+        "LB": "Libanon",
+        "LC": "Svätá Lucia",
+        "LI": "Lichtenštajnsko",
+        "LK": "Srí Lanka",
+        "LR": "Libéria",
+        "LS": "Lesotho",
+        "LT": "Litva",
+        "LU": "Luxembursko",
+        "LV": "Lotyšsko",
+        "LY": "Líbya",
+        "MA": "Maroko",
+        "MC": "Monako",
+        "MD": "Moldavsko",
+        "ME": "Čierna Hora",
+        "MF": "Svätý Martin (fr.)",
+        "MG": "Madagaskar",
+        "MH": "Marshallove ostrovy",
+        "MK": "Severné Macedónsko",
+        "ML": "Mali",
+        "MM": "Mjanmarsko",
+        "MN": "Mongolsko",
+        "MO": "Macao – OAO Číny",
+        "MP": "Severné Mariány",
+        "MQ": "Martinik",
+        "MR": "Mauritánia",
+        "MS": "Montserrat",
+        "MT": "Malta",
+        "MU": "Maurícius",
+        "MV": "Maldivy",
+        "MW": "Malawi",
+        "MX": "Mexiko",
+        "MY": "Malajzia",
+        "MZ": "Mozambik",
+        "NA": "Namíbia",
+        "NC": "Nová Kaledónia",
+        "NE": "Niger",
+        "NF": "Norfolk",
+        "NG": "Nigéria",
+        "NI": "Nikaragua",
+        "NL": "Holandsko",
+        "NO": "Nórsko",
+        "NP": "Nepál",
+        "NR": "Nauru",
+        "NU": "Niue",
+        "NZ": "Nový Zéland",
+        "OM": "Omán",
+        "PA": "Panama",
+        "PE": "Peru",
+        "PF": "Francúzska Polynézia",
+        "PG": "Papua-Nová Guinea",
+        "PH": "Filipíny",
+        "PK": "Pakistan",
+        "PL": "Poľsko",
+        "PM": "Saint Pierre a Miquelon",
+        "PN": "Pitcairnove ostrovy",
+        "PR": "Portoriko",
+        "PS": "Palestínske územia",
+        "PT": "Portugalsko",
+        "PW": "Palau",
+        "PY": "Paraguaj",
+        "QA": "Katar",
+        "QO": "ostatné Tichomorie",
+        "RE": "Réunion",
+        "RO": "Rumunsko",
+        "RS": "Srbsko",
+        "RU": "Rusko",
+        "RW": "Rwanda",
+        "SA": "Saudská Arábia",
+        "SB": "Šalamúnove ostrovy",
+        "SC": "Seychely",
+        "SD": "Sudán",
+        "SE": "Švédsko",
+        "SG": "Singapur",
+        "SH": "Svätá Helena",
+        "SI": "Slovinsko",
+        "SJ": "Svalbard a Jan Mayen",
+        "SK": "Slovensko",
+        "SL": "Sierra Leone",
+        "SM": "San Maríno",
+        "SN": "Senegal",
+        "SO": "Somálsko",
+        "SR": "Surinam",
+        "SS": "Južný Sudán",
+        "ST": "Svätý Tomáš a Princov ostrov",
+        "SV": "Salvádor",
+        "SX": "Svätý Martin (hol.)",
+        "SY": "Sýria",
+        "SZ": "Eswatini",
+        "TA": "Tristan da Cunha",
+        "TC": "Turks a Caicos",
+        "TD": "Čad",
+        "TF": "Francúzske južné a antarktické územia",
+        "TG": "Togo",
+        "TH": "Thajsko",
+        "TJ": "Tadžikistan",
+        "TK": "Tokelau",
+        "TL": "Východný Timor",
+        "TM": "Turkménsko",
+        "TN": "Tunisko",
+        "TO": "Tonga",
+        "TR": "Turecko",
+        "TT": "Trinidad a Tobago",
+        "TV": "Tuvalu",
+        "TW": "Taiwan",
+        "TZ": "Tanzánia",
+        "UA": "Ukrajina",
+        "UG": "Uganda",
+        "UM": "Menšie odľahlé ostrovy USA",
+        "UN": "Organizácia Spojených národov",
+        "US": "Spojené štáty",
+        "UY": "Uruguaj",
+        "UZ": "Uzbekistan",
+        "VA": "Vatikán",
+        "VC": "Svätý Vincent a Grenadíny",
+        "VE": "Venezuela",
+        "VG": "Britské Panenské ostrovy",
+        "VI": "Americké Panenské ostrovy",
+        "VN": "Vietnam",
+        "VU": "Vanuatu",
+        "WF": "Wallis a Futuna",
+        "WS": "Samoa",
+        "XA": "falošná diakritika",
+        "XB": "obrátenie sprava doľava",
+        "XK": "Kosovo",
+        "YE": "Jemen",
+        "YT": "Mayotte",
+        "ZA": "Južná Afrika",
+        "ZM": "Zambia",
+        "ZW": "Zimbabwe",
+        "ZZ": "neznámy región"
     }
 }

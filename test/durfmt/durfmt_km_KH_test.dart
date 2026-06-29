@@ -10,10 +10,8 @@ void main() {
   debugPrint('Testing [durfmt_km_KH_test.dart] file.');
   setUpAll(() async {
     testPlatform = getTestPlatform();
-    final ILibJS ilibjsinstance = ILibJS.instance;
-    await ilibjsinstance.loadJS();
-    ilibjsinstance.initILib();
-    await ILibJS.instance.loadILibLocaleData('km-KH');
+    await ILibLoader.instance.loadJSON();
+    await ILibLoader.instance.loadILibLocaleData('km-KH');
   });
 
   group('ILibDurationFmt km-KH', () {

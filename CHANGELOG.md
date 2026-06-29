@@ -1,19 +1,25 @@
 ## 2.0.0
-* Removed the `flutter_js` JavaScript interop. flutter_ilib is now a pure-Dart implementation that
+* Remove the `flutter_js` JavaScript interop. flutter_ilib is now a pure-Dart implementation that
   reads iLib's CLDR locale data (JSON) directly — no JavaScript runtime is required.
-* Converted to pure Dart:
+* Convert to pure Dart:
   * `ILibLocale`, `ILibLocaleInfo`, `ILibCaseMapper`
   * `ILibDate` / `ILibDateFmt` — date/time formatting engine
   * `ILibTimeZone` — timezone and DST calculation from `zoneinfo` data
   * `ILibCalendar` and 9 calendars: gregorian, thaisolar, julian, islamic, hebrew, ethiopic,
     coptic, persian (astronomical), and persian-algo (algorithmic)
   * `ILibAstro` — astronomical calculations for the Persian astronomical calendar
-* Added system `'local'` timezone support (DST-aware, sampled from the OS). An omitted timezone now
+* Add system `'local'` timezone support (DST-aware, sampled from the OS). An omitted timezone now
   defaults to `'local'`, matching iLib JS; `'local'` and `'Etc/UTC'` therefore differ on a non-UTC
   host.
-* Based on iLib v14.21.0 / CLDR 46.
+* Based on iLib v14.21.0 / CLDR 48.2.
 * **Breaking**: `ILibCountry`, `ILibScriptInfo`, `ILibNumFmt`, and `ILibDurationFmt` are not yet
   ported to pure Dart and are unavailable in this release; they are planned for a later 2.x.
+
+## 1.9.0
+* Update the iLib files to version 14.22.0.
+  * iLib version 14.22.0 incorporates CLDR 48.2
+* Update unit test expectations for locale formatting changes introduced by CLDR 48.2, including webOS-specific expectations where results still differ from upstream.
+* Fix empty asset path crash in loadJS when locale is invalid
 
 ## 1.8.0
 * Implement `ILibCountry` class for Country Information
