@@ -50,6 +50,7 @@ Options → ILibLocaleInfo (determines locale, calendar, clock, meridiems)
 | 9 calendars | `lib/calendar/{name}_date.dart` + `{name}_rata_die.dart` | gregorian, thaisolar, julian, islamic, hebrew, ethiopic, coptic, persian (astronomical), persian-algo (algorithmic) — see [docs/date-calendar-architecture.md](docs/date-calendar-architecture.md) |
 | ILibAstro | `lib/calendar/ilib_astro.dart` | Astronomical calculation (`ilib.data.astro`) |
 | ILibDateOptions | `lib/ilib_date.dart` | `_toCalendarDate()` delegates per calendar |
+| ILibNumFmt | `lib/ilib_numfmt.dart` | `ilib.data.localeinfo.numfmt` + `ilib.data.currency` |
 
 ### Not yet ported (currently non-functional)
 The `ILibJS` interop bridge was removed in v2.0, but these classes were never converted to pure
@@ -62,7 +63,6 @@ not compile and are not exported** from `flutter_ilib.dart`. Porting them is the
 | ILibCountry | `lib/ilib_country.dart` | 5 |
 | ILibScriptInfo | `lib/ilib_scriptinfo.dart` | 7 |
 | ILibDurationFmt | `lib/ilib_durationfmt.dart` | 4 |
-| ILibNumFmt | `lib/ilib_numfmt.dart` | 12 |
 
 ## Conversion Pattern (How to Convert a Class)
 See [docs/conversion-guide.md](docs/conversion-guide.md) for the full checklist (analyze JS source →
@@ -124,7 +124,7 @@ lib/
 ├── ilib_casemapper.dart        # case conversion
 ├── ilib_country.dart           # [unconverted] country info
 ├── ilib_durationfmt.dart       # [unconverted] duration format
-├── ilib_numfmt.dart            # [unconverted] number format
+├── ilib_numfmt.dart            # number format
 ├── ilib_scriptinfo.dart        # [unconverted] script info
 ├── calendar/
 │   ├── rata_die.dart           # ILibRataDie abstract base (shared static methods)
