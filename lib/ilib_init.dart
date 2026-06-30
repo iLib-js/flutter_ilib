@@ -29,9 +29,19 @@ class ILibLoader extends ChangeNotifier {
 
   final Set<String> _availableAssets = <String>{};
 
+  static const String _rootPath =
+      'packages/flutter_ilib/assets/locale/root.json';
+
   Map<String, dynamic>? getLocaleData(String locale) {
     return _localeDataMap[locale] ?? _mergeFromCache(locale);
   }
+
+  /// Locale-independent data from root.json (e.g. `ilib.data.astro`).
+  ///
+  /// root.json is always loaded first by [loadJSON], so this is available
+  /// regardless of which locales have been loaded — unlike [getLocaleData],
+  /// which depends on a (valid, loaded) locale.
+  Map<String, dynamic>? getRootData() => _fileDataCache[_rootPath];
 
   Map<String, dynamic>? _mergeFromCache(String locale) {
     final List<String> paths = getJSONDataPaths(locale);
@@ -130,14 +140,15 @@ class ILibLoader extends ChangeNotifier {
     await _loadAssetManifest();
 
     // Always load root.json first as it contains locale-independent data (e.g. astro)
-    await _loadFile('packages/flutter_ilib/assets/locale/root.json');
+    await _loadFile(_rootPath);
 
-    final String curlocale = getLocale();
-    if (isValidLocale(curlocale)) {
-      await _loadLocaleData(curlocale);
-    } else {
-      logger.warn('Invalid locale: $curlocale, no locale-specific data loaded');
+    // normalizeLocale maps C/POSIX/empty to en-US.
+    String curlocale = normalizeLocale(getLocale());
+    if (!isValidLocale(curlocale)) {
+      logger.warn('Invalid locale: $curlocale, falling back to en-US');
+      curlocale = 'en-US';
     }
+    await _loadLocaleData(curlocale);
 
     initILib();
     logger.info('Notifying listeners after JSON loading');
@@ -161,7 +172,8 @@ class ILibLoader extends ChangeNotifier {
       return;
     }
 
-    locale ??= getLocale();
+    // normalizeLocale maps C/POSIX/empty to en-US instead of rejecting.
+    locale = normalizeLocale(locale ?? getLocale());
     if (!isValidLocale(locale)) {
       return;
     }

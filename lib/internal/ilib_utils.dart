@@ -2,15 +2,38 @@ import 'dart:ui';
 
 import '../ilib_locale.dart';
 
-String currentLocale =
-    PlatformDispatcher.instance.locale.toString().replaceAll('_', '-');
+String _currentLocale =
+    normalizeLocale(PlatformDispatcher.instance.locale.toString());
 
-String getLocale() {
-  return currentLocale;
-}
+/// The active locale, always normalized — it can never be observed as
+/// `C`/`POSIX`/empty (those collapse to `en-US`). Both reads and writes go
+/// through [normalizeLocale] via this getter/setter, so no code path —
+/// initialization, [setLocale], or a direct `currentLocale = ...` assignment —
+/// can leave an un-normalized value.
+String get currentLocale => _currentLocale;
+set currentLocale(String value) => _currentLocale = normalizeLocale(value);
 
-void setLocale(String loc) {
-  currentLocale = loc;
+String getLocale() => currentLocale;
+
+void setLocale(String loc) => currentLocale = loc;
+
+/// Maps "no real locale" values to `en-US` and normalizes the `_` separator
+/// to `-`. Covers POSIX/special locales (`C`, `POSIX`), empty/null, and the
+/// BCP-47 "undetermined" code `und` (which some embedders — e.g. embedded
+/// targets like webOS — report when the platform locale is unknown; on its own
+/// it would only load root defaults, not a usable locale).
+///
+/// Only the bare `und` collapses — `und-US`/`und-Hans` (valid region/script
+/// fallbacks, built internally by [getJSONDataPaths]) are left untouched.
+String normalizeLocale(String? locale) {
+  if (locale == null) {
+    return 'en-US';
+  }
+  final String lo = locale.replaceAll('_', '-');
+  if (lo.isEmpty || lo == 'C' || lo == 'POSIX' || lo == 'und') {
+    return 'en-US';
+  }
+  return lo;
 }
 
 String getJSONDataPath(String? locale) {
