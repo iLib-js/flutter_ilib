@@ -36,6 +36,7 @@ class _MyAppState extends State<MyApp> {
   String _iLibVersion = 'Unknown iLib';
   String _iLibCLDRVersion = 'CLDR';
   String _currentTime = 'Current Time';
+  String _currentTimeFormat = 'Current Time Format';
   static const int _numOfItems = 6;
   List<String> newList = List<String>.generate(_numOfItems, (int index) => '-');
   String curLocale = window.locale.toString().replaceAll('_', '-');
@@ -52,21 +53,22 @@ class _MyAppState extends State<MyApp> {
       if (!mounted) {
         return;
       }
-      if (!_flutterIlibPlugin.isILibReady) {
-        _flutterIlibPlugin.addListener(() => updateState());
-      } else {
+      _flutterIlibPlugin.addListener(() => updateState());
+      if (_flutterIlibPlugin.isILibReady) {
         updateState();
       }
     });
   }
 
   void updateState() {
+    if (!mounted) return;
+
     String iLibVersion;
     String currentTime;
     String iLibCLDRVersion;
 
     try {
-      iLibVersion = _flutterIlibPlugin.getVersion;
+      iLibVersion = _flutterIlibPlugin.getVersion ?? 'Unknown iLib version';
     } on PlatformException {
       iLibVersion = 'Failed to get iLib version.';
     }
@@ -78,22 +80,20 @@ class _MyAppState extends State<MyApp> {
       iLibCLDRVersion = 'Failed to get iLib CLDR version.';
     }
 
-    try {
-      currentTime = getDateTimeFormatNow('en-US');
-    } on PlatformException {
-      currentTime = 'Failed to get iLib DatFmt.';
-    }
+    final now = DateTime.now();
+    currentTime = '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')} ${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}';
 
-    results[0] = getDateTimeFormat(curLocale);
+    results[0] = getDateTimeFormatFixed(curLocale);
     results[1] = getFirstDayOfWeek(curLocale);
     results[2] = getClock(curLocale);
-    //results[3] = getNumFmt(curLocale);
-    //results[4] = getCountry(curLocale);
+    results[3] = getNumFmt(curLocale);
+    // results[4] = getCountry(curLocale);
 
     setState(() {
       _iLibVersion = iLibVersion;
       _iLibCLDRVersion = iLibCLDRVersion;
       _currentTime = currentTime;
+      _currentTimeFormat = getDateTimeFormatNow(curLocale);
       newList = results;
     });
   }
@@ -135,7 +135,7 @@ class _MyAppState extends State<MyApp> {
               _customTextBox('DateTime (full)', newList[0]),
               _customTextBox('First Day Of the Week', newList[1]),
               _customTextBox('Clock (12 or 24)', newList[2]),
-              //_customTextBox('Number Format', newList[3]),
+              _customTextBox('Number Format', newList[3]),
               //_customTextBox('Country', newList[4]),
               const SizedBox(
                 height: 30,
@@ -148,13 +148,14 @@ class _MyAppState extends State<MyApp> {
                   for (int i = 0; i < localeList.length; i++)
                     ElevatedButton(
                       child: Text(localeList[i], style: buttonTextStyle),
-                      onPressed: () {
+                      onPressed: () async {
                         curLocale = localeList[i];
-                        _flutterIlibPlugin.loadLocaleData(curLocale);
-                        results[0] = getDateTimeFormat(curLocale);
+                        await _flutterIlibPlugin.loadLocaleData(curLocale);
+                        _currentTimeFormat = getDateTimeFormatNow(curLocale);
+                        results[0] = getDateTimeFormatFixed(curLocale);
                         results[1] = getFirstDayOfWeek(curLocale);
                         results[2] = getClock(curLocale);
-                        //results[3] = getNumFmt(curLocale);
+                        results[3] = getNumFmt(curLocale);
                         //results[4] = getCountry(curLocale);
                         setState(() {
                           newList = results;
@@ -169,6 +170,7 @@ class _MyAppState extends State<MyApp> {
               _customTextBox('iLib Version', _iLibVersion, main: false),
               _customTextBox('CLDR Version', _iLibCLDRVersion, main: false),
               _customTextBox('Current Time', _currentTime),
+              _customTextBox('Current DateTime (full)', _currentTimeFormat),
             ],
           ),
         ),
@@ -207,11 +209,11 @@ class _MyAppState extends State<MyApp> {
     return fmt.format(dateOptions);
   }
 
-  String getDateTimeFormat(String curlo) {
+  String getDateTimeFormatFixed(String lo) {
     final ILibDateOptions dateOptions =
-        ILibDateOptions(dateTime: DateTime.now());
+        ILibDateOptions(dateTime: DateTime(2026, 5, 23, 16, 30, 0));
     final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
-        locale: curlo,
+        locale: lo,
         length: 'full',
         type: 'datetime',
         useNative: false,
@@ -241,17 +243,14 @@ class _MyAppState extends State<MyApp> {
     final int clock = ILibDateFmt(fmtOptions).getClock();
     return '$clock';
   }
-  /*
+
   String getNumFmt(String curlo) {
     final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions(locale: curlo));
     return fmt.format(-111123456.785);
-  }*/
+  }
 
-  /*String getCountry(String curlo) {
-    final ILibCountry ctry = ILibCountry(locale: curlo);
-    return ctry.getName('KR');
-  }*/
   // String getCountry(String curlo) {
-  //   return 'SA';
+  //   final ILibCountry ctry = ILibCountry(locale: curlo);
+  //   return ctry.getName('KR');
   // }
 }
