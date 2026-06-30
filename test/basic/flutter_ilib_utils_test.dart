@@ -111,4 +111,39 @@ void main() {
       expect(paths.length, 7);
     });
   });
+
+  group('normalizeLocale', () {
+    test('C / POSIX / und / empty / null fall back to en-US', () {
+      expect(normalizeLocale('C'), 'en-US');
+      expect(normalizeLocale('POSIX'), 'en-US');
+      expect(normalizeLocale('und'), 'en-US'); // bare "undetermined"
+      expect(normalizeLocale(''), 'en-US');
+      expect(normalizeLocale(null), 'en-US');
+    });
+
+    test('normalizes the separator and keeps valid locales', () {
+      expect(normalizeLocale('ko_KR'), 'ko-KR');
+      expect(normalizeLocale('fa-IR'), 'fa-IR');
+      expect(normalizeLocale('en-US'), 'en-US');
+    });
+
+    test('keeps und-REGION / und-SCRIPT (only bare und collapses)', () {
+      expect(normalizeLocale('und-US'), 'und-US');
+      expect(normalizeLocale('und-Hans'), 'und-Hans');
+    });
+  });
+
+  group('currentLocale is always normalized', () {
+    test('setLocale and direct assignment both normalize', () {
+      final String saved = getLocale();
+      setLocale('C');
+      expect(currentLocale, 'en-US');
+      expect(getLocale(), 'en-US');
+      currentLocale = 'POSIX'; // direct assignment also goes through the setter
+      expect(currentLocale, 'en-US');
+      currentLocale = 'ko_KR';
+      expect(currentLocale, 'ko-KR');
+      setLocale(saved); // restore the shared global
+    });
+  });
 }

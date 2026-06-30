@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/foundation.dart' show visibleForTesting;
 
 import '../ilib_init.dart';
-import '../internal/ilib_utils.dart';
 import 'greg_rata_die.dart';
 
 class ILibAstro {
@@ -12,14 +11,19 @@ class ILibAstro {
   static Map<String, dynamic>? _data;
 
   static Map<String, dynamic> _getData() {
-    if (_data != null) {
+    // astro is locale-independent (root.json only). Read it from the root data
+    // directly so it does not depend on currentLocale being valid/loaded, and
+    // never cache an empty map (so a too-early call can recover later).
+    if (_data != null && _data!.isNotEmpty) {
       return _data!;
     }
-    final Map<String, dynamic>? localeData =
-        ILibLoader.instance.getLocaleData(currentLocale);
-    _data = (localeData?['ilib.data.astro'] as Map<String, dynamic>?) ??
-        <String, dynamic>{};
-    return _data!;
+    final Map<String, dynamic>? rootData = ILibLoader.instance.getRootData();
+    final Map<String, dynamic>? astro =
+        rootData?['ilib.data.astro'] as Map<String, dynamic>?;
+    if (astro != null && astro.isNotEmpty) {
+      _data = astro;
+    }
+    return astro ?? const <String, dynamic>{};
   }
 
   static double _dtr(double d) => d * pi / 180.0;
