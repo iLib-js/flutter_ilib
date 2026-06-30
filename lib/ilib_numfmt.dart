@@ -1,11 +1,8 @@
-import 'ilib_init.dart';
-import 'ilib_localeinfo.dart';
 import 'calendar/calendar_utils.dart' as calendar_utils;
+import 'ilib_currency.dart';
+import 'ilib_localeinfo.dart';
 import 'internal/ilib_utils.dart' as ilib_utils;
 import 'internal/math_utils.dart' as math_utils;
-
-/// Padding string of zeros for fraction formatting.
-const String _zeros = '00000000000000000000000000000000000000000000000000000000000000000000';
 
 class ILibNumFmt {
   /// [options] Set the Options for formatting
@@ -17,7 +14,9 @@ class ILibNumFmt {
 
     // Resolve style
     if (_type == 'currency') {
-      _style = (options.style == 'common' || options.style == 'iso') ? options.style! : 'common';
+      _style = (options.style == 'common' || options.style == 'iso')
+          ? options.style!
+          : 'common';
     } else {
       _style = options.style ?? 'standard';
     }
@@ -63,7 +62,9 @@ class ILibNumFmt {
     }
 
     // Resolve rounding mode
-    _roundingMode = options.roundingMode ?? _currencyRoundingMode ?? locInfo.getRoundingMode();
+    _roundingMode = options.roundingMode ??
+        _currencyRoundingMode ??
+        locInfo.getRoundingMode();
     _round = math_utils.getRoundingFunction(_roundingMode);
 
     // Resolve useNative
@@ -106,22 +107,18 @@ class ILibNumFmt {
   }
 
   void _initCurrency(String? currency, ILibLocaleInfo locInfo) {
-    _currencyCode = currency;
+    // Use ILibCurrency to get currency information (converts Currency.js functionality)
+    final ILibCurrency currencyInfo = ILibCurrency(
+      locale: _locale,
+      code: currency,
+    );
 
-    final Map<String, dynamic>? localeData = ILibLoader.instance.getLocaleData(_locale);
-    final Map<String, dynamic>? allCurrencies =
-        localeData?['ilib.data.currency'] as Map<String, dynamic>?;
-    final Map<String, dynamic>? currInfo = (allCurrencies != null && _currencyCode != null)
-        ? allCurrencies[_currencyCode] as Map<String, dynamic>?
-        : null;
+    _currencyCode = currencyInfo.getCode();
+    _currencySign = currencyInfo.getSign() ?? _currencyCode;
+    _currencyRoundingMode = currencyInfo.getRoundingMode();
 
-    int currencyDecimals = 2;
-    if (currInfo != null) {
-      currencyDecimals = (currInfo['decimals'] as num?)?.toInt() ?? 2;
-      _currencySign = currInfo['sign'] as String? ?? _currencyCode;
-    } else {
-      _currencySign = _currencyCode;
-    }
+    // Get currency decimals
+    final int currencyDecimals = currencyInfo.getFractionDigits();
 
     // Set fraction digits to currency decimals if user didn't override
     if (_maxFractionDigits == null && _minFractionDigits == null) {
@@ -129,21 +126,21 @@ class ILibNumFmt {
       _minFractionDigits = currencyDecimals;
     }
 
-    // Currency rounding mode
-    _currencyRoundingMode = currInfo?['roundingMode'] as String?;
-
     // Currency format templates
     final CurrencyFormats formats = locInfo.getCurrencyFormats();
     if (_style == 'iso') {
       final String isoFmt = formats.iso ?? '';
       final String isoNeg = formats.isoNegative ?? '';
       _template = isoFmt.isNotEmpty ? isoFmt : (formats.common ?? '{s} {n}');
-      _templateNegative = isoNeg.isNotEmpty ? isoNeg : (formats.commonNegative ?? '-{s} {n}');
+      _templateNegative =
+          isoNeg.isNotEmpty ? isoNeg : (formats.commonNegative ?? '-{s} {n}');
       _currencySign = _currencyCode;
     } else {
-      _template = (formats.common?.isNotEmpty ?? false) ? formats.common! : '{s} {n}';
-      _templateNegative =
-          (formats.commonNegative?.isNotEmpty ?? false) ? formats.commonNegative! : '-{s} {n}';
+      _template =
+          (formats.common?.isNotEmpty ?? false) ? formats.common! : '{s} {n}';
+      _templateNegative = (formats.commonNegative?.isNotEmpty ?? false)
+          ? formats.commonNegative!
+          : '-{s} {n}';
     }
   }
 
@@ -179,13 +176,15 @@ class ILibNumFmt {
     } else {
       _prigroupSize = locInfo.getPrimaryGroupingDigits();
       _secgroupSize = locInfo.getSecondaryGroupingDigits();
-      _groupingSeparator =
-          _useNative ? locInfo.getNativeGroupingSeparator() : locInfo.getGroupingSeparator();
+      _groupingSeparator = _useNative
+          ? locInfo.getNativeGroupingSeparator()
+          : locInfo.getGroupingSeparator();
     }
 
     // Decimal separator
-    _decimalSeparator =
-        _useNative ? locInfo.getNativeDecimalSeparator() : locInfo.getDecimalSeparator();
+    _decimalSeparator = _useNative
+        ? locInfo.getNativeDecimalSeparator()
+        : locInfo.getDecimalSeparator();
 
     // Native digits
     if (_useNative) {
@@ -196,7 +195,8 @@ class ILibNumFmt {
     }
 
     // Exponential symbol
-    _exponentSymbol = _useNative ? locInfo.getNativeExponential() : locInfo.getExponential();
+    _exponentSymbol =
+        _useNative ? locInfo.getNativeExponential() : locInfo.getExponential();
   }
 
   String _mapDigits(String str) {
@@ -231,8 +231,9 @@ class ILibNumFmt {
 
     // Apply maxFractionDigits
     if (_maxFractionDigits != null && _maxFractionDigits! > -1) {
-      result =
-          math_utils.shiftDecimal(_round(math_utils.shiftDecimal(result, _maxFractionDigits!)), -_maxFractionDigits!);
+      result = math_utils.shiftDecimal(
+          _round(math_utils.shiftDecimal(result, _maxFractionDigits!)),
+          -_maxFractionDigits!);
     }
 
     return result;
@@ -252,7 +253,9 @@ class ILibNumFmt {
         (_minFractionDigits == null || _minFractionDigits! <= 0) &&
         (_maxFractionDigits == null || _maxFractionDigits! < 0)) {
       fraction = null;
-    } else if (fraction == '0' && _maxFractionDigits != null && _maxFractionDigits == 0) {
+    } else if (fraction == '0' &&
+        _maxFractionDigits != null &&
+        _maxFractionDigits == 0) {
       fraction = null;
     }
 
@@ -260,7 +263,7 @@ class ILibNumFmt {
     if (_minFractionDigits != null && _minFractionDigits! > 0) {
       final String frac = fraction ?? '';
       if (frac.length < _minFractionDigits!) {
-        fraction = frac + _zeros.substring(0, _minFractionDigits! - frac.length);
+        fraction = _pad(frac, _minFractionDigits!, true);
       }
     }
 
@@ -323,7 +326,8 @@ class ILibNumFmt {
     String numSec = result.substring(0, result.indexOf(_groupingSeparator));
     while (numSec.length > _secgroupSize) {
       final int secSize3 = numSec.length - _secgroupSize;
-      result = '${result.substring(0, secSize3)}$_groupingSeparator${result.substring(secSize3)}';
+      result =
+          '${result.substring(0, secSize3)}$_groupingSeparator${result.substring(secSize3)}';
       numSec = result.substring(0, result.indexOf(_groupingSeparator));
     }
 
@@ -342,7 +346,7 @@ class ILibNumFmt {
     // the last significant digit due to IEEE 754 precision limits.
     final bool needsConstraints =
         (_maxFractionDigits != null && _maxFractionDigits! > 0) ||
-        (_significantDigits != null && _significantDigits! > 0);
+            (_significantDigits != null && _significantDigits! > 0);
 
     String significandStr = expParts[0];
 
@@ -354,7 +358,8 @@ class ILibNumFmt {
           maxDigits = _significantDigits!;
         }
       }
-      significantPart = math_utils.significant(significantPart, maxDigits, _round);
+      significantPart =
+          math_utils.significant(significantPart, maxDigits, _round);
       significandStr = significantPart.toString();
     }
 
@@ -373,7 +378,7 @@ class ILibNumFmt {
     if (minFrac > 0) {
       final String frac = fraction ?? '';
       if (frac.length < minFrac) {
-        fraction = frac + _zeros.substring(0, minFrac - frac.length);
+        fraction = _pad(frac, minFrac, true);
       }
     }
 
@@ -381,7 +386,7 @@ class ILibNumFmt {
     if (fraction != null && fraction.isNotEmpty && fraction != '0') {
       formatted += _decimalSeparator + fraction;
     } else if (minFrac > 0) {
-      formatted += _decimalSeparator + (fraction ?? _zeros.substring(0, minFrac));
+      formatted += _decimalSeparator + _pad(fraction ?? '', minFrac, true);
     }
     formatted += _exponentSymbol + exponent;
 
@@ -405,10 +410,12 @@ class ILibNumFmt {
       return number.toString();
     }
 
-    final double n = number is String ? double.parse(number) : (number as num).toDouble();
+    final double n =
+        number is String ? double.parse(number) : (number as num).toDouble();
 
     if (_type == 'number') {
-      final String formatted = (_style == 'scientific') ? _formatScientific(n) : _formatStandard(n);
+      final String formatted =
+          (_style == 'scientific') ? _formatScientific(n) : _formatStandard(n);
       if (n < 0) {
         return _templateNegative.replaceAll('{n}', formatted);
       }
@@ -487,6 +494,19 @@ class ILibNumFmt {
   bool getUseNative() {
     return _useNative;
   }
+}
+
+String _pad(String value, int length, [bool right = false]) {
+  // This helper is only used for right-padding fraction digits,
+  // so negative values never reach it.
+  if (value.length >= length) {
+    return value;
+  }
+
+  const String zeros = '00000000000000000000000000000000';
+  final String padding = zeros.substring(0, length - value.length);
+
+  return right ? value + padding : padding + value;
 }
 
 /// Options for configuring the number formatter.

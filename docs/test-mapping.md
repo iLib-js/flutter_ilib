@@ -182,13 +182,21 @@ These were extracted from the single monolithic `js/test/testdatefmt.js` file, s
 ## Basic Tests (flutter_ilib-specific)
 
 These tests have no JS counterpart. They verify the Flutter plugin initialization and internal utilities.
+The math utils file below was extracted from the `math_utils` portion of `js/test/testutils.js`.
 
 | Dart Test File | iLib JS Source File | Notes |
 |---|---|---|
 | `test/basic/flutter_ilib_test.dart` | — | Plugin initialization test |
 | `test/basic/flutter_ilib_datefmt_test.dart` | — | DateFmt basic behavior check |
+| `test/basic/flutter_ilib_math_utils_test.dart` | `js/test/testutils.js` | Math utils tests extracted from the `math_utils` section |
 | `test/basic/flutter_ilib_localeinfo_test.dart` | — | LocaleInfo basic behavior check |
 | `test/basic/flutter_ilib_utils_test.dart` | — | Internal utility tests |
+
+## Currency Tests
+
+| Dart Test File | iLib JS Source File | Notes |
+|---|---|---|
+| `test/currency/currency_test.dart` | `js/test/number/testcurrency.js` | ILibCurrency (default locale currency, code lookup, sign lookup, ambiguous-sign fallback) |
 
 
 ## Common Not Converted Pattern (All Calendar Date Tests)

@@ -50,6 +50,7 @@ Options → ILibLocaleInfo (determines locale, calendar, clock, meridiems)
 | 9 calendars | `lib/calendar/{name}_date.dart` + `{name}_rata_die.dart` | gregorian, thaisolar, julian, islamic, hebrew, ethiopic, coptic, persian (astronomical), persian-algo (algorithmic) — see [docs/date-calendar-architecture.md](docs/date-calendar-architecture.md) |
 | ILibAstro | `lib/calendar/ilib_astro.dart` | Astronomical calculation (`ilib.data.astro`) |
 | ILibDateOptions | `lib/ilib_date.dart` | `_toCalendarDate()` delegates per calendar |
+| ILibCurrency | `lib/ilib_currency.dart` | Currency metadata lookup (`ilib.data.currency`) |
 | ILibNumFmt | `lib/ilib_numfmt.dart` | `ilib.data.localeinfo.numfmt` + `ilib.data.currency` |
 
 ### Not yet ported (currently non-functional)

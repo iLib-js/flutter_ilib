@@ -78,27 +78,43 @@ Both use string-based "e" notation to avoid floating-point drift. Same strategy.
 | Currency info | `new Currency({...})` | Direct access via `localeData['ilib.data.currency']` |
 | String substitution | `new IString(template).format(...)` | `String.replaceAll('{n}', ...)` |
 
-### No Separate Currency Class
+### Currency.js → ILibCurrency
 
-JS uses a separate `Currency` class (`Currency.js`) that loads currency data,
-provides methods like `getSign()`, `getFractionDigits()`, and `getRoundingMode()`,
-and supports searching currencies by sign (with circulation-based fallback).
+JS uses a dedicated `Currency` class (`Currency.js`) to encapsulate currency
+metadata lookup. It reads `ilib.data.currency`, exposes `getCode()`,
+`getSign()`, `getFractionDigits()`, `getName()`, and `getRoundingMode()`, and
+implements sign-based lookup with locale-aware fallback.
 
-In Dart, **no separate `ILibCurrency` class exists**. Instead, `ILibNumFmt` accesses
-the JSON data directly:
+That behavior is now converted into Dart as `ILibCurrency` in
+`lib/ilib_currency.dart`.
+
+| JS `Currency.js` behavior | Dart `ILibCurrency` behavior |
+|---------------------------|------------------------------|
+| Load currency metadata from locale data | Read `ilib.data.currency` from `ILibLoader.instance.getLocaleData()` |
+| Default currency comes from locale | Resolve via `ilib.data.localeinfo.currency`, then `ILibLocaleInfo.getCurrency()` fallback |
+| Lookup by ISO code | `ILibCurrency(code: ...)` |
+| Lookup by sign | `ILibCurrency(sign: ...)` searches matching symbols |
+| Ambiguous sign fallback | Prefer the current locale currency when that locale uses the same sign; otherwise choose the first matching currency |
+| Available currency list | `ILibCurrency.getAvailableCurrencies()` |
+
+The current Dart implementation keeps the resolution logic inside the currency
+class instead of in `ILibNumFmt`, so number formatting can reuse the same
+currency metadata path as direct callers.
+
+The main lookup flow is:
 
 ```dart
 final Map<String, dynamic>? localeData = ILibLoader.instance.getLocaleData(_locale);
 final Map<String, dynamic>? allCurrencies =
     localeData?['ilib.data.currency'] as Map<String, dynamic>?;
-final Map<String, dynamic>? currInfo = allCurrencies?[_currencyCode];
 ```
 
-The needed fields (`sign`, `decimals`, `roundingMode`) are extracted directly from
-the JSON map without wrapping them in a separate currency class.
+From there, the class selects a currency by `code`, by `sign`, or by the locale's
+default currency, and then copies the `name`, `decimals`, `sign`, and
+`roundingMode` fields into the instance.
 
-If future requirements need feature parity with JS `Currency` class (search by sign,
-list all currencies, etc.), then `ILibCurrency` should be implemented separately.
+`ILibNumFmt` now depends on `ILibCurrency` for currency formatting details, so
+the two classes stay aligned when currency data or fallback rules change.
 
 ### Default Rounding Mode
 
