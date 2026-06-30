@@ -1,5 +1,6 @@
 import 'ilib_init.dart';
 import 'ilib_localeinfo.dart';
+import 'calendar/calendar_utils.dart' as calendar_utils;
 import 'internal/ilib_utils.dart' as ilib_utils;
 import 'internal/math_utils.dart' as math_utils;
 
@@ -302,10 +303,7 @@ class ILibNumFmt {
       if (cycle == 0) {
         result.write(_groupingSeparator);
       }
-      cycle = (cycle - 1) % _prigroupSize;
-      if (cycle < 0) {
-        cycle += _prigroupSize;
-      }
+      cycle = calendar_utils.mod(cycle - 1, _prigroupSize);
     }
     result.write(integral[integral.length - 1]);
     return result.toString();

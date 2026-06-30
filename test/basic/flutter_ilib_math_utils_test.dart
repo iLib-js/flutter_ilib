@@ -4,59 +4,6 @@ import 'package:flutter_ilib/internal/math_utils.dart';
 
 void main() {
   debugPrint('Testing [flutter_ilib_math_utils_test.dart] file.');
-  group('math_utils-mod', () {
-    test('testModSimple', () {
-      expect(mod(2, 4), 2);
-    });
-    test('testModWrap', () {
-      expect(mod(6, 4), 2);
-    });
-    test('testModWrapNeg', () {
-      expect(mod(-6, 4), 2);
-    });
-    test('testModZeroModulus', () {
-      expect(mod(6, 0), 0);
-    });
-    test('testModZeroNum', () {
-      expect(mod(0, 6), 0);
-    });
-    test('testModReal', () {
-      expect(mod(2.234231, 4), closeTo(2.234231, 0.0000001));
-    });
-    test('testModRealWrap', () {
-      expect(mod(6.234231, 4), closeTo(2.234231, 0.0000001));
-    });
-    test('testModRealNeg', () {
-      expect(mod(-6.3, 4), closeTo(1.7, 0.0000001));
-    });
-  });
-
-  group('math_utils-amod', () {
-    test('testAmodSimple', () {
-      expect(amod(2, 4), 2);
-    });
-    test('testAmodWrap', () {
-      expect(amod(6, 4), 2);
-    });
-    test('testAmodWrapNeg', () {
-      expect(amod(-6, 4), 2);
-    });
-    test('testAmodZeroModulus', () {
-      expect(amod(6, 0), 0);
-    });
-    test('testAmodZeroNum', () {
-      expect(amod(0, 6), 6);
-    });
-    test('testAmodReal', () {
-      expect(amod(2.234231, 4), closeTo(2.234231, 0.0000001));
-    });
-    test('testAmodRealWrap', () {
-      expect(amod(6.234231, 4), closeTo(2.234231, 0.0000001));
-    });
-    test('testAmodRealNeg', () {
-      expect(amod(-6.3, 4), closeTo(1.7, 0.0000001));
-    });
-  });
 
   group('math_utils-log10', () {
     test('testLog10', () {
@@ -101,46 +48,6 @@ void main() {
     });
     test('testSignificantZeroNumber', () {
       expect(significant(0.0, 2, roundHalfup), 0.0);
-    });
-  });
-
-  group('math_utils-signum', () {
-    test('testSignumPositive', () {
-      expect(signum(1), 1);
-    });
-    test('testSignumPositiveLarge', () {
-      expect(signum(1345234), 1);
-    });
-    test('testSignumNegative', () {
-      expect(signum(-1), -1);
-    });
-    test('testSignumNegativeLarge', () {
-      expect(signum(-13234), -1);
-    });
-    test('testSignumZero', () {
-      expect(signum(0), 1);
-    });
-    test('testSignumStringNumberPositive', () {
-      expect(signum("1345234"), 1);
-    });
-    test('testSignumStringNumberNegative', () {
-      expect(signum("-1345234"), -1);
-    });
-    test('testSignumUndefined', () {
-      expect(signum(), 1);
-    });
-    test('testSignumNull', () {
-      expect(signum(null), 1);
-    });
-    test('testSignumStringNonNumber', () {
-      expect(signum("rafgasdf"), 1);
-    });
-    test('testSignumBoolean', () {
-      expect(signum(true), 1);
-      expect(signum(false), 1);
-    });
-    test('testSignumFunction', () {
-      expect(signum(() { return -4; }), 1);
     });
   });
 

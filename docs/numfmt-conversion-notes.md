@@ -26,19 +26,26 @@ double roundHalfPositiveInfinity(double num) => (num + 0.5).floorToDouble();
 When JS code uses `Math.round` as the default rounding function (e.g., in `significant()`
 without a third argument), pass `roundHalfPositiveInfinity` in Dart to get identical results.
 
-### `mod` / `amod` — int-only vs JS float-accepting
+### `mod` / `amod` — Not converted
 
 JS `MathUtils.mod` accepts floats (`mod(2.234231, 4)` → `2.234231`).
-The Dart version is `int`-only — the project never uses float modulo.
+However, the project never uses float modulo operations, so these functions were not converted to Dart.
 
-Note: `calendar_utils.dart` also has its own `mod` function (identical logic).
-NumFmt uses the one from `math_utils.dart`.
+Note: `calendar_utils.dart` has its own `mod` function for calendar calculations.
 
-### `signum` — Type Safety
+### `signum` — Not converted
 
-JS handles `typeof(num) === 'string'` (tries `parseInt`), and returns `1` for
-`undefined`, `null`, non-numeric strings, booleans, and functions.
-Dart version only accepts `num` type — the type system guarantees validity.
+JS `signum` handles various edge cases (strings, undefined, null, booleans, functions).
+Since this function is not used by any production code, it was not converted.
+
+### Converted Functions
+
+Only the functions needed for NumFmt were converted:
+- `log10`, `shiftDecimal`, `significant`
+- Rounding functions: `roundFloor`, `roundCeiling`, `roundDown`, `roundUp`
+- `roundHalfup`, `roundHalfdown`, `roundHalfeven`, `roundHalfodd`
+- `roundHalfPositiveInfinity` (mirrors JS `Math.round` behavior)
+- `getRoundingFunction`
 
 ### `shiftDecimal` — Floating-Point Precision
 
