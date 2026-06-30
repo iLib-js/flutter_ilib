@@ -48,18 +48,15 @@ class ILibCurrency {
 
   /// Initialize currency info
   void _init() {
-    Map<String, dynamic>? localeData =
+    // Locale data drives only the locale's *default* currency selection.
+    final Map<String, dynamic>? localeData =
         ILibLoader.instance.getLocaleData(_locale);
-    Map<String, dynamic>? allCurrencies =
-        localeData?['ilib.data.currency'] as Map<String, dynamic>?;
-
-    // If currency data not in current locale, try 'en-US' as fallback
-    // (currency.json is bundled in en-US locale data)
-    if (allCurrencies == null) {
-      localeData = ILibLoader.instance.getLocaleData('en-US');
-      allCurrencies =
-          localeData?['ilib.data.currency'] as Map<String, dynamic>?;
-    }
+    // The currency metadata table itself is locale-independent (root.json
+    // only), mirroring the JS `ilib.data.currency` global. Read it from the
+    // root data directly rather than via a specific locale.
+    final Map<String, dynamic>? rootData = ILibLoader.instance.getRootData();
+    final Map<String, dynamic>? allCurrencies =
+        rootData?['ilib.data.currency'] as Map<String, dynamic>?;
 
     if (allCurrencies == null) {
       // No currency data available, use defaults
@@ -172,10 +169,13 @@ class ILibCurrency {
   /// ilib knows about.
   static List<String> getAvailableCurrencies() {
     final List<String> result = <String>[];
-    final Map<String, dynamic>? fileDataCache =
-        ILibLoader.instance.getLocaleData('-');
+    // Currency metadata is locale-independent (it lives in root.json only),
+    // so read it from the root data directly rather than via a specific
+    // locale — getRootData() is available as soon as loadJSON() has run,
+    // regardless of which locales have been loaded.
+    final Map<String, dynamic>? rootData = ILibLoader.instance.getRootData();
     final Map<String, dynamic>? allCurrencies =
-        fileDataCache?['ilib.data.currency'] as Map<String, dynamic>?;
+        rootData?['ilib.data.currency'] as Map<String, dynamic>?;
 
     if (allCurrencies != null) {
       final List<String> keys = allCurrencies.keys.toList();

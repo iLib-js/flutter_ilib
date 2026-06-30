@@ -95,7 +95,7 @@ That behavior is now converted into Dart as `ILibCurrency` in
 | Lookup by ISO code | `ILibCurrency(code: ...)` |
 | Lookup by sign | `ILibCurrency(sign: ...)` searches matching symbols |
 | Ambiguous sign fallback | Prefer the current locale currency when that locale uses the same sign; otherwise choose the first matching currency |
-| Available currency list | `ILibCurrency.getAvailableCurrencies()` |
+| Available currency list | `ILibCurrency.getAvailableCurrencies()` — reads `ilib.data.currency` (bundled in `root.json`) via a valid locale (`en-US`), not the JS `-` pseudo-locale |
 
 The current Dart implementation keeps the resolution logic inside the currency
 class instead of in `ILibNumFmt`, so number formatting can reuse the same
