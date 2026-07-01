@@ -446,8 +446,11 @@ class ILibNumFmt {
   }
 
   /// Apply the constraints used in the current formatter to the given number.
-  String constrain(int number) {
-    return _constrain(number.toDouble()).toString();
+  /// Applies maxFractionDigits, significantDigits, and the rounding mode, and
+  /// returns the constrained number (before it is turned into a formatted
+  /// string). Mirrors NumFmt.js, which takes and returns a number.
+  double constrain(num number) {
+    return _constrain(number.toDouble());
   }
 
   /// Return the locale that was used to construct this number formatter object.
