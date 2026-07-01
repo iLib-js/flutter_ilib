@@ -45,8 +45,10 @@ double roundHalfodd(double number) =>
 /// For positive numbers: ties go up. For negative numbers: ties go toward zero.
 double roundHalfPositiveInfinity(double number) => (number + 0.5).floorToDouble();
 
-/// Get rounding function by mode name.
-double Function(double) getRoundingFunction(String mode) {
+/// Look up a rounding function by mode name, or null if the name is not a
+/// known mode. Mirrors JS `MathUtils[mode]`, which yields undefined for an
+/// unknown key.
+double Function(double)? lookupRoundingFunction(String mode) {
   switch (mode) {
     case 'floor':
       return roundFloor;
@@ -63,9 +65,16 @@ double Function(double) getRoundingFunction(String mode) {
     case 'halfodd':
       return roundHalfodd;
     case 'halfdown':
-    default:
       return roundHalfdown;
+    default:
+      return null;
   }
+}
+
+/// Get rounding function by mode name, falling back to halfdown for an
+/// unknown mode.
+double Function(double) getRoundingFunction(String mode) {
+  return lookupRoundingFunction(mode) ?? roundHalfdown;
 }
 
 /// Base-10 logarithm.

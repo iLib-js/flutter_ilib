@@ -71,7 +71,16 @@ class ILibNumFmt {
     // property and the currency metadata carries no such field, so it is
     // always undefined and the locale default applies.
     _roundingMode = options.roundingMode ?? locInfo.getRoundingMode();
-    _round = math_utils.getRoundingFunction(_roundingMode);
+    // if the mode name is not a known rounding function,
+    // fall back to halfdown for both the function and the reported mode.
+    final double Function(double)? round =
+        math_utils.lookupRoundingFunction(_roundingMode);
+    if (round != null) {
+      _round = round;
+    } else {
+      _roundingMode = 'halfdown';
+      _round = math_utils.roundHalfdown;
+    }
 
     // Resolve useNative
     _resolveUseNative(options.useNative, locInfo);

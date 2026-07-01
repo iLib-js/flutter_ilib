@@ -4,10 +4,9 @@ Mapping table showing which iLib JS test file (`github.com/iLib-js/iLib`) each f
 
 JS source path base: `js/test/`
 
-Scope: this covers the pure-Dart classes. The 4 classes still on JS interop — `ILibCountry`,
-`ILibScriptInfo`, `ILibNumFmt`, `ILibDurationFmt` — and their tests (`test/country/`,
-`test/scriptinfo/`, `test/numfmt/`, `test/durfmt/`) are not mapped here until those classes are
-converted.
+Scope: this covers the pure-Dart classes. The 3 classes still on JS interop — `ILibCountry`,
+`ILibScriptInfo`, `ILibDurationFmt` — and their tests (`test/country/`, `test/scriptinfo/`,
+`test/durfmt/`) are not mapped here until those classes are converted.
 
 ## Calendar Tests
 
@@ -197,6 +196,16 @@ These tests have no JS counterpart. They verify the Flutter plugin initializatio
 |---|---|---|
 | `test/currency/currency_test.dart` | `js/test/number/testcurrency.js` | ILibCurrency (default locale currency, code lookup, sign lookup, ambiguous-sign fallback) — 1:1 with the JS test, minus the unsupported-locale cases |
 | `test/currency/currency_extra_test.dart` | — | Dart-only: `ILibCurrency.getAvailableCurrencies()` reads currency metadata from the bundled rootData |
+
+## NumFmt Tests
+
+| Dart Test File | iLib JS Source File | Notes |
+|---|---|---|
+| `test/numfmt/numfmt_test.dart` | `js/test/number/testnumfmt.js` | ILibNumFmt core (number/currency/percentage, fraction digits, significant digits, rounding modes, grouping, scientific) |
+| `test/numfmt/numfmt2_test.dart` | `js/test/number/testnumfmt2.js` | ILibNumFmt additional cases |
+| `test/numfmt/numfmt_af_test.dart` | `js/test/number/testnumfmt_af.js` | ILibNumFmt af (Afrikaans) locale formatting |
+| `test/numfmt/numfmt_am_test.dart` | `js/test/number/testnumfmt_am.js` | ILibNumFmt am (Amharic) locale formatting |
+| `test/numfmt/numfmt_extra_test.dart` | — | flutter_ilib-specific (no JS counterpart): unknown `roundingMode` falls back to `halfdown` for both the reported mode and the applied rounding, and a valid mode is preserved |
 
 
 ## Common Not Converted Pattern (All Calendar Date Tests)
