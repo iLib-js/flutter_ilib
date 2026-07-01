@@ -182,7 +182,6 @@ These were extracted from the single monolithic `js/test/testdatefmt.js` file, s
 ## Basic Tests (flutter_ilib-specific)
 
 These tests have no JS counterpart. They verify the Flutter plugin initialization and internal utilities.
-The math utils file below was extracted from the `math_utils` portion of `js/test/testutils.js`.
 
 | Dart Test File | iLib JS Source File | Notes |
 |---|---|---|

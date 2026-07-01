@@ -18,7 +18,6 @@ for test_file in $(find test/ \( -path 'test/durfmt' -o -path 'test/country' -o 
   fi
 done
 
-
 if [[ ${#FAILED_TESTS[@]} -gt 0 ]]; then
   echo ""
   test_log "** Failed tests **"

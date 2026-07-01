@@ -1,7 +1,7 @@
 // Dart-only tests for ILibCurrency that have no counterpart in the iLib JS
-// testcurrency.js. Currency metadata lives in root.json, so the available
-// currency list is resolved through a valid bundled locale ('en-US') rather
-// than the JS '-' pseudo-locale.
+// testcurrency.js. Currency metadata is stored in the loader's rootData
+// (ILibLoader.instance.getRootData()), so getAvailableCurrencies() enumerates
+// currency codes from rootData rather than per-locale tables.
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
