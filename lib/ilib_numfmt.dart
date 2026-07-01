@@ -47,6 +47,11 @@ class ILibNumFmt {
 
     // Currency setup
     if (_type == 'currency') {
+      if (options.currency == null) {
+        throw ArgumentError(
+            'A currency property is required in the options to the number '
+            'formatter constructor when the type property is set to currency.');
+      }
       _initCurrency(options.currency, locInfo);
     }
 
@@ -61,10 +66,11 @@ class ILibNumFmt {
       _templateNegative = locInfo.getNegativeNumberFormat();
     }
 
-    // Resolve rounding mode
-    _roundingMode = options.roundingMode ??
-        _currencyRoundingMode ??
-        locInfo.getRoundingMode();
+    // Resolve rounding mode. iLib's NumFmt.js reads a per-currency rounding
+    // mode here (currencyInfo.roundingMode), but Currency.js never sets that
+    // property and the currency metadata carries no such field, so it is
+    // always undefined and the locale default applies.
+    _roundingMode = options.roundingMode ?? locInfo.getRoundingMode();
     _round = math_utils.getRoundingFunction(_roundingMode);
 
     // Resolve useNative
@@ -93,7 +99,6 @@ class ILibNumFmt {
   // Currency
   String? _currencyCode;
   String? _currencySign;
-  String? _currencyRoundingMode;
 
   // Templates
   String _template = '{n}';
@@ -115,7 +120,6 @@ class ILibNumFmt {
 
     _currencyCode = currencyInfo.getCode();
     _currencySign = currencyInfo.getSign() ?? _currencyCode;
-    _currencyRoundingMode = currencyInfo.getRoundingMode();
 
     // Get currency decimals
     final int currencyDecimals = currencyInfo.getFractionDigits();

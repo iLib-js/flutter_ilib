@@ -4174,5 +4174,56 @@ void main() {
       expect(fmt, isNotNull);
       expect(fmt.format(12345678900), '1.23E+10');
     });
+
+    // Missing core feature tests
+    test('testNumFmtCurrencyNoCurrencyDefaultForLocale', () {
+      // Test that currency formatting without currency option throws error
+      try {
+        final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions(
+          type: 'currency',
+          locale: 'ja-JP',
+        ));
+        fail('Should have thrown error');
+      } catch (e) {
+        expect(
+            e.toString(),
+            contains('A currency property is required in the options to the '
+                'number formatter constructor when the type property is set '
+                'to currency.'));
+      }
+    });
+
+    test('testNumFmtNumberStyleScientificSmallWithMaxAndMinFractionDigitsJustRight', () {
+      final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions(
+        style: 'scientific',
+        maxFractionDigits: 5,
+        minFractionDigits: 3,
+      ));
+
+      expect(fmt, isNotNull);
+      expect(fmt.format(0.0000012345), '1.2345E-6');
+    });
+
+    test('testNumFmtNumberStyleScientificSmallWithMaxAndMinFractionDigitsTooBig', () {
+      final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions(
+        style: 'scientific',
+        maxFractionDigits: 5,
+        minFractionDigits: 3,
+      ));
+
+      expect(fmt, isNotNull);
+      expect(fmt.format(0.00000123456789), '1.23457E-6');
+    });
+
+    test('testNumFmtNumberStyleScientificSmallWithMaxAndMinFractionDigitsTooSmall', () {
+      final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions(
+        style: 'scientific',
+        maxFractionDigits: 5,
+        minFractionDigits: 3,
+      ));
+
+      expect(fmt, isNotNull);
+      expect(fmt.format(0.0000012), '1.200E-6');
+    });
   });
 }

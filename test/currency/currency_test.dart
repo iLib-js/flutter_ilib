@@ -28,7 +28,7 @@ void main() {
       expect(cur, isNotNull);
       expect(cur.getCode(), 'USD');
       expect(cur.getFractionDigits(), 2);
-      expect(cur.getSign(), '\$');
+      expect(cur.getSign(), r'$');
       expect(cur.getName(), 'US Dollar');
       final String locale = cur.getLocale();
       expect(locale, isNotNull);

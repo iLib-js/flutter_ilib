@@ -44,7 +44,6 @@ class ILibCurrency {
   String? _sign;
   String? _name;
   int? _fractionDigits;
-  String? _roundingMode;
 
   /// Initialize currency info
   void _init() {
@@ -96,7 +95,6 @@ class ILibCurrency {
       _name = currInfo['name'] as String?;
       _fractionDigits = (currInfo['decimals'] as num?)?.toInt() ?? 2;
       _sign = currInfo['sign'] as String? ?? _code;
-      _roundingMode = currInfo['roundingMode'] as String?;
     } else {
       _fractionDigits ??= 2;
       _sign ??= _code;
@@ -212,10 +210,5 @@ class ILibCurrency {
   /// Return the locale string for this currency.
   String getLocale() {
     return _locale;
-  }
-
-  /// Return the rounding mode typically used with this currency.
-  String? getRoundingMode() {
-    return _roundingMode;
   }
 }

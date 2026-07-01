@@ -12,7 +12,7 @@
   defaults to `'local'`, matching iLib JS; `'local'` and `'Etc/UTC'` therefore differ on a non-UTC
   host.
 * Based on iLib v14.22.0 / CLDR 48.2.
-* **Breaking**: `ILibCountry`, `ILibScriptInfo`, `ILibNumFmt`, and `ILibDurationFmt` are not yet
+* **Breaking**: `ILibCountry`, `ILibScriptInfo`, and `ILibDurationFmt` are not yet
   ported to pure Dart and are unavailable in this release; they are planned for a later 2.x.
 
 ## 1.9.0
