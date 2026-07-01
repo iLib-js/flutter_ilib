@@ -196,32 +196,8 @@ The math utils file below was extracted from the `math_utils` portion of `js/tes
 
 | Dart Test File | iLib JS Source File | Notes |
 |---|---|---|
-| `test/currency/currency_test.dart` | `js/test/number/testcurrency.js` | ILibCurrency (default locale currency, code lookup, sign lookup, ambiguous-sign fallback) — 1:1 with the JS test, minus the unsupported-locale cases below |
-| `test/currency/currency_extra_test.dart` | — | Dart-only: `getAvailableCurrencies()` resolves the currency list through a valid bundled locale (`en-US`) instead of the JS `-` pseudo-locale |
-
-### Not Converted — unsupported locales
-
-The JS `testcurrency.js` covers 216 locales; only the **136** that are in the
-bundled set (`getSupportedLocales()` in `lib/internal/ilib_utils.dart`) are
-converted. The remaining **80** locales are **not bundled** under
-`assets/locale/`, so `ILibLocaleInfo`/`ILibCurrency` fall back to defaults and
-cannot reproduce the JS expected currency — these are N/A and intentionally
-omitted (per CLAUDE.md › Conventions › Testing).
-
-This also covers the `ILibCurrency` constructor case `testCurrencyGetByCode4`
-(`locale: "ar-QA"`), which is dropped for the same reason.
-
-Excluded locales (not bundled):
-
-```
-ar-BH ar-DJ ar-DZ ar-JO ar-KW ar-LB ar-LY ar-MR ar-OM ar-QA ar-SD ar-SY
-ar-TN ar-YE be-BY ca-AD ca-ES en-ET en-GM en-KR en-LR en-PK en-RW en-SD
-en-SL en-TZ es-CR es-CU es-GQ es-PH fa-AF fr-BF fr-BJ fr-CD fr-CF fr-CG
-fr-CI fr-CM fr-DJ fr-DZ fr-GA fr-GN fr-GQ fr-LB fr-ML fr-RW fr-SN fr-TG
-gl-ES hr-HU hy-AM ig-NG kk-KZ ku-IQ ky-KG lb-LU lo-LA mn-MN ms-SG mt-MT
-my-MM ne-NP pa-Guru-IN pa-PK ps-AF ps-PK pt-AO pt-CV pt-GQ sn-ZW sr-Cyrl-RS
-tg-TJ tk-TM ur-PK wo-SN yo-BJ yo-NG zh-Hans-MY zh-Hans-SG zu-ZA
-```
+| `test/currency/currency_test.dart` | `js/test/number/testcurrency.js` | ILibCurrency (default locale currency, code lookup, sign lookup, ambiguous-sign fallback) — 1:1 with the JS test, minus the unsupported-locale cases |
+| `test/currency/currency_extra_test.dart` | — | Dart-only: `ILibCurrency.getAvailableCurrencies()` reads currency metadata from the bundled rootData |
 
 
 ## Common Not Converted Pattern (All Calendar Date Tests)
