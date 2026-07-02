@@ -66,10 +66,6 @@ class ILibNumFmt {
       _templateNegative = locInfo.getNegativeNumberFormat();
     }
 
-    // Resolve rounding mode. iLib's NumFmt.js reads a per-currency rounding
-    // mode here (currencyInfo.roundingMode), but Currency.js never sets that
-    // property and the currency metadata carries no such field, so it is
-    // always undefined and the locale default applies.
     _roundingMode = options.roundingMode ?? locInfo.getRoundingMode();
     // if the mode name is not a known rounding function,
     // fall back to halfdown for both the function and the reported mode.
@@ -447,8 +443,7 @@ class ILibNumFmt {
 
   /// Apply the constraints used in the current formatter to the given number.
   /// Applies maxFractionDigits, significantDigits, and the rounding mode, and
-  /// returns the constrained number (before it is turned into a formatted
-  /// string). Mirrors NumFmt.js, which takes and returns a number.
+  /// returns the constrained number.
   double constrain(num number) {
     return _constrain(number.toDouble());
   }
