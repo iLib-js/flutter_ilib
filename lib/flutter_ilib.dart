@@ -8,12 +8,14 @@ import 'internal/logger/logger_selector.dart';
 
 export 'ilib_calendar.dart';
 export 'ilib_casemapper.dart';
+export 'ilib_currency.dart';
 export 'ilib_date.dart';
 export 'ilib_date_accessor.dart';
 export 'ilib_datefmt.dart';
 export 'ilib_init.dart';
 export 'ilib_locale.dart';
 export 'ilib_localeinfo.dart';
+export 'ilib_numfmt.dart';
 export 'ilib_timezone.dart';
 
 class FlutterILib extends ChangeNotifier {

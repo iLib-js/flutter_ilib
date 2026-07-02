@@ -94,6 +94,7 @@ If you're an AI agent (Claude, Copilot, etc.), follow this sequence:
 | [conversion-guide.md](./conversion-guide.md) | General JS→Dart conversion checklist | Developers |
 | [test-mapping.md](./test-mapping.md) | JS→Dart test file mapping, not-converted patterns | Developers, AI |
 | [benchmark.md](./benchmark.md) | Performance & memory: v2.0 (pure Dart) vs v1.3.0 (JS interop) + empty-app baseline | Developers, AI |
+| [numfmt-conversion-plan.md](./numfmt-conversion-plan.md) | NumFmt & Currency implementation reference (rounding, precision, API differences) | Developers, AI | ~200 lines |
 
 ### External Documentation
 

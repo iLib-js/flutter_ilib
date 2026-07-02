@@ -9,11 +9,11 @@ Reads JSON locale data directly and performs formatting/calculation in Dart.
 instead of repeating the numbers, so a version bump only changes the values here (plus the two
 point-in-time/public spots listed below).
 
-- **iLib JS source**: **v14.21.0** — all `lib/` Dart code and `test/` cases were converted
+- **iLib JS source**: **v14.22.0** — all `lib/` Dart code and `test/` cases were converted
   from the iLib JS at this tag (`js/lib/` and `js/test/` of github.com/iLib-js/iLib;
-  `git checkout v14.21.0`).
+  `git checkout v14.22.0`).
 - **CLDR data**: **48.2** — the bundled `assets/locale/` JSON (218 locales) was generated from
-  iLib v14.21.0, which incorporates CLDR 46.
+  iLib v14.22.0, which incorporates CLDR 46.
 - When updating to a newer iLib/CLDR: bump the JS source and the generated locale data
   **together** (a JS-only or data-only bump will diverge), then re-run the converted tests
   against the new JS expectations.
@@ -50,6 +50,8 @@ Options → ILibLocaleInfo (determines locale, calendar, clock, meridiems)
 | 9 calendars | `lib/calendar/{name}_date.dart` + `{name}_rata_die.dart` | gregorian, thaisolar, julian, islamic, hebrew, ethiopic, coptic, persian (astronomical), persian-algo (algorithmic) — see [docs/date-calendar-architecture.md](docs/date-calendar-architecture.md) |
 | ILibAstro | `lib/calendar/ilib_astro.dart` | Astronomical calculation (`ilib.data.astro`) |
 | ILibDateOptions | `lib/ilib_date.dart` | `_toCalendarDate()` delegates per calendar |
+| ILibCurrency | `lib/ilib_currency.dart` | Currency metadata lookup (`ilib.data.currency`) |
+| ILibNumFmt | `lib/ilib_numfmt.dart` | `ilib.data.localeinfo.numfmt` + `ilib.data.currency` |
 
 ### Not yet ported (currently non-functional)
 The `ILibJS` interop bridge was removed in v2.0, but these classes were never converted to pure
@@ -62,7 +64,6 @@ not compile and are not exported** from `flutter_ilib.dart`. Porting them is the
 | ILibCountry | `lib/ilib_country.dart` | 5 |
 | ILibScriptInfo | `lib/ilib_scriptinfo.dart` | 7 |
 | ILibDurationFmt | `lib/ilib_durationfmt.dart` | 4 |
-| ILibNumFmt | `lib/ilib_numfmt.dart` | 12 |
 
 ## Conversion Pattern (How to Convert a Class)
 See [docs/conversion-guide.md](docs/conversion-guide.md) for the full checklist (analyze JS source →
@@ -124,7 +125,7 @@ lib/
 ├── ilib_casemapper.dart        # case conversion
 ├── ilib_country.dart           # [unconverted] country info
 ├── ilib_durationfmt.dart       # [unconverted] duration format
-├── ilib_numfmt.dart            # [unconverted] number format
+├── ilib_numfmt.dart            # number format
 ├── ilib_scriptinfo.dart        # [unconverted] script info
 ├── calendar/
 │   ├── rata_die.dart           # ILibRataDie abstract base (shared static methods)

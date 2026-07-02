@@ -211,7 +211,7 @@ void main() {
       expect(fmt.format(12340000000000000000000000000.0), '1.23400E+28');
     });
 
-    test('testNumFmtNumberStyleScientificWithMinFractionDigits', () {
+    test('testNumFmtNumberStyleScientificWithMinFractionDigits2', () {
       final ILibNumFmt fmt = ILibNumFmt(
           ILibNumFmtOptions(style: 'scientific', minFractionDigits: 1));
 
@@ -828,7 +828,7 @@ void main() {
       expect(fmt.format(1234567.745), '1 234 567,745');
     });
 
-    test('testNumFmtNumberFormatDESimple', () {
+    test('testNumFmtNumberFormatDESimple2', () {
       final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions(locale: 'de-DE'));
 
       expect(fmt, isNotNull);
@@ -1018,6 +1018,24 @@ void main() {
       expect(fmt, isNotNull);
       expect(fmt.format(345.3), '¥345');
     });
+
+    test('testNumFmtCurrencyNoCurrencyDefaultForLocale', () {
+      // Test that currency formatting without currency option throws error
+      try {
+        final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions(
+          type: 'currency',
+          locale: 'ja-JP',
+        ));
+        fail('Should have thrown error');
+      } catch (e) {
+        expect(
+            e.toString(),
+            contains('A currency property is required in the options to the '
+                'number formatter constructor when the type property is set '
+                'to currency.'));
+      }
+    });
+
     test('testNumFmtCurrencyUseCorrectFractionDigitsForLocale', () {
       final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions(
           type: 'currency', locale: 'ja-JP', currency: 'JPY'));
@@ -1789,7 +1807,7 @@ void main() {
       expect(fmt.format(57.8), '੫੭.੮%');
     });
 
-    test('testNumFmtPercentageFormatRegular_pa_IN', () {
+    test('testNumFmtPercentageNegativeFormatRegular_pa_IN', () {
       final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions(
           locale: 'pa-IN', useNative: true, type: 'percentage'));
 
@@ -1805,7 +1823,7 @@ void main() {
       expect(fmt.format(57.8), '57.8%');
     });
 
-    test('testNumFmtPercentageNativeFormatRegular_pa_IN', () {
+    test('testNumFmtPercentageNativeNegativeFormatRegular_pa_IN', () {
       final ILibNumFmt fmt =
           ILibNumFmt(ILibNumFmtOptions(locale: 'pa-IN', type: 'percentage'));
 
@@ -4031,28 +4049,28 @@ void main() {
       expect(fmt, isNotNull);
       expect(fmt.format(-123456.785), '-123,456.78');
     });
-    test('testNumFmt_ja_JP', () {
+    test('testNumFmt_ja_JP2', () {
       final ILibNumFmt fmt =
           ILibNumFmt(ILibNumFmtOptions(locale: 'ja-JP', maxFractionDigits: 2));
 
       expect(fmt, isNotNull);
       expect(fmt.format(-123456.785), '-123,456.78');
     });
-    test('testNumFmt_pt_BR', () {
+    test('testNumFmt_pt_BR2', () {
       final ILibNumFmt fmt =
           ILibNumFmt(ILibNumFmtOptions(locale: 'pt-BR', maxFractionDigits: 2));
 
       expect(fmt, isNotNull);
       expect(fmt.format(-123456.785), '-123.456,78');
     });
-    test('testNumFmt_de_DE', () {
+    test('testNumFmt_de_DE2', () {
       final ILibNumFmt fmt =
           ILibNumFmt(ILibNumFmtOptions(locale: 'de-DE', maxFractionDigits: 2));
 
       expect(fmt, isNotNull);
       expect(fmt.format(-123456.785), '-123.456,78');
     });
-    test('testNumFmt_id_ID', () {
+    test('testNumFmt_id_ID2', () {
       final ILibNumFmt fmt =
           ILibNumFmt(ILibNumFmtOptions(locale: 'id-ID', maxFractionDigits: 2));
 
@@ -4066,7 +4084,7 @@ void main() {
       expect(fmt, isNotNull);
       expect(fmt.format(-123456.785), '-123 456,78');
     });
-    test('testNumFmt_it_IT', () {
+    test('testNumFmt_it_IT2', () {
       final ILibNumFmt fmt =
           ILibNumFmt(ILibNumFmtOptions(locale: 'it-IT', maxFractionDigits: 2));
 
@@ -4174,5 +4192,6 @@ void main() {
       expect(fmt, isNotNull);
       expect(fmt.format(12345678900), '1.23E+10');
     });
+
   });
 }
