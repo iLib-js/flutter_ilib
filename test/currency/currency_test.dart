@@ -89,13 +89,13 @@ void main() {
     test('testCurrencyGetBySignAmbiguousCurrentLocale', () {
       final ILibCurrency cur = ILibCurrency(
         locale: 'en-CA',
-        sign: '\$',
+        sign: r'$',
       );
 
       expect(cur, isNotNull);
       expect(cur.getCode(), 'CAD');
       expect(cur.getFractionDigits(), 2);
-      expect(cur.getSign(), '\$');
+      expect(cur.getSign(), r'$');
       expect(cur.getName(), 'Canadian Dollar');
       expect(cur.getLocale(), 'en-CA');
     });
@@ -103,13 +103,13 @@ void main() {
     test('testCurrencyGetBySignAmbiguousNotCurrentLocale', () {
       final ILibCurrency cur = ILibCurrency(
         locale: 'en-GB',
-        sign: '\$',
+        sign: r'$',
       );
 
       expect(cur, isNotNull);
       expect(cur.getCode(), 'USD');
       expect(cur.getFractionDigits(), 2);
-      expect(cur.getSign(), '\$');
+      expect(cur.getSign(), r'$');
       expect(cur.getName(), 'US Dollar');
       expect(cur.getLocale(), 'en-GB');
     });
