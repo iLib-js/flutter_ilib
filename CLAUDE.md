@@ -193,10 +193,9 @@ lib/
   scope only if its locale is in that list. When the data is fully absent,
   `ILibLocaleInfo`/`ILibTimeZone.fromLocale` fall back to defaults (e.g. `Etc/UTC`), so the
   test cannot reproduce the JS expected value — these are N/A.
-  **Do not decide by "the value happens to reproduce":** an unsupported
-  locale can still yield the JS value by language fallback (e.g. `ku-IQ` via `ku` + `und-IQ`), yet
-  it is out of scope; only convert the variant that is in `locales.json` (e.g. `ku-Arab-IQ` is,
-  `ku-IQ`/`ku-TR` are not). See [docs/conversion-guide.md](docs/conversion-guide.md) › Test Conversion.
+  **Do not decide by "the value happens to reproduce":** an unsupported locale can still yield the
+  JS value by language fallback, yet it is out of scope — only convert the variant that is in
+  `locales.json`. See [docs/conversion-guide.md](docs/conversion-guide.md) › Test Conversion.
 
 ### Public API Export
 - All public classes exported from `lib/flutter_ilib.dart`
