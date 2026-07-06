@@ -210,7 +210,6 @@ void main() {
 
       expect(info.getDecimalSeparator(), ',');
     });
-    //*************************************************Added By Birendra 23/05**********************************************************
     //test cases for en-GB number format
     test('testLocaleInfoGetDecimalSeparatorfor_en_GB', () {
       final ILibLocaleInfo info = ILibLocaleInfo('en-GB');
@@ -2975,6 +2974,66 @@ void main() {
     });
     test('testLocaleInfoRoundingMode_ku', () {
       final ILibLocaleInfo info = ILibLocaleInfo('ku-IQ');
+      expect(info, isNotNull);
+
+      expect(info.getRoundingMode(), 'halfdown');
+    });
+    //test cases for ku-Arab-IQ
+    test('testLocaleInfoGetDecimalSeparatorfor_ku_Arab_IQ', () {
+      final ILibLocaleInfo info = ILibLocaleInfo('ku-Arab-IQ');
+      expect(info, isNotNull);
+      expect(info.getDecimalSeparator(), '.');
+    });
+    test('testLocaleInfoGetGroupingSeparatorfor_ku_Arab_IQ', () {
+      final ILibLocaleInfo info = ILibLocaleInfo('ku-Arab-IQ');
+      expect(info, isNotNull);
+
+      expect(info.getGroupingSeparator(), ',');
+    });
+    test('testLocaleInfoGetPercentageFormat_ku_Arab_IQ', () {
+      final ILibLocaleInfo info = ILibLocaleInfo('ku-Arab-IQ');
+      expect(info, isNotNull);
+
+      expect(info.getPercentageFormat(), '{n}%');
+    });
+    test('testLocaleInfoGetCurrencyFormat_ku_Arab_IQ', () {
+      final ILibLocaleInfo info = ILibLocaleInfo('ku-Arab-IQ');
+      expect(info, isNotNull);
+
+      expect(info.getCurrencyFormats().common, '{s} {n}');
+    });
+    test('testLocaleInfoGetNegativeNumberFormat_ku_Arab_IQ', () {
+      final ILibLocaleInfo info = ILibLocaleInfo('ku-Arab-IQ');
+      expect(info, isNotNull);
+
+      expect(info.getNegativeNumberFormat(), '-{n}');
+    });
+    test('testLocaleInfoGetNegativePercentageFormat_ku_Arab_IQ', () {
+      final ILibLocaleInfo info = ILibLocaleInfo('ku-Arab-IQ');
+      expect(info, isNotNull);
+
+      expect(info.getNegativePercentageFormat(), '-{n}%');
+    });
+    test('testLocaleInfoGetNegativeCurrencyFormat_ku_Arab_IQ', () {
+      final ILibLocaleInfo info = ILibLocaleInfo('ku-Arab-IQ');
+      expect(info, isNotNull);
+
+      expect(info.getCurrencyFormats().commonNegative, '-{s} {n}');
+    });
+    test('testLocaleInfoGetPrimaryGroupingDigits_ku_Arab_IQ', () {
+      final ILibLocaleInfo info = ILibLocaleInfo('ku-Arab-IQ');
+      expect(info, isNotNull);
+
+      expect(info.getPrimaryGroupingDigits(), 3);
+    });
+    test('testLocaleInfoGetSecondaryGroupingDigits_ku_Arab_IQ', () {
+      final ILibLocaleInfo info = ILibLocaleInfo('ku-Arab-IQ');
+      expect(info, isNotNull);
+
+      expect(info.getSecondaryGroupingDigits(), 0);
+    });
+    test('testLocaleInfoRoundingMode_ku_Arab_IQ', () {
+      final ILibLocaleInfo info = ILibLocaleInfo('ku-Arab-IQ');
       expect(info, isNotNull);
 
       expect(info.getRoundingMode(), 'halfdown');
