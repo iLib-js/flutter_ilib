@@ -82,7 +82,9 @@ String getClock() {
 - [ ] **NEVER modify test expected values** — if a test fails, the Dart implementation has a bug, not the test data
 - [ ] Test data (e.g., `testDatesCoptic` reference arrays) must match JS source exactly
 - [ ] If a JS test cannot be converted due to missing Dart features (setters, timezone offset), document it in `docs/test-mapping.md` under "Not Converted" with the reason
-- [ ] **Do NOT convert JS tests that use a locale not bundled under `assets/locale/`** (the bundled iLib locales — see CLAUDE.md › Source Versions). The data is absent, so `ILibLocaleInfo`/`ILibTimeZone.fromLocale` fall back to defaults (e.g. `Etc/UTC`) and the JS expected value (e.g. `Asia/Ashgabat`) cannot be reproduced — N/A (e.g. `testTZGetDefaultFor_tk_TM`/`_tg_TJ`/`_wo_SN`/`_zu_ZA`/`_mt_MT`)
+- [ ] **Do NOT convert JS tests for a locale that flutter_ilib does not support.** The authoritative list of supported locales is `scripts/assemble_ilib/locales.json` (the seed used to generate `assets/locale/`) — a per-locale test is in scope only if its locale is in that list.
+  - When the data is fully absent, `ILibLocaleInfo`/`ILibTimeZone.fromLocale` fall back to defaults (e.g. `Etc/UTC`) and the JS expected value (e.g. `Asia/Ashgabat`) cannot be reproduced — N/A (e.g. `testTZGetDefaultFor_tk_TM`/`_tg_TJ`/`_wo_SN`/`_zu_ZA`/`_mt_MT`).
+  - **Do not rely on "the value happens to reproduce" to decide.** An unsupported locale can still produce the JS value by language fallback (e.g. `ku-IQ` resolves via `ku` + `und-IQ`), yet it is out of scope because it is not in `locales.json`. Conversely, only convert the supported variant (e.g. `ku-Arab-IQ` **is** in the list; `ku-IQ`/`ku-TR` are not). Membership in `locales.json` — not data presence or accidental fallback — is the test.
 - [ ] Dart-specific additional tests (getDayOfYear, getEra, etc.) go in a separate `*_extra_test.dart` file
 
 ### 5. Cleanup
