@@ -1018,5 +1018,9 @@ void main() {
           millisecond: 0);
       expect(fmt.format(dateOptions), '13:45');
     });
+    test('testDateFmtConstructorEmpty_es_CO', () {
+      final ILibDateFmt fmt = ILibDateFmt(ILibDateFmtOptions(locale: 'es-CO'));
+      expect(fmt, isNotNull);
+    });
   });
 }

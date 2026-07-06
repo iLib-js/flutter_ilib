@@ -1440,5 +1440,20 @@ void main() {
           millisecond: 0);
       expect(fmt.format(dateOptions), '١٣:٤٥');
     });
+    test('testDateFmtTemplateCalendar_ar_EG', () {
+      final ILibDateFmt fmt = ILibDateFmt(ILibDateFmtOptions(
+          locale: 'ar-EG', calendar: 'julian', template: 'yyyy-MM-dd'));
+      final ILibDateOptions date = ILibDateOptions(
+          locale: 'ar-EG',
+          calendar: 'julian',
+          year: 2011,
+          month: 9,
+          day: 29,
+          hour: 13,
+          minute: 45,
+          second: 0,
+          millisecond: 0);
+      expect(fmt.format(date), '٢٠١١-٠٩-٢٩');
+    });
   });
 }
