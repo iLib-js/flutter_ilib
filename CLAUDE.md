@@ -192,9 +192,8 @@ lib/
   `assets/locale/` — the 218 bundled iLib locales, see Source Versions); a per-locale test is in
   scope only if its locale is in that list. When the data is fully absent,
   `ILibLocaleInfo`/`ILibTimeZone.fromLocale` fall back to defaults (e.g. `Etc/UTC`), so the
-  test cannot reproduce the JS expected value — these are N/A (e.g. JS
-  `testTZGetDefaultFor_tk_TM`/`_tg_TJ`/`_wo_SN`/`_zu_ZA`/`_mt_MT` — tk/tg/wo/zu/mt and their
-  regions are not bundled). **Do not decide by "the value happens to reproduce":** an unsupported
+  test cannot reproduce the JS expected value — these are N/A.
+  **Do not decide by "the value happens to reproduce":** an unsupported
   locale can still yield the JS value by language fallback (e.g. `ku-IQ` via `ku` + `und-IQ`), yet
   it is out of scope; only convert the variant that is in `locales.json` (e.g. `ku-Arab-IQ` is,
   `ku-IQ`/`ku-TR` are not). See [docs/conversion-guide.md](docs/conversion-guide.md) › Test Conversion.
