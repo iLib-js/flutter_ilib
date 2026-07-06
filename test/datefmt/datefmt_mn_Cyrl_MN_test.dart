@@ -1096,5 +1096,42 @@ void main() {
           millisecond: 0);
       expect(fmt.format(dateOptions), '13:45');
     });
+    test('testDateFmtConstructorEmpty_mn_Cyrl_MN', () {
+      final ILibDateFmt fmt =
+          ILibDateFmt(ILibDateFmtOptions(locale: 'mn-Cyrl-MN'));
+      expect(fmt, isNotNull);
+    });
+    test('testDateFmtTemplateCalendar_mn_Cyrl_MN', () {
+      final ILibDateFmt fmt = ILibDateFmt(ILibDateFmtOptions(
+          locale: 'mn-Cyrl-MN', calendar: 'julian', template: 'yyyy-MM-dd'));
+      final ILibDateOptions date = ILibDateOptions(
+          locale: 'mn-Cyrl-MN',
+          calendar: 'julian',
+          year: 2011,
+          month: 9,
+          day: 29,
+          hour: 13,
+          minute: 45,
+          second: 0,
+          millisecond: 0);
+      expect(fmt.format(date), '2011-09-29');
+    });
+    test('testDateFmtTemplateCalendarIncompatibleDateType_mn_Cyrl_MN', () {
+      final ILibDateFmt fmt = ILibDateFmt(ILibDateFmtOptions(
+          locale: 'mn-Cyrl-MN',
+          calendar: 'julian',
+          template: 'yyyy-MM-dd HH:mm'));
+      final ILibDateOptions date = ILibDateOptions(
+          locale: 'mn-Cyrl-MN',
+          calendar: 'gregorian',
+          year: 2011,
+          month: 9,
+          day: 29,
+          hour: 13,
+          minute: 45,
+          second: 0,
+          millisecond: 0);
+      expect(fmt.format(date), '2011-09-16 13:45');
+    });
   });
 }

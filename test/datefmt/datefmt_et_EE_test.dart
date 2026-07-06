@@ -963,5 +963,24 @@ void main() {
           millisecond: 0);
       expect(fmt.format(dateOptions), '13:45');
     });
+    test('testDateFmtConstructorEmpty_et_EE', () {
+      final ILibDateFmt fmt = ILibDateFmt(ILibDateFmtOptions(locale: 'et-EE'));
+      expect(fmt, isNotNull);
+    });
+    test('testDateFmtTemplateCalendar_et_EE', () {
+      final ILibDateFmt fmt = ILibDateFmt(ILibDateFmtOptions(
+          locale: 'et-EE', calendar: 'julian', template: 'yyyy-MM-dd'));
+      final ILibDateOptions date = ILibDateOptions(
+          locale: 'et-EE',
+          calendar: 'julian',
+          year: 2011,
+          month: 9,
+          day: 29,
+          hour: 13,
+          minute: 45,
+          second: 0,
+          millisecond: 0);
+      expect(fmt.format(date), '2011-09-29');
+    });
   });
 }

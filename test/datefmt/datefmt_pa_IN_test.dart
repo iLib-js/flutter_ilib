@@ -1098,5 +1098,24 @@ void main() {
           millisecond: 0);
       expect(fmt.format(dateOptions), '13:45');
     });
+    test('testDateFmtINConstructorEmpty_pa_IN', () {
+      final ILibDateFmt fmt = ILibDateFmt(ILibDateFmtOptions(locale: 'pa-IN'));
+      expect(fmt, isNotNull);
+    });
+    test('testDateFmtINTemplateCalendar_pa_IN', () {
+      final ILibDateFmt fmt = ILibDateFmt(ILibDateFmtOptions(
+          locale: 'pa-IN', calendar: 'julian', template: 'yyyy-MM-dd'));
+      final ILibDateOptions date = ILibDateOptions(
+          locale: 'pa-IN',
+          calendar: 'julian',
+          year: 2011,
+          month: 9,
+          day: 29,
+          hour: 13,
+          minute: 45,
+          second: 0,
+          millisecond: 0);
+      expect(fmt.format(date), '2011-09-29');
+    });
   });
 }
