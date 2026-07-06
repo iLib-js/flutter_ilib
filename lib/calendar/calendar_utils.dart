@@ -14,7 +14,3 @@ int floorDiv(int a, int b) {
   }
   return q;
 }
-
-int floorMod(int a, int b) {
-  return a - floorDiv(a, b) * b;
-}
