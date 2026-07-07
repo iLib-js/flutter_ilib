@@ -62,6 +62,19 @@ dart format --output=none --set-exit-if-changed .
 Switching to the modern "tall" style would mean raising the SDK floor to ≥ 3.7 and doing a one-time
 repo-wide reformat in its own commit. See CLAUDE.md › Conventions › Code Style.
 
+#### Enforce it with the pre-commit hook
+
+To guarantee formatting is never forgotten, install the committed git hook once per clone:
+
+```bash
+scripts/install-git-hooks.sh   # sets core.hooksPath -> scripts/git-hooks
+```
+
+After this, `scripts/git-hooks/pre-commit` runs `dart format --output=none
+--set-exit-if-changed` on the staged `.dart` files at every commit and **aborts the commit** if any
+file is not formatted, printing how to fix it. To bypass once: `git commit --no-verify`. To disable:
+`git config --unset core.hooksPath`.
+
 ### Static Analysis
 
 ```bash
@@ -391,8 +404,12 @@ List<String> getJSONDataPaths(String? locale) {
 
 ### Before Committing
 
+> One-time setup: `scripts/install-git-hooks.sh` installs a pre-commit hook that runs the
+> `dart format` check automatically (step 1 below) and blocks the commit if anything is unformatted.
+> See Code Style & Formatting › *Enforce it with the pre-commit hook*.
+
 ```bash
-# 1. Format
+# 1. Format  (also enforced by the pre-commit hook once installed)
 dart format .
 
 # 2. Run analysis

@@ -161,7 +161,9 @@ lib/
   their tests — those still reference the removed `ILibJS` and report errors until ported).
 - **Formatting — run `dart format`.** The repo is formatted with the **short style at
   `page_width: 80`** (set in `analysis_options.yaml`; short because the package SDK floor is
-  < 3.7). Format-on-save is fine; run `dart format .` before committing. Switching to the modern
+  < 3.7). Format-on-save is fine; run `dart format .` before committing — a committed pre-commit
+  hook enforces this (install once with `scripts/install-git-hooks.sh`; see
+  [docs/development.md](docs/development.md) › Code Style & Formatting). Switching to the modern
   "tall" style would require raising the SDK floor to ≥ 3.7 and a one-time repo-wide reformat in
   its own commit.
 - Explicit type declarations (`always_specify_types`)

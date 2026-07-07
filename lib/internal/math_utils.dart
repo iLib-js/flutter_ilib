@@ -20,10 +20,12 @@ double roundFloor(double number) => number.floorToDouble();
 double roundCeiling(double number) => number.ceilToDouble();
 
 /// Round toward zero (truncate).
-double roundDown(double number) => number < 0 ? number.ceilToDouble() : number.floorToDouble();
+double roundDown(double number) =>
+    number < 0 ? number.ceilToDouble() : number.floorToDouble();
 
 /// Round away from zero.
-double roundUp(double number) => number < 0 ? number.floorToDouble() : number.ceilToDouble();
+double roundUp(double number) =>
+    number < 0 ? number.floorToDouble() : number.ceilToDouble();
 
 /// Round half up (ties go away from zero).
 double roundHalfup(double number) =>
@@ -34,16 +36,19 @@ double roundHalfdown(double number) =>
     number < 0 ? (number + 0.5).floorToDouble() : (number - 0.5).ceilToDouble();
 
 /// Round half even (banker's rounding — ties go to nearest even).
-double roundHalfeven(double number) =>
-    (number.floorToDouble() % 2 == 0) ? (number - 0.5).ceilToDouble() : (number + 0.5).floorToDouble();
+double roundHalfeven(double number) => (number.floorToDouble() % 2 == 0)
+    ? (number - 0.5).ceilToDouble()
+    : (number + 0.5).floorToDouble();
 
 /// Round half odd (ties go to nearest odd).
-double roundHalfodd(double number) =>
-    (number.floorToDouble() % 2 != 0) ? (number - 0.5).ceilToDouble() : (number + 0.5).floorToDouble();
+double roundHalfodd(double number) => (number.floorToDouble() % 2 != 0)
+    ? (number - 0.5).ceilToDouble()
+    : (number + 0.5).floorToDouble();
 
 /// Round half toward positive infinity (mirrors JS Math.round behavior).
 /// For positive numbers: ties go up. For negative numbers: ties go toward zero.
-double roundHalfPositiveInfinity(double number) => (number + 0.5).floorToDouble();
+double roundHalfPositiveInfinity(double number) =>
+    (number + 0.5).floorToDouble();
 
 /// Look up a rounding function by mode name, or null if the name is not a
 /// known mode. Mirrors JS `MathUtils[mode]`, which yields undefined for an
