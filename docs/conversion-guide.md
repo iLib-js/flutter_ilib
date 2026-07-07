@@ -23,14 +23,14 @@ Guide for converting flutter_ilib's JavaScript interop dependencies to pure Dart
 | `ILibCalendar` | `lib/ilib_calendar.dart` + `lib/calendar/` | Calendar factory + all calendar types |
 | `ILibCurrency` | `lib/ilib_currency.dart` | Currency metadata lookup and resolution |
 | `ILibNumFmt` | `lib/ilib_numfmt.dart` | Pure Dart number/currency formatting |
+| `ILibScriptInfo` | `lib/ilib_scriptinfo.dart` | `ilib.data.scripts` lookup (root-only, locale-independent) |
 
 ### Remaining
 
 | Class | File | JS Calls | Suggested Priority |
 |-------|------|----------|-------------------|
 | `ILibCountry` | `lib/ilib_country.dart` | 5 | 1st — simple structure |
-| `ILibScriptInfo` | `lib/ilib_scriptinfo.dart` | 7 | 2nd — simple structure |
-| `ILibDurationFmt` | `lib/ilib_durationfmt.dart` | 5 | 3rd |
+| `ILibDurationFmt` | `lib/ilib_durationfmt.dart` | 5 | 2nd |
 
 ## Conversion Pattern
 
