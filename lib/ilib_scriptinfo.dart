@@ -9,6 +9,11 @@ import 'ilib_init.dart';
 /// flags.
 class ILibScriptInfo {
   /// [script] The ISO 15924 4-letter identifier for the script.
+  ///
+  /// Unlike the JS `ScriptInfo(script, options)` constructor where `script` is
+  /// optional (omitting it yields an instance with no info), Dart requires an
+  /// explicit code. Pass an empty string `''` to replicate the JS no-arg
+  /// behaviour — `_info` will be null and all getters return their defaults.
   ILibScriptInfo(this.script) {
     final Map<String, dynamic>? rootData = ILibLoader.instance.getRootData();
     final Map<String, dynamic>? scripts =

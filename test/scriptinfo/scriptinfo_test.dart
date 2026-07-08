@@ -1064,6 +1064,15 @@ void main() {
       expect(scinfo.getScriptDirection(), 'ltr');
     });
 
+    test('testScriptInfo_pa_Guru_IN', () {
+      final ILibLocaleInfo li = ILibLocaleInfo('pa-Guru-IN');
+      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
+      expect(li, isNotNull);
+      expect(scinfo, isNotNull);
+      expect(li.getScript(), 'Guru');
+      expect(scinfo.getScriptDirection(), 'ltr');
+    });
+
     test('testScriptInfo_pl_PL', () {
       final ILibLocaleInfo li = ILibLocaleInfo('pl-PL');
       final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());

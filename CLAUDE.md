@@ -197,6 +197,10 @@ lib/
   **Do not decide by "the value happens to reproduce":** an unsupported locale can still yield the
   JS value by language fallback, yet it is out of scope — only convert the variant that is in
   `locales.json`. See [docs/conversion-guide.md](docs/conversion-guide.md) › Test Conversion.
+- **Script-explicit 3-part locale** (e.g. `pa-Guru-IN`): in scope if its 2-part form (`pa-IN`)
+  is in `locales.json` — same asset files, identical data. N/A if neither form is bundled.
+- **Language-only locale** (e.g. `az`, `pa`): in scope if at least one `{lang}-*` locale is in
+  `locales.json` (meaning `{lang}.json` exists). N/A if no `{lang}-*` is bundled (e.g. `ig`, `lb`).
 
 ### Public API Export
 - All public classes exported from `lib/flutter_ilib.dart`

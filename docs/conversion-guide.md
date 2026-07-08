@@ -85,6 +85,8 @@ String getClock() {
 - [ ] **Do NOT convert JS tests for a locale that flutter_ilib does not support.** The authoritative list of supported locales is `scripts/assemble_ilib/locales.json` (the seed used to generate `assets/locale/`) — a per-locale test is in scope only if its locale is in that list.
   - When the data is fully absent, `ILibLocaleInfo`/`ILibTimeZone.fromLocale` fall back to defaults (e.g. `Etc/UTC`) and the JS expected value (e.g. `Asia/Ashgabat`) cannot be reproduced — N/A (e.g. `testTZGetDefaultFor_tk_TM`/`_tg_TJ`/`_wo_SN`/`_zu_ZA`/`_mt_MT`).
   - **Do not rely on "the value happens to reproduce" to decide.** An unsupported locale can still produce the JS value by language fallback (e.g. `ku-IQ` resolves via `ku` + `und-IQ`), yet it is out of scope because it is not in `locales.json`. Conversely, only convert the supported variant (e.g. `ku-Arab-IQ` **is** in the list; `ku-IQ`/`ku-TR` are not). Membership in `locales.json` — not data presence or accidental fallback — is the test.
+  - **Script-explicit 3-part locales** (e.g. `pa-Guru-IN`) whose 2-part form (`pa-IN`) is in `locales.json` are also in scope — port the JS test as-is. `pa-Guru-IN` is the BCP-47 form with an explicit script tag; it loads the same asset files as `pa-IN` and produces identical data. If neither 3-part nor 2-part is in `locales.json`, the test is N/A.
+  - **Language-only locales** (e.g. `az`, `pa`) are in scope when at least one `{lang}-*` locale is in `locales.json` (meaning `{lang}.json` exists). If no `{lang}-*` locale is bundled, the language-only test is N/A (e.g. `ig`, `lb`).
 - [ ] Dart-specific additional tests (getDayOfYear, getEra, etc.) go in a separate `*_extra_test.dart` file
 
 ### 5. Cleanup
@@ -92,6 +94,17 @@ String getClock() {
 - [ ] Verify exports in `flutter_ilib.dart`
 - [ ] Run existing tests to confirm identical results
 - [ ] Remove JS interop imports (`flutter_js`, `dart:ffi`, etc.)
+
+## Intentional API Differences from JS
+
+Some JS APIs accept optional or loosely-typed arguments that Dart's type system
+cannot express the same way. These differences are intentional — they make the
+Dart API clearer without changing observable behaviour.
+
+| Class | JS API | Dart API | Reason |
+|-------|--------|----------|--------|
+| `ILibScriptInfo` | `new ScriptInfo()` — `script` is optional; omitting it yields an instance where all getters return defaults | `ILibScriptInfo(String script)` — `script` is required; pass `''` to replicate the JS no-arg behaviour | Dart requires explicit types; a no-arg constructor with no useful state is misleading |
+| `ILibNumFmt` | `constrain(number)` — accepts any JS number, returns `number` | `double constrain(num number)` — `num` accepts both `int` and `double`, returns `double` | JS has a single `number` type; Dart distinguishes `int`/`double` — `num` is the correct abstract supertype |
 
 ## Core Infrastructure
 
