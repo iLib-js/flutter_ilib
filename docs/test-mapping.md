@@ -211,32 +211,12 @@ These tests have no JS counterpart. They verify the Flutter plugin initializatio
 
 | Dart Test File | iLib JS Source File | Notes |
 |---|---|---|
-| `test/scriptinfo/scriptinfo_test.dart` | `js/test/root/testscriptinfo.js` | ILibScriptInfo (getCode/getCodeNumber/getName/getLongCode/getScriptDirection/getNeedsIME/getCasing + static getAllScripts) — script metadata read from `ilib.data.scripts` (root-only, locale-independent). Converts the 19 script-code/construction cases, every per-locale case whose locale is in `locales.json`, and the bare-language cases for supported languages (`pa`, `ha`, `az`); the per-locale cases for the 86 non-member region/script locales listed below are not converted. |
+| `test/scriptinfo/scriptinfo_test.dart` | `js/test/root/testscriptinfo.js` | 161 tests converted: script-code/construction cases, per-locale cases in `locales.json`, and bare-language cases for supported languages (`pa`, `ha`, `az`). 85 per-locale cases skipped (N/A). |
 
 ### Not Converted — ScriptInfo Tests
 
-Per the rule in CLAUDE.md › Conventions › Testing and `docs/conversion-guide.md` step 4
-(**membership in `scripts/assemble_ilib/locales.json` is the test — not data presence or accidental
-fallback**), the 86 `testScriptInfo_<locale>` cases whose locale carries a region/script subtag and
-is **not** in `locales.json` are not converted, and are removed from the test file **even when they
-would pass by language fallback** (e.g. `ar-BH` → `ar` → Arab/rtl, or `mt-MT` → Latn). This mirrors
-the JS source's per-locale cases that exercise an unsupported locale.
-
-**Bare-language exception (kept):** a test whose argument is a bare language code with **no region
-or script subtag** is kept when that language is itself supported — i.e. a bundled `{lang}.json`
-backs the result (`pa` → Guru, `ha` → Latn, `az` → Latn). These exercise real language-level data,
-not an accidental root-default fallback, so they are in scope even though the bare code is not a
-`locales.json` entry. A bare language with **no** bundled data (`ig` — no `ig.json`, not the base of
-any member locale) is *not* kept: it only passes because `getScript()` defaults to `Latn`, exactly
-the accidental-fallback case the rule excludes.
-
-The removed locales (86): `ar-BH ar-DJ ar-DZ ar-JO ar-KW ar-LB ar-LY ar-MR ar-OM ar-QA ar-SD
-ar-SY ar-TN ar-YE az-AZ be-BY ca-AD ca-ES ckb-IQ en-ET en-GM en-KR en-LR en-PK en-RW en-SD
-en-SL en-TZ es-CR es-GQ es-PH eu-ES fa-AF fr-BF fr-BJ fr-CD fr-CF fr-CG fr-CI fr-CM fr-DJ fr-DZ
-fr-GA fr-GN fr-GQ fr-LB fr-ML fr-RW fr-SN fr-TG gl-ES ha-CM ha-NG ha-SD hr-HU hy-AM ig ig-NG
-kk-KZ ku-IQ ky-KG lb-LU lo-LA mn-MN ms-SG mt-MT my-MM ne-NP pa-Arab-PK pa-Guru-IN pa-PK ps-AF
-ps-PK pt-AO pt-CV pt-GQ sr-Cyrl-RS tg-TJ tk-TM ur-PK wo-SN yo-BJ yo-NG zh-Hans-MY zh-Hans-SG
-zu-ZA`.
+85 `testScriptInfo_<locale>` cases skipped — locale not in `locales.json`, or bare-language with no
+bundled `{lang}.json`. See CLAUDE.md › Conventions › Testing for the rule.
 
 
 ## Common Not Converted Pattern (All Calendar Date Tests)
