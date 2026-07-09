@@ -81,7 +81,8 @@ class _MyAppState extends State<MyApp> {
     }
 
     final now = DateTime.now();
-    currentTime = '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')} ${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}';
+    currentTime =
+        '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')} ${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}';
 
     results[0] = getDateTimeFormatFixed(curLocale);
     results[1] = getFirstDayOfWeek(curLocale);
