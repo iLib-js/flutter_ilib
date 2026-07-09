@@ -75,6 +75,23 @@ After this, `scripts/git-hooks/pre-commit` runs `dart format --output=none
 file is not formatted, printing how to fix it. To bypass once: `git commit --no-verify`. To disable:
 `git config --unset core.hooksPath`.
 
+#### Troubleshooting: `dart format` gives a different result
+
+If a file reformats differently on two runs (short style vs. the "tall" style that splits every
+parameter and **adds trailing commas**), it is **not** a Dart/Flutter version difference. The style
+comes from the file's resolved **language version**: `< 3.7` → short, `≥ 3.7` → tall. Check
+`.dart_tool/package_config.json` — this package's `languageVersion` should be `3.1` (derived from the
+`pubspec.yaml` SDK floor):
+
+```bash
+grep -A2 '"flutter_ilib"' .dart_tool/package_config.json   # expect "languageVersion": "3.1"
+```
+
+A tall result means the package default was overridden: the file was formatted **outside the package**
+(no pubspec → SDK latest), or a `--language-version` flag / `// @dart=` comment forced it. Fix: always
+run `dart format .` from the repo root. Never commit `package_config.json` — it is a `.gitignore`d
+cache regenerated from `pubspec.yaml` by `pub get`.
+
 ### Static Analysis
 
 ```bash
