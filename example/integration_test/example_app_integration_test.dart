@@ -53,14 +53,14 @@ void main() {
   };
 
   final Map<String, String> expectedNumberFormatValues = <String, String>{
-    'en-GB': '-111,123,456.785',
-    'en-US': '-111,123,456.785',
-    'de-DE': '-111.123.456,785',
-    'hi-IN': '-11,11,23,456.785',
-    'ko-KR': '-111,123,456.785',
-    'ru-RU': '-111\u00A0123\u00A0456,785',
-    'fa-IR': '\u200E−۱۱۱٬۱۲۳٬۴۵۶٫۷۸۵',
-    'am-ET': '-111,123,456.785',
+    'en-GB': '111,123,456.785',
+    'en-US': '111,123,456.785',
+    'de-DE': '111.123.456,785',
+    'hi-IN': '११,११,२३,४५६.७८५ (11,11,23,456.785)',
+    'ko-KR': '111,123,456.785',
+    'ru-RU': '111\u00A0123\u00A0456,785',
+    'fa-IR': '۱۱۱٬۱۲۳٬۴۵۶٫۷۸۵ (111٬123٬456٫785)',
+    'am-ET': '111,123,456.785',
   };
 
   final Map<String, String> expectedCountryValues = <String, String>{
@@ -75,7 +75,8 @@ void main() {
   };
 
   group('Real usage locale flow integration tests', () {
-    testWidgets('Single app session should pass through all locales in sequence',
+    testWidgets(
+        'Single app session should pass through all locales in sequence',
         (WidgetTester tester) async {
       await tester.pumpWidget(const MyApp());
       await _waitForInit(tester);
@@ -84,8 +85,7 @@ void main() {
 
       for (final String locale in testLocales) {
         try {
-          final Finder localeButton =
-              find.widgetWithText(ElevatedButton, locale);
+          final Finder localeButton = find.widgetWithText(FilledButton, locale);
           if (localeButton.evaluate().isEmpty) {
             failures.add('[$locale] Locale button not found');
             continue;
@@ -186,8 +186,7 @@ Future<void> _tapWithVisualDelay(WidgetTester tester, Finder button,
 }
 
 Future<void> _waitForInit(WidgetTester tester) async {
-  await _waitUntil(
-      tester, 'iLib Version', (value) => value != 'Unknown iLib');
+  await _waitUntil(tester, 'Based on iLib', (value) => value != 'Unknown iLib');
 }
 
 Future<void> _waitForLabelToEqual(
@@ -214,10 +213,15 @@ String? _tryGetValueForLabel(WidgetTester tester, String label) {
   final Finder labelFinder = find.text(label);
   if (labelFinder.evaluate().isEmpty) return null;
 
-  final Finder rowFinder = find.ancestor(
-    of: labelFinder,
-    matching: find.byType(Row),
-  );
+  // Use the nearest (innermost) Row ancestor: the info row wrapping this
+  // label. Matching all ancestor Rows would also catch the outer two-column
+  // layout Row and pull in unrelated Text widgets.
+  final Finder rowFinder = find
+      .ancestor(
+        of: labelFinder,
+        matching: find.byType(Row),
+      )
+      .first;
   if (rowFinder.evaluate().isEmpty) return null;
 
   final Finder textsInRow = find.descendant(
