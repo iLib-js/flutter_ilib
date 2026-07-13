@@ -1,108 +1,487 @@
 import 'ilib_date.dart';
+import 'ilib_datefmt.dart';
 import 'ilib_init.dart';
+import 'ilib_localeinfo.dart';
+import 'ilib_scriptinfo.dart';
+import 'internal/ilib_utils.dart' as ilib_utils;
 
 class ILibDurationFmt {
-  /// [options] Set the Options for formatting
   ILibDurationFmt(ILibDurationFmtOptions options) {
-    locale = options.locale;
-    length = options.length;
-    style = options.style;
-    useNative = options.useNative;
-  }
+    _locale = options.locale ?? ilib_utils.getLocale();
 
-  String? locale;
-  String? length;
-  String? style;
-  bool? useNative;
-
-  /// A string representation of parameters to call functions of iLib library properly
-  String toJsonString() {
-    String result = '';
-    String completeOption = '';
-
-    final Map<String, String> paramInfo = <String, String>{
-      'locale': '$locale',
-      'length': '$length',
-      'style': '$style'
-    };
-    paramInfo.forEach((String key, String value) {
-      if (value != 'null') {
-        result += '$key:"$value",';
-      }
-    });
-
-    if (useNative != null) {
-      result += 'useNative:$useNative,';
+    _length = 'short';
+    if (options.length == 'short' ||
+        options.length == 'medium' ||
+        options.length == 'long' ||
+        options.length == 'full') {
+      _length = options.length!;
     }
 
-    result =
-        result.isNotEmpty ? result.substring(0, result.length - 1) : result;
-    completeOption = '{$result}';
+    _style = 'text';
+    if (options.style == 'text' || options.style == 'clock') {
+      _style = options.style!;
+    }
 
-    return completeOption;
+    _useNative = options.useNative;
+
+    final ILibLocaleInfo locInfo = ILibLocaleInfo(_locale);
+    final String script = locInfo.getScript();
+
+    if (_length == 'medium' &&
+        script != 'Latn' &&
+        script != 'Grek' &&
+        script != 'Cyrl') {
+      _length = 'short';
+    }
+
+    final Map<String, dynamic>? localeData =
+        ILibLoader.instance.getLocaleData(_locale);
+    final Map<String, dynamic> sysres =
+        (localeData?['ilib.data.sysres'] as Map<String, dynamic>?) ??
+            <String, dynamic>{};
+    _pluralRules =
+        (localeData?['ilib.data.plurals'] as Map<String, dynamic>?) ??
+            <String, dynamic>{};
+
+    _components = _buildComponents(sysres, _length);
+
+    final ILibScriptInfo scriptInfo = ILibScriptInfo(script);
+    _scriptDirection = scriptInfo.getScriptDirection();
+
+    if (_useNative ?? false) {
+      _digits = locInfo.getNativeDigits();
+    } else if (_useNative == null && locInfo.getDigitsStyle() == 'native') {
+      _useNative = true;
+      _digits = locInfo.getNativeDigits();
+    }
+
+    if (_style == 'clock') {
+      _timeFmtMS = _buildClockFmt('ms');
+      _timeFmtHM = _buildClockFmt('hm');
+      _timeFmtHMS = _buildClockFmt('hms');
+    }
   }
 
-  /// Formats a particular date instance according to the settings of this formatter object
-  String format(ILibDateOptions date) {
-    String result = '';
-    final String formatOptions = toJsonString();
-    final String dateOptions = date.toJsonString();
-
-    result = ILibJS.instance
-        .evaluate(
-            'new DurationFmt($formatOptions).format($dateOptions).toString()')
-        .stringResult;
-
-    return result;
+  /// Build a time formatter for clock style: create the DateFmt with the
+  /// locale-default clock, then munge its rendered template so hours are 24h
+  /// no-padding (`hh?` → `H`, first match only). The `ms` formatter is not
+  /// munged.
+  ILibDateFmt _buildClockFmt(String time) {
+    final ILibDateFmt fmt = ILibDateFmt(
+      ILibDateFmtOptions(
+        locale: _locale,
+        calendar: 'gregorian',
+        type: 'time',
+        time: time,
+        useNative: _useNative,
+      ),
+    );
+    if (time == 'ms') {
+      return fmt;
+    }
+    final String munged = fmt.getTemplate().replaceFirst(RegExp('hh?'), 'H');
+    return ILibDateFmt(
+      ILibDateFmtOptions(
+        locale: _locale,
+        calendar: 'gregorian',
+        type: 'time',
+        template: munged,
+        useNative: _useNative,
+      ),
+    );
   }
 
-  /// Return the locale that was used to construct this duration formatter object.<br>
-  /// If the locale was not given as parameter to the constructor, this method returns the default<br>
-  /// locale of the system.<br>
-  String getLocale() {
-    String result = '';
-    final String formatOptions = toJsonString();
-    final String jscode1 =
-        'new DurationFmt($formatOptions).getLocale().toString()';
-    result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+  /// Component order per style.
+  static const Map<String, List<String>> _complist = <String, List<String>>{
+    'text': <String>[
+      'year',
+      'month',
+      'week',
+      'day',
+      'hour',
+      'minute',
+      'second',
+      'millisecond',
+    ],
+    'clock': <String>['year', 'month', 'week', 'day'],
+  };
+
+  late String _locale;
+  late String _length;
+  late String _style;
+  bool? _useNative;
+  String? _digits;
+  late String _scriptDirection;
+  late Map<String, String> _components;
+  late Map<String, dynamic> _pluralRules;
+  ILibDateFmt? _timeFmtHM;
+  ILibDateFmt? _timeFmtHMS;
+  ILibDateFmt? _timeFmtMS;
+
+  /// Build the per-unit template map for [length]. Keys are the unit names
+  /// plus `separator` and `finalSeparator`.
+  Map<String, String> _buildComponents(
+    Map<String, dynamic> sysres,
+    String length,
+  ) {
+    // Resolve a sysres string: prefer the named key, else the source string.
+    String getString(String str, [String? key]) {
+      if (key != null) {
+        final dynamic v = sysres[key];
+        if (v is String) {
+          return v;
+        }
+      }
+      final dynamic v = sysres[str];
+      if (v is String) {
+        return v;
+      }
+      return str;
+    }
+
+    switch (length) {
+      case 'short':
+        return <String, String>{
+          'year': getString('#{num}y'),
+          'month': getString('#{num}m', 'durationShortMonths'),
+          'week': getString('#{num}w'),
+          'day': getString('#{num}d'),
+          'hour': getString('#{num}h'),
+          'minute': getString('#{num}m', 'durationShortMinutes'),
+          'second': getString('#{num}s'),
+          'millisecond': getString('#{num}m', 'durationShortMillis'),
+          'separator': getString(' ', 'separatorShort'),
+          'finalSeparator': '', // not used at this length
+        };
+      case 'medium':
+        return <String, String>{
+          'year': getString('1#1 yr|#{num} yrs', 'durationMediumYears'),
+          'month': getString('1#1 mo|#{num} mos'),
+          'week': getString('1#1 wk|#{num} wks', 'durationMediumWeeks'),
+          'day': getString('1#1 dy|#{num} dys'),
+          'hour': getString('1#1 hr|#{num} hrs', 'durationMediumHours'),
+          'minute': getString('1#1 mi|#{num} min'),
+          'second': getString('1#1 se|#{num} sec'),
+          'millisecond': getString('#{num} ms', 'durationMediumMillis'),
+          'separator': getString(' ', 'separatorMedium'),
+          'finalSeparator': '', // not used at this length
+        };
+      case 'long':
+        return <String, String>{
+          'year': getString('1#1 yr|#{num} yrs'),
+          'month': getString('1#1 mon|#{num} mons'),
+          'week': getString('1#1 wk|#{num} wks'),
+          'day': getString('1#1 day|#{num} days', 'durationLongDays'),
+          'hour': getString('1#1 hr|#{num} hrs'),
+          'minute': getString('1#1 min|#{num} min'),
+          'second': getString('1#1 sec|#{num} sec'),
+          'millisecond': getString('#{num} ms'),
+          'separator': getString(', ', 'separatorLong'),
+          'finalSeparator': '', // not used at this length
+        };
+      case 'full':
+      default:
+        return <String, String>{
+          'year': getString('1#1 year|#{num} years'),
+          'month': getString('1#1 month|#{num} months'),
+          'week': getString('1#1 week|#{num} weeks'),
+          'day': getString('1#1 day|#{num} days'),
+          'hour': getString('1#1 hour|#{num} hours'),
+          'minute': getString('1#1 minute|#{num} minutes'),
+          'second': getString('1#1 second|#{num} seconds'),
+          'millisecond': getString('1#1 millisecond|#{num} milliseconds'),
+          'separator': getString(', ', 'separatorFull'),
+          'finalSeparator': getString(' and ', 'finalSeparatorFull'),
+        };
+    }
   }
 
-  /// Return the length that was used to construct this duration formatter object. If the<br>
-  /// length was not given as parameter to the constructor, this method returns the default<br>
-  /// length. Valid values are "short", "medium", "long", and "full".<br>
-  String getLength() {
-    String result = '';
-    final String formatOptions = toJsonString();
-    final String jscode1 = 'new DurationFmt($formatOptions).getLength()';
-    result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+  // --- plural rule evaluation ---
+
+  /// Compute CLDR plural operand values for [n].
+  /// n=absolute value, i=integer part, v=visible fraction digits,
+  /// f=visible fraction digits as integer.
+  Map<String, num> _operands(num n) {
+    final double abs = n.abs().toDouble();
+    final int i = abs.truncate();
+    final String str = abs.toString();
+    final int dotIdx = str.indexOf('.');
+    final String fracStr = dotIdx >= 0 ? str.substring(dotIdx + 1) : '';
+    final int v = fracStr == '0' ? 0 : fracStr.length;
+    final int f = v > 0 ? int.parse(fracStr) : 0;
+    return <String, num>{'n': abs, 'i': i, 'v': v, 'f': f, 'w': v, 't': f};
   }
 
-  /// Return the style that was used to construct this duration formatter object.<br>
-  /// Valid values are "text" or "clock".<br>
-  String getStyle() {
-    String result = '';
-    final String formatOptions = toJsonString();
-    final String jscode1 = 'new DurationFmt($formatOptions).getStyle()';
-    result = ILibJS.instance.evaluate(jscode1).stringResult;
-    return result;
+  dynamic _evalOperand(dynamic expr, Map<String, num> ops) {
+    if (expr is String) {
+      return ops[expr] ?? 0;
+    }
+    if (expr is num) {
+      return expr;
+    }
+    if (expr is Map<String, dynamic>) {
+      final String op = expr.keys.first;
+      final dynamic args = expr[op];
+      if (op == 'mod') {
+        final List<dynamic> a = args as List<dynamic>;
+        final num left = (_evalOperand(a[0], ops) as num).toDouble();
+        final num right = (_evalOperand(a[1], ops) as num).toDouble();
+        return left % right;
+      }
+    }
+    return 0;
   }
+
+  bool _evalRule(dynamic rule, Map<String, num> ops) {
+    if (rule == null) {
+      return false;
+    }
+    if (rule is String) {
+      return true;
+    }
+    if (rule is Map<String, dynamic>) {
+      final String op = rule.keys.first;
+      final dynamic args = rule[op];
+      switch (op) {
+        case 'and':
+          final List<dynamic> conditions = args as List<dynamic>;
+          for (final dynamic c in conditions) {
+            if (!_evalRule(c, ops)) {
+              return false;
+            }
+          }
+          return true;
+        case 'or':
+          final List<dynamic> conditions = args as List<dynamic>;
+          for (final dynamic c in conditions) {
+            if (_evalRule(c, ops)) {
+              return true;
+            }
+          }
+          return false;
+        case 'eq':
+        case 'neq':
+          final List<dynamic> a = args as List<dynamic>;
+          final num lhs = (_evalOperand(a[0], ops) as num).toDouble();
+          final dynamic rhs = a[1];
+          bool eq;
+          if (rhs is List<dynamic>) {
+            // range [start, end] or set
+            if (rhs.length == 2 && rhs[0] is num && rhs[1] is num) {
+              final double start = (rhs[0] as num).toDouble();
+              final double end = (rhs[1] as num).toDouble();
+              eq = lhs >= start && lhs <= end;
+            } else {
+              eq = rhs.any((dynamic v) => (v as num).toDouble() == lhs);
+            }
+          } else {
+            eq = lhs == (rhs as num).toDouble();
+          }
+          return op == 'eq' ? eq : !eq;
+        case 'inrange':
+          final List<dynamic> ranges = args as List<dynamic>;
+          final num val = (_evalOperand(ranges[0], ops) as num).toDouble();
+          for (int i = 1; i < ranges.length; i += 2) {
+            final double s = (ranges[i] as num).toDouble();
+            final double e = (ranges[i + 1] as num).toDouble();
+            if (val >= s && val <= e) {
+              return true;
+            }
+          }
+          return false;
+        default:
+          return false;
+      }
+    }
+    return false;
+  }
+
+  /// Returns the CLDR plural class for [n] using the loaded plural rules.
+  String _pluralClass(num n) {
+    if (_pluralRules.isEmpty) {
+      return n == 1 ? 'one' : 'other';
+    }
+    final Map<String, num> ops = _operands(n);
+    for (final MapEntry<String, dynamic> entry in _pluralRules.entries) {
+      final String cls = entry.key;
+      if (cls == 'other') {
+        continue;
+      }
+      final dynamic rule = entry.value;
+      if (rule is String && rule.isEmpty) {
+        continue;
+      }
+      if (_evalRule(rule, ops)) {
+        return cls;
+      }
+    }
+    return 'other';
+  }
+
+  String _mapDigits(num n) {
+    final String s = n.toString();
+    if ((_useNative ?? false) && _digits != null && _digits!.length >= 10) {
+      final StringBuffer buf = StringBuffer();
+      for (final int cp in s.runes) {
+        final int digit = cp - 0x30;
+        if (digit >= 0 && digit <= 9) {
+          buf.write(_digits![digit]);
+        } else {
+          buf.writeCharCode(cp);
+        }
+      }
+      return buf.toString();
+    }
+    return s;
+  }
+
+  String _formatChoice(String template, num n, String numStr) {
+    if (template.isEmpty) {
+      return '';
+    }
+
+    final String pluralCls = _pluralClass(n);
+    final List<String> choices = template.split('|');
+    String defaultCase = '';
+    String? pluralMatch;
+
+    for (final String choice in choices) {
+      final int hashIdx = choice.indexOf('#');
+      if (hashIdx < 0) {
+        continue;
+      }
+      final String limit = choice.substring(0, hashIdx);
+      final String str = choice.substring(hashIdx + 1);
+
+      if (limit.isEmpty || limit == 'other') {
+        defaultCase = str;
+        continue;
+      }
+
+      // Check exact numeric match first
+      final num? exact = num.tryParse(limit);
+      if (exact != null) {
+        if (n == exact) {
+          return str.replaceAll('{num}', numStr);
+        }
+        continue;
+      }
+
+      // Range match (e.g. "2-4")
+      final int dashIdx = limit.indexOf('-');
+      if (dashIdx > 0) {
+        final int? start = int.tryParse(limit.substring(0, dashIdx));
+        final int? end = int.tryParse(limit.substring(dashIdx + 1));
+        if (start != null && end != null && n >= start && n <= end) {
+          return str.replaceAll('{num}', numStr);
+        }
+        continue;
+      }
+
+      // CLDR plural class match
+      if (limit == pluralCls) {
+        pluralMatch = str;
+      }
+    }
+
+    if (pluralMatch != null) {
+      return pluralMatch.replaceAll('{num}', numStr);
+    }
+    return defaultCase.replaceAll('{num}', numStr);
+  }
+
+  /// Format a duration according to this formatter's style/length.
+  ///
+  /// Iterate the style's component list from smallest to largest, skip
+  /// undefined/zero fields, join with the separator (finalSeparator before the
+  /// last field at `full` length), then append the clock time and prepend the
+  /// RTL marker when needed.
+  String format(ILibDateOptions components) {
+    final List<String> list = _complist[_style]!;
+
+    // Field values indexed by component name.
+    final Map<String, num?> vals = <String, num?>{
+      'year': components.year,
+      'month': components.month,
+      'week': components.week,
+      'day': components.day,
+      'hour': components.hour,
+      'minute': components.minute,
+      'second': components.second,
+      'millisecond': components.millisecond,
+    };
+
+    String str = '';
+    bool secondlast = true;
+
+    for (int i = list.length - 1; i >= 0; i--) {
+      final num? value = vals[list[i]];
+      if (value != null && value != 0) {
+        if (str.isNotEmpty) {
+          str = ((_length == 'full' && secondlast)
+                  ? _components['finalSeparator']!
+                  : _components['separator']!) +
+              str;
+          secondlast = false;
+        }
+        str = _formatChoice(_components[list[i]]!, value, _mapDigits(value)) +
+            str;
+      }
+    }
+
+    if (_style == 'clock') {
+      final ILibDateFmt? fmt;
+      if (components.hour != null && components.hour != 0) {
+        fmt = (components.second != null && components.second != 0)
+            ? _timeFmtHMS
+            : _timeFmtHM;
+      } else {
+        fmt = _timeFmtMS;
+      }
+      if (fmt != null) {
+        if (str.isNotEmpty) {
+          str += _components['separator']!;
+        }
+        str += fmt.format(
+          ILibDateOptions(
+            hour: components.hour ?? 0,
+            minute: components.minute ?? 0,
+            second: components.second ?? 0,
+          ),
+        );
+      }
+    }
+
+    if (_scriptDirection == 'rtl') {
+      str = '\u200F$str';
+    }
+    return str;
+  }
+
+  String getLocale() => _locale;
+
+  String getLength() => _length;
+
+  String getStyle() => _style;
 }
 
 class ILibDurationFmtOptions {
-  /// [locale] Locales are specified either with a specifier string that follows the BCP-47 convention.<br>
-  /// [length] Specifies the length of the format to use. Valid values are "short", "medium", "long" and "full".<br>
-  /// [style] whether hours, minutes, and seconds should be formatted as a text string or as a regular time as on a clock.<br>
-  /// [useNative] The flag used to determine whether to use the native script settings for formatting the numbers.<br>
   ILibDurationFmtOptions({
     this.locale,
     this.length,
     this.style,
     this.useNative,
   });
+
+  /// BCP-47 locale string (e.g. `'en-US'`). Defaults to system locale.
   String? locale;
+
+  /// `'short'`, `'medium'`, `'long'`, or `'full'`. Defaults to `'short'`.
   String? length;
+
+  /// `'text'` or `'clock'`. Defaults to `'text'`.
   String? style;
+
+  /// Whether to use native script digits. Defaults to locale setting.
   bool? useNative;
 }

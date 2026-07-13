@@ -4,9 +4,8 @@ Mapping table showing which iLib JS test file (`github.com/iLib-js/iLib`) each f
 
 JS source path base: `js/test/`
 
-Scope: this covers the pure-Dart classes. The 3 classes still on JS interop — `ILibCountry`,
-`ILibScriptInfo`, `ILibDurationFmt` — and their tests (`test/country/`, `test/scriptinfo/`,
-`test/durfmt/`) are not mapped here until those classes are converted.
+Scope: this covers the pure-Dart classes. The 1 class still on JS interop — `ILibCountry` —
+and its tests (`test/country/`) are not mapped here until it is converted.
 
 ## Calendar Tests
 
@@ -217,6 +216,22 @@ These tests have no JS counterpart. They verify the Flutter plugin initializatio
 
 85 `testScriptInfo_<locale>` cases skipped — locale not in `locales.json`, or bare-language with no
 bundled `{lang}.json`. See CLAUDE.md › Conventions › Testing for the rule.
+
+
+## DurationFmt Tests
+
+| Dart Test File | iLib JS Source File | Notes |
+|---|---|---|
+| `test/durfmt/durfmt_test.dart` | `js/test/durfmt/testdurfmt.js` | Main suite: length × style matrix, singular/plural, clock overflow/no-wrap, medium→short downgrade, native digits, RTL |
+| `test/durfmt/durfmt2_test.dart` | `js/test/durfmt/testdurfmt2.js` | Additional DurationFmt cases |
+| `test/durfmt/durfmt_am_ET_test.dart` | `js/test/durfmt/testdurfmt_am_ET.js` | |
+| `test/durfmt/durfmt_ar_SA_test.dart` | `js/test/durfmt/testdurfmt_ar_SA.js` | |
+| `test/durfmt/durfmt_az_Latn_AZ_test.dart` | `js/test/durfmt/testdurfmt_az_Latn_AZ.js` | |
+| `test/durfmt/durfmt_ha_Latn_NG_test.dart` | `js/test/durfmt/testdurfmt_ha_Latn_NG.js` | |
+| `test/durfmt/durfmt_km_KH_test.dart` | `js/test/durfmt/testdurfmt_km_KH.js` | |
+| `test/durfmt/durfmt_or_IN_test.dart` | `js/test/durfmt/testdurfmt_or_IN.js` | |
+| `test/durfmt/durfmt_si_LK_test.dart` | `js/test/durfmt/testdurfmt_si_LK.js` | |
+| `test/durfmt/durfmt_sw_KE_test.dart` | `js/test/durfmt/testdurfmt_sw_KE.js` | |
 
 
 ## Common Not Converted Pattern (All Calendar Date Tests)
