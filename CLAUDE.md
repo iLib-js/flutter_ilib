@@ -92,13 +92,13 @@ pure-calculation classes need no locale loading (see Conventions › Testing).
 
 ### JSON Data Keys
 - `ilib.data.astro` — astronomical coefficients (equinox, delta-T, nutation, etc. for Persian astronomical)
-- `ilib.data.localeinfo` — locale metadata (clock, calendar, timezone, digits, etc.)
 - `ilib.data.dateformats` — date/time format templates (per calendar)
+- `ilib.data.localeinfo` — locale metadata (clock, calendar, timezone, digits, etc.)
+- `ilib.data.localeinfo.numfmt` — number format patterns (nested under localeinfo)
+- `ilib.data.plurals` — CLDR plural rule tree (used by `ILibDurationFmt` plural selection)
+- `ilib.data.scriptinfo` — script metadata
 - `ilib.data.sysres` — translated strings (month/day names, AM/PM, etc.)
 - `ilib.data.zoneinfo` — timezone + DST rules
-- `ilib.data.numfmt` — number format patterns
-- `ilib.data.scriptinfo` — script metadata
-- `ilib.data.plurals` — CLDR plural rule tree (used by `ILibDurationFmt` plural selection)
 
 ### Locale Data
 - `assets/locale/` holds the JSON data files for the full set of supported locales,
