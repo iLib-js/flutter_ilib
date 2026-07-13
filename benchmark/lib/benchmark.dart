@@ -147,13 +147,17 @@ class _BenchmarkAppState extends State<BenchmarkApp> {
     final ILibDateOptions date = ILibDateOptions(dateTime: DateTime.now());
     int li = 0;
     final List<ILibDateFmt> fmts = _locales
-        .map((String lo) => ILibDateFmt(ILibDateFmtOptions(
+        .map(
+          (String lo) => ILibDateFmt(
+            ILibDateFmtOptions(
               locale: lo,
               length: 'full',
               type: 'datetime',
               useNative: false,
               timezone: 'local',
-            )))
+            ),
+          ),
+        )
         .toList();
     final double formatUs = _perOp(_formatIters, () {
       fmts[li++ % fmts.length].format(date);
@@ -164,13 +168,15 @@ class _BenchmarkAppState extends State<BenchmarkApp> {
     int ci = 0;
     final double constructUs = _perOp(_constructIters, () {
       final String lo = _locales[ci++ % _locales.length];
-      ILibDateFmt(ILibDateFmtOptions(
-        locale: lo,
-        length: 'full',
-        type: 'datetime',
-        useNative: false,
-        timezone: 'local',
-      )).format(date);
+      ILibDateFmt(
+        ILibDateFmtOptions(
+          locale: lo,
+          length: 'full',
+          type: 'datetime',
+          useNative: false,
+          timezone: 'local',
+        ),
+      ).format(date);
     });
     row('construct + format()', '${constructUs.toStringAsFixed(3)} µs/op');
 
@@ -219,10 +225,7 @@ class _BenchmarkAppState extends State<BenchmarkApp> {
           child: SingleChildScrollView(
             child: Text(
               _report,
-              style: const TextStyle(
-                fontFamily: 'monospace',
-                fontSize: 22,
-              ),
+              style: const TextStyle(fontFamily: 'monospace', fontSize: 22),
             ),
           ),
         ),

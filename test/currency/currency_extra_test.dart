@@ -17,8 +17,7 @@ void main() {
 
   group('ILibCurrency extra', () {
     test('getAvailableCurrencies returns the bundled ISO 4217 codes', () {
-      final List<String> currencies =
-          ILibCurrency.getAvailableCurrencies();
+      final List<String> currencies = ILibCurrency.getAvailableCurrencies();
 
       expect(currencies, isNotEmpty);
       // Common currencies that must be present in the bundled data.

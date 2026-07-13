@@ -75,7 +75,8 @@ void main() {
   };
 
   group('Real usage locale flow integration tests', () {
-    testWidgets('Single app session should pass through all locales in sequence',
+    testWidgets(
+        'Single app session should pass through all locales in sequence',
         (WidgetTester tester) async {
       await tester.pumpWidget(const MyApp());
       await _waitForInit(tester);
@@ -186,8 +187,7 @@ Future<void> _tapWithVisualDelay(WidgetTester tester, Finder button,
 }
 
 Future<void> _waitForInit(WidgetTester tester) async {
-  await _waitUntil(
-      tester, 'iLib Version', (value) => value != 'Unknown iLib');
+  await _waitUntil(tester, 'iLib Version', (value) => value != 'Unknown iLib');
 }
 
 Future<void> _waitForLabelToEqual(
