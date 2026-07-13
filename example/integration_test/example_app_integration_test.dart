@@ -63,6 +63,8 @@ void main() {
     'am-ET': '111,123,456.785',
   };
 
+  // The app shows one reference country (KR) localized per locale, so the same
+  // country renders differently in each language.
   final Map<String, String> expectedCountryValues = <String, String>{
     'en-GB': 'South Korea',
     'en-US': 'South Korea',
@@ -136,13 +138,13 @@ void main() {
             expected: expectedNumberFormatValues[locale],
           );
 
-          // _collectMismatch(
-          //   failures: failures,
-          //   locale: locale,
-          //   label: 'Country',
-          //   actual: _tryGetValueForLabel(tester, 'Country'),
-          //   expected: expectedCountryValues[locale],
-          // );
+          _collectMismatch(
+            failures: failures,
+            locale: locale,
+            label: 'Country (KR)',
+            actual: _tryGetValueForLabel(tester, 'Country (KR)'),
+            expected: expectedCountryValues[locale],
+          );
         } catch (error) {
           failures.add('[$locale] Unexpected error: $error');
         }

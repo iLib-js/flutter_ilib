@@ -4,9 +4,8 @@ Mapping table showing which iLib JS test file (`github.com/iLib-js/iLib`) each f
 
 JS source path base: `js/test/`
 
-Scope: this covers the pure-Dart classes. The 3 classes still on JS interop — `ILibCountry`,
-`ILibScriptInfo`, `ILibDurationFmt` — and their tests (`test/country/`, `test/scriptinfo/`,
-`test/durfmt/`) are not mapped here until those classes are converted.
+Scope: this covers the pure-Dart classes. The 1 class still on JS interop — `ILibDurationFmt` —
+and its tests (`test/durfmt/`) are not mapped here until that class is converted.
 
 ## Calendar Tests
 
@@ -217,6 +216,20 @@ These tests have no JS counterpart. They verify the Flutter plugin initializatio
 
 85 `testScriptInfo_<locale>` cases skipped — locale not in `locales.json`, or bare-language with no
 bundled `{lang}.json`. See CLAUDE.md › Conventions › Testing for the rule.
+
+
+## Country Tests
+
+| Dart Test File | iLib JS Source File | Notes |
+|---|---|---|
+| `test/country/country_test.dart` | `js/test/root/testcountry.js` | 26 tests converted 1:1: constructor/default/wrong-locale, per-locale `getName`/`getCode` cases in `locales.json`, and the two unknown-code/name `ArgumentError` cases (JS `testCountryGetBy*Unknown`, renamed). |
+| `test/country/country_extra_test.dart` | — | flutter_ilib-specific (no JS counterpart): the `ILibLocale`-object constructor branch, es-ES/en-US/ko-KR platform-branched extras, and the static `getAvailableCode`/`getAvailableCountry` queries. |
+
+### Not Converted — Country Tests
+
+`testCountryLocale6` (af-NA) and ~28 `testCountryLocale_<locale>` cases skipped — locale not in
+`locales.json` (out of scope even when the value reproduces via language fallback).
+`testCountryAsync` is N/A (the Dart port is synchronous). See CLAUDE.md › Conventions › Testing.
 
 
 ## Common Not Converted Pattern (All Calendar Date Tests)

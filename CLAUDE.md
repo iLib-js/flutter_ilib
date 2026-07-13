@@ -53,16 +53,16 @@ Options → ILibLocaleInfo (determines locale, calendar, clock, meridiems)
 | ILibCurrency | `lib/ilib_currency.dart` | Currency metadata lookup (`ilib.data.currency`) |
 | ILibNumFmt | `lib/ilib_numfmt.dart` | `ilib.data.localeinfo.numfmt` + `ilib.data.currency` |
 | ILibScriptInfo | `lib/ilib_scriptinfo.dart` | `ilib.data.scripts` (root-only, locale-independent) |
+| ILibCountry | `lib/ilib_country.dart` | `ilib.data.ctryreverse` (code↔name, per-locale) |
 
 ### Not yet ported (currently non-functional)
-The `ILibJS` interop bridge was removed in v2.0, but these classes were never converted to pure
-Dart — they still contain `ILibJS.instance.evaluate()` calls that no longer resolve, so they **do
-not compile and are not exported** from `flutter_ilib.dart`. Porting them is the remaining work
+The `ILibJS` interop bridge was removed in v2.0, but this class was never converted to pure
+Dart — it still contains `ILibJS.instance.evaluate()` calls that no longer resolve, so it **does
+not compile and is not exported** from `flutter_ilib.dart`. Porting it is the remaining work
 (the count is the number of `evaluate()` calls to replace).
 
 | Class | File | `evaluate()` calls to port |
 |-------|------|----------------------------|
-| ILibCountry | `lib/ilib_country.dart` | 5 |
 | ILibDurationFmt | `lib/ilib_durationfmt.dart` | 4 |
 
 ## Conversion Pattern (How to Convert a Class)
@@ -123,7 +123,7 @@ lib/
 ├── ilib_timezone.dart          # timezone/DST
 ├── ilib_calendar.dart          # Calendar factory + abstract base
 ├── ilib_casemapper.dart        # case conversion
-├── ilib_country.dart           # [unconverted] country info
+├── ilib_country.dart           # country info (ilib.data.ctryreverse)
 ├── ilib_durationfmt.dart       # [unconverted] duration format
 ├── ilib_numfmt.dart            # number format
 ├── ilib_scriptinfo.dart        # script info (ilib.data.scripts)
@@ -157,8 +157,8 @@ lib/
 > (+ `calendar-conversion.md`, `local-timezone-support.md`) **before** changing it.
 
 ### Code Style
-- `flutter analyze` must pass for the converted code (`lib/` minus the 2 unported classes —
-  `ILibCountry`, `ILibDurationFmt` — and their tests, which still reference the removed `ILibJS`
+- `flutter analyze` must pass for the converted code (`lib/` minus the 1 unported class —
+  `ILibDurationFmt` — and its tests, which still reference the removed `ILibJS`
   and report errors until ported).
 - **Formatting — run `dart format`.** The repo is formatted with the **short style at
   `page_width: 80`** (set in `analysis_options.yaml`; short because the package SDK floor is
@@ -226,8 +226,8 @@ For in-depth explanations, see `docs/`:
   Strategy B (`flutter_timezone`) is only needed if `getId()` must return the real zone name
   (e.g. `Asia/Seoul`) instead of `'local'`. See
   [docs/local-timezone-support.md](docs/local-timezone-support.md).
-- The 2 unported classes (`ILibCountry`, `ILibDurationFmt`) — they still call the now-removed
-  `ILibJS`, so they don't compile / aren't exported; see Conversion Status.
+- The 1 unported class (`ILibDurationFmt`) — it still calls the now-removed
+  `ILibJS`, so it doesn't compile / isn't exported; see Conversion Status.
 
 ## Running Tests
 ```bash

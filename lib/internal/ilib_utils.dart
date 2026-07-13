@@ -3,7 +3,7 @@ import 'dart:ui';
 import '../ilib_locale.dart';
 
 String _currentLocale =
-    normalizeLocale(PlatformDispatcher.instance.locale.toString());
+    normalizeLocale(PlatformDispatcher.instance.locale.toLanguageTag());
 
 /// The active locale, always normalized — it can never be observed as
 /// `C`/`POSIX`/empty (those collapse to `en-US`). Both reads and writes go

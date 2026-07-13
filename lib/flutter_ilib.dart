@@ -8,6 +8,7 @@ import 'internal/logger/logger_selector.dart';
 
 export 'ilib_calendar.dart';
 export 'ilib_casemapper.dart';
+export 'ilib_country.dart';
 export 'ilib_currency.dart';
 export 'ilib_date.dart';
 export 'ilib_date_accessor.dart';
