@@ -1,4 +1,5 @@
-import 'flutter_ilib.dart';
+import 'ilib_init.dart';
+import 'ilib_locale.dart';
 import 'internal/ilib_utils.dart' as ilib_utils;
 
 class ILibLocaleInfo {

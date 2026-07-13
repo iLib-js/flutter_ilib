@@ -1,4 +1,6 @@
-import 'flutter_ilib.dart';
+import 'ilib_init.dart';
+import 'ilib_locale.dart';
+import 'ilib_localeinfo.dart';
 import 'internal/ilib_utils.dart' as ilib_utils;
 
 /// Country name ↔ ISO 3166-1 alpha-2 code lookup, localized per locale.

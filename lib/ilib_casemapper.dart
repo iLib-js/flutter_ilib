@@ -1,4 +1,4 @@
-import 'flutter_ilib.dart';
+import 'ilib_locale.dart';
 
 /// A class that maps a string to upper or lower case in a locale-sensitive manner.
 class ILibCaseMapper {
