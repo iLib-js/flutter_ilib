@@ -144,6 +144,8 @@ lib/
 │   └── persian_algo_cal.dart   # + persian_algo_date.dart + persian_algo_rata_die.dart (algorithmic)
 └── internal/
     ├── ilib_utils.dart         # getLocale(), getJSONDataPaths(), etc.
+    ├── ilib_plural.dart        # getPluralCategory() — CLDR plural-rule eval (used by ILibDurationFmt)
+    ├── math_utils.dart         # rounding helpers (used by ILibNumFmt)
     └── logger/                 # internal logging (LogAdapter + package:logging); not part of the conversion
 ```
 

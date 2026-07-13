@@ -59,11 +59,12 @@ format(components)   // components is an ILibDateOptions
 
 ```
 lib/
-├── ilib_durationfmt.dart   ← formatter + plural engine + options
-├── ilib_datefmt.dart       ← reused for clock-style time rendering
-├── ilib_scriptinfo.dart    ← script direction lookup
-├── ilib_localeinfo.dart    ← script/clock/digits defaults
-└── flutter_ilib.dart       ← export
+├── ilib_durationfmt.dart      ← formatter + options
+├── internal/ilib_plural.dart  ← CLDR plural-rule evaluation (getPluralCategory)
+├── ilib_datefmt.dart          ← reused for clock-style time rendering
+├── ilib_scriptinfo.dart       ← script direction lookup
+├── ilib_localeinfo.dart       ← script/clock/digits defaults
+└── flutter_ilib.dart          ← export
 ```
 
 ---
@@ -88,7 +89,12 @@ are copied verbatim from `DurationFmt.js`. `finalSeparator` is only non-empty at
 **medium downgrade**: JS forces `medium → short` when the locale script is not
 Latin, Greek, or Cyrillic. Same check applied in the constructor.
 
-### Step 2: Plural-choice engine (`_formatChoice`, `_pluralClass`, `_evalRule`)
+### Step 2: Plural-choice engine (`_formatChoice` + `internal/ilib_plural.dart`)
+
+Plural-rule evaluation lives in `lib/internal/ilib_plural.dart` as stateless
+top-level functions (no class — the only input is the rule map). The formatter
+calls `getPluralCategory(rules, n)`; the template-choice logic (`_formatChoice`)
+stays in `ilib_durationfmt.dart`.
 
 Duration templates are choice strings: `"limit1#string1|limit2#string2|..."`.
 - `|` splits choices; the first `#` splits `limit` from `string`.
@@ -103,7 +109,7 @@ Selection order in `_formatChoice`:
 4. empty/`other` limit → remembered as default
 Result = plural-class match if any, else default.
 
-`_pluralClass(n)` evaluates `ilib.data.plurals` for the locale:
+`getPluralCategory(rules, n)` evaluates `ilib.data.plurals` for the locale:
 - computes CLDR operands `n, i, v, f` (`_operands`)
 - walks each non-`other` class rule via `_evalRule`, returns first true class
 - returns `other` if none match, or falls back to `n==1 ? 'one' : 'other'`
