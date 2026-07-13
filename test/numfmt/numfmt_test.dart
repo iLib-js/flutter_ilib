@@ -4192,6 +4192,5 @@ void main() {
       expect(fmt, isNotNull);
       expect(fmt.format(12345678900), '1.23E+10');
     });
-
   });
 }

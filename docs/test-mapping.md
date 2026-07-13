@@ -207,6 +207,17 @@ These tests have no JS counterpart. They verify the Flutter plugin initializatio
 | `test/numfmt/numfmt_am_test.dart` | `js/test/number/testnumfmt_am.js` | ILibNumFmt am (Amharic) locale formatting |
 | `test/numfmt/numfmt_extra_test.dart` | — | flutter_ilib-specific (no JS counterpart): unknown `roundingMode` falls back to `halfdown` for both the reported mode and the applied rounding, and a valid mode is preserved |
 
+## ScriptInfo Tests
+
+| Dart Test File | iLib JS Source File | Notes |
+|---|---|---|
+| `test/scriptinfo/scriptinfo_test.dart` | `js/test/root/testscriptinfo.js` | 161 tests converted: script-code/construction cases, per-locale cases in `locales.json`, and bare-language cases for supported languages (`pa`, `ha`, `az`). 85 per-locale cases skipped (N/A). |
+
+### Not Converted — ScriptInfo Tests
+
+85 `testScriptInfo_<locale>` cases skipped — locale not in `locales.json`, or bare-language with no
+bundled `{lang}.json`. See CLAUDE.md › Conventions › Testing for the rule.
+
 
 ## Common Not Converted Pattern (All Calendar Date Tests)
 

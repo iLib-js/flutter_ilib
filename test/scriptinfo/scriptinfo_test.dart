@@ -2,17 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../test_env.dart';
-
 void main() {
-  String testPlatform = '';
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [scriptinfo_test.dart] file.');
   setUpAll(() async {
-    testPlatform = getTestPlatform();
-    final ILibJS ilibjsinstance = ILibJS.instance;
-    await ilibjsinstance.loadJS();
-    ilibjsinstance.initILib();
+    final ILibLoader ilibjsinstance = ILibLoader.instance;
+    await ilibjsinstance.loadJSON();
     await ilibjsinstance.loadILibLocaleDataAll();
   });
 
@@ -149,6 +144,96 @@ void main() {
       expect(si.getCodeNumber(), 0);
       expect(si.getName(), isNull);
       expect(si.getLongCode(), isNull);
+    });
+
+    test('testScriptGetDefaultLongCode_Berf', () {
+      final ILibScriptInfo si = ILibScriptInfo('Berf');
+      expect(si, isNotNull);
+
+      expect(si.getCode(), 'Berf');
+      expect(si.getCodeNumber(), 258);
+      expect(si.getName(), 'Beria Erfe');
+      expect(si.getLongCode(), 'Beria_Erfe');
+      expect(si.getScriptDirection(), 'ltr');
+      expect(si.getNeedsIME(), isFalse);
+      expect(si.getCasing(), isTrue);
+    });
+
+    test('testScriptGetDefaultLongCode_Gara', () {
+      final ILibScriptInfo si = ILibScriptInfo('Gara');
+      expect(si, isNotNull);
+
+      expect(si.getCode(), 'Gara');
+      expect(si.getCodeNumber(), 164);
+      expect(si.getName(), 'Garay');
+      expect(si.getLongCode(), 'Garay');
+      expect(si.getScriptDirection(), 'rtl');
+      expect(si.getNeedsIME(), isFalse);
+      expect(si.getCasing(), isTrue);
+    });
+
+    test('testScriptGetDefaultLongCodeKits', () {
+      final ILibScriptInfo si = ILibScriptInfo('Kits');
+      expect(si, isNotNull);
+
+      expect(si.getCode(), 'Kits');
+      expect(si.getCodeNumber(), 288);
+      expect(si.getName(), 'Khitan small script');
+      expect(si.getLongCode(), 'Khitan_Small_Script');
+      expect(si.getScriptDirection(), 'ltr');
+      expect(si.getNeedsIME(), isTrue);
+      expect(si.getCasing(), isFalse);
+    });
+
+    test('testScriptGetDefaultLongCodeMend', () {
+      final ILibScriptInfo si = ILibScriptInfo('Mend');
+      expect(si, isNotNull);
+
+      expect(si.getCode(), 'Mend');
+      expect(si.getCodeNumber(), 438);
+      expect(si.getName(), 'Mende Kikakui');
+      expect(si.getLongCode(), 'Mende_Kikakui');
+      expect(si.getScriptDirection(), 'rtl');
+      expect(si.getNeedsIME(), isTrue);
+      expect(si.getCasing(), isFalse);
+    });
+
+    test('testScriptGetDefaultLongCodePauc', () {
+      final ILibScriptInfo si = ILibScriptInfo('Pauc');
+      expect(si, isNotNull);
+
+      expect(si.getCode(), 'Pauc');
+      expect(si.getCodeNumber(), 263);
+      expect(si.getName(), 'Pau Cin Hau');
+      expect(si.getLongCode(), 'Pau_Cin_Hau');
+      expect(si.getScriptDirection(), 'ltr');
+      expect(si.getNeedsIME(), isFalse);
+      expect(si.getCasing(), isFalse);
+    });
+
+    test('testScriptGetDefaultLongCode_Tols', () {
+      final ILibScriptInfo si = ILibScriptInfo('Tols');
+      expect(si, isNotNull);
+
+      expect(si.getCode(), 'Tols');
+      expect(si.getCodeNumber(), 299);
+      expect(si.getName(), 'Tolong Siki');
+      expect(si.getLongCode(), 'Tolong_Siki');
+      expect(si.getScriptDirection(), 'ltr');
+      expect(si.getNeedsIME(), isFalse);
+      expect(si.getCasing(), isFalse);
+    });
+
+    test('testScriptGetAllScripts', () {
+      final List<String> scripts = ILibScriptInfo.getAllScripts();
+      expect(scripts, isNotNull);
+
+      expect(scripts.length, 224);
+      expect(scripts[0], 'Adlm');
+      expect(scripts[1], 'Afak');
+      expect(scripts[2], 'Aghb');
+      expect(scripts[4], 'Arab');
+      expect(scripts[scripts.length - 1], 'Zzzz');
     });
 
     test('testScriptInfo_ar_EG', () {
@@ -396,15 +481,6 @@ void main() {
 
     test('testScriptInfo_en_KE', () {
       final ILibLocaleInfo li = ILibLocaleInfo('en-KE');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_en_KR', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('en-KR');
       final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
       expect(li, isNotNull);
       expect(scinfo, isNotNull);
@@ -709,15 +785,6 @@ void main() {
       expect(scinfo.getScriptDirection(), 'ltr');
     });
 
-    test('testScriptInfo_fa_AF', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('fa-AF');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Arab');
-      expect(scinfo.getScriptDirection(), 'rtl');
-    });
-
     test('testScriptInfo_fa_IR', () {
       final ILibLocaleInfo li = ILibLocaleInfo('fa-IR');
       final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
@@ -835,15 +902,6 @@ void main() {
       expect(scinfo.getScriptDirection(), 'ltr');
     });
 
-    test('testScriptInfo_hr_HU', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('hr-HU');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
     test('testScriptInfo_id_ID', () {
       final ILibLocaleInfo li = ILibLocaleInfo('id-ID');
       final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
@@ -889,15 +947,6 @@ void main() {
       expect(scinfo.getScriptDirection(), 'ltr');
     });
 
-    test('testScriptInfo_kk_KZ', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('kk-KZ');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Cyrl');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
     test('testScriptInfo_kn_IN', () {
       final ILibLocaleInfo li = ILibLocaleInfo('kn-IN');
       final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
@@ -916,14 +965,6 @@ void main() {
       expect(scinfo.getScriptDirection(), 'ltr');
     });
 
-    test('testScriptInfo_ku_IQ', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('ku-IQ');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
     test('testScriptInfo_ku_Arab_IQ', () {
       final ILibLocaleInfo li = ILibLocaleInfo('ku-Arab-IQ');
       final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
@@ -1032,24 +1073,6 @@ void main() {
       expect(scinfo.getScriptDirection(), 'ltr');
     });
 
-    test('testScriptInfo_pa', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('pa');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Guru');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_pa_PK', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('pa-PK');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Arab');
-      expect(scinfo.getScriptDirection(), 'rtl');
-    });
-
     test('testScriptInfo_pl_PL', () {
       final ILibLocaleInfo li = ILibLocaleInfo('pl-PL');
       final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
@@ -1083,15 +1106,6 @@ void main() {
       expect(li, isNotNull);
       expect(scinfo, isNotNull);
       expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_sr_Cyrl_RS', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('sr-Cyrl-RS');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Cyrl');
       expect(scinfo.getScriptDirection(), 'ltr');
     });
 
@@ -1374,15 +1388,6 @@ void main() {
       expect(scinfo.getScriptDirection(), 'ltr');
     });
 
-    test('testScriptInfo_mn_MN', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('mn-MN');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Cyrl');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
     test('testScriptInfo_es_CA', () {
       final ILibLocaleInfo li = ILibLocaleInfo('es-CA');
       final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
@@ -1419,66 +1424,12 @@ void main() {
       expect(scinfo.getScriptDirection(), 'ltr');
     });
 
-    test('testScriptInfo_ha', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('ha');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_az', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('az');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_ha_NG', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('ha-NG');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_ha_CM', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('ha-CM');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Arab');
-      expect(scinfo.getScriptDirection(), 'rtl');
-    });
-
-    test('testScriptInfo_ha_SD', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('ha-SD');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Arab');
-      expect(scinfo.getScriptDirection(), 'rtl');
-    });
-
     test('testScriptInfo_or_IN', () {
       final ILibLocaleInfo li = ILibLocaleInfo('or-IN');
       final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
       expect(li, isNotNull);
       expect(scinfo, isNotNull);
       expect(li.getScript(), 'Orya');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_az_AZ', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('az-AZ');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
       expect(scinfo.getScriptDirection(), 'ltr');
     });
 
@@ -1518,96 +1469,6 @@ void main() {
       expect(scinfo.getScriptDirection(), 'rtl');
     });
 
-    test('testScriptInfo_ar_BH', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('ar-BH');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Arab');
-      expect(scinfo.getScriptDirection(), 'rtl');
-    });
-
-    test('testScriptInfo_ar_DJ', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('ar-DJ');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Arab');
-      expect(scinfo.getScriptDirection(), 'rtl');
-    });
-
-    test('testScriptInfo_ar_DZ', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('ar-DZ');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Arab');
-      expect(scinfo.getScriptDirection(), 'rtl');
-    });
-
-    test('testScriptInfo_ar_JO', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('ar-JO');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Arab');
-      expect(scinfo.getScriptDirection(), 'rtl');
-    });
-
-    test('testScriptInfo_ar_KW', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('ar-KW');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Arab');
-      expect(scinfo.getScriptDirection(), 'rtl');
-    });
-
-    test('testScriptInfo_ar_LB', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('ar-LB');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Arab');
-      expect(scinfo.getScriptDirection(), 'rtl');
-    });
-
-    test('testScriptInfo_ar_LY', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('ar-LY');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Arab');
-      expect(scinfo.getScriptDirection(), 'rtl');
-    });
-
-    test('testScriptInfo_ar_MR', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('ar-MR');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Arab');
-      expect(scinfo.getScriptDirection(), 'rtl');
-    });
-
-    test('testScriptInfo_ar_OM', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('ar-OM');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Arab');
-      expect(scinfo.getScriptDirection(), 'rtl');
-    });
-
-    test('testScriptInfo_ar_QA', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('ar-QA');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Arab');
-      expect(scinfo.getScriptDirection(), 'rtl');
-    });
-
     test('testScriptInfo_ar_SA', () {
       final ILibLocaleInfo li = ILibLocaleInfo('ar-SA');
       final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
@@ -1615,366 +1476,6 @@ void main() {
       expect(scinfo, isNotNull);
       expect(li.getScript(), 'Arab');
       expect(scinfo.getScriptDirection(), 'rtl');
-    });
-
-    test('testScriptInfo_ar_SD', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('ar-SD');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Arab');
-      expect(scinfo.getScriptDirection(), 'rtl');
-    });
-
-    test('testScriptInfo_ar_SY', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('ar-SY');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Arab');
-      expect(scinfo.getScriptDirection(), 'rtl');
-    });
-
-    test('testScriptInfo_ar_TN', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('ar-TN');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Arab');
-      expect(scinfo.getScriptDirection(), 'rtl');
-    });
-
-    test('testScriptInfo_ar_YE', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('ar-YE');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Arab');
-      expect(scinfo.getScriptDirection(), 'rtl');
-    });
-
-    test('testScriptInfo_en_ET', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('en-ET');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_en_GM', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('en-GM');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_en_LR', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('en-LR');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_en_PK', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('en-PK');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_en_RW', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('en-RW');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_en_SD', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('en-SD');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_en_SL', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('en-SL');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_en_TZ', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('en-TZ');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_es_CR', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('es-CR');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_es_GQ', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('es-GQ');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_es_PH', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('es-PH');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_fr_BF', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('fr-BF');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_fr_BJ', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('fr-BJ');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_fr_CD', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('fr-CD');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_fr_CF', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('fr-CF');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_fr_CG', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('fr-CG');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_fr_CI', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('fr-CI');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_fr_CM', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('fr-CM');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_fr_GQ', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('fr-GQ');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_fr_DJ', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('fr-DJ');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_fr_DZ', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('fr-DZ');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_fr_GA', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('fr-GA');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_fr_GN', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('fr-GN');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_fr_LB', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('fr-LB');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_fr_ML', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('fr-ML');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_fr_RW', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('fr-RW');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_fr_SN', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('fr-SN');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_fr_TG', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('fr-TG');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_ms_SG', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('ms-SG');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_pa_Arab_PK', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('pa-Arab-PK');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Arab');
-      expect(scinfo.getScriptDirection(), 'rtl');
-    });
-
-    test('testScriptInfo_pt_AO', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('pt-AO');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_pt_GQ', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('pt-GQ');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_pt_CV', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('pt-CV');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Latn');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_ur_PK', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('ur-PK');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Arab');
-      expect(scinfo.getScriptDirection(), 'rtl');
-    });
-
-    test('testScriptInfo_zh_Hans_SG', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('zh-Hans-SG');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Hans');
-      expect(scinfo.getScriptDirection(), 'ltr');
-    });
-
-    test('testScriptInfo_zh_Hans_MY', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('zh-Hans-MY');
-      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
-      expect(li, isNotNull);
-      expect(scinfo, isNotNull);
-      expect(li.getScript(), 'Hans');
-      expect(scinfo.getScriptDirection(), 'ltr');
     });
 
     test('testScriptInfo_ka_GE', () {
@@ -1986,8 +1487,21 @@ void main() {
       expect(scinfo.getScriptDirection(), 'ltr');
     });
 
-    test('testScriptInfo_es_ES', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('ca-ES');
+    // Language-only cases: the argument is a bare language (no region) that is
+    // itself supported — a bundled `{lang}.json` backs the result (not a root
+    // default). Kept even though the bare code is not a `locales.json` entry,
+    // because it exercises real language-level data for a supported language.
+    test('testScriptInfo_pa', () {
+      final ILibLocaleInfo li = ILibLocaleInfo('pa');
+      final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
+      expect(li, isNotNull);
+      expect(scinfo, isNotNull);
+      expect(li.getScript(), 'Guru');
+      expect(scinfo.getScriptDirection(), 'ltr');
+    });
+
+    test('testScriptInfo_ha', () {
+      final ILibLocaleInfo li = ILibLocaleInfo('ha');
       final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
       expect(li, isNotNull);
       expect(scinfo, isNotNull);
@@ -1995,8 +1509,8 @@ void main() {
       expect(scinfo.getScriptDirection(), 'ltr');
     });
 
-    test('testScriptInfo_ha', () {
-      final ILibLocaleInfo li = ILibLocaleInfo('ha');
+    test('testScriptInfo_az', () {
+      final ILibLocaleInfo li = ILibLocaleInfo('az');
       final ILibScriptInfo scinfo = ILibScriptInfo(li.getScript());
       expect(li, isNotNull);
       expect(scinfo, isNotNull);

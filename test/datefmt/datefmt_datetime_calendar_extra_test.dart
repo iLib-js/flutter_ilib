@@ -35,7 +35,8 @@ void main() {
     // Label only — 'unset' means the `timezone` argument was not passed (null)
     final String tzLabel = timezone ?? 'unset';
     expect(out, contains(expectYear), reason: '$locale tz=$tzLabel → "$out"');
-    expect(out, isNot(contains('2026')), reason: '$locale tz=$tzLabel → "$out"');
+    expect(out, isNot(contains('2026')),
+        reason: '$locale tz=$tzLabel → "$out"');
   }
 
   // Exact full-date check. With the timezone omitted, the formatter uses the
