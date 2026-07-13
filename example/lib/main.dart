@@ -106,6 +106,7 @@ class _MyAppState extends State<MyApp> {
     results[2] = getClock(curLocale);
     results[3] = getNumFmt(curLocale);
     results[4] = getCalendarName(curLocale);
+    results[5] = getDurationFmt(curLocale);
 
     setState(() {
       _flutterILibVersion = flutterILibVersion;
@@ -126,6 +127,7 @@ class _MyAppState extends State<MyApp> {
     results[2] = getClock(curLocale);
     results[3] = getNumFmt(curLocale);
     results[4] = getCalendarName(curLocale);
+    results[5] = getDurationFmt(curLocale);
     setState(() {
       newList = results;
     });
@@ -211,6 +213,8 @@ class _MyAppState extends State<MyApp> {
                       _infoRow(context, 'Clock (12 or 24)', newList[2],
                           large: true),
                       _infoRow(context, 'Number Format', newList[3],
+                          large: true),
+                      _infoRow(context, 'Duration Format', newList[5],
                           large: true),
                     ],
                   ),
@@ -541,5 +545,11 @@ class _MyAppState extends State<MyApp> {
   String getCalendarName(String curlo) {
     final ILibLocaleInfo locInfo = ILibLocaleInfo(curlo);
     return locInfo.getCalendar();
+  }
+
+  String getDurationFmt(String curlo) {
+    final ILibDurationFmt fmt =
+        ILibDurationFmt(ILibDurationFmtOptions(locale: curlo, length: 'long'));
+    return fmt.format(ILibDateOptions(hour: 1, minute: 30));
   }
 }
