@@ -271,9 +271,9 @@ flutter_ilib/
 │       ├── und-{region}.json    (region fallback, e.g. und-US)
 │       └── {lang}-{...}.json    ({lang}-{script}, {lang}-{region}, {lang}-{script}-{region})
 │
-├── test/                        (basic, localeinfo, casemapper, calendar,
-│                                 timezone, datefmt, country, scriptinfo,
-│                                 numfmt, durfmt)
+├── test/                        (basic, internal, localeinfo, casemapper,
+│                                 calendar, timezone, datefmt, country,
+│                                 scriptinfo, numfmt, durfmt)
 ├── linux/                       (C++ plugin implementation)
 ├── webos/                       (C++ plugin implementation)
 └── scripts/                     (build/publish helpers)

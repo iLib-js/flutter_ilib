@@ -310,8 +310,8 @@ class ILibDurationFmt {
 
     if (_style == 'clock') {
       final ILibDateFmt? fmt;
-      if (components.hour != null && components.hour != 0) {
-        fmt = (components.second != null && components.second != 0)
+      if (components.hour != null) {
+        fmt = (components.second != null)
             ? _timeFmtHMS
             : _timeFmtHM;
       } else {

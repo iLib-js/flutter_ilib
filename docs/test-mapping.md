@@ -185,9 +185,18 @@ These tests have no JS counterpart. They verify the Flutter plugin initializatio
 |---|---|---|
 | `test/basic/flutter_ilib_test.dart` | — | Plugin initialization test |
 | `test/basic/flutter_ilib_datefmt_test.dart` | — | DateFmt basic behavior check |
-| `test/basic/flutter_ilib_math_utils_test.dart` | `js/test/testutils.js` | Math utils tests extracted from the `math_utils` section |
 | `test/basic/flutter_ilib_localeinfo_test.dart` | — | LocaleInfo basic behavior check |
-| `test/basic/flutter_ilib_utils_test.dart` | — | Internal utility tests |
+
+## Internal Tests (flutter_ilib-specific)
+
+These cover `lib/internal/` helpers and have no direct JS test counterpart
+(the plural engine is exercised indirectly in JS via `IString.formatChoice`).
+
+| Dart Test File | iLib JS Source File | Notes |
+|---|---|---|
+| `test/internal/math_utils_test.dart` | `js/test/testutils.js` | Math utils tests extracted from the `math_utils` section |
+| `test/internal/utils_test.dart` | — | Internal utility tests (`getJSONDataPaths`, locale helpers) |
+| `test/internal/plural_test.dart` | — | CLDR plural-rule engine (`getPluralCategory`) |
 
 ## Currency Tests
 

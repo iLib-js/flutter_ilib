@@ -33,7 +33,7 @@ String getPluralCategory(Map<String, dynamic> rules, num n) {
 
 /// Compute CLDR plural operand values for [n].
 /// n=absolute value, i=integer part, v=visible fraction digits,
-/// f=visible fraction digits as integer.
+/// f=visible fraction digits as integer, c/e=base-10 exponent.
 Map<String, num> _operands(num n) {
   final double abs = n.abs().toDouble();
   final int i = abs.truncate();
@@ -42,7 +42,21 @@ Map<String, num> _operands(num n) {
   final String fracStr = dotIdx >= 0 ? str.substring(dotIdx + 1) : '';
   final int v = fracStr == '0' ? 0 : fracStr.length;
   final int f = v > 0 ? int.parse(fracStr) : 0;
-  return <String, num>{'n': abs, 'i': i, 'v': v, 'f': f, 'w': v, 't': f};
+  // c/e are the base-10 exponent read from the exponential form (0 when
+  // there is none).
+  final String exp = abs.toStringAsExponential();
+  final int eIdx = exp.indexOf('e');
+  final int c = eIdx >= 0 ? int.parse(exp.substring(eIdx + 1)).abs() : 0;
+  return <String, num>{
+    'n': abs,
+    'i': i,
+    'v': v,
+    'f': f,
+    'w': v,
+    't': f,
+    'c': c,
+    'e': c,
+  };
 }
 
 dynamic _evalOperand(dynamic expr, Map<String, num> ops) {
@@ -63,6 +77,26 @@ dynamic _evalOperand(dynamic expr, Map<String, num> ops) {
     }
   }
   return 0;
+}
+
+/// [range] is a list whose elements are either a `[start, end]` pair or a
+/// bare number. Returns true if [n] equals one of the bare numbers or falls
+/// within any pair.
+bool _matchRange(num n, List<dynamic> range) {
+  for (final dynamic entry in range) {
+    if (entry is List<dynamic>) {
+      final double s = (entry[0] as num).toDouble();
+      final double e = (entry[1] as num).toDouble();
+      if (n >= s && n <= e) {
+        return true;
+      }
+    } else if (entry is num) {
+      if (n == entry.toDouble()) {
+        return true;
+      }
+    }
+  }
+  return false;
 }
 
 bool _evalRule(dynamic rule, Map<String, num> ops) {
@@ -112,16 +146,14 @@ bool _evalRule(dynamic rule, Map<String, num> ops) {
         }
         return op == 'eq' ? eq : !eq;
       case 'inrange':
-        final List<dynamic> ranges = args as List<dynamic>;
-        final num val = (_evalOperand(ranges[0], ops) as num).toDouble();
-        for (int i = 1; i < ranges.length; i += 2) {
-          final double s = (ranges[i] as num).toDouble();
-          final double e = (ranges[i + 1] as num).toDouble();
-          if (val >= s && val <= e) {
-            return true;
-          }
-        }
-        return false;
+      case 'notin':
+        // args = [operand, rangeList]. rangeList is a list whose elements are
+        // either a [start, end] pair or a bare number; matches if the operand
+        // value falls in any of them.
+        final List<dynamic> args2 = args as List<dynamic>;
+        final num val = (_evalOperand(args2[0], ops) as num).toDouble();
+        final bool inRange = _matchRange(val, args2[1] as List<dynamic>);
+        return op == 'inrange' ? inRange : !inRange;
       default:
         return false;
     }

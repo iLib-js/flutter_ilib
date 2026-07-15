@@ -188,7 +188,7 @@ flutter test test/numfmt/numfmt_test.dart
 flutter test test/numfmt/numfmt_af_test.dart
 flutter test test/numfmt/numfmt_am_test.dart
 flutter test test/numfmt/numfmt2_test.dart
-flutter test test/basic/flutter_ilib_math_utils_test.dart
+flutter test test/internal/math_utils_test.dart
 flutter test test/currency/currency_test.dart
 flutter test test/currency/currency_extra_test.dart
 

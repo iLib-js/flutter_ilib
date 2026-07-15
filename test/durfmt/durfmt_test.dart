@@ -485,7 +485,6 @@ void main() {
           minute: 2,
           second: 2,
           millisecond: 2);
-      final String result = (testPlatform == 'webOS') ? '' : '';
       expect(fmt.format(dateOptions),
           '2 Jahre, 2 Monate, 2 Wochen, 2 Tage, 2 Stunden, 2 Minuten, 2 Sekunden und 2 Millisekunden');
     });

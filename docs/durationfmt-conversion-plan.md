@@ -110,15 +110,18 @@ Selection order in `_formatChoice`:
 Result = plural-class match if any, else default.
 
 `getPluralCategory(rules, n)` evaluates `ilib.data.plurals` for the locale:
-- computes CLDR operands `n, i, v, f` (`_operands`)
+- computes CLDR operands `n, i, v, f, w, t, c, e` (`_operands`); `c`/`e` are the
+  base-10 exponent, used by `es`/`fr`/`it`/`pt`/`pt-PT`
 - walks each non-`other` class rule via `_evalRule`, returns first true class
 - returns `other` if none match, or falls back to `n==1 ? 'one' : 'other'`
   when the locale has no plural rules loaded
 
 `_evalRule` supports the rule tree used in the bundled data: `and`, `or`,
-`eq`, `neq`, `inrange`, and the `mod` operand expression. This mirrors the
-relevant subset of JS `IString._fncs`. (The JS `Intl.PluralRules` fast path is
-not used; the bundled `ilib.data.plurals` tree is authoritative.)
+`eq`, `neq`, `inrange`, `notin`, and the `mod` operand expression. The bundled
+data emits `eq` with a flat `[start, end]` range; `inrange`/`notin` handle the
+nested `[[start, end], ...]` range form and are not used by any bundled locale
+(kept for correctness, covered by synthetic-tree tests). The bundled
+`ilib.data.plurals` tree is authoritative.
 
 ### Step 3: Clock style (reuse `ILibDateFmt`)
 

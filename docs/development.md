@@ -129,7 +129,7 @@ flutter test
 flutter test --verbose
 
 # Run specific test file
-flutter test test/basic/flutter_ilib_utils_test.dart
+flutter test test/internal/utils_test.dart
 
 # Run specific test by name
 flutter test -k "testLocaleInfoGetRegionName4"
@@ -357,7 +357,7 @@ flutter:
 
 ### Step 3: Add Tests
 
-Add to `test/basic/flutter_ilib_utils_test.dart`:
+Add to `test/internal/utils_test.dart`:
 ```dart
 test('region only (XX)', () {
   expect(getJSONDataPaths('XX'), <String>[
@@ -371,7 +371,7 @@ test('region only (XX)', () {
 
 ```bash
 # Check locale is recognized
-flutter test test/basic/flutter_ilib_utils_test.dart
+flutter test test/internal/utils_test.dart
 
 # Verify data loading
 final info = ILibLocaleInfo('XX');
@@ -395,7 +395,7 @@ bool isValidLocale(String lo) {
 ```
 
 **After Change**:
-1. Run `flutter test test/basic/`
+1. Run `flutter test test/internal/`
 2. Update failing tests if needed
 3. Add new tests for new patterns
 
@@ -412,7 +412,7 @@ List<String> getJSONDataPaths(String? locale) {
 
 **After Change**:
 1. Update expected paths in tests
-2. Run `flutter test test/basic/`
+2. Run `flutter test test/internal/`
 3. Test with real locales to verify fallback chain
 
 ---
