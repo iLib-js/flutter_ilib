@@ -114,6 +114,19 @@ void main() {
       final ILibLocale locale = ctry.getLocale();
       expect(locale.toString(), 'ko-KR');
     });
+    test('testCountryLocale_af_ZA', () {
+      final ILibCountry ctry = ILibCountry(locale: 'af-ZA');
+      expect(ctry, isNotNull);
+
+      expect(ctry.getName('ZA'), 'Suid-Afrika');
+      expect(ctry.getCode('Suid-Afrika'), 'ZA');
+      expect(ctry.getName('US'), 'Verenigde State van Amerika');
+      expect(ctry.getCode('Verenigde State van Amerika'), 'US');
+      expect(ctry.getName('DE'), 'Duitsland');
+      expect(ctry.getCode('Duitsland'), 'DE');
+      final ILibLocale locale = ctry.getLocale();
+      expect(locale.toString(), 'af-ZA');
+    });
     test('testGetAvailableCode', () {
       final List<String> codes = ILibCountry.getAvailableCode();
 

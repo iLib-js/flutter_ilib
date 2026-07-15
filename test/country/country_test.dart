@@ -96,9 +96,6 @@ void main() {
       final ILibLocale locale = ctry.getLocale();
       expect(locale.toString(), 'ko-KR');
     });
-    // testCountryLocale6 (af-NG) omitted: af-NG is not in
-    // scripts/assemble_ilib/locales.json, so it is out of scope (its value only
-    // reproduces via `af` language fallback). See CLAUDE.md › Testing.
     test('testCountryLocale7', () {
       final ILibCountry ctry = ILibCountry(locale: 'as-IN');
       expect(ctry, isNotNull);
