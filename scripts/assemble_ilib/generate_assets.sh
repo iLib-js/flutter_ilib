@@ -16,6 +16,7 @@
 #
 # Options (see --help for the full list):
 #   --ilib-version VER            pin a specific `ilib` npm version (default: latest)
+#   --ilib-path DIR               use an existing ilib install instead of downloading
 #   -o, --out-dir DIR             write output to DIR instead of assets/
 #   --dry-run                     write output to a temp dir; leave assets/ untouched
 #   --keep-build                  keep the intermediate build/ directory for inspection
@@ -63,6 +64,9 @@ Options:
       --ilib-version VER         Version of the ilib npm package to install.
                                  Accepts any npm version/tag (e.g. 14.22.0,
                                  ^14, latest).                (default: latest)
+      --ilib-path DIR            Use an existing ilib package at DIR instead of
+                                 downloading it (skips the ilib install).
+                                 Overrides --ilib-version.
   -o, --out-dir DIR              Write the generated files into DIR (as DIR/js
                                  and DIR/locales) instead of the project's
                                  assets/. Use this to inspect/diff before
@@ -82,21 +86,35 @@ Examples:
   ./generate_assets.sh --dry-run
   ./generate_assets.sh --out-dir /tmp/ilib-preview
   ./generate_assets.sh --ilib-version 14.22.0
+  ./generate_assets.sh --ilib-path ./node_modules/ilib
 EOF
 }
 
 # --- argument parsing ------------------------------------------------------
-DEST_ROOT=""   # empty => write to the project's assets/
+DEST_ROOT=""       # empty => write to the project's assets/
+ILIB_PATH_ARG=""   # empty => download ilib; else use this existing install
+ILIB_VERSION_SET=0 # whether --ilib-version was passed explicitly
 DRY_RUN=0
 KEEP_BUILD=0
+# Ensure the option in $1 was given a real value in $2 (present, and not another
+# option starting with '-'). Exits with an error otherwise.
+require_value() {
+  case "${2-}" in
+    ""|-*) err "$1 requires a $3 argument"; exit 2 ;;
+  esac
+}
+
 while [ $# -gt 0 ]; do
   case "$1" in
     -h|--help) usage; exit 0 ;;
     --ilib-version)
-      [ $# -ge 2 ] || { err "$1 requires a version argument"; exit 2; }
-      ILIB_VERSION="$2"; shift 2 ;;
+      require_value "$1" "${2-}" "version"
+      ILIB_VERSION="$2"; ILIB_VERSION_SET=1; shift 2 ;;
+    --ilib-path)
+      require_value "$1" "${2-}" "directory"
+      ILIB_PATH_ARG="$2"; shift 2 ;;
     -o|--out-dir)
-      [ $# -ge 2 ] || { err "$1 requires a directory argument"; exit 2; }
+      require_value "$1" "${2-}" "directory"
       DEST_ROOT="$2"; shift 2 ;;
     --dry-run) DRY_RUN=1; shift ;;
     --keep-build) KEEP_BUILD=1; shift ;;
@@ -127,11 +145,28 @@ JSON
 fi
 
 # --- 2. install ilib + ilib-assemble ---------------------------------------
-log "Installing ilib@${ILIB_VERSION} and ilib-assemble@${ILIB_ASSEMBLE_VERSION}..."
-(cd "$BUILD_DIR" && npm install --no-audit --no-fund \
-  "ilib@${ILIB_VERSION}" "ilib-assemble@${ILIB_ASSEMBLE_VERSION}")
+# ilib-assemble is always installed into build/. ilib is downloaded too unless
+# --ilib-path points at an existing install to use as-is.
+if [ -n "$ILIB_PATH_ARG" ]; then
+  # Resolve to an absolute path so the assembler can be run from anywhere.
+  ILIB_PATH="$(cd "$ILIB_PATH_ARG" 2>/dev/null && pwd)" \
+    || { err "--ilib-path directory does not exist: $ILIB_PATH_ARG"; exit 1; }
+  [ -f "$ILIB_PATH/package.json" ] \
+    || { err "--ilib-path is not an ilib package (no package.json): $ILIB_PATH"; exit 1; }
+  if [ "$ILIB_VERSION_SET" = "1" ]; then
+    log "Note: --ilib-version is ignored because --ilib-path was given."
+  fi
+  log "Using existing ilib at: $ILIB_PATH"
+  log "Installing ilib-assemble@${ILIB_ASSEMBLE_VERSION}..."
+  (cd "$BUILD_DIR" && npm install --no-audit --no-fund \
+    "ilib-assemble@${ILIB_ASSEMBLE_VERSION}")
+else
+  log "Installing ilib@${ILIB_VERSION} and ilib-assemble@${ILIB_ASSEMBLE_VERSION}..."
+  (cd "$BUILD_DIR" && npm install --no-audit --no-fund \
+    "ilib@${ILIB_VERSION}" "ilib-assemble@${ILIB_ASSEMBLE_VERSION}")
+  ILIB_PATH="$BUILD_DIR/node_modules/ilib"
+fi
 
-ILIB_PATH="$BUILD_DIR/node_modules/ilib"
 ASSEMBLE_BIN="$BUILD_DIR/node_modules/.bin/ilib-assemble"
 [ -d "$ILIB_PATH" ]    || { err "ilib package not found at $ILIB_PATH"; exit 1; }
 [ -x "$ASSEMBLE_BIN" ] || { err "ilib-assemble binary not found at $ASSEMBLE_BIN"; exit 1; }

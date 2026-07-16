@@ -60,12 +60,18 @@ Pass as command-line arguments (`./generate_assets.sh --help` for the full list)
 | Option | Default | Effect |
 | --- | --- | --- |
 | `--ilib-version VER` | `latest` | Pin a specific `ilib` npm version (any npm version/tag). |
+| `--ilib-path DIR` | — | Use an existing ilib install at `DIR` instead of downloading it. Overrides `--ilib-version`. |
 | `-o, --out-dir DIR` | `assets/` | Write output to `DIR` instead of `assets/`. |
 | `--dry-run` | — | Write output to a temp dir; leave `assets/` untouched. |
 | `--keep-build` | — | Keep the intermediate `build/` dir for inspection. |
 
 `ilib-assemble` always installs the latest release. `--ilib-version` defaults to
 the latest release when omitted.
+
+`--ilib-version` and `--ilib-path` select where `ilib` comes from and are
+mutually exclusive in effect. If both are given, `--ilib-path` wins: the local
+install is used, `--ilib-version` is ignored, and the script prints a note
+saying so.
 
 Example — pin the ilib version and keep the build dir:
 
