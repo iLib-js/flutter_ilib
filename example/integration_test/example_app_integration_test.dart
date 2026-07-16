@@ -63,6 +63,17 @@ void main() {
     'am-ET': '111,123,456.785',
   };
 
+  final Map<String, String> expectedDurationValues = <String, String>{
+    'en-GB': '1 hr, 30 mins',
+    'en-US': '1 hr, 30 min',
+    'de-DE': '1 Std., 30 Min.',
+    'hi-IN': '1 घं॰, 30 मि॰',
+    'ko-KR': '1시간 30분',
+    'ru-RU': '1 ч 30 мин',
+    'fa-IR': '\u200F۱ ساعت،\u200F ۳۰ دقیقه',
+    'am-ET': '1 ሰዓ፣ 30 ደቂቃ',
+  };
+
   final Map<String, String> expectedCountryValues = <String, String>{
     'en-GB': 'South Korea',
     'en-US': 'South Korea',
@@ -134,6 +145,14 @@ void main() {
             label: 'Number Format',
             actual: _tryGetValueForLabel(tester, 'Number Format'),
             expected: expectedNumberFormatValues[locale],
+          );
+
+          _collectMismatch(
+            failures: failures,
+            locale: locale,
+            label: 'Duration Format',
+            actual: _tryGetValueForLabel(tester, 'Duration Format'),
+            expected: expectedDurationValues[locale],
           );
 
           // _collectMismatch(

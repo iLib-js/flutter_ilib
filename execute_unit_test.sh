@@ -11,7 +11,7 @@ FAILED_TESTS=()
 # Ignore info-level logs during test
 FLUTTER_OPTIONS="--dart-define=TEST_MODE=true"
 
-for test_file in $(find test/ \( -path 'test/durfmt' -o -path 'test/country' -o -path 'test/scriptinfo' \) -prune -o -name '*_test.dart' -print
+for test_file in $(find test/ \( -path 'test/country' \) -prune -o -name '*_test.dart' -print
 ); do
   if ! flutter test "$test_file" $FLUTTER_OPTIONS; then
     FAILED_TESTS+=("$test_file")
