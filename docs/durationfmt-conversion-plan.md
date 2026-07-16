@@ -116,12 +116,22 @@ Result = plural-class match if any, else default.
 - returns `other` if none match, or falls back to `n==1 ? 'one' : 'other'`
   when the locale has no plural rules loaded
 
-`_evalRule` supports the rule tree used in the bundled data: `and`, `or`,
-`eq`, `neq`, `inrange`, `notin`, and the `mod` operand expression. The bundled
-data emits `eq` with a flat `[start, end]` range; `inrange`/`notin` handle the
-nested `[[start, end], ...]` range form and are not used by any bundled locale
-(kept for correctness, covered by synthetic-tree tests). The bundled
-`ilib.data.plurals` tree is authoritative.
+`_evalRule` supports the full IString.js rule tree: `and`, `or`, `eq`, `neq`,
+`is`, `isnot`, `inrange`, `within`, `notin`, and the `mod` operand expression.
+The bundled iLib v14.22.0 data only uses `and`/`or`/`eq`/`neq`/`mod` — it emits
+`eq` with a flat `[start, end]` range — so the remaining operators are not
+reached by any bundled locale. They are ported from the JS engine anyway so
+future locale data (or the legacy CLDR `n is 1` / `n within 2..4` forms)
+evaluates correctly:
+- `is`/`isnot` — scalar equality/inequality of two operand values (unlike `eq`,
+  the right side is never a range)
+- `inrange`/`within` — share one range matcher over the nested
+  `[[start, end], ...]` form (`matchRange` and `matchRangeContinuous` are
+  identical in v14.22.0); `notin` is its negation
+
+All the non-bundled operators are covered by synthetic-tree tests in
+`test/internal/plural_test.dart`. The bundled `ilib.data.plurals` tree is
+authoritative.
 
 ### Step 3: Clock style (reuse `ILibDateFmt`)
 

@@ -3,7 +3,11 @@
 /// Selects the plural category (`one`, `two`, `few`, `many`, `other`, ...) for
 /// a given number. The rule tree is the parsed CLDR form used by iLib: each
 /// category maps to a boolean expression over the CLDR plural operands, built
-/// from nested `and`/`or`/`eq`/`neq`/`inrange`/`mod` nodes.
+/// from nested `and`/`or`/`eq`/`neq`/`is`/`isnot`/`inrange`/`within`/`notin`/
+/// `mod` nodes. The bundled iLib v14.22.0 data only uses
+/// `and`/`or`/`eq`/`neq`/`mod`, but the full operator set from the IString.js
+/// engine is supported so future locale data (or the legacy CLDR `n is 1` /
+/// `n within 2..4` forms) evaluates correctly.
 library;
 
 /// Returns the CLDR plural class for [n] using [rules].
@@ -133,27 +137,45 @@ bool _evalRule(dynamic rule, Map<String, num> ops) {
         final dynamic rhs = a[1];
         bool eq;
         if (rhs is List<dynamic>) {
-          // range [start, end] or set
           if (rhs.length == 2 && rhs[0] is num && rhs[1] is num) {
+            // flat [start, end] range — the only list shape the bundled data
+            // emits for `eq`/`neq` (e.g. `{"eq": ["i", [2, 4]]}`).
             final double start = (rhs[0] as num).toDouble();
             final double end = (rhs[1] as num).toDouble();
             eq = lhs >= start && lhs <= end;
           } else {
-            eq = rhs.any((dynamic v) => (v as num).toDouble() == lhs);
+            // Set of scalars and/or nested `[[start, end], ...]` ranges. Not
+            // used by any bundled locale, but JS routes a list rhs through
+            // matchRange, so delegate here too (guards against a cast crash on
+            // future nested-range data).
+            eq = _matchRange(lhs, rhs);
           }
         } else {
           eq = lhs == (rhs as num).toDouble();
         }
         return op == 'eq' ? eq : !eq;
+      case 'is':
+      case 'isnot':
+        // args = [left, right]. Scalar equality of two operand values (the
+        // legacy CLDR `n is 1` form; unlike `eq`, the right side is never a
+        // range). Ported from IString.js `_fncs.is` / `_fncs.isnot`.
+        final List<dynamic> a = args as List<dynamic>;
+        final num lhs = (_evalOperand(a[0], ops) as num).toDouble();
+        final num rhs = (_evalOperand(a[1], ops) as num).toDouble();
+        final bool eq = lhs == rhs;
+        return op == 'is' ? eq : !eq;
       case 'inrange':
       case 'notin':
+      case 'within':
         // args = [operand, rangeList]. rangeList is a list whose elements are
         // either a [start, end] pair or a bare number; matches if the operand
-        // value falls in any of them.
+        // value falls in any of them. In iLib v14.22.0 `matchRange` and
+        // `matchRangeContinuous` are identical, so `inrange`/`within` share
+        // one matcher (`notin` is its negation).
         final List<dynamic> args2 = args as List<dynamic>;
         final num val = (_evalOperand(args2[0], ops) as num).toDouble();
         final bool inRange = _matchRange(val, args2[1] as List<dynamic>);
-        return op == 'inrange' ? inRange : !inRange;
+        return op == 'notin' ? !inRange : inRange;
       default:
         return false;
     }

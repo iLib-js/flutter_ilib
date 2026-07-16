@@ -196,4 +196,120 @@ void main() {
       });
     }
   });
+
+  // `is`/`isnot`/`within` are the legacy CLDR operators (`n is 1`,
+  // `n within 2..4`). No bundled iLib v14.22.0 locale emits them — the data
+  // uses `eq`/`neq`/`inrange` instead — but the engine ports them from
+  // IString.js so future/legacy data evaluates. These synthetic trees exercise
+  // the branches directly.
+  group('getPluralCategory is/isnot/within (synthetic trees)', () {
+    // `is` = scalar equality (never a range), unlike `eq`.
+    final Map<String, dynamic> isTree = _rules(
+      '{"one":{"is":["n",1]},"two":{"is":[{"mod":["n",10]},2]}}',
+    );
+    final Map<num, String> isExpected = <num, String>{
+      1: 'one',
+      2: 'two',
+      12: 'two', // mod 10 == 2
+      0: 'other',
+      3: 'other',
+    };
+    for (final MapEntry<num, String> c in isExpected.entries) {
+      test('is: ${c.key} => ${c.value}', () {
+        expect(getPluralCategory(isTree, c.key), c.value);
+      });
+    }
+
+    // `isnot` = scalar inequality.
+    final Map<String, dynamic> isnotTree = _rules(
+      '{"special":{"isnot":["i",0]}}',
+    );
+    final Map<num, String> isnotExpected = <num, String>{
+      0: 'other', // i == 0 -> isnot false
+      1: 'special',
+      5: 'special',
+      0.5: 'other', // i == 0
+    };
+    for (final MapEntry<num, String> c in isnotExpected.entries) {
+      test('isnot: ${c.key} => ${c.value}', () {
+        expect(getPluralCategory(isnotTree, c.key), c.value);
+      });
+    }
+
+    // `within` shares the range matcher with `inrange` (identical in
+    // v14.22.0). Nested [[start,end]] range list.
+    final Map<String, dynamic> withinTree = _rules(
+      '{"few":{"within":[{"mod":["n",100]},[[3,10]]]}}',
+    );
+    final Map<num, String> withinExpected = <num, String>{
+      2: 'other',
+      3: 'few',
+      10: 'few',
+      11: 'other',
+      103: 'few', // mod 100 == 3
+    };
+    for (final MapEntry<num, String> c in withinExpected.entries) {
+      test('within: ${c.key} => ${c.value}', () {
+        expect(getPluralCategory(withinTree, c.key), c.value);
+      });
+    }
+  });
+
+  // `eq`/`neq` with a list rhs that is NOT a flat [start, end] pair routes
+  // through the range matcher: a scalar set (3+ elements) or a nested
+  // [[start, end], ...] range list. No bundled v14.22.0 locale emits these
+  // shapes, but the engine delegates to `_matchRange` to mirror JS and guard
+  // against a cast crash on future data. Exercise both branches directly.
+  group('getPluralCategory eq/neq list rhs (synthetic trees)', () {
+    // Scalar set of 3 values — length != 2, so not a flat range.
+    final Map<String, dynamic> setTree = _rules(
+      '{"few":{"eq":["n",[2,4,6]]}}',
+    );
+    final Map<num, String> setExpected = <num, String>{
+      1: 'other',
+      2: 'few',
+      4: 'few',
+      6: 'few',
+      3: 'other',
+      8: 'other',
+    };
+    for (final MapEntry<num, String> c in setExpected.entries) {
+      test('eq set: ${c.key} => ${c.value}', () {
+        expect(getPluralCategory(setTree, c.key), c.value);
+      });
+    }
+
+    // Nested [[start, end]] range list.
+    final Map<String, dynamic> nestedTree = _rules(
+      '{"few":{"eq":["n",[[2,4]]]}}',
+    );
+    final Map<num, String> nestedExpected = <num, String>{
+      1: 'other',
+      2: 'few',
+      3: 'few',
+      4: 'few',
+      5: 'other',
+    };
+    for (final MapEntry<num, String> c in nestedExpected.entries) {
+      test('eq nested range: ${c.key} => ${c.value}', () {
+        expect(getPluralCategory(nestedTree, c.key), c.value);
+      });
+    }
+
+    // `neq` = negation of the same set match.
+    final Map<String, dynamic> neqTree = _rules(
+      '{"most":{"neq":["n",[2,4,6]]}}',
+    );
+    final Map<num, String> neqExpected = <num, String>{
+      2: 'other',
+      4: 'other',
+      1: 'most',
+      3: 'most',
+    };
+    for (final MapEntry<num, String> c in neqExpected.entries) {
+      test('neq set: ${c.key} => ${c.value}', () {
+        expect(getPluralCategory(neqTree, c.key), c.value);
+      });
+    }
+  });
 }

@@ -214,7 +214,7 @@ class _MyAppState extends State<MyApp> {
                           large: true),
                       _infoRow(context, 'Number Format', newList[3],
                           large: true),
-                      _infoRow(context, 'Duration Format', newList[5],
+                      _infoRow(context, 'Duration Format (long)', newList[5],
                           large: true),
                     ],
                   ),
