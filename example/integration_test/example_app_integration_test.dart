@@ -63,6 +63,17 @@ void main() {
     'am-ET': '111,123,456.785',
   };
 
+  final Map<String, String> expectedDurationValues = <String, String>{
+    'en-GB': '1 hr, 30 mins',
+    'en-US': '1 hr, 30 min',
+    'de-DE': '1 Std., 30 Min.',
+    'hi-IN': '1 घं॰, 30 मि॰',
+    'ko-KR': '1시간 30분',
+    'ru-RU': '1 ч 30 мин',
+    'fa-IR': '\u200F۱ ساعت،\u200F ۳۰ دقیقه',
+    'am-ET': '1 ሰዓ፣ 30 ደቂቃ',
+  };
+
   // The app shows one reference country (KR) localized per locale, so the same
   // country renders differently in each language.
   final Map<String, String> expectedCountryValues = <String, String>{
@@ -145,6 +156,22 @@ void main() {
             actual: _tryGetValueForLabel(tester, 'Country (KR)'),
             expected: expectedCountryValues[locale],
           );
+          
+          _collectMismatch(
+            failures: failures,
+            locale: locale,
+            label: 'Duration Format',
+            actual: _tryGetValueForLabel(tester, 'Duration Format'),
+            expected: expectedDurationValues[locale],
+          );
+
+          // _collectMismatch(
+          //   failures: failures,
+          //   locale: locale,
+          //   label: 'Country',
+          //   actual: _tryGetValueForLabel(tester, 'Country'),
+          //   expected: expectedCountryValues[locale],
+          // );
         } catch (error) {
           failures.add('[$locale] Unexpected error: $error');
         }

@@ -105,8 +105,9 @@ class _MyAppState extends State<MyApp> {
     results[1] = getFirstDayOfWeek(curLocale);
     results[2] = getClock(curLocale);
     results[3] = getNumFmt(curLocale);
-    results[4] = getCalendarName(curLocale);
-    results[5] = getCountryName(curLocale);
+    results[4] = getCalendarName(curLocale);   
+    results[5] = getDurationFmt(curLocale);
+    results[6] = getCountryName(curLocale);
 
     setState(() {
       _flutterILibVersion = flutterILibVersion;
@@ -127,7 +128,8 @@ class _MyAppState extends State<MyApp> {
     results[2] = getClock(curLocale);
     results[3] = getNumFmt(curLocale);
     results[4] = getCalendarName(curLocale);
-    results[5] = getCountryName(curLocale);
+    results[5] = getDurationFmt(curLocale);
+    results[6] = getCountryName(curLocale);
     setState(() {
       newList = results;
     });
@@ -213,8 +215,10 @@ class _MyAppState extends State<MyApp> {
                       _infoRow(context, 'Clock (12 or 24)', newList[2],
                           large: true),
                       _infoRow(context, 'Number Format', newList[3],
+                          large: true),              
+                      _infoRow(context, 'Duration Format (long)', newList[5],
                           large: true),
-                      _infoRow(context, 'Country (KR)', newList[5],
+                      _infoRow(context, 'Country (KR)', newList[6],
                           large: true),
                     ],
                   ),
@@ -555,5 +559,9 @@ class _MyAppState extends State<MyApp> {
     } on ArgumentError {
       return '-';
     }
+  String getDurationFmt(String curlo) {
+    final ILibDurationFmt fmt =
+        ILibDurationFmt(ILibDurationFmtOptions(locale: curlo, length: 'long'));
+    return fmt.format(ILibDateOptions(hour: 1, minute: 30));
   }
 }

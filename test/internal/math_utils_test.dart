@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_ilib/internal/math_utils.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   debugPrint('Testing [flutter_ilib_math_utils_test.dart] file.');

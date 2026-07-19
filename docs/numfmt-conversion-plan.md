@@ -9,9 +9,9 @@ helpers. The file mirrors the structure used in datefmt conversion plans and is
 intended as a developer reference for maintenance and future conversions.
 
 ### Data used
-- `ilib.data.numberformat` — locale-specific number and percentage patterns
 - `ilib.data.currency` — currency metadata and signs
 - `ilib.data.localeinfo` — locale-level defaults (currency, digits, grouping)
+- `ilib.data.localeinfo.numfmt` — locale-specific number and percentage patterns (nested under localeinfo)
 - `ilib.data.sysres` — localized strings used for formatting where applicable
 
 ### Scope
@@ -35,8 +35,7 @@ intended as a developer reference for maintenance and future conversions.
 ILibNumFmt constructor
   ├── ILibLocaleInfo → determines default digitsStyle, grouping, currency
   ├── ILibLoader.getLocaleData(locale)
-  │     ├── ['ilib.data.numberformat'] → pattern templates
-  │     └── ['ilib.data.localeinfo'] → locale defaults
+  │     └── ['ilib.data.localeinfo'] → locale defaults + ['numfmt'] pattern templates
   ├── ILibLoader.getRootData()
   │     └── ['ilib.data.currency'] → currency metadata (read by `ILibCurrency`)
   ├── _initPatterns() → select pattern based on style (number/currency/percent)
@@ -78,7 +77,7 @@ Key responsibilities:
 
 Key behaviors covered:
 - Styles: `number`, `currency`, `percentage`
-- Pattern selection: short, medium, long patterns from `ilib.data.numberformat`
+- Pattern selection: short, medium, long patterns from `ilib.data.localeinfo.numfmt`
 - Percentage scaling: multiply input by 100 when style is `percentage`
 - Negative formatting: select negative pattern from number/currency templates
 
@@ -189,7 +188,7 @@ flutter test test/numfmt/numfmt_test.dart
 flutter test test/numfmt/numfmt_af_test.dart
 flutter test test/numfmt/numfmt_am_test.dart
 flutter test test/numfmt/numfmt2_test.dart
-flutter test test/basic/flutter_ilib_math_utils_test.dart
+flutter test test/internal/math_utils_test.dart
 flutter test test/currency/currency_test.dart
 flutter test test/currency/currency_extra_test.dart
 

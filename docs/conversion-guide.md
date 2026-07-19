@@ -137,9 +137,11 @@ App start → ILibLoader.loadJSON()
 
 ```json
 {
-  "ilib.data.localeinfo": { "clock": "24", "timezone": "Asia/Seoul", ... },
-  "ilib.data.scriptinfo": { ... },
-  "ilib.data.numfmt": { ... }
+  "ilib.data.currency": { ... },
+  "ilib.data.dateformats": { ... },
+  "ilib.data.localeinfo": { "clock": "24", "timezone": "Asia/Seoul", "numfmt": { ... }, ... },
+  "ilib.data.scripts": { ... },
+  "ilib.data.sysres":   { ... }
 }
 ```
 

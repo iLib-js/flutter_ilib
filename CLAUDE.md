@@ -54,6 +54,7 @@ Options → ILibLocaleInfo (determines locale, calendar, clock, meridiems)
 | ILibNumFmt | `lib/ilib_numfmt.dart` | `ilib.data.localeinfo.numfmt` + `ilib.data.currency` |
 | ILibScriptInfo | `lib/ilib_scriptinfo.dart` | `ilib.data.scripts` (root-only, locale-independent) |
 | ILibCountry | `lib/ilib_country.dart` | `ilib.data.ctryreverse` (code↔name, per-locale) |
+| ILibDurationFmt | `lib/ilib_durationfmt.dart` | `ilib.data.sysres` + `ilib.data.plurals` + `ilib.data.dateformats` (clock style) — see [docs/durationfmt-conversion-plan.md](docs/durationfmt-conversion-plan.md) |
 
 ### Not yet ported (currently non-functional)
 The `ILibJS` interop bridge was removed in v2.0, but this class was never converted to pure
@@ -64,6 +65,7 @@ not compile and is not exported** from `flutter_ilib.dart`. Porting it is the re
 | Class | File | `evaluate()` calls to port |
 |-------|------|----------------------------|
 | ILibDurationFmt | `lib/ilib_durationfmt.dart` | 4 |
+| ILibCountry | `lib/ilib_country.dart` | 5 |
 
 ## Conversion Pattern (How to Convert a Class)
 See [docs/conversion-guide.md](docs/conversion-guide.md) for the full checklist (analyze JS source →
@@ -92,13 +94,13 @@ pure-calculation classes need no locale loading (see Conventions › Testing).
 
 ### JSON Data Keys
 - `ilib.data.astro` — astronomical coefficients (equinox, delta-T, nutation, etc. for Persian astronomical)
-- `ilib.data.localeinfo` — locale metadata (clock, calendar, timezone, digits, etc.)
 - `ilib.data.dateformats` — date/time format templates (per calendar)
+- `ilib.data.localeinfo` — locale metadata (clock, calendar, timezone, digits, etc.)
+- `ilib.data.localeinfo.numfmt` — number format patterns (nested under localeinfo)
+- `ilib.data.plurals` — CLDR plural rule tree (used by `ILibDurationFmt` plural selection)
+- `ilib.data.scriptinfo` — script metadata
 - `ilib.data.sysres` — translated strings (month/day names, AM/PM, etc.)
 - `ilib.data.zoneinfo` — timezone + DST rules
-- `ilib.data.numfmt` — number format patterns
-- `ilib.data.scriptinfo` — script metadata
-- `ilib.data.durationfmt` — duration format
 
 ### Locale Data
 - `assets/locale/` holds the JSON data files for the full set of supported locales,
@@ -124,7 +126,6 @@ lib/
 ├── ilib_calendar.dart          # Calendar factory + abstract base
 ├── ilib_casemapper.dart        # case conversion
 ├── ilib_country.dart           # country info (ilib.data.ctryreverse)
-├── ilib_durationfmt.dart       # [unconverted] duration format
 ├── ilib_numfmt.dart            # number format
 ├── ilib_scriptinfo.dart        # script info (ilib.data.scripts)
 ├── calendar/
@@ -144,6 +145,8 @@ lib/
 │   └── persian_algo_cal.dart   # + persian_algo_date.dart + persian_algo_rata_die.dart (algorithmic)
 └── internal/
     ├── ilib_utils.dart         # getLocale(), getJSONDataPaths(), etc.
+    ├── ilib_plural.dart        # getPluralCategory() — CLDR plural-rule eval (used by ILibDurationFmt)
+    ├── math_utils.dart         # rounding helpers (used by ILibNumFmt)
     └── logger/                 # internal logging (LogAdapter + package:logging); not part of the conversion
 ```
 
@@ -157,9 +160,7 @@ lib/
 > (+ `calendar-conversion.md`, `local-timezone-support.md`) **before** changing it.
 
 ### Code Style
-- `flutter analyze` must pass for the converted code (`lib/` minus the 1 unported class —
-  `ILibDurationFmt` — and its tests, which still reference the removed `ILibJS`
-  and report errors until ported).
+- `flutter analyze` must pass for the converted code.
 - **Formatting — run `dart format`.** The repo is formatted with the **short style at
   `page_width: 80`** (set in `analysis_options.yaml`; short because the package SDK floor is
   < 3.7). Format-on-save is fine; run `dart format .` before committing — a committed pre-commit
@@ -213,6 +214,7 @@ lib/
 For in-depth explanations, see `docs/`:
 - [docs/calendar-conversion.md](docs/calendar-conversion.md) — Cross-calendar conversion logic, JS vs Dart differences
 - [docs/datefmt-conversion-plan.md](docs/datefmt-conversion-plan.md) — DateFmt implementation details (tokens, templates, DST)
+- [docs/durationfmt-conversion-plan.md](docs/durationfmt-conversion-plan.md) — DurationFmt implementation details (plural-choice engine, clock style, RTL)
 - [docs/conversion-guide.md](docs/conversion-guide.md) — General JS→Dart conversion checklist
 - [docs/architecture.md](docs/architecture.md) — System architecture and data loading
 - [docs/api.md](docs/api.md) — Public API reference
@@ -226,8 +228,6 @@ For in-depth explanations, see `docs/`:
   Strategy B (`flutter_timezone`) is only needed if `getId()` must return the real zone name
   (e.g. `Asia/Seoul`) instead of `'local'`. See
   [docs/local-timezone-support.md](docs/local-timezone-support.md).
-- The 1 unported class (`ILibDurationFmt`) — it still calls the now-removed
-  `ILibJS`, so it doesn't compile / isn't exported; see Conversion Status.
 
 ## Running Tests
 ```bash

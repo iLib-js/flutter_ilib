@@ -16,9 +16,7 @@ FLUTTER_OPTIONS="--dart-define=TEST_MODE=true"
 # for every test file.
 flutter pub get
 
-# Only test/durfmt is still on JS interop (ILibDurationFmt) and does not
-# compile; country/scriptinfo are now pure Dart and run normally.
-for test_file in $(find test/ -path 'test/durfmt' -prune -o -name '*_test.dart' -print
+for test_file in $(find test/ -prune -o -name '*_test.dart' -print
 ); do
   if ! flutter test "$test_file" $FLUTTER_OPTIONS --no-pub; then
     FAILED_TESTS+=("$test_file")

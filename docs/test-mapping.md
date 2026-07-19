@@ -4,9 +4,6 @@ Mapping table showing which iLib JS test file (`github.com/iLib-js/iLib`) each f
 
 JS source path base: `js/test/`
 
-Scope: this covers the pure-Dart classes. The 1 class still on JS interop — `ILibDurationFmt` —
-and its tests (`test/durfmt/`) are not mapped here until that class is converted.
-
 ## Calendar Tests
 
 | Dart Test File | iLib JS Source File | Notes |
@@ -185,9 +182,18 @@ These tests have no JS counterpart. They verify the Flutter plugin initializatio
 |---|---|---|
 | `test/basic/flutter_ilib_test.dart` | — | Plugin initialization test |
 | `test/basic/flutter_ilib_datefmt_test.dart` | — | DateFmt basic behavior check |
-| `test/basic/flutter_ilib_math_utils_test.dart` | `js/test/testutils.js` | Math utils tests extracted from the `math_utils` section |
 | `test/basic/flutter_ilib_localeinfo_test.dart` | — | LocaleInfo basic behavior check |
-| `test/basic/flutter_ilib_utils_test.dart` | — | Internal utility tests |
+
+## Internal Tests (flutter_ilib-specific)
+
+These cover `lib/internal/` helpers and have no direct JS test counterpart
+(the plural engine is exercised indirectly in JS via `IString.formatChoice`).
+
+| Dart Test File | iLib JS Source File | Notes |
+|---|---|---|
+| `test/internal/math_utils_test.dart` | `js/test/testutils.js` | Math utils tests extracted from the `math_utils` section |
+| `test/internal/utils_test.dart` | — | Internal utility tests (`getJSONDataPaths`, locale helpers) |
+| `test/internal/plural_test.dart` | — | CLDR plural-rule engine (`getPluralCategory`) |
 
 ## Currency Tests
 
@@ -230,6 +236,20 @@ bundled `{lang}.json`. See CLAUDE.md › Conventions › Testing for the rule.
 `testCountryLocale6` (af-NA) and ~28 `testCountryLocale_<locale>` cases skipped — locale not in
 `locales.json` (out of scope even when the value reproduces via language fallback).
 `testCountryAsync` is N/A (the Dart port is synchronous). See CLAUDE.md › Conventions › Testing.
+## DurationFmt Tests
+
+| Dart Test File | iLib JS Source File | Notes |
+|---|---|---|
+| `test/durfmt/durfmt_test.dart` | `js/test/durfmt/testdurfmt.js` | Main suite: length × style matrix, singular/plural, clock overflow/no-wrap, medium→short downgrade, native digits, RTL |
+| `test/durfmt/durfmt2_test.dart` | `js/test/durfmt/testdurfmt2.js` | Additional DurationFmt cases |
+| `test/durfmt/durfmt_am_ET_test.dart` | `js/test/durfmt/testdurfmt_am_ET.js` | |
+| `test/durfmt/durfmt_ar_SA_test.dart` | `js/test/durfmt/testdurfmt_ar_SA.js` | |
+| `test/durfmt/durfmt_az_Latn_AZ_test.dart` | `js/test/durfmt/testdurfmt_az_Latn_AZ.js` | |
+| `test/durfmt/durfmt_ha_Latn_NG_test.dart` | `js/test/durfmt/testdurfmt_ha_Latn_NG.js` | |
+| `test/durfmt/durfmt_km_KH_test.dart` | `js/test/durfmt/testdurfmt_km_KH.js` | |
+| `test/durfmt/durfmt_or_IN_test.dart` | `js/test/durfmt/testdurfmt_or_IN.js` | |
+| `test/durfmt/durfmt_si_LK_test.dart` | `js/test/durfmt/testdurfmt_si_LK.js` | |
+| `test/durfmt/durfmt_sw_KE_test.dart` | `js/test/durfmt/testdurfmt_sw_KE.js` | |
 
 
 ## Common Not Converted Pattern (All Calendar Date Tests)
