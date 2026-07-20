@@ -160,8 +160,8 @@ void main() {
           _collectMismatch(
             failures: failures,
             locale: locale,
-            label: 'Duration Format',
-            actual: _tryGetValueForLabel(tester, 'Duration Format'),
+            label: 'Duration Format (long)',
+            actual: _tryGetValueForLabel(tester, 'Duration Format (long)'),
             expected: expectedDurationValues[locale],
           );
 

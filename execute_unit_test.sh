@@ -16,8 +16,7 @@ FLUTTER_OPTIONS="--dart-define=TEST_MODE=true"
 # for every test file.
 flutter pub get
 
-for test_file in $(find test/ -prune -o -name '*_test.dart' -print
-); do
+for test_file in $(find test/ -name '*_test.dart' | sort); do
   if ! flutter test "$test_file" $FLUTTER_OPTIONS --no-pub; then
     FAILED_TESTS+=("$test_file")
   fi
