@@ -56,17 +56,6 @@ Options → ILibLocaleInfo (determines locale, calendar, clock, meridiems)
 | ILibCountry | `lib/ilib_country.dart` | `ilib.data.ctryreverse` (code↔name, per-locale) |
 | ILibDurationFmt | `lib/ilib_durationfmt.dart` | `ilib.data.sysres` + `ilib.data.plurals` + `ilib.data.dateformats` (clock style) — see [docs/durationfmt-conversion-plan.md](docs/durationfmt-conversion-plan.md) |
 
-### Not yet ported (currently non-functional)
-The `ILibJS` interop bridge was removed in v2.0, but this class was never converted to pure
-Dart — it still contains `ILibJS.instance.evaluate()` calls that no longer resolve, so it **does
-not compile and is not exported** from `flutter_ilib.dart`. Porting it is the remaining work
-(the count is the number of `evaluate()` calls to replace).
-
-| Class | File | `evaluate()` calls to port |
-|-------|------|----------------------------|
-| ILibDurationFmt | `lib/ilib_durationfmt.dart` | 4 |
-| ILibCountry | `lib/ilib_country.dart` | 5 |
-
 ## Conversion Pattern (How to Convert a Class)
 See [docs/conversion-guide.md](docs/conversion-guide.md) for the full checklist (analyze JS source →
 verify JSON data → Dart implementation → convert tests → verify), the before/after example, and the
@@ -127,6 +116,7 @@ lib/
 ├── ilib_casemapper.dart        # case conversion
 ├── ilib_country.dart           # country info (ilib.data.ctryreverse)
 ├── ilib_numfmt.dart            # number format
+├── ilib_durationfmt.dart       # duration format (sysres + plurals + clock via datefmt)
 ├── ilib_scriptinfo.dart        # script info (ilib.data.scripts)
 ├── calendar/
 │   ├── rata_die.dart           # ILibRataDie abstract base (shared static methods)

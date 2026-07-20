@@ -26,12 +26,6 @@ Guide for converting flutter_ilib's JavaScript interop dependencies to pure Dart
 | `ILibScriptInfo` | `lib/ilib_scriptinfo.dart` | `ilib.data.scripts` lookup (root-only, locale-independent) |
 | `ILibCountry` | `lib/ilib_country.dart` | `ilib.data.ctryreverse` lookup (code↔name, per-locale) |
 
-### Remaining
-
-| Class | File | JS Calls | Suggested Priority |
-|-------|------|----------|-------------------|
-| `ILibDurationFmt` | `lib/ilib_durationfmt.dart` | 4 | 1st |
-
 ## Conversion Pattern
 
 ### Before (JS interop)
