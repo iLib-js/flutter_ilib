@@ -36,7 +36,7 @@ class _MyAppState extends State<MyApp> {
   String _iLibCLDRVersion = 'CLDR';
   String _currentTime = 'Current Time';
   String _currentTimeFormat = 'Current Time Format';
-  static const int _numOfItems = 6;
+  static const int _numOfItems = 7;
   List<String> newList = List<String>.generate(_numOfItems, (int index) => '-');
   String curLocale = PlatformDispatcher.instance.locale.toLanguageTag();
   List<String> results = List<String>.filled(_numOfItems, '');
@@ -107,6 +107,7 @@ class _MyAppState extends State<MyApp> {
     results[3] = getNumFmt(curLocale);
     results[4] = getCalendarName(curLocale);
     results[5] = getDurationFmt(curLocale);
+    results[6] = getCountryName(curLocale);
 
     setState(() {
       _flutterILibVersion = flutterILibVersion;
@@ -128,6 +129,7 @@ class _MyAppState extends State<MyApp> {
     results[3] = getNumFmt(curLocale);
     results[4] = getCalendarName(curLocale);
     results[5] = getDurationFmt(curLocale);
+    results[6] = getCountryName(curLocale);
     setState(() {
       newList = results;
     });
@@ -189,77 +191,81 @@ class _MyAppState extends State<MyApp> {
           alignment: Alignment.topCenter,
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 1120),
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  _heroCard(context),
-                  const SizedBox(height: 8),
-                  _localeSwitcherCard(context, perRow: 8),
-                  const SizedBox(height: 8),
-                  _sectionCard(
-                    context,
-                    title: 'Locale details',
-                    icon: Icons.tune,
-                    children: <Widget>[
-                      _infoRow(context, 'DateTime (full)', newList[0],
-                          large: true),
-                      _infoRow(context, 'Default Calendar', newList[4],
-                          large: true),
-                      _infoRow(context, 'First Day Of the Week', newList[1],
-                          large: true),
-                      _infoRow(context, 'Clock (12 or 24)', newList[2],
-                          large: true),
-                      _infoRow(context, 'Number Format', newList[3],
-                          large: true),
-                      _infoRow(context, 'Duration Format (long)', newList[5],
-                          large: true),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  IntrinsicHeight(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    _heroCard(context),
+                    const SizedBox(height: 4),
+                    _localeSwitcherCard(context, perRow: 8),
+                    const SizedBox(height: 4),
+                    _sectionCard(
+                      context,
+                      title: 'Locale details',
+                      icon: Icons.tune,
                       children: <Widget>[
-                        Expanded(
-                          child: _sectionCard(
-                            context,
-                            title: 'Live clock',
-                            icon: Icons.schedule,
-                            children: <Widget>[
-                              _infoRow(context, 'Current Time', _currentTime),
-                              _infoRow(
-                                context,
-                                'Current DateTime (full)',
-                                _currentTimeFormat,
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(width: 20),
-                        Expanded(
-                          child: _sectionCard(
-                            context,
-                            title: 'Library info',
-                            icon: Icons.info_outline,
-                            children: <Widget>[
-                              _infoRow(context, 'Package Version',
-                                  _flutterILibVersion,
-                                  subtle: true),
-                              _infoRow(context, 'Based on iLib', _iLibVersion,
-                                  subtle: true),
-                              _infoRow(
-                                  context, 'Based on CLDR', _iLibCLDRVersion,
-                                  subtle: true),
-                            ],
-                          ),
-                        ),
+                        _infoRow(context, 'DateTime (full)', newList[0],
+                            large: true),
+                        _infoRow(context, 'Default Calendar', newList[4],
+                            large: true),
+                        _infoRow(context, 'First Day Of the Week', newList[1],
+                            large: true),
+                        _infoRow(context, 'Clock (12 or 24)', newList[2],
+                            large: true),
+                        _infoRow(context, 'Number Format', newList[3],
+                            large: true),
+                        _infoRow(context, 'Duration Format (long)', newList[5],
+                            large: true),
+                        _infoRow(context, 'Country (KR)', newList[6],
+                            large: true),
                       ],
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 4),
+                    IntrinsicHeight(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          Expanded(
+                            child: _sectionCard(
+                              context,
+                              title: 'Live clock',
+                              icon: Icons.schedule,
+                              children: <Widget>[
+                                _infoRow(context, 'Current Time', _currentTime),
+                                _infoRow(
+                                  context,
+                                  'Current DateTime (full)',
+                                  _currentTimeFormat,
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 20),
+                          Expanded(
+                            child: _sectionCard(
+                              context,
+                              title: 'Library info',
+                              icon: Icons.info_outline,
+                              children: <Widget>[
+                                _infoRow(context, 'Package Version',
+                                    _flutterILibVersion,
+                                    subtle: true),
+                                _infoRow(context, 'Based on iLib', _iLibVersion,
+                                    subtle: true),
+                                _infoRow(
+                                    context, 'Based on CLDR', _iLibCLDRVersion,
+                                    subtle: true),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -278,7 +284,7 @@ class _MyAppState extends State<MyApp> {
         borderRadius: BorderRadius.circular(20),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 13.6, vertical: 10.2),
+        padding: const EdgeInsets.symmetric(horizontal: 13.6, vertical: 6),
         child: Row(
           children: <Widget>[
             CircleAvatar(
@@ -334,7 +340,7 @@ class _MyAppState extends State<MyApp> {
         borderRadius: BorderRadius.circular(20),
       ),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
+        padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -377,13 +383,17 @@ class _MyAppState extends State<MyApp> {
         : (large ? theme.textTheme.titleLarge : theme.textTheme.titleMedium)
             ?.copyWith(color: cs.onSurface, fontWeight: FontWeight.w600);
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 3),
+      padding: const EdgeInsets.symmetric(vertical: 1),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(label, style: labelStyle),
+          Expanded(
+            flex: 2,
+            child: Text(label, style: labelStyle),
+          ),
           const SizedBox(width: 16),
           Expanded(
+            flex: 3,
             child: Text(
               value,
               textAlign: TextAlign.right,
@@ -405,7 +415,7 @@ class _MyAppState extends State<MyApp> {
         borderRadius: BorderRadius.circular(20),
       ),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 16, 20, 20),
+        padding: const EdgeInsets.fromLTRB(20, 10, 20, 12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -423,7 +433,7 @@ class _MyAppState extends State<MyApp> {
                 ),
               ],
             ),
-            const SizedBox(height: 14),
+            const SizedBox(height: 8),
             _localeGrid(context, perRow: perRow),
           ],
         ),
@@ -466,7 +476,7 @@ class _MyAppState extends State<MyApp> {
         backgroundColor: selected ? cs.primary : cs.secondaryContainer,
         foregroundColor: selected ? cs.onPrimary : cs.onSecondaryContainer,
         overlayColor: selected ? cs.onPrimary : cs.onSecondaryContainer,
-        padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 10),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
           side: BorderSide(
@@ -545,6 +555,16 @@ class _MyAppState extends State<MyApp> {
   String getCalendarName(String curlo) {
     final ILibLocaleInfo locInfo = ILibLocaleInfo(curlo);
     return locInfo.getCalendar();
+  }
+
+  String getCountryName(String curlo) {
+    // Localize one reference country (KR) so the same country renders
+    // differently in each locale's language.
+    try {
+      return ILibCountry(locale: curlo).getName('KR');
+    } on ArgumentError {
+      return '-';
+    }
   }
 
   String getDurationFmt(String curlo) {

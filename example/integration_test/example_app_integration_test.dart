@@ -74,6 +74,8 @@ void main() {
     'am-ET': '1 ሰዓ፣ 30 ደቂቃ',
   };
 
+  // The app shows one reference country (KR) localized per locale, so the same
+  // country renders differently in each language.
   final Map<String, String> expectedCountryValues = <String, String>{
     'en-GB': 'South Korea',
     'en-US': 'South Korea',
@@ -150,8 +152,16 @@ void main() {
           _collectMismatch(
             failures: failures,
             locale: locale,
-            label: 'Duration Format',
-            actual: _tryGetValueForLabel(tester, 'Duration Format'),
+            label: 'Country (KR)',
+            actual: _tryGetValueForLabel(tester, 'Country (KR)'),
+            expected: expectedCountryValues[locale],
+          );
+          
+          _collectMismatch(
+            failures: failures,
+            locale: locale,
+            label: 'Duration Format (long)',
+            actual: _tryGetValueForLabel(tester, 'Duration Format (long)'),
             expected: expectedDurationValues[locale],
           );
 

@@ -11,9 +11,13 @@ FAILED_TESTS=()
 # Ignore info-level logs during test
 FLUTTER_OPTIONS="--dart-define=TEST_MODE=true"
 
-for test_file in $(find test/ \( -path 'test/country' \) -prune -o -name '*_test.dart' -print
-); do
-  if ! flutter test "$test_file" $FLUTTER_OPTIONS; then
+# Resolve dependencies once up front so the per-file loop below can skip the
+# implicit `pub get` (via --no-pub) and not reprint the resolution summary
+# for every test file.
+flutter pub get
+
+for test_file in $(find test/ -name '*_test.dart' | sort); do
+  if ! flutter test "$test_file" $FLUTTER_OPTIONS --no-pub; then
     FAILED_TESTS+=("$test_file")
   fi
 done

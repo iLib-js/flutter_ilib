@@ -149,10 +149,9 @@ mapper.toUpperCase(str)
 
 ## Recent Changes (v2.0.0)
 
-✅ Pure Dart: the locale / date / calendar / timezone path no longer uses JS interop —
+✅ Pure Dart: all classes are now native Dart with no JS interop —
 `ILibLocale`, `ILibLocaleInfo`, `ILibCaseMapper`, `ILibDate`/`ILibDateFmt`, the 9 calendars,
-`ILibTimeZone`, `ILibAstro` are all native Dart (reads `assets/locale/` JSON directly).
-Still on JS interop: `ILibCountry`, `ILibScriptInfo`, `ILibDurationFmt`, `ILibNumFmt`.  
+`ILibTimeZone`, `ILibAstro`, `ILibDurationFmt`, `ILibCountry` all read `assets/locale/` JSON directly.  
 ✅ Region-only locales (`MK`, `TR`); region files use `und-MK.json` (hyphen).  
 ✅ Based on the pinned iLib / CLDR — see [CLAUDE.md › Source Versions](../CLAUDE.md).  
 

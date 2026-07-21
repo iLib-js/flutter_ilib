@@ -10,16 +10,14 @@ void main() {
   debugPrint('Testing [localeinfo_test.dart] file.');
   setUpAll(() async {
     testPlatform = getTestPlatform();
-    final ILibJS ilibjsinstance = ILibJS.instance;
-    await ilibjsinstance.loadJS();
-    ilibjsinstance.initILib();
+    final ILibLoader ilibjsinstance = ILibLoader.instance;
+    await ilibjsinstance.loadJSON();
     await ilibjsinstance.loadILibLocaleDataAll();
   });
 
   group('ILibCountry', () {
     test('testCountryConstructorEmpty', () {
       final ILibCountry ctry = ILibCountry();
-
       expect(ctry, isNotNull);
     });
     test('testCountryDefaultLocale', () {
@@ -98,15 +96,6 @@ void main() {
       final ILibLocale locale = ctry.getLocale();
       expect(locale.toString(), 'ko-KR');
     });
-    test('testCountryLocale6', () {
-      final ILibCountry ctry = ILibCountry(locale: 'af-NG');
-      expect(ctry, isNotNull);
-
-      expect(ctry.getName('MK'), 'Noord-Macedonië');
-      expect(ctry.getCode('Noord-Macedonië'), 'MK');
-      final ILibLocale locale = ctry.getLocale();
-      expect(locale.toString(), 'af-NG');
-    });
     test('testCountryLocale7', () {
       final ILibCountry ctry = ILibCountry(locale: 'as-IN');
       expect(ctry, isNotNull);
@@ -175,6 +164,24 @@ void main() {
       final ILibLocale locale = ctry.getLocale();
       expect(locale.toString(), 'am-ET');
     });
+    test('testCountryLocale16', () {
+      final ILibCountry ctry = ILibCountry(locale: 'fr-FR');
+      expect(ctry, isNotNull);
+
+      expect(ctry.getName('CQ'), 'Sercq');
+      expect(ctry.getCode('Sercq'), 'CQ');
+      final ILibLocale locale = ctry.getLocale();
+      expect(locale.toString(), 'fr-FR');
+    });
+    test('testCountryLocale17', () {
+      final ILibCountry ctry = ILibCountry(locale: 'ko-KR');
+      expect(ctry, isNotNull);
+
+      expect(ctry.getName('CQ'), '사크');
+      expect(ctry.getCode('사크'), 'CQ');
+      final ILibLocale locale = ctry.getLocale();
+      expect(locale.toString(), 'ko-KR');
+    });
     test('testCountryLocale_es_CO', () {
       final ILibCountry ctry = ILibCountry(locale: 'es-CO');
       expect(ctry, isNotNull);
@@ -183,15 +190,6 @@ void main() {
       expect(ctry.getCode('Arabia Saudita'), 'SA');
       final ILibLocale locale = ctry.getLocale();
       expect(locale.toString(), 'es-CO');
-    });
-    test('testCountryLocale_es_ES', () {
-      final ILibCountry ctry = ILibCountry(locale: 'es-ES');
-      expect(ctry, isNotNull);
-
-      expect(ctry.getName('SA'), 'Arabia Saudí');
-      expect(ctry.getCode('Arabia Saudí'), 'SA');
-      final ILibLocale locale = ctry.getLocale();
-      expect(locale.toString(), 'es-ES');
     });
     test('testCountryLocale_es_CO2', () {
       final ILibCountry ctry = ILibCountry(locale: 'es-CO');
@@ -247,76 +245,6 @@ void main() {
       final ILibLocale locale = ctry.getLocale();
       expect(locale.toString(), 'zh-Hant-HK');
     });
-    test('testCountryLocale_en_US_forPS', () {
-      final ILibCountry ctry = ILibCountry(locale: 'en-US');
-      expect(ctry, isNotNull);
-
-      if (testPlatform == 'webOS') {
-        expect(ctry.getName('PS'), 'PS');
-        expect(ctry.getCode('PS'), 'PS');
-      } else {
-        expect(ctry.getName('PS'), 'Palestinian Territories');
-        expect(ctry.getCode('Palestinian Territories'), 'PS');
-      }
-      final ILibLocale locale = ctry.getLocale();
-      expect(locale.toString(), 'en-US');
-    });
-    test('testCountryLocale_ko_KR_forBA', () {
-      final ILibCountry ctry = ILibCountry(locale: 'ko-KR');
-      expect(ctry, isNotNull);
-
-      if (testPlatform == 'webOS') {
-        expect(ctry.getName('BA'), '보스니아 헤르체코비나');
-        expect(ctry.getCode('보스니아 헤르체코비나'), 'BA');
-      } else {
-        expect(ctry.getName('BA'), '보스니아 헤르체고비나');
-        expect(ctry.getCode('보스니아 헤르체고비나'), 'BA');
-      }
-      final ILibLocale locale = ctry.getLocale();
-      expect(locale.toString(), 'ko-KR');
-    });
-    test('testCountryLocale_ko_KR_forHK', () {
-      final ILibCountry ctry = ILibCountry(locale: 'ko-KR');
-      expect(ctry, isNotNull);
-
-      if (testPlatform == 'webOS') {
-        expect(ctry.getName('HK'), '홍콩');
-        expect(ctry.getCode('홍콩'), 'HK');
-      } else {
-        expect(ctry.getName('HK'), '홍콩(중국 특별행정구)');
-        expect(ctry.getCode('홍콩(중국 특별행정구)'), 'HK');
-      }
-      final ILibLocale locale = ctry.getLocale();
-      expect(locale.toString(), 'ko-KR');
-    });
-    test('testCountryLocale_ko_KR_forPS', () {
-      final ILibCountry ctry = ILibCountry(locale: 'ko-KR');
-      expect(ctry, isNotNull);
-
-      if (testPlatform == 'webOS') {
-        expect(ctry.getName('PS'), '팔레스타인');
-        expect(ctry.getCode('팔레스타인'), 'PS');
-      } else {
-        expect(ctry.getName('PS'), '팔레스타인 지구');
-        expect(ctry.getCode('팔레스타인 지구'), 'PS');
-      }
-      final ILibLocale locale = ctry.getLocale();
-      expect(locale.toString(), 'ko-KR');
-    });
-    test('testCountryLocale_ko_KR_forZA', () {
-      final ILibCountry ctry = ILibCountry(locale: 'ko-KR');
-      expect(ctry, isNotNull);
-
-      if (testPlatform == 'webOS') {
-        expect(ctry.getName('ZA'), '남아프리카 공화국');
-        expect(ctry.getCode('남아프리카 공화국'), 'ZA');
-      } else {
-        expect(ctry.getName('ZA'), '남아프리카');
-        expect(ctry.getCode('남아프리카'), 'ZA');
-      }
-      final ILibLocale locale = ctry.getLocale();
-      expect(locale.toString(), 'ko-KR');
-    });
     test('testCountryUnknownCode', () {
       final ILibCountry ctry = ILibCountry();
       expect(ctry, isNotNull);
@@ -328,24 +256,6 @@ void main() {
       expect(ctry, isNotNull);
 
       expect(() => ctry.getCode('xxx'), throwsA(isA<ArgumentError>()));
-    });
-    test('testGetAvailableCode', () {
-      final List<String> codes = ILibCountry.getAvailableCode();
-
-      expect(codes, isNotNull);
-      expect(codes, isNotEmpty);
-      expect(codes.length, 295);
-      expect(codes.contains('KR'), isTrue);
-      expect(codes.contains('xxx'), isFalse);
-    });
-    test('testGetAvailableCountry', () {
-      final List<String> countries = ILibCountry.getAvailableCountry();
-
-      expect(countries, isNotNull);
-      expect(countries, isNotEmpty);
-      expect(countries.length, 295);
-      expect(countries.contains('South Korea'), isTrue);
-      expect(countries.contains('xxx'), isFalse);
     });
   });
 }

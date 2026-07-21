@@ -21,8 +21,8 @@ flutter_ilib (Dart/Flutter Plugin)
     │   ├── ILibDateFmt
     │   ├── ILibCalendar (+ lib/calendar/: 9 calendars, Rata Die, Astro)
     │   ├── ILibTimeZone
+    │   ├── ILibDurationFmt
     │   └── ILibLoader (data loading)
-    │   (still on JS interop, not yet ported: ILibCountry, ILibDurationFmt)
     │
     ├── Internal (lib/internal/)
     │   ├── ilib_utils.dart (locale path generation, validation)
