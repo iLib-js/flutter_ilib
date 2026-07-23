@@ -1,5 +1,8 @@
 pubspec.lock
+
+**/flutter/generated_plugin_registrant.cc
+**/flutter/generated_plugin_registrant.h
+**/flutter/generated_plugins.cmake
+
 .dart_tool/
 build/
-
-
