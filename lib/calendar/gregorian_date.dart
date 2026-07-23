@@ -4,7 +4,9 @@ import 'gregorian_cal.dart';
 import 'ilib_date.dart';
 import 'rata_die.dart';
 
+/// A date in the Gregorian calendar.
 class GregorianDate extends ILibCalendarDate {
+  /// Create a Gregorian date from components, a Julian Day, or unix time.
   GregorianDate(
       {int? year,
       int? month,

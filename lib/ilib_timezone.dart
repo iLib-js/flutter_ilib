@@ -4,7 +4,17 @@ import 'ilib_init.dart';
 import 'ilib_localeinfo.dart';
 import 'internal/ilib_utils.dart';
 
+/// A time zone and its UTC offset / daylight-saving rules.
+///
+/// Create one from an IANA zone id (e.g. `'America/New_York'`), the special id
+/// `'local'` for the system zone, a fixed offset, or a locale. Once created it
+/// answers offset and DST queries for a given [ILibDate].
 class ILibTimeZone {
+  /// Create a zone for the IANA [id] (e.g. `'Europe/Paris'`), or the special id
+  /// `'local'` for the system zone. Unknown ids fall back to `'Etc/UTC'`.
+  ///
+  /// [allZoneData] overrides the bundled zoneinfo table; it defaults to the
+  /// data for the current locale.
   ILibTimeZone(String id, [Map<String, dynamic>? allZoneData]) : _id = id {
     if (_id == 'local') {
       // System time zone: sample the OS DST-aware offsets via core DateTime.
@@ -40,15 +50,19 @@ class ILibTimeZone {
     }
   }
 
+  /// Create a fixed-offset zone [offsetMinutes] east of UTC, with no DST. The
+  /// id is derived as an RFC 822 style string (e.g. `'UTC+0530'`).
   ILibTimeZone.fromOffset(int offsetMinutes)
       : _id = _offsetToRfc822(offsetMinutes) {
     _offset = offsetMinutes.toDouble();
     _dstSavings = 0;
   }
 
+  /// Create the zone that [locale] commonly uses.
   ILibTimeZone.fromLocale(String locale, [Map<String, dynamic>? allZoneData])
       : this(ILibLocaleInfo(locale).getTimeZone(), allZoneData);
 
+  /// Create the zone that the current locale commonly uses.
   ILibTimeZone.defaultZone([Map<String, dynamic>? allZoneData])
       : this(ILibLocaleInfo(currentLocale).getTimeZone(), allZoneData);
 
@@ -70,6 +84,8 @@ class ILibTimeZone {
         <String, dynamic>{};
   }
 
+  /// All known zone ids, or just those used in [country] (an ISO 3166-1
+  /// alpha-2 code) when given. Includes `'local'` when [country] is null.
   static List<String> getAvailableIds([String? country]) {
     final Map<String, dynamic> zoneData = _getZoneData();
     if (country == null) {
@@ -108,28 +124,48 @@ class ILibTimeZone {
   /// The year whose Jan/Jun offsets are sampled to classify standard vs daylight.
   static int Function() sampleYear = () => DateTime.now().year;
 
+  /// The id of this zone (e.g. `'America/New_York'`, `'local'`, `'Etc/UTC'`).
   String getId() => _id;
 
+  /// The standard (non-DST) offset from UTC as a `{'h': ..., 'm': ...}` map.
   Map<String, int> getRawOffset() => _minutesToHm(_offset);
 
+  /// The standard (non-DST) offset from UTC in minutes east of UTC.
   double getRawOffsetMinutes() => _offset;
 
+  /// The standard (non-DST) offset from UTC as a string (e.g. `'-5:0'`).
   String getRawOffsetStr() => _minutesToStr(_offset);
 
+  /// The daylight-saving amount as a `{'h': ..., 'm': ...}` map, or zero when
+  /// this zone does not observe DST.
   Map<String, int> getDSTSavings() =>
       _minutesToHm(_useDaylightTime() ? _dstSavings : 0);
 
+  /// The daylight-saving amount in minutes, or zero when this zone does not
+  /// observe DST.
   double getDSTSavingsMinutes() => _useDaylightTime() ? _dstSavings : 0;
 
+  /// The daylight-saving amount as a string, or `'0:0'` when this zone does not
+  /// observe DST.
   String getDSTSavingsStr() => _minutesToStr(getDSTSavingsMinutes());
 
+  /// Whether this zone observes daylight-saving time.
   bool useDaylightTime() => _useDaylightTime();
 
+  /// The ISO 3166-1 alpha-2 country code this zone belongs to, or `''`.
   String getCountry() => (_zone?['c'] as String?) ?? '';
 
+  /// The total offset from UTC for [date] (standard + DST when in effect) as a
+  /// `{'h': ..., 'm': ...}` map.
   Map<String, int> getOffset(ILibDate date) =>
       _minutesToHm(getOffsetMinutes(date));
 
+  /// The total offset from UTC for [date] in minutes east of UTC (standard +
+  /// DST when in effect).
+  ///
+  /// Set [wallTime] true when [date] carries local wall-clock components (so a
+  /// spring-forward gap is resolved as standard time); leave it false when
+  /// [date] represents an absolute UTC instant.
   double getOffsetMinutes(ILibDate date, {bool wallTime = false}) {
     if (_isLocal) {
       if (wallTime && date.dst == null) {
@@ -165,13 +201,21 @@ class ILibTimeZone {
   static int _instantMillis(ILibDate date) =>
       ((date.getJulianDay() - 2440587.5) * 86400000).round();
 
+  /// The total offset from UTC for [date] as a string (e.g. `'-4:0'`).
   String getOffsetStr(ILibDate date) => _minutesToStr(getOffsetMinutes(date));
 
+  /// The total offset from UTC for [date] in milliseconds.
   int getOffsetMillis(ILibDate date) =>
       (getOffsetMinutes(date) * 60000).round();
 
+  /// The standard (non-DST) offset from UTC in milliseconds.
   int getRawOffsetMillis() => (_offset * 60000).round();
 
+  /// A human-readable name for this zone at [date].
+  ///
+  /// [style] selects the form: `'rfc822'` for a numeric offset (e.g.
+  /// `'-0400'`), `'long'` for the full name (e.g. `'Eastern Standard Time'`),
+  /// or the default abbreviation (e.g. `'EST'`).
   String getDisplayName(ILibDate date, [String style = '']) {
     if (_zone == null) {
       return _formatRfc822(_offset);
@@ -214,6 +258,10 @@ class ILibTimeZone {
     }
   }
 
+  /// Whether daylight-saving time is in effect for [date] in this zone.
+  ///
+  /// Set [wallTime] true when [date] carries local wall-clock components rather
+  /// than an absolute UTC instant.
   bool inDaylightTime(ILibDate date, {bool wallTime = false}) {
     if (_isLocal) {
       // System time zone: probe the OS for the offset at this instant and compare it

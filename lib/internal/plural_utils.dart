@@ -1,14 +1,13 @@
-/// CLDR plural-rule evaluation (`ilib.data.plurals`).
-///
-/// Selects the plural category (`one`, `two`, `few`, `many`, `other`, ...) for
-/// a given number. The rule tree is the parsed CLDR form used by iLib: each
-/// category maps to a boolean expression over the CLDR plural operands, built
-/// from nested `and`/`or`/`eq`/`neq`/`is`/`isnot`/`inrange`/`within`/`notin`/
-/// `mod` nodes. The bundled iLib v14.22.0 data only uses
-/// `and`/`or`/`eq`/`neq`/`mod`, but the full operator set is supported so
-/// future locale data (or the legacy CLDR `n is 1` / `n within 2..4` forms)
-/// evaluates correctly.
-library;
+// CLDR plural-rule evaluation (`ilib.data.plurals`).
+//
+// Selects the plural category (`one`, `two`, `few`, `many`, `other`, ...) for
+// a given number. The rule tree is the parsed CLDR form used by iLib: each
+// category maps to a boolean expression over the CLDR plural operands, built
+// from nested `and`/`or`/`eq`/`neq`/`is`/`isnot`/`inrange`/`within`/`notin`/
+// `mod` nodes. The bundled iLib v14.22.0 data only uses
+// `and`/`or`/`eq`/`neq`/`mod`, but the full operator set is supported so
+// future locale data (or the legacy CLDR `n is 1` / `n within 2..4` forms)
+// evaluates correctly.
 
 /// Returns the CLDR plural class for [n] using [rules].
 ///

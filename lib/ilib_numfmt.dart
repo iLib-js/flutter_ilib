@@ -4,8 +4,13 @@ import 'ilib_localeinfo.dart';
 import 'internal/ilib_utils.dart' as ilib_utils;
 import 'internal/math_utils.dart' as math_utils;
 
+/// Formats numbers, currency amounts, and percentages for a locale.
+///
+/// Configure with [ILibNumFmtOptions] then call [format] with any [num] or
+/// [String] value. The formatter is immutable once created.
 class ILibNumFmt {
-  /// [options] Set the Options for formatting
+  /// Create a formatter from [options]. Unspecified options fall back to
+  /// the locale's defaults.
   ILibNumFmt(ILibNumFmtOptions options) {
     _locale = options.locale ?? ilib_utils.getLocale();
     _type = _validType(options.type);
@@ -520,18 +525,9 @@ String _pad(String value, int length, [bool right = false]) {
   return right ? value + padding : padding + value;
 }
 
-/// Options for configuring the number formatter.
+/// Options for configuring [ILibNumFmt]. Unspecified fields fall back to the
+/// locale's defaults.
 class ILibNumFmtOptions {
-  /// [locale] Locales are specified either with a specifier string that follows the BCP-47 convention.<br>
-  /// [useNative] The flag used to determine whether to use the native script settings for formatting the numbers.<br>
-  /// [type] The formatter type. Valid values: "number", "currency", "percentage". Default: "number".<br>
-  /// [currency] ISO 4217 currency code for "currency" type. Required for currency formatting.<br>
-  /// [maxFractionDigits] Maximum digits after the decimal. `-1` means unlimited, `0` means no fractional digits.<br>
-  /// [minFractionDigits] Minimum digits after the decimal. Pads with zeros if necessary.<br>
-  /// [significantDigits] Maximum significant digits, applied before and after the decimal.<br>
-  /// [roundingMode] Governs rounding behavior. Examples: "up", "down", "halfup", "halfeven".<br>
-  /// [style] Formatting style.<br>
-  /// For "currency": "common" (symbol) or "iso" (ISO code). For "number": "standard", "scientific", "native", or "nogrouping".<br>
   ILibNumFmtOptions({
     this.locale,
     this.type,
@@ -544,13 +540,37 @@ class ILibNumFmtOptions {
     this.useNative,
   });
 
+  /// BCP-47 locale string to format for.
   String? locale;
+
+  /// Formatter type: `'number'` (default), `'currency'`, or `'percentage'`.
   String? type;
+
+  /// ISO 4217 currency code (e.g. `'USD'`). Required when [type] is
+  /// `'currency'`.
   String? currency;
+
+  /// Maximum digits after the decimal point. `-1` means unlimited, `0` means
+  /// no fractional part.
   int? maxFractionDigits;
+
+  /// Minimum digits after the decimal point. Output is zero-padded to reach
+  /// this length.
   int? minFractionDigits;
+
+  /// Maximum total significant digits, applied before and after the decimal.
+  /// Clamped to [1..20].
   int? significantDigits;
+
+  /// Formatting style.<br>
+  /// For `'number'`: `'standard'`, `'scientific'`, `'native'`, or `'nogrouping'`.<br>
+  /// For `'currency'`: `'common'` (currency symbol) or `'iso'` (ISO code).
   String? style;
+
+  /// Rounding mode: `'up'`, `'down'`, `'halfup'`, `'halfdown'`, `'halfeven'`,
+  /// `'halfodd'`, `'ceiling'`, or `'floor'`. Defaults to the locale's setting.
   String? roundingMode;
+
+  /// Whether to use native-script digits. Defaults to the locale's setting.
   bool? useNative;
 }

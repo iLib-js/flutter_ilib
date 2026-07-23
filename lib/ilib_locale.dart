@@ -1,9 +1,12 @@
+/// A parsed BCP-47 locale identifier (language, script, region, variant).
+///
+/// Accepts a BCP-47 string (e.g. `'zh-Hans-CN'`), an existing [ILibLocale]
+/// to copy, or individual components. All getters return the normalized
+/// component codes as parsed from the specifier.
 class ILibLocale {
-  /// [language] the ISO 639 2-letter code for the language,<br>
-  /// or a full locale spec in BCP-47 format, or another Locale instance to copy from
-  /// [region] the ISO 3166 2-letter code for the region
-  /// [variant] the name of the variant of this locale, if any
-  /// [script] the ISO 15924 code of the script for this locale, if any
+  /// Create a locale from a BCP-47 [language] string (e.g. `'en-US'`), an
+  /// existing [ILibLocale] to copy, or separate [language]/[region]/[script]/
+  /// [variant] components. Pass no argument for an empty locale.
   factory ILibLocale(
       [Object? language, String? region, String? variant, String? script]) {
     if (language is String) {
@@ -88,14 +91,24 @@ class ILibLocale {
     instance._genSpec();
     return instance;
   }
+
+  /// ISO 639 2-letter language code (e.g. `'en'`), or null if unspecified.
   String? language;
+
+  /// ISO 3166-1 alpha-2 region code (e.g. `'US'`), or null if unspecified.
   String? region;
+
+  /// ISO 15924 4-letter script code (e.g. `'Hans'`), or null if unspecified.
   String? script;
+
+  /// Variant tag, or null if unspecified.
   String? variant;
+
+  /// The full BCP-47 specifier (e.g. `'zh-Hans-CN'`), or null before
+  /// [_genSpec] runs.
   String? spec;
 
-  // Map of ISO 3166-1 alpha-2 to alpha-3 region codes
-  // from http://en.wikipedia.org/wiki/ISO_3166-1
+  /// ISO 3166-1 alpha-2 → alpha-3 region code lookup table.
   static const Map<String, String> a2toa3regmap = <String, String>{
     'AF': 'AFG',
     'AX': 'ALA',
@@ -348,7 +361,7 @@ class ILibLocale {
     'ZW': 'ZWE'
   };
 
-  // Map of ISO 639-1 to ISO 639-3 language codes
+  /// ISO 639-1 alpha-1 → alpha-3 language code lookup table.
   static const Map<String, String> a1toa3langmap = <String, String>{
     'ab': 'abk',
     'aa': 'aar',
@@ -536,8 +549,7 @@ class ILibLocale {
     'zu': 'zul'
   };
 
-  // List of ISO 15924 script codes
-  // the list below is originally from https://unicode.org/iso15924/iso15924-codes.html
+  /// ISO 15924 script codes. Source: https://unicode.org/iso15924/iso15924-codes.html
   static const List<String> iso15924 = <String>[
     'Adlm',
     'Afak',
@@ -912,6 +924,7 @@ class ILibLocale {
     return spec;
   }
 
+  /// The full BCP-47 specifier string (same as [getSpec]).
   @override
   String toString() {
     return getSpec();
@@ -954,6 +967,9 @@ class ILibLocale {
             (_isRegionCode(region) && a2toa3regmap.containsKey(region)));
   }
 
+  /// Return all available locale specifiers.
+  ///
+  /// Not yet implemented.
   static List<String> getAvailableLocales() {
     throw UnimplementedError('getAvailableLocales is not implemented yet');
   }

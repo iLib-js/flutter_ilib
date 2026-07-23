@@ -4,9 +4,8 @@ import 'ilib_init.dart';
 ///
 /// The script metadata is locale-independent (it lives in `root.json` only,
 /// under the `ilib.data.scripts` key). Each entry maps a 4-letter script code
-/// to its number (`nb`),
-/// English name (`nm`), long identifier (`lid`), and the `rtl`/`ime`/`casing`
-/// flags.
+/// to its number (`nb`), English name (`nm`), long identifier (`lid`), and the
+/// `rtl`/`ime`/`casing` flags.
 class ILibScriptInfo {
   /// [script] The ISO 15924 4-letter identifier for the script. Required; pass
   /// an empty string `''` for a no-info instance, where `_info` is null and all
@@ -18,6 +17,7 @@ class ILibScriptInfo {
     _info = scripts?[script] as Map<String, dynamic>?;
   }
 
+  /// The ISO 15924 4-letter script code this instance was created with.
   String? script;
 
   /// Metadata for [script], or null if the script code is unknown.

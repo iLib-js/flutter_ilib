@@ -2,9 +2,14 @@ import 'ilib_init.dart';
 import 'ilib_locale.dart';
 import 'internal/ilib_utils.dart' as ilib_utils;
 
+/// Locale-specific formatting and regional conventions for a given locale.
+///
+/// Provides locale data such as calendar, clock convention, number formatting,
+/// currency, first day of week, paper size, and script information.
 class ILibLocaleInfo {
-  /// [lo] Set the locale for which the info is sought.
-  /// Accepts a [String] locale spec, an [ILibLocale] instance, or nothing (undefined).
+  /// Create a [ILibLocaleInfo] for [lo].<br>
+  /// [lo] accepts a [String] locale spec, an [ILibLocale] instance,
+  /// or nothing to use the current locale.
   factory ILibLocaleInfo([Object? lo]) {
     final ILibLocale localeObj;
     if (lo is String) {
@@ -27,6 +32,7 @@ class ILibLocaleInfo {
         Map<String, dynamic>.from(_defaultInfo);
   }
 
+  /// The BCP-47 locale spec this info was created with, or null if none was given.
   String? locale;
   late ILibLocale _localeObj;
   Map<String, dynamic> _info = <String, dynamic>{};
@@ -324,8 +330,12 @@ class ILibLocaleInfo {
   }
 }
 
-/// Represents currency formatting templates for a specific locale.
+/// Currency formatting templates for a locale.
+///
+/// Each field is a format string where `{s}` is the currency sign and `{n}`
+/// is the formatted number.
 class CurrencyFormats {
+  /// Create a [CurrencyFormats] with the given templates.
   CurrencyFormats({
     this.common,
     this.commonNegative,
@@ -333,8 +343,15 @@ class CurrencyFormats {
     this.isoNegative,
   });
 
+  /// Standard positive format (e.g. `'{s} {n}'`).
   String? common;
+
+  /// Standard negative format (e.g. `'-{s} {n}'`).
   String? commonNegative;
+
+  /// ISO code positive format (e.g. `'USD {n}'`).
   String? iso;
+
+  /// ISO code negative format (e.g. `'(USD {n})'`).
   String? isoNegative;
 }

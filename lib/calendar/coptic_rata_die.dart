@@ -1,7 +1,9 @@
 import 'calendar_utils.dart';
 import 'rata_die.dart';
 
+/// Coptic Rata Die implementation.
 class CopticRataDie extends ILibRataDie {
+  /// Create a [CopticRataDie] from date components, a Julian Day, or unix time.
   CopticRataDie(
       {int? year,
       int? month,
@@ -42,6 +44,7 @@ class CopticRataDie extends ILibRataDie {
     }
   }
 
+  /// The Julian Day of the Coptic calendar epoch.
   static const double epoch = 1825028.5;
 
   late double _rd;
@@ -91,6 +94,7 @@ class CopticRataDie extends ILibRataDie {
     return years + dayInYear + rdTime;
   }
 
+  /// The calendar year that contains the rata die [rd].
   static int calcYear(double rd) {
     return floorDiv(4 * (rd.floor() - 1) + 1463, 1461);
   }

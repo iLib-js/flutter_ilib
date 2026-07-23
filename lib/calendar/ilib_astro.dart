@@ -5,6 +5,12 @@ import 'package:flutter/foundation.dart' show visibleForTesting;
 import '../ilib_init.dart';
 import 'greg_rata_die.dart';
 
+/// Astronomical calculations used by calendar systems that track solar and
+/// lunar events (equinoxes, new moons, solar longitude).
+///
+/// All methods operate on Julian Day numbers and return values in degrees
+/// unless noted otherwise. Data is loaded lazily from the bundled
+/// `ilib.data.astro` table in `root.json`.
 class ILibAstro {
   ILibAstro._();
 
@@ -35,6 +41,9 @@ class ILibAstro {
   static double _fixangr(double a) =>
       a - (2 * pi) * (a / (2 * pi)).floorToDouble();
 
+  /// The Julian Day of the equinox or solstice for [year].
+  /// [which]: 0 = March equinox, 1 = June solstice, 2 = September equinox,
+  /// 3 = December solstice.
   static double equinox(int year, int which) {
     final Map<String, dynamic> data = _getData();
     final List<dynamic> jde0tab;
@@ -72,6 +81,8 @@ class ILibAstro {
     return jde0 + (s * 0.00001) / deltaL;
   }
 
+  /// The difference ΔT (seconds) between Terrestrial Dynamical Time and
+  /// Universal Time for the given decimal [year].
   static double deltat(double year) {
     final Map<String, dynamic> data = _getData();
     final List<dynamic> deltaTtab = data['_deltaTtab'] as List<dynamic>;
@@ -98,6 +109,7 @@ class ILibAstro {
     return dt;
   }
 
+  /// The obliquity of the ecliptic (degrees) at Julian Day [jd].
   static double obliqeq(double jd) {
     final Map<String, dynamic> data = _getData();
     final List<dynamic> oterms = data['_oterms'] as List<dynamic>;
@@ -115,6 +127,9 @@ class ILibAstro {
     return eps;
   }
 
+  /// Sun position data at Julian Day [jd]. Returns a map with keys
+  /// `meanLongitude`, `meanAnomaly`, `equationOfCenter`, `sunLongitude`,
+  /// `apparentLong`, `inclination`, and `apparentRightAscension` (all degrees).
   static Map<String, double> sunpos(double jd) {
     final double t = (jd - 2451545.0) / 36525.0;
     final double t2 = t * t;
@@ -150,6 +165,8 @@ class ILibAstro {
     };
   }
 
+  /// Nutation components at Julian Day [jd]. Returns `deltaPsi` (nutation in
+  /// longitude) and `deltaEpsilon` (nutation in obliquity), both in degrees.
   static Map<String, double> nutation(double jd) {
     final Map<String, dynamic> data = _getData();
     final List<dynamic> nutArgMult = data['_nutArgMult'] as List<dynamic>;
@@ -208,6 +225,7 @@ class ILibAstro {
     return result;
   }
 
+  /// Correction (days) from Universal Time to Ephemeris Time at Julian Day [jd].
   @visibleForTesting
   static double ephemerisCorrection(double jd) {
     final int year = GregRataDie.calcYear(jd - 1721424.5);
@@ -258,16 +276,19 @@ class ILibAstro {
     return jd - ephemerisCorrection(jd);
   }
 
+  /// Julian centuries from J2000.0 for Julian Day [jd] in Ephemeris Time.
   @visibleForTesting
   static double julianCenturies(double jd) {
     return (_ephemerisFromUniversal(jd) - 2451545.0) / 36525.0;
   }
 
+  /// Solar aberration correction (degrees) for Julian centuries [c].
   @visibleForTesting
   static double aberration(double c) {
     return 9.74e-05 * _dcos(177.63 + 35999.01847999999 * c) - 0.005575;
   }
 
+  /// Nutation correction (degrees) for Julian centuries [c].
   @visibleForTesting
   static double nutation2(double c) {
     final Map<String, dynamic> data = _getData();
@@ -278,6 +299,7 @@ class ILibAstro {
     return -0.004778 * _dsin(a) - 0.0003667 * _dsin(b);
   }
 
+  /// The apparent solar longitude (degrees) at Julian Day [jd].
   static double solarLongitude(double jd) {
     final Map<String, dynamic> data = _getData();
     final double c = julianCenturies(jd);
@@ -314,6 +336,8 @@ class ILibAstro {
     return (lo + hi) / 2;
   }
 
+  /// The Julian Day of the next moment at or after [jd] when the sun reaches
+  /// the given ecliptic [longitude] (degrees).
   static double nextSolarLongitude(double jd, double longitude) {
     const double rate = 365.242189 / 360.0;
     final double tau = jd + rate * _fixangle(longitude - solarLongitude(jd));
@@ -324,6 +348,7 @@ class ILibAstro {
     });
   }
 
+  /// The apparent lunar longitude (degrees) at Julian Day [jd].
   static double lunarLongitude(double jd) {
     final Map<String, dynamic> data = _getData();
     final double c = julianCenturies(jd);
@@ -374,6 +399,7 @@ class ILibAstro {
     return _fixangle(lunarLongitude(jd) - solarLongitude(jd));
   }
 
+  /// The Julian Day of the [n]-th new moon after the epoch (J2000.0).
   static double newMoonTime(double n) {
     final Map<String, dynamic> data = _getData();
     final double k = n - 24724;
@@ -420,6 +446,7 @@ class ILibAstro {
         approx + correction + extra + additional + 1721424.5);
   }
 
+  /// The Julian Day of the most recent new moon strictly before [jd].
   static double newMoonBefore(double jd) {
     final double phase = _lunarSolarAngle(jd);
     double guess = ((jd - 11.450086114414322 - 1721424.5) / 29.530588853000001 -
@@ -436,6 +463,7 @@ class ILibAstro {
     return last;
   }
 
+  /// The Julian Day of the first new moon at or after [jd].
   static double newMoonAtOrAfter(double jd) {
     final double phase = _lunarSolarAngle(jd);
     double guess = ((jd - 11.450086114414322 - 1721424.5) / 29.530588853000001 -
@@ -448,22 +476,30 @@ class ILibAstro {
     return current;
   }
 
+  /// Round [jd] down to the start of its Julian Day (noon boundary).
   static double floorToJD(double jd) {
     return (jd - 0.5).floorToDouble() + 0.5;
   }
 
+  /// Round [jd] up to the start of the next Julian Day (noon boundary).
   static double ceilToJD(double jd) {
     return (jd + 0.5).ceilToDouble() - 0.5;
   }
 
+  /// Convert a local Julian Day [local] to Universal Time by subtracting the
+  /// [zone] offset (minutes).
   static double universalFromLocal(double local, double zone) {
     return local - zone / 1440;
   }
 
+  /// Convert a Universal Time Julian Day [universal] to local time by adding
+  /// the [zone] offset (minutes).
   static double localFromUniversal(double universal, double zone) {
     return universal + zone / 1440;
   }
 
+  /// The equation of time (fraction of a day) at Julian Day [jd]: the
+  /// difference between apparent solar time and mean solar time.
   static double equationOfTime(double jd) {
     final double tau = (jd - 2451545.0) / 365250.0;
     double l0 = 280.4664567 +

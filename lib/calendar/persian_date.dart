@@ -3,7 +3,9 @@ import 'ilib_date.dart';
 import 'persian_rata_die.dart';
 import 'rata_die.dart';
 
+/// A date in the Persian (Solar Hijri) astronomical calendar.
 class PersianDate extends ILibCalendarDate {
+  /// Create a Persian date from components, a Julian Day, or unix time.
   PersianDate(
       {int? year,
       int? month,

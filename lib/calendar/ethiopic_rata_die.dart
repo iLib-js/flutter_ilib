@@ -1,7 +1,9 @@
 import 'calendar_utils.dart';
 import 'rata_die.dart';
 
+/// Ethiopic Rata Die implementation.
 class EthiopicRataDie extends ILibRataDie {
+  /// Create a [EthiopicRataDie] from date components, a Julian Day, or unix time.
   EthiopicRataDie(
       {int? year,
       int? month,
@@ -42,6 +44,7 @@ class EthiopicRataDie extends ILibRataDie {
     }
   }
 
+  /// The Julian Day of the Ethiopic calendar epoch.
   static const double epoch = 1724219.75;
 
   late double _rd;
@@ -91,6 +94,7 @@ class EthiopicRataDie extends ILibRataDie {
     return years + dayInYear + rdTime;
   }
 
+  /// The calendar year that contains the rata die [rd].
   static int calcYear(double rd) {
     return floorDiv(4 * (rd.floor() - 1) + 1463, 1461);
   }

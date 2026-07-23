@@ -1,7 +1,7 @@
-/// Math utilities.
-///
-/// Includes rounding modes (halfdown, halfup, halfeven, halfodd, up, down,
-/// ceiling, floor) and numeric helpers.
+// Math utilities.
+//
+// Includes rounding modes (halfdown, halfup, halfeven, halfodd, up, down,
+// ceiling, floor) and numeric helpers.
 import 'dart:math' as math;
 
 /// Shift decimal by [precision] places (positive = right, negative = left).

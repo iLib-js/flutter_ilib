@@ -1,5 +1,6 @@
 import '../ilib_calendar.dart';
 
+/// The Gregorian (proleptic) calendar.
 class GregorianCal implements ILibCalendar {
   static const List<int> _monthLengths = <int>[
     31,

@@ -3,7 +3,9 @@ import 'ilib_date.dart';
 import 'islamic_rata_die.dart';
 import 'rata_die.dart';
 
+/// A date in the Islamic (Hijri) calendar.
 class IslamicDate extends ILibCalendarDate {
+  /// Create an Islamic date from components, a Julian Day, or unix time.
   IslamicDate(
       {int? year,
       int? month,

@@ -6,7 +6,15 @@ import 'ilib_localeinfo.dart';
 import 'ilib_timezone.dart';
 import 'internal/ilib_utils.dart' as ilib_utils;
 
+/// Formats dates and times for a locale, calendar, and time zone.
+///
+/// Configure it with an [ILibDateFmtOptions] and then call [format] with a
+/// date. The formatter is immutable once created and can format many dates
+/// with the same settings. A custom [ILibDateFmtOptions.template] overrides the
+/// locale's default format.
 class ILibDateFmt {
+  /// Create a formatter from [options]. Unspecified options fall back to the
+  /// locale's defaults.
   ILibDateFmt(ILibDateFmtOptions options) {
     _locale = options.locale ?? ilib_utils.getLocale();
     _type = options.type ?? 'date';
@@ -74,6 +82,9 @@ class ILibDateFmt {
   late List<String> _templateArr;
   String? _digits;
 
+  /// Format [date] according to this formatter's settings and return the
+  /// resulting string. [date] may be any [ILibDate], including an
+  /// [ILibDateOptions] describing the date to format.
   String format(ILibDate date) {
     ILibDate resolved = date;
     if (date is ILibDateOptions) {
@@ -252,16 +263,21 @@ class ILibDateFmt {
     return date;
   }
 
+  /// The calendar used to format dates and times.
   ILibCalendar getCalendar() => _calendar;
 
+  /// The clock convention in use: 12 or 24 (hour).
   int getClock() {
     return int.parse(_clock ?? '12');
   }
 
+  /// The template string used to format dates and times.
   String getTemplate() {
     return _template;
   }
 
+  /// The ordered ranges of meridiems (e.g. AM/PM) this formatter recognizes,
+  /// which vary by the locale's meridiems style.
   List<MeridiemsInfo> getMeridiemsRange() {
     switch (_meridiems) {
       case 'chinese':
@@ -304,6 +320,8 @@ class ILibDateFmt {
     }
   }
 
+  /// The order of the day/month/year components in this locale's date format,
+  /// as a string of `d`, `m`, and `y` (e.g. `'dmy'`, `'mdy'`).
   String getDateComponentOrder() {
     final Map<String, dynamic>? calFormats = _getCalendarFormats();
     if (calFormats == null) {
@@ -859,6 +877,8 @@ class ILibDateFmt {
   }
 }
 
+/// Options that configure an [ILibDateFmt]. Unspecified options fall back to
+/// the locale's defaults.
 class ILibDateFmtOptions {
   ILibDateFmtOptions(
       {this.locale,
@@ -872,22 +892,54 @@ class ILibDateFmtOptions {
       this.clock,
       this.template,
       this.meridiems});
+
+  /// BCP-47 locale string to format for.
   String? locale;
+
+  /// Approximate size of the formatted string: `'short'`, `'medium'`,
+  /// `'long'`, or `'full'`.
   String? length;
+
+  /// Whether to format `'date'` only, `'time'` only, or `'datetime'`.
   String? type;
+
+  /// The calendar to format in (e.g. `'gregorian'`, `'islamic'`).
   String? calendar;
+
+  /// IANA timezone name to format times in.
   String? timezone;
+
+  /// Which date components to include, as a string of `d`/`m`/`y` (e.g.
+  /// `'dmy'`).
   String? date;
+
+  /// Which time components to include (e.g. `'ahm'` for meridiem/hour/minute).
   String? time;
+
+  /// Clock convention: `'12'` or `'24'` hour.
   String? clock;
+
+  /// A fixed template string that overrides the locale's default format.
   String? template;
+
+  /// Style of meridiems (e.g. AM/PM) to use.
   String? meridiems;
+
+  /// Whether to use native-script digits when formatting numbers.
   bool? useNative;
 }
 
+/// One meridiem range (e.g. AM or PM): its localized [name] and the wall-clock
+/// [start]/[end] times (`'HH:MM'`) it covers.
 class MeridiemsInfo {
   MeridiemsInfo({this.name, this.start, this.end});
+
+  /// The localized display name of this meridiem.
   String? name;
+
+  /// The inclusive start of the range as `'HH:MM'`.
   String? start;
+
+  /// The inclusive end of the range as `'HH:MM'`.
   String? end;
 }

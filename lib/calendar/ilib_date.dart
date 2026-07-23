@@ -3,13 +3,32 @@ import '../ilib_localeinfo.dart';
 import '../ilib_timezone.dart';
 import 'rata_die.dart';
 
+/// Abstract base for all calendar-specific date implementations.
+///
+/// Bridges the generic [ILibDate] interface with calendar arithmetic:
+/// subclasses implement [getYears]/[getMonths]/[getDays]/… and the RataDie
+/// factory methods; this class provides the shared timezone, week, and
+/// day-of-week logic that works identically across all calendars.
 abstract class ILibCalendarDate implements ILibDate {
+  /// The year component in this calendar.
   int getYears();
+
+  /// The month component (1-based) in this calendar.
   int getMonths();
+
+  /// The day-of-month component in this calendar.
   int getDays();
+
+  /// The hour component (0–23).
   int getHours();
+
+  /// The minute component (0–59).
   int getMinutes();
+
+  /// The second component (0–59).
   int getSeconds();
+
+  /// The millisecond component (0–999).
   int getMilliseconds();
 
   @override
@@ -41,6 +60,8 @@ abstract class ILibCalendarDate implements ILibDate {
   double getJulianDay();
   @override
   String getCalendar();
+
+  /// The [ILibRataDie] instance backing this date.
   ILibRataDie getRataDieInstance();
 
   @override
@@ -52,8 +73,12 @@ abstract class ILibCalendarDate implements ILibDate {
   @override
   int getEra() => (getYears() < 1) ? -1 : 1;
 
+  /// Timezone offset in fractional days (east of UTC), cached after the first
+  /// timezone resolution so repeated queries avoid redundant DST lookups.
   double tzOffsetDays = 0;
 
+  /// Adjust the rata die [rd] (from-components / wall-clock) to UTC by
+  /// subtracting the timezone offset. Updates [tzOffsetDays] as a side-effect.
   double adjustRdForTimezone(double rd) {
     final String? tz = timezone;
     if (tz == null) {
@@ -68,8 +93,11 @@ abstract class ILibCalendarDate implements ILibDate {
     return rd - tzOffsetDays;
   }
 
+  /// The rata die of this date's wall-clock instant (UTC rata die +
+  /// [tzOffsetDays]).
   double getWallClockRd() => getRataDie() + tzOffsetDays;
 
+  /// Resolve and cache [tzOffsetDays] for the from-UTC-instant path.
   void calcTimezoneOffset() {
     final String? tz = timezone;
     if (tz == null) {
@@ -99,6 +127,8 @@ abstract class ILibCalendarDate implements ILibDate {
     return ((jd - 2440587.5) * 86400000).round();
   }
 
+  /// The rata die of the first Sunday on or after January 1 of [year], used
+  /// as the anchor for ISO week-of-year calculations.
   double firstSunday(int year) {
     final ILibRataDie firstDay = newRd(
       year: year,
@@ -156,34 +186,39 @@ abstract class ILibCalendarDate implements ILibDate {
     return (rd - weekStart) ~/ 7 + 1;
   }
 
-  // Pass tzOffsetDays so the day-of-week is evaluated in wall-clock (local) time,
-  // consistent with getDayOfWeek() (RataDie computes on rd+offset, then -offset).
+  /// The nearest date on or before this date whose day of week is [dayOfWeek]
+  /// (0 = Sunday … 6 = Saturday), evaluated in wall-clock time.
   ILibCalendarDate onOrBefore(int dayOfWeek) {
     final double rd =
         getRataDieInstance().onOrBefore(dayOfWeek, offset: tzOffsetDays);
     return newDateFromRd(rd);
   }
 
+  /// The nearest date on or after this date whose day of week is [dayOfWeek].
   ILibCalendarDate onOrAfter(int dayOfWeek) {
     final double rd =
         getRataDieInstance().onOrAfter(dayOfWeek, offset: tzOffsetDays);
     return newDateFromRd(rd);
   }
 
+  /// The nearest date strictly before this date whose day of week is [dayOfWeek].
   ILibCalendarDate before(int dayOfWeek) {
     final double rd =
         getRataDieInstance().before(dayOfWeek, offset: tzOffsetDays);
     return newDateFromRd(rd);
   }
 
+  /// The nearest date strictly after this date whose day of week is [dayOfWeek].
   ILibCalendarDate after(int dayOfWeek) {
     final double rd =
         getRataDieInstance().after(dayOfWeek, offset: tzOffsetDays);
     return newDateFromRd(rd);
   }
 
+  /// Create a new date of this calendar type from the given rata die [rd].
   ILibCalendarDate newDateFromRd(double rd);
 
+  /// Create the [ILibRataDie] for this calendar from the given components.
   ILibRataDie newRd({
     required int year,
     required int month,
@@ -194,5 +229,6 @@ abstract class ILibCalendarDate implements ILibDate {
     required int millisecond,
   });
 
+  /// Create the [ILibRataDie] for this calendar from an existing rata die [rd].
   ILibRataDie newRdFromRd(double rd);
 }

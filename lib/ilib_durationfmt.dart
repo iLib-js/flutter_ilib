@@ -3,8 +3,8 @@ import 'ilib_datefmt.dart';
 import 'ilib_init.dart';
 import 'ilib_localeinfo.dart';
 import 'ilib_scriptinfo.dart';
-import 'internal/ilib_plural.dart' as ilib_plural;
 import 'internal/ilib_utils.dart' as ilib_utils;
+import 'internal/plural_utils.dart' as plural_utils;
 
 class ILibDurationFmt {
   ILibDurationFmt(ILibDurationFmtOptions options) {
@@ -219,7 +219,7 @@ class ILibDurationFmt {
       return '';
     }
 
-    final String pluralCls = ilib_plural.getPluralCategory(_pluralRules, n);
+    final String pluralCls = plural_utils.getPluralCategory(_pluralRules, n);
     final List<String> choices = template.split('|');
     String defaultCase = '';
     String? pluralMatch;
@@ -311,9 +311,7 @@ class ILibDurationFmt {
     if (_style == 'clock') {
       final ILibDateFmt? fmt;
       if (components.hour != null) {
-        fmt = (components.second != null)
-            ? _timeFmtHMS
-            : _timeFmtHM;
+        fmt = (components.second != null) ? _timeFmtHMS : _timeFmtHM;
       } else {
         fmt = _timeFmtMS;
       }

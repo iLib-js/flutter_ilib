@@ -5,7 +5,9 @@ import 'ilib_date.dart';
 import 'rata_die.dart';
 import 'thaisolar_rata_die.dart';
 
+/// A date in the Thai Solar calendar.
 class ThaiSolarDate extends ILibCalendarDate {
+  /// Create a Thai Solar date from components, a Julian Day, or unix time.
   ThaiSolarDate(
       {int? year,
       int? month,
