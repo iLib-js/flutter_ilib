@@ -5,15 +5,13 @@ import 'internal/ilib_utils.dart' as ilib_utils;
 
 /// Country name ↔ ISO 3166-1 alpha-2 code lookup, localized per locale.
 ///
-/// Mirrors the JS `Country` class. The bundled data holds a single
-/// `ilib.data.ctryreverse` map (country code → localized name) per locale,
-/// merged most-general → most-specific like every other locale data type.
-/// [getName] reads that map directly; [getCode] reads the inverse (name →
-/// code) built once at construction, mirroring the JS `_calculateCountryToCode`.
+/// The bundled data holds a single `ilib.data.ctryreverse` map (country code →
+/// localized name) per locale, merged most-general → most-specific like every
+/// other locale data type. [getName] reads that map directly; [getCode] reads
+/// the inverse (name → code) built once at construction.
 class ILibCountry {
   /// [locale] the locale whose language the country names are in. Accepts a
-  /// [String] spec, an [ILibLocale] instance, or nothing (the current locale,
-  /// matching the JS `new Locale()` default).
+  /// [String] spec, an [ILibLocale] instance, or nothing (the current locale).
   ILibCountry({Object? locale}) {
     if (locale is String) {
       _locale = ILibLocale(locale);
@@ -23,10 +21,10 @@ class ILibCountry {
       _locale = ILibLocale(ilib_utils.getLocale());
     }
 
-    // Mirror the JS constructor: a LocaleInfo decides which locale to load the
-    // country names for. If it cannot resolve a region name (an unknown locale
-    // that falls back to defaults), load the English (en-US) names instead of
-    // the requested locale. getLocale() still reports the original locale.
+    // A LocaleInfo decides which locale to load the country names for. If it
+    // cannot resolve a region name (an unknown locale that falls back to
+    // defaults), load the English (en-US) names instead of the requested
+    // locale. getLocale() still reports the original locale.
     final ILibLocaleInfo locInfo = ILibLocaleInfo(_locale);
     final String dataLocale =
         locInfo.getRegionName() == null ? 'en-US' : _locale.getSpec();
@@ -40,13 +38,13 @@ class ILibCountry {
 
   late final ILibLocale _locale;
 
-  /// Country code → localized name, from `ilib.data.ctryreverse`.
+  /// Country code → localized name.
   late final Map<String, String> _codeToCountry;
 
   /// Localized name → country code, the inverse of [_codeToCountry].
   late final Map<String, String> _countryToCode;
 
-  /// Load `ilib.data.ctryreverse` for [spec], falling back to root data (the
+  /// Load the country-name map for [spec], falling back to root data (the
   /// English defaults) when the locale is unknown or carries no override.
   static Map<String, String> _loadCtryReverse(String spec) {
     final Map<String, dynamic>? data =
@@ -55,8 +53,8 @@ class ILibCountry {
     return _asStringMap(data?['ilib.data.ctryreverse']);
   }
 
-  /// Locale-independent `ilib.data.ctryreverse` from root.json, used by the
-  /// static availability queries.
+  /// Locale-independent country-name map from root.json, used by the static
+  /// availability queries.
   static Map<String, String> _rootCtryReverse() {
     final Map<String, dynamic>? root = ILibLoader.instance.getRootData();
     return _asStringMap(root?['ilib.data.ctryreverse']);

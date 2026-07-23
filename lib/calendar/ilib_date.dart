@@ -61,9 +61,9 @@ abstract class ILibCalendarDate implements ILibDate {
     }
     final ILibTimeZone tzObj = ILibTimeZone(tz);
     // From-components path: getJulianDay() still holds the local wall-clock instant,
-    // so the DST boundaries are compared in wall time (mirrors JS
-    // _getOffsetMillisWallTime). inDaylightTime() derives the Gregorian RD/year from
-    // the instant, so non-Gregorian calendars need no separate Gregorian view.
+    // so the DST boundaries are compared in wall time. inDaylightTime() derives the
+    // Gregorian RD/year from the instant, so non-Gregorian calendars need no
+    // separate Gregorian view.
     tzOffsetDays = tzObj.getOffsetMinutes(this, wallTime: true) / 1440.0;
     return rd - tzOffsetDays;
   }
@@ -77,7 +77,7 @@ abstract class ILibCalendarDate implements ILibDate {
     }
     final ILibTimeZone tzObj = ILibTimeZone(tz);
     // From-UTC-instant path: getJulianDay() holds the UTC instant, so the DST
-    // boundaries are converted to UTC for comparison (mirrors JS getOffsetMillis).
+    // boundaries are converted to UTC for comparison.
     tzOffsetDays = tzObj.getOffsetMinutes(this) / 1440.0;
   }
 
@@ -157,7 +157,7 @@ abstract class ILibCalendarDate implements ILibDate {
   }
 
   // Pass tzOffsetDays so the day-of-week is evaluated in wall-clock (local) time,
-  // consistent with getDayOfWeek() and JS (RataDie computes on rd+offset, then -offset).
+  // consistent with getDayOfWeek() (RataDie computes on rd+offset, then -offset).
   ILibCalendarDate onOrBefore(int dayOfWeek) {
     final double rd =
         getRataDieInstance().onOrBefore(dayOfWeek, offset: tzOffsetDays);

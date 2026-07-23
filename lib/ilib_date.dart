@@ -75,8 +75,8 @@ class ILibDateOptions implements ILibDate {
     final int sec = second ?? 0;
     final int ms = millisecond ?? 0;
     final String cal = type ?? calendar ?? 'gregorian';
-    // Mirror JS DateFactory: pass the unambiguous UTC-based params through and let the
-    // calendar date constructor resolve precedence (unixtime over components). A Flutter
+    // Pass the unambiguous UTC-based params through and let the calendar date
+    // constructor resolve precedence (unixtime over components). A Flutter
     // DateTime is an absolute instant, so it maps to unixtime as well.
     final int? ut = unixtime ?? dateTime?.millisecondsSinceEpoch;
 

@@ -3,17 +3,14 @@ import 'ilib_init.dart';
 /// Information about scripts, based on the ISO 15924 registry.
 ///
 /// The script metadata is locale-independent (it lives in `root.json` only,
-/// under the `ilib.data.scripts` key), mirroring the JS `ilib.data.scripts`
-/// global. Each entry maps a 4-letter script code to its number (`nb`),
+/// under the `ilib.data.scripts` key). Each entry maps a 4-letter script code
+/// to its number (`nb`),
 /// English name (`nm`), long identifier (`lid`), and the `rtl`/`ime`/`casing`
 /// flags.
 class ILibScriptInfo {
-  /// [script] The ISO 15924 4-letter identifier for the script.
-  ///
-  /// Unlike the JS `ScriptInfo(script, options)` constructor where `script` is
-  /// optional (omitting it yields an instance with no info), Dart requires an
-  /// explicit code. Pass an empty string `''` to replicate the JS no-arg
-  /// behaviour — `_info` will be null and all getters return their defaults.
+  /// [script] The ISO 15924 4-letter identifier for the script. Required; pass
+  /// an empty string `''` for a no-info instance, where `_info` is null and all
+  /// getters return their defaults.
   ILibScriptInfo(this.script) {
     final Map<String, dynamic>? rootData = ILibLoader.instance.getRootData();
     final Map<String, dynamic>? scripts =

@@ -9,7 +9,7 @@ abstract class ILibRataDie {
   double before(int dayOfWeek, {double offset = 0});
   double after(int dayOfWeek, {double offset = 0});
 
-  // Unix time of this rata die (mirrors JS RataDie.getTime/getTimeExtended).
+  // Unix time of this rata die.
   // Returns -1 when the instant is outside the representable range.
   int getTime() {
     final double jd = getJulianDay();

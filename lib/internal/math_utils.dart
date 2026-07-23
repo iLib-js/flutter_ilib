@@ -1,4 +1,4 @@
-/// Math utilities mirroring JS MathUtils.js.
+/// Math utilities.
 ///
 /// Includes rounding modes (halfdown, halfup, halfeven, halfodd, up, down,
 /// ceiling, floor) and numeric helpers.
@@ -45,14 +45,13 @@ double roundHalfodd(double number) => (number.floorToDouble() % 2 != 0)
     ? (number - 0.5).ceilToDouble()
     : (number + 0.5).floorToDouble();
 
-/// Round half toward positive infinity (mirrors JS Math.round behavior).
+/// Round half toward positive infinity.
 /// For positive numbers: ties go up. For negative numbers: ties go toward zero.
 double roundHalfPositiveInfinity(double number) =>
     (number + 0.5).floorToDouble();
 
 /// Look up a rounding function by mode name, or null if the name is not a
-/// known mode. Mirrors JS `MathUtils[mode]`, which yields undefined for an
-/// unknown key.
+/// known mode.
 double Function(double)? lookupRoundingFunction(String mode) {
   switch (mode) {
     case 'floor':
@@ -88,7 +87,6 @@ double log10(double number) {
 }
 
 /// Apply significant digits constraint.
-/// Mirrors JS MathUtils.significant(number, digits, round).
 double significant(double number, int digits, double Function(double) round) {
   if (digits < 1 || number == 0) {
     return number;

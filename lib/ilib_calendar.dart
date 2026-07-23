@@ -43,7 +43,7 @@ export 'calendar/thaisolar_date.dart';
 export 'calendar/thaisolar_rata_die.dart';
 
 abstract class ILibCalendar {
-  // No-arg defaults to gregorian, mirroring JS CalendarFactory() with no options.
+  // No-arg defaults to gregorian.
   factory ILibCalendar([String? type]) {
     switch (type ?? 'gregorian') {
       case 'gregorian':
@@ -71,9 +71,9 @@ abstract class ILibCalendar {
     }
   }
 
-  /// Create the calendar commonly used in the given locale (mirrors JS
-  /// CalendarFactory({locale: ...})). Falls back to the locale's default
-  /// calendar, which is gregorian when the locale data specifies none.
+  /// Create the calendar commonly used in the given locale. Falls back to the
+  /// locale's default calendar, which is gregorian when the locale data
+  /// specifies none.
   factory ILibCalendar.fromLocale(String locale) =>
       ILibCalendar(ILibLocaleInfo(locale).getCalendar());
 

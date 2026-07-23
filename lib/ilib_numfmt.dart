@@ -117,7 +117,7 @@ class ILibNumFmt {
   }
 
   void _initCurrency(String? currency, ILibLocaleInfo locInfo) {
-    // Use ILibCurrency to get currency information (converts Currency.js functionality)
+    // Use ILibCurrency to get currency information.
     final ILibCurrency currencyInfo = ILibCurrency(
       locale: _locale,
       code: currency,
