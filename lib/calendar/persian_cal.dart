@@ -1,6 +1,6 @@
 import '../ilib_calendar.dart';
 
-/// The Persian (Solar Hijri) astronomical calendar.
+/// The Persian astronomical calendar.
 class PersianCal implements ILibCalendar {
   static const List<int> _monthLengths = <int>[
     31,

@@ -17,8 +17,7 @@ class ILibAstro {
   static Map<String, dynamic>? _data;
 
   static Map<String, dynamic> _getData() {
-    // astro is locale-independent (root.json only), so read it from root data
-    // directly. Never cache an empty map, so a too-early call can recover later.
+    // Never cache an empty map, so a too-early call can recover later.
     if (_data != null && _data!.isNotEmpty) {
       return _data!;
     }

@@ -361,7 +361,7 @@ class ILibLocale {
     'ZW': 'ZWE'
   };
 
-  /// ISO 639-1 alpha-1 → alpha-3 language code lookup table.
+  /// ISO 639 alpha-2 → alpha-3 language code lookup table.
   static const Map<String, String> a1toa3langmap = <String, String>{
     'ab': 'abk',
     'aa': 'aar',
@@ -853,9 +853,9 @@ class ILibLocale {
     return a2toa3regmap[alpha2] ?? alpha2;
   }
 
-  /// Return the ISO-639 alpha3 equivalent language code
-  /// for the given ISO 639 alpha1 language code.<br>
-  /// If the given alpha1 code is not found, this function returns its argument unchanged.
+  /// Return the ISO 639 alpha-3 equivalent language code
+  /// for the given ISO 639 alpha-2 language code.<br>
+  /// If the given alpha-2 code is not found, this function returns its argument unchanged.
   static String? languageAlpha1ToAlpha3(String? alpha1) {
     return a1toa3langmap[alpha1] ?? alpha1;
   }
@@ -882,7 +882,7 @@ class ILibLocale {
     return language;
   }
 
-  /// Return the language of this locale as an ISO-639-alpha3 language code.
+  /// Return the language of this locale as an ISO 639 alpha-3 language code.
   String? getLanguageAlpha3() {
     return language != null ? languageAlpha1ToAlpha3(language) : null;
   }

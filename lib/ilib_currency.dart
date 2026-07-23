@@ -49,9 +49,6 @@ class ILibCurrency {
     // Locale data drives only the locale's *default* currency selection.
     final Map<String, dynamic>? localeData =
         ILibLoader.instance.getLocaleData(_locale);
-    // The currency metadata table itself is locale-independent (root.json
-    // only). Read it from the root data directly rather than via a specific
-    // locale.
     final Map<String, dynamic>? rootData = ILibLoader.instance.getRootData();
     final Map<String, dynamic>? allCurrencies =
         rootData?['ilib.data.currency'] as Map<String, dynamic>?;
@@ -166,8 +163,6 @@ class ILibCurrency {
   /// ilib knows about.
   static List<String> getAvailableCurrencies() {
     final List<String> result = <String>[];
-    // Currency metadata is locale-independent (root.json only); read it from
-    // root data, which is available as soon as loadJSON() has run.
     final Map<String, dynamic>? rootData = ILibLoader.instance.getRootData();
     final Map<String, dynamic>? allCurrencies =
         rootData?['ilib.data.currency'] as Map<String, dynamic>?;

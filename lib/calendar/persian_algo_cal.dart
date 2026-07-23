@@ -1,6 +1,6 @@
 import '../ilib_calendar.dart';
 
-/// The Persian (Solar Hijri) algorithmic calendar.
+/// The Persian algorithmic calendar.
 class PersianAlgoCal implements ILibCalendar {
   /// Create a [PersianAlgoCal], optionally forcing leap-year overrides.
   PersianAlgoCal([this._type = 'persian-algo']);
