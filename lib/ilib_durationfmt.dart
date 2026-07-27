@@ -6,7 +6,17 @@ import 'ilib_scriptinfo.dart';
 import 'internal/ilib_utils.dart' as ilib_utils;
 import 'internal/plural_utils.dart' as plural_utils;
 
+/// Formats a duration (years, months, weeks, days, hours, minutes, seconds,
+/// milliseconds) as a localized string.
+///
+/// Configure with [ILibDurationFmtOptions] and call [format] with an
+/// [ILibDateOptions] that carries the duration components. The formatter is
+/// immutable once created. Two styles are supported: `'text'` (all units) and
+/// `'clock'` (large units as text + small units as a clock time such as
+/// `1:23:45`).
 class ILibDurationFmt {
+  /// Create a formatter from [options]. Unspecified options fall back to the
+  /// locale's defaults.
   ILibDurationFmt(ILibDurationFmtOptions options) {
     _locale = options.locale ?? ilib_utils.getLocale();
 
@@ -335,13 +345,18 @@ class ILibDurationFmt {
     return str;
   }
 
+  /// The BCP-47 locale this formatter was configured with.
   String getLocale() => _locale;
 
+  /// The length setting (`'short'`, `'medium'`, `'long'`, or `'full'`).
   String getLength() => _length;
 
+  /// The style setting (`'text'` or `'clock'`).
   String getStyle() => _style;
 }
 
+/// Options that configure an [ILibDurationFmt]. Unspecified options fall back
+/// to the locale's defaults.
 class ILibDurationFmtOptions {
   ILibDurationFmtOptions({
     this.locale,

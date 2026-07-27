@@ -900,7 +900,7 @@ class ILibDateFmtOptions {
   /// `'long'`, or `'full'`.
   String? length;
 
-  /// Whether to format `'date'` only, `'time'` only, or `'datetime'`.
+  /// The type of value to format: 'date', 'time', or 'datetime'.
   String? type;
 
   /// The calendar to format in (e.g. `'gregorian'`, `'islamic'`).
