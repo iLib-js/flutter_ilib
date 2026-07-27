@@ -1,6 +1,11 @@
+/// {@category Calendar}
+library;
+
 import '../ilib_calendar.dart';
 
+/// The Hebrew (Jewish) lunisolar calendar.
 class HebrewCal implements ILibCalendar {
+  /// The number of days elapsed from the Hebrew epoch to the start of [year].
   static int elapsedDays(int year) {
     final int months = (235 * year - 234) ~/ 19;
     final int parts = 204 + 793 * mod(months, 1080);
@@ -9,6 +14,8 @@ class HebrewCal implements ILibCalendar {
     return mod(3 * (days + 1), 7) < 3 ? days + 1 : days;
   }
 
+  /// The postponement correction (0, 1, or 2 days) applied to the New Year
+  /// of [year] to avoid forbidden weekday starts.
   static int newYearsCorrection(int year, int elapsed) {
     final int lastYear = elapsedDays(year - 1);
     final int thisYear = elapsed;
@@ -22,23 +29,29 @@ class HebrewCal implements ILibCalendar {
     return 0;
   }
 
+  /// The Gregorian rata die of the first day of [year] (1 Tishri).
   static int newYear(int year) {
     final int elapsed = elapsedDays(year);
     return elapsed + newYearsCorrection(year, elapsed);
   }
 
+  /// The total number of days in [year].
   static int daysInYear(int year) {
     return newYear(year + 1) - newYear(year);
   }
 
+  /// Whether the month of Heshvan in [year] has 30 days (instead of 29).
   static bool longHeshvan(int year) {
     return mod(daysInYear(year), 10) == 5;
   }
 
+  /// Whether the month of Kislev in [year] has 30 days (instead of 29).
   static bool longKislev(int year) {
     return mod(daysInYear(year), 10) != 3;
   }
 
+  /// The last day number of [month] in [year], or 0 for the 13th month in a
+  /// non-leap year.
   static int lastDayOfMonth(int month, int year) {
     switch (month) {
       case 2:

@@ -1,9 +1,14 @@
+/// {@category Calendar}
+library;
+
 import '../ilib_localeinfo.dart';
 import 'ilib_date.dart';
 import 'persian_algo_rata_die.dart';
 import 'rata_die.dart';
 
+/// A date in the Persian algorithmic calendar.
 class PersianAlgoDate extends ILibCalendarDate {
+  /// Create a PersianAlgo date from components, a Julian Day, or unix time.
   PersianAlgoDate(
       {int? year,
       int? month,

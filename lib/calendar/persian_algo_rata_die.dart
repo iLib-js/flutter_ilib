@@ -1,7 +1,12 @@
+/// {@category Calendar}
+library;
+
 import 'calendar_utils.dart';
 import 'rata_die.dart';
 
+/// PersianAlgo Rata Die implementation.
 class PersianAlgoRataDie extends ILibRataDie {
+  /// Create a [PersianAlgoRataDie] from date components, a Julian Day, or unix time.
   PersianAlgoRataDie(
       {int? year,
       int? month,
@@ -42,8 +47,10 @@ class PersianAlgoRataDie extends ILibRataDie {
     }
   }
 
+  /// The Julian Day of the PersianAlgo calendar epoch.
   static const double epoch = 1948319.5;
 
+  /// Cumulative day counts at the start of each month in a standard year.
   static const List<int> cumMonthLengths = <int>[
     0,
     31,
@@ -111,6 +118,7 @@ class PersianAlgoRataDie extends ILibRataDie {
     return rdOfYears + dayInYear + rdTime;
   }
 
+  /// The calendar year that contains the rata die [rd].
   static int calcYear(double rd) {
     final int d0 = rd.floor() - _dateToRdYearStart(475);
     final int n2820 = floorDiv(d0, 1029983);

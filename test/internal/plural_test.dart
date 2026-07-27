@@ -1,4 +1,4 @@
-// Unit tests for getPluralCategory (lib/internal/ilib_plural.dart).
+// Unit tests for getPluralCategory (lib/internal/plural_utils.dart).
 //
 // Each rule tree below is the exact parsed CLDR form bundled in
 // assets/locale/{lang}.json (`ilib.data.plurals`). Locales chosen to cover
@@ -7,7 +7,7 @@
 // the `e`/`c` exponent operand (es).
 import 'dart:convert';
 
-import 'package:flutter_ilib/internal/ilib_plural.dart';
+import 'package:flutter_ilib/internal/plural_utils.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 Map<String, dynamic> _rules(String json) =>

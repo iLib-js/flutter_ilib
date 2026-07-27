@@ -1,7 +1,12 @@
+/// {@category Calendar}
+library;
+
 import 'greg_rata_die.dart';
 import 'rata_die.dart';
 
+/// ThaiSolar Rata Die implementation.
 class ThaiSolarRataDie extends ILibRataDie {
+  /// Create a [ThaiSolarRataDie] from date components, a Julian Day, or unix time.
   ThaiSolarRataDie(
       {int? year,
       int? month,
@@ -70,5 +75,6 @@ class ThaiSolarRataDie extends ILibRataDie {
   double after(int dayOfWeek, {double offset = 0}) =>
       _greg.after(dayOfWeek, offset: offset) + _yearOffset;
 
+  /// The underlying Gregorian rata die (Thai Solar year = Gregorian year − 543).
   GregRataDie getGregRataDie() => _greg;
 }

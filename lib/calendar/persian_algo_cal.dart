@@ -1,6 +1,11 @@
+/// {@category Calendar}
+library;
+
 import '../ilib_calendar.dart';
 
+/// The Persian algorithmic calendar.
 class PersianAlgoCal implements ILibCalendar {
+  /// Create a [PersianAlgoCal], optionally forcing leap-year overrides.
   PersianAlgoCal([this._type = 'persian-algo']);
 
   final String _type;
@@ -34,6 +39,7 @@ class PersianAlgoCal implements ILibCalendar {
     return _monthLengths[month - 1];
   }
 
+  /// The equivalent year within the 2820-year cycle used to determine leap years.
   int equivalentCycleYear(int year) {
     final int y = year - (year >= 0 ? 474 : 473);
     return mod(y, 2820) + 474;

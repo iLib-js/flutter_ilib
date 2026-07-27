@@ -1,3 +1,6 @@
+/// {@category API}
+library;
+
 import 'calendar/coptic_date.dart';
 import 'calendar/ethiopic_date.dart';
 import 'calendar/gregorian_date.dart';
@@ -10,21 +13,15 @@ import 'calendar/persian_date.dart';
 import 'calendar/thaisolar_date.dart';
 import 'ilib_date_accessor.dart';
 
+/// A mutable bag of date components used to construct a date and to read it
+/// back through the [ILibDate] interface.
+///
+/// Provide whichever fields describe the date you want: calendar components
+/// ([year]/[month]/[day]/…), an absolute [unixtime], or a Flutter [dateTime].
+/// [type]/[calendar] selects which calendar the components are interpreted in
+/// (gregorian by default). The [ILibDate] accessor methods resolve the date on
+/// demand from these fields.
 class ILibDateOptions implements ILibDate {
-  /// [locale] Locales are specified either with a specifier string that follows the BCP-47 convention.<br>
-  /// [year] The year<br>
-  /// [month] The month<br>
-  /// [week] The week<br>
-  /// [day] The day of the month<br>
-  /// [hour] The hour of the day<br>
-  /// [minute] The minute [0..59]<br>
-  /// [second] The second [0..59]<br>
-  /// [millisecond] The millisecond [0..999]<br>
-  /// [unixtime] Sets the time of this instance according to the given unix time.<br>
-  /// [timezone] Time zone name as a string<br>
-  /// [calendar] Same as "type" property<br>
-  /// [dateTime] DateTime class of flutter<br>
-  /// [type] Specifies the type/calendar of the date desired.<br>
   ILibDateOptions(
       {this.locale,
       this.year,
@@ -41,28 +38,61 @@ class ILibDateOptions implements ILibDate {
       this.dateTime,
       this.type,
       this.dst});
+
+  /// BCP-47 locale string used for locale-dependent calculations.
   String? locale;
+
+  /// The year in the selected calendar.
   @override
   int? year;
+
+  /// The month (1-based) in the selected calendar.
   @override
   int? month;
+
+  /// The week of the year.
   int? week;
+
+  /// The day of the month.
   @override
   int? day;
+
+  /// The hour of the day (0–23).
   @override
   int? hour;
+
+  /// The minute of the hour (0–59).
   @override
   int? minute;
+
+  /// The second of the minute (0–59).
   @override
   int? second;
+
+  /// The millisecond of the second (0–999).
   @override
   int? millisecond;
+
+  /// Absolute instant as unix time (milliseconds since the epoch). Takes
+  /// precedence over the individual calendar components when set.
   int? unixtime;
+
+  /// IANA timezone name as a string.
   @override
   String? timezone;
+
+  /// The calendar/type of the date desired (e.g. `'gregorian'`, `'islamic'`).
   String? type;
+
+  /// The calendar of the date desired; an alias for [type].
   String? calendar;
+
+  /// A Flutter [DateTime] to initialize from; maps to an absolute instant like
+  /// [unixtime].
   DateTime? dateTime;
+
+  /// Optional DST disambiguation for the overlap hour at the end of DST. Null
+  /// when unspecified.
   @override
   bool? dst;
 
@@ -75,8 +105,8 @@ class ILibDateOptions implements ILibDate {
     final int sec = second ?? 0;
     final int ms = millisecond ?? 0;
     final String cal = type ?? calendar ?? 'gregorian';
-    // Mirror JS DateFactory: pass the unambiguous UTC-based params through and let the
-    // calendar date constructor resolve precedence (unixtime over components). A Flutter
+    // Pass the unambiguous UTC-based params through and let the calendar date
+    // constructor resolve precedence (unixtime over components). A Flutter
     // DateTime is an absolute instant, so it maps to unixtime as well.
     final int? ut = unixtime ?? dateTime?.millisecondsSinceEpoch;
 

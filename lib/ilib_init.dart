@@ -1,3 +1,6 @@
+/// {@category API}
+library;
+
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
@@ -7,6 +10,11 @@ import 'internal/ilib_utils.dart';
 import 'internal/logger/log_adapter.dart';
 import 'internal/logger/logger_selector.dart';
 
+/// Singleton that loads and caches the bundled locale JSON data.
+///
+/// Call [loadJSON] once at startup (done automatically by the constructor).
+/// After [isILibReady] becomes true, use [getLocaleData] and [getRootData] to
+/// read locale data, and [loadILibLocaleData] when the active locale changes.
 class ILibLoader extends ChangeNotifier {
   ILibLoader._internal() {
     loadJSON().catchError((Object e) {
@@ -15,7 +23,11 @@ class ILibLoader extends ChangeNotifier {
   }
 
   static final ILibLoader _instance = ILibLoader._internal();
+
+  /// The singleton instance.
   static ILibLoader get instance => _instance;
+
+  /// Whether iLib has finished loading and is ready to use.
   bool get isILibReady => _iLibPrepared;
   final LogAdapter logger = Logger();
 
@@ -32,6 +44,8 @@ class ILibLoader extends ChangeNotifier {
   static const String _rootPath =
       'packages/flutter_ilib/assets/locale/root.json';
 
+  /// The merged locale data for [locale], or null if [locale] has not been
+  /// loaded. Data is resolved lazily from the file cache on first access.
   Map<String, dynamic>? getLocaleData(String locale) {
     return _localeDataMap[locale] ?? _mergeFromCache(locale);
   }
@@ -136,6 +150,10 @@ class ILibLoader extends ChangeNotifier {
     }
   }
 
+  /// Load the bundled JSON data for the current locale.
+  ///
+  /// Called automatically by the constructor. Can be awaited if the caller
+  /// needs to ensure data is ready before proceeding.
   Future<void> loadJSON() async {
     await _loadAssetManifest();
 
@@ -155,6 +173,10 @@ class ILibLoader extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Mark iLib as ready once locale data has been loaded.
+  ///
+  /// Called automatically by [loadJSON]. Callers can invoke this again after
+  /// a hot-reload or locale change to re-check readiness without reloading.
   void initILib() {
     if (_iLibPrepared) {
       return;
@@ -167,6 +189,9 @@ class ILibLoader extends ChangeNotifier {
     logger.info('iLib initialization completed');
   }
 
+  /// Load and cache the JSON data for [locale], then notify listeners if the
+  /// active locale changed. Pass null to reload the current locale. No-op if
+  /// iLib is not yet ready.
   Future<void> loadILibLocaleData(String? locale) async {
     if (!_iLibPrepared) {
       return;
@@ -185,6 +210,7 @@ class ILibLoader extends ChangeNotifier {
     }
   }
 
+  /// Load and cache JSON data for every locale in [getSupportedLocales].
   Future<void> loadILibLocaleDataAll() async {
     final List<String> localelist = getSupportedLocales();
 

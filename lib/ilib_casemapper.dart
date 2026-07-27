@@ -1,3 +1,6 @@
+/// {@category API}
+library;
+
 import 'ilib_locale.dart';
 
 /// A class that maps a string to upper or lower case in a locale-sensitive manner.
@@ -43,8 +46,14 @@ class ILibCaseMapper {
       _setUpMap('iı', 'İI');
     }
   }
+
+  /// True for upper-casing, false for lower-casing.
   bool up;
+
+  /// The locale used by this mapper.
   ILibLocale locale;
+
+  /// Per-character overrides applied before the standard case conversion.
   Map<String, String> mapData = <String, String>{};
 
   String _handleGreekSigma(String string, int i) {

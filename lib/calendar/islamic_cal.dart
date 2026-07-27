@@ -1,5 +1,9 @@
+/// {@category Calendar}
+library;
+
 import '../ilib_calendar.dart';
 
+/// The Islamic lunisolar calendar.
 class IslamicCal implements ILibCalendar {
   static const List<int> _monthLengths = <int>[
     30,

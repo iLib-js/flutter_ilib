@@ -1,6 +1,10 @@
+/// {@category Calendar}
+library;
+
 import 'calendar_utils.dart';
 import 'gregorian_cal.dart';
 
+/// The Thai Solar calendar.
 class ThaiSolarCal extends GregorianCal {
   @override
   String getType() => 'thaisolar';

@@ -1,7 +1,12 @@
+/// {@category Calendar}
+library;
+
 import 'calendar_utils.dart';
 import 'rata_die.dart';
 
+/// Islamic Rata Die implementation.
 class IslamicRataDie extends ILibRataDie {
+  /// Create a [IslamicRataDie] from date components, a Julian Day, or unix time.
   IslamicRataDie(
       {int? year,
       int? month,
@@ -42,8 +47,10 @@ class IslamicRataDie extends ILibRataDie {
     }
   }
 
+  /// The Julian Day of the Islamic calendar epoch.
   static const double epoch = 1948439.5;
 
+  /// Cumulative day counts at the start of each month in a standard year.
   static const List<int> cumMonthLengths = <int>[
     0,
     30,
@@ -110,6 +117,7 @@ class IslamicRataDie extends ILibRataDie {
     return days + rdTime;
   }
 
+  /// The calendar year that contains the rata die [rd].
   static int calcYear(double rd) {
     final int year = (30 * rd.floor() + 10646) ~/ 10631;
     return (year <= 0) ? year - 1 : year;

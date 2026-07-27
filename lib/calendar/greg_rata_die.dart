@@ -1,7 +1,12 @@
+/// {@category Calendar}
+library;
+
 import 'gregorian_cal.dart';
 import 'rata_die.dart';
 
+/// Gregorian Rata Die implementation.
 class GregRataDie extends ILibRataDie {
+  /// Create a [GregRataDie] from date components, a Julian Day, or unix time.
   GregRataDie(
       {int? year,
       int? month,
@@ -41,6 +46,7 @@ class GregRataDie extends ILibRataDie {
     }
   }
 
+  /// The Julian Day of the Gregorian calendar epoch.
   static const double epoch = 1721424.5;
 
   static const List<int> _cumMonthLengths = <int>[
@@ -133,6 +139,7 @@ class GregRataDie extends ILibRataDie {
     return 719163.0 + millis / 86400000.0;
   }
 
+  /// Floor division: quotient of [a] ÷ [b] rounded toward negative infinity.
   static int floorDiv(int a, int b) {
     final int q = a ~/ b;
     final int r = a - q * b;
@@ -154,6 +161,7 @@ class GregRataDie extends ILibRataDie {
     return x < 0 ? x + modulus : x;
   }
 
+  /// The calendar year that contains the rata die [rd].
   static int calcYear(double rd) {
     final int rdInt = rd.floor() - 1;
     final int y400 = floorDiv(rdInt, 146097);
@@ -170,6 +178,7 @@ class GregRataDie extends ILibRataDie {
     return year;
   }
 
+  /// The ordinal day number within [year] for the given [month] and [day].
   static int calcDayOfYear(int year, int month, int day) {
     final bool isLeap = _cal.isLeapYear(year);
     final List<int> cumLengths =
@@ -177,6 +186,7 @@ class GregRataDie extends ILibRataDie {
     return (month > 1 ? cumLengths[month - 1] : 0) + day;
   }
 
+  /// The month number in [year] that contains [dayOfYear].
   static int calcMonthFromDayOfYear(int year, int dayOfYear) {
     final bool isLeap = _cal.isLeapYear(year);
     final List<int> cumLengths =

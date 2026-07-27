@@ -1,3 +1,6 @@
+/// @nodoc
+library;
+
 import 'dart:ui';
 
 import '../ilib_locale.dart';
@@ -13,8 +16,10 @@ String _currentLocale =
 String get currentLocale => _currentLocale;
 set currentLocale(String value) => _currentLocale = normalizeLocale(value);
 
+/// Return the current locale. Equivalent to reading [currentLocale].
 String getLocale() => currentLocale;
 
+/// Set the current locale to [loc]. Equivalent to assigning [currentLocale].
 void setLocale(String loc) => currentLocale = loc;
 
 /// Maps "no real locale" values to `en-US` and normalizes the `_` separator
@@ -36,6 +41,9 @@ String normalizeLocale(String? locale) {
   return lo;
 }
 
+/// The asset path for the single JSON file that corresponds to [locale]
+/// (e.g. `packages/flutter_ilib/assets/locale/en-US.json`). Returns `''`
+/// for an invalid or null locale.
 String getJSONDataPath(String? locale) {
   if (locale == null || !isValidLocale(locale)) {
     return '';
@@ -49,6 +57,9 @@ String getJSONDataPath(String? locale) {
   return 'packages/flutter_ilib/assets/locale/$locale.json';
 }
 
+/// The ordered list of asset paths to load for [locale], from most-general
+/// (`root.json`) to most-specific. Each file is merged in order so that
+/// the most-specific value wins. Returns `[]` for an invalid or null locale.
 List<String> getJSONDataPaths(String? locale) {
   if (locale == null || !isValidLocale(locale)) {
     return <String>[];
@@ -91,6 +102,9 @@ List<String> getJSONDataPaths(String? locale) {
   return paths;
 }
 
+/// Whether [lo] is a recognized locale specifier: a BCP-47 language tag
+/// (language, optional script, optional region) or a bare ISO 3166-1
+/// alpha-2 region code.
 bool isValidLocale(String lo) {
   const String bcp47Pattern =
       r'(^|[^a-z])([a-z][a-z][a-z]?)(-([A-Z][a-z][a-z][a-z]))?(-([A-Z][A-Z]))?$';
@@ -103,6 +117,8 @@ bool isValidLocale(String lo) {
   return RegExp(regionOnlyPattern).hasMatch(lo);
 }
 
+/// All locale specifiers for which bundled JSON data is included in this
+/// package.
 List<String> getSupportedLocales() {
   return const <String>[
     'af-ZA',

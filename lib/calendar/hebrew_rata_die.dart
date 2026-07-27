@@ -1,8 +1,13 @@
+/// {@category Calendar}
+library;
+
 import 'calendar_utils.dart';
 import 'hebrew_cal.dart';
 import 'rata_die.dart';
 
+/// Hebrew Rata Die implementation.
 class HebrewRataDie extends ILibRataDie {
+  /// Create a [HebrewRataDie] from date components, a Julian Day, or unix time.
   HebrewRataDie(
       {int? year,
       int? month,
@@ -43,8 +48,10 @@ class HebrewRataDie extends ILibRataDie {
     }
   }
 
+  /// The Julian Day of the Hebrew calendar epoch.
   static const double epoch = 347997.25;
 
+  /// Cumulative day counts at the start of each month in a standard year.
   static const List<int> cumMonthLengths = <int>[
     176,
     206,
@@ -60,6 +67,7 @@ class HebrewRataDie extends ILibRataDie {
     147
   ];
 
+  /// Cumulative day counts at the start of each month in a leap year.
   static const List<int> cumMonthLengthsLeap = <int>[
     206,
     236,
@@ -150,6 +158,7 @@ class HebrewRataDie extends ILibRataDie {
     return days + time;
   }
 
+  /// The calendar year that contains the rata die [rd].
   static int calcYear(double rd) {
     final int approx = ((rd - epoch) * 19 / 6939.688).floor() + 1;
     int year = approx - 1;

@@ -1,9 +1,11 @@
+/// {@category API}
+library;
+
 import 'ilib_init.dart';
 import 'ilib_localeinfo.dart';
 import 'internal/ilib_utils.dart' as ilib_utils;
 
 /// Currency information class that provides details about a particular currency.
-/// This class mirrors the functionality of the JS Currency.js class.
 ///
 /// For formatting currency, use ILibNumFmt instead. This class only provides
 /// information about currencies.
@@ -50,9 +52,6 @@ class ILibCurrency {
     // Locale data drives only the locale's *default* currency selection.
     final Map<String, dynamic>? localeData =
         ILibLoader.instance.getLocaleData(_locale);
-    // The currency metadata table itself is locale-independent (root.json
-    // only), mirroring the JS `ilib.data.currency` global. Read it from the
-    // root data directly rather than via a specific locale.
     final Map<String, dynamic>? rootData = ILibLoader.instance.getRootData();
     final Map<String, dynamic>? allCurrencies =
         rootData?['ilib.data.currency'] as Map<String, dynamic>?;
@@ -167,10 +166,6 @@ class ILibCurrency {
   /// ilib knows about.
   static List<String> getAvailableCurrencies() {
     final List<String> result = <String>[];
-    // Currency metadata is locale-independent (it lives in root.json only),
-    // so read it from the root data directly rather than via a specific
-    // locale — getRootData() is available as soon as loadJSON() has run,
-    // regardless of which locales have been loaded.
     final Map<String, dynamic>? rootData = ILibLoader.instance.getRootData();
     final Map<String, dynamic>? allCurrencies =
         rootData?['ilib.data.currency'] as Map<String, dynamic>?;

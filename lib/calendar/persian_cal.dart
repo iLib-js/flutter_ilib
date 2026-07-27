@@ -1,6 +1,9 @@
-import '../ilib_calendar.dart';
-import 'persian_rata_die.dart';
+/// {@category Calendar}
+library;
 
+import '../ilib_calendar.dart';
+
+/// The Persian astronomical calendar.
 class PersianCal implements ILibCalendar {
   static const List<int> _monthLengths = <int>[
     31,

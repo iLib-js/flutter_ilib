@@ -1,9 +1,14 @@
+/// {@category Calendar}
+library;
+
 import '../ilib_localeinfo.dart';
 import 'coptic_rata_die.dart';
 import 'ilib_date.dart';
 import 'rata_die.dart';
 
+/// A date in the Coptic calendar.
 class CopticDate extends ILibCalendarDate {
+  /// Create a Coptic date from components, a Julian Day, or unix time.
   CopticDate(
       {int? year,
       int? month,

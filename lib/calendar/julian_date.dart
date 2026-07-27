@@ -1,3 +1,6 @@
+/// {@category Calendar}
+library;
+
 import '../ilib_localeinfo.dart';
 import 'calendar_utils.dart';
 import 'ilib_date.dart';
@@ -5,7 +8,9 @@ import 'julian_cal.dart';
 import 'julian_rata_die.dart';
 import 'rata_die.dart';
 
+/// A date in the Julian calendar.
 class JulianDate extends ILibCalendarDate {
+  /// Create a Julian date from components, a Julian Day, or unix time.
   JulianDate(
       {int? year,
       int? month,

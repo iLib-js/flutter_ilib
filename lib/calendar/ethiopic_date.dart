@@ -1,9 +1,14 @@
+/// {@category Calendar}
+library;
+
 import '../ilib_localeinfo.dart';
 import 'ethiopic_rata_die.dart';
 import 'ilib_date.dart';
 import 'rata_die.dart';
 
+/// A date in the Ethiopic (Ge'ez) calendar.
 class EthiopicDate extends ILibCalendarDate {
+  /// Create an Ethiopic date from components, a Julian Day, or unix time.
   EthiopicDate(
       {int? year,
       int? month,

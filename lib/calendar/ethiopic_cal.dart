@@ -1,5 +1,9 @@
+/// {@category Calendar}
+library;
+
 import '../ilib_calendar.dart';
 
+/// The Ethiopic (Ge'ez) calendar.
 class EthiopicCal implements ILibCalendar {
   @override
   String getType() => 'ethiopic';

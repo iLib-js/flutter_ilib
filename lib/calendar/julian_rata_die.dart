@@ -1,8 +1,13 @@
+/// {@category Calendar}
+library;
+
 import 'calendar_utils.dart';
 import 'julian_cal.dart';
 import 'rata_die.dart';
 
+/// Julian Rata Die implementation.
 class JulianRataDie extends ILibRataDie {
+  /// Create a [JulianRataDie] from date components, a Julian Day, or unix time.
   JulianRataDie(
       {int? year,
       int? month,
@@ -43,6 +48,7 @@ class JulianRataDie extends ILibRataDie {
     }
   }
 
+  /// The Julian Day of the Julian calendar epoch.
   static const double epoch = 1721422.5;
 
   static const List<int> _cumMonthLengths = <int>[
@@ -130,11 +136,13 @@ class JulianRataDie extends ILibRataDie {
     return years + dayInYear + rdTime;
   }
 
+  /// The calendar year that contains the rata die [rd].
   static int calcYear(double rd) {
     final int year = floorDiv(4 * (rd.floor() - 1) + 1464, 1461);
     return (year <= 0) ? year - 1 : year;
   }
 
+  /// The ordinal day number within [year] for the given [month] and [day].
   static int calcDayOfYear(int year, int month, int day) {
     final bool isLeap = _cal.isLeapYear(year);
     final List<int> cumLengths =
@@ -142,6 +150,7 @@ class JulianRataDie extends ILibRataDie {
     return (month > 1 ? cumLengths[month - 1] : 0) + day;
   }
 
+  /// The month number in [year] that contains [dayOfYear].
   static int calcMonthFromDayOfYear(int year, int dayOfYear) {
     final bool isLeap = _cal.isLeapYear(year);
     final List<int> cumLengths =

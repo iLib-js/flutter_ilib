@@ -1,3 +1,6 @@
+/// {@category API}
+library;
+
 import 'calendar/coptic_cal.dart';
 import 'calendar/ethiopic_cal.dart';
 import 'calendar/gregorian_cal.dart';
@@ -42,8 +45,14 @@ export 'calendar/thaisolar_cal.dart';
 export 'calendar/thaisolar_date.dart';
 export 'calendar/thaisolar_rata_die.dart';
 
+/// Abstract calendar type used to calculate date and time information.
+///
+/// Use [ILibCalendar.fromLocale] to get the calendar for a locale, or pass a
+/// type string to the default factory (e.g. `ILibCalendar('islamic')`).
+/// Concrete subclasses implement the calendar-specific arithmetic.
 abstract class ILibCalendar {
-  // No-arg defaults to gregorian, mirroring JS CalendarFactory() with no options.
+  /// Create a calendar by [type] name (e.g. `'gregorian'`, `'islamic'`).
+  /// Defaults to `'gregorian'` when [type] is omitted.
   factory ILibCalendar([String? type]) {
     switch (type ?? 'gregorian') {
       case 'gregorian':
@@ -71,17 +80,25 @@ abstract class ILibCalendar {
     }
   }
 
-  /// Create the calendar commonly used in the given locale (mirrors JS
-  /// CalendarFactory({locale: ...})). Falls back to the locale's default
-  /// calendar, which is gregorian when the locale data specifies none.
+  /// Create the calendar commonly used in the given locale. Falls back to the
+  /// locale's default calendar, which is gregorian when the locale data
+  /// specifies none.
   factory ILibCalendar.fromLocale(String locale) =>
       ILibCalendar(ILibLocaleInfo(locale).getCalendar());
 
+  /// Return the calendar type identifier (e.g. `'gregorian'`, `'islamic'`).
   String getType();
+
+  /// Return the number of months in the given [year].
   int getNumMonths(int year);
+
+  /// Return the number of days in [month] of the given [year].
   int getMonLength(int month, int year);
+
+  /// Return true if [year] is a leap year in this calendar.
   bool isLeapYear(int year);
 
+  /// Return the list of calendar type names supported by this library.
   static List<String> getCalendars() => <String>[
         'gregorian',
         'thaisolar',

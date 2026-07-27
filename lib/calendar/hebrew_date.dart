@@ -1,10 +1,15 @@
+/// {@category Calendar}
+library;
+
 import '../ilib_localeinfo.dart';
 import 'hebrew_cal.dart';
 import 'hebrew_rata_die.dart';
 import 'ilib_date.dart';
 import 'rata_die.dart';
 
+/// A date in the Hebrew (Jewish) calendar.
 class HebrewDate extends ILibCalendarDate {
+  /// Create a Hebrew date from components, a Julian Day, or unix time.
   HebrewDate(
       {int? year,
       int? month,
@@ -183,6 +188,7 @@ class HebrewDate extends ILibCalendarDate {
   @override
   ILibRataDie getRataDieInstance() => _rataDie;
 
+  /// The rata die of the first Sunday on or after 1 Tishri of [year].
   @override
   double firstSunday(int year) {
     final ILibRataDie tishri1 = HebrewRataDie(
