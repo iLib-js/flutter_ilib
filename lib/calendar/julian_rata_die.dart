@@ -1,3 +1,6 @@
+/// {@category Calendar}
+library;
+
 import 'calendar_utils.dart';
 import 'julian_cal.dart';
 import 'rata_die.dart';

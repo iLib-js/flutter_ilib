@@ -1,3 +1,6 @@
+/// {@category Calendar}
+library;
+
 import 'dart:math';
 
 import 'package:flutter/foundation.dart' show visibleForTesting;

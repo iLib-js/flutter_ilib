@@ -1,3 +1,6 @@
+/// @nodoc
+library;
+
 import 'dart:ui';
 
 import '../ilib_locale.dart';

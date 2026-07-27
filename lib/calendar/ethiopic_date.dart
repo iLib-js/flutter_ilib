@@ -1,3 +1,6 @@
+/// {@category Calendar}
+library;
+
 import '../ilib_localeinfo.dart';
 import 'ethiopic_rata_die.dart';
 import 'ilib_date.dart';

@@ -1,3 +1,6 @@
+/// @nodoc
+library;
+
 /// Mathematically correct modulo that always returns a non-negative result,
 /// unlike Dart's `%` operator which mirrors the sign of the dividend.
 int mod(int dividend, int modulus) {

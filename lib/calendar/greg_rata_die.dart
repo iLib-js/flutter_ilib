@@ -1,3 +1,6 @@
+/// {@category Calendar}
+library;
+
 import 'gregorian_cal.dart';
 import 'rata_die.dart';
 

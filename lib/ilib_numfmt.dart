@@ -1,3 +1,6 @@
+/// {@category API}
+library;
+
 import 'calendar/calendar_utils.dart' as calendar_utils;
 import 'ilib_currency.dart';
 import 'ilib_localeinfo.dart';

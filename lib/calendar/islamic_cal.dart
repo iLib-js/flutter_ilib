@@ -1,3 +1,6 @@
+/// {@category Calendar}
+library;
+
 import '../ilib_calendar.dart';
 
 /// The Islamic lunisolar calendar.

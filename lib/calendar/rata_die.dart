@@ -1,3 +1,6 @@
+/// {@category Calendar}
+library;
+
 import 'calendar_utils.dart';
 
 /// Abstract base for all calendar-specific Rata Die (fixed-day) implementations.

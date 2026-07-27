@@ -1,3 +1,6 @@
+/// {@category Calendar}
+library;
+
 import '../ilib_localeinfo.dart';
 import 'ilib_date.dart';
 import 'islamic_rata_die.dart';

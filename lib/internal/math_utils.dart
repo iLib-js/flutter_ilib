@@ -2,6 +2,10 @@
 //
 // Includes rounding modes (halfdown, halfup, halfeven, halfodd, up, down,
 // ceiling, floor) and numeric helpers.
+
+/// @nodoc
+library;
+
 import 'dart:math' as math;
 
 /// Shift decimal by [precision] places (positive = right, negative = left).

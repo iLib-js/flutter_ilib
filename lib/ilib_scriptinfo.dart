@@ -1,3 +1,6 @@
+/// {@category API}
+library;
+
 import 'ilib_init.dart';
 
 /// Information about scripts, based on the ISO 15924 registry.

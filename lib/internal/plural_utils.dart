@@ -9,6 +9,9 @@
 // future locale data (or the legacy CLDR `n is 1` / `n within 2..4` forms)
 // evaluates correctly.
 
+/// @nodoc
+library;
+
 /// Returns the CLDR plural class for [n] using [rules].
 ///
 /// Falls back to the English rule (`one` for 1, else `other`) when [rules] is

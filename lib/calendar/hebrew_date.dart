@@ -1,3 +1,6 @@
+/// {@category Calendar}
+library;
+
 import '../ilib_localeinfo.dart';
 import 'hebrew_cal.dart';
 import 'hebrew_rata_die.dart';

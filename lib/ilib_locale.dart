@@ -1,3 +1,6 @@
+/// {@category API}
+library;
+
 /// A parsed BCP-47 locale identifier (language, script, region, variant).
 ///
 /// Accepts a BCP-47 string (e.g. `'zh-Hans-CN'`), an existing [ILibLocale]

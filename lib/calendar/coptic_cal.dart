@@ -1,3 +1,6 @@
+/// {@category Calendar}
+library;
+
 import 'ethiopic_cal.dart';
 
 /// The Coptic calendar.

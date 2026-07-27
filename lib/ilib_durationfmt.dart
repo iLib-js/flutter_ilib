@@ -1,3 +1,6 @@
+/// {@category API}
+library;
+
 import 'ilib_date.dart';
 import 'ilib_datefmt.dart';
 import 'ilib_init.dart';

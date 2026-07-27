@@ -1,3 +1,6 @@
+/// {@category Calendar}
+library;
+
 /// A Julian Day number split into its integer day and fractional day parts.
 ///
 /// Splitting avoids floating-point precision loss when adding small time

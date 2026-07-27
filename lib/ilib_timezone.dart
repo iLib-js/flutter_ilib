@@ -1,3 +1,6 @@
+/// {@category API}
+library;
+
 import 'calendar/greg_rata_die.dart';
 import 'ilib_date_accessor.dart';
 import 'ilib_init.dart';

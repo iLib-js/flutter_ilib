@@ -1,3 +1,6 @@
+/// @nodoc
+library;
+
 /// Default tag used for logging when no specific tag is provided.
 const String defaultTag = 'default';
 

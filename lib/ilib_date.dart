@@ -1,3 +1,6 @@
+/// {@category API}
+library;
+
 import 'calendar/coptic_date.dart';
 import 'calendar/ethiopic_date.dart';
 import 'calendar/gregorian_date.dart';

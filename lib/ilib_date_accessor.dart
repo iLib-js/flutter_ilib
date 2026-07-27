@@ -1,3 +1,6 @@
+/// {@category API}
+library;
+
 /// The common read interface shared by every calendar date in this library.
 ///
 /// A date exposes both its calendar-specific components (year/month/day/… in

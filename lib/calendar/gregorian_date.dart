@@ -1,3 +1,6 @@
+/// {@category Calendar}
+library;
+
 import '../ilib_localeinfo.dart';
 import 'greg_rata_die.dart';
 import 'gregorian_cal.dart';

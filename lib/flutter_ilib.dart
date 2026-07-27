@@ -1,3 +1,4 @@
+/// {@category flutter_ilib}
 library flutter_ilib;
 
 import 'package:flutter/foundation.dart';

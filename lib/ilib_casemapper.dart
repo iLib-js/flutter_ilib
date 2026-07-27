@@ -1,3 +1,6 @@
+/// {@category API}
+library;
+
 import 'ilib_locale.dart';
 
 /// A class that maps a string to upper or lower case in a locale-sensitive manner.

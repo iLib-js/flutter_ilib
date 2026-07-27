@@ -1,3 +1,6 @@
+/// @nodoc
+library;
+
 import 'package:flutter/foundation.dart';
 import 'package:logging/logging.dart' as main_logger;
 import 'log_adapter.dart';

@@ -1,3 +1,6 @@
+/// {@category Calendar}
+library;
+
 import '../ilib_localeinfo.dart';
 import 'calendar_utils.dart';
 import 'ilib_date.dart';

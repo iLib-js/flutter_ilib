@@ -1,3 +1,6 @@
+/// {@category API}
+library;
+
 import 'ilib_init.dart';
 import 'ilib_locale.dart';
 import 'ilib_localeinfo.dart';
