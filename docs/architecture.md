@@ -1,6 +1,6 @@
 ---
 title: flutter_ilib Architecture
-description: Detailed architecture, design patterns, and data flow for flutter_ilib
+description: System architecture, data flow, and design patterns for flutter_ilib
 keywords: [flutter, ilib, architecture, design, locale-data]
 version: 2.0.0
 ---
@@ -16,12 +16,16 @@ flutter_ilib (Dart/Flutter Plugin)
     ├── Public API (lib/*.dart, exported from flutter_ilib.dart)
     │   ├── ILibLocale
     │   ├── ILibLocaleInfo
-    │   ├── ILibCaseMapper
     │   ├── ILibDate / ILibDateOptions
     │   ├── ILibDateFmt
+    │   ├── ILibDurationFmt
+    │   ├── ILibNumFmt
     │   ├── ILibCalendar (+ lib/calendar/: 9 calendars, Rata Die, Astro)
     │   ├── ILibTimeZone
-    │   ├── ILibDurationFmt
+    │   ├── ILibCaseMapper
+    │   ├── ILibScriptInfo
+    │   ├── ILibCountry
+    │   ├── ILibCurrency
     │   └── ILibLoader (data loading)
     │
     ├── Internal (lib/internal/)
@@ -38,6 +42,8 @@ flutter_ilib (Dart/Flutter Plugin)
             ├── {language}-{region}.json
             └── {language}-{script}-{region}.json   (e.g. zh-Hans-CN)
 ```
+
+---
 
 ## Data Loading Flow
 
@@ -58,7 +64,7 @@ flutter_ilib (Dart/Flutter Plugin)
    ↓
 7. Cache merged result in ILibLoader._localeDataMap
    ↓
-8. API calls access merged data (ILibLocaleInfo, ILibDate, etc.)
+8. API calls access merged data (ILibLocaleInfo, ILibDateFmt, etc.)
 ```
 
 ### Locale Path Generation
@@ -88,7 +94,7 @@ Output: Array of file paths in priority order
 |-------|--------------|
 | `"ko"` | `[root.json, ko.json]` |
 | `"en-US"` | `[root.json, en.json, und-US.json, en-US.json]` |
-| `"MK"` (region) | `[root.json, und-MK.json]` |
+| `"MK"` (region-only) | `[root.json, und-MK.json]` |
 | `"zh-Hans-CN"` | `[root.json, zh.json, und-Hans.json, zh-Hans.json, und-CN.json, zh-CN.json, zh-Hans-CN.json]` |
 
 ### Deep Merge Strategy
@@ -111,136 +117,6 @@ More specific locales override less specific ones.
 
 ---
 
-## Core Components
-
-### 1. ILibLocale Module (`lib/ilib_locale.dart`)
-
-**Responsibility**: Parse, validate, and normalize locale strings per BCP-47 standard
-
-**Key Methods**:
-```dart
-// Parsing
-ILibLocale(string)          // Parse from string
-ILibLocale(lang, region)    // Construct from parts
-
-// Getters
-getLanguage() → String?     // ISO 639 code
-getRegion() → String?       // ISO 3166 code
-getScript() → String?       // ISO 15924 code
-getVariant() → String?      // Variant identifier
-getSpec() → String          // Full normalized spec
-```
-
-**Validation Rules**:
-- Language: `[a-z]{2,3}` (2-3 lowercase letters)
-- Script: `[A-Z][a-z]{3}` (1 uppercase + 3 lowercase)
-- Region: `[A-Z]{2}` or `[0-9]{3}` (2 uppercase or 3 digits)
-
-### 2. ILibLocaleInfo Module (`lib/ilib_localeinfo.dart`)
-
-**Responsibility**: Retrieve and serve localization data by locale
-
-**Key Methods**:
-```dart
-ILibLocaleInfo(locale)          // Create with locale
-getRegionName() → String?       // e.g., "South Korea"
-getLanguageName() → String      // e.g., "Korean"
-getClock() → String             // "12" or "24"
-getTimeZone() → String          // e.g., "Asia/Seoul"
-getDecimalSeparator() → String  // e.g., "."
-getGroupingSeparator() → String // e.g., ","
-getFirstDayOfWeek() → int       // 0 (Sunday) to 6 (Saturday)
-getWeekEndStart() → int
-getWeekEndEnd() → int
-```
-
-**Data Source**: Downloaded locale JSON files in `assets/locale/`
-
-### 3. ILibDate / ILibDateFmt Modules (`lib/ilib_date.dart`, `lib/ilib_datefmt.dart`)
-
-**Responsibility**: Represent a date (`ILibDate` interface; `ILibDateOptions` implementation) and
-format it per locale (`ILibDateFmt`). `ILibDate` is an interface — build a date with
-`ILibDateOptions(...)`, then format with `ILibDateFmt(...).format(date)`.
-
-**Key Methods**:
-```dart
-final date = ILibDateOptions(year: 2011, month: 9, day: 29);
-final fmt = ILibDateFmt(ILibDateFmtOptions(
-  locale: 'ko-KR',
-  length: 'short'|'medium'|'long'|'full',
-  type: 'date'|'time'|'datetime',
-));
-fmt.format(date) → String
-```
-
-### 4. ILibCalendar Module (`lib/ilib_calendar.dart` + `lib/calendar/`)
-
-**Responsibility**: Calendar rules and the calendar factory; per-calendar date/Rata-Die classes.
-
-**Key Methods**:
-```dart
-ILibCalendar([type])            // factory; default gregorian
-ILibCalendar.fromLocale(locale)
-getType() → String
-getNumMonths(int year) → int
-getMonLength(int month, int year) → int
-isLeapYear(int year) → bool
-```
-9 calendars: gregorian, thaisolar, julian, islamic, hebrew, ethiopic, coptic, persian
-(astronomical), persian-algo (algorithmic). See `docs/date-calendar-architecture.md`.
-
-### 5. ILibTimeZone Module (`lib/ilib_timezone.dart`)
-
-**Responsibility**: Timezone offset and DST calculation from bundled `zoneinfo`; `'local'` =
-DST-aware system timezone.
-
-**Key Methods**:
-```dart
-ILibTimeZone(id) / .fromOffset(min) / .fromLocale(locale) / .defaultZone()
-getId() → String
-getOffsetMinutes(ILibDate date, {wallTime}) → double
-inDaylightTime(ILibDate date) → bool
-getDisplayName(ILibDate date, [style]) → String   // 'PST'/'PDT', 'rfc822', 'long'
-```
-
-### 6. ILibCaseMapper Module (`lib/ilib_casemapper.dart`)
-
-**Responsibility**: Perform locale-aware case conversion
-
-**Key Methods**:
-```dart
-final mapper = ILibCaseMapper(locale);
-mapper.toLowerCase(String) → String
-mapper.toUpperCase(String) → String
-mapper.toLocaleString(String) → String
-```
-
-**Example**: Turkish `İ` (capital dotted I) → `i̇` (lowercase dotted i)
-
-### 7. ILibLoader Module (`lib/ilib_init.dart`)
-
-**Responsibility**: Manage locale data loading and caching
-
-**Pattern**: Singleton
-
-**Key Methods**:
-```dart
-ILibLoader.instance                  // Global access
-getLocaleData(locale) → Map?         // Cached data
-_mergeFromCache(locale)              // Build from file cache
-_deepMerge(base, override) → Map    // Merge strategy
-loadJSON()                           // Initialize with current locale
-initILib()                           // Mark ready (validates data loaded)
-loadILibLocaleData(locale)           // Load additional locale
-loadILibLocaleDataAll()              // Load all supported locales
-```
-
-**Caching Strategy**:
-- `_localeDataMap`: Merged data by locale (fast lookup)
-- `_fileDataCache`: Individual JSON files (reusable)
-
----
-
 ## Directory Structure
 
 ```
@@ -252,15 +128,19 @@ flutter_ilib/
 │   ├── ilib_date.dart           (ILibDateOptions: date options/calculation)
 │   ├── ilib_date_accessor.dart  (ILibDate interface)
 │   ├── ilib_datefmt.dart        (date/time formatting engine)
+│   ├── ilib_durationfmt.dart    (duration formatting)
+│   ├── ilib_numfmt.dart         (number & currency formatting)
 │   ├── ilib_timezone.dart       (timezone / DST)
 │   ├── ilib_calendar.dart       (calendar factory + abstract base)
-│   ├── ilib_casemapper.dart     (case conversion)
+│   ├── ilib_casemapper.dart     (locale-aware case conversion)
+│   ├── ilib_scriptinfo.dart     (script metadata)
+│   ├── ilib_country.dart        (country code ↔ name lookup)
+│   ├── ilib_currency.dart       (currency metadata)
 │   ├── ilib_init.dart           (ILibLoader: data load/merge/cache)
 │   ├── calendar/                (9 calendars: {name}_cal/_date/_rata_die.dart,
 │   │                             rata_die.dart, ilib_astro.dart, julian_day.dart)
 │   └── internal/
-│       ├── ilib_utils.dart      (getJSONDataPaths, getJSONDataPath,
-│       │                         isValidLocale, getSupportedLocales)
+│       ├── ilib_utils.dart      (getJSONDataPaths, isValidLocale, getSupportedLocales)
 │       └── logger/              (logging)
 │
 ├── assets/
@@ -295,10 +175,8 @@ Each JSON file contains:
     "timezone": "Asia/Seoul",
     "numfmt": {
       "decimalChar": ".",
-      "groupChar": ",",
-      ...
-    },
-    ...
+      "groupChar": ","
+    }
   }
 }
 ```
@@ -306,118 +184,55 @@ Each JSON file contains:
 ### Merging Example
 
 For locale `"ko-KR"`, load order:
-1. `root.json` - Base defaults
-2. `ko.json` - Korean language specifics
-3. `und-KR.json` - South Korea region specifics
-4. `ko-KR.json` - Full ko-KR locale specifics
+1. `root.json` — base defaults
+2. `ko.json` — Korean language specifics
+3. `und-KR.json` — South Korea region specifics
+4. `ko-KR.json` — full ko-KR locale specifics
 
-Each level **overrides** previous levels.
-
----
-
-## Validation Logic
-
-### isValidLocale() Function
-
-```dart
-bool isValidLocale(String lo) {
-  const String bcp47Pattern =
-      r'(^|[^a-z])([a-z][a-z][a-z]?)(-([A-Z][a-z][a-z][a-z]))?(-([A-Z][A-Z]))?$';
-  const String regionOnlyPattern = r'^[A-Z][A-Z]$';
-
-  if (RegExp(bcp47Pattern).hasMatch(lo)) {
-    return true;  // Standard BCP-47: en, en-US, zh-Hans-CN
-  }
-
-  return RegExp(regionOnlyPattern).hasMatch(lo);  // Region-only: MK, TR
-}
-```
-
-**Regex Breakdown (BCP-47)**:
-- `(^|[^a-z])` - Start or non-lowercase char
-- `([a-z][a-z][a-z]?)` - Language: 2-3 lowercase letters
-- `(-([A-Z][a-z][a-z][a-z]))?` - Optional script: hyphen + titlecase 4 chars
-- `(-([A-Z][A-Z]))?` - Optional region: hyphen + 2 uppercase letters
-- `$` - End of string
-
----
-
-## Recent Improvements (v2.0.0)
-
-### 1. Region-Only Locale Support
-
-**Before**: `'MK'` → Invalid, no data loaded  
-**After**: `'MK'` → Valid, loads `und-MK.json`
-
-**Implementation**:
-- Added `regionOnlyPattern` regex to `isValidLocale()`
-- Updated `getJSONDataPaths()` to handle `language == null && region != null`
-
-### 2. Path Normalization
-
-Both region and script `und-*` fallbacks use a **hyphen**: `und-{REGION}.json`, `und-{SCRIPT}.json`.
-
-**Rationale**: Consistency with the bundled file naming (all `und-*` files use a hyphen).
-
-### 3. Test Coverage Updates
-
-Updated 5 tests to match implementation:
-- `language-region (ko-KR)`: Now expects `und-KR.json` (hyphen)
-- `language-region (en-US)`: Now expects `und-US.json` (hyphen)
-- `language-script-region (zh-Hans-CN)`: Added intermediate `zh-CN.json`
-- `language-script-region (ku-Arab-IQ)`: Added intermediate `ku-IQ.json`
-- `path order` test: Updated expected path count from 6 to 7
+Each level overrides previous levels.
 
 ---
 
 ## Design Patterns
 
-### Singleton Pattern
-`ILibLoader` is a singleton for global locale data loading/caching.
+### Singleton
+`ILibLoader` is a singleton for global locale data loading and caching.
 
-### Factory Pattern
+### Factory
 `ILibLocale` and `ILibCalendar` use factory constructors for flexible construction.
 
-### Strategy Pattern
-`getJSONDataPaths()` implements the merge strategy for locale data.
-
-### Caching Pattern
-Two-level cache in `ILibLoader`:
-- File cache: Raw JSON from disk
-- Locale cache: Merged data ready for use
+### Two-Level Cache (`ILibLoader`)
+- **File cache** (`_fileDataCache`): raw JSON from disk — avoids redundant I/O
+- **Locale cache** (`_localeDataMap`): merged data by locale — avoids re-merging on repeated access
 
 ---
 
 ## Performance Considerations
 
-### Loading Time
-- Lazy loading: Load only the current locale + fallbacks
-- File caching prevents redundant I/O
-
-### Memory Usage
-- Merged data cached in memory per locale
-- Avoids re-merging on repeated access
+### Loading
+- Lazy loading: only the current locale + its fallback chain are loaded at startup
+- File cache prevents redundant disk reads when multiple locales share the same fallback files
 
 ### Optimization Tips
-- Load locale data early in app startup
-- Cache locale-specific objects (`ILibLocaleInfo`)
-- Reuse `ILibLocale` instances when possible
+- Load locale data early in app startup (`ILibLoader.instance.loadJSON()`)
+- Load additional locales ahead of time with `loadILibLocaleData(locale)`
+- Reuse `ILibDateFmt` / `ILibNumFmt` instances across multiple format calls
 
 ---
 
 ## Dependencies & Integration
 
 ### Internal Dependencies
-- `lib/ilib_locale.dart` ← used by `ilib_utils.dart`, all other modules
+- `lib/ilib_locale.dart` ← used by `ilib_utils.dart` and all other modules
 - `lib/ilib_init.dart` ← used by all modules for data loading
 
 ### External Dependencies
-- `flutter: sdk` - Flutter framework
-- `logging: ^1.2.0` - Logging utilities
-- `plugin_platform_interface: ^2.0.2` - Multi-platform support
+- `flutter: sdk` — Flutter framework
+- `logging: ^1.2.0` — logging utilities
+- `plugin_platform_interface: ^2.0.2` — multi-platform support
 
 ### Asset Dependencies
-- `assets/locale/*.json` - iLib locale data files (~251 files)
+- `assets/locale/*.json` — iLib locale data files (~251 files)
 
 ---
 

@@ -260,8 +260,7 @@ ILibJS.instance.initILib();
 await ILibJS.instance.loadILibLocaleData('en-US');
 
 // After (Pure Dart)
-await ILibLoader.instance.loadJSON();
-ILibLoader.instance.initILib();
+await ILibLoader.instance.loadJSON();  // initILib() called internally
 await ILibLoader.instance.loadILibLocaleData('en-US');
 ```
 

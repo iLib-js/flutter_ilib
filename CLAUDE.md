@@ -12,7 +12,7 @@ point-in-time/public spots listed below).
 - **iLib JS source**: **v14.22.0** — all `lib/` Dart code and `test/` cases were converted
   from the iLib JS at this tag (`js/lib/` and `js/test/` of github.com/iLib-js/iLib;
   `git checkout v14.22.0`).
-- **CLDR data**: **48.2** — the bundled `assets/locale/` JSON (218 locales) was generated from
+- **CLDR data**: **48.2** — the bundled `assets/locale/` JSON (144 locales) was generated from
   iLib v14.22.0, which incorporates CLDR 46.
 - When updating to a newer iLib/CLDR: bump the JS source and the generated locale data
   **together** (a JS-only or data-only bump will diverge), then re-run the converted tests
@@ -87,7 +87,7 @@ pure-calculation classes need no locale loading (see Conventions › Testing).
 - `ilib.data.localeinfo` — locale metadata (clock, calendar, timezone, digits, etc.)
 - `ilib.data.localeinfo.numfmt` — number format patterns (nested under localeinfo)
 - `ilib.data.plurals` — CLDR plural rule tree (used by `ILibDurationFmt` plural selection)
-- `ilib.data.scriptinfo` — script metadata
+- `ilib.data.scripts` — script metadata
 - `ilib.data.sysres` — translated strings (month/day names, AM/PM, etc.)
 - `ilib.data.zoneinfo` — timezone + DST rules
 
@@ -135,7 +135,7 @@ lib/
 │   └── persian_algo_cal.dart   # + persian_algo_date.dart + persian_algo_rata_die.dart (algorithmic)
 └── internal/
     ├── ilib_utils.dart         # getLocale(), getJSONDataPaths(), etc.
-    ├── ilib_plural.dart        # getPluralCategory() — CLDR plural-rule eval (used by ILibDurationFmt)
+    ├── plural_utils.dart       # getPluralCategory() — CLDR plural-rule eval (used by ILibDurationFmt)
     ├── math_utils.dart         # rounding helpers (used by ILibNumFmt)
     └── logger/                 # internal logging (LogAdapter + package:logging); not part of the conversion
 ```
@@ -183,7 +183,7 @@ lib/
   cases to the JS-mirrored file (see docs/conversion-guide.md, docs/test-mapping.md)
 - **Do NOT convert JS tests for a locale that flutter_ilib does not support.** The authoritative
   list of supported locales is `scripts/assemble_ilib/locales.json` (the seed used to generate
-  `assets/locale/` — the 218 bundled iLib locales, see Source Versions); a per-locale test is in
+  `assets/locale/` — the 144 bundled iLib locales, see Source Versions); a per-locale test is in
   scope only if its locale is in that list. When the data is fully absent,
   `ILibLocaleInfo`/`ILibTimeZone.fromLocale` fall back to defaults (e.g. `Etc/UTC`), so the
   test cannot reproduce the JS expected value — these are N/A.

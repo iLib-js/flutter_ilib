@@ -5,8 +5,8 @@ import 'package:flutter_test/flutter_test.dart';
 // JulianDay is a pure calculation class — no locale/asset loading needed.
 //
 // Not converted: testJulianDaySetDaysIgnoreFraction — JS calls setDays(2.9) with a
-// float to verify the fraction is dropped. Dart setDays(int) takes a non-nullable int,
-// so a float cannot be passed (same reason as *DateConstructorFullWithStrings).
+// float to verify the fraction is dropped. Dart `days` is a non-nullable int field,
+// so a float cannot be assigned (same reason as *DateConstructorFullWithStrings).
 void main() {
   group('JulianDay', () {
     test('testJulianDayConstructor', () {
@@ -19,7 +19,7 @@ void main() {
     });
     test('testJulianDayGetDays', () {
       final JulianDay jd = JulianDay(1721791.25);
-      expect(jd.getDays(), 1721791);
+      expect(jd.days, 1721791);
     });
     test('testJulianDayGetDayFraction', () {
       final JulianDay jd = JulianDay(1721791.25);
@@ -37,8 +37,8 @@ void main() {
     test('testJulianDaySetDays', () {
       final JulianDay jd = JulianDay(1721791.25);
       expect(jd.getDate(), 1721791.25);
-      jd.setDays(2);
-      expect(jd.getDays(), 2);
+      jd.days = 2;
+      expect(jd.days, 2);
       expect(jd.getDate(), 2.25);
     });
     test('testJulianDaySetDayFraction', () {

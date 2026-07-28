@@ -63,7 +63,7 @@ print(locale.region);    // 'US'
 
 ### Case Conversion
 ```dart
-final mapper = ILibCaseMapper('tr-TR');  // Turkish
+final mapper = ILibCaseMapper(locale: 'tr-TR');  // Turkish
 print(mapper.toLowerCase('İ'));  // 'i̇'
 ```
 
@@ -142,7 +142,7 @@ ILibDateFmt(ILibDateFmtOptions(...)).format(date)
 
 ### ILibCaseMapper
 ```dart
-ILibCaseMapper('en-US')
+ILibCaseMapper(locale: 'en-US')
 mapper.toLowerCase(str)
 mapper.toUpperCase(str)
 ```

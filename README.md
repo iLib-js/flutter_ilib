@@ -184,6 +184,63 @@ fmt.format(-1234567.89);
 // '-$1,234,567.89'
 ```
 
+### Calendar Date
+
+```dart
+// Gregorian
+final ILibDateOptions date = ILibDateOptions(
+    year: 2024, month: 6, day: 27, hour: 13, minute: 45);
+date.getYears();   // 2024
+date.getMonths();  // 6
+date.getDays();    // 27
+date.getDayOfWeek(); // 4 (Thursday)
+date.getCalendar();  // 'gregorian'
+```
+
+### Calendar Meta
+
+```dart
+// Thai Solar (year = Gregorian + 543)
+final ILibCalendar cal = ThaiSolarCal();
+cal.getNumMonths(2567);     // 12
+cal.getMonLength(2, 2555);  // 29 (leap year)
+cal.isLeapYear(2555);       // true
+cal.isLeapYear(2554);       // false
+```
+
+### Calendar Formatting
+
+```dart
+// Persian calendar (fa-IR)
+final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+    locale: 'fa-IR',
+    length: 'long',
+    useNative: false);
+final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+final ILibDateOptions dateOptions = ILibDateOptions(
+    locale: 'fa-IR',
+    year: 1392,
+    month: 9,
+    day: 21);
+fmt.format(dateOptions);
+// '‏21 آذر 1392'
+```
+
+```dart
+// Ethiopic calendar (am-ET)
+final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+    locale: 'am-ET',
+    length: 'medium');
+final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+final ILibDateOptions dateOptions = ILibDateOptions(
+    locale: 'am-ET',
+    year: 2011,
+    month: 9,
+    day: 29);
+fmt.format(dateOptions);
+// '29 ግንቦት 2011'
+```
+
 ## ScriptInfo
 ```dart
 final ILibLocaleInfo locInfo = ILibLocaleInfo('en-US');
@@ -215,60 +272,6 @@ ctry.getName('TR');
 ctry.getCode('튀르키예');
 // 'TR'
 ```
-
-## CLASS
-
-### FlutterILib
-We provide some classes that can be easily used in a Flutter app.   
-Currently, we have the following classes:
-- `ILibCaseMapper`
-- `ILibCountry`
-- `ILibDateFmt`
-- `ILibDateOptions`
-- `ILibDurationFmt`
-- `ILibLocale`
-- `ILibLocaleInfo`
-- `ILibNumFmt`
-- `ILibScriptInfo`
-
-We have a plan to provide more classes and methods.  
-
-### ILibDateFmt
-- Class: [ILibDateFmtOptions](./Docs.md/#ilibdatefmtoptions)
-- Class: [ILibDateFmt](./Docs.md#ilibdatefmt)
-   - Methods: `format()`, `getClock()`, `getTemplate()`, `getMeridiemsRange()`
-
-### ILibDurationFmt
-- Class: [ILibDurationFmtOptions](./Docs.md/#ilibdurationfmtoptions)
-- Class: [ILibDurationFmt](./Docs.md/#ilibdurationfmt)
-   - Methods:  `format()`, `getLocale()`, `getStyle()`, `getLength()`
-
-### ILibDateOptions
-- Class: [ILibDateOptions](./Docs.md/#ilibdateoptions)
-
-### ILibLocale
-- Class: [ILibLocale](./Docs.md/#iliblocale)
-
-### ILibLocaleInfo
-- Class: [ILibLocaleInfo](./Docs.md/#iliblocaleinfo)
-  - Methods: `getLanguageName()`, `getRegionName()`, `getClock()`, `getLocale()`, `getUnits()`, `getCalendar()`, `getFirstDayOfWeek()`, `getWeekEndStart()`, `getWeekEndEnd()`, `getTimeZone()`, `getDecimalSeparator()`, `getNativeDecimalSeparator()`, `getGroupingSeparator()`, `getNativeGroupingSeparator()`, `getPrimaryGroupingDigits()`, `getSecondaryGroupingDigits()`, `getPercentageFormat()`, `getNegativePercentageFormat()`, `getPercentageSymbol()`, `getExponential()`, `getNativeExponential()`, `getNativePercentageSymbol()`, `getNegativeNumberFormat()`, `getCurrencyFormats()`, `getCurrency()`, `getDigitsStyle()`, `getDigits()`, `getNativeDigits()`, `getRoundingMode()`, `getScript()`, `getDefaultScript()`, `getAllScripts()`, `getMeridiemsStyle()`, `getPaperSize()`, `getDelimiterQuotationStart()`, `getDelimiterQuotationEnd()`
-
-### ILibNumFmt
-- Clasee: [ILibNumFmtOptions](./Docs.md/#ilibnumfmtoptions)
-- Class: [ILibNumFmt](./Docs.md/#ilibnumfmt)
-   - Methods:  `format()`, `constrain()`, `getLocale()`, `getStyle()`, `getType()`, `isGroupingUsed()`, `getMaxFractionDigits()`, `getMinFractionDigits()`, `getSignificantDigits()`, `getCurrency()`, `getRoundingMode()`, `getUseNative()`
-
-### ILibScriptInfo
-- Class: [ILibScriptInfo](./Docs.md/#ilibscriptinfo)
-   - Methods: `getCode()`, `getCodeNumber()`, `getName()`, `getLongCode()`, `getScriptDirection()`, `getNeedsIME()`, `getCasing()`
-
-### ILibCaseMapper
-- Class: [ILibCaseMapper](./Docs.md/#ilibcasemapper)
-  - Methods: `getLocale()`, `map()`
-
-### ILibCountry
-- Class: [ILibCountry](./Docs.md/#ilibcountry)
-  - Methods: `getAvailableCode()`, `getAvailableCountry()`, `getCode()`, `getName()`, `getLocale()`
 
 ## Supported Locales
 The results of the following locales are checked by unit tests.  

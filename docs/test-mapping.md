@@ -15,7 +15,7 @@ JS source path base: `js/test/`
 | `test/calendar/testthaisolardate_test.dart` | `js/test/testthaisolardate.js` | ThaiSolarDate |
 | `test/calendar/testjulian_test.dart` | `js/test/testcal_julian.js` | JulianCal |
 | `test/calendar/testjuliandate_test.dart` | `js/test/testjuliandate.js` | JulianDate |
-| `test/calendar/testjulianday_test.dart` | `js/test/testjulianday.js` | JulianDay helper (getDate/getDays/getDayFraction/setDate/setDays/setDayFraction/addDate). `addDate` returns a new instance in Dart (JS mutates in place); see Not Converted for the one untranslatable case |
+| `test/calendar/testjulianday_test.dart` | `js/test/testjulianday.js` | JulianDay helper (getDate/days/getDayFraction/setDate/setDayFraction/addDate). `addDate` returns a new instance in Dart (JS mutates in place); see Not Converted for the one untranslatable case |
 | `test/calendar/testislamic_test.dart` | `js/test/testcal_islamic.js` | IslamicCal |
 | `test/calendar/testislamicdate_test.dart` | `js/test/testislamicdate.js` | IslamicDate |
 | `test/calendar/testhebrew_test.dart` | `js/test/testcal_hebrew.js` | HebrewCal |
@@ -271,7 +271,7 @@ Total: ~15 tests per calendar, ~135 tests across all 9 calendars.
 | Test | File | Count | Reason |
 |---|---|---|---|
 | `testEthiopicGetMonLength14/15/16`, `testEthiopicIsLeapYear5/6` | `testethiopic.js` | 5 | JS passes `String`/`undefined` args (`getMonLength("15")`, `getMonLength(undefined)`, `isLeapYear("2009")`, `isLeapYear(undefined)`) to exercise dynamic-type coercion. Dart `getMonLength(int, int)` / `isLeapYear(int)` take non-nullable `int`, so `String`/`undefined` are not expressible (same reason as `*DateConstructorFullWithStrings`). The meaningful integer behavior is already covered — e.g. `getMonLength("13","2007") → 6` equals the Dart `GetMonLength 13 LeapYear` test (`getMonLength(13, 2007) → 6`). Only `testethiopic.js` has these edge tests; the other 8 cal test files do not. |
-| `testJulianDaySetDaysIgnoreFraction` | `testjulianday.js` | 1 | JS calls `setDays(2.9)` with a float to verify the fractional part is dropped. Dart `setDays(int)` takes a non-nullable `int`, so a float cannot be passed (same reason as `*DateConstructorFullWithStrings`). The other 9 JulianDay tests are converted. |
+| `testJulianDaySetDaysIgnoreFraction` | `testjulianday.js` | 1 | JS calls `setDays(2.9)` with a float to verify the fractional part is dropped. Dart `days` is a non-nullable `int` field, so a float cannot be assigned (same reason as `*DateConstructorFullWithStrings`). The other 9 JulianDay tests are converted. |
 
 ## Commented-out / disabled in the JS source (not real tests)
 
@@ -295,7 +295,7 @@ dynamic-typing features that don't exist in the Dart port:
 | `*NonIDate` | 22 | `testTZGetOffsetDSTNonIDate`, `testTZDisplayName*NonIDate`, `testTZInDaylightTime*NonIDate` | JS passes a native `Date` (or plain object) instead of an iLib `IDate`, e.g. `tz.getOffset(new Date(2011, 7, 1))`. Dart's `getOffset`/`inDaylightTime`/`getDisplayName` take a typed `ILibDate`, so a native date can't be passed. The `IDate` variant of each IS converted; the Dart-idiomatic "non-iLib date input" is provided separately via `DateTime` and tested in `timezone_extra_test.dart` (`testTZGetOffsetDateTime*`, `testTZInDaylightTimeDateTime*`, `testTZDisplayNameDateTime*`). |
 | `*WithLoader` / `*Asynch` | 10 | `testTZGetTimeZoneWithLoaderAsynch`, `testGetAvailableTimeZonesWithLoader`, `testTZGetTimeZoneForLocaleWithLoaderNoData` | Exercise the JS async loader callback (`ilib.setLoaderCallback(...)`, `sync: false`). Dart uses the synchronous asset-based `ILibLoader`; there is no async-callback loader to test. |
 | `*WithIlibString` | 3 | `testTZConstructorWithIlibString`, `testTZConstructorLocalWithIlibString`, `testTZGetWithIlibString` | Construct with an iLib `IString` wrapper (`new TimeZone({id: new IString("America/Los_Angeles")})`). Dart uses a plain `String`; there is no `IString` type. The `String` constructor IS covered. |
-| `testTZGetDefaultFor_{tg_TJ,tk_TM,wo_SN,zu_ZA}`, `testTZGetDefaultLocale_mt_MT` | 5 | — | Unsupported locales (tg/tk/wo/zu/mt not in the bundled 218); see the unsupported-locale rule in CLAUDE.md. |
+| `testTZGetDefaultFor_{tg_TJ,tk_TM,wo_SN,zu_ZA}`, `testTZGetDefaultLocale_mt_MT` | 5 | — | Unsupported locales (tg/tk/wo/zu/mt not in the bundled 144); see the unsupported-locale rule in CLAUDE.md. |
 
 ## Assertion Conversion Patterns
 
