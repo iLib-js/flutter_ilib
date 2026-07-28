@@ -222,7 +222,7 @@ For in-depth explanations, see `docs/`:
 ## Running Tests
 ```bash
 flutter test                 # all tests
-flutter test test/calendar/  # one suite (also: timezone/, basic/, datefmt/)
+flutter test test/calendar/  # one suite (also: date/, root/, number/, basic/)
 flutter analyze              # static analysis
 ```
 See [docs/development.md](docs/development.md) › Testing for single-test / `-k` filter / coverage.

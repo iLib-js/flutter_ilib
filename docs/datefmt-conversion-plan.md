@@ -288,16 +288,16 @@ Steps 1, 2, and 5 are independent and can be done in parallel.
 
 ```bash
 # Unit tests (representative locales)
-flutter test test/datefmt/datefmt_en_US_test.dart
-flutter test test/datefmt/datefmt_ko_KR_test.dart
-flutter test test/datefmt/datefmt_ar_SA_test.dart
+flutter test test/date/datefmt_en_US_test.dart
+flutter test test/date/datefmt_ko_KR_test.dart
+flutter test test/date/datefmt_ar_SA_test.dart
 
 # Special feature tests
-flutter test test/datefmt/datefmt_Clock_test.dart
-flutter test test/datefmt/datefmt_Meridiems_test.dart
+flutter test test/date/datefmt_Clock_test.dart
+flutter test test/date/datefmt_Meridiems_test.dart
 
 # All datefmt tests
-for f in test/datefmt/*_test.dart; do flutter test "$f"; done
+for f in test/date/*_test.dart; do flutter test "$f"; done
 
 # Regression (full project)
 ./execute_unit_test.sh
@@ -318,4 +318,4 @@ for f in test/datefmt/*_test.dart; do flutter test "$f"; done
    - **naive `DateTime(...)`** (no zone): use its **wall components directly** (`dt.year`/`dt.hour`/…). This is host-independent (the wall value is the same on every machine) and matches `package:intl`, which formats a `DateTime`'s fields without shifting zones.
    - **`DateTime.utc(...)` / `unixtime`** (an explicit instant): apply the **formatter's timezone** offset, then take the components — i.e. convert the instant into the target zone.
 
-   In both cases the resulting Gregorian date is then converted to the formatter's calendar via **Julian Day** when they differ (`_convertToFormatterCalendar`), so non-Gregorian locales show the converted date — am-ET → "16 ሰኔ 2018", **not** the raw Gregorian "23 የካቲት 2026". Do **not** treat a naive `DateTime` as a host-zone instant (via `millisecondsSinceEpoch`): that makes formatting host-dependent (passes on a KST dev box, fails on a UTC CI runner). JS's instant path *is* host-dependent for locally-constructed `Date`s, but that is a JS quirk worth diverging from for a Flutter API — naive `DateTime` input is Dart-specific and has no JS contract. Regression: `test/datefmt/datefmt_datetime_calendar_extra_test.dart`.
+   In both cases the resulting Gregorian date is then converted to the formatter's calendar via **Julian Day** when they differ (`_convertToFormatterCalendar`), so non-Gregorian locales show the converted date — am-ET → "16 ሰኔ 2018", **not** the raw Gregorian "23 የካቲት 2026". Do **not** treat a naive `DateTime` as a host-zone instant (via `millisecondsSinceEpoch`): that makes formatting host-dependent (passes on a KST dev box, fails on a UTC CI runner). JS's instant path *is* host-dependent for locally-constructed `Date`s, but that is a JS quirk worth diverging from for a Flutter API — naive `DateTime` input is Dart-specific and has no JS contract. Regression: `test/date/datefmt_datetime_calendar_extra_test.dart`.

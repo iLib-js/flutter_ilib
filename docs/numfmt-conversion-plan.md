@@ -184,16 +184,16 @@ Unit tests to run (representative):
 
 ```bash
 # Representative numfmt tests (actual files in this repo)
-flutter test test/numfmt/numfmt_test.dart
-flutter test test/numfmt/numfmt_af_test.dart
-flutter test test/numfmt/numfmt_am_test.dart
-flutter test test/numfmt/numfmt2_test.dart
+flutter test test/number/numfmt_test.dart
+flutter test test/number/numfmt_af_test.dart
+flutter test test/number/numfmt_am_test.dart
+flutter test test/number/numfmt2_test.dart
 flutter test test/internal/math_utils_test.dart
-flutter test test/currency/currency_test.dart
-flutter test test/currency/currency_extra_test.dart
+flutter test test/number/currency_test.dart
+flutter test test/number/currency_extra_test.dart
 
 # Run all numfmt tests
-for f in test/numfmt/*_test.dart; do flutter test "$f"; done
+for f in test/number/*_test.dart; do flutter test "$f"; done
 
 # Full project regression
 ./execute_unit_test.sh
