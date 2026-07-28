@@ -295,7 +295,7 @@ dynamic-typing features that don't exist in the Dart port:
 | `*NonIDate` | 22 | `testTZGetOffsetDSTNonIDate`, `testTZDisplayName*NonIDate`, `testTZInDaylightTime*NonIDate` | JS passes a native `Date` (or plain object) instead of an iLib `IDate`, e.g. `tz.getOffset(new Date(2011, 7, 1))`. Dart's `getOffset`/`inDaylightTime`/`getDisplayName` take a typed `ILibDate`, so a native date can't be passed. The `IDate` variant of each IS converted; the Dart-idiomatic "non-iLib date input" is provided separately via `DateTime` and tested in `timezone_extra_test.dart` (`testTZGetOffsetDateTime*`, `testTZInDaylightTimeDateTime*`, `testTZDisplayNameDateTime*`). |
 | `*WithLoader` / `*Asynch` | 10 | `testTZGetTimeZoneWithLoaderAsynch`, `testGetAvailableTimeZonesWithLoader`, `testTZGetTimeZoneForLocaleWithLoaderNoData` | Exercise the JS async loader callback (`ilib.setLoaderCallback(...)`, `sync: false`). Dart uses the synchronous asset-based `ILibLoader`; there is no async-callback loader to test. |
 | `*WithIlibString` | 3 | `testTZConstructorWithIlibString`, `testTZConstructorLocalWithIlibString`, `testTZGetWithIlibString` | Construct with an iLib `IString` wrapper (`new TimeZone({id: new IString("America/Los_Angeles")})`). Dart uses a plain `String`; there is no `IString` type. The `String` constructor IS covered. |
-| `testTZGetDefaultFor_{tg_TJ,tk_TM,wo_SN,zu_ZA}`, `testTZGetDefaultLocale_mt_MT` | 5 | — | Unsupported locales (tg/tk/wo/zu/mt not in the bundled 218); see the unsupported-locale rule in CLAUDE.md. |
+| `testTZGetDefaultFor_{tg_TJ,tk_TM,wo_SN,zu_ZA}`, `testTZGetDefaultLocale_mt_MT` | 5 | — | Unsupported locales (tg/tk/wo/zu/mt not in the bundled 144); see the unsupported-locale rule in CLAUDE.md. |
 
 ## Assertion Conversion Patterns
 

@@ -1,6 +1,8 @@
 /// {@category API}
 library;
 
+import 'internal/ilib_utils.dart';
+
 /// A parsed BCP-47 locale identifier (language, script, region, variant).
 ///
 /// Accepts a BCP-47 string (e.g. `'zh-Hans-CN'`), an existing [ILibLocale]
@@ -971,9 +973,7 @@ class ILibLocale {
   }
 
   /// Return all available locale specifiers.
-  ///
-  /// Not yet implemented.
   static List<String> getAvailableLocales() {
-    throw UnimplementedError('getAvailableLocales is not implemented yet');
+    return getSupportedLocales();
   }
 }
