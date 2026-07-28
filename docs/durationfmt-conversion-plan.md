@@ -26,7 +26,7 @@ developer reference for maintenance and future conversions.
 
 > History: This replaced the JS interop calls in `lib/ilib_durationfmt.dart`
 > (`ILibJS.instance.evaluate('new DurationFmt(...).format(...)')`) with a pure-Dart
-> implementation. The unported `ILibCountry` remains the only class still on JS interop.
+> implementation. All classes are now pure Dart.
 
 ---
 
@@ -60,7 +60,7 @@ format(components)   // components is an ILibDateOptions
 ```
 lib/
 ├── ilib_durationfmt.dart      ← formatter + options
-├── internal/ilib_plural.dart  ← CLDR plural-rule evaluation (getPluralCategory)
+├── internal/plural_utils.dart  ← CLDR plural-rule evaluation (getPluralCategory)
 ├── ilib_datefmt.dart          ← reused for clock-style time rendering
 ├── ilib_scriptinfo.dart       ← script direction lookup
 ├── ilib_localeinfo.dart       ← script/clock/digits defaults
@@ -89,9 +89,9 @@ are copied verbatim from `DurationFmt.js`. `finalSeparator` is only non-empty at
 **medium downgrade**: JS forces `medium → short` when the locale script is not
 Latin, Greek, or Cyrillic. Same check applied in the constructor.
 
-### Step 2: Plural-choice engine (`_formatChoice` + `internal/ilib_plural.dart`)
+### Step 2: Plural-choice engine (`_formatChoice` + `internal/plural_utils.dart`)
 
-Plural-rule evaluation lives in `lib/internal/ilib_plural.dart` as stateless
+Plural-rule evaluation lives in `lib/internal/plural_utils.dart` as stateless
 top-level functions (no class — the only input is the rule map). The formatter
 calls `getPluralCategory(rules, n)`; the template-choice logic (`_formatChoice`)
 stays in `ilib_durationfmt.dart`.
@@ -203,7 +203,7 @@ flutter test test/durfmt/durfmt_or_IN_test.dart
 flutter test test/durfmt/durfmt_si_LK_test.dart
 flutter test test/durfmt/durfmt_sw_KE_test.dart
 
-# Full project regression (durfmt now included; only country is pruned)
+# Full project regression
 ./execute_unit_test.sh
 ```
 

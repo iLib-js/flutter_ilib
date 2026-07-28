@@ -191,6 +191,7 @@ Matches JS `_init()` / `_init2()` / `_calcDateComponents()` pattern.
 ```
 lib/
 +-- ilib_date.dart              # ILibDateOptions (user API)
++-- ilib_date_accessor.dart     # ILibDate interface (year/month/day accessors)
 +-- ilib_datefmt.dart           # ILibDateFmt (formatting engine)
 +-- ilib_timezone.dart          # ILibTimeZone (DST calculation)
 +-- ilib_calendar.dart          # ILibCalendar (factory + abstract)
@@ -198,7 +199,7 @@ lib/
     +-- ilib_date.dart          # ILibCalendarDate (abstract base)
     +-- rata_die.dart           # ILibRataDie (abstract base)
     +-- julian_day.dart         # JulianDay helper
-    +-- calendar_utils.dart     # mod() helper
+    +-- calendar_utils.dart     # mod(), floorDiv() helpers
     +-- ilib_astro.dart         # Astronomical calculations
     +-- gregorian_cal.dart      # Calendar rules
     +-- gregorian_date.dart     # Date implementation
