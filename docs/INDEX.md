@@ -1,15 +1,13 @@
 ---
 title: flutter_ilib Documentation Index
-description: Complete documentation index and navigation guide for flutter_ilib
+description: Documentation index and navigation guide for flutter_ilib
 keywords: [index, navigation, documentation, guide]
 version: 2.0.0
 ---
 
 # flutter_ilib Documentation Index
 
-Welcome to flutter_ilib documentation. This index helps you find the right document for your needs.
-
-## 🤖 For AI Agents (Recommended Path)
+## For AI Agents (Recommended Path)
 
 If you're an AI agent (Claude, Copilot, etc.), follow this sequence:
 
@@ -18,65 +16,51 @@ If you're an AI agent (Claude, Copilot, etc.), follow this sequence:
    - Conversion status and source versions (the iLib / CLDR baseline — single source of truth)
    - Links into the detailed `docs/` below
 
-1. **[quick_reference.md](./quick_reference.md)** (Start here for an overview!)
+1. **[quick_reference.md](./quick_reference.md)** (Start here for an overview)
    - Quick facts and overview
    - Key classes and common usage
    - Commands reference
-   - Time: ~5 minutes
 
-2. **[architecture.md](./architecture.md)** (Deep dive)
-   - System architecture and design
-   - Data loading flow with diagrams
-   - Component details
-   - Validation logic
-   - Time: ~15 minutes
+2. **[architecture.md](./architecture.md)** (System design)
+   - System architecture and data loading flow
+   - Locale path generation and deep merge strategy
+   - Directory structure
 
 3. **[api.md](./api.md)** (APIs)
-   - Complete API reference
-   - All classes and methods
-   - Code examples for each API
-   - Type definitions
-   - Time: ~20 minutes
+   - Class overview and relationships
+   - Usage flows and combined examples
+   - For individual method signatures, see dartdoc comments in source
 
 4. **[development.md](./development.md)** (For developers)
    - Setup and environment
    - Testing guide
-   - Coding conventions
-   - Contributing guidelines
-   - Time: ~30 minutes
+   - Coding conventions and contribution guidelines
 
-## 📚 For Humans (Browse by Topic)
+---
 
-### I want to...
+## Browse by Topic
 
-#### Understand the project
+### Understand the project
 → [quick_reference.md](./quick_reference.md) + [architecture.md](./architecture.md)
 
-#### Use the library in my app
+### Use the library in my app
 → [quick_reference.md](./quick_reference.md) + [api.md](./api.md)
 
-#### Format dates by locale
-→ [api.md](./api.md#ilibdate-api) → "ILibDate API"
-
-#### Get locale information
-→ [api.md](./api.md#iliblocaleinfo-api) → "ILibLocaleInfo API"
-
-#### Parse locale strings
-→ [api.md](./api.md#iliblocale-api) → "ILibLocale API"
-
-#### Add new locale data
+### Add new locale data
 → [development.md](./development.md) → "Adding Locale Data"
 
-#### Contribute code
+### Contribute code
 → [development.md](./development.md) → "Git Workflow" + "Code Conventions"
 
-#### Understand data loading
+### Understand data loading
 → [architecture.md](./architecture.md) → "Data Loading Flow"
 
-#### Debug locale issues
+### Debug locale issues
 → [development.md](./development.md) → "Troubleshooting"
 
-## 📖 Documents
+---
+
+## Documents
 
 ### Core Documentation
 
@@ -84,8 +68,8 @@ If you're an AI agent (Claude, Copilot, etc.), follow this sequence:
 |----------|---------|----------|
 | [../CLAUDE.md](../CLAUDE.md) | Project source of truth: goal, conventions, must-follow rules, conversion status | Developers, AI |
 | [quick_reference.md](./quick_reference.md) | Quick overview and common patterns | Everyone |
-| [architecture.md](./architecture.md) | System design and internals | Developers, AI |
-| [api.md](./api.md) | Complete API reference | Developers, AI |
+| [architecture.md](./architecture.md) | System design, data loading flow, directory structure | Developers, AI |
+| [api.md](./api.md) | Class overview, usage flows, and combined examples | Developers, AI |
 | [development.md](./development.md) | Setup, testing, contribution | Developers |
 | [calendar-conversion.md](./calendar-conversion.md) | Calendar conversion logic in DateFmt | Developers, AI |
 | [date-calendar-architecture.md](./date-calendar-architecture.md) | Date & calendar system layers, constructor pattern, critical rules | Developers, AI |
@@ -93,64 +77,30 @@ If you're an AI agent (Claude, Copilot, etc.), follow this sequence:
 | [local-timezone-support.md](./local-timezone-support.md) | System `'local'` timezone — implemented (Strategy A) + optional Strategy B | Developers, AI |
 | [conversion-guide.md](./conversion-guide.md) | General JS→Dart conversion checklist | Developers |
 | [test-mapping.md](./test-mapping.md) | JS→Dart test file mapping, not-converted patterns | Developers, AI |
-| [benchmark.md](./benchmark.md) | Performance & memory: v2.0 (pure Dart) vs v1.3.0 (JS interop) + empty-app baseline | Developers, AI |
-| [numfmt-conversion-plan.md](./numfmt-conversion-plan.md) | NumFmt & Currency implementation reference (rounding, precision, API differences) | Developers, AI | ~200 lines |
+| [benchmark.md](./benchmark.md) | Performance & memory: v2.0 (pure Dart) vs v1.3.0 (JS interop) | Developers, AI |
+| [numfmt-conversion-plan.md](./numfmt-conversion-plan.md) | NumFmt & Currency implementation reference (rounding, precision, API differences) | Developers, AI |
 | [durationfmt-conversion-plan.md](./durationfmt-conversion-plan.md) | DurationFmt implementation reference (plural engine, clock style, RTL) | Developers, AI |
 
 ### External Documentation
 
-| Document | Purpose | Link |
-|----------|---------|------|
-| **README.md** | User guide and quick start | `../README.md` |
-| **Docs.md** | Detailed user documentation | `../Docs.md` |
-| **Tips.md** | Tips and troubleshooting | `../Tips.md` |
-| **CHANGELOG.md** | Version history | `../CHANGELOG.md` |
+| Document | Purpose |
+|----------|---------|
+| [../README.md](../README.md) | User guide and quick start |
+| [../CHANGELOG.md](../CHANGELOG.md) | Version history |
 
-## 🎯 Learning Paths
+---
 
-### Path 1: Quick Start (15 min)
-1. [quick_reference.md](./quick_reference.md) - Overview
-2. [README.md](../README.md) - Getting started examples
-
-### Path 2: Deep Understanding (1 hour)
-1. [quick_reference.md](./quick_reference.md) - Overview
-2. [architecture.md](./architecture.md) - How it works
-3. [api.md](./api.md) - What you can do
-4. [development.md](./development.md) - How to extend
-
-### Path 3: Contributing (1.5 hours)
-1. [quick_reference.md](./quick_reference.md) - Overview
-2. [architecture.md](./architecture.md) - System design
-3. [api.md](./api.md) - Current APIs
-4. [development.md](./development.md) - Full development guide
-5. [Docs.md](../Docs.md) - User-facing documentation
-
-### Path 4: Troubleshooting (15 min)
-1. [Tips.md](../Tips.md) - Known issues and solutions
-2. [development.md](./development.md#troubleshooting) - Debug steps
-
-## 🔍 Quick Search
+## Quick Search
 
 ### By Topic
 
-**Locale Handling**
-- Parsing: [api.md#iliblocale-api](./api.md#iliblocale-api)
-- Validation: [architecture.md#validation-logic](./architecture.md#validation-logic)
-- Data paths: [architecture.md#locale-path-generation](./architecture.md#locale-path-generation)
-
 **Data Loading**
 - Overview: [architecture.md#data-loading-flow](./architecture.md#data-loading-flow)
-- Algorithm: [architecture.md#step-by-step-process](./architecture.md#step-by-step-process)
+- Path generation: [architecture.md#locale-path-generation](./architecture.md#locale-path-generation)
 - Merging: [architecture.md#deep-merge-strategy](./architecture.md#deep-merge-strategy)
 
 **Timezone**
-- System `'local'` support (implemented, Strategy A): [local-timezone-support.md](./local-timezone-support.md)
-
-**APIs**
-- ILibLocale: [api.md#iliblocale-api](./api.md#iliblocale-api)
-- ILibLocaleInfo: [api.md#iliblocaleinfo-api](./api.md#iliblocaleinfo-api)
-- ILibDate: [api.md#ilibdate-api](./api.md#ilibdate-api)
-- ILibCaseMapper: [api.md#ilibcasemapper-api](./api.md#ilibcasemapper-api)
+- System `'local'` support (Strategy A): [local-timezone-support.md](./local-timezone-support.md)
 
 **Development**
 - Setup: [development.md#initial-setup](./development.md#initial-setup)
@@ -158,120 +108,25 @@ If you're an AI agent (Claude, Copilot, etc.), follow this sequence:
 - Code Style: [development.md#code-conventions](./development.md#code-conventions)
 - Contributing: [development.md#git-workflow](./development.md#git-workflow)
 
-### By Audience
-
-**Product Managers / Non-Technical**
-- [quick_reference.md](./quick_reference.md) - Overview
-
-**App Developers (Using the library)**
-- [quick_reference.md](./quick_reference.md) - Overview
-- [api.md](./api.md) - How to use
-- [README.md](../README.md) - Examples
-
-**Library Developers (Contributing)**
-- [quick_reference.md](./quick_reference.md) - Overview
-- [architecture.md](./architecture.md) - How it works
-- [api.md](./api.md) - Current APIs
-- [development.md](./development.md) - Development guide
-
-**System Architects**
-- [architecture.md](./architecture.md) - Design
-- [api.md](./api.md) - Interface
-
-**QA / Testers**
-- [development.md#testing](./development.md#testing) - Test guide
-- [Tips.md](../Tips.md) - Known issues
-
-## 📋 Document Metadata
-
-### quick_reference.md
-- **Type**: Overview
-- **Difficulty**: Beginner
-- **Prerequisite**: None
-- **Topics**: Classes, Common patterns, Quick commands
-- **Best for**: Everyone, quick overview
-
-### architecture.md
-- **Type**: Deep dive
-- **Difficulty**: Intermediate
-- **Prerequisite**: quick_reference.md
-- **Topics**: System design, Data flow, Component details
-- **Best for**: Developers, system designers
-
-### api.md
-- **Type**: Reference
-- **Difficulty**: Intermediate
-- **Prerequisite**: quick_reference.md
-- **Topics**: All APIs, Methods, Examples
-- **Best for**: Developers, API usage
-
-### development.md
-- **Type**: Guide
-- **Difficulty**: Intermediate-Advanced
-- **Prerequisite**: quick_reference.md, architecture.md
-- **Topics**: Setup, Testing, Code style, Contributing
-- **Best for**: Contributors, maintainers
-
-## 🔗 Related Resources
-
-### Official
-- **iLib GitHub**: https://github.com/iLib-js/iLib
-- **BCP 47 Standard**: https://tools.ietf.org/html/bcp47
-- **ISO Standards**:
-  - ISO 639 (Languages): https://iso639-3.sil.org/
-  - ISO 3166 (Countries): https://www.iso.org/iso-3166-1-alpha-2.html
-  - ISO 15924 (Scripts): https://www.unicode.org/iso15924/
-
-### Flutter
-- **Flutter Docs**: https://flutter.dev/docs
-- **Dart Language**: https://dart.dev/guides
-- **Pub.dev Package**: https://pub.dev/packages/flutter_ilib
-
-## ❓ FAQ
-
-**Q: Where do I start?**  
-A: If you're an AI agent, follow the "For AI Agents" path above. If you're a human, choose a learning path based on your goal.
-
-**Q: What's the difference between quick_reference and api?**  
-A: `quick_reference` gives you the essentials and common patterns. `api` is the complete reference with all details.
-
-**Q: I want to understand how locale data is loaded.**  
-A: Read [architecture.md#data-loading-flow](./architecture.md#data-loading-flow).
-
-**Q: I want to add a new locale.**  
-A: Read [development.md#adding-locale-data](./development.md#adding-locale-data).
-
-**Q: I found a bug, what do I do?**  
-A: Check [Tips.md](../Tips.md) first, then file an issue on GitHub.
-
-**Q: How do I run tests?**  
-A: Read [development.md#running-tests](./development.md#running-tests).
-
-## 🎓 Knowledge Graph
-
-```
-quick_reference (Start Here!)
-    ↓
-architecture (Understand the system)
-    ↓
-api (Learn the APIs)
-    ↓
-development (Get hands-on)
-```
-
-## 📝 Document Status
-
-| Document | Status |
-|----------|--------|
-| quick_reference.md | ✅ Current |
-| architecture.md | ✅ Current |
-| api.md | ✅ Current |
-| development.md | ✅ Current |
-| README.md | ✅ Current |
-| CHANGELOG.md | ✅ Current |
-
 ---
 
-**Note**: This documentation is designed to be read by both humans and AI agents. Documents are self-contained but cross-referenced for completeness.
+## FAQ
+
+**Q: Where do I start?**
+A: If you're an AI agent, follow the "For AI Agents" path above. If you're a human, pick a topic from "Browse by Topic".
+
+**Q: What's the difference between quick_reference and api?**
+A: `quick_reference` gives you the essentials and common patterns. `api` covers class relationships, usage flows, and combined examples.
+
+**Q: How do I understand how locale data is loaded?**
+A: Read [architecture.md#data-loading-flow](./architecture.md#data-loading-flow).
+
+**Q: How do I add a new locale?**
+A: Read [development.md#adding-locale-data](./development.md#adding-locale-data).
+
+**Q: How do I run tests?**
+A: Read [development.md#running-tests](./development.md#running-tests).
+
+---
 
 *See CHANGELOG.md for version history.*

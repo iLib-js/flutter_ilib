@@ -105,16 +105,6 @@ flutter analyze lib/ilib_locale.dart
 flutter analyze --verbose
 ```
 
-### Linting
-
-```bash
-# Run custom linter rules
-flutter pub run custom_lint
-
-# Update linter configuration
-# Edit: analysis_options.yaml
-```
-
 ---
 
 ## Testing
@@ -239,32 +229,6 @@ const String apiVersion = '2.0.0';
 // Private members: prefix with underscore
 String _privateField;
 void _privateMethod() { }
-```
-
-### File Organization
-
-Each Dart file should follow:
-```dart
-// 1. Imports
-import 'dart:ui';
-import 'package:flutter/foundation.dart';
-import 'relative/path.dart';
-
-// 2. Part declarations (if used)
-part 'subfile.dart';
-
-// 3. Constants
-const String defaultLocale = 'en-US';
-
-// 4. Types/Typedefs
-typedef LocaleCallback = void Function(String);
-enum DateLength { short, medium, long, full }
-
-// 5. Main class
-class MyClass { }
-
-// 6. Standalone functions (if any)
-void helperFunction() { }
 ```
 
 ### Documentation
@@ -611,7 +575,7 @@ Before releasing version X.Y.Z:
 - [ ] Code formatted (`dart format .`)
 - [ ] CHANGELOG.md updated
 - [ ] Version bumped in `pubspec.yaml`
-- [ ] Notable features documented in `Docs.md`
+- [ ] Notable features documented in `docs/`
 - [ ] README examples work
 - [ ] No breaking changes (or clearly documented)
 - [ ] Git tag created: `vX.Y.Z`
@@ -632,7 +596,7 @@ Before releasing version X.Y.Z:
 ## Getting Help
 
 ### Questions?
-- Check `README.md` and `Docs.md`
+- Check `README.md` and `docs/`
 - Review existing issues: GitHub Issues
 - Review test examples in `test/`
 

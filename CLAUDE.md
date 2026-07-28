@@ -87,7 +87,7 @@ pure-calculation classes need no locale loading (see Conventions › Testing).
 - `ilib.data.localeinfo` — locale metadata (clock, calendar, timezone, digits, etc.)
 - `ilib.data.localeinfo.numfmt` — number format patterns (nested under localeinfo)
 - `ilib.data.plurals` — CLDR plural rule tree (used by `ILibDurationFmt` plural selection)
-- `ilib.data.scriptinfo` — script metadata
+- `ilib.data.scripts` — script metadata
 - `ilib.data.sysres` — translated strings (month/day names, AM/PM, etc.)
 - `ilib.data.zoneinfo` — timezone + DST rules
 
@@ -135,7 +135,7 @@ lib/
 │   └── persian_algo_cal.dart   # + persian_algo_date.dart + persian_algo_rata_die.dart (algorithmic)
 └── internal/
     ├── ilib_utils.dart         # getLocale(), getJSONDataPaths(), etc.
-    ├── ilib_plural.dart        # getPluralCategory() — CLDR plural-rule eval (used by ILibDurationFmt)
+    ├── plural_utils.dart       # getPluralCategory() — CLDR plural-rule eval (used by ILibDurationFmt)
     ├── math_utils.dart         # rounding helpers (used by ILibNumFmt)
     └── logger/                 # internal logging (LogAdapter + package:logging); not part of the conversion
 ```
