@@ -238,6 +238,8 @@ class ILibDateFmt {
     if (dt != null) {
       if (dt.isUtc && _timezone != null && _timezone!.isNotEmpty) {
         final ILibTimeZone tz = ILibTimeZone(_timezone!, _zoneInfo);
+        // 'Etc/UTC' prevents adjustRdForTimezone from treating these UTC
+        // components as local time, which would corrupt DST decisions.
         final ILibDateOptions tempDate = ILibDateOptions(
           year: dt.year,
           month: dt.month,
@@ -245,6 +247,7 @@ class ILibDateFmt {
           hour: dt.hour,
           minute: dt.minute,
           second: dt.second,
+          timezone: 'Etc/UTC',
         );
         final double offsetMinutes = tz.getOffsetMinutes(tempDate);
         dt = dt.add(Duration(minutes: offsetMinutes.round()));

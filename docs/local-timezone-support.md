@@ -61,6 +61,13 @@ CLAUDE.md to keep that file lean):
   `true` (from-components, wall): `startRd += dstSavings/1440`. `calcTimezoneOffset()` passes
   `wallTime=false`; `adjustRdForTimezone()` passes `wallTime=true`. A date passed to
   `getOffset()`/`inDaylightTime()` must carry the timezone it should be interpreted in.
+- **JD round-trip precision:** `getJulianDay() - GregRataDie.epoch` introduces a sub-nanosecond
+  floating-point error (≈ ±2.3e-10 days, ≈ ±20 ns) because the epoch magnitude shifts the IEEE 754
+  ULP. JS avoids this by reading `date.rd.getRataDie()` directly; Dart compensates with a
+  `halfMs = 0.5/86400000` (≈ 5.8e-9 days, ≈ 500 ns) tolerance in the boundary comparisons:
+  `rdC = rd + halfMs; return rdC >= startRd && rdC < endRd`. Since `halfMs` is orders of magnitude
+  smaller than any 1 ms step (1.16e-5 days), all integer-millisecond timestamps produce the same
+  boolean result as JS.
 - DST-end overlap (`dst` flag): the same wall time occurs twice; `ILibDate` carries `bool? dst`
   threaded through every constructor and `_toCalendarDate()`. `inDaylightTime()` has the JS
   magic-overlap rule `if (dst != null && rd < endRd && endRd - rd <= dstSavings/1440) return dst;`
@@ -69,6 +76,11 @@ CLAUDE.md to keep that file lean):
 - `ILibRataDie.snapToMillis()` rounds an rd to millisecond resolution (mirrors iLib storing
   `halfup((jd - epoch) * 86400000) / 86400000`), applied in every `*RataDie` `julianDay`/`unixtime`
   branch so a `getTime()` round-trip lands on an exact instant (not `...999999999`).
+- **`_resolveDateOptions` UTC guard:** when `ILibDateFmt.format()` resolves a `unixtime`/`dateTime`
+  input to wall-clock components, it creates a temporary `ILibDateOptions(timezone: 'Etc/UTC')` to
+  probe the formatter's timezone offset. Without the explicit `'Etc/UTC'`, the temp date defaults to
+  `'local'`, causing `adjustRdForTimezone` to apply the system timezone twice and producing wrong DST
+  decisions (e.g. wrong AM/PM on DST boundaries in es-CL / America/Santiago).
 
 ## Optional future work — Strategy B (only for a real IANA `getId()`)
 
