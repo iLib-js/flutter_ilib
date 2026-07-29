@@ -17,7 +17,7 @@ Implementation summary:
   on a `null` raw `_timezone`; `'local'` flows to `ILibTimeZone('local')`.
 - `lib/ilib_date.dart`: `ILibDateOptions._toCalendarDate()` forwards `locale`.
 - `newDateFromRd` (all 9 calendar date classes) propagates the source `_timezone` to results.
-- Tests: ported `*Local*` tests in `test/timezone/timezone_test.dart`; Dart-only ones in
+- Tests: ported `*Local*` tests in `test/calendar/timezone_test.dart`; Dart-only ones in
   `timezone_extra_test.dart`; both emulate `America/Los_Angeles` via the injectable hooks.
 
 ## Implemented behavior (Strategy A — detail)

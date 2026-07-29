@@ -45,90 +45,90 @@ JS source path base: `js/test/`
 
 | Dart Test File | iLib JS Source File | Notes |
 |---|---|---|
-| `test/datefmt/datefmt_af_ZA_test.dart` | `js/test/testdatefmt_af_ZA.js` | |
-| `test/datefmt/datefmt_am_ET_test.dart` | `js/test/testdatefmt_am_ET.js` | |
-| `test/datefmt/datefmt_ar_EG_test.dart` | `js/test/testdatefmt_ar_EG.js` | |
-| `test/datefmt/datefmt_ar_SA_test.dart` | `js/test/testdatefmt_ar_SA.js` | |
-| `test/datefmt/datefmt_as_IN_test.dart` | `js/test/testdatefmt_as_IN.js` | |
-| `test/datefmt/datefmt_az_Latn_AZ_test.dart` | `js/test/testdatefmt_az_Latn_AZ.js` | |
-| `test/datefmt/datefmt_bg_test.dart` | `js/test/testdatefmt_bg_BG.js` | Filename shortened |
-| `test/datefmt/datefmt_bn_IN_test.dart` | `js/test/testdatefmt_bn_IN.js` | |
-| `test/datefmt/datefmt_bs_Latn_BA_test.dart` | `js/test/testdatefmt_bs_Latn_BA.js` | |
-| `test/datefmt/datefmt_cs_CZ_test.dart` | `js/test/testdatefmt_cs_CZ.js` | |
-| `test/datefmt/datefmt_da_DK_test.dart` | `js/test/testdatefmt_da_DK.js` | |
-| `test/datefmt/datefmt_de_DE_test.dart` | `js/test/testdatefmt_de_DE.js` | |
-| `test/datefmt/datefmt_el_GR_test.dart` | `js/test/testdatefmt_el_GR.js` | |
-| `test/datefmt/datefmt_en_AU_test.dart` | `js/test/testdatefmt_en_AU.js` | |
-| `test/datefmt/datefmt_en_CA_test.dart` | `js/test/testdatefmt_en_CA.js` | |
-| `test/datefmt/datefmt_en_GB_test.dart` | `js/test/testdatefmt_en_GB.js` | |
-| `test/datefmt/datefmt_en_HK_test.dart` | `js/test/testdatefmt_en_HK.js` | |
-| `test/datefmt/datefmt_en_IE_test.dart` | `js/test/testdatefmt_en_IE.js` | |
-| `test/datefmt/datefmt_en_IN_test.dart` | `js/test/testdatefmt_en_IN.js` | |
-| `test/datefmt/datefmt_en_KE_test.dart` | `js/test/testdatefmt_en_KE.js` | |
-| `test/datefmt/datefmt_en_MY_test.dart` | `js/test/testdatefmt_en_MY.js` | |
-| `test/datefmt/datefmt_en_NZ_test.dart` | `js/test/testdatefmt_en_NZ.js` | |
-| `test/datefmt/datefmt_en_SG_test.dart` | `js/test/testdatefmt_en_SG.js` | |
-| `test/datefmt/datefmt_en_US_test.dart` | `js/test/testdatefmt_en_US.js` | |
-| `test/datefmt/datefmt_en_ZA_test.dart` | `js/test/testdatefmt_en_ZA.js` | |
-| `test/datefmt/datefmt_es_CO_test.dart` | `js/test/testdatefmt_es_CO.js` | |
-| `test/datefmt/datefmt_es_ES_test.dart` | `js/test/testdatefmt_es_ES.js` | |
-| `test/datefmt/datefmt_es_MX_test.dart` | `js/test/testdatefmt_es_MX.js` | |
-| `test/datefmt/datefmt_es_US_test.dart` | `js/test/testdatefmt_es_US.js` | |
-| `test/datefmt/datefmt_et_EE_test.dart` | `js/test/testdatefmt_et_EE.js` | |
-| `test/datefmt/datefmt_fa_IR_test.dart` | `js/test/testdatefmt_fa_IR.js` | |
-| `test/datefmt/datefmt_fi_FI_test.dart` | `js/test/testdatefmt_fi_FI.js` | |
-| `test/datefmt/datefmt_fr_CA_test.dart` | `js/test/testdatefmt_fr_CA.js` | |
-| `test/datefmt/datefmt_fr_FR_test.dart` | `js/test/testdatefmt_fr_FR.js` | |
-| `test/datefmt/datefmt_ga_IE_test.dart` | `js/test/testdatefmt_ga_IE.js` | |
-| `test/datefmt/datefmt_gu_IN_test.dart` | `js/test/testdatefmt_gu_IN.js` | |
-| `test/datefmt/datefmt_ha_Latn_NG_test.dart` | `js/test/testdatefmt_ha_Latn_NG.js` | |
-| `test/datefmt/datefmt_he_IL_test.dart` | `js/test/testdatefmt_he_IL.js` | |
-| `test/datefmt/datefmt_hi_IN_test.dart` | `js/test/testdatefmt_hi_IN.js` | |
-| `test/datefmt/datefmt_hr_HR_test.dart` | `js/test/testdatefmt_hr_HR.js` | |
-| `test/datefmt/datefmt_id_ID_test.dart` | `js/test/testdatefmt_id_ID.js` | |
-| `test/datefmt/datefmt_it_IT_test.dart` | `js/test/testdatefmt_it_IT.js` | |
-| `test/datefmt/datefmt_ja_JP_test.dart` | `js/test/testdatefmt_ja_JP.js` | |
-| `test/datefmt/datefmt_ka_GE_test.dart` | `js/test/testdatefmt_ka_GE.js` | |
-| `test/datefmt/datefmt_kk_Cyrl_KZ_test.dart` | `js/test/testdatefmt_kk_Cyrl_KZ.js` | |
-| `test/datefmt/datefmt_km_KH_test.dart` | `js/test/testdatefmt_km_KH.js` | |
-| `test/datefmt/datefmt_kn_IN_test.dart` | `js/test/testdatefmt_kn_IN.js` | |
-| `test/datefmt/datefmt_ko_KR_test.dart` | `js/test/testdatefmt_ko_KR.js` | |
-| `test/datefmt/datefmt_ko_KR_extra_test.dart` | — | flutter_ilib-specific (no JS counterpart): Dart-style `DateFmt_*` cases and Flutter `DateTime` (`ILibDateOptions.dateTime`) input |
-| `test/datefmt/datefmt_ku_Arab_IQ_test.dart` | `js/test/testdatefmt_ku_Arab_IQ.js` | |
-| `test/datefmt/datefmt_lt_LT_test.dart` | `js/test/testdatefmt_lt_LT.js` | |
-| `test/datefmt/datefmt_lv_LV_test.dart` | `js/test/testdatefmt_lv_LV.js` | |
-| `test/datefmt/datefmt_mk_MK_test.dart` | `js/test/testdatefmt_mk_MK.js` | |
-| `test/datefmt/datefmt_ml_IN_test.dart` | `js/test/testdatefmt_ml_IN.js` | |
-| `test/datefmt/datefmt_mn_Cyrl_MN_test.dart` | `js/test/testdatefmt_mn_Cyrl_MN.js` | |
-| `test/datefmt/datefmt_mr_IN_test.dart` | `js/test/testdatefmt_mr_IN.js` | |
-| `test/datefmt/datefmt_ms_MY_test.dart` | `js/test/testdatefmt_ms_MY.js` | |
-| `test/datefmt/datefmt_nb_NO_test.dart` | `js/test/testdatefmt_nb_NO.js` | |
-| `test/datefmt/datefmt_nl_NL_test.dart` | `js/test/testdatefmt_nl_NL.js` | |
-| `test/datefmt/datefmt_or_IN_test.dart` | `js/test/testdatefmt_or_IN.js` | |
-| `test/datefmt/datefmt_pa_IN_test.dart` | `js/test/testdatefmt_pa_IN.js` | |
-| `test/datefmt/datefmt_pl_PL_test.dart` | `js/test/testdatefmt_pl_PL.js` | |
-| `test/datefmt/datefmt_pt_BR_test.dart` | `js/test/testdatefmt_pt_BR.js` | |
-| `test/datefmt/datefmt_pt_PT_test.dart` | `js/test/testdatefmt_pt_PT.js` | |
-| `test/datefmt/datefmt_ro_RO_test.dart` | `js/test/testdatefmt_ro_RO.js` | |
-| `test/datefmt/datefmt_ru_RU_test.dart` | `js/test/testdatefmt_ru_RU.js` | |
-| `test/datefmt/datefmt_si_LK_test.dart` | `js/test/testdatefmt_si_LK.js` | |
-| `test/datefmt/datefmt_sk_SK_test.dart` | `js/test/testdatefmt_sk_SK.js` | |
-| `test/datefmt/datefmt_sl_SI_test.dart` | `js/test/testdatefmt_sl_SI.js` | |
-| `test/datefmt/datefmt_sq_AL_test.dart` | `js/test/testdatefmt_sq_AL.js` | |
-| `test/datefmt/datefmt_sr_Latn_RS_test.dart` | `js/test/testdatefmt_sr_Latn_RS.js` | |
-| `test/datefmt/datefmt_sv_SE_test.dart` | `js/test/testdatefmt_sv_SE.js` | |
-| `test/datefmt/datefmt_sw_KE_test.dart` | `js/test/testdatefmt_sw_KE.js` | |
-| `test/datefmt/datefmt_ta_IN_test.dart` | `js/test/testdatefmt_ta_IN.js` | |
-| `test/datefmt/datefmt_te_IN_test.dart` | `js/test/testdatefmt_te_IN.js` | |
-| `test/datefmt/datefmt_th_TH_test.dart` | `js/test/testdatefmt_th_TH.js` | |
-| `test/datefmt/datefmt_tr_TR_test.dart` | `js/test/testdatefmt_tr_TR.js` | |
-| `test/datefmt/datefmt_uk_UA_test.dart` | `js/test/testdatefmt_uk_UA.js` | |
-| `test/datefmt/datefmt_ur_IN_test.dart` | `js/test/testdatefmt_ur_IN.js` | |
-| `test/datefmt/datefmt_uz_Latn_UZ_test.dart` | `js/test/testdatefmt_uz_Latn_UZ.js` | |
-| `test/datefmt/datefmt_vi_VN_test.dart` | `js/test/testdatefmt_vi_VN.js` | |
-| `test/datefmt/datefmt_zh_CN_test.dart` | `js/test/testdatefmt_zh_Hans_CN.js` | Filename shortened (Hans omitted) |
-| `test/datefmt/datefmt_zh_Hant_HK_test.dart` | `js/test/testdatefmt_zh_Hant_HK.js` | |
-| `test/datefmt/datefmt_zh_Hant_TW_test.dart` | `js/test/testdatefmt_zh_Hant_TW.js` | |
+| `test/date/datefmt_af_ZA_test.dart` | `js/test/testdatefmt_af_ZA.js` | |
+| `test/date/datefmt_am_ET_test.dart` | `js/test/testdatefmt_am_ET.js` | |
+| `test/date/datefmt_ar_EG_test.dart` | `js/test/testdatefmt_ar_EG.js` | |
+| `test/date/datefmt_ar_SA_test.dart` | `js/test/testdatefmt_ar_SA.js` | |
+| `test/date/datefmt_as_IN_test.dart` | `js/test/testdatefmt_as_IN.js` | |
+| `test/date/datefmt_az_Latn_AZ_test.dart` | `js/test/testdatefmt_az_Latn_AZ.js` | |
+| `test/date/datefmt_bg_test.dart` | `js/test/testdatefmt_bg_BG.js` | Filename shortened |
+| `test/date/datefmt_bn_IN_test.dart` | `js/test/testdatefmt_bn_IN.js` | |
+| `test/date/datefmt_bs_Latn_BA_test.dart` | `js/test/testdatefmt_bs_Latn_BA.js` | |
+| `test/date/datefmt_cs_CZ_test.dart` | `js/test/testdatefmt_cs_CZ.js` | |
+| `test/date/datefmt_da_DK_test.dart` | `js/test/testdatefmt_da_DK.js` | |
+| `test/date/datefmt_de_DE_test.dart` | `js/test/testdatefmt_de_DE.js` | |
+| `test/date/datefmt_el_GR_test.dart` | `js/test/testdatefmt_el_GR.js` | |
+| `test/date/datefmt_en_AU_test.dart` | `js/test/testdatefmt_en_AU.js` | |
+| `test/date/datefmt_en_CA_test.dart` | `js/test/testdatefmt_en_CA.js` | |
+| `test/date/datefmt_en_GB_test.dart` | `js/test/testdatefmt_en_GB.js` | |
+| `test/date/datefmt_en_HK_test.dart` | `js/test/testdatefmt_en_HK.js` | |
+| `test/date/datefmt_en_IE_test.dart` | `js/test/testdatefmt_en_IE.js` | |
+| `test/date/datefmt_en_IN_test.dart` | `js/test/testdatefmt_en_IN.js` | |
+| `test/date/datefmt_en_KE_test.dart` | `js/test/testdatefmt_en_KE.js` | |
+| `test/date/datefmt_en_MY_test.dart` | `js/test/testdatefmt_en_MY.js` | |
+| `test/date/datefmt_en_NZ_test.dart` | `js/test/testdatefmt_en_NZ.js` | |
+| `test/date/datefmt_en_SG_test.dart` | `js/test/testdatefmt_en_SG.js` | |
+| `test/date/datefmt_en_US_test.dart` | `js/test/testdatefmt_en_US.js` | |
+| `test/date/datefmt_en_ZA_test.dart` | `js/test/testdatefmt_en_ZA.js` | |
+| `test/date/datefmt_es_CO_test.dart` | `js/test/testdatefmt_es_CO.js` | |
+| `test/date/datefmt_es_ES_test.dart` | `js/test/testdatefmt_es_ES.js` | |
+| `test/date/datefmt_es_MX_test.dart` | `js/test/testdatefmt_es_MX.js` | |
+| `test/date/datefmt_es_US_test.dart` | `js/test/testdatefmt_es_US.js` | |
+| `test/date/datefmt_et_EE_test.dart` | `js/test/testdatefmt_et_EE.js` | |
+| `test/date/datefmt_fa_IR_test.dart` | `js/test/testdatefmt_fa_IR.js` | |
+| `test/date/datefmt_fi_FI_test.dart` | `js/test/testdatefmt_fi_FI.js` | |
+| `test/date/datefmt_fr_CA_test.dart` | `js/test/testdatefmt_fr_CA.js` | |
+| `test/date/datefmt_fr_FR_test.dart` | `js/test/testdatefmt_fr_FR.js` | |
+| `test/date/datefmt_ga_IE_test.dart` | `js/test/testdatefmt_ga_IE.js` | |
+| `test/date/datefmt_gu_IN_test.dart` | `js/test/testdatefmt_gu_IN.js` | |
+| `test/date/datefmt_ha_Latn_NG_test.dart` | `js/test/testdatefmt_ha_Latn_NG.js` | |
+| `test/date/datefmt_he_IL_test.dart` | `js/test/testdatefmt_he_IL.js` | |
+| `test/date/datefmt_hi_IN_test.dart` | `js/test/testdatefmt_hi_IN.js` | |
+| `test/date/datefmt_hr_HR_test.dart` | `js/test/testdatefmt_hr_HR.js` | |
+| `test/date/datefmt_id_ID_test.dart` | `js/test/testdatefmt_id_ID.js` | |
+| `test/date/datefmt_it_IT_test.dart` | `js/test/testdatefmt_it_IT.js` | |
+| `test/date/datefmt_ja_JP_test.dart` | `js/test/testdatefmt_ja_JP.js` | |
+| `test/date/datefmt_ka_GE_test.dart` | `js/test/testdatefmt_ka_GE.js` | |
+| `test/date/datefmt_kk_Cyrl_KZ_test.dart` | `js/test/testdatefmt_kk_Cyrl_KZ.js` | |
+| `test/date/datefmt_km_KH_test.dart` | `js/test/testdatefmt_km_KH.js` | |
+| `test/date/datefmt_kn_IN_test.dart` | `js/test/testdatefmt_kn_IN.js` | |
+| `test/date/datefmt_ko_KR_test.dart` | `js/test/testdatefmt_ko_KR.js` | |
+| `test/date/datefmt_ko_KR_extra_test.dart` | — | flutter_ilib-specific (no JS counterpart): Dart-style `DateFmt_*` cases and Flutter `DateTime` (`ILibDateOptions.dateTime`) input |
+| `test/date/datefmt_ku_Arab_IQ_test.dart` | `js/test/testdatefmt_ku_Arab_IQ.js` | |
+| `test/date/datefmt_lt_LT_test.dart` | `js/test/testdatefmt_lt_LT.js` | |
+| `test/date/datefmt_lv_LV_test.dart` | `js/test/testdatefmt_lv_LV.js` | |
+| `test/date/datefmt_mk_MK_test.dart` | `js/test/testdatefmt_mk_MK.js` | |
+| `test/date/datefmt_ml_IN_test.dart` | `js/test/testdatefmt_ml_IN.js` | |
+| `test/date/datefmt_mn_Cyrl_MN_test.dart` | `js/test/testdatefmt_mn_Cyrl_MN.js` | |
+| `test/date/datefmt_mr_IN_test.dart` | `js/test/testdatefmt_mr_IN.js` | |
+| `test/date/datefmt_ms_MY_test.dart` | `js/test/testdatefmt_ms_MY.js` | |
+| `test/date/datefmt_nb_NO_test.dart` | `js/test/testdatefmt_nb_NO.js` | |
+| `test/date/datefmt_nl_NL_test.dart` | `js/test/testdatefmt_nl_NL.js` | |
+| `test/date/datefmt_or_IN_test.dart` | `js/test/testdatefmt_or_IN.js` | |
+| `test/date/datefmt_pa_IN_test.dart` | `js/test/testdatefmt_pa_IN.js` | |
+| `test/date/datefmt_pl_PL_test.dart` | `js/test/testdatefmt_pl_PL.js` | |
+| `test/date/datefmt_pt_BR_test.dart` | `js/test/testdatefmt_pt_BR.js` | |
+| `test/date/datefmt_pt_PT_test.dart` | `js/test/testdatefmt_pt_PT.js` | |
+| `test/date/datefmt_ro_RO_test.dart` | `js/test/testdatefmt_ro_RO.js` | |
+| `test/date/datefmt_ru_RU_test.dart` | `js/test/testdatefmt_ru_RU.js` | |
+| `test/date/datefmt_si_LK_test.dart` | `js/test/testdatefmt_si_LK.js` | |
+| `test/date/datefmt_sk_SK_test.dart` | `js/test/testdatefmt_sk_SK.js` | |
+| `test/date/datefmt_sl_SI_test.dart` | `js/test/testdatefmt_sl_SI.js` | |
+| `test/date/datefmt_sq_AL_test.dart` | `js/test/testdatefmt_sq_AL.js` | |
+| `test/date/datefmt_sr_Latn_RS_test.dart` | `js/test/testdatefmt_sr_Latn_RS.js` | |
+| `test/date/datefmt_sv_SE_test.dart` | `js/test/testdatefmt_sv_SE.js` | |
+| `test/date/datefmt_sw_KE_test.dart` | `js/test/testdatefmt_sw_KE.js` | |
+| `test/date/datefmt_ta_IN_test.dart` | `js/test/testdatefmt_ta_IN.js` | |
+| `test/date/datefmt_te_IN_test.dart` | `js/test/testdatefmt_te_IN.js` | |
+| `test/date/datefmt_th_TH_test.dart` | `js/test/testdatefmt_th_TH.js` | |
+| `test/date/datefmt_tr_TR_test.dart` | `js/test/testdatefmt_tr_TR.js` | |
+| `test/date/datefmt_uk_UA_test.dart` | `js/test/testdatefmt_uk_UA.js` | |
+| `test/date/datefmt_ur_IN_test.dart` | `js/test/testdatefmt_ur_IN.js` | |
+| `test/date/datefmt_uz_Latn_UZ_test.dart` | `js/test/testdatefmt_uz_Latn_UZ.js` | |
+| `test/date/datefmt_vi_VN_test.dart` | `js/test/testdatefmt_vi_VN.js` | |
+| `test/date/datefmt_zh_CN_test.dart` | `js/test/testdatefmt_zh_Hans_CN.js` | Filename shortened (Hans omitted) |
+| `test/date/datefmt_zh_Hant_HK_test.dart` | `js/test/testdatefmt_zh_Hant_HK.js` | |
+| `test/date/datefmt_zh_Hant_TW_test.dart` | `js/test/testdatefmt_zh_Hant_TW.js` | |
 
 ### DateFmt Special Tests
 
@@ -136,12 +136,12 @@ These were extracted from the single monolithic `js/test/testdatefmt.js` file, s
 
 | Dart Test File | iLib JS Source File | Extracted Section |
 |---|---|---|
-| `test/datefmt/datefmt_template_test.dart` | `js/test/testdatefmt.js` | Format template tests |
-| `test/datefmt/datefmt_Clock_test.dart` | `js/test/testdatefmt.js` | getClock() tests |
-| `test/datefmt/datefmt_Meridiems_test.dart` | `js/test/testdatefmt.js` | getMeridiemsRange() tests |
-| `test/datefmt/datefmt_MonthTranslation_test.dart` | `js/test/testdatefmt.js` | Month name translation tests |
-| `test/datefmt/datefmt_WeekdayTranslation_test.dart` | `js/test/testdatefmt.js` | Weekday name translation tests |
-| `test/datefmt/datefmt_datetime_calendar_extra_test.dart` | — | **flutter_ilib-specific**: `ILibDateOptions(dateTime:/unixtime:)` input (Flutter `DateTime`/Unix instant) converts to the locale's calendar — am-ET→ethiopic, fa-IR→persian |
+| `test/date/datefmt_template_test.dart` | `js/test/testdatefmt.js` | Format template tests |
+| `test/date/datefmt_Clock_test.dart` | `js/test/testdatefmt.js` | getClock() tests |
+| `test/date/datefmt_Meridiems_test.dart` | `js/test/testdatefmt.js` | getMeridiemsRange() tests |
+| `test/date/datefmt_MonthTranslation_test.dart` | `js/test/testdatefmt.js` | Month name translation tests |
+| `test/date/datefmt_WeekdayTranslation_test.dart` | `js/test/testdatefmt.js` | Weekday name translation tests |
+| `test/date/datefmt_datetime_calendar_extra_test.dart` | — | **flutter_ilib-specific**: `ILibDateOptions(dateTime:/unixtime:)` input (Flutter `DateTime`/Unix instant) converts to the locale's calendar — am-ET→ethiopic, fa-IR→persian |
 
 > **Dart-specific input paths need their own coverage.** The JS-mirrored datefmt
 > tests above all pass dates as **calendar components** (`year/month/day`), which
@@ -156,23 +156,23 @@ These were extracted from the single monolithic `js/test/testdatefmt.js` file, s
 
 | Dart Test File | iLib JS Source File | Notes |
 |---|---|---|
-| `test/localeinfo/localeinfo_test.dart` | `js/test/testlocaleinfo.js` | ILibLocaleInfo general |
-| `test/localeinfo/localeinfo_dayofweek_test.dart` | `js/test/testlocaleinfo.js` | Extracted: getFirstDayOfWeek/getWeekEndStart/End |
-| `test/localeinfo/locale_test.dart` | `js/test/testlocale.js` | ILibLocale (BCP-47 parsing) |
+| `test/root/localeinfo_test.dart` | `js/test/testlocaleinfo.js` | ILibLocaleInfo general |
+| `test/root/localeinfo_dayofweek_test.dart` | `js/test/testlocaleinfo.js` | Extracted: getFirstDayOfWeek/getWeekEndStart/End |
+| `test/root/locale_test.dart` | `js/test/testlocale.js` | ILibLocale (BCP-47 parsing) |
 
-## CaseMapper Tests
+## Maps Tests (CaseMapper)
 
 | Dart Test File | iLib JS Source File | Notes |
 |---|---|---|
-| `test/casemapper/upper_test.dart` | `js/test/testcasemapper.js` | Extracted: toUpper tests |
-| `test/casemapper/lower_test.dart` | `js/test/testcasemapper.js` | Extracted: toLower tests |
+| `test/maps/upper_test.dart` | `js/test/maps/testtoupper.js` | Extracted: toUpper tests |
+| `test/maps/lower_test.dart` | `js/test/maps/testtolower.js` | Extracted: toLower tests |
 
 ## Timezone Tests
 
 | Dart Test File | iLib JS Source File | Notes |
 |---|---|---|
-| `test/timezone/timezone_test.dart` | `js/test/calendar/testtimezone.js` | ILibTimeZone |
-| `test/timezone/timezone_extra_test.dart` | — | flutter_ilib-specific (additional timezone tests; system `'local'` tests; spring-forward gap; Flutter `DateTime` input) |
+| `test/calendar/timezone_test.dart` | `js/test/calendar/testtimezone.js` | ILibTimeZone |
+| `test/calendar/timezone_extra_test.dart` | — | flutter_ilib-specific (additional timezone tests; system `'local'` tests; spring-forward gap; Flutter `DateTime` input) |
 
 ## Basic Tests (flutter_ilib-specific)
 
@@ -199,24 +199,24 @@ These cover `lib/internal/` helpers and have no direct JS test counterpart
 
 | Dart Test File | iLib JS Source File | Notes |
 |---|---|---|
-| `test/currency/currency_test.dart` | `js/test/number/testcurrency.js` | ILibCurrency (default locale currency, code lookup, sign lookup, ambiguous-sign fallback) — 1:1 with the JS test, minus the unsupported-locale cases |
-| `test/currency/currency_extra_test.dart` | — | Dart-only: `ILibCurrency.getAvailableCurrencies()` reads currency metadata from the bundled rootData |
+| `test/number/currency_test.dart` | `js/test/number/testcurrency.js` | ILibCurrency (default locale currency, code lookup, sign lookup, ambiguous-sign fallback) — 1:1 with the JS test, minus the unsupported-locale cases |
+| `test/number/currency_extra_test.dart` | — | Dart-only: `ILibCurrency.getAvailableCurrencies()` reads currency metadata from the bundled rootData |
 
 ## NumFmt Tests
 
 | Dart Test File | iLib JS Source File | Notes |
 |---|---|---|
-| `test/numfmt/numfmt_test.dart` | `js/test/number/testnumfmt.js` | ILibNumFmt core (number/currency/percentage, fraction digits, significant digits, rounding modes, grouping, scientific) |
-| `test/numfmt/numfmt2_test.dart` | `js/test/number/testnumfmt2.js` | ILibNumFmt additional cases |
-| `test/numfmt/numfmt_af_test.dart` | `js/test/number/testnumfmt_af.js` | ILibNumFmt af (Afrikaans) locale formatting |
-| `test/numfmt/numfmt_am_test.dart` | `js/test/number/testnumfmt_am.js` | ILibNumFmt am (Amharic) locale formatting |
-| `test/numfmt/numfmt_extra_test.dart` | — | flutter_ilib-specific (no JS counterpart): unknown `roundingMode` falls back to `halfdown` for both the reported mode and the applied rounding, and a valid mode is preserved |
+| `test/number/numfmt_test.dart` | `js/test/number/testnumfmt.js` | ILibNumFmt core (number/currency/percentage, fraction digits, significant digits, rounding modes, grouping, scientific) |
+| `test/number/numfmt2_test.dart` | `js/test/number/testnumfmt2.js` | ILibNumFmt additional cases |
+| `test/number/numfmt_af_test.dart` | `js/test/number/testnumfmt_af.js` | ILibNumFmt af (Afrikaans) locale formatting |
+| `test/number/numfmt_am_test.dart` | `js/test/number/testnumfmt_am.js` | ILibNumFmt am (Amharic) locale formatting |
+| `test/number/numfmt_extra_test.dart` | — | flutter_ilib-specific (no JS counterpart): unknown `roundingMode` falls back to `halfdown` for both the reported mode and the applied rounding, and a valid mode is preserved |
 
 ## ScriptInfo Tests
 
 | Dart Test File | iLib JS Source File | Notes |
 |---|---|---|
-| `test/scriptinfo/scriptinfo_test.dart` | `js/test/root/testscriptinfo.js` | 161 tests converted: script-code/construction cases, per-locale cases in `locales.json`, and bare-language cases for supported languages (`pa`, `ha`, `az`). 85 per-locale cases skipped (N/A). |
+| `test/root/scriptinfo_test.dart` | `js/test/root/testscriptinfo.js` | 161 tests converted: script-code/construction cases, per-locale cases in `locales.json`, and bare-language cases for supported languages (`pa`, `ha`, `az`). 85 per-locale cases skipped (N/A). |
 
 ### Not Converted — ScriptInfo Tests
 
@@ -228,8 +228,8 @@ bundled `{lang}.json`. See CLAUDE.md › Conventions › Testing for the rule.
 
 | Dart Test File | iLib JS Source File | Notes |
 |---|---|---|
-| `test/country/country_test.dart` | `js/test/root/testcountry.js` | 26 tests converted 1:1: constructor/default/wrong-locale, per-locale `getName`/`getCode` cases in `locales.json`, and the two unknown-code/name `ArgumentError` cases (JS `testCountryGetBy*Unknown`, renamed). |
-| `test/country/country_extra_test.dart` | — | flutter_ilib-specific (no JS counterpart): the `ILibLocale`-object constructor branch, es-ES/en-US/ko-KR platform-branched extras, and the static `getAvailableCode`/`getAvailableCountry` queries. |
+| `test/root/country_test.dart` | `js/test/root/testcountry.js` | 26 tests converted 1:1: constructor/default/wrong-locale, per-locale `getName`/`getCode` cases in `locales.json`, and the two unknown-code/name `ArgumentError` cases (JS `testCountryGetBy*Unknown`, renamed). |
+| `test/root/country_extra_test.dart` | — | flutter_ilib-specific (no JS counterpart): the `ILibLocale`-object constructor branch, es-ES/en-US/ko-KR platform-branched extras, and the static `getAvailableCode`/`getAvailableCountry` queries. |
 
 ### Not Converted — Country Tests
 
@@ -282,7 +282,7 @@ these; check for an enclosing block comment.)
 
 | Test | File | Count | Reason |
 |---|---|---|---|
-| `testPersDateAstroConstructorBeforeDSTWithImplicitTimeZone`, `testPersDateAstroConstructorAfterDSTWithImplicitTimeZone` | `testpersiandateastro.js` | 2 | Block-commented in the JS source (lines ~626–693). The iLib note: *"Doesn't work on node because you cannot change the time zone after the first call to a Date method... To run these, temporarily set your TZ to 'Asia/Tehran' first, uncomment these, and run as normal."* They test `timezone: "local"` (system tz) around the Iran DST boundary. The constituent behavior is already covered: explicit Asia/Tehran + DST in `testPersDateAstroConstructorNearDSTWithExplicitTimeZone`, and the `'local'` = system-tz mechanism in `test/timezone/` (LA emulation via the injectable hooks). |
+| `testPersDateAstroConstructorBeforeDSTWithImplicitTimeZone`, `testPersDateAstroConstructorAfterDSTWithImplicitTimeZone` | `testpersiandateastro.js` | 2 | Block-commented in the JS source (lines ~626–693). The iLib note: *"Doesn't work on node because you cannot change the time zone after the first call to a Date method... To run these, temporarily set your TZ to 'Asia/Tehran' first, uncomment these, and run as normal."* They test `timezone: "local"` (system tz) around the Iran DST boundary. The constituent behavior is already covered: explicit Asia/Tehran + DST in `testPersDateAstroConstructorNearDSTWithExplicitTimeZone`, and the `'local'` = system-tz mechanism in `test/calendar/` (LA emulation via the injectable hooks). |
 
 ## Not Converted — Timezone Tests
 
