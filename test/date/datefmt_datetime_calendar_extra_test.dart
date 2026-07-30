@@ -102,6 +102,42 @@ void main() {
     expect(out, contains('2026'));
   });
 
+  // ILibCalendarDate passed directly to format() with a different timezone than
+  // the formatter — re-created via Julian Day in the formatter's timezone.
+  group('ILibCalendarDate timezone mismatch re-conversion', () {
+    test('GregorianDate Asia/Seoul → formatter America/New_York', () {
+      // 2024-07-04 13:00 Seoul (UTC+9) = 2024-07-04 04:00 UTC = 2024-07-04 00:00 NYC
+      final GregorianDate d = GregorianDate(
+          year: 2024, month: 7, day: 4, hour: 13, timezone: 'Asia/Seoul');
+      final String out = ILibDateFmt(ILibDateFmtOptions(
+        locale: 'en-US',
+        length: 'long',
+        type: 'datetime',
+        useNative: false,
+        timezone: 'America/New_York',
+      )).format(d);
+      expect(out, 'July 4, 2024 at 12:00 AM');
+    });
+
+    test('EthiopicDate Africa/Addis_Ababa → formatter Etc/UTC', () {
+      // 2016-10-27 13:00 Addis (UTC+3) = UTC 10:00
+      final EthiopicDate e = EthiopicDate(
+          year: 2016,
+          month: 10,
+          day: 27,
+          hour: 13,
+          timezone: 'Africa/Addis_Ababa');
+      final String out = ILibDateFmt(ILibDateFmtOptions(
+        locale: 'am-ET',
+        length: 'long',
+        type: 'datetime',
+        useNative: false,
+        timezone: 'Etc/UTC',
+      )).format(e);
+      expect(out, '27 ሰኔ 2016 10:00 ከሰዓት');
+    });
+  });
+
   // local DateTime (isUtc=false) components are wall-clock — no UTC offset applied.
   group('local DateTime converts to non-gregorian calendar', () {
     // DateTime(2026, 5, 23) local — date-only check is host-independent.
