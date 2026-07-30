@@ -322,10 +322,14 @@ class ILibTimeZone {
       return dst;
     }
 
+    // Half-ms tolerance absorbs the sub-nanosecond JD round-trip error
+    // (rd + epoch - epoch ≠ rd in IEEE 754) without affecting 1-ms boundaries.
+    const double halfMs = 0.5 / 86400000.0;
+    final double rdC = rd + halfMs;
     if (startRd < endRd) {
-      return rd >= startRd && rd < endRd;
+      return rdC >= startRd && rdC < endRd;
     }
-    return rd >= startRd || rd < endRd;
+    return rdC >= startRd || rdC < endRd;
   }
 
   bool _useDaylightTime() {

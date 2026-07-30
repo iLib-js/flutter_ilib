@@ -41,6 +41,26 @@ JS source path base: `js/test/`
 | `test/calendar/testpersiandate_extra_test.dart` | — | flutter_ilib-specific (basic JD/date; getCalendar) |
 | `test/calendar/testthaisolardate_extra_test.dart` | — | flutter_ilib-specific (basic JD/date; getCalendar) |
 
+## Date / DateFactory Tests
+
+| Dart Test File | iLib JS Source File | Notes |
+|---|---|---|
+| `test/date/date_test.dart` | `js/test/date/testdate.js` | `ILibDateOptions` (DateFactory): constructor, mutable fields (set year/month/day/hour/minute/second/millisecond), factory type selection, DST boundary (Azores, Santiago). 18 of 32 active JS tests converted; see Not Converted below. |
+
+### Not Converted — Date/DateFactory Tests
+
+| JS Test | Reason |
+|---|---|
+| `testDateFactoryBogus` | JS returns `undefined` for an unknown `type`; Dart falls to the `default:` switch case and returns a `GregorianDate` — behavior differs |
+| `testDateToIlibUndefined`, `testDateToIlibNull`, `testDateToIlibDate*` (8), `testDateToIlib{Date,String,Integer,IlibDate}` | `DateFactory._dateToIlib()` is a JS-internal conversion utility (no Dart equivalent) |
+| `testDateGetJSDateBeyond32Bits` | `getJSDate()` returns a JS `Date` object — JS-specific, no Dart equivalent |
+| `testDstStartBoundary_Windhoek`, `testDstEndBoundary_Windhoek` | Commented out in the JS source |
+
+> **Note:** `testDateSet{Years,Months,Days,Hours,Minutes,Seconds,Milliseconds}` **are** converted for
+> `ILibDateOptions` (its fields are public and mutable: `gd.year = 123`). The same JS setter pattern
+> is N/A for `ILibCalendarDate` subclasses (immutable after construction) — see
+> [Common Not Converted Pattern](#common-not-converted-pattern-all-calendar-date-tests).
+
 ## DateFmt Locale Tests
 
 | Dart Test File | iLib JS Source File | Notes |
