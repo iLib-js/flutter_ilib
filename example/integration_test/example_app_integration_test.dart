@@ -156,7 +156,7 @@ void main() {
             actual: _tryGetValueForLabel(tester, 'Country (KR)'),
             expected: expectedCountryValues[locale],
           );
-          
+
           _collectMismatch(
             failures: failures,
             locale: locale,
