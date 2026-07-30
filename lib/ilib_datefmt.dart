@@ -90,35 +90,59 @@ class ILibDateFmt {
   /// [ILibDateOptions] describing the date to format.
   String format(ILibDate date) {
     ILibDate resolved = date;
+    bool instantResolved = false;
     if (date is ILibDateOptions) {
-      resolved = _resolveDateOptions(date);
+      final (ILibDate r, bool utcConverted) = _resolveDateOptions(date);
+      instantResolved = utcConverted;
+      resolved = r;
     }
-    resolved = _convertToFormatterCalendar(resolved);
+    resolved =
+        _convertToFormatterCalendar(resolved, instantResolved: instantResolved);
     return _formatTemplate(resolved, _templateArr);
   }
 
-  ILibDate _convertToFormatterCalendar(ILibDate date) {
+  ILibDate _convertToFormatterCalendar(ILibDate date,
+      {bool instantResolved = false}) {
+    // For ILibCalendarDate passed directly to format(), re-create in the
+    // formatter's calendar/timezone via Julian Day when either mismatches.
     String dateCalendar = _calName;
+    bool needsTimezoneConversion = false;
     if (date is ILibDateOptions) {
-      dateCalendar = date.type ?? date.calendar ?? _calName;
+      dateCalendar = date.getCalendar();
     } else if (date is ILibCalendarDate) {
       dateCalendar = date.getCalendar();
+      final String formatterTz = _timezone ?? 'local';
+      final String? rawTz = date.getTimeZone();
+      final String dateTz = (rawTz == null || rawTz.isEmpty) ? 'local' : rawTz;
+      needsTimezoneConversion = dateTz != formatterTz;
     }
-    if (dateCalendar == _calName) {
+    if (dateCalendar == _calName && !needsTimezoneConversion) {
       return date;
     }
-    final ILibCalendarDate calDate = (date is ILibDateOptions)
-        ? _createCalendarDate(dateCalendar,
-            year: date.year,
-            month: date.month,
-            day: date.day,
-            hour: date.hour,
-            minute: date.minute,
-            second: date.second,
-            millisecond: date.millisecond)
-        : date as ILibCalendarDate;
+    final ILibCalendarDate calDate;
+    if (date is ILibDateOptions) {
+      // If an absolute instant was resolved, components are already timezone-
+      // adjusted — use 'Etc/UTC' to avoid a second offset application.
+      calDate = _createCalendarDate(dateCalendar,
+          year: date.year,
+          month: date.month,
+          day: date.day,
+          hour: date.hour,
+          minute: date.minute,
+          second: date.second,
+          millisecond: date.millisecond,
+          timezone: instantResolved
+              ? 'Etc/UTC'
+              : (date.timezone ??
+                  (date.locale != null
+                      ? ILibLocaleInfo(date.locale).getTimeZone()
+                      : null)));
+    } else {
+      calDate = date as ILibCalendarDate;
+    }
     final double jd = calDate.getJulianDay();
-    return _createCalendarDate(_calName, julianDay: jd);
+    return _createCalendarDate(_calName,
+        julianDay: jd, timezone: _timezone ?? 'local');
   }
 
   ILibCalendarDate _createCalendarDate(
@@ -131,6 +155,7 @@ class ILibDateFmt {
     int? second,
     int? millisecond,
     double? julianDay,
+    String? timezone,
   }) {
     switch (calendar) {
       case 'ethiopic':
@@ -142,7 +167,8 @@ class ILibDateFmt {
             minute: minute,
             second: second,
             millisecond: millisecond,
-            julianDay: julianDay);
+            julianDay: julianDay,
+            timezone: timezone);
       case 'coptic':
         return CopticDate(
             year: year,
@@ -152,7 +178,8 @@ class ILibDateFmt {
             minute: minute,
             second: second,
             millisecond: millisecond,
-            julianDay: julianDay);
+            julianDay: julianDay,
+            timezone: timezone);
       case 'hebrew':
         return HebrewDate(
             year: year,
@@ -162,7 +189,8 @@ class ILibDateFmt {
             minute: minute,
             second: second,
             millisecond: millisecond,
-            julianDay: julianDay);
+            julianDay: julianDay,
+            timezone: timezone);
       case 'islamic':
         return IslamicDate(
             year: year,
@@ -172,7 +200,8 @@ class ILibDateFmt {
             minute: minute,
             second: second,
             millisecond: millisecond,
-            julianDay: julianDay);
+            julianDay: julianDay,
+            timezone: timezone);
       case 'julian':
         return JulianDate(
             year: year,
@@ -182,7 +211,8 @@ class ILibDateFmt {
             minute: minute,
             second: second,
             millisecond: millisecond,
-            julianDay: julianDay);
+            julianDay: julianDay,
+            timezone: timezone);
       case 'persian':
         return PersianDate(
             year: year,
@@ -192,7 +222,8 @@ class ILibDateFmt {
             minute: minute,
             second: second,
             millisecond: millisecond,
-            julianDay: julianDay);
+            julianDay: julianDay,
+            timezone: timezone);
       case 'persian-algo':
         return PersianAlgoDate(
             year: year,
@@ -202,7 +233,8 @@ class ILibDateFmt {
             minute: minute,
             second: second,
             millisecond: millisecond,
-            julianDay: julianDay);
+            julianDay: julianDay,
+            timezone: timezone);
       case 'thaisolar':
         return ThaiSolarDate(
             year: year,
@@ -212,7 +244,8 @@ class ILibDateFmt {
             minute: minute,
             second: second,
             millisecond: millisecond,
-            julianDay: julianDay);
+            julianDay: julianDay,
+            timezone: timezone);
       default:
         return GregorianDate(
             year: year,
@@ -222,18 +255,25 @@ class ILibDateFmt {
             minute: minute,
             second: second,
             millisecond: millisecond,
-            julianDay: julianDay);
+            julianDay: julianDay,
+            timezone: timezone);
     }
   }
 
-  ILibDateOptions _resolveDateOptions(ILibDateOptions date) {
-    // A Flutter `DateTime` or a `unixtime` is a Gregorian instant. Resolve it to
-    // Gregorian wall-clock components and mark it 'gregorian' so the formatter
-    // converts it to its own calendar (e.g. ethiopic for am-ET) instead of
-    // treating the raw Gregorian numbers as already in that calendar.
+  // Returns (resolved options, utcConverted).
+  // utcConverted is true only when a UTC-based instant (unixtime, julianday,
+  // rd, or UTC dateTime) was resolved — local dateTime components are already
+  // wall-clock values and must not be treated as UTC-adjusted.
+  (ILibDateOptions, bool) _resolveDateOptions(ILibDateOptions date) {
     DateTime? dt = date.dateTime;
+    bool utcConverted = false;
     if (dt == null && date.unixtime != null) {
       dt = DateTime.fromMillisecondsSinceEpoch(date.unixtime!, isUtc: true);
+    }
+    if (dt == null && (date.julianday != null || date.rd != null)) {
+      final double jd = date.getJulianDay();
+      final int ut = ((jd - 2440587.5) * 86400000).round();
+      dt = DateTime.fromMillisecondsSinceEpoch(ut, isUtc: true);
     }
     if (dt != null) {
       if (dt.isUtc && _timezone != null && _timezone!.isNotEmpty) {
@@ -251,22 +291,26 @@ class ILibDateFmt {
         );
         final double offsetMinutes = tz.getOffsetMinutes(tempDate);
         dt = dt.add(Duration(minutes: offsetMinutes.round()));
+        utcConverted = true;
       }
-      return ILibDateOptions(
-        locale: date.locale,
-        year: date.year ?? dt.year,
-        month: date.month ?? dt.month,
-        day: date.day ?? dt.day,
-        hour: date.hour ?? dt.hour,
-        minute: date.minute ?? dt.minute,
-        second: date.second ?? dt.second,
-        millisecond: date.millisecond ?? dt.millisecond,
-        timezone: date.timezone,
-        calendar: date.calendar ?? 'gregorian',
-        type: date.type,
+      return (
+        ILibDateOptions(
+          locale: date.locale,
+          year: date.year ?? dt.year,
+          month: date.month ?? dt.month,
+          day: date.day ?? dt.day,
+          hour: date.hour ?? dt.hour,
+          minute: date.minute ?? dt.minute,
+          second: date.second ?? dt.second,
+          millisecond: date.millisecond ?? dt.millisecond,
+          timezone: date.timezone,
+          calendar: date.calendar ?? 'gregorian',
+          type: date.type,
+        ),
+        utcConverted,
       );
     }
-    return date;
+    return (date, false);
   }
 
   /// The calendar used to format dates and times.
