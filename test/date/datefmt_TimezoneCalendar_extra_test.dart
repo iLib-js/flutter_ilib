@@ -44,7 +44,6 @@ void main() {
 
       // JS iLib: "20/10/2016 7:00 ከሰዓት"
       final String result = fmt.format(dateOptions);
-      debugPrint('Scenario 3 result: $result');
       expect(result, '20/10/2016 7:00 ከሰዓት');
     });
 
@@ -80,8 +79,6 @@ void main() {
 
       final String resultComponents = fmt.format(fromComponents);
       final String resultUnixtime = fmt.format(fromUnixtime);
-      debugPrint('From components: $resultComponents');
-      debugPrint('From unixtime:   $resultUnixtime');
 
       // JS iLib: both produce "20/10/2016 7:00 ከሰዓት"
       expect(resultComponents, '20/10/2016 7:00 ከሰዓት');
@@ -121,8 +118,6 @@ void main() {
 
       final String resultNY = fmt.format(dateNY);
       final String resultUnix = fmt.format(dateUnix);
-      debugPrint('From NY components: $resultNY');
-      debugPrint('From unixtime:      $resultUnix');
 
       // JS iLib: both produce "24. 6. 28. 오전 2:00"
       expect(resultNY, '24. 6. 28. 오전 2:00');
@@ -161,8 +156,6 @@ void main() {
 
       final String resultSeoul = fmt.format(dateSeoul);
       final String resultUnix = fmt.format(dateUnix);
-      debugPrint('From Seoul components: $resultSeoul');
-      debugPrint('From unixtime:         $resultUnix');
 
       // JS iLib: "January 14, 2024 at 4:00\u202FPM" (U+202F = narrow no-break space)
       expect(resultSeoul, 'January 14, 2024 at 4:00\u202FPM');
@@ -202,8 +195,6 @@ void main() {
 
       final String resultNY = fmt.format(dateNY);
       final String resultUnix = fmt.format(dateUnix);
-      debugPrint('From NY gregorian:  $resultNY');
-      debugPrint('From unixtime:      $resultUnix');
 
       // JS iLib: both produce "20/10/2016 2:00 ከምሽቱ"
       expect(resultNY, '20/10/2016 2:00 ከምሽቱ');

@@ -27,7 +27,6 @@ class ILibDateFmt {
 
     final ILibLocaleInfo locInfo = ILibLocaleInfo(_locale);
     _timezone = options.timezone ?? locInfo.getTimeZone();
-    _explicitTimezone = options.timezone != null;
     _calName = options.calendar ?? locInfo.getCalendar();
     _calendar = ILibCalendar(_calName);
     _clock ??= locInfo.getClock();
@@ -72,7 +71,6 @@ class ILibDateFmt {
   late String _length;
   String? _clock;
   String? _timezone;
-  bool _explicitTimezone = false;
   bool? _useNative;
   late String _calName;
   late ILibCalendar _calendar;
@@ -110,13 +108,14 @@ class ILibDateFmt {
     final String formatterTz = _timezone ?? 'local';
     if (date is ILibDateOptions) {
       dateCalendar = date.getCalendar();
-      // Only check timezone mismatch when the formatter timezone was explicitly
-      // set and the input is plain components (not a resolved absolute instant).
-      if (!instantResolved && _explicitTimezone) {
-        final String dateTz = (date.timezone == null || date.timezone!.isEmpty)
-            ? 'local'
-            : date.timezone!;
-        needsTimezoneConversion = dateTz != formatterTz;
+      // Convert when the date carries an explicit timezone that differs from
+      // the formatter's. A resolved absolute instant is already in the
+      // formatter's timezone, and a null date timezone means 'local' — neither
+      // needs conversion here (matches JS: (date.timezone||'local')===fmtTz).
+      if (!instantResolved &&
+          date.timezone != null &&
+          date.timezone!.isNotEmpty) {
+        needsTimezoneConversion = date.timezone! != formatterTz;
       }
     } else if (date is ILibCalendarDate) {
       dateCalendar = date.getCalendar();
@@ -300,6 +299,10 @@ class ILibDateFmt {
         dt = dt.add(Duration(minutes: offsetMinutes.round()));
         utcConverted = true;
       }
+      // The absolute instant was decomposed into Gregorian wall-clock
+      // components, so the resolved date is always Gregorian — regardless of
+      // the caller's type/calendar. _convertToFormatterCalendar then converts
+      // it to the formatter's calendar via Julian Day.
       return (
         ILibDateOptions(
           locale: date.locale,
@@ -311,8 +314,7 @@ class ILibDateFmt {
           second: date.second ?? dt.second,
           millisecond: date.millisecond ?? dt.millisecond,
           timezone: date.timezone,
-          calendar: date.calendar ?? 'gregorian',
-          type: date.type,
+          calendar: 'gregorian',
         ),
         utcConverted,
       );

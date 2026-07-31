@@ -300,4 +300,39 @@ void main() {
       expect(localDate.getMinutes(), 45);
     });
   });
+
+  // An absolute instant is Gregorian; the formatter's calendar (not the
+  // caller's type/calendar) decides how it renders.
+  group('absolute instant with caller type/calendar', () {
+    // 2024-07-04 00:00 UTC
+    final int ut = DateTime.utc(2024, 7, 4).millisecondsSinceEpoch;
+
+    test('unixtime + type:islamic → gregorian formatter stays 2024-07-04', () {
+      final ILibDateOptions date =
+          ILibDateOptions(unixtime: ut, type: 'islamic');
+      final String out = ILibDateFmt(ILibDateFmtOptions(
+        locale: 'en-US',
+        length: 'long',
+        type: 'date',
+        useNative: false,
+        timezone: 'Etc/UTC',
+      )).format(date);
+      // Was 'October 19, 2585' before the fix (gregorian numbers read as islamic)
+      expect(out, 'July 4, 2024');
+    });
+
+    test('unixtime → islamic formatter renders islamic date', () {
+      final ILibDateOptions date = ILibDateOptions(unixtime: ut);
+      final String out = ILibDateFmt(ILibDateFmtOptions(
+        locale: 'en-US',
+        calendar: 'islamic',
+        length: 'long',
+        type: 'date',
+        useNative: false,
+        timezone: 'Etc/UTC',
+      )).format(date);
+      // 2024-07-04 Gregorian = 1445-12-27 Islamic
+      expect(out, 'Ḏu al-Ḥijja 27, 1445');
+    });
+  });
 }

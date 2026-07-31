@@ -109,11 +109,7 @@ class ILibDateOptions implements ILibDate {
   ILibCalendarDate toCalendarDate() => _toCalendarDate();
 
   ILibCalendarDate _toCalendarDate() {
-    // If no explicit type/calendar, derive from locale, then fall back to 'gregorian'.
-    final String cal = type ??
-        calendar ??
-        (locale != null ? ILibLocaleInfo(locale).getCalendar() : null) ??
-        'gregorian';
+    final String cal = getCalendar();
 
     // With an absolute instant, pass only that — not component defaults.
     final int? ut = unixtime ?? dateTime?.millisecondsSinceEpoch;
@@ -299,68 +295,10 @@ class ILibDateOptions implements ILibDate {
   int getTimeExtended() => _toCalendarDate().getTimeExtended();
 
   @override
+  // Explicit type/calendar wins; otherwise derive from locale, then 'gregorian'.
   String getCalendar() =>
       type ??
       calendar ??
       (locale != null ? ILibLocaleInfo(locale).getCalendar() : null) ??
       'gregorian';
-
-  /// A string representation of parameters to call functions of iLib library properly
-  String toJsonString() {
-    int? y = year;
-    int? m = month;
-    int? d = day;
-    int? h = hour;
-    int? min = minute;
-    int? sec = second;
-    int? milsec = millisecond;
-    String result = '';
-    String completeOption = '';
-    final int? w = week;
-
-    if (dateTime != null) {
-      y = dateTime!.year;
-      m = dateTime!.month;
-      d = dateTime!.day;
-      h = dateTime!.hour;
-      min = dateTime!.minute;
-      sec = dateTime!.second;
-      milsec = dateTime!.millisecond;
-    }
-
-    final Map<String, String> paramInfo = <String, String>{
-      'locale': '$locale',
-      // If dateTime is not null and is in UTC, set timezone to 'Etc/UTC'.
-      // Otherwise, use the provided timezone value.
-      'timezone': (dateTime?.isUtc ?? false) ? 'Etc/UTC' : '$timezone',
-      'type': '$type',
-      'calendar': '$calendar'
-    };
-
-    paramInfo.forEach((String key, String value) {
-      if (value != 'null') {
-        result += '$key:"$value",';
-      }
-    });
-
-    final Map<String, int?> datetimeInfo = <String, int?>{
-      'year': y,
-      'month': m,
-      'week': w,
-      'day': d,
-      'hour': h,
-      'minute': min,
-      'second': sec,
-      'millisecond': milsec,
-    };
-    datetimeInfo.forEach((String key, int? value) {
-      if (value != null) {
-        result += '$key:$value,';
-      }
-    });
-    result =
-        result.isNotEmpty ? result.substring(0, result.length - 1) : result;
-    completeOption = result.isNotEmpty ? '{$result}' : '';
-    return completeOption;
-  }
 }
