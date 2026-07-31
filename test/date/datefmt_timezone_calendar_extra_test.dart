@@ -2,15 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-/// Tests for scenarios where the absence of a unified DateFactory may cause
-/// incorrect timezone/calendar conversion in ILibDateFmt.format().
-///
-/// These correspond to the concern scenarios documented in
-/// review-datefactory-concerns.md.
-/// Expected values are verified against iLib JS (testCalendarTimezone.js).
+/// ILibDateFmt.format() when the input date and formatter differ in calendar
+/// and/or timezone.
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  debugPrint('Testing [datefmt_TimezoneCalendar_extra_test.dart] file.');
+  debugPrint('Testing [datefmt_timezone_calendar_extra_test.dart] file.');
 
   setUpAll(() async {
     await ILibLoader.instance.loadJSON();
@@ -19,7 +15,7 @@ void main() {
     await ILibLoader.instance.loadILibLocaleData('ko-KR');
   });
 
-  group('Scenario 3: cross-calendar conversion with timezone', () {
+  group('cross-calendar conversion with timezone', () {
     // gregorian components with timezone formatted as ethiopic
     test('testDateFmtCrossCalGregToEthiopic_am_ET', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -86,7 +82,7 @@ void main() {
     });
   });
 
-  group('Scenario 4: same calendar, different timezone', () {
+  group('same calendar, different timezone', () {
     // NY time formatted with Seoul formatter
     test('testDateFmtTzConvNYToSeoul_ko_KR', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -163,7 +159,7 @@ void main() {
     });
   });
 
-  group('Scenario 5: different timezone AND different calendar', () {
+  group('different timezone AND different calendar', () {
     // NY gregorian to Addis Ababa ethiopic
     test('testDateFmtTzCalConvNYGregToAddisEthiopic_am_ET', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
