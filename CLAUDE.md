@@ -9,11 +9,11 @@ Reads JSON locale data directly and performs formatting/calculation in Dart.
 instead of repeating the numbers, so a version bump only changes the values here (plus the two
 point-in-time/public spots listed below).
 
-- **iLib JS source**: **v14.22.0** — all `lib/` Dart code and `test/` cases were converted
+- **iLib JS source**: **v15.0.0** — all `lib/` Dart code and `test/` cases were converted
   from the iLib JS at this tag (`js/lib/` and `js/test/` of github.com/iLib-js/iLib;
-  `git checkout v14.22.0`).
+  `git checkout v15.0.0`).
 - **CLDR data**: **48.2** — the bundled `assets/locale/` JSON (144 locales) was generated from
-  iLib v14.22.0, which incorporates CLDR 46.
+  iLib v15.0.0, which incorporates CLDR 46.
 - When updating to a newer iLib/CLDR: bump the JS source and the generated locale data
   **together** (a JS-only or data-only bump will diverge), then re-run the converted tests
   against the new JS expectations.
