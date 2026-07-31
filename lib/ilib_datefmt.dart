@@ -108,10 +108,8 @@ class ILibDateFmt {
     final String formatterTz = _timezone ?? 'local';
     if (date is ILibDateOptions) {
       dateCalendar = date.getCalendar();
-      // Convert when the date carries an explicit timezone that differs from
-      // the formatter's. A resolved absolute instant is already in the
-      // formatter's timezone, and a null date timezone means 'local' — neither
-      // needs conversion here (matches JS: (date.timezone||'local')===fmtTz).
+      // Convert only when the date has an explicit timezone differing from the
+      // formatter's. Resolved instants and null-timezone dates need no convert.
       if (!instantResolved &&
           date.timezone != null &&
           date.timezone!.isNotEmpty) {
