@@ -317,7 +317,6 @@ void main() {
         useNative: false,
         timezone: 'Etc/UTC',
       )).format(date);
-      // Was 'October 19, 2585' before the fix (gregorian numbers read as islamic)
       expect(out, 'July 4, 2024');
     });
 
