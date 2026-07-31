@@ -27,6 +27,7 @@ class ILibDateFmt {
 
     final ILibLocaleInfo locInfo = ILibLocaleInfo(_locale);
     _timezone = options.timezone ?? locInfo.getTimeZone();
+    _explicitTimezone = options.timezone != null;
     _calName = options.calendar ?? locInfo.getCalendar();
     _calendar = ILibCalendar(_calName);
     _clock ??= locInfo.getClock();
@@ -71,6 +72,7 @@ class ILibDateFmt {
   late String _length;
   String? _clock;
   String? _timezone;
+  bool _explicitTimezone = false;
   bool? _useNative;
   late String _calName;
   late ILibCalendar _calendar;
@@ -103,15 +105,21 @@ class ILibDateFmt {
 
   ILibDate _convertToFormatterCalendar(ILibDate date,
       {bool instantResolved = false}) {
-    // For ILibCalendarDate passed directly to format(), re-create in the
-    // formatter's calendar/timezone via Julian Day when either mismatches.
     String dateCalendar = _calName;
     bool needsTimezoneConversion = false;
+    final String formatterTz = _timezone ?? 'local';
     if (date is ILibDateOptions) {
       dateCalendar = date.getCalendar();
+      // Only check timezone mismatch when the formatter timezone was explicitly
+      // set and the input is plain components (not a resolved absolute instant).
+      if (!instantResolved && _explicitTimezone) {
+        final String dateTz = (date.timezone == null || date.timezone!.isEmpty)
+            ? 'local'
+            : date.timezone!;
+        needsTimezoneConversion = dateTz != formatterTz;
+      }
     } else if (date is ILibCalendarDate) {
       dateCalendar = date.getCalendar();
-      final String formatterTz = _timezone ?? 'local';
       final String? rawTz = date.getTimeZone();
       final String dateTz = (rawTz == null || rawTz.isEmpty) ? 'local' : rawTz;
       needsTimezoneConversion = dateTz != formatterTz;
@@ -121,8 +129,7 @@ class ILibDateFmt {
     }
     final ILibCalendarDate calDate;
     if (date is ILibDateOptions) {
-      // If an absolute instant was resolved, components are already timezone-
-      // adjusted — use 'Etc/UTC' to avoid a second offset application.
+      // Resolved components are already in formatterTz — use it to extract JD correctly.
       calDate = _createCalendarDate(dateCalendar,
           year: date.year,
           month: date.month,
@@ -132,7 +139,7 @@ class ILibDateFmt {
           second: date.second,
           millisecond: date.millisecond,
           timezone: instantResolved
-              ? 'Etc/UTC'
+              ? formatterTz
               : (date.timezone ??
                   (date.locale != null
                       ? ILibLocaleInfo(date.locale).getTimeZone()
