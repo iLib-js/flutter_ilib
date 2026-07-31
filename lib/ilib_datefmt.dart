@@ -299,20 +299,18 @@ class ILibDateFmt {
         dt = dt.add(Duration(minutes: offsetMinutes.round()));
         utcConverted = true;
       }
-      // The absolute instant was decomposed into Gregorian wall-clock
-      // components, so the resolved date is always Gregorian — regardless of
-      // the caller's type/calendar. _convertToFormatterCalendar then converts
-      // it to the formatter's calendar via Julian Day.
+      // Take components from the decomposed dt only (always Gregorian), not the
+      // caller's fields, which may be in another calendar.
       return (
         ILibDateOptions(
           locale: date.locale,
-          year: date.year ?? dt.year,
-          month: date.month ?? dt.month,
-          day: date.day ?? dt.day,
-          hour: date.hour ?? dt.hour,
-          minute: date.minute ?? dt.minute,
-          second: date.second ?? dt.second,
-          millisecond: date.millisecond ?? dt.millisecond,
+          year: dt.year,
+          month: dt.month,
+          day: dt.day,
+          hour: dt.hour,
+          minute: dt.minute,
+          second: dt.second,
+          millisecond: dt.millisecond,
           timezone: date.timezone,
           calendar: 'gregorian',
         ),
