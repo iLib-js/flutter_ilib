@@ -12,6 +12,7 @@ import 'calendar/persian_algo_date.dart';
 import 'calendar/persian_date.dart';
 import 'calendar/thaisolar_date.dart';
 import 'ilib_date_accessor.dart';
+import 'ilib_localeinfo.dart';
 
 /// A mutable bag of date components used to construct a date and to read it
 /// back through the [ILibDate] interface.
@@ -33,6 +34,8 @@ class ILibDateOptions implements ILibDate {
       this.second,
       this.millisecond,
       this.unixtime,
+      this.julianday,
+      this.rd,
       this.timezone,
       this.calendar,
       this.dateTime,
@@ -77,6 +80,12 @@ class ILibDateOptions implements ILibDate {
   /// precedence over the individual calendar components when set.
   int? unixtime;
 
+  /// Julian Day number. Takes precedence over calendar components when set.
+  double? julianday;
+
+  /// Rata Die number. Takes precedence over calendar components when set.
+  double? rd;
+
   /// IANA timezone name as a string.
   @override
   String? timezone;
@@ -96,19 +105,24 @@ class ILibDateOptions implements ILibDate {
   @override
   bool? dst;
 
+  /// Resolve these options into a concrete [ILibCalendarDate].
+  ILibCalendarDate toCalendarDate() => _toCalendarDate();
+
   ILibCalendarDate _toCalendarDate() {
-    final int y = year ?? 1;
-    final int m = month ?? 1;
-    final int d = day ?? 1;
-    final int h = hour ?? 0;
-    final int min = minute ?? 0;
-    final int sec = second ?? 0;
-    final int ms = millisecond ?? 0;
-    final String cal = type ?? calendar ?? 'gregorian';
-    // Pass the unambiguous UTC-based params through and let the calendar date
-    // constructor resolve precedence (unixtime over components). A Flutter
-    // DateTime is an absolute instant, so it maps to unixtime as well.
+    final String cal = getCalendar();
+
+    // With an absolute instant, pass only that — not component defaults.
     final int? ut = unixtime ?? dateTime?.millisecondsSinceEpoch;
+    final bool hasAbsoluteInstant =
+        julianday != null || rd != null || ut != null;
+
+    final int? y = hasAbsoluteInstant ? null : (year ?? 1);
+    final int? m = hasAbsoluteInstant ? null : (month ?? 1);
+    final int? d = hasAbsoluteInstant ? null : (day ?? 1);
+    final int? h = hasAbsoluteInstant ? null : (hour ?? 0);
+    final int? min = hasAbsoluteInstant ? null : (minute ?? 0);
+    final int? sec = hasAbsoluteInstant ? null : (second ?? 0);
+    final int? ms = hasAbsoluteInstant ? null : (millisecond ?? 0);
 
     switch (cal) {
       case 'ethiopic':
@@ -121,6 +135,8 @@ class ILibDateOptions implements ILibDate {
             second: sec,
             millisecond: ms,
             unixtime: ut,
+            julianDay: julianday,
+            rd: rd,
             timezone: timezone,
             locale: locale,
             dst: dst);
@@ -134,6 +150,8 @@ class ILibDateOptions implements ILibDate {
             second: sec,
             millisecond: ms,
             unixtime: ut,
+            julianDay: julianday,
+            rd: rd,
             timezone: timezone,
             locale: locale,
             dst: dst);
@@ -147,6 +165,8 @@ class ILibDateOptions implements ILibDate {
             second: sec,
             millisecond: ms,
             unixtime: ut,
+            julianDay: julianday,
+            rd: rd,
             timezone: timezone,
             locale: locale,
             dst: dst);
@@ -160,6 +180,8 @@ class ILibDateOptions implements ILibDate {
             second: sec,
             millisecond: ms,
             unixtime: ut,
+            julianDay: julianday,
+            rd: rd,
             timezone: timezone,
             locale: locale,
             dst: dst);
@@ -173,6 +195,8 @@ class ILibDateOptions implements ILibDate {
             second: sec,
             millisecond: ms,
             unixtime: ut,
+            julianDay: julianday,
+            rd: rd,
             timezone: timezone,
             locale: locale,
             dst: dst);
@@ -186,6 +210,8 @@ class ILibDateOptions implements ILibDate {
             second: sec,
             millisecond: ms,
             unixtime: ut,
+            julianDay: julianday,
+            rd: rd,
             timezone: timezone,
             locale: locale,
             dst: dst);
@@ -199,6 +225,8 @@ class ILibDateOptions implements ILibDate {
             second: sec,
             millisecond: ms,
             unixtime: ut,
+            julianDay: julianday,
+            rd: rd,
             timezone: timezone,
             locale: locale,
             dst: dst);
@@ -212,6 +240,8 @@ class ILibDateOptions implements ILibDate {
             second: sec,
             millisecond: ms,
             unixtime: ut,
+            julianDay: julianday,
+            rd: rd,
             timezone: timezone,
             locale: locale,
             dst: dst);
@@ -225,6 +255,8 @@ class ILibDateOptions implements ILibDate {
             second: sec,
             millisecond: ms,
             unixtime: ut,
+            julianDay: julianday,
+            rd: rd,
             timezone: timezone,
             locale: locale,
             dst: dst);
@@ -263,64 +295,10 @@ class ILibDateOptions implements ILibDate {
   int getTimeExtended() => _toCalendarDate().getTimeExtended();
 
   @override
-  String getCalendar() => type ?? calendar ?? 'gregorian';
-
-  /// A string representation of parameters to call functions of iLib library properly
-  String toJsonString() {
-    int? y = year;
-    int? m = month;
-    int? d = day;
-    int? h = hour;
-    int? min = minute;
-    int? sec = second;
-    int? milsec = millisecond;
-    String result = '';
-    String completeOption = '';
-    final int? w = week;
-
-    if (dateTime != null) {
-      y = dateTime!.year;
-      m = dateTime!.month;
-      d = dateTime!.day;
-      h = dateTime!.hour;
-      min = dateTime!.minute;
-      sec = dateTime!.second;
-      milsec = dateTime!.millisecond;
-    }
-
-    final Map<String, String> paramInfo = <String, String>{
-      'locale': '$locale',
-      // If dateTime is not null and is in UTC, set timezone to 'Etc/UTC'.
-      // Otherwise, use the provided timezone value.
-      'timezone': (dateTime?.isUtc ?? false) ? 'Etc/UTC' : '$timezone',
-      'type': '$type',
-      'calendar': '$calendar'
-    };
-
-    paramInfo.forEach((String key, String value) {
-      if (value != 'null') {
-        result += '$key:"$value",';
-      }
-    });
-
-    final Map<String, int?> datetimeInfo = <String, int?>{
-      'year': y,
-      'month': m,
-      'week': w,
-      'day': d,
-      'hour': h,
-      'minute': min,
-      'second': sec,
-      'millisecond': milsec,
-    };
-    datetimeInfo.forEach((String key, int? value) {
-      if (value != null) {
-        result += '$key:$value,';
-      }
-    });
-    result =
-        result.isNotEmpty ? result.substring(0, result.length - 1) : result;
-    completeOption = result.isNotEmpty ? '{$result}' : '';
-    return completeOption;
-  }
+  // Explicit type/calendar wins; otherwise derive from locale, then 'gregorian'.
+  String getCalendar() =>
+      type ??
+      calendar ??
+      (locale != null ? ILibLocaleInfo(locale).getCalendar() : null) ??
+      'gregorian';
 }
