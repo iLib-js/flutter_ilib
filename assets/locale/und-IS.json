@@ -1,10 +1,1 @@
-{
-    "ilib.data.localeinfo": {
-        "clock": "24",
-        "currency": "ISK",
-        "firstDayOfWeek": 0,
-        "locale": "IS",
-        "region.name": "Iceland",
-        "timezone": "Atlantic/Reykjavik"
-    }
-}
+{"ilib.data.localeinfo":{"clock":"24","currency":"ISK","firstDayOfWeek":0,"locale":"IS","region.name":"Iceland","timezone":"Atlantic/Reykjavik"}}

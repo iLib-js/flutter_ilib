@@ -1,119 +1,91 @@
 # assemble_ilib
 
-Two scripts manage the iLib-derived assets that `flutter_ilib` ships:
+Regenerates the iLib locale data that `flutter_ilib` ships under `assets/locale/`.
 
-| Script | Output | When to use |
-| --- | --- | --- |
-| `generate_assets.sh` | `assets/js/ilib-init.js`, `assets/locales/<lang>.js` | (Legacy) Rebuilding the JS runtime + JS locale bundles. |
-| `generate_locale_json.sh` | `assets/locale/*.json` | Rebuilding the hierarchical JSON locale files used by the pure-Dart implementation. |
+## generate_locale_json.sh
 
----
+Runs the [`ilib-assemble`](https://www.npmjs.com/package/ilib-assemble) CLI
+with `--mergeJson --splitByLocale`, producing one JSON file per locale level
+(root, language, region, script). These files are loaded and deep-merged at
+runtime by `ILibLoader`.
 
-## `generate_locale_json.sh` — hierarchical JSON locale data
+By default the latest `ilib` npm package is downloaded; **ilib >= 15** is
+required (that is when the package started shipping `assemble.mjs`). Use
+`--ilib-version` to pin a version or `--ilib-path` to point at an existing
+install / source tree.
 
-Regenerates `assets/locale/*.json` using iLib's `assembleData/assemble.mjs`
-with `splitByLocale=true`. Each output file covers one locale level and is
-deep-merged at runtime by `ILibLoader` in the order described in
-[CLAUDE.md › Key Infrastructure](../../CLAUDE.md):
-
-| File pattern | Example | Level |
-| --- | --- | --- |
-| `root.json` | `root.json` | base/root |
-| `{lang}.json` | `ar.json` | language |
-| `und-{region}.json` | `und-US.json` | region-only fallback |
-| `{lang}-{region}.json` | `ar-SA.json` | locale-specific |
-| `{lang}-{script}.json` | `zh-Hans.json` | script-level |
-| `{lang}-{script}-{region}.json` | `zh-Hans-CN.json` | full locale |
-
-### Usage
-
-```bash
-cd scripts/assemble_ilib
-./generate_locale_json.sh --ilib-path /path/to/iLib
-```
-
-`--ilib-path` is **required** and must point to an iLib source tree that
-contains `assembleData/assemble.mjs` with `splitByLocale` support. This file
-is not part of any published npm `ilib` release. The script installs
-`ilib-assemble` into a throwaway `build/` directory (git-ignored) for its
-`ilib-common` / `ilib-locale` dependencies, then removes `build/` on
-completion.
-
-### Previewing without touching `assets/locale/`
-
-```bash
-./generate_locale_json.sh --dry-run --ilib-path /path/to/iLib
-./generate_locale_json.sh --out-dir /tmp/locale-preview --ilib-path /path/to/iLib
-```
-
-Compare then copy over:
-
-```bash
-./generate_locale_json.sh --out-dir /tmp/locale-preview --ilib-path /path/to/iLib
-diff -r /tmp/locale-preview assets/locale
-cp /tmp/locale-preview/*.json assets/locale/
-```
-
-### Options
-
-| Option | Default | Effect |
-| --- | --- | --- |
-| `--ilib-path DIR` | **(required)** | Path to the iLib source tree that contains `assembleData/assemble.mjs` with `splitByLocale` support. The published npm `ilib` package does not include this file, so `--ilib-path` is always required. |
-| `-o, --out-dir DIR` | `assets/locale/` | Write output to `DIR` instead of `assets/locale/`. |
-| `--dry-run` | — | Write output to a temp dir; leave `assets/locale/` untouched. |
-| `--keep-build` | — | Keep the intermediate `build/` dir for inspection. |
-
----
-
-## `generate_assets.sh` — JS runtime + JS locale bundles (legacy)
-
-Regenerates the legacy JS assets (used by the old `flutter_js` interop, now
-superseded by the pure-Dart implementation):
-
-| Output | Description |
+| Output example | Description |
 | --- | --- |
-| `assets/js/ilib-init.js` | The assembled, minified iLib JS runtime. |
-| `assets/locales/<lang>.js` | Per-language CLDR/locale data bundles. |
-
-These are produced by the [`ilib-assemble`](https://www.npmjs.com/package/ilib-assemble)
-tool run against the legacy monolithic [`ilib`](https://www.npmjs.com/package/ilib)
-package (v14).
+| `assets/locale/root.json` | Base/root locale data |
+| `assets/locale/en.json` | Language-level data |
+| `assets/locale/und-US.json` | Region-only fallback |
+| `assets/locale/en-US.json` | Locale-specific data |
+| `assets/locale/zh-Hans.json` | Script-level data |
 
 ### Usage
 
 ```bash
 cd scripts/assemble_ilib
-./generate_assets.sh
+./generate_locale_json.sh --compressed
 ```
+
+The script downloads the required npm packages into a throwaway `build/`
+directory (git-ignored), runs the assembler, copies the results into
+`assets/locale/`, then removes `build/`. It does **not** require a global npm
+install.
+
+The output is **pretty-printed (4-space) by default**. The committed
+`assets/locale/` files are **minified**, so regenerate them with
+`--compressed` to keep the diff clean. Use the default (pretty) only for
+inspecting or diffing the data.
 
 ### Previewing without touching `assets/`
 
 ```bash
-./generate_assets.sh --dry-run
-./generate_assets.sh --out-dir /tmp/ilib-preview
+./generate_locale_json.sh --compressed --dry-run                 # writes to a temp dir, prints its path
+./generate_locale_json.sh --compressed --out-dir /tmp/ilib-preview
 ```
 
-Run `./generate_assets.sh --help` for the full option list.
+Both write the same `*.json` layout into the target directory and leave
+`assets/locale/` untouched. Use `--compressed` to match the committed
+(minified) assets, then compare and copy over if it looks right:
+
+```bash
+./generate_locale_json.sh --compressed --out-dir /tmp/ilib-preview
+diff -r /tmp/ilib-preview assets/locale
+cp /tmp/ilib-preview/*.json assets/locale/
+```
+
+Run `./generate_locale_json.sh --help` for the full option list.
 
 ### Options
 
 | Option | Default | Effect |
 | --- | --- | --- |
-| `--ilib-version VER` | `latest` | Pin a specific `ilib` npm version. |
-| `--ilib-path DIR` | — | Use an existing ilib install at `DIR`. Overrides `--ilib-version`. |
-| `-o, --out-dir DIR` | `assets/` | Write output to `DIR` instead of `assets/`. |
-| `--dry-run` | — | Write output to a temp dir; leave `assets/` untouched. |
+| `--ilib-version VER` | `latest` | Pin a specific `ilib` npm version (any npm version/tag). Requires ilib >= 15 (ships `assemble.mjs`). |
+| `--ilib-path DIR` | — | Use an existing ilib package/source tree instead of downloading. Overrides `--ilib-version`. |
+| `--compressed` | off | Write minified JSON. Use this when regenerating the committed `assets/locale/` (default output is pretty-printed 4-space). |
+| `-o, --out-dir DIR` | `assets/locale/` | Write output to `DIR` instead of `assets/locale/`. |
+| `--dry-run` | — | Write output to a temp dir; leave `assets/locale/` untouched. |
 | `--keep-build` | — | Keep the intermediate `build/` dir for inspection. |
 
----
+Example — use a local ilib source tree and keep the build dir:
 
-## Shared inputs
+```bash
+./generate_locale_json.sh --ilib-path /path/to/iLib --keep-build
+```
+
+## Inputs
 
 | File | Purpose |
 | --- | --- |
-| `ilib-inc.js` | The legacy `!depends` list — which iLib modules to include (determines which data types are assembled). |
-| `locales.json` | The set of BCP-47 locales to generate data for (`{ "locales": [...] }`). |
+| `ilib-inc.js` | List of iLib JS modules whose `require()` statements and `// !data` comments determine which data types are assembled. |
+| `locales.json` | The set of BCP-47 locales to generate data for (`{ "locales": [...] }`). Edit this to change locale coverage. |
 
 ## After regenerating
 
-Review the diff (`git diff assets/`) and run the test suite before committing.
+Review the diff (`git diff assets/`) and run the test suite before committing:
+
+```bash
+flutter test
+```

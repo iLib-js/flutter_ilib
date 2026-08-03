@@ -1,10 +1,1 @@
-{
-    "ilib.data.localeinfo": {
-        "clock": "24",
-        "currency": "ZAR",
-        "firstDayOfWeek": 0,
-        "locale": "ZA",
-        "region.name": "South Africa",
-        "timezone": "Africa/Johannesburg"
-    }
-}
+{"ilib.data.localeinfo":{"clock":"24","currency":"ZAR","firstDayOfWeek":0,"locale":"ZA","region.name":"South Africa","timezone":"Africa/Johannesburg"}}

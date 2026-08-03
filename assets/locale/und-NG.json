@@ -1,9 +1,1 @@
-{
-    "ilib.data.localeinfo": {
-        "clock": "24",
-        "currency": "NGN",
-        "locale": "NG",
-        "region.name": "Nigeria",
-        "timezone": "Africa/Lagos"
-    }
-}
+{"ilib.data.localeinfo":{"clock":"24","currency":"NGN","locale":"NG","region.name":"Nigeria","timezone":"Africa/Lagos"}}

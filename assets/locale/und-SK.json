@@ -1,10 +1,1 @@
-{
-    "ilib.data.localeinfo": {
-        "clock": "24",
-        "currency": "EUR",
-        "firstDayOfWeek": 1,
-        "locale": "SK",
-        "region.name": "Slovakia",
-        "timezone": "Europe/Bratislava"
-    }
-}
+{"ilib.data.localeinfo":{"clock":"24","currency":"EUR","firstDayOfWeek":1,"locale":"SK","region.name":"Slovakia","timezone":"Europe/Bratislava"}}

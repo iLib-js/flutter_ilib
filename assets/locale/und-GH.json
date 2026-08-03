@@ -1,9 +1,1 @@
-{
-    "ilib.data.localeinfo": {
-        "clock": "12",
-        "currency": "GHS",
-        "locale": "GH",
-        "region.name": "Ghana",
-        "timezone": "Africa/Accra"
-    }
-}
+{"ilib.data.localeinfo":{"clock":"12","currency":"GHS","locale":"GH","region.name":"Ghana","timezone":"Africa/Accra"}}
