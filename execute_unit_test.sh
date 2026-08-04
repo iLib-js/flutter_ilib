@@ -1,33 +1,145 @@
 #!/usr/bin/env bash
+#
+# execute_unit_test.sh
+#
+# Run tests for flutter_ilib.
+# This script must be executed from the project root directory.
+#
+# Usage:
+#   ./execute_unit_test.sh          # Run all tests (default)
+#   ./execute_unit_test.sh unit      # Run library API tests only
+#   ./execute_unit_test.sh integration      # Run integration tests only
+#   ./execute_unit_test.sh all       # Run all tests
+#
+# Test structure:
+#   - test/ (excluding test/integration/) : Unit tests (datefmt, numfmt, durfmt, etc.)
+#   - test/integration/                   : API-level integration tests
+#   - example/integration_test/           : Widget-based integration tests (requires Linux device)
+#
+
 set -e
+
+PROJECT_ROOT="${PWD}"
 
 test_log() {
   echo "[flutter_ilib] $1"
 }
 
-test_log "Execute unit tests..."
-echo ""
-FAILED_TESTS=()
-# Ignore info-level logs during test
-FLUTTER_OPTIONS="--dart-define=TEST_MODE=true"
+run_linux_flutter_test() {
+  local test_file="$1"
+  shift
 
-# Resolve dependencies once up front so the per-file loop below can skip the
-# implicit `pub get` (via --no-pub) and not reprint the resolution summary
-# for every test file.
+  if [[ -z "${DISPLAY:-}" ]] && command -v xvfb-run > /dev/null; then
+    xvfb-run -a flutter test "$test_file" "$@"
+    return
+  fi
+
+  flutter test "$test_file" "$@"
+}
+
+# Suppress info-level logs during test execution.
+# --no-pub: skip the implicit `pub get` on every `flutter test` (run once below).
+FLUTTER_OPTIONS="--dart-define=TEST_MODE=true --no-pub"
+
+# Resolve dependencies once up front.
+test_log "Resolve dependencies (flutter pub get)..."
 flutter pub get
 
-for test_file in $(find test/ -name '*_test.dart' | sort); do
-  if ! flutter test "$test_file" $FLUTTER_OPTIONS --no-pub; then
-    FAILED_TESTS+=("$test_file")
-  fi
-done
+FAILED_UNIT_TESTS=()
+FAILED_INTEGRATION_TESTS=()
+RUN_UNIT_TESTS=false
+RUN_INTEGRATION_TESTS=false
 
-if [[ ${#FAILED_TESTS[@]} -gt 0 ]]; then
+# --- Test functions ---
+
+run_unit_tests() {
+  RUN_UNIT_TESTS=true
+  test_log "Execute unit tests (test/)..."
   echo ""
-  test_log "** Failed tests **"
-  for failed in "${FAILED_TESTS[@]}"; do
-    echo " ❌ $failed"
+  for test_file in $(find test/ -path 'test/integration' -prune -o -name '*_test.dart' -print | sort); do
+    if ! flutter test "$test_file" $FLUTTER_OPTIONS; then
+      FAILED_UNIT_TESTS+=("$test_file")
+    fi
   done
+}
+
+run_integration_tests() {
+  RUN_INTEGRATION_TESTS=true
+  # API-level integration tests
+  test_log "Execute API-level integration tests (test/integration/)..."
+  echo ""
+  for test_file in $(find test/integration/ -name '*_test.dart' | sort); do
+    if ! flutter test "$test_file" $FLUTTER_OPTIONS; then
+      FAILED_INTEGRATION_TESTS+=("$test_file")
+    fi
+  done
+
+  # Widget-based integration tests (must run from example/ directory)
+  test_log "Execute widget-based integration tests (example/integration_test/)..."
+  echo ""
+  pushd example > /dev/null
+  # example/ has its own pubspec; resolve it once, then run each test --no-pub.
+  test_log "Resolve example dependencies (flutter pub get)..."
+  flutter pub get
+  for test_file in $(find integration_test/ -name '*_test.dart' | sort); do
+    if ! run_linux_flutter_test "$test_file" $FLUTTER_OPTIONS -d linux; then
+      FAILED_INTEGRATION_TESTS+=("example/$test_file")
+    fi
+  done
+  popd > /dev/null
+}
+
+# --- Option handling ---
+
+MODE="${1:-all}"
+
+case "$MODE" in
+  unit)
+    run_unit_tests
+    ;;
+  integration)
+    run_integration_tests
+    ;;
+  all)
+    run_unit_tests
+    run_integration_tests
+    ;;
+  *)
+    echo "Usage: $0 [unit|integration|all]"
+    exit 1
+    ;;
+esac
+
+echo ""
+echo "-------------------------------------"
+# --- Report results ---
+if [[ "$RUN_UNIT_TESTS" == true ]]; then
+  echo ""
+  test_log "[unit] result"
+  if [[ ${#FAILED_UNIT_TESTS[@]} -gt 0 ]]; then
+    echo " ❌ failed"
+    for failed in "${FAILED_UNIT_TESTS[@]}"; do
+      echo "   - $failed"
+    done
+  else
+    echo " ✅ passed"
+  fi
+fi
+
+if [[ "$RUN_INTEGRATION_TESTS" == true ]]; then
+  echo ""
+  test_log "[integration] result"
+  if [[ ${#FAILED_INTEGRATION_TESTS[@]} -gt 0 ]]; then
+    echo " ❌ failed"
+    for failed in "${FAILED_INTEGRATION_TESTS[@]}"; do
+      echo "   - $failed"
+    done
+  else
+    echo " ✅ passed"
+  fi
+fi
+
+if [[ ${#FAILED_UNIT_TESTS[@]} -gt 0 || ${#FAILED_INTEGRATION_TESTS[@]} -gt 0 ]]; then
   exit 1
 else
   echo ""
