@@ -25,6 +25,39 @@ test_log() {
   echo "[flutter_ilib] $1"
 }
 
+usage() {
+  cat <<EOF
+execute_unit_test.sh - Run tests for flutter_ilib
+
+Usage:
+  ./execute_unit_test.sh [option]
+
+Options:
+  unit          Run unit tests only (test/, excluding test/integration/)
+  integration   Run integration tests only:
+                  - API-level:    test/integration/
+                  - Widget-based: example/integration_test/ (requires Linux device)
+  all           Run all tests (default)
+  -h, --help    Show this help and exit
+
+Test structure:
+  test/ (excluding test/integration/)   Unit tests (datefmt, numfmt, durfmt, etc.)
+  test/integration/                     API-level integration tests
+  example/integration_test/             Widget-based integration tests (requires Linux device)
+
+Notes:
+  - Logs at info level are suppressed via --dart-define=TEST_MODE=true.
+  - Dependencies are resolved once (flutter pub get) before running tests.
+  - Widget-based integration tests use xvfb-run if DISPLAY is unset.
+
+Examples:
+  ./execute_unit_test.sh              # Run all tests
+  ./execute_unit_test.sh unit         # Run unit tests only
+  ./execute_unit_test.sh integration  # Run integration tests only
+  ./execute_unit_test.sh --help       # Show this help
+EOF
+}
+
 run_linux_flutter_test() {
   local test_file="$1"
   shift
@@ -40,6 +73,25 @@ run_linux_flutter_test() {
 # Suppress info-level logs during test execution.
 # --no-pub: skip the implicit `pub get` on every `flutter test` (run once below).
 FLUTTER_OPTIONS="--dart-define=TEST_MODE=true --no-pub"
+
+# --- Option handling (early, before pub get) ---
+
+MODE="${1:-all}"
+
+case "$MODE" in
+  -h|--help)
+    usage
+    exit 0
+    ;;
+  unit|integration|all)
+    ;;
+  *)
+    echo "Unknown option: $MODE"
+    echo ""
+    usage
+    exit 1
+    ;;
+esac
 
 # Resolve dependencies once up front.
 test_log "Resolve dependencies (flutter pub get)..."
@@ -103,10 +155,6 @@ case "$MODE" in
   all)
     run_unit_tests
     run_integration_tests
-    ;;
-  *)
-    echo "Usage: $0 [unit|integration|all]"
-    exit 1
     ;;
 esac
 
