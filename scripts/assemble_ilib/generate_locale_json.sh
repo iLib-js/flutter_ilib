@@ -77,6 +77,10 @@ Options:
       --ilib-path DIR            Use an existing ilib package/source tree at DIR
                                  instead of downloading. Overrides
                                  --ilib-version.
+                                 NOTE: If DIR is a source checkout (not an npm
+                                 install), iLib must be built first so that
+                                 js/lib/ and js/locale/ exist. An unbuilt
+                                 source tree will cause a build-check error.
       --compressed               Write minified JSON (no whitespace). The
                                  default is pretty-printed (4-space).
   -o, --out-dir DIR              Write the generated .json files into DIR
@@ -166,6 +170,17 @@ if [ -n "$ILIB_PATH_ARG" ]; then
     || { err "--ilib-path directory does not exist: $ILIB_PATH_ARG"; exit 1; }
   [ -f "$ILIB_PATH/package.json" ] \
     || { err "--ilib-path is not an ilib package (no package.json): $ILIB_PATH"; exit 1; }
+
+  # The locale data lives under js/locale/ and is only present after a build
+  # step (e.g. `ant build`). If missing, ilib-assemble will fail with cryptic
+  # errors because it cannot find the locale JSON sources.
+  if [ ! -d "$ILIB_PATH/js/locale" ]; then
+    err "--ilib-path appears to be an unbuilt iLib source tree."
+    err "Missing required build output: js/locale/"
+    err "Please build iLib first (e.g. 'ant build') before running this script."
+    exit 1
+  fi
+
   if [ "$ILIB_VERSION_SET" = "1" ]; then
     log "Note: --ilib-version is ignored because --ilib-path was given."
   fi
