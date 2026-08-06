@@ -15,7 +15,7 @@
 //
 //   # 3) Fetch deps and run. No manual QuickJS build is needed: `flutter pub get`
 //   #    makes flutter_js bundle its prebuilt libquickjs_c_bridge_plugin.so.
-//   #    (LIBQUICKJSC_TEST_PATH / execute_unit_test.sh are only for `flutter test`.)
+//   #    (LIBQUICKJSC_TEST_PATH / execute_test.sh are only for `flutter test`.)
 //   cd ../flutter_ilib-v1.3.0/example
 //   flutter pub get
 //   flutter run --profile -d linux -t lib/benchmark.dart

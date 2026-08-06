@@ -196,7 +196,7 @@ flutter test test/number/currency_extra_test.dart
 for f in test/number/*_test.dart; do flutter test "$f"; done
 
 # Full project regression
-./execute_unit_test.sh
+./execute_test.sh
 ```
 
 Suggested test coverage:

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -8,6 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 // float to verify the fraction is dropped. Dart `days` is a non-nullable int field,
 // so a float cannot be assigned (same reason as *DateConstructorFullWithStrings).
 void main() {
+  debugPrint('Testing [testjulianday_test.dart] file.');
   group('JulianDay', () {
     test('testJulianDayConstructor', () {
       final JulianDay jd = JulianDay(1721791.25); // jan 2, 2, 6:00pm

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -7,6 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 // This is the regression guard for the Persian/equinox crash that happened when
 // the active locale had no astro-bearing data (`null as List` in equinox).
 void main() {
+  debugPrint('Testing [testastro_extra_test.dart] file.');
   TestWidgetsFlutterBinding.ensureInitialized();
   setUpAll(() async {
     await ILibLoader.instance.loadJSON();

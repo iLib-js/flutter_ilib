@@ -7,6 +7,7 @@
 // the `e`/`c` exponent operand (es).
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_ilib/internal/plural_utils.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -14,6 +15,7 @@ Map<String, dynamic> _rules(String json) =>
     jsonDecode(json) as Map<String, dynamic>;
 
 void main() {
+  debugPrint('Testing [plural_test.dart] file.');
   // en: `one` = i == 1 and v == 0; everything else `other`.
   final Map<String, dynamic> en = _rules(
     '{"one":{"and":[{"eq":["i",1]},{"eq":["v",0]}]}}',

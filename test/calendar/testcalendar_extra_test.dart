@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -5,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 // that arise from the Dart error-handling design (throw vs JS undefined) and the
 // deferred Han calendar.
 void main() {
+  debugPrint('Testing [testcalendar_extra_test.dart] file.');
   TestWidgetsFlutterBinding.ensureInitialized();
 
   group('ILibCalendar factory (Dart-only)', () {
