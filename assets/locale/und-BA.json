@@ -1,10 +1,1 @@
-{
-    "ilib.data.localeinfo": {
-        "clock": "24",
-        "currency": "BAM",
-        "firstDayOfWeek": 1,
-        "locale": "BA",
-        "region.name": "Bosnia & Herzegovina",
-        "timezone": "Europe/Sarajevo"
-    }
-}
+{"ilib.data.localeinfo":{"clock":"24","currency":"BAM","firstDayOfWeek":1,"locale":"BA","region.name":"Bosnia & Herzegovina","timezone":"Europe/Sarajevo"}}

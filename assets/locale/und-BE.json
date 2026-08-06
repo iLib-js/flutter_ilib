@@ -1,10 +1,1 @@
-{
-    "ilib.data.localeinfo": {
-        "clock": "24",
-        "currency": "EUR",
-        "firstDayOfWeek": 1,
-        "locale": "BE",
-        "region.name": "Belgium",
-        "timezone": "Europe/Brussels"
-    }
-}
+{"ilib.data.localeinfo":{"clock":"24","currency":"EUR","firstDayOfWeek":1,"locale":"BE","region.name":"Belgium","timezone":"Europe/Brussels"}}

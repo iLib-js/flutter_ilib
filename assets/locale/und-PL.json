@@ -1,10 +1,1 @@
-{
-    "ilib.data.localeinfo": {
-        "clock": "24",
-        "currency": "PLN",
-        "firstDayOfWeek": 1,
-        "locale": "PL",
-        "region.name": "Poland",
-        "timezone": "Europe/Warsaw"
-    }
-}
+{"ilib.data.localeinfo":{"clock":"24","currency":"PLN","firstDayOfWeek":1,"locale":"PL","region.name":"Poland","timezone":"Europe/Warsaw"}}

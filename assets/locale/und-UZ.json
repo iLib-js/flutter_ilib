@@ -1,10 +1,1 @@
-{
-    "ilib.data.localeinfo": {
-        "clock": "24",
-        "currency": "UZS",
-        "firstDayOfWeek": 1,
-        "locale": "UZ",
-        "region.name": "Uzbekistan",
-        "timezone": "Asia/Samarkand"
-    }
-}
+{"ilib.data.localeinfo":{"clock":"24","currency":"UZS","firstDayOfWeek":1,"locale":"UZ","region.name":"Uzbekistan","timezone":"Asia/Samarkand"}}
