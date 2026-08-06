@@ -41,7 +41,7 @@ class FlutterILib extends ChangeNotifier {
   String get getVersion => '2.0.0';
 
   /// Return the current version of iLib.
-  String get getILibVersion => '14.22.0';
+  String get getILibVersion => '15.0.0';
 
   /// Return the CLDR version currently adopted by iLib.
   String? get getCLDRVersion => '48.2';

@@ -1,10 +1,1 @@
-{
-    "ilib.data.localeinfo": {
-        "clock": "24",
-        "currency": "EUR",
-        "firstDayOfWeek": 1,
-        "locale": "SI",
-        "region.name": "Slovenia",
-        "timezone": "Europe/Ljubljana"
-    }
-}
+{"ilib.data.localeinfo":{"clock":"24","currency":"EUR","firstDayOfWeek":1,"locale":"SI","region.name":"Slovenia","timezone":"Europe/Ljubljana"}}

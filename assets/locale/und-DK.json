@@ -1,10 +1,1 @@
-{
-    "ilib.data.localeinfo": {
-        "clock": "24",
-        "currency": "DKK",
-        "firstDayOfWeek": 1,
-        "locale": "DK",
-        "region.name": "Denmark",
-        "timezone": "Europe/Copenhagen"
-    }
-}
+{"ilib.data.localeinfo":{"clock":"24","currency":"DKK","firstDayOfWeek":1,"locale":"DK","region.name":"Denmark","timezone":"Europe/Copenhagen"}}

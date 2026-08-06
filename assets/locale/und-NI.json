@@ -1,13 +1,1 @@
-{
-    "ilib.data.localeinfo": {
-        "clock": "12",
-        "currency": "NIO",
-        "firstDayOfWeek": 0,
-        "locale": "NI",
-        "paperSizes": {
-            "regular": "8x11"
-        },
-        "region.name": "Nicaragua",
-        "timezone": "America/Managua"
-    }
-}
+{"ilib.data.localeinfo":{"clock":"12","currency":"NIO","firstDayOfWeek":0,"locale":"NI","paperSizes":{"regular":"8x11"},"region.name":"Nicaragua","timezone":"America/Managua"}}
