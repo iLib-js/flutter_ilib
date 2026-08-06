@@ -204,7 +204,7 @@ flutter test test/durfmt/durfmt_si_LK_test.dart
 flutter test test/durfmt/durfmt_sw_KE_test.dart
 
 # Full project regression
-./execute_unit_test.sh
+./execute_test.sh
 ```
 
 Coverage exercised by the ported tests:

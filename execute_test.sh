@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 #
-# execute_unit_test.sh
+# execute_test.sh
 #
 # Run tests for flutter_ilib.
 # This script must be executed from the project root directory.
 #
 # Usage:
-#   ./execute_unit_test.sh          # Run all tests (default)
-#   ./execute_unit_test.sh unit      # Run library API tests only
-#   ./execute_unit_test.sh integration      # Run integration tests only
-#   ./execute_unit_test.sh all       # Run all tests
+#   ./execute_test.sh          # Run all tests (default)
+#   ./execute_test.sh unit      # Run library API tests only
+#   ./execute_test.sh integration      # Run integration tests only
+#   ./execute_test.sh all       # Run all tests
 #
 # Test structure:
 #   - test/ (excluding test/integration/) : Unit tests (datefmt, numfmt, durfmt, etc.)
@@ -27,10 +27,10 @@ test_log() {
 
 usage() {
   cat <<EOF
-execute_unit_test.sh - Run tests for flutter_ilib
+execute_test.sh - Run tests for flutter_ilib
 
 Usage:
-  ./execute_unit_test.sh [option]
+  ./execute_test.sh [option]
 
 Options:
   unit          Run unit tests only (test/, excluding test/integration/)
@@ -51,10 +51,11 @@ Notes:
   - Widget-based integration tests use xvfb-run if DISPLAY is unset.
 
 Examples:
-  ./execute_unit_test.sh              # Run all tests
-  ./execute_unit_test.sh unit         # Run unit tests only
-  ./execute_unit_test.sh integration  # Run integration tests only
-  ./execute_unit_test.sh --help       # Show this help
+  ./execute_test.sh              # Run all tests
+  ./execute_test.sh unit         # Run unit tests only
+  ./execute_test.sh integration  # Run integration tests only
+  ./execute_test.sh --help       # Show this help
+  ./execute_test.sh --help       # Show this help
 EOF
 }
 
