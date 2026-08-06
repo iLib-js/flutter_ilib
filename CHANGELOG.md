@@ -1,19 +1,24 @@
 ## 2.0.0
-* Remove the `flutter_js` JavaScript interop. flutter_ilib is now a pure-Dart implementation that
-  reads iLib's CLDR locale data (JSON) directly — no JavaScript runtime is required.
-* Convert to pure Dart:
+* Remove the `flutter_js` JavaScript interop entirely. flutter_ilib is now a pure-Dart
+  implementation that reads iLib's CLDR locale data (JSON) directly — no JavaScript runtime
+  (and no `flutter_js` dependency) is required.
+* Convert all public classes to pure Dart:
   * `ILibLocale`, `ILibLocaleInfo`, `ILibCaseMapper`
-  * `ILibDate` / `ILibDateFmt` — date/time formatting engine
-  * `ILibTimeZone` — timezone and DST calculation from `zoneinfo` data
+  * `ILibDateFmt` — date/time formatting engine
+  * `ILibDurationFmt` — duration formatting with CLDR plural rules
+  * `ILibNumFmt` — number and currency formatting
+  * `ILibTimeZone` — timezone and DST calculation
   * `ILibCalendar` and 9 calendars: gregorian, thaisolar, julian, islamic, hebrew, ethiopic,
     coptic, persian (astronomical), and persian-algo (algorithmic)
-  * `ILibAstro` — astronomical calculations for the Persian astronomical calendar
-* Add system `'local'` timezone support (DST-aware, sampled from the OS). An omitted timezone now
-  defaults to `'local'`, matching iLib JS; `'local'` and `'Etc/UTC'` therefore differ on a non-UTC
-  host.
-* Based on iLib v14.22.0 / CLDR 48.2.
-* **Breaking**: `ILibCountry`, `ILibScriptInfo`, and `ILibDurationFmt` are not yet
-  ported to pure Dart and are unavailable in this release; they are planned for a later 2.x.
+  * `ILibScriptInfo` — script metadata (direction, name, code)
+  * `ILibCountry` — country name/code lookup per locale
+* Add system `'local'` timezone support (DST-aware). An omitted timezone defaults to `'local'`,
+  matching iLib JS behavior.
+* Add `ILibLocale.getAvailableLocales()` API.
+* Support 144 locales with CLDR 48.2 data.
+* Add integration tests and rework test runner with unit/integration mode support.
+* Based on iLib v15.0.0 / CLDR 48.2.
+* The public API is unchanged from v1.x — upgrade without code changes.
 
 ## 1.9.0
 * Update the iLib files to version 14.22.0.
