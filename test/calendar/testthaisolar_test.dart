@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  debugPrint('Testing [testthaisolar_test.dart] file.');
   group('ThaiSolarCal', () {
     test('GetNumMonths', () {
       final ILibCalendar cal = ThaiSolarCal();

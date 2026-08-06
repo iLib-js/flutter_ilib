@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -39,6 +40,7 @@ const List<List<num>> testDates = <List<num>>[
 ];
 
 void main() {
+  debugPrint('Testing [testgregratadie_test.dart] file.');
   group('GregRataDie constructor', () {
     test('from components default', () {
       final GregRataDie rd = GregRataDie();

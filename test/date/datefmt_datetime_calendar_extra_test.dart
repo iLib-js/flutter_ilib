@@ -2,10 +2,12 @@
 // must be converted to the formatter's calendar. Also covers locale-driven
 // calendar selection via toCalendarDate().
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  debugPrint('Testing [datefmt_datetime_calendar_extra_test.dart] file.');
   TestWidgetsFlutterBinding.ensureInitialized();
   final ILibLoader loader = ILibLoader.instance;
 

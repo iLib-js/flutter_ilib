@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  debugPrint('Testing [testpersiandate_extra_test.dart] file.');
   TestWidgetsFlutterBinding.ensureInitialized();
   setUpAll(() async {
     await ILibLoader.instance.loadJSON();

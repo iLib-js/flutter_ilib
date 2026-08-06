@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  debugPrint('Testing [testcopticdate_extra_test.dart] file.');
   group('CopticDate getDayOfYear', () {
     test('CopticDateGetDayOfYearFirst', () {
       final CopticDate d = CopticDate(year: 1735, month: 1, day: 1);
