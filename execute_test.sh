@@ -55,7 +55,6 @@ Examples:
   ./execute_test.sh unit         # Run unit tests only
   ./execute_test.sh integration  # Run integration tests only
   ./execute_test.sh --help       # Show this help
-  ./execute_test.sh --help       # Show this help
 EOF
 }
 

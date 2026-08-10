@@ -48,6 +48,8 @@ To load the updated locale data file when the locale changes, I suggest adding t
 
 ``` _flutterIlibPlugin.loadLocaleData(curLocale);```  
 
+> **Note:** `loadLocaleData` is what actually loads the data and notifies listeners. Setting the app-wide default `_flutterIlibPlugin.locale = '<locale>'` only changes the default used when no per-call `locale` is given — it does **not** load data. Whenever you switch to a locale whose data has not been loaded yet, you must call `loadLocaleData('<locale>')`; otherwise consumers fall back to default data.  
+
 Here is an example of using the [localeResolutionCallback](https://api.flutter.dev/flutter/widgets/WidgetsApp/localeResolutionCallback.html)  property.  
 i.e:
 ```dart
@@ -69,6 +71,15 @@ Widget build(BuildContext context) {
         localeResolutionCallback: appLocaleResolutionCallback,
     ....
 ```
+
+#### Reclaiming locale memory (optional)
+Loaded locale data is cached for reuse and normally does not need clearing. If you loaded many locales (e.g. via `loadILibLocaleDataAll`) and want to reclaim memory for ones you no longer use, call:
+
+```dart
+_flutterIlibPlugin.clearLocaleData('<locale>');
+```
+
+This drops only that locale's merged data; iLib stays ready, other locales are untouched, and the data is re-merged cheaply on next access.
 
 ### Examples
 Get the result of formatting by using the class provided by flutter_ilib.
