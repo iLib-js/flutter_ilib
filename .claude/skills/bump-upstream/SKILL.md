@@ -83,7 +83,7 @@ the **new** iLib JS expectations (see [docs/conversion-guide.md](../../../docs/c
 and [docs/test-mapping.md](../../../docs/test-mapping.md)):
 
 ```bash
-./execute_unit_test.sh          # or: flutter test
+./execute_test.sh          # or: flutter test
 flutter analyze
 ```
 
