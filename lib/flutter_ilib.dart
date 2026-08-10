@@ -41,11 +41,9 @@ class FlutterILib extends ChangeNotifier {
   /// The app-wide default locale, used when no per-call `options.locale` is
   /// given.
   ///
-  /// Setting it only updates the default string — it neither loads data nor
-  /// notifies listeners, and only instances created afterwards pick it up.
-  /// Unless the locale's data was already loaded (e.g. the system locale at
-  /// startup, or a prior [loadLocaleData]), you must call [loadLocaleData]
-  /// after setting it; otherwise consumers fall back to default data:
+  /// Setting it only updates the default string; it does not load data or
+  /// notify listeners. Unless the locale is already loaded, follow it with
+  /// [loadLocaleData], or consumers fall back to default data:
   ///
   /// ```dart
   /// plugin.locale = 'fr-FR';
