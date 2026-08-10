@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  debugPrint('Testing [testgregoriandate_extra_test.dart] file.');
   group('GregorianDate getCalendar', () {
     test('testGregDateGetCalendar', () {
       final GregorianDate gd = GregorianDate(year: 2011, month: 1, day: 1);

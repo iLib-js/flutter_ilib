@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  debugPrint('Testing [locale_extra_test.dart] file.');
   group('ILibLocale.getAvailableLocales', () {
     test('returns a non-empty list', () {
       final List<String> locales = ILibLocale.getAvailableLocales();

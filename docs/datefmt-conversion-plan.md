@@ -268,7 +268,7 @@ await ILibLoader.instance.loadILibLocaleData('en-US');
 
 The one-time migration also added the `ilib_datefmt.dart` export to `flutter_ilib.dart`, removed
 the `ILibJS` import and `toJsonString()` from `ILibDateFmt`, and removed the datefmt test exclusion
-from `execute_unit_test.sh`.
+from `execute_test.sh`.
 
 ---
 
@@ -300,7 +300,7 @@ flutter test test/date/datefmt_Meridiems_test.dart
 for f in test/date/*_test.dart; do flutter test "$f"; done
 
 # Regression (full project)
-./execute_unit_test.sh
+./execute_test.sh
 ```
 
 ---
