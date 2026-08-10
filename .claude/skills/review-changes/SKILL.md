@@ -55,8 +55,21 @@ Read the actual hunks, not just the file list — know what each change does.
   `debugPrint('Testing [{filename}] file.')` and imports
   `package:flutter/foundation.dart` (not `material.dart`).
 - **Exports** — any new public class is exported from `lib/flutter_ilib.dart`.
-- **Docs** — CLAUDE.md, `docs/test-mapping.md`, and the relevant conversion doc
-  updated when behavior/coverage changed.
+- **Docs** — the change is reflected in every doc it touches. Match the change
+  type to the docs that must be updated:
+  - **Behavior / conversion change** → CLAUDE.md (conversion status, rules) and
+    the relevant `docs/*-conversion-plan.md` / `docs/date-calendar-architecture.md`.
+  - **Test coverage change** (new/removed/moved cases, not-converted patterns) →
+    `docs/test-mapping.md`.
+  - **Public API change** (new/renamed class, method, or signature) → README.md,
+    `docs/api.md`, and `docs/quick_reference.md`. (Ties to the Exports rule and
+    the PR template's "API description" checkbox.)
+  - **Any user-facing change** → a new `CHANGELOG.md` entry (never edit frozen
+    history; see CLAUDE.md › Source Versions).
+  - **New doc file added** → registered in `docs/INDEX.md` (nav path + Documents
+    table).
+  - **Version bump** → the two independent version spots (README intro note,
+    CHANGELOG entry) per CLAUDE.md; a full bump is the `bump-upstream` skill's job.
 
 ### 3. Report findings
 
@@ -79,5 +92,7 @@ plainly — do not invent findings.
 - [ ] Calendar/date/tz base-class + offset/`'local'` rules respected
 - [ ] Test hygiene (`debugPrint`, `foundation.dart`) present
 - [ ] New public classes exported
-- [ ] Docs updated for behavior/coverage changes
+- [ ] Docs updated per change type (CLAUDE.md / test-mapping / conversion-plan;
+      README + api.md + quick_reference for API; CHANGELOG for user-facing;
+      INDEX.md for new docs)
 - [ ] Findings reported with `file:line` + fixes

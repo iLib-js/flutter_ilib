@@ -98,10 +98,12 @@ in the conversation language.
 ### Checklist
 
 The following lists affects Pub Points on pub.dev when the package is published.
-* [x] Passed the all tests.
+* [x] Passed all tests.
+* [x] Passed `flutter analyze` with no issues.
 * [x] Verified that the example app works.
 * [x] Executed the `dart format` command.
-* [x] Added the API description is added if necessary.
+* [x] Added the API description if necessary.
+* [x] Updated CHANGELOG.md for user-facing changes.
 
 ### Description
 
