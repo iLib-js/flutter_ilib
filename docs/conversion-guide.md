@@ -69,6 +69,7 @@ String getClock() {
 ### 4. Test Conversion
 
 - [ ] Convert tests from `js/test/` at the pinned iLib tag to Dart
+- [ ] **Skip tests that are commented out in the JS source** (`/* … */` blocks or `//`-disabled) — they don't run in JS, so there's no JS-verified expected value; converting them yields broken Dart tests. Check each test's `/* */` balance (a `/*` stays open until the first following `*/`). Watch for a **missing closing `*/`** that silently disables a whole run of tests that look active (e.g. an unclosed `/*` swallowing dozens of cases), and for **duplicate test names** where the same test appears once commented (stale value) and once active later — convert only the active one.
 - [ ] **NEVER modify test expected values** — if a test fails, the Dart implementation has a bug, not the test data
 - [ ] Test data (e.g., `testDatesCoptic` reference arrays) must match JS source exactly
 - [ ] If a JS test cannot be converted due to missing Dart features (setters, timezone offset), document it in `docs/test-mapping.md` under "Not Converted" with the reason
