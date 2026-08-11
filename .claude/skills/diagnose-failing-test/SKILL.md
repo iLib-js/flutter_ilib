@@ -21,8 +21,7 @@ value came from iLib JS and is presumed correct. Only after proving otherwise
 against the JS source may an expected value change.
 
 Never edit an expected value to silence a failure. Never weaken an assertion
-(`expect` → `closeTo`, tightening bounds, deleting a case). See the memory notes:
-[[feedback-test-closeto]], [[feedback-no-tests-beyond-js-original]].
+(`expect` → `closeTo`, tightening bounds, deleting a case).
 
 ## Procedure
 
@@ -35,8 +34,7 @@ Never edit an expected value to silence a failure. Never weaken an assertion
    ```
 
 2. **Locate the JS original** — find the matching case in the iLib JS source
-   (`js/test/` at the pinned tag; the source lives at the upstream repo, not a
-   local `ilib_js/` — see [[reference-ilib-js-source]]). Confirm the Dart expected
+   (`js/test/` at the pinned tag). Confirm the Dart expected
    value matches the JS expected value exactly. If they differ, the *conversion*
    was wrong — fix the Dart expected value to match JS, not the other way around.
 
@@ -52,7 +50,7 @@ Never edit an expected value to silence a failure. Never weaken an assertion
    - **Out-of-scope locale** → the test should not exist; move it or mark N/A per
      `docs/test-mapping.md`.
    - **Exact-vs-float** → if it uses `closeTo` on an exact value, that hid a real
-     precision bug; switch to exact `expect` and investigate ([[feedback-test-closeto]]).
+     precision bug; switch to exact `expect` and investigate.
    - **Upstream change** → only valid during a version bump; use the `bump-upstream`
      skill, which reconciles against the *new* JS tag.
 
@@ -73,7 +71,7 @@ Never edit an expected value to silence a failure. Never weaken an assertion
 
 - Expected values are ground truth from iLib JS — change `lib/`, not the assertion.
 - If a JS test was inside a `/* */` or `//` comment, it should not have been
-  converted at all ([[feedback-skip-commented-js-tests]]).
+  converted at all.
 - Watch for a fix that turns one red test green while turning others red — run the
   full suite before declaring success.
 - Commit only when the user asks.

@@ -37,16 +37,14 @@ Read the actual hunks, not just the file list — know what each change does.
 ### 2. Check the conversion-specific rules
 
 - **Expected values are ground truth** — no test assertion was weakened or edited
-  to pass; a red test means `lib/` is wrong, not the test (see
-  [[feedback-no-tests-beyond-js-original]], [[feedback-test-closeto]]). If a case
+  to pass; a red test means `lib/` is wrong, not the test. If a case
   fails, use the `diagnose-failing-test` skill.
 - **Test placement** — JS-mirrored cases in `*_test.dart`, Dart-only cases in
   `*_extra_test.dart`; no Dart-only assertions added to the JS-mirrored file.
 - **Locale scope** — any new per-locale test's locale is in
   `scripts/assemble_ilib/locales.json` (CLAUDE.md › Testing). No tests for
   unsupported locales, including ones that pass only by language fallback.
-- **Commented-out JS** — tests inside JS `/* */` or `//` blocks were not converted
-  ([[feedback-skip-commented-js-tests]]).
+- **Commented-out JS** — tests inside JS `/* */` or `//` blocks were not converted.
 - **Calendar/date/tz changes** — shared logic lives in the base class, not
   duplicated across the 9 subclasses; offset/`'local'`/calendar-token rules from
   [docs/date-calendar-architecture.md](../../../docs/date-calendar-architecture.md)
