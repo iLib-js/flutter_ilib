@@ -205,6 +205,22 @@ Each level overrides previous levels.
 - **File cache** (`_fileDataCache`): raw JSON from disk — avoids redundant I/O
 - **Locale cache** (`_localeDataMap`): merged data by locale — avoids re-merging on repeated access
 
+Both caches key locales by their **normalized** form (`ko_KR` → `ko-KR`), so
+`getLocaleData`, `loadILibLocaleData`, and `clearLocale` all resolve the same
+entry regardless of spelling.
+
+**Clearing:**
+- `clearLocale(locale)` (public, via `FlutterILib.clearLocaleData`) drops one
+  locale's merged entry to reclaim memory. The file cache is kept, so the next
+  `getLocaleData` re-merges it cheaply — no disk I/O.
+- `clearCache()` (`@visibleForTesting`) clears both caches and resets readiness;
+  `loadJSON()` must run again before reading data.
+
+**Lazy re-merge safety:** `getLocaleData` re-merges only when every *existing*
+file for the locale is cached; if one is missing it returns `null` rather than
+partial data. Absent files are skipped — e.g. `en-CW` has no `en-CW.json` and
+falls back to `en`.
+
 ---
 
 ## Performance Considerations

@@ -41,13 +41,22 @@ class ILibLoader extends ChangeNotifier {
 
   final Set<String> _availableAssets = <String>{};
 
+  /// The most recently loaded locale. Drives the [loadILibLocaleData] notify
+  /// decision; distinct from [currentLocale] (the app-wide default).
+  String? _lastLoadedLocale;
+
   static const String _rootPath =
       'packages/flutter_ilib/assets/locale/root.json';
 
   /// The merged locale data for [locale], or null if [locale] has not been
   /// loaded. Data is resolved lazily from the file cache on first access.
+  ///
+  /// [locale] is normalized so the cache key matches the one used by
+  /// [loadILibLocaleData] (store) and [clearLocale] (drop); otherwise an
+  /// un-normalized spelling such as `ko_KR` would miss the `ko-KR` entry.
   Map<String, dynamic>? getLocaleData(String locale) {
-    return _localeDataMap[locale] ?? _mergeFromCache(locale);
+    final String key = normalizeLocale(locale);
+    return _localeDataMap[key] ?? _mergeFromCache(key);
   }
 
   /// Locale-independent data from root.json (e.g. `ilib.data.astro`).
@@ -64,6 +73,11 @@ class ILibLoader extends ChangeNotifier {
       final Map<String, dynamic>? data = _fileDataCache[path];
       if (data != null) {
         merged = _deepMerge(merged, data);
+      } else if (_assetExists(path)) {
+        // Exists on disk but not cached: merging would silently drop its data,
+        // so bail and let the caller load it first. (Files that don't exist are
+        // fine to skip — e.g. en-CW has no file and falls back to 'en'.)
+        return null;
       }
     }
     if (merged.isNotEmpty) {
@@ -71,6 +85,18 @@ class ILibLoader extends ChangeNotifier {
       return merged;
     }
     return null;
+  }
+
+  /// Whether [path] is a bundled asset, per the manifest. Accepts both the
+  /// `packages/flutter_ilib/...` and manifest-relative forms; false when the
+  /// manifest is unavailable.
+  bool _assetExists(String path) {
+    if (_availableAssets.isEmpty) {
+      return false;
+    }
+    return _availableAssets.contains(path) ||
+        _availableAssets
+            .contains(path.replaceFirst('packages/flutter_ilib/', ''));
   }
 
   Future<void> _loadAssetManifest() async {
@@ -167,6 +193,7 @@ class ILibLoader extends ChangeNotifier {
       curlocale = 'en-US';
     }
     await _loadLocaleData(curlocale);
+    _lastLoadedLocale = curlocale;
 
     initILib();
     logger.info('Notifying listeners after JSON loading');
@@ -189,9 +216,9 @@ class ILibLoader extends ChangeNotifier {
     logger.info('iLib initialization completed');
   }
 
-  /// Load and cache the JSON data for [locale], then notify listeners if the
-  /// active locale changed. Pass null to reload the current locale. No-op if
-  /// iLib is not yet ready.
+  /// Load and cache the JSON data for [locale], notifying listeners only if it
+  /// differs from the last loaded locale (reloading the same one is a no-op for
+  /// listeners). Pass null to reload the current locale. No-op if not ready.
   Future<void> loadILibLocaleData(String? locale) async {
     if (!_iLibPrepared) {
       return;
@@ -205,17 +232,40 @@ class ILibLoader extends ChangeNotifier {
 
     await _loadLocaleData(locale);
 
-    if (currentLocale != locale) {
+    if (_lastLoadedLocale != locale) {
+      _lastLoadedLocale = locale;
       notifyListeners();
     }
   }
 
   /// Load and cache JSON data for every locale in [getSupportedLocales].
+  ///
+  /// Mainly for tests that exercise many locales at once. Apps should prefer
+  /// lazy loading (the current locale plus [loadILibLocaleData] on change) —
+  /// loading all ~144 locales up front holds every merged locale in memory.
   Future<void> loadILibLocaleDataAll() async {
     final List<String> localelist = getSupportedLocales();
 
     for (final String lo in localelist) {
       await loadILibLocaleData(lo);
     }
+  }
+
+  /// Drop [locale]'s merged data to reclaim memory. Safe at runtime: iLib stays
+  /// ready and the shared file cache is kept, so [getLocaleData] re-merges it
+  /// cheaply on next access.
+  void clearLocale(String locale) {
+    _localeDataMap.remove(normalizeLocale(locale));
+  }
+
+  /// Clear every cache and reset iLib to not-ready; [loadJSON] must run again
+  /// before reading data. For reclaiming all memory and isolating test state.
+  /// The asset manifest is kept, as it never changes.
+  @visibleForTesting
+  void clearCache() {
+    _localeDataMap.clear();
+    _fileDataCache.clear();
+    _lastLoadedLocale = null;
+    _iLibPrepared = false;
   }
 }

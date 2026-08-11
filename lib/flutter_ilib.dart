@@ -4,6 +4,7 @@ library flutter_ilib;
 import 'package:flutter/foundation.dart';
 
 import 'ilib_init.dart';
+import 'internal/ilib_utils.dart' as ilib_utils;
 import 'internal/logger/log_adapter.dart';
 import 'internal/logger/logger_selector.dart';
 
@@ -37,6 +38,17 @@ class FlutterILib extends ChangeNotifier {
   /// Return whether iLib is ready
   bool get isILibReady => ILibLoader.instance.isILibReady;
 
+  /// The app-wide default locale, used when no per-call `options.locale` is
+  /// given.
+  ///
+  /// Setting it only updates the default string; it does not load data or
+  /// notify listeners. Use it to point the default at an already-loaded
+  /// locale. To switch to a locale whose data is not loaded yet, call
+  /// [loadLocaleData] instead — it loads the data and updates this default in
+  /// one step; otherwise consumers fall back to default data.
+  String get locale => ilib_utils.getLocale();
+  set locale(String value) => ilib_utils.setLocale(value);
+
   /// Return the current version of flutter_ilib.
   String get getVersion => '2.0.0';
 
@@ -50,8 +62,26 @@ class FlutterILib extends ChangeNotifier {
   ///
   /// To properly load the updated locale data file,
   /// this should be called at the appropriate time when the locale changes.
+  ///
+  /// Passing an explicit [locale] also updates the app-wide default [locale],
+  /// so the two stay in sync and a locale-less formatter created afterwards
+  /// uses the locale just loaded. Passing null reloads the current locale and
+  /// leaves the default unchanged.
   Future<void> loadLocaleData(String? locale) async {
     logger.debug('[FlutterILib] Loading locale data for $locale');
+    if (locale != null) {
+      this.locale = locale;
+    }
     await ILibLoader.instance.loadILibLocaleData(locale);
+  }
+
+  /// Drop the cached data for [locale] to reclaim memory.
+  ///
+  /// Optional: loaded data is normally kept for reuse. iLib stays ready and
+  /// other locales are untouched; the data is re-loaded on the next
+  /// [loadLocaleData] for [locale].
+  void clearLocaleData(String locale) {
+    logger.debug('[FlutterILib] Clearing locale data for $locale');
+    ILibLoader.instance.clearLocale(locale);
   }
 }
