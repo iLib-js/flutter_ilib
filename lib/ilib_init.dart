@@ -239,6 +239,10 @@ class ILibLoader extends ChangeNotifier {
   }
 
   /// Load and cache JSON data for every locale in [getSupportedLocales].
+  ///
+  /// Mainly for tests that exercise many locales at once. Apps should prefer
+  /// lazy loading (the current locale plus [loadILibLocaleData] on change) —
+  /// loading all ~144 locales up front holds every merged locale in memory.
   Future<void> loadILibLocaleDataAll() async {
     final List<String> localelist = getSupportedLocales();
 

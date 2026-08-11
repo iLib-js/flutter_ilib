@@ -95,4 +95,32 @@ void main() {
       expect(calls, 1);
     });
   });
+
+  group('loadLocaleData / default locale sync', () {
+    test('loading an explicit locale updates the app-wide default', () async {
+      plugin.locale = 'fr-FR';
+
+      await plugin.loadLocaleData('ko-KR');
+
+      // The default follows the explicit load target, so a locale-less
+      // consumer created afterwards uses ko-KR, not the stale fr-FR.
+      expect(plugin.locale, 'ko-KR');
+    });
+
+    test('loading null reloads the current locale without changing it',
+        () async {
+      plugin.locale = 'de-DE';
+
+      await plugin.loadLocaleData(null);
+
+      expect(plugin.locale, 'de-DE');
+    });
+
+    test('the explicit locale is normalized before becoming the default',
+        () async {
+      await plugin.loadLocaleData('ko_KR');
+
+      expect(plugin.locale, 'ko-KR');
+    });
+  });
 }
