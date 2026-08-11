@@ -40,12 +40,19 @@ run_linux_flutter_test() {
 test_log "Set LIBQUICKJSC_TEST_PATH"
 export LIBQUICKJSC_TEST_PATH="${PROJECT_ROOT}/test/linux/libquickjs_c_bridge_plugin.so"
 
+# Resolve dependencies once up front. Each `flutter test` below runs with
+# --no-pub so it doesn't re-run `pub get` (and re-print "Downloading
+# packages..." + the outdated-package list) for every one of the test files.
+test_log "Resolve dependencies (flutter pub get)..."
+flutter pub get
+
 FAILED_UNIT_TESTS=()
 FAILED_INTEGRATION_TESTS=()
 RUN_UNIT_TESTS=false
 RUN_INTEGRATION_TESTS=false
-# Suppress info-level logs during test execution
-FLUTTER_OPTIONS="--dart-define=TEST_MODE=true"
+# Suppress info-level logs during test execution.
+# --no-pub: skip the implicit `pub get` on every `flutter test` (run once above).
+FLUTTER_OPTIONS="--dart-define=TEST_MODE=true --no-pub"
 
 # --- Test functions ---
 
@@ -77,6 +84,9 @@ run_integration_tests() {
   local previous_libquickjsc_path="${LIBQUICKJSC_PATH:-}"
   pushd example > /dev/null
   export LIBQUICKJSC_PATH="${PROJECT_ROOT}/test/linux/libquickjs_c_bridge_plugin.so"
+  # example/ has its own pubspec; resolve it once, then run each test --no-pub.
+  test_log "Resolve example dependencies (flutter pub get)..."
+  flutter pub get
   for test_file in $(find integration_test/ -name '*_test.dart'); do
     if ! run_linux_flutter_test "$test_file" $FLUTTER_OPTIONS -d linux; then
       FAILED_INTEGRATION_TESTS+=("example/$test_file")

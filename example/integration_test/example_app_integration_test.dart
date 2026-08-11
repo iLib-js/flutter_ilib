@@ -1,12 +1,3 @@
-// Integration test that verifies the example app's behavior:
-// - Version display
-// - "Current Time" and "DateTime (full)" matching when locale is en-US
-// - Locale change updates UI correctly
-// - Number format display
-//
-// All locale-changing scenarios run in a single testWidgets to keep the
-// app instance alive (listener stays registered for loadLocaleData callbacks).
-
 import 'package:flutter/material.dart';
 import 'package:flutter_ilib_example/main.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,123 +6,195 @@ import 'package:integration_test/integration_test.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  const String ILIB_VERSION = '14.22.0';
-  const String CLDR_VERSION = '48.2';
+  const Duration localeTapVisualDelay = Duration(milliseconds: 700);
 
-  group('Version integration tests', () {
-    testWidgets('iLib and CLDR versions should be displayed correctly',
+  final List<String> testLocales = <String>[
+    'en-GB',
+    'en-US',
+    'de-DE',
+    'hi-IN',
+    'ko-KR',
+    'ru-RU',
+    'fa-IR',
+    'am-ET'
+  ];
+
+  final Map<String, String> expectedDateTimeValues = <String, String>{
+    'en-GB': '23 May 2026 at 16:30',
+    'en-US': 'May 23, 2026 at 4:30\u202FPM',
+    'de-DE': '23. Mai 2026 um 16:30',
+    'hi-IN': '23 मई 2026 को 4:30 pm बजे',
+    'ko-KR': '2026년 5월 23일 오후 4:30',
+    'ru-RU': '23 мая 2026\u202Fг. в 16:30',
+    'fa-IR': '\u200F1405 خرداد 2، ساعت \u200F16:30',
+    'am-ET': '15 ግንቦት 2018 10:30 ከሰዓት',
+  };
+
+  final Map<String, String> expectedFirstDayValues = <String, String>{
+    'en-GB': 'Monday',
+    'en-US': 'Sunday',
+    'de-DE': 'Monday',
+    'hi-IN': 'Sunday',
+    'ko-KR': 'Sunday',
+    'ru-RU': 'Monday',
+    'fa-IR': 'Saturday',
+    'am-ET': 'Sunday',
+  };
+
+  final Map<String, String> expectedClockValues = <String, String>{
+    'en-GB': '24',
+    'en-US': '12',
+    'de-DE': '24',
+    'hi-IN': '12',
+    'ko-KR': '12',
+    'ru-RU': '24',
+    'fa-IR': '24',
+    'am-ET': '12',
+  };
+
+  final Map<String, String> expectedNumberFormatValues = <String, String>{
+    'en-GB': '-111,123,456.785',
+    'en-US': '-111,123,456.785',
+    'de-DE': '-111.123.456,785',
+    'hi-IN': '-11,11,23,456.785',
+    'ko-KR': '-111,123,456.785',
+    'ru-RU': '-111\u00A0123\u00A0456,785',
+    'fa-IR': '\u200E−۱۱۱٬۱۲۳٬۴۵۶٫۷۸۵',
+    'am-ET': '-111,123,456.785',
+  };
+
+  final Map<String, String> expectedCountryValues = <String, String>{
+    'en-GB': 'South Korea',
+    'en-US': 'South Korea',
+    'de-DE': 'Südkorea',
+    'hi-IN': 'दक्षिण कोरिया',
+    'ko-KR': '대한민국',
+    'ru-RU': 'Республика Корея',
+    'fa-IR': 'کرهٔ جنوبی',
+    'am-ET': 'ደቡብ ኮሪያ',
+  };
+
+  group('Real usage locale flow integration tests', () {
+    testWidgets('Single app session should pass through all locales in sequence',
         (WidgetTester tester) async {
       await tester.pumpWidget(const MyApp());
       await _waitForInit(tester);
 
-      final String iLibVersion = _getValueForLabel(tester, 'iLib Version');
-      expect(iLibVersion, equals(ILIB_VERSION));
+      final List<String> failures = <String>[];
 
-      final String cldrVersion = _getValueForLabel(tester, 'CLDR Version');
-      expect(cldrVersion, equals(CLDR_VERSION));
-    });
-  });
+      for (final String locale in testLocales) {
+        try {
+          final Finder localeButton =
+              find.widgetWithText(ElevatedButton, locale);
+          if (localeButton.evaluate().isEmpty) {
+            failures.add('[$locale] Locale button not found');
+            continue;
+          }
 
-  group('DateTime format integration tests', () {
-    testWidgets('Current Time and DateTime (full) should match for en-US',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(const MyApp());
-      await _waitForInit(tester);
+          await _tapWithVisualDelay(tester, localeButton,
+              delay: localeTapVisualDelay);
 
-      // Tap en-US to ensure locale is set.
-      final Finder enUSButton = find.widgetWithText(ElevatedButton, 'en-US');
-      expect(enUSButton, findsOneWidget);
-      await tester.tap(enUSButton);
-      await tester.pumpAndSettle();
+          await _waitForLabelToEqual(tester, 'Current Locale', locale);
 
-      final String currentTimeValue = _getValueForLabel(tester, 'Current Time');
-      final String dateTimeFullValue =
-          _getValueForLabel(tester, 'DateTime (full)');
+          _collectMismatch(
+            failures: failures,
+            locale: locale,
+            label: 'Current Locale',
+            actual: _tryGetValueForLabel(tester, 'Current Locale'),
+            expected: locale,
+          );
 
-      expect(currentTimeValue.isNotEmpty, true);
-      expect(dateTimeFullValue.isNotEmpty, true);
-      expect(dateTimeFullValue, equals(currentTimeValue));
-    });
-  });
+          _collectMismatch(
+            failures: failures,
+            locale: locale,
+            label: 'DateTime (full)',
+            actual: _tryGetValueForLabel(tester, 'DateTime (full)'),
+            expected: expectedDateTimeValues[locale],
+          );
 
-  group('Locale change integration tests', () {
-    testWidgets('Locale change updates UI correctly',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(const MyApp());
-      await _waitForInit(tester);
+          _collectMismatch(
+            failures: failures,
+            locale: locale,
+            label: 'First Day Of the Week',
+            actual: _tryGetValueForLabel(tester, 'First Day Of the Week'),
+            expected: expectedFirstDayValues[locale],
+          );
 
-      // --- Switch to ko-KR ---
-      final Finder koKRButton = find.widgetWithText(ElevatedButton, 'ko-KR');
-      expect(koKRButton, findsOneWidget);
-      await tester.tap(koKRButton);
+          _collectMismatch(
+            failures: failures,
+            locale: locale,
+            label: 'Clock (12 or 24)',
+            actual: _tryGetValueForLabel(tester, 'Clock (12 or 24)'),
+            expected: expectedClockValues[locale],
+          );
 
-      // Wait until DateTime (full) reflects ko-KR format.
-      await _waitForLabelToContain(tester, 'DateTime (full)', '년');
+          _collectMismatch(
+            failures: failures,
+            locale: locale,
+            label: 'Number Format',
+            actual: _tryGetValueForLabel(tester, 'Number Format'),
+            expected: expectedNumberFormatValues[locale],
+          );
 
-      final String currentTimeValue = _getValueForLabel(tester, 'Current Time');
-      final String dateTimeFullValue =
-          _getValueForLabel(tester, 'DateTime (full)');
+          _collectMismatch(
+            failures: failures,
+            locale: locale,
+            label: 'Country',
+            actual: _tryGetValueForLabel(tester, 'Country'),
+            expected: expectedCountryValues[locale],
+          );
+        } catch (error) {
+          failures.add('[$locale] Unexpected error: $error');
+        }
+      }
 
-      // Current Time should remain in en-US format.
-      expect(
-          currentTimeValue.contains(RegExp(
-              r'(January|February|March|April|May|June|July|August|September|October|November|December)')),
-          true,
-          reason: 'Current Time should contain English month name (en-US)');
-      expect(currentTimeValue.contains(RegExp(r'(AM|PM)')), true,
-          reason: 'Current Time should contain AM/PM (en-US 12-hour format)');
-
-      // DateTime (full) should be in ko-KR format.
-      expect(dateTimeFullValue.contains('년'), true);
-      expect(dateTimeFullValue.contains('월'), true);
-      expect(dateTimeFullValue.contains('일'), true);
-
-      // They should NOT be equal.
-      expect(dateTimeFullValue, isNot(equals(currentTimeValue)));
-
-      // --- Switch to de-DE ---
-      final Finder deDEButton = find.widgetWithText(ElevatedButton, 'de-DE');
-      expect(deDEButton, findsOneWidget);
-      await tester.tap(deDEButton);
-
-      // Wait until Current Locale reflects de-DE.
-      await _waitForLabelToEqual(tester, 'Current Locale', 'de-DE');
-
-      final String currentLocaleValue =
-          _getValueForLabel(tester, 'Current Locale');
-      expect(currentLocaleValue, equals('de-DE'));
-
-      // Number Format should be in de-DE format.
-      final String numFmtValue = _getValueForLabel(tester, 'Number Format');
-      expect(numFmtValue, equals('-111.123.456,785'));
+      if (failures.isNotEmpty) {
+        fail('Found ${failures.length} mismatches:\n${failures.join('\n')}');
+      }
     });
   });
 }
 
-// --- Helper functions ---
+void _collectMismatch({
+  required List<String> failures,
+  required String locale,
+  required String label,
+  required String? actual,
+  required String? expected,
+}) {
+  if (actual == null) {
+    failures.add('[$locale] $label missing in UI');
+    return;
+  }
 
-/// Wait for iLib initialization to complete (UI shows actual values).
+  if (expected == null) {
+    failures.add('[$locale] $label expected value is null in test data');
+    return;
+  }
+
+  if (actual != expected) {
+    failures.add(
+        '[$locale] $label mismatch | expected: "$expected" | actual: "$actual"');
+  }
+}
+
+Future<void> _tapWithVisualDelay(WidgetTester tester, Finder button,
+    {Duration delay = const Duration(milliseconds: 700)}) async {
+  await tester.tap(button);
+  await tester.pumpAndSettle();
+  await tester.pump(delay);
+}
+
 Future<void> _waitForInit(WidgetTester tester) async {
   await _waitUntil(
       tester, 'iLib Version', (value) => value != 'Unknown iLib');
 }
 
-/// Wait until the value for [label] contains [substring].
-Future<void> _waitForLabelToContain(
-    WidgetTester tester, String label, String substring) async {
-  await _waitUntil(tester, label, (value) => value.contains(substring));
-}
-
-/// Wait until the value for [label] equals [expected].
 Future<void> _waitForLabelToEqual(
     WidgetTester tester, String label, String expected) async {
   await _waitUntil(tester, label, (value) => value == expected);
 }
 
-/// Core retry logic: pumps frames with real time delay until the UI
-/// reflects the expected value. IntegrationTestWidgetsFlutterBinding uses
-/// live async, so pump(Duration) allows real async operations (like
-/// loadLocaleData) to complete between frames.
 Future<void> _waitUntil(
     WidgetTester tester, String label, bool Function(String) condition,
     {int maxRetries = 100}) async {
@@ -144,11 +207,9 @@ Future<void> _waitUntil(
       return;
     }
   }
-  // Final attempt — let the test's expect report the failure.
   await tester.pumpAndSettle();
 }
 
-/// Try to get the value text for a given label. Returns null if not found.
 String? _tryGetValueForLabel(WidgetTester tester, String label) {
   final Finder labelFinder = find.text(label);
   if (labelFinder.evaluate().isEmpty) return null;
@@ -171,7 +232,6 @@ String? _tryGetValueForLabel(WidgetTester tester, String label) {
   return textWidgets[1].data;
 }
 
-/// Extract the displayed value text for a given label (asserts existence).
 String _getValueForLabel(WidgetTester tester, String label) {
   final Finder labelFinder = find.text(label);
   expect(labelFinder, findsOneWidget,

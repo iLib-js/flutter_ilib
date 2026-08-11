@@ -284,10 +284,13 @@ On Linux, you need to export an environment variable called `LIBQUICKJSC_TEST_PA
 export LIBQUICKJSC_TEST_PATH="${PWD}/test/linux/libquickjs_c_bridge_plugin.so"
 flutter test test/flutter_ilib_test.dart
 ```
-We have the script file for the above works to do everything at once.
+We have the script file for the above works to do everything at once.  
+You can optionally pass a test type (unit or integration) as an argument to run a specific subset of tests.
 
 ```
-./execute_unit_test.sh
+./execute_unit_test.sh               # Run all tests (default)
+./execute_unit_test.sh unit          # Run library API tests only
+./execute_unit_test.sh integration   # Run example app tests only
 ```
 > **Note**  
 > Logging behavior has been updated and logs are printed by default during tests.  
