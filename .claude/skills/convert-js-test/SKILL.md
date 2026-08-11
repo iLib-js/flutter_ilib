@@ -21,7 +21,7 @@ File mapping: [docs/test-mapping.md](../../../docs/test-mapping.md).
 ## Procedure
 
 1. **Scope check** — locale must be in `locales.json`
-2. **Convert** — JS test functions → Dart `test()` blocks
+2. **Convert** — JS test functions → Dart `test()` blocks. **Skip commented-out JS tests** (`/* */` or `//`) — no JS-verified value; watch for an unclosed `/*` that disables a whole run, and duplicate names (convert only the active one).
 3. **Separate** — JS-mirrored → `*_test.dart`; Dart-only → `*_extra_test.dart`
 4. **Document** — update `docs/test-mapping.md`
 5. **Verify** — `flutter test <file>` + `flutter analyze`
@@ -36,6 +36,7 @@ File mapping: [docs/test-mapping.md](../../../docs/test-mapping.md).
 ## Checklist
 
 - [ ] Locale in `locales.json` confirmed
+- [ ] Commented-out JS tests (`/* */` or `//`) skipped — not converted
 - [ ] Tests converted with expected values unchanged
 - [ ] Correct file placement and `*_extra_test.dart` separation
 - [ ] `docs/test-mapping.md` updated
