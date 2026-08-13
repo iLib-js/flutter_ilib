@@ -6,6 +6,8 @@ import 'package:integration_test/integration_test.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
+  const Duration localeTapVisualDelay = Duration(milliseconds: 700);
+
   final List<String> testLocales = <String>[
     'en-GB',
     'en-US',
@@ -102,7 +104,8 @@ void main() {
             continue;
           }
 
-          await _tapWithVisualDelay(tester, localeButton);
+          await _tapWithVisualDelay(tester, localeButton,
+              delay: localeTapVisualDelay);
 
           await _waitForLabelToEqual(tester, 'Current Locale', locale);
 
