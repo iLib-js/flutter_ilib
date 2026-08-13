@@ -52,7 +52,7 @@ void main() {
       expect(curfmt.format(57.05), '‏57٫05 E£'); //EGP
     });
     test('testNumFmt_ar_IQ', () {
-      final ILibLocaleInfo li = new ILibLocaleInfo('ar-IQ');
+      final ILibLocaleInfo li = ILibLocaleInfo('ar-IQ');
       final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions(
           locale: 'ar-IQ', type: 'standard', useNative: false));
       expect(li.getDecimalSeparator(), '٫');
@@ -303,8 +303,8 @@ void main() {
       final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions(
           locale: 'de-CH', type: 'standard', useNative: false));
       expect(li.getDecimalSeparator(), '.');
-      expect(li.getGroupingSeparator(), '\'');
-      expect(fmt.format(123456789.45), '123\'456\'789.45');
+      expect(li.getGroupingSeparator(), "'");
+      expect(fmt.format(123456789.45), "123'456'789.45");
 
       final ILibNumFmt pctfmt = ILibNumFmt(ILibNumFmtOptions(
           locale: 'de-CH', type: 'percentage', useNative: false));
@@ -1591,8 +1591,8 @@ void main() {
       final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions(
           locale: 'fr-CH', type: 'standard', useNative: false));
       expect(li.getDecimalSeparator(), ',');
-      expect(li.getGroupingSeparator(), '\'');
-      expect(fmt.format(123456789.45), '123\'456\'789,45');
+      expect(li.getGroupingSeparator(), "'");
+      expect(fmt.format(123456789.45), "123'456'789,45");
 
       final ILibNumFmt pctfmt = ILibNumFmt(ILibNumFmtOptions(
           locale: 'fr-CH', type: 'percentage', useNative: false));
@@ -1867,8 +1867,8 @@ void main() {
       final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions(
           locale: 'it-CH', type: 'standard', useNative: false));
       expect(li.getDecimalSeparator(), '.');
-      expect(li.getGroupingSeparator(), '\'');
-      expect(fmt.format(123456789.45), '123\'456\'789.45');
+      expect(li.getGroupingSeparator(), "'");
+      expect(fmt.format(123456789.45), "123'456'789.45");
 
       final ILibNumFmt pctfmt = ILibNumFmt(ILibNumFmtOptions(
           locale: 'it-CH', type: 'percentage', useNative: false));

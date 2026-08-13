@@ -1760,7 +1760,7 @@ void main() {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions();
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       final List<MeridiemsInfo> mdRange = fmt.getMeridiemsRange();
-      expect(mdRange.length > 0, isTrue,
+      expect(mdRange.isNotEmpty, isTrue,
           reason:
               'getMeridiemsRange should return length value greater than 0');
     });
@@ -1769,7 +1769,7 @@ void main() {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: null);
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       final List<MeridiemsInfo> mdRange = fmt.getMeridiemsRange();
-      expect(mdRange.length > 0, isTrue,
+      expect(mdRange.isNotEmpty, isTrue,
           reason:
               'getMeridiemsRange should return length value greater than 0');
     });
@@ -1778,7 +1778,7 @@ void main() {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'wrong');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       final List<MeridiemsInfo> mdRange = fmt.getMeridiemsRange();
-      expect(mdRange.length > 0, isTrue,
+      expect(mdRange.isNotEmpty, isTrue,
           reason:
               'getMeridiemsRange should return length value greater than 0');
     });

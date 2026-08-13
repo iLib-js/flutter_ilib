@@ -20,7 +20,11 @@ analyzer:
     - '**/*.freezed.dart'
     - '**/generated_*.dart'
 
-# linter:
+linter:
+  rules:
+    # disabled: intentional explicit args (e.g. DateTime seconds) are fine;
+    # matches the root analysis_options.yaml
+    avoid_redundant_argument_values: false
 #   rules:
 #     # analysis_options_flutter_3.13.9.yaml
 #     - avoid_setters_without_getters: false

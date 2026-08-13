@@ -194,6 +194,10 @@ lib/
   is in `locales.json` — same asset files, identical data. N/A if neither form is bundled.
 - **Language-only locale** (e.g. `az`, `pa`): in scope if at least one `{lang}-*` locale is in
   `locales.json` (meaning `{lang}.json` exists). N/A if no `{lang}-*` is bundled (e.g. `ig`, `lb`).
+- **Invisible bidi control chars are valid test data.** RTL-locale expected values (e.g. `fa-IR`,
+  `ar-*`) legitimately contain bidi chars like U+202A/U+200E/U+200F — iLib emits them, so keep them
+  verbatim; do not strip or `\u`-escape. `text_direction_code_point_in_literal` is set to `ignore`
+  in `analysis_options.yaml` for this reason — keep it.
 
 ### Public API Export
 - All public classes exported from `lib/flutter_ilib.dart`

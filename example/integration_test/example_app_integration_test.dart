@@ -6,8 +6,6 @@ import 'package:integration_test/integration_test.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  const Duration localeTapVisualDelay = Duration(milliseconds: 700);
-
   final List<String> testLocales = <String>[
     'en-GB',
     'en-US',
@@ -104,8 +102,7 @@ void main() {
             continue;
           }
 
-          await _tapWithVisualDelay(tester, localeButton,
-              delay: localeTapVisualDelay);
+          await _tapWithVisualDelay(tester, localeButton);
 
           await _waitForLabelToEqual(tester, 'Current Locale', locale);
 
@@ -156,7 +153,7 @@ void main() {
             actual: _tryGetValueForLabel(tester, 'Country (KR)'),
             expected: expectedCountryValues[locale],
           );
-          
+
           _collectMismatch(
             failures: failures,
             locale: locale,
@@ -215,12 +212,13 @@ Future<void> _tapWithVisualDelay(WidgetTester tester, Finder button,
 }
 
 Future<void> _waitForInit(WidgetTester tester) async {
-  await _waitUntil(tester, 'Based on iLib', (value) => value != 'Unknown iLib');
+  await _waitUntil(
+      tester, 'Based on iLib', (String value) => value != 'Unknown iLib');
 }
 
 Future<void> _waitForLabelToEqual(
     WidgetTester tester, String label, String expected) async {
-  await _waitUntil(tester, label, (value) => value == expected);
+  await _waitUntil(tester, label, (String value) => value == expected);
 }
 
 Future<void> _waitUntil(
@@ -240,7 +238,9 @@ Future<void> _waitUntil(
 
 String? _tryGetValueForLabel(WidgetTester tester, String label) {
   final Finder labelFinder = find.text(label);
-  if (labelFinder.evaluate().isEmpty) return null;
+  if (labelFinder.evaluate().isEmpty) {
+    return null;
+  }
 
   // Use the nearest (innermost) Row ancestor: the info row wrapping this
   // label. Matching all ancestor Rows would also catch the outer two-column
@@ -251,7 +251,9 @@ String? _tryGetValueForLabel(WidgetTester tester, String label) {
         matching: find.byType(Row),
       )
       .first;
-  if (rowFinder.evaluate().isEmpty) return null;
+  if (rowFinder.evaluate().isEmpty) {
+    return null;
+  }
 
   final Finder textsInRow = find.descendant(
     of: rowFinder,
@@ -260,32 +262,9 @@ String? _tryGetValueForLabel(WidgetTester tester, String label) {
 
   final List<Text> textWidgets =
       textsInRow.evaluate().map((Element e) => e.widget as Text).toList();
-  if (textWidgets.length != 2) return null;
+  if (textWidgets.length != 2) {
+    return null;
+  }
 
   return textWidgets[1].data;
-}
-
-String _getValueForLabel(WidgetTester tester, String label) {
-  final Finder labelFinder = find.text(label);
-  expect(labelFinder, findsOneWidget,
-      reason: 'Should find label "$label" in the widget tree');
-
-  final Finder rowFinder = find.ancestor(
-    of: labelFinder,
-    matching: find.byType(Row),
-  );
-  expect(rowFinder, findsOneWidget,
-      reason: 'Label "$label" should be inside a Row');
-
-  final Finder textsInRow = find.descendant(
-    of: rowFinder,
-    matching: find.byType(Text),
-  );
-
-  final List<Text> textWidgets =
-      textsInRow.evaluate().map((Element e) => e.widget as Text).toList();
-  expect(textWidgets.length, equals(2),
-      reason: 'Row for "$label" should have 2 Text widgets');
-
-  return textWidgets[1].data ?? '';
 }

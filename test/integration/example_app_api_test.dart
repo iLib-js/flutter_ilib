@@ -19,10 +19,9 @@ void main() {
   group('Version', () {
     test('iLib version', () {
       final FlutterILib plugin = FlutterILib.instance;
-      final String? version = plugin.getVersion;
+      final String version = plugin.getVersion;
 
-      expect(version, isNotNull);
-      expect(version!.isNotEmpty, true);
+      expect(version.isNotEmpty, true);
       expect(version, equals('2.0.0'));
       debugPrint('  iLib Version: $version');
     });

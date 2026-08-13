@@ -1022,7 +1022,7 @@ void main() {
     test('testNumFmtCurrencyNoCurrencyDefaultForLocale', () {
       // Test that currency formatting without currency option throws error
       try {
-        final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions(
+        ILibNumFmt(ILibNumFmtOptions(
           type: 'currency',
           locale: 'ja-JP',
         ));
@@ -4098,16 +4098,6 @@ void main() {
       expect(fmt, isNotNull);
       expect(fmt.getSignificantDigits(), 3);
     });
-    // todo
-    // test('testNumFmtGetSignificantDigitsAsString', () {
-    //     final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions(
-    //         significantDigits: '3'
-    //     ));
-
-    //     expect(fmt, isNotNull);
-    //     expect(fmt.getSignificantDigits(), 3);
-
-    // });
     test('testNumFmtSignificantDigits', () {
       final ILibNumFmt fmt =
           ILibNumFmt(ILibNumFmtOptions(significantDigits: 3));
