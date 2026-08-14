@@ -71,7 +71,9 @@ class _MyAppState extends State<MyApp> {
   }
 
   void updateState() {
-    if (!mounted) return;
+    if (!mounted) {
+      return;
+    }
 
     String flutterILibVersion;
     String iLibVersion;

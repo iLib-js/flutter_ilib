@@ -114,6 +114,11 @@ Only tick a box you actually verified in step 3. If the example app was not
 re-verified because the change can't affect it, say so in the Description rather
 than ticking blindly.
 
+**Description line width** — wrap the Description prose at ~100 columns (soft
+wrap; don't split code, URLs, or `inline code` spans). This is the repo
+preference for readable diffs in the commit/PR body — it is independent of the
+`page_width: 80` used by `dart format` for source code.
+
 ### 6. Output the PR content to chat
 
 Write the following into the chat so the user can copy it into GitHub themselves.

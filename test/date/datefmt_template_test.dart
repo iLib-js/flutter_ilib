@@ -1932,7 +1932,7 @@ void main() {
       final ILibDateFmt fmt5 = ILibDateFmt(fmtOptions5);
       final ILibDateFmt fmt6 = ILibDateFmt(fmtOptions6);
 
-      expect(fmt5.getTemplate(), 'EEEE, MMMM d, yyyy \'at\' H:mm');
+      expect(fmt5.getTemplate(), "EEEE, MMMM d, yyyy 'at' H:mm");
       expect(fmt6.getTemplate(), 'E, yyyy/MM/dd, H:mm');
 
       final ILibDateFmtOptions fmtOptions7 = ILibDateFmtOptions(
@@ -6041,8 +6041,8 @@ void main() {
       final ILibDateFmt fmt2 = ILibDateFmt(fmtOptions2);
       final ILibDateFmt fmt3 = ILibDateFmt(fmtOptions3);
       final ILibDateFmt fmt4 = ILibDateFmt(fmtOptions4);
-      expect(fmt1.getTemplate(), 'EEEE, d\'ê\' MMMM\'a\' yyyy\'an\'');
-      expect(fmt2.getTemplate(), 'EEE, d\'ê\' MMMM\'a\' yyyy\'an\'');
+      expect(fmt1.getTemplate(), "EEEE, d'ê' MMMM'a' yyyy'an'");
+      expect(fmt2.getTemplate(), "EEE, d'ê' MMMM'a' yyyy'an'");
       expect(fmt3.getTemplate(), 'EE, d MMM, yyyy');
       expect(fmt4.getTemplate(), 'E, dd.MM.yyyy');
 
@@ -6064,7 +6064,7 @@ void main() {
       final ILibDateFmt fmt5 = ILibDateFmt(fmtOptions5);
       final ILibDateFmt fmt6 = ILibDateFmt(fmtOptions6);
 
-      expect(fmt5.getTemplate(), 'EEEE, d\'ê\' MMMM\'a\' yyyy\'an\' ‏h:mm a');
+      expect(fmt5.getTemplate(), "EEEE, d'ê' MMMM'a' yyyy'an' ‏h:mm a");
       expect(fmt6.getTemplate(), 'E, dd.MM.yyyy ‏h:mm a');
 
       final ILibDateFmtOptions fmtOptions7 = ILibDateFmtOptions(
@@ -6256,10 +6256,10 @@ void main() {
       final ILibDateFmt fmt2 = ILibDateFmt(fmtOptions2);
       final ILibDateFmt fmt3 = ILibDateFmt(fmtOptions3);
       final ILibDateFmt fmt4 = ILibDateFmt(fmtOptions4);
-      expect(fmt1.getTemplate(), "EEEE, d MMMM yyyy \'г\'.");
-      expect(fmt2.getTemplate(), "EEE, d MMMM yyyy \'г\'.");
-      expect(fmt3.getTemplate(), "EE, d MMM yyyy \'г\'.");
-      expect(fmt4.getTemplate(), 'E, d.M.yyyy \'г\'.');
+      expect(fmt1.getTemplate(), "EEEE, d MMMM yyyy 'г'.");
+      expect(fmt2.getTemplate(), "EEE, d MMMM yyyy 'г'.");
+      expect(fmt3.getTemplate(), "EE, d MMM yyyy 'г'.");
+      expect(fmt4.getTemplate(), "E, d.M.yyyy 'г'.");
 
       final ILibDateFmtOptions fmtOptions5 = ILibDateFmtOptions(
           locale: 'mk-MK',
@@ -6279,8 +6279,8 @@ void main() {
       final ILibDateFmt fmt5 = ILibDateFmt(fmtOptions5);
       final ILibDateFmt fmt6 = ILibDateFmt(fmtOptions6);
 
-      expect(fmt5.getTemplate(), "EEEE, d MMMM yyyy \'г\'., \'во\' HH:mm");
-      expect(fmt6.getTemplate(), 'E, d.M.yyyy \'г\'., HH:mm');
+      expect(fmt5.getTemplate(), "EEEE, d MMMM yyyy 'г'., 'во' HH:mm");
+      expect(fmt6.getTemplate(), "E, d.M.yyyy 'г'., HH:mm");
 
       final ILibDateFmtOptions fmtOptions7 = ILibDateFmtOptions(
           locale: 'mk-MK',
@@ -7963,7 +7963,7 @@ void main() {
       final ILibDateFmt fmt5 = ILibDateFmt(fmtOptions5);
       final ILibDateFmt fmt6 = ILibDateFmt(fmtOptions6);
 
-      expect(fmt5.getTemplate(), 'EEEE d MMMM yyyy \'kl\'. H.mm');
+      expect(fmt5.getTemplate(), "EEEE d MMMM yyyy 'kl'. H.mm");
       expect(fmt6.getTemplate(), 'E d.M.yyyy H.mm');
 
       final ILibDateFmtOptions fmtOptions7 = ILibDateFmtOptions(
@@ -9102,7 +9102,7 @@ void main() {
       final ILibDateFmt fmt5 = ILibDateFmt(fmtOptions5);
       final ILibDateFmt fmt6 = ILibDateFmt(fmtOptions6);
 
-      expect(fmt5.getTemplate(), 'EEEE, d MMMM yyyy \'at\' HH:mm');
+      expect(fmt5.getTemplate(), "EEEE, d MMMM yyyy 'at' HH:mm");
       expect(fmt6.getTemplate(), 'E, dd/MM/yyyy, HH:mm');
 
       final ILibDateFmtOptions fmtOptions7 = ILibDateFmtOptions(
@@ -9452,7 +9452,7 @@ void main() {
       final ILibDateFmt fmt5 = ILibDateFmt(fmtOptions5);
       final ILibDateFmt fmt6 = ILibDateFmt(fmtOptions6);
 
-      expect(fmt5.getTemplate(), 'EEEE, d \'de\' MMMM \'de\' yyyy, h:mm a');
+      expect(fmt5.getTemplate(), "EEEE, d 'de' MMMM 'de' yyyy, h:mm a");
       expect(fmt6.getTemplate(), 'E, d/M/yy, h:mm a');
 
       final ILibDateFmtOptions fmtOptions7 = ILibDateFmtOptions(
@@ -9681,7 +9681,7 @@ void main() {
       final ILibDateFmt fmt6 = ILibDateFmt(fmtOptions6);
 
       final String result5 = (testPlatform == 'webOS')
-          ? 'EEEE d MMMM, yyyy \'da\' h:mm a'
+          ? "EEEE d MMMM, yyyy 'da' h:mm a"
           : "EEEE d MMMM, yyyy 'da' HH:mm";
       final String result6 =
           (testPlatform == 'webOS') ? 'E d/M/yy, h:mm a' : 'E d/M/yy, HH:mm';

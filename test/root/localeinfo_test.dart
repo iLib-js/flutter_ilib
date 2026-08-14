@@ -1968,7 +1968,7 @@ void main() {
       final ILibLocaleInfo info = ILibLocaleInfo('fr-CH');
       expect(info, isNotNull);
 
-      expect(info.getGroupingSeparator(), '\'');
+      expect(info.getGroupingSeparator(), "'");
     });
     test('testLocaleInfoGetNegativeNumberFormat_fr_CH', () {
       final ILibLocaleInfo info = ILibLocaleInfo('fr-CH');
@@ -2628,7 +2628,7 @@ void main() {
       final ILibLocaleInfo info = ILibLocaleInfo('it-CH');
       expect(info, isNotNull);
 
-      expect(info.getGroupingSeparator(), '\'');
+      expect(info.getGroupingSeparator(), "'");
     });
     test('testLocaleInfoGetPercentageFormat_it_CH', () {
       final ILibLocaleInfo info = ILibLocaleInfo('it-CH');
@@ -5142,17 +5142,17 @@ void main() {
     test('testLocaleInfoGetAllScriptsSingle', () {
       final ILibLocaleInfo li = ILibLocaleInfo('nl-NL');
       expect(li, isNotNull);
-      expect(li.getAllScripts(), containsAll(['Latn']));
+      expect(li.getAllScripts(), containsAll(<String>['Latn']));
     });
     test('testLocaleInfoGetAllScriptsMultiple1', () {
       final ILibLocaleInfo li = ILibLocaleInfo('de-DE');
       expect(li, isNotNull);
-      expect(li.getAllScripts(), containsAll(['Latn', 'Runr']));
+      expect(li.getAllScripts(), containsAll(<String>['Latn', 'Runr']));
     });
     test('testLocaleInfoGetAllScriptsMultiple2', () {
       final ILibLocaleInfo li = ILibLocaleInfo('uz-UZ');
       expect(li, isNotNull);
-      expect(li.getAllScripts(), containsAll(['Arab', 'Cyrl', 'Latn']));
+      expect(li.getAllScripts(), containsAll(<String>['Arab', 'Cyrl', 'Latn']));
     });
     test('testLocaleInfoGetDefaultScriptSingle', () {
       final ILibLocaleInfo li = ILibLocaleInfo('nl-NL');

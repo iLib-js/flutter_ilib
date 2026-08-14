@@ -20,6 +20,10 @@
 * Based on iLib v15.0.0 / CLDR 48.2.
 * The public API is unchanged from v1.x — upgrade without code changes.
 
+## 1.9.1
+* Regenerate `ilib-init.js` from the npm ilib package via the new `scripts/assemble_ilib/generate_assets.sh`. The diff is minification-only (different internal variable names); logic and iLib version (14.22.0) are unchanged.
+* Expand the integration test to validate all features, and make the example app render a fixed datetime for consistent locale comparison.
+
 ## 1.9.0
 * Update the iLib files to version 14.22.0.
   * iLib version 14.22.0 incorporates CLDR 48.2

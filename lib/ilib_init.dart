@@ -160,7 +160,6 @@ class ILibLoader extends ChangeNotifier {
     }
 
     final List<String> paths = getJSONDataPaths(locale);
-    //paths.forEach(print);
 
     Map<String, dynamic> merged = <String, dynamic>{};
 
