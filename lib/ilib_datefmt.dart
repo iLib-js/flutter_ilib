@@ -7,7 +7,7 @@ import 'ilib_date_accessor.dart';
 import 'ilib_init.dart';
 import 'ilib_localeinfo.dart';
 import 'ilib_timezone.dart';
-import 'internal/ilib_utils.dart' as ilib_utils;
+import 'internal/locale_state.dart' as locale_state;
 
 /// Formats dates and times for a locale, calendar, and time zone.
 ///
@@ -19,7 +19,7 @@ class ILibDateFmt {
   /// Create a formatter from [options]. Unspecified options fall back to the
   /// locale's defaults.
   ILibDateFmt(ILibDateFmtOptions options) {
-    _locale = options.locale ?? ilib_utils.getLocale();
+    _locale = options.locale ?? locale_state.currentLocale;
     _type = options.type ?? 'date';
     _length = _mapLength(options.length ?? 'short');
     _clock = options.clock;

@@ -4,7 +4,7 @@ library;
 import 'ilib_init.dart';
 import 'ilib_locale.dart';
 import 'ilib_localeinfo.dart';
-import 'internal/ilib_utils.dart' as ilib_utils;
+import 'internal/locale_state.dart' as locale_state;
 
 /// Country name ↔ ISO 3166-1 alpha-2 code lookup, localized per locale.
 ///
@@ -21,7 +21,7 @@ class ILibCountry {
     } else if (locale is ILibLocale) {
       _locale = ILibLocale(locale);
     } else {
-      _locale = ILibLocale(ilib_utils.getLocale());
+      _locale = ILibLocale(locale_state.currentLocale);
     }
 
     // A LocaleInfo decides which locale to load the country names for. If it

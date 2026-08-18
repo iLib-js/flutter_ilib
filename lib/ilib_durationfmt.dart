@@ -6,7 +6,7 @@ import 'ilib_datefmt.dart';
 import 'ilib_init.dart';
 import 'ilib_localeinfo.dart';
 import 'ilib_scriptinfo.dart';
-import 'internal/ilib_utils.dart' as ilib_utils;
+import 'internal/locale_state.dart' as locale_state;
 import 'internal/plural_utils.dart' as plural_utils;
 
 /// Formats a duration (years, months, weeks, days, hours, minutes, seconds,
@@ -21,7 +21,7 @@ class ILibDurationFmt {
   /// Create a formatter from [options]. Unspecified options fall back to the
   /// locale's defaults.
   ILibDurationFmt(ILibDurationFmtOptions options) {
-    _locale = options.locale ?? ilib_utils.getLocale();
+    _locale = options.locale ?? locale_state.currentLocale;
 
     _length = 'short';
     if (options.length == 'short' ||

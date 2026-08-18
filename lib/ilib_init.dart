@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'internal/ilib_utils.dart';
+import 'internal/locale_state.dart';
 
 import 'internal/logger/log_adapter.dart';
 import 'internal/logger/logger_selector.dart';
@@ -186,7 +187,7 @@ class ILibLoader extends ChangeNotifier {
     await _loadFile(_rootPath);
 
     // normalizeLocale maps C/POSIX/empty to en-US.
-    String curlocale = normalizeLocale(getLocale());
+    String curlocale = normalizeLocale(currentLocale);
     if (!isValidLocale(curlocale)) {
       logger.warn('Invalid locale: $curlocale, falling back to en-US');
       curlocale = 'en-US';
@@ -224,7 +225,7 @@ class ILibLoader extends ChangeNotifier {
     }
 
     // normalizeLocale maps C/POSIX/empty to en-US instead of rejecting.
-    locale = normalizeLocale(locale ?? getLocale());
+    locale = normalizeLocale(locale ?? currentLocale);
     if (!isValidLocale(locale)) {
       return;
     }

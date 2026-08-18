@@ -4,7 +4,7 @@ library flutter_ilib;
 import 'package:flutter/foundation.dart';
 
 import 'ilib_init.dart';
-import 'internal/ilib_utils.dart' as ilib_utils;
+import 'internal/locale_state.dart' as locale_state;
 import 'internal/logger/log_adapter.dart';
 import 'internal/logger/logger_selector.dart';
 
@@ -46,8 +46,8 @@ class FlutterILib extends ChangeNotifier {
   /// locale. To switch to a locale whose data is not loaded yet, call
   /// [loadLocaleData] instead — it loads the data and updates this default in
   /// one step; otherwise consumers fall back to default data.
-  String get locale => ilib_utils.getLocale();
-  set locale(String value) => ilib_utils.setLocale(value);
+  String get locale => locale_state.currentLocale;
+  set locale(String value) => locale_state.currentLocale = value;
 
   /// Return the current version of flutter_ilib.
   String get getVersion => '2.0.0';

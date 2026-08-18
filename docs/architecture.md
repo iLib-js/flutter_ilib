@@ -30,6 +30,7 @@ flutter_ilib (Dart/Flutter Plugin)
     │
     ├── Internal (lib/internal/)
     │   ├── ilib_utils.dart (locale path generation, validation)
+    │   ├── locale_state.dart (flutter_ilib's library-wide default locale)
     │   └── logger/ (logging)
     │
     └── Assets (assets/)
@@ -141,6 +142,7 @@ flutter_ilib/
 │   │                             rata_die.dart, ilib_astro.dart, julian_day.dart)
 │   └── internal/
 │       ├── ilib_utils.dart      (getJSONDataPaths, isValidLocale, getSupportedLocales)
+│       ├── locale_state.dart    (currentLocale / getLocale / setLocale — library-wide default locale)
 │       └── logger/              (logging)
 │
 ├── assets/

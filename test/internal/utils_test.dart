@@ -10,13 +10,6 @@ void main() {
   setUpAll(() async {});
 
   group('utils', () {
-    test('getLocale', () {
-      final String curlo = getLocale();
-      setLocale('ko-KR');
-      expect(getLocale(), 'ko-KR');
-      setLocale(curlo);
-    });
-
     test('isValidLocale', () => expect(isValidLocale('-'), false));
     test('isValidLocaleXXX', () => expect(isValidLocale('XXX'), false));
     test('isValidLocaleRegionOnly', () => expect(isValidLocale('MK'), true));
@@ -130,20 +123,6 @@ void main() {
     test('keeps und-REGION / und-SCRIPT (only bare und collapses)', () {
       expect(normalizeLocale('und-US'), 'und-US');
       expect(normalizeLocale('und-Hans'), 'und-Hans');
-    });
-  });
-
-  group('currentLocale is always normalized', () {
-    test('setLocale and direct assignment both normalize', () {
-      final String saved = getLocale();
-      setLocale('C');
-      expect(currentLocale, 'en-US');
-      expect(getLocale(), 'en-US');
-      currentLocale = 'POSIX'; // direct assignment also goes through the setter
-      expect(currentLocale, 'en-US');
-      currentLocale = 'ko_KR';
-      expect(currentLocale, 'ko-KR');
-      setLocale(saved); // restore the shared global
     });
   });
 }

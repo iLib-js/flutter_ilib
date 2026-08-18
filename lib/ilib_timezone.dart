@@ -5,7 +5,7 @@ import 'calendar/greg_rata_die.dart';
 import 'ilib_date_accessor.dart';
 import 'ilib_init.dart';
 import 'ilib_localeinfo.dart';
-import 'internal/ilib_utils.dart';
+import 'internal/locale_state.dart';
 
 /// A time zone and its UTC offset / daylight-saving rules.
 ///

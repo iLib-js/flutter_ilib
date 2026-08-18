@@ -212,7 +212,8 @@ These cover `lib/internal/` helpers and have no direct JS test counterpart
 | Dart Test File | iLib JS Source File | Notes |
 |---|---|---|
 | `test/internal/math_utils_test.dart` | `js/test/testutils.js` | Math utils tests extracted from the `math_utils` section |
-| `test/internal/utils_test.dart` | — | Internal utility tests (`getJSONDataPaths`, locale helpers) |
+| `test/internal/utils_test.dart` | — | Internal pure-helper tests (`isValidLocale`, `getJSONDataPaths`, `normalizeLocale`) |
+| `test/internal/locale_state_test.dart` | — | Library-wide `currentLocale` state (get/set + normalization) |
 | `test/internal/plural_test.dart` | — | CLDR plural-rule engine (`getPluralCategory`) |
 
 ## Currency Tests
