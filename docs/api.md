@@ -171,6 +171,31 @@ ctry.getCode('튀르키예');  // 'TR'
 
 ---
 
+## Locale Management
+
+flutter_ilib keeps one library-wide default locale, used whenever a formatter is
+created without an explicit `options.locale`. Manage it through `FlutterILib`:
+
+```dart
+// Read / write the default locale.
+final String current = FlutterILib.instance.locale;   // get, e.g. 'en-US'
+FlutterILib.instance.locale = 'ko-KR';                // set
+
+// List the locales bundled with the package.
+final List<String> locales = ILibLocale.getAvailableLocales();
+```
+
+> **Setting `locale` only changes the default string** — it does not load data or
+> notify listeners. Use it to point the default at a locale whose data is already
+> loaded. To switch to a locale whose data is not loaded yet, call
+> `await FlutterILib.instance.loadLocaleData('<locale>')` instead: it loads the
+> data, updates the default, and notifies listeners in one step. Assigning a
+> not-yet-loaded locale via the setter makes consumers fall back to default data.
+
+Per-call overrides are independent of this default — pass `locale:` to any options
+object (e.g. `ILibNumFmtOptions(locale: 'fr-FR')`) to format in a specific locale
+without changing the library-wide default.
+
 ## Public API
 
 ```dart

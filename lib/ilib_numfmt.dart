@@ -4,7 +4,7 @@ library;
 import 'calendar/calendar_utils.dart' as calendar_utils;
 import 'ilib_currency.dart';
 import 'ilib_localeinfo.dart';
-import 'internal/ilib_utils.dart' as ilib_utils;
+import 'internal/locale_state.dart' as locale_state;
 import 'internal/math_utils.dart' as math_utils;
 
 /// Formats numbers, currency amounts, and percentages for a locale.
@@ -15,7 +15,7 @@ class ILibNumFmt {
   /// Create a formatter from [options]. Unspecified options fall back to
   /// the locale's defaults.
   ILibNumFmt(ILibNumFmtOptions options) {
-    _locale = options.locale ?? ilib_utils.getLocale();
+    _locale = options.locale ?? locale_state.currentLocale;
     _type = _validType(options.type);
 
     final ILibLocaleInfo locInfo = ILibLocaleInfo(_locale);

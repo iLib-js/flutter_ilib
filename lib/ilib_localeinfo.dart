@@ -3,7 +3,7 @@ library;
 
 import 'ilib_init.dart';
 import 'ilib_locale.dart';
-import 'internal/ilib_utils.dart' as ilib_utils;
+import 'internal/locale_state.dart' as locale_state;
 
 /// Locale-specific formatting and regional conventions for a given locale.
 ///
@@ -28,7 +28,7 @@ class ILibLocaleInfo {
   ILibLocaleInfo._internal(this._localeObj) {
     final String spec = _localeObj.getSpec();
     locale = spec.isNotEmpty ? spec : null;
-    final String lookupLocale = locale ?? ilib_utils.getLocale();
+    final String lookupLocale = locale ?? locale_state.currentLocale;
     _info = (ILibLoader.instance
                 .getLocaleData(lookupLocale)?['ilib.data.localeinfo']
             as Map<String, dynamic>?) ??

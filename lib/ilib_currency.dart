@@ -3,7 +3,7 @@ library;
 
 import 'ilib_init.dart';
 import 'ilib_localeinfo.dart';
-import 'internal/ilib_utils.dart' as ilib_utils;
+import 'internal/locale_state.dart' as locale_state;
 
 /// Currency information class that provides details about a particular currency.
 ///
@@ -34,7 +34,7 @@ class ILibCurrency {
     String? code,
     String? sign,
   }) {
-    _locale = locale ?? ilib_utils.getLocale();
+    _locale = locale ?? locale_state.currentLocale;
     _code = code;
     _sign = sign;
 

@@ -134,7 +134,8 @@ lib/
 │   ├── persian_cal.dart        # + persian_date.dart + persian_rata_die.dart (astronomical)
 │   └── persian_algo_cal.dart   # + persian_algo_date.dart + persian_algo_rata_die.dart (algorithmic)
 └── internal/
-    ├── ilib_utils.dart         # getLocale(), getJSONDataPaths(), etc.
+    ├── ilib_utils.dart         # pure stateless helpers: normalizeLocale(), getJSONDataPaths(), isValidLocale(), getSupportedLocales()
+    ├── locale_state.dart       # flutter_ilib's library-wide default locale: _currentLocale + currentLocale/getLocale()/setLocale() (owner of the global locale state)
     ├── plural_utils.dart       # getPluralCategory() — CLDR plural-rule eval (used by ILibDurationFmt)
     ├── math_utils.dart         # rounding helpers (used by ILibNumFmt)
     └── logger/                 # internal logging (LogAdapter + package:logging); not part of the conversion
@@ -222,6 +223,12 @@ For in-depth explanations, see `docs/`:
   Strategy B (`flutter_timezone`) is only needed if `getId()` must return the real zone name
   (e.g. `Asia/Seoul`) instead of `'local'`. See
   [docs/local-timezone-support.md](docs/local-timezone-support.md).
+
+Notes on the locale-state design (see `lib/internal/locale_state.dart`): the single accessor is
+`currentLocale` (the redundant `getLocale()`/`setLocale()` wrappers were removed). Optional future
+follow-up: consider `lib/internal/` → `lib/src/` for true path-import privacy. Avoid moving the
+state into `ILibLoader` — it would couple the pure formatters to the singleton. Keep
+`FlutterILib.locale` as the sole public entry point.
 
 ## Running Tests
 ```bash

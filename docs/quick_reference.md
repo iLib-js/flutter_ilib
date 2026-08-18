@@ -88,7 +88,8 @@ lib/
 ├── ilib_casemapper.dart     (Case conversion)
 ├── ilib_init.dart           (ILibLoader: data load/merge)
 └── internal/
-    └── ilib_utils.dart      (Utilities)
+    ├── ilib_utils.dart      (Utilities)
+    └── locale_state.dart    (Library-wide default locale)
 
 assets/locale/
 ├── root.json                       (Base defaults)

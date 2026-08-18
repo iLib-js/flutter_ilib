@@ -1,26 +1,7 @@
 /// @nodoc
 library;
 
-import 'dart:ui';
-
 import '../ilib_locale.dart';
-
-String _currentLocale =
-    normalizeLocale(PlatformDispatcher.instance.locale.toLanguageTag());
-
-/// The active locale, always normalized — it can never be observed as
-/// `C`/`POSIX`/empty (those collapse to `en-US`). Both reads and writes go
-/// through [normalizeLocale] via this getter/setter, so no code path —
-/// initialization, [setLocale], or a direct `currentLocale = ...` assignment —
-/// can leave an un-normalized value.
-String get currentLocale => _currentLocale;
-set currentLocale(String value) => _currentLocale = normalizeLocale(value);
-
-/// Return the current locale. Equivalent to reading [currentLocale].
-String getLocale() => currentLocale;
-
-/// Set the current locale to [loc]. Equivalent to assigning [currentLocale].
-void setLocale(String loc) => currentLocale = loc;
 
 /// Maps "no real locale" values to `en-US` and normalizes the `_` separator
 /// to `-`. Covers POSIX/special locales (`C`, `POSIX`), empty/null, and the
