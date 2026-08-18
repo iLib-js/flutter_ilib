@@ -1,6 +1,6 @@
 name: flutter_ilib
 description: "A wrapper plugin to conveniently use 'iLib' in Flutter app for internationalization."
-version: 2.0.0
+version: 2.0.0-beta.1
 homepage: https://github.com/iLib-js/flutter_ilib
 repository: https://github.com/iLib-js/flutter_ilib
 

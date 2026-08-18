@@ -22,7 +22,7 @@ void main() {
       final String version = plugin.getVersion;
 
       expect(version.isNotEmpty, true);
-      expect(version, equals('2.0.0'));
+      expect(version, equals('2.0.0-beta.1'));
       debugPrint('  iLib Version: $version');
     });
 
