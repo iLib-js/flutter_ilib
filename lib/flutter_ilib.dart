@@ -50,7 +50,7 @@ class FlutterILib extends ChangeNotifier {
   set locale(String value) => locale_state.currentLocale = value;
 
   /// Return the current version of flutter_ilib.
-  String get getVersion => '2.0.0';
+  String get getVersion => '2.0.0-beta.1';
 
   /// Return the current version of iLib.
   String get getILibVersion => '15.0.0';
