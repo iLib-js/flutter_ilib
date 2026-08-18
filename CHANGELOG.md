@@ -1,4 +1,6 @@
-## 2.0.0
+## 2.0.0-beta.1
+* First pre-release of the 2.0.0 pure-Dart rewrite, published for testing ahead of the final
+  2.0.0 release. Contents are the full 2.0.0 change set below.
 * Remove the `flutter_js` JavaScript interop entirely. flutter_ilib is now a pure-Dart
   implementation that reads iLib's CLDR locale data (JSON) directly — no JavaScript runtime
   (and no `flutter_js` dependency) is required.
