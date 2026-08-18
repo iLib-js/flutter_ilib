@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -11,10 +11,8 @@ void main() {
   debugPrint('Testing [durfmt_test.dart] file.');
   setUpAll(() async {
     testPlatform = getTestPlatform();
-    final ILibJS ilibjsinstance = ILibJS.instance;
-    await ilibjsinstance.loadJS();
-    ilibjsinstance.initILib();
-    await ilibjsinstance.loadILibLocaleDataAll();
+    await ILibLoader.instance.loadJSON();
+    await ILibLoader.instance.loadILibLocaleDataAll();
   });
 
   group('testDurFmt', () {
@@ -605,6 +603,110 @@ void main() {
       expect(clockformatted_5[1], result);
       expect(clockformatted_5[2], '5 h, 5 m, 5 s');
       expect(clockformatted_5[3], '5 h, 5 m, 5 s');
+    });
+
+    test('testDurFmt_bs_Latn_ME', () {
+      // 1 2 20
+      final List<String> textformatted_1 = <String>[];
+      final List<String> textformatted_2 = <String>[];
+      final List<String> textformatted_20 = <String>[];
+      final List<String> clockformatted_1 = <String>[];
+      final List<String> clockformatted_2 = <String>[];
+      final List<String> clockformatted_20 = <String>[];
+
+      for (int i = 0; i < 4; i++) {
+        final ILibDurationFmt fmt = ILibDurationFmt(
+          ILibDurationFmtOptions(
+            locale: 'bs-Latn-ME',
+            style: 'text',
+            length: length[i],
+          ),
+        );
+
+        textformatted_1.add(
+            fmt.format(ILibDateOptions(year: 1, month: 1, week: 1, day: 1)));
+        textformatted_2.add(
+            fmt.format(ILibDateOptions(year: 2, month: 2, week: 2, day: 2)));
+        textformatted_20.add(fmt
+            .format(ILibDateOptions(year: 20, month: 20, week: 20, day: 20)));
+
+        clockformatted_1
+            .add(fmt.format(ILibDateOptions(hour: 1, minute: 1, second: 1)));
+        clockformatted_2
+            .add(fmt.format(ILibDateOptions(hour: 2, minute: 2, second: 2)));
+        clockformatted_20
+            .add(fmt.format(ILibDateOptions(hour: 20, minute: 20, second: 20)));
+      }
+
+      expect(textformatted_1[0], '1 godina, 1 mjesec, 1 sedmica i 1 dan');
+
+      String result = (testPlatform == 'webOS')
+          ? '1 god., 1 mj., 1 sed., 1 dan'
+          : '1 god., 1 mj., 1 sedm., 1 dan';
+      expect(textformatted_1[1], result);
+
+      result = (testPlatform == 'webOS')
+          ? '1 god., 1 mj., 1 sed., 1 d.'
+          : '1 god., 1 mj., 1 sedm., 1 d.';
+      expect(textformatted_1[2], result);
+      expect(textformatted_1[3], result);
+
+      expect(textformatted_2[0], '2 godine, 2 mjeseca, 2 sedmice i 2 dana');
+
+      result = (testPlatform == 'webOS')
+          ? '2 god., 2 mj., 2 sed., 2 dana'
+          : '2 god., 2 mj., 2 sedm., 2 dana';
+      expect(textformatted_2[1], result);
+
+      result = (testPlatform == 'webOS')
+          ? '2 god., 2 mj., 2 sed., 2 d.'
+          : '2 god., 2 mj., 2 sedm., 2 d.';
+      expect(textformatted_2[2], result);
+      expect(textformatted_2[3], result);
+
+      expect(
+          textformatted_20[0], '20 godina, 20 mjeseci, 20 sedmica i 20 dana');
+
+      result = (testPlatform == 'webOS')
+          ? '20 god., 20 mj., 20 sed., 20 dana'
+          : '20 god., 20 mj., 20 sedm., 20 dana';
+      expect(textformatted_20[1], result);
+
+      result = (testPlatform == 'webOS')
+          ? '20 god., 20 mj., 20 sed., 20 d.'
+          : '20 god., 20 mj., 20 sedm., 20 d.';
+      expect(textformatted_20[2], result);
+      expect(textformatted_20[3], result);
+
+      expect(clockformatted_1[0], '1 sat, 1 minuta i 1 sekunda');
+
+      result = (testPlatform == 'webOS')
+          ? '1 h, 1 min., 1 s'
+          : '1 h, 1 min., 1 sek.';
+      expect(clockformatted_1[1], result);
+
+      expect(clockformatted_1[2], '1 h, 1 m, 1 s');
+      expect(clockformatted_1[3], '1 h, 1 m, 1 s');
+
+      expect(clockformatted_2[0], '2 sata, 2 minute i 2 sekunde');
+
+      result = (testPlatform == 'webOS')
+          ? '2 h, 2 min., 2 s'
+          : '2 h, 2 min., 2 sek.';
+      expect(clockformatted_2[1], result);
+
+      expect(clockformatted_2[2], '2 h, 2 m, 2 s');
+      expect(clockformatted_2[3], '2 h, 2 m, 2 s');
+
+      expect(clockformatted_20[0], '20 sati, 20 minuta i 20 sekundi');
+
+      result = (testPlatform == 'webOS')
+          ? '20 h, 20 min., 20 s'
+          : '20 h, 20 min., 20 sek.';
+      expect(clockformatted_20[1], result);
+
+      expect(clockformatted_20[2], '20 h, 20 m, 20 s');
+      expect(clockformatted_20[3], '20 h, 20 m, 20 s');
     });
 
     test('testDurFmt_cs_CZ', () {
@@ -6156,7 +6258,7 @@ void main() {
       expect(clockformatted_2[2], '2 soat 2 daq. 2 s');
       expect(clockformatted_2[3], '2 soat 2 daq. 2 s');
     });
-    test('testDurFmt_testDurFmt_vi_VN', () {
+    test('testDurFmt_vi_VN', () {
       // 1 2
       final List<String> textformatted_1 = <String>[];
       final List<String> textformatted_2 = <String>[];

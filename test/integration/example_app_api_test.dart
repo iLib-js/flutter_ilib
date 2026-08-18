@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -10,21 +10,19 @@ import 'package:flutter_test/flutter_test.dart';
 /// DateTime input, so the formatted output must be identical.
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  debugPrint('Testing [example_app_integration_test.dart] file.');
+  debugPrint('Testing [example_app_api_test.dart] file.');
   setUpAll(() async {
-    await ILibJS.instance.loadJS();
-    ILibJS.instance.initILib();
-    await ILibJS.instance.loadILibLocaleData('en-US');
+    await ILibLoader.instance.loadJSON();
+    await ILibLoader.instance.loadILibLocaleData('en-US');
   });
 
   group('Version', () {
     test('iLib version', () {
       final FlutterILib plugin = FlutterILib.instance;
-      final String? version = plugin.getVersion;
+      final String version = plugin.getVersion;
 
-      expect(version, isNotNull);
-      expect(version!.isNotEmpty, true);
-      expect(version, equals('14.22.0'));
+      expect(version.isNotEmpty, true);
+      expect(version, equals('2.0.0'));
       debugPrint('  iLib Version: $version');
     });
 
@@ -136,7 +134,7 @@ void main() {
     });
 
     test('en-US vs ko-KR full datetime', () async {
-      await ILibJS.instance.loadILibLocaleData('ko-KR');
+      await ILibLoader.instance.loadILibLocaleData('ko-KR');
 
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 2026,
@@ -181,7 +179,7 @@ void main() {
 
   group('NumFmt', () {
     test('de-DE number format', () async {
-      await ILibJS.instance.loadILibLocaleData('de-DE');
+      await ILibLoader.instance.loadILibLocaleData('de-DE');
 
       // Same logic as example app's getNumFmt()
       final ILibNumFmt fmt = ILibNumFmt(ILibNumFmtOptions(locale: 'de-DE'));

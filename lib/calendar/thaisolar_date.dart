@@ -1,0 +1,220 @@
+/// {@category Calendar}
+library;
+
+import '../ilib_localeinfo.dart';
+import 'greg_rata_die.dart';
+import 'gregorian_cal.dart';
+import 'ilib_date.dart';
+import 'rata_die.dart';
+import 'thaisolar_rata_die.dart';
+
+/// A date in the Thai Solar calendar.
+class ThaiSolarDate extends ILibCalendarDate {
+  /// Create a Thai Solar date from components, a Julian Day, or unix time.
+  ThaiSolarDate(
+      {int? year,
+      int? month,
+      int? day,
+      int? hour,
+      int? minute,
+      int? second,
+      int? millisecond,
+      double? julianDay,
+      double? rd,
+      int? unixtime,
+      String? locale,
+      String? timezone,
+      bool? dst}) {
+    _timezone = timezone ??
+        (locale != null ? ILibLocaleInfo(locale).getTimeZone() : null);
+    this.dst = dst;
+    final bool fromComponents = julianDay == null &&
+        rd == null &&
+        unixtime == null &&
+        ILibRataDie.hasDateComponents(
+            year: year,
+            month: month,
+            day: day,
+            hour: hour,
+            minute: minute,
+            second: second,
+            millisecond: millisecond);
+    if (fromComponents) {
+      _year = year ?? 0;
+      _month = month ?? 1;
+      _day = day ?? 1;
+      _hour = hour ?? 0;
+      _minute = minute ?? 0;
+      _second = second ?? 0;
+      _millisecond = millisecond ?? 0;
+      _rataDie = ThaiSolarRataDie(
+          year: year,
+          month: month,
+          day: day,
+          hour: hour,
+          minute: minute,
+          second: second,
+          millisecond: millisecond);
+      final double adjustedGregRd =
+          adjustRdForTimezone(_rataDie.getRataDie() - 198327);
+      _rataDie = ThaiSolarRataDie(rataDie: adjustedGregRd + 198327);
+    } else {
+      _rataDie = ThaiSolarRataDie(
+          julianDay: julianDay, rataDie: rd, unixtime: unixtime);
+      _calcDateComponents();
+    }
+  }
+
+  static final GregorianCal _cal = GregorianCal();
+  static const List<int> _cumMonthLengths = <int>[
+    0,
+    31,
+    59,
+    90,
+    120,
+    151,
+    181,
+    212,
+    243,
+    273,
+    304,
+    334,
+    365
+  ];
+  static const List<int> _cumMonthLengthsLeap = <int>[
+    0,
+    31,
+    60,
+    91,
+    121,
+    152,
+    182,
+    213,
+    244,
+    274,
+    305,
+    335,
+    366
+  ];
+
+  late ThaiSolarRataDie _rataDie;
+  String? _timezone;
+  late int _year;
+  late int _month;
+  late int _day;
+  late int _hour;
+  late int _minute;
+  late int _second;
+  late int _millisecond;
+
+  void _calcDateComponents() {
+    _decomposeRd(_rataDie.getGregRataDie().getRataDie());
+    calcTimezoneOffset();
+    if (tzOffsetDays != 0) {
+      _decomposeRd(getWallClockRd() - 198327);
+    }
+  }
+
+  void _decomposeRd(double rd) {
+    final int gregYear = GregRataDie.calcYear(rd);
+    _year = gregYear + 543;
+
+    final int rdFloor = rd.floor();
+    final bool isLeap = _cal.isLeapYear(gregYear);
+    final List<int> cumLengths =
+        isLeap ? _cumMonthLengthsLeap : _cumMonthLengths;
+
+    final int y1 = gregYear - 1;
+    final int yearStart = 365 * y1 +
+        GregRataDie.floorDiv(y1, 4) -
+        GregRataDie.floorDiv(y1, 100) +
+        GregRataDie.floorDiv(y1, 400);
+    final int dayOfYear = rdFloor - yearStart;
+
+    _month = 1;
+    for (int i = cumLengths.length - 1; i >= 1; i--) {
+      if (dayOfYear > cumLengths[i - 1]) {
+        _month = i;
+        break;
+      }
+    }
+    _day = dayOfYear - cumLengths[_month - 1];
+
+    final double fractionalDay = rd - rdFloor;
+    final int timeMs = (fractionalDay * 86400000).round();
+    _hour = timeMs ~/ 3600000;
+    _minute = (timeMs % 3600000) ~/ 60000;
+    _second = (timeMs % 60000) ~/ 1000;
+    _millisecond = timeMs % 1000;
+  }
+
+  @override
+  int getYears() => _year;
+  @override
+  int getMonths() => _month;
+  @override
+  int getDays() => _day;
+  @override
+  int getHours() => _hour;
+  @override
+  int getMinutes() => _minute;
+  @override
+  int getSeconds() => _second;
+  @override
+  int getMilliseconds() => _millisecond;
+
+  @override
+  int getDayOfWeek() => _rataDie.getDayOfWeek(offset: tzOffsetDays);
+
+  @override
+  int getDayOfYear() {
+    final int gregYear = _year - 543;
+    return GregRataDie.calcDayOfYear(gregYear, _month, _day);
+  }
+
+  @override
+  double getRataDie() => _rataDie.getRataDie();
+
+  @override
+  double getJulianDay() => _rataDie.getJulianDay();
+
+  @override
+  String getCalendar() => 'thaisolar';
+
+  @override
+  String? get timezone => _timezone ?? 'local';
+
+  @override
+  ILibRataDie getRataDieInstance() => _rataDie;
+
+  @override
+  ILibRataDie newRd({
+    required int year,
+    required int month,
+    required int day,
+    required int hour,
+    required int minute,
+    required int second,
+    required int millisecond,
+  }) {
+    return ThaiSolarRataDie(
+      year: year,
+      month: month,
+      day: day,
+      hour: hour,
+      minute: minute,
+      second: second,
+      millisecond: millisecond,
+    );
+  }
+
+  @override
+  ILibRataDie newRdFromRd(double rd) {
+    return ThaiSolarRataDie(rataDie: rd);
+  }
+
+  @override
+  ThaiSolarDate newDateFromRd(double rd) {
+    return ThaiSolarDate(rd: rd, timezone: _timezone);
+  }
+}

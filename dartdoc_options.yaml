@@ -1,0 +1,5 @@
+dartdoc:
+  categoryOrder:
+    - "flutter_ilib"
+    - "API"
+    - "Calendar"

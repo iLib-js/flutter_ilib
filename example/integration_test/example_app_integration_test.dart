@@ -53,16 +53,29 @@ void main() {
   };
 
   final Map<String, String> expectedNumberFormatValues = <String, String>{
-    'en-GB': '-111,123,456.785',
-    'en-US': '-111,123,456.785',
-    'de-DE': '-111.123.456,785',
-    'hi-IN': '-11,11,23,456.785',
-    'ko-KR': '-111,123,456.785',
-    'ru-RU': '-111\u00A0123\u00A0456,785',
-    'fa-IR': '\u200E−۱۱۱٬۱۲۳٬۴۵۶٫۷۸۵',
-    'am-ET': '-111,123,456.785',
+    'en-GB': '111,123,456.785',
+    'en-US': '111,123,456.785',
+    'de-DE': '111.123.456,785',
+    'hi-IN': '११,११,२३,४५६.७८५ (11,11,23,456.785)',
+    'ko-KR': '111,123,456.785',
+    'ru-RU': '111\u00A0123\u00A0456,785',
+    'fa-IR': '۱۱۱٬۱۲۳٬۴۵۶٫۷۸۵ (111٬123٬456٫785)',
+    'am-ET': '111,123,456.785',
   };
 
+  final Map<String, String> expectedDurationValues = <String, String>{
+    'en-GB': '1 hr, 30 mins',
+    'en-US': '1 hr, 30 min',
+    'de-DE': '1 Std., 30 Min.',
+    'hi-IN': '1 घं॰, 30 मि॰',
+    'ko-KR': '1시간 30분',
+    'ru-RU': '1 ч 30 мин',
+    'fa-IR': '\u200F۱ ساعت،\u200F ۳۰ دقیقه',
+    'am-ET': '1 ሰዓ፣ 30 ደቂቃ',
+  };
+
+  // The app shows one reference country (KR) localized per locale, so the same
+  // country renders differently in each language.
   final Map<String, String> expectedCountryValues = <String, String>{
     'en-GB': 'South Korea',
     'en-US': 'South Korea',
@@ -75,7 +88,8 @@ void main() {
   };
 
   group('Real usage locale flow integration tests', () {
-    testWidgets('Single app session should pass through all locales in sequence',
+    testWidgets(
+        'Single app session should pass through all locales in sequence',
         (WidgetTester tester) async {
       await tester.pumpWidget(const MyApp());
       await _waitForInit(tester);
@@ -84,8 +98,7 @@ void main() {
 
       for (final String locale in testLocales) {
         try {
-          final Finder localeButton =
-              find.widgetWithText(ElevatedButton, locale);
+          final Finder localeButton = find.widgetWithText(FilledButton, locale);
           if (localeButton.evaluate().isEmpty) {
             failures.add('[$locale] Locale button not found');
             continue;
@@ -139,10 +152,26 @@ void main() {
           _collectMismatch(
             failures: failures,
             locale: locale,
-            label: 'Country',
-            actual: _tryGetValueForLabel(tester, 'Country'),
+            label: 'Country (KR)',
+            actual: _tryGetValueForLabel(tester, 'Country (KR)'),
             expected: expectedCountryValues[locale],
           );
+
+          _collectMismatch(
+            failures: failures,
+            locale: locale,
+            label: 'Duration Format (long)',
+            actual: _tryGetValueForLabel(tester, 'Duration Format (long)'),
+            expected: expectedDurationValues[locale],
+          );
+
+          // _collectMismatch(
+          //   failures: failures,
+          //   locale: locale,
+          //   label: 'Country',
+          //   actual: _tryGetValueForLabel(tester, 'Country'),
+          //   expected: expectedCountryValues[locale],
+          // );
         } catch (error) {
           failures.add('[$locale] Unexpected error: $error');
         }
@@ -187,12 +216,12 @@ Future<void> _tapWithVisualDelay(WidgetTester tester, Finder button,
 
 Future<void> _waitForInit(WidgetTester tester) async {
   await _waitUntil(
-      tester, 'iLib Version', (value) => value != 'Unknown iLib');
+      tester, 'Based on iLib', (String value) => value != 'Unknown iLib');
 }
 
 Future<void> _waitForLabelToEqual(
     WidgetTester tester, String label, String expected) async {
-  await _waitUntil(tester, label, (value) => value == expected);
+  await _waitUntil(tester, label, (String value) => value == expected);
 }
 
 Future<void> _waitUntil(
@@ -212,13 +241,22 @@ Future<void> _waitUntil(
 
 String? _tryGetValueForLabel(WidgetTester tester, String label) {
   final Finder labelFinder = find.text(label);
-  if (labelFinder.evaluate().isEmpty) return null;
+  if (labelFinder.evaluate().isEmpty) {
+    return null;
+  }
 
-  final Finder rowFinder = find.ancestor(
-    of: labelFinder,
-    matching: find.byType(Row),
-  );
-  if (rowFinder.evaluate().isEmpty) return null;
+  // Use the nearest (innermost) Row ancestor: the info row wrapping this
+  // label. Matching all ancestor Rows would also catch the outer two-column
+  // layout Row and pull in unrelated Text widgets.
+  final Finder rowFinder = find
+      .ancestor(
+        of: labelFinder,
+        matching: find.byType(Row),
+      )
+      .first;
+  if (rowFinder.evaluate().isEmpty) {
+    return null;
+  }
 
   final Finder textsInRow = find.descendant(
     of: rowFinder,
@@ -227,32 +265,9 @@ String? _tryGetValueForLabel(WidgetTester tester, String label) {
 
   final List<Text> textWidgets =
       textsInRow.evaluate().map((Element e) => e.widget as Text).toList();
-  if (textWidgets.length != 2) return null;
+  if (textWidgets.length != 2) {
+    return null;
+  }
 
   return textWidgets[1].data;
-}
-
-String _getValueForLabel(WidgetTester tester, String label) {
-  final Finder labelFinder = find.text(label);
-  expect(labelFinder, findsOneWidget,
-      reason: 'Should find label "$label" in the widget tree');
-
-  final Finder rowFinder = find.ancestor(
-    of: labelFinder,
-    matching: find.byType(Row),
-  );
-  expect(rowFinder, findsOneWidget,
-      reason: 'Label "$label" should be inside a Row');
-
-  final Finder textsInRow = find.descendant(
-    of: rowFinder,
-    matching: find.byType(Text),
-  );
-
-  final List<Text> textWidgets =
-      textsInRow.evaluate().map((Element e) => e.widget as Text).toList();
-  expect(textWidgets.length, equals(2),
-      reason: 'Row for "$label" should have 2 Text widgets');
-
-  return textWidgets[1].data ?? '';
 }

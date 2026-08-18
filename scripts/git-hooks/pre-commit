@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+#
+# flutter_ilib pre-commit hook — enforce `dart format` before a commit.
+#
+# The repo is formatted with the short style at page_width: 80 (analysis_options.yaml).
+# This hook checks that every staged .dart file is already formatted; if any file
+# would be reformatted, the commit is aborted with instructions.
+#
+# Install: scripts/install-git-hooks.sh   (sets core.hooksPath to scripts/git-hooks)
+
+set -euo pipefail
+
+# Collect staged Dart files (Added/Copied/Modified/Renamed), NUL-separated for safe paths.
+mapfile -d '' -t staged < <(
+  git diff --cached --name-only --diff-filter=ACMR -z -- '*.dart'
+)
+
+if [ ${#staged[@]} -eq 0 ]; then
+  exit 0
+fi
+
+# `dart format --set-exit-if-changed` exits non-zero if any file needs reformatting.
+# `--output=none` means it only checks; it does not modify files.
+if ! dart format --output=none --set-exit-if-changed "${staged[@]}"; then
+  echo
+  echo "✖ Commit aborted: the staged Dart files above are not formatted."
+  echo "  Run the formatter, then re-stage and commit:"
+  echo
+  echo "      dart format ."
+  echo "      git add -u"
+  echo
+  echo "  (short style, page_width: 80 — see docs/development.md › Code Style & Formatting)"
+  exit 1
+fi

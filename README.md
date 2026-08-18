@@ -1,8 +1,30 @@
 # flutter_ilib
 
-A wrapper plugin to conveniently use [iLib](https://github.com/iLib-js/iLib) in Flutter app.  
-The iLib is an internationalization library written in pure JavaScript.  
-This plugin uses the [flutter_js](https://pub.dev/packages/flutter_js) to make the JavaScript file work properly in the Flutter app.
+A Flutter plugin that brings [iLib](https://github.com/iLib-js/iLib)'s internationalization (i18n)
+to Flutter apps — locale-aware date/number/duration formatting, calendars, case mapping, and
+locale information.
+
+- **v1.x**: ran the iLib JavaScript library through the
+  [flutter_js](https://pub.dev/packages/flutter_js) engine.
+- **v2.0+**: the JavaScript interop is removed. flutter_ilib is implemented in pure Dart and reads
+  iLib's CLDR-based locale data (JSON) directly, so no JavaScript runtime (and no `flutter_js`
+  dependency) is needed.
+
+> The change is internal only — the public API is the same across major versions, so your usage
+> code does not need to change when upgrading from v1.x to v2.0.
+
+The Dart implementation and the bundled locale data are based on **iLib v15.0.0** (which
+incorporates **CLDR 48.2**).
+
+## 📚 Documentation
+
+For detailed documentation, see the **[docs/](./docs/)** folder:
+
+- **[Quick Reference](./docs/quick_reference.md)** - Get started with key APIs and common patterns
+- **[Architecture](./docs/architecture.md)** - Understand the system design and data flow
+- **[API Reference](./docs/api.md)** - Complete API documentation for all classes
+- **[Development Guide](./docs/development.md)** - Setup, testing, and contribution guidelines
+- **[Documentation Index](./docs/INDEX.md)** - Navigation guide for all documentation
 
 ## How to use
 ### Initialization
@@ -26,6 +48,8 @@ To load the updated locale data file when the locale changes, I suggest adding t
 
 ``` _flutterIlibPlugin.loadLocaleData(curLocale);```  
 
+> **Note:** `loadLocaleData('<locale>')` loads the data, notifies listeners, **and** updates the app-wide default locale — so a single call is all you need when switching locales. The setter `_flutterIlibPlugin.locale = '<locale>'` only changes the default string; it does **not** load data, so use it only to point the default at a locale that is already loaded. If you switch to a locale whose data is not loaded yet without calling `loadLocaleData`, consumers fall back to default data.  
+
 Here is an example of using the [localeResolutionCallback](https://api.flutter.dev/flutter/widgets/WidgetsApp/localeResolutionCallback.html)  property.  
 i.e:
 ```dart
@@ -47,6 +71,15 @@ Widget build(BuildContext context) {
         localeResolutionCallback: appLocaleResolutionCallback,
     ....
 ```
+
+#### Reclaiming locale memory (optional)
+Loaded locale data is cached for reuse and normally does not need clearing. If you have loaded many locales and want to reclaim memory for ones you no longer use, call:
+
+```dart
+_flutterIlibPlugin.clearLocaleData('<locale>');
+```
+
+This drops only that locale's merged data; iLib stays ready, other locales are untouched, and the data is re-merged cheaply on next access.
 
 ### Examples
 Get the result of formatting by using the class provided by flutter_ilib.
@@ -85,6 +118,11 @@ final ILibDateOptions dateOptions =
 fmt.format(dateOptions);
 // '2024년 6월 27일 오전 10:42'
 ```
+
+> **Note on `timezone: 'local'`:** `'local'` resolves to the device's DST-aware system time
+> zone (matching iLib's JS), so it differs from `'Etc/UTC'` on a non-UTC host. An omitted
+> timezone defaults to `'local'`. See
+> [docs/local-timezone-support.md](docs/local-timezone-support.md) for details.
 
 ### Duration Formatting
 
@@ -157,6 +195,63 @@ fmt.format(-1234567.89);
 // '-$1,234,567.89'
 ```
 
+### Calendar Date
+
+```dart
+// Gregorian
+final ILibDateOptions date = ILibDateOptions(
+    year: 2024, month: 6, day: 27, hour: 13, minute: 45);
+date.getYears();   // 2024
+date.getMonths();  // 6
+date.getDays();    // 27
+date.getDayOfWeek(); // 4 (Thursday)
+date.getCalendar();  // 'gregorian'
+```
+
+### Calendar Meta
+
+```dart
+// Thai Solar (year = Gregorian + 543)
+final ILibCalendar cal = ThaiSolarCal();
+cal.getNumMonths(2567);     // 12
+cal.getMonLength(2, 2555);  // 29 (leap year)
+cal.isLeapYear(2555);       // true
+cal.isLeapYear(2554);       // false
+```
+
+### Calendar Formatting
+
+```dart
+// Persian calendar (fa-IR)
+final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+    locale: 'fa-IR',
+    length: 'long',
+    useNative: false);
+final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+final ILibDateOptions dateOptions = ILibDateOptions(
+    locale: 'fa-IR',
+    year: 1392,
+    month: 9,
+    day: 21);
+fmt.format(dateOptions);
+// '‏21 آذر 1392'
+```
+
+```dart
+// Ethiopic calendar (am-ET)
+final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
+    locale: 'am-ET',
+    length: 'medium');
+final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
+final ILibDateOptions dateOptions = ILibDateOptions(
+    locale: 'am-ET',
+    year: 2011,
+    month: 9,
+    day: 29);
+fmt.format(dateOptions);
+// '29 ግንቦት 2011'
+```
+
 ## ScriptInfo
 ```dart
 final ILibLocaleInfo locInfo = ILibLocaleInfo('en-US');
@@ -189,69 +284,6 @@ ctry.getCode('튀르키예');
 // 'TR'
 ```
 
-## CLASS
-
-### FlutterILib
-- Methods: `evaluateILib()` :
-    It allows to use any class of APIs from ILib.   
-    Convert the Javascript code you want to get as a result into a string and pass it as an argument.
-```dart
-String lo = 'am-ET';
-String jscode1 = 'new LocaleInfo("$lo").getCalendar()';
-_flutterIlibPlugin.evaluateILib(jscode1);
-// 'ethiopic'
-```
-To give a more efficient way, we provide some classes that can be easily used in a Flutter app.   
-Currently, we have the following classes:
-- `ILibCaseMapper`
-- `ILibCountry`
-- `ILibDateFmt`
-- `ILibDateOptions`
-- `ILibDurationFmt`
-- `ILibLocale`
-- `ILibLocaleInfo`
-- `ILibNumFmt`
-- `ILibScriptInfo`
-
-We have a plan to provide more classes and methods.  
-
-### ILibDateFmt
-- Class: [ILibDateFmtOptions](./Docs.md/#ilibdatefmtoptions)
-- Class: [ILibDateFmt](./Docs.md#ilibdatefmt)
-   - Methods: `format()`, `getClock()`, `getTemplate()`, `getMeridiemsRange()`
-
-### ILibDurationFmt
-- Class: [ILibDurationFmtOptions](./Docs.md/#ilibdurationfmtoptions)
-- Class: [ILibDurationFmt](./Docs.md/#ilibdurationfmt)
-   - Methods:  `format()`, `getLocale()`, `getStyle()`, `getLength()`
-
-### ILibDateOptions
-- Class: [ILibDateOptions](./Docs.md/#ilibdateoptions)
-
-### ILibLocale
-- Class: [ILibLocale](./Docs.md/#iliblocale)
-
-### ILibLocaleInfo
-- Class: [ILibLocaleInfo](./Docs.md/#iliblocaleinfo)
-  - Methods: `getLanguageName()`, `getRegionName()`, `getClock()`, `getLocale()`, `getUnits()`, `getCalendar()`, `getFirstDayOfWeek()`, `getWeekEndStart()`, `getWeekEndEnd()`, `getTimeZone()`, `getDecimalSeparator()`, `getNativeDecimalSeparator()`, `getGroupingSeparator()`, `getNativeGroupingSeparator()`, `getPrimaryGroupingDigits()`, `getSecondaryGroupingDigits()`, `getPercentageFormat()`, `getNegativePercentageFormat()`, `getPercentageSymbol()`, `getExponential()`, `getNativeExponential()`, `getNativePercentageSymbol()`, `getNegativeNumberFormat()`, `getCurrencyFormats()`, `getCurrency()`, `getDigitsStyle()`, `getDigits()`, `getNativeDigits()`, `getRoundingMode()`, `getScript()`, `getDefaultScript()`, `getAllScripts()`, `getMeridiemsStyle()`, `getPaperSize()`, `getDelimiterQuotationStart()`, `getDelimiterQuotationEnd()`
-
-### ILibNumFmt
-- Clasee: [ILibNumFmtOptions](./Docs.md/#ilibnumfmtoptions)
-- Class: [ILibNumFmt](./Docs.md/#ilibnumfmt)
-   - Methods:  `format()`, `constrain()`, `getLocale()`, `getStyle()`, `getType()`, `isGroupingUsed()`, `getMaxFractionDigits()`, `getMinFractionDigits()`, `getSignificantDigits()`, `getCurrency()`, `getRoundingMode()`, `getUseNative()`
-
-### ILibScriptInfo
-- Class: [ILibScriptInfo](./Docs.md/#ilibscriptinfo)
-   - Methods: `getCode()`, `getCodeNumber()`, `getName()`, `getLongCode()`, `getScriptDirection()`, `getNeedsIME()`, `getCasing()`
-
-### ILibCaseMapper
-- Class: [ILibCaseMapper](./Docs.md/#ilibcasemapper)
-  - Methods: `getLocale()`, `map()`
-
-### ILibCountry
-- Class: [ILibCountry](./Docs.md/#ilibcountry)
-  - Methods: `getAvailableCode()`, `getAvailableCountry()`, `getCode()`, `getName()`, `getLocale()`
-
 ## Supported Locales
 The results of the following locales are checked by unit tests.  
 They have the same result as the original iLib methods.
@@ -278,20 +310,21 @@ vi-VN,zh-Hans-CN,zh-Hant-HK,zh-Hant-TW
 
 ## TEST
 ### Run the Unit Test
-On Linux, you need to export an environment variable called `LIBQUICKJSC_TEST_PATH` pointing to the file `libquickjs_c_bridge_plugin.so`.
+
+**v2.0+**: tests run in pure Dart — no JavaScript bridge or environment variable is required.
+
+```
+flutter test
+```
+
+**v1.x**: required a QuickJS bridge. On Linux you had to export `LIBQUICKJSC_TEST_PATH` pointing to
+`libquickjs_c_bridge_plugin.so` before running the tests:
 
 ```
 export LIBQUICKJSC_TEST_PATH="${PWD}/test/linux/libquickjs_c_bridge_plugin.so"
 flutter test test/flutter_ilib_test.dart
 ```
-We have the script file for the above works to do everything at once.  
-You can optionally pass a test type (unit or integration) as an argument to run a specific subset of tests.
 
-```
-./execute_unit_test.sh               # Run all tests (default)
-./execute_unit_test.sh unit          # Run library API tests only
-./execute_unit_test.sh integration   # Run example app tests only
-```
 > **Note**  
 > Logging behavior has been updated and logs are printed by default during tests.  
 > To suppress verbose logs during testing, add `--dart-define=TEST_MODE=true` option.  

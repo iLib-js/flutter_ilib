@@ -1,14 +1,13 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  debugPrint('Testing [numfmt3_test.dart] file.');
+  debugPrint('Testing [flutter_ilib_numfmt_test.dart] file.');
   setUpAll(() async {
-    final ILibJS ilibjsinstance = ILibJS.instance;
-    await ilibjsinstance.loadJS();
-    ilibjsinstance.initILib();
+    await ILibLoader.instance.loadJSON();
+    await ILibLoader.instance.loadILibLocaleDataAll();
   });
 
   group('iLibNumFmt-format()', () {

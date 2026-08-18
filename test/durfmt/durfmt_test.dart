@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -10,10 +10,8 @@ void main() {
   debugPrint('Testing [durfmt_test.dart] file.');
   setUpAll(() async {
     testPlatform = getTestPlatform();
-    final ILibJS ilibjsinstance = ILibJS.instance;
-    await ilibjsinstance.loadJS();
-    ilibjsinstance.initILib();
-    await ilibjsinstance.loadILibLocaleDataAll();
+    await ILibLoader.instance.loadJSON();
+    await ILibLoader.instance.loadILibLocaleDataAll();
   });
 
   group('test_ILibDurationFmt', () {
@@ -487,7 +485,6 @@ void main() {
           minute: 2,
           second: 2,
           millisecond: 2);
-      final String result = (testPlatform == 'webOS') ? '' : '';
       expect(fmt.format(dateOptions),
           '2 Jahre, 2 Monate, 2 Wochen, 2 Tage, 2 Stunden, 2 Minuten, 2 Sekunden und 2 Millisekunden');
     });

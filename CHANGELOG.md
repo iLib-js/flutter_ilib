@@ -1,5 +1,27 @@
+## 2.0.0
+* Remove the `flutter_js` JavaScript interop entirely. flutter_ilib is now a pure-Dart
+  implementation that reads iLib's CLDR locale data (JSON) directly — no JavaScript runtime
+  (and no `flutter_js` dependency) is required.
+* Convert all public classes to pure Dart:
+  * `ILibLocale`, `ILibLocaleInfo`, `ILibCaseMapper`
+  * `ILibDateFmt` — date/time formatting engine
+  * `ILibDurationFmt` — duration formatting with CLDR plural rules
+  * `ILibNumFmt` — number and currency formatting
+  * `ILibTimeZone` — timezone and DST calculation
+  * `ILibCalendar` and 9 calendars: gregorian, thaisolar, julian, islamic, hebrew, ethiopic,
+    coptic, persian (astronomical), and persian-algo (algorithmic)
+  * `ILibScriptInfo` — script metadata (direction, name, code)
+  * `ILibCountry` — country name/code lookup per locale
+* Add system `'local'` timezone support (DST-aware). An omitted timezone defaults to `'local'`,
+  matching iLib JS behavior.
+* Add `ILibLocale.getAvailableLocales()` API.
+* Support 144 locales with CLDR 48.2 data.
+* Add integration tests and rework test runner with unit/integration mode support.
+* Based on iLib v15.0.0 / CLDR 48.2.
+* The public API is unchanged from v1.x — upgrade without code changes.
+
 ## 1.9.1
-* Regenerate `ilib-init.js` from the npm `ilib` package via the new `scripts/assemble_ilib/generate_assets.sh`. The diff is minification-only (different internal variable names); logic and iLib version (14.22.0) are unchanged.
+* Regenerate `ilib-init.js` from the npm ilib package via the new `scripts/assemble_ilib/generate_assets.sh`. The diff is minification-only (different internal variable names); logic and iLib version (14.22.0) are unchanged.
 * Expand the integration test to validate all features, and make the example app render a fixed datetime for consistent locale comparison.
 
 ## 1.9.0

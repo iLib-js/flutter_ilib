@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -6,9 +6,8 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [flutter_ilib_localeinfo_test.dart] file.');
   setUpAll(() async {
-    final ILibJS ilibjsinstance = ILibJS.instance;
-    await ilibjsinstance.loadJS();
-    ilibjsinstance.initILib();
+    final ILibLoader ilibjsinstance = ILibLoader.instance;
+    await ilibjsinstance.loadJSON();
     await ilibjsinstance.loadILibLocaleData('ar-SA');
     await ilibjsinstance.loadILibLocaleData('de-DE');
     await ilibjsinstance.loadILibLocaleData('ko-KR');
