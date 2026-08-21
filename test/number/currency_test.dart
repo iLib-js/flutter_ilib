@@ -120,7 +120,8 @@ void main() {
       expect(cur, isNotNull);
       expect(cur.getCode(), 'IQD');
       expect(cur.getFractionDigits(), 0);
-      expect(cur.getSign(), 'د.ع.\u200F');
+      final String sign = (testPlatform == 'webOS') ? 'د.ع.' : 'د.ع.‏';
+      expect(cur.getSign(), sign);
       expect(cur.getName(), 'Iraqi Dinar');
       expect(cur.getLocale(), 'ar-IQ');
     });

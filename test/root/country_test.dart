@@ -42,13 +42,9 @@ void main() {
       final ILibCountry ctry = ILibCountry(locale: 'ko-KR');
       expect(ctry, isNotNull);
 
-      if (testPlatform == 'webOS') {
-        expect(ctry.getName('CD'), '콩고 민주 공화국');
-        expect(ctry.getCode('콩고 민주 공화국'), 'CD');
-      } else {
-        expect(ctry.getName('CD'), '콩고-킨샤사');
-        expect(ctry.getCode('콩고-킨샤사'), 'CD');
-      }
+      final String name = (testPlatform == 'webOS') ? '콩고 민주 공화국' : '콩고-킨샤사';
+      expect(ctry.getName('CD'), name);
+      expect(ctry.getCode(name), 'CD');
       final ILibLocale locale = ctry.getLocale();
       expect(locale.toString(), 'ko-KR');
     });
@@ -64,26 +60,19 @@ void main() {
     test('testCountryLocale3', () {
       final ILibCountry ctry = ILibCountry(locale: 'zh-Hans-CN');
       expect(ctry, isNotNull);
-      if (testPlatform == 'webOS') {
-        expect(ctry.getName('CD'), '刚果民主共和国');
-        expect(ctry.getCode('刚果民主共和国'), 'CD');
-      } else {
-        expect(ctry.getName('CD'), '刚果（金）');
-        expect(ctry.getCode('刚果（金）'), 'CD');
-      }
+      final String name = (testPlatform == 'webOS') ? '刚果民主共和国' : '刚果（金）';
+      expect(ctry.getName('CD'), name);
+      expect(ctry.getCode(name), 'CD');
       final ILibLocale locale = ctry.getLocale();
       expect(locale.toString(), 'zh-Hans-CN');
     });
     test('testCountryLocale4', () {
       final ILibCountry ctry = ILibCountry(locale: 'ja-JP');
       expect(ctry, isNotNull);
-      if (testPlatform == 'webOS') {
-        expect(ctry.getName('CD'), 'コンゴ民主共和国');
-        expect(ctry.getCode('コンゴ民主共和国'), 'CD');
-      } else {
-        expect(ctry.getName('CD'), 'コンゴ民主共和国(キンシャサ)');
-        expect(ctry.getCode('コンゴ民主共和国(キンシャサ)'), 'CD');
-      }
+      final String name =
+          (testPlatform == 'webOS') ? 'コンゴ民主共和国' : 'コンゴ民主共和国(キンシャサ)';
+      expect(ctry.getName('CD'), name);
+      expect(ctry.getCode(name), 'CD');
       final ILibLocale locale = ctry.getLocale();
       expect(locale.toString(), 'ja-JP');
     });
@@ -100,13 +89,9 @@ void main() {
       final ILibCountry ctry = ILibCountry(locale: 'as-IN');
       expect(ctry, isNotNull);
 
-      if (testPlatform == 'webOS') {
-        expect(ctry.getName('SG'), 'চিংগাপুৰ');
-        expect(ctry.getCode('চিংগাপুৰ'), 'SG');
-      } else {
-        expect(ctry.getName('SG'), 'ছিংগাপুৰ');
-        expect(ctry.getCode('ছিংগাপুৰ'), 'SG');
-      }
+      final String name = (testPlatform == 'webOS') ? 'চিংগাপুৰ' : 'ছিংগাপুৰ';
+      expect(ctry.getName('SG'), name);
+      expect(ctry.getCode(name), 'SG');
       final ILibLocale locale = ctry.getLocale();
       expect(locale.toString(), 'as-IN');
     });

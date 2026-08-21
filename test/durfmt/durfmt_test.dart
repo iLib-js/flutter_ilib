@@ -1389,13 +1389,10 @@ void main() {
 
       final ILibDateOptions dateOptions = ILibDateOptions(
           year: 1, month: 1, week: 1, day: 1, hour: 1, minute: 1, second: 1);
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(dateOptions),
-            '1 an, 1 m., 1 sem., 1 j, 1 h, 1 min, 1 s');
-      } else {
-        expect(fmt.format(dateOptions),
-            '1 an, 1 m., 1 sem., 1 j, 1 h, 1 min, 1 s');
-      }
+      final String expected = (testPlatform == 'webOS')
+          ? '1 an, 1 m., 1 sem., 1 j, 1 h, 1 min, 1 s'
+          : '1 an, 1 m., 1 sem., 1 j, 1 h, 1 min, 1 s';
+      expect(fmt.format(dateOptions), expected);
     });
     test('testDurFmtFRCAFormatFull', () {
       final ILibDurationFmtOptions fmtOptions =
