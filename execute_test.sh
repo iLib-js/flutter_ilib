@@ -25,6 +25,32 @@ test_log() {
   echo "[flutter_ilib] $1"
 }
 
+# Resolve the test platform the same way test/test_env.dart does:
+# read test/env (KEY=VALUE) when present, otherwise fall back to the OS name
+# (lowercased to match Dart's Platform.operatingSystem, e.g. "linux").
+resolve_test_platform() {
+  if [[ -f test/env ]]; then
+    cut -d'=' -f2- test/env | tr -d '[:space:]'
+  else
+    uname -s | tr '[:upper:]' '[:lower:]'
+  fi
+}
+
+# Print, once at the very start, which platform's expected values the run
+# will be checked against.
+print_test_platform_banner() {
+  local platform source
+  platform="$(resolve_test_platform)"
+  if [[ -f test/env ]]; then
+    source="test/env"
+  else
+    source="Platform.operatingSystem"
+  fi
+  echo ""
+  test_log "Test platform: ${platform}  (source: ${source})"
+  echo ""
+}
+
 usage() {
   cat <<EOF
 execute_test.sh - Run tests for flutter_ilib
@@ -92,6 +118,9 @@ case "$MODE" in
     exit 1
     ;;
 esac
+
+# Announce the resolved test platform before anything else runs.
+print_test_platform_banner
 
 # Resolve dependencies once up front.
 test_log "Resolve dependencies (flutter pub get)..."

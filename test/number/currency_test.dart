@@ -10,7 +10,6 @@ void main() {
   debugPrint('Testing [currency_test.dart] file.');
   setUpAll(() async {
     testPlatform = getTestPlatform();
-    debugPrint('Testing [currency_test.dart] on $testPlatform.');
     await ILibLoader.instance.loadJSON();
     await ILibLoader.instance.loadILibLocaleDataAll();
   });
