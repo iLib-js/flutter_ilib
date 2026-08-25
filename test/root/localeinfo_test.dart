@@ -2982,43 +2982,51 @@ void main() {
     test('testLocaleInfoGetDecimalSeparatorfor_ku_Arab_IQ', () {
       final ILibLocaleInfo info = ILibLocaleInfo('ku-Arab-IQ');
       expect(info, isNotNull);
-      expect(info.getDecimalSeparator(), '.');
+      final String result = (testPlatform == 'webOS') ? '٫' : '.';
+      expect(info.getDecimalSeparator(), result);
     });
     test('testLocaleInfoGetGroupingSeparatorfor_ku_Arab_IQ', () {
       final ILibLocaleInfo info = ILibLocaleInfo('ku-Arab-IQ');
       expect(info, isNotNull);
 
-      expect(info.getGroupingSeparator(), ',');
+      final String result = (testPlatform == 'webOS') ? '٬' : ',';
+      expect(info.getGroupingSeparator(), result);
     });
     test('testLocaleInfoGetPercentageFormat_ku_Arab_IQ', () {
       final ILibLocaleInfo info = ILibLocaleInfo('ku-Arab-IQ');
       expect(info, isNotNull);
 
-      expect(info.getPercentageFormat(), '{n}%');
+      final String result = (testPlatform == 'webOS') ? '{n} ٪' : '{n}%';
+      expect(info.getPercentageFormat(), result);
     });
     test('testLocaleInfoGetCurrencyFormat_ku_Arab_IQ', () {
       final ILibLocaleInfo info = ILibLocaleInfo('ku-Arab-IQ');
       expect(info, isNotNull);
 
-      expect(info.getCurrencyFormats().common, '{s} {n}');
+      final String result = (testPlatform == 'webOS') ? '{n} {s}' : '{s} {n}';
+      expect(info.getCurrencyFormats().common, result);
     });
     test('testLocaleInfoGetNegativeNumberFormat_ku_Arab_IQ', () {
       final ILibLocaleInfo info = ILibLocaleInfo('ku-Arab-IQ');
       expect(info, isNotNull);
 
-      expect(info.getNegativeNumberFormat(), '-{n}');
+      final String result = (testPlatform == 'webOS') ? '‏-{n}' : '-{n}';
+      expect(info.getNegativeNumberFormat(), result);
     });
     test('testLocaleInfoGetNegativePercentageFormat_ku_Arab_IQ', () {
       final ILibLocaleInfo info = ILibLocaleInfo('ku-Arab-IQ');
       expect(info, isNotNull);
 
-      expect(info.getNegativePercentageFormat(), '-{n}%');
+      final String result = (testPlatform == 'webOS') ? '‏-{n} ٪' : '-{n}%';
+      expect(info.getNegativePercentageFormat(), result);
     });
     test('testLocaleInfoGetNegativeCurrencyFormat_ku_Arab_IQ', () {
       final ILibLocaleInfo info = ILibLocaleInfo('ku-Arab-IQ');
       expect(info, isNotNull);
 
-      expect(info.getCurrencyFormats().commonNegative, '-{s} {n}');
+      final String result =
+          (testPlatform == 'webOS') ? '‏-{n} {s}' : '-{s} {n}';
+      expect(info.getCurrencyFormats().commonNegative, result);
     });
     test('testLocaleInfoGetPrimaryGroupingDigits_ku_Arab_IQ', () {
       final ILibLocaleInfo info = ILibLocaleInfo('ku-Arab-IQ');

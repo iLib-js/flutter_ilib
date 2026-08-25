@@ -3400,21 +3400,19 @@ void main() {
       }
 
       expect(textformatted_1[0], '1 an, 1 mois, 1 semaine et 1 jour');
-      if (testPlatform == 'webOS') {
-        expect(textformatted_1[1], '1 an, 1 m., 1 sem., 1 j');
-      } else {
-        expect(textformatted_1[1], '1 an, 1 m., 1 sem., 1 j');
-      }
+      final String expected = (testPlatform == 'webOS')
+          ? '1 an, 1 m., 1 sem., 1 j'
+          : '1 an, 1 m., 1 sem., 1 j';
+      expect(textformatted_1[1], expected);
       expect(textformatted_1[2], '1a, 1m, 1sem, 1j');
       expect(textformatted_1[3], '1a 1m 1sem 1j');
 
       expect(textformatted_17[0], '17 ans, 17 mois, 17 semaines et 17 jours');
 
-      if (testPlatform == 'webOS') {
-        expect(textformatted_17[1], '17 ans, 17 m., 17 sem., 17 j');
-      } else {
-        expect(textformatted_17[1], '17 ans, 17 m., 17 sem., 17 j');
-      }
+      final String expected17 = (testPlatform == 'webOS')
+          ? '17 ans, 17 m., 17 sem., 17 j'
+          : '17 ans, 17 m., 17 sem., 17 j';
+      expect(textformatted_17[1], expected17);
 
       expect(textformatted_17[2], '17a, 17m, 17sem, 17j');
       expect(textformatted_17[3], '17a 17m 17sem 17j');

@@ -2,13 +2,17 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../test_env.dart';
+
 /// ILibDateFmt.format() when the input date and formatter differ in calendar
 /// and/or timezone.
 void main() {
+  String testPlatform = '';
   TestWidgetsFlutterBinding.ensureInitialized();
   debugPrint('Testing [datefmt_timezone_calendar_extra_test.dart] file.');
 
   setUpAll(() async {
+    testPlatform = getTestPlatform();
     await ILibLoader.instance.loadJSON();
     await ILibLoader.instance.loadILibLocaleData('en-US');
     await ILibLoader.instance.loadILibLocaleData('am-ET');
@@ -40,7 +44,10 @@ void main() {
 
       // JS iLib: "20/10/2016 7:00 ከሰዓት"
       final String result = fmt.format(dateOptions);
-      expect(result, '20/10/2016 7:00 ከሰዓት');
+      final String expected = (testPlatform == 'webOS')
+          ? '20/10/2016 ቀትር 7:00'
+          : '20/10/2016 7:00 ከሰዓት';
+      expect(result, expected);
     });
 
     // gregorian components with same timezone as formatter -
@@ -77,8 +84,11 @@ void main() {
       final String resultUnixtime = fmt.format(fromUnixtime);
 
       // JS iLib: both produce "20/10/2016 7:00 ከሰዓት"
-      expect(resultComponents, '20/10/2016 7:00 ከሰዓት');
-      expect(resultUnixtime, '20/10/2016 7:00 ከሰዓት');
+      final String expected = (testPlatform == 'webOS')
+          ? '20/10/2016 ቀትር 7:00'
+          : '20/10/2016 7:00 ከሰዓት';
+      expect(resultComponents, expected);
+      expect(resultUnixtime, expected);
     });
   });
 
@@ -193,8 +203,11 @@ void main() {
       final String resultUnix = fmt.format(dateUnix);
 
       // JS iLib: both produce "20/10/2016 2:00 ከምሽቱ"
-      expect(resultNY, '20/10/2016 2:00 ከምሽቱ');
-      expect(resultUnix, '20/10/2016 2:00 ከምሽቱ');
+      final String expected = (testPlatform == 'webOS')
+          ? '20/10/2016 ከሰዓት 2:00'
+          : '20/10/2016 2:00 ከምሽቱ';
+      expect(resultNY, expected);
+      expect(resultUnix, expected);
     });
   });
 }

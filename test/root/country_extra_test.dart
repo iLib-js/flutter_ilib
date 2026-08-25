@@ -25,13 +25,9 @@ void main() {
       final ILibCountry ctry = ILibCountry(locale: ILibLocale('ko-KR'));
       expect(ctry, isNotNull);
 
-      if (testPlatform == 'webOS') {
-        expect(ctry.getName('CD'), '콩고 민주 공화국');
-        expect(ctry.getCode('콩고 민주 공화국'), 'CD');
-      } else {
-        expect(ctry.getName('CD'), '콩고-킨샤사');
-        expect(ctry.getCode('콩고-킨샤사'), 'CD');
-      }
+      final String name = (testPlatform == 'webOS') ? '콩고 민주 공화국' : '콩고-킨샤사';
+      expect(ctry.getName('CD'), name);
+      expect(ctry.getCode(name), 'CD');
       final ILibLocale locale = ctry.getLocale();
       expect(locale.toString(), 'ko-KR');
     });
@@ -48,13 +44,10 @@ void main() {
       final ILibCountry ctry = ILibCountry(locale: 'en-US');
       expect(ctry, isNotNull);
 
-      if (testPlatform == 'webOS') {
-        expect(ctry.getName('PS'), 'PS');
-        expect(ctry.getCode('PS'), 'PS');
-      } else {
-        expect(ctry.getName('PS'), 'Palestinian Territories');
-        expect(ctry.getCode('Palestinian Territories'), 'PS');
-      }
+      final String name =
+          (testPlatform == 'webOS') ? 'PS' : 'Palestinian Territories';
+      expect(ctry.getName('PS'), name);
+      expect(ctry.getCode(name), 'PS');
       final ILibLocale locale = ctry.getLocale();
       expect(locale.toString(), 'en-US');
     });
@@ -62,13 +55,10 @@ void main() {
       final ILibCountry ctry = ILibCountry(locale: 'ko-KR');
       expect(ctry, isNotNull);
 
-      if (testPlatform == 'webOS') {
-        expect(ctry.getName('BA'), '보스니아 헤르체코비나');
-        expect(ctry.getCode('보스니아 헤르체코비나'), 'BA');
-      } else {
-        expect(ctry.getName('BA'), '보스니아 헤르체고비나');
-        expect(ctry.getCode('보스니아 헤르체고비나'), 'BA');
-      }
+      final String name =
+          (testPlatform == 'webOS') ? '보스니아 헤르체코비나' : '보스니아 헤르체고비나';
+      expect(ctry.getName('BA'), name);
+      expect(ctry.getCode(name), 'BA');
       final ILibLocale locale = ctry.getLocale();
       expect(locale.toString(), 'ko-KR');
     });
@@ -76,13 +66,9 @@ void main() {
       final ILibCountry ctry = ILibCountry(locale: 'ko-KR');
       expect(ctry, isNotNull);
 
-      if (testPlatform == 'webOS') {
-        expect(ctry.getName('HK'), '홍콩');
-        expect(ctry.getCode('홍콩'), 'HK');
-      } else {
-        expect(ctry.getName('HK'), '홍콩(중국 특별행정구)');
-        expect(ctry.getCode('홍콩(중국 특별행정구)'), 'HK');
-      }
+      final String name = (testPlatform == 'webOS') ? '홍콩' : '홍콩(중국 특별행정구)';
+      expect(ctry.getName('HK'), name);
+      expect(ctry.getCode(name), 'HK');
       final ILibLocale locale = ctry.getLocale();
       expect(locale.toString(), 'ko-KR');
     });
@@ -90,13 +76,9 @@ void main() {
       final ILibCountry ctry = ILibCountry(locale: 'ko-KR');
       expect(ctry, isNotNull);
 
-      if (testPlatform == 'webOS') {
-        expect(ctry.getName('PS'), '팔레스타인');
-        expect(ctry.getCode('팔레스타인'), 'PS');
-      } else {
-        expect(ctry.getName('PS'), '팔레스타인 지구');
-        expect(ctry.getCode('팔레스타인 지구'), 'PS');
-      }
+      final String name = (testPlatform == 'webOS') ? '팔레스타인' : '팔레스타인 지구';
+      expect(ctry.getName('PS'), name);
+      expect(ctry.getCode(name), 'PS');
       final ILibLocale locale = ctry.getLocale();
       expect(locale.toString(), 'ko-KR');
     });
@@ -104,13 +86,9 @@ void main() {
       final ILibCountry ctry = ILibCountry(locale: 'ko-KR');
       expect(ctry, isNotNull);
 
-      if (testPlatform == 'webOS') {
-        expect(ctry.getName('ZA'), '남아프리카 공화국');
-        expect(ctry.getCode('남아프리카 공화국'), 'ZA');
-      } else {
-        expect(ctry.getName('ZA'), '남아프리카');
-        expect(ctry.getCode('남아프리카'), 'ZA');
-      }
+      final String name = (testPlatform == 'webOS') ? '남아프리카 공화국' : '남아프리카';
+      expect(ctry.getName('ZA'), name);
+      expect(ctry.getCode(name), 'ZA');
       final ILibLocale locale = ctry.getLocale();
       expect(locale.toString(), 'ko-KR');
     });

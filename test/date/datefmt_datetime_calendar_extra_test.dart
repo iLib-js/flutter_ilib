@@ -6,12 +6,16 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../test_env.dart';
+
 void main() {
+  String testPlatform = '';
   debugPrint('Testing [datefmt_datetime_calendar_extra_test.dart] file.');
   TestWidgetsFlutterBinding.ensureInitialized();
   final ILibLoader loader = ILibLoader.instance;
 
   setUpAll(() async {
+    testPlatform = getTestPlatform();
     await loader.loadJSON();
     await loader.loadILibLocaleData('am-ET');
     await loader.loadILibLocaleData('fa-IR');
@@ -136,7 +140,10 @@ void main() {
         useNative: false,
         timezone: 'Etc/UTC',
       )).format(e);
-      expect(out, '27 ሰኔ 2016 10:00 ከሰዓት');
+      final String expected = (testPlatform == 'webOS')
+          ? '27 ሰኔ 2016 ቀትር 10:00'
+          : '27 ሰኔ 2016 10:00 ከሰዓት';
+      expect(out, expected);
     });
   });
 

@@ -3,8 +3,12 @@ import 'package:flutter_ilib_example/main.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
+import '../../test/test_env.dart';
+
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+
+  final String testPlatform = getTestPlatform();
 
   const Duration localeTapVisualDelay = Duration(milliseconds: 700);
 
@@ -21,13 +25,19 @@ void main() {
 
   final Map<String, String> expectedDateTimeValues = <String, String>{
     'en-GB': '23 May 2026 at 16:30',
-    'en-US': 'May 23, 2026 at 4:30\u202FPM',
+    'en-US': 'May 23, 2026 at 4:30 PM',
     'de-DE': '23. Mai 2026 um 16:30',
-    'hi-IN': '23 मई 2026 को 4:30 pm बजे',
+    'hi-IN': (testPlatform == 'webOS')
+        ? '23 मई 2026 को 4:30 PM बजे'
+        : '23 मई 2026 को 4:30 pm बजे',
     'ko-KR': '2026년 5월 23일 오후 4:30',
-    'ru-RU': '23 мая 2026\u202Fг. в 16:30',
-    'fa-IR': '\u200F1405 خرداد 2، ساعت \u200F16:30',
-    'am-ET': '15 ግንቦት 2018 10:30 ከሰዓት',
+    'ru-RU': '23 мая 2026 г. в 16:30',
+    'fa-IR': (testPlatform == 'webOS')
+        ? 'ساعت ‏16:30، ‏2 خرداد 1405'
+        : '‏1405 خرداد 2، ساعت ‏16:30',
+    'am-ET': (testPlatform == 'webOS')
+        ? 'ግንቦት 15 ቀን 2018 ዓ.ም ቀትር 10:30'
+        : '15 ግንቦት 2018 10:30 ከሰዓት',
   };
 
   final Map<String, String> expectedFirstDayValues = <String, String>{
@@ -58,8 +68,10 @@ void main() {
     'de-DE': '111.123.456,785',
     'hi-IN': '११,११,२३,४५६.७८५ (11,11,23,456.785)',
     'ko-KR': '111,123,456.785',
-    'ru-RU': '111\u00A0123\u00A0456,785',
-    'fa-IR': '۱۱۱٬۱۲۳٬۴۵۶٫۷۸۵ (111٬123٬456٫785)',
+    'ru-RU': '111 123 456,785',
+    'fa-IR': (testPlatform == 'webOS')
+        ? '۱۱۱٫۱۲۳٫۴۵۶/۷۸۵ (111٫123٫456/785)'
+        : '۱۱۱٬۱۲۳٬۴۵۶٫۷۸۵ (111٬123٬456٫785)',
     'am-ET': '111,123,456.785',
   };
 
@@ -70,8 +82,9 @@ void main() {
     'hi-IN': '1 घं॰, 30 मि॰',
     'ko-KR': '1시간 30분',
     'ru-RU': '1 ч 30 мин',
-    'fa-IR': '\u200F۱ ساعت،\u200F ۳۰ دقیقه',
-    'am-ET': '1 ሰዓ፣ 30 ደቂቃ',
+    'fa-IR':
+        (testPlatform == 'webOS') ? '‏۱ ساعت و ۳۰ دقیقه' : '‏۱ ساعت،‏ ۳۰ دقیقه',
+    'am-ET': (testPlatform == 'webOS') ? '1 ሰዓ፣ 30 ደቂ' : '1 ሰዓ፣ 30 ደቂቃ',
   };
 
   // The app shows one reference country (KR) localized per locale, so the same
@@ -79,11 +92,11 @@ void main() {
   final Map<String, String> expectedCountryValues = <String, String>{
     'en-GB': 'South Korea',
     'en-US': 'South Korea',
-    'de-DE': 'Südkorea',
-    'hi-IN': 'दक्षिण कोरिया',
+    'de-DE': (testPlatform == 'webOS') ? 'Korea' : 'Südkorea',
+    'hi-IN': (testPlatform == 'webOS') ? 'कोरिया' : 'दक्षिण कोरिया',
     'ko-KR': '대한민국',
     'ru-RU': 'Республика Корея',
-    'fa-IR': 'کرهٔ جنوبی',
+    'fa-IR': (testPlatform == 'webOS') ? 'کره جنوبی' : 'کرهٔ جنوبی',
     'am-ET': 'ደቡብ ኮሪያ',
   };
 
@@ -164,14 +177,6 @@ void main() {
             actual: _tryGetValueForLabel(tester, 'Duration Format (long)'),
             expected: expectedDurationValues[locale],
           );
-
-          // _collectMismatch(
-          //   failures: failures,
-          //   locale: locale,
-          //   label: 'Country',
-          //   actual: _tryGetValueForLabel(tester, 'Country'),
-          //   expected: expectedCountryValues[locale],
-          // );
         } catch (error) {
           failures.add('[$locale] Unexpected error: $error');
         }
