@@ -48,7 +48,7 @@ Never edit an expected value to silence a failure. Never weaken an assertion
    - **Bad conversion** (expected value never matched JS) → correct the expected
      value to the JS original.
    - **Out-of-scope locale** → the test should not exist; move it or mark N/A per
-     `docs/test-mapping.md`.
+     `doc/test-mapping.md`.
    - **Exact-vs-float** → if it uses `closeTo` on an exact value, that hid a real
      precision bug; switch to exact `expect` and investigate.
    - **Upstream change** → only valid during a version bump; use the `bump-upstream`
@@ -56,7 +56,7 @@ Never edit an expected value to silence a failure. Never weaken an assertion
 
 5. **Fix at the root** — for calendar/date/timezone failures, the cause is often a
    base-class rule (offset passthrough, calendar-specific token formatting, `'local'`
-   tz). Read [docs/date-calendar-architecture.md](../../../docs/date-calendar-architecture.md)
+   tz). Read [doc/date-calendar-architecture.md](../../../doc/date-calendar-architecture.md)
    § Critical rules before editing.
 
 6. **Re-verify the whole suite** — a fix in `lib/` can shift other locales:

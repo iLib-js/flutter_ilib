@@ -18,13 +18,13 @@ incorporates **CLDR 48.2**).
 
 ## 📚 Documentation
 
-For detailed documentation, see the **[docs/](./docs/)** folder:
+For detailed documentation, see the **[doc/](./doc/)** folder:
 
-- **[Quick Reference](./docs/quick_reference.md)** - Get started with key APIs and common patterns
-- **[Architecture](./docs/architecture.md)** - Understand the system design and data flow
-- **[API Reference](./docs/api.md)** - Complete API documentation for all classes
-- **[Development Guide](./docs/development.md)** - Setup, testing, and contribution guidelines
-- **[Documentation Index](./docs/INDEX.md)** - Navigation guide for all documentation
+- **[Quick Reference](./doc/quick_reference.md)** - Get started with key APIs and common patterns
+- **[Architecture](./doc/architecture.md)** - Understand the system design and data flow
+- **[API Reference](./doc/api.md)** - Complete API documentation for all classes
+- **[Development Guide](./doc/development.md)** - Setup, testing, and contribution guidelines
+- **[Documentation Index](./doc/INDEX.md)** - Navigation guide for all documentation
 
 ## How to use
 ### Initialization
@@ -122,7 +122,7 @@ fmt.format(dateOptions);
 > **Note on `timezone: 'local'`:** `'local'` resolves to the device's DST-aware system time
 > zone (matching iLib's JS), so it differs from `'Etc/UTC'` on a non-UTC host. An omitted
 > timezone defaults to `'local'`. See
-> [docs/local-timezone-support.md](docs/local-timezone-support.md) for details.
+> [doc/local-timezone-support.md](doc/local-timezone-support.md) for details.
 
 ### Duration Formatting
 
