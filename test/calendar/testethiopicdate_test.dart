@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_ilib/flutter_ilib.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../test_env.dart';
+
 // [julianDay, year, month, day, hour, minute, second, millisecond, dayOfWeek]
 const List<List<num>> testDatesEthiopic = <List<num>>[
   <num>[1507231.5, -594, 12, 5, 18, 0, 0, 0, 6],
@@ -40,9 +42,11 @@ const List<List<num>> testDatesEthiopic = <List<num>>[
 ];
 
 void main() {
+  String testPlatform = '';
   debugPrint('Testing [testethiopicdate_test.dart] file.');
   TestWidgetsFlutterBinding.ensureInitialized();
   setUpAll(() async {
+    testPlatform = getTestPlatform();
     await ILibLoader.instance.loadJSON();
     await ILibLoader.instance.loadILibLocaleData('am-ET');
     await ILibLoader.instance.loadILibLocaleData('de-DE');
@@ -611,7 +615,9 @@ void main() {
           minute: 0,
           type: 'gregorian',
           timezone: 'Africa/Addis_Ababa');
-      expect(fmt.format(dateOptions), '13 ነሐሴ 2013');
+      final String result =
+          (testPlatform == 'webOS') ? 'ነሐሴ 13 ቀን 2013 ዓ.ም' : '13 ነሐሴ 2013';
+      expect(fmt.format(dateOptions), result);
     });
     test('testEthiopicDateConversion_weekday', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -628,7 +634,10 @@ void main() {
           minute: 0,
           type: 'gregorian',
           timezone: 'Africa/Addis_Ababa');
-      expect(fmt.format(dateOptions), 'ሐሙስ፣ 13 ነሐሴ 2013');
+      final String result = (testPlatform == 'webOS')
+          ? 'ሐሙስ፣ ነሐሴ 13 ቀን 2013 ዓ.ም'
+          : 'ሐሙስ፣ 13 ነሐሴ 2013';
+      expect(fmt.format(dateOptions), result);
     });
     test('testEthiopicDateConversion2', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -645,7 +654,9 @@ void main() {
           minute: 30,
           type: 'gregorian',
           timezone: 'Africa/Addis_Ababa');
-      expect(fmt.format(dateOptions), '14 ነሐሴ 2013');
+      final String result =
+          (testPlatform == 'webOS') ? 'ነሐሴ 14 ቀን 2013 ዓ.ም' : '14 ነሐሴ 2013';
+      expect(fmt.format(dateOptions), result);
     });
     test('testEthiopicDateConversion2_weekday', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -662,7 +673,10 @@ void main() {
           minute: 30,
           type: 'gregorian',
           timezone: 'Africa/Addis_Ababa');
-      expect(fmt.format(dateOptions), 'ዓርብ፣ 14 ነሐሴ 2013');
+      final String result = (testPlatform == 'webOS')
+          ? 'ዓርብ፣ ነሐሴ 14 ቀን 2013 ዓ.ም'
+          : 'ዓርብ፣ 14 ነሐሴ 2013';
+      expect(fmt.format(dateOptions), result);
     });
     test('testEthiopicDateConversion3', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -679,7 +693,9 @@ void main() {
           minute: 43,
           type: 'gregorian',
           timezone: 'Africa/Addis_Ababa');
-      expect(fmt.format(dateOptions), '13 ነሐሴ 2013');
+      final String result =
+          (testPlatform == 'webOS') ? 'ነሐሴ 13 ቀን 2013 ዓ.ም' : '13 ነሐሴ 2013';
+      expect(fmt.format(dateOptions), result);
     });
     test('testEthiopicDateConversion3_weekday', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -696,7 +712,10 @@ void main() {
           minute: 43,
           type: 'gregorian',
           timezone: 'Africa/Addis_Ababa');
-      expect(fmt.format(dateOptions), 'ሐሙስ፣ 13 ነሐሴ 2013');
+      final String result = (testPlatform == 'webOS')
+          ? 'ሐሙስ፣ ነሐሴ 13 ቀን 2013 ዓ.ም'
+          : 'ሐሙስ፣ 13 ነሐሴ 2013';
+      expect(fmt.format(dateOptions), result);
     });
     test('testEthiopicDateConversion4', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -713,7 +732,9 @@ void main() {
           minute: 0,
           type: 'gregorian',
           timezone: 'Africa/Addis_Ababa');
-      expect(fmt.format(dateOptions), '14 ነሐሴ 2013');
+      final String result =
+          (testPlatform == 'webOS') ? 'ነሐሴ 14 ቀን 2013 ዓ.ም' : '14 ነሐሴ 2013';
+      expect(fmt.format(dateOptions), result);
     });
     test('testEthiopicDateConversion4_weekday', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -730,7 +751,10 @@ void main() {
           minute: 0,
           type: 'gregorian',
           timezone: 'Africa/Addis_Ababa');
-      expect(fmt.format(dateOptions), 'ዓርብ፣ 14 ነሐሴ 2013');
+      final String result = (testPlatform == 'webOS')
+          ? 'ዓርብ፣ ነሐሴ 14 ቀን 2013 ዓ.ም'
+          : 'ዓርብ፣ 14 ነሐሴ 2013';
+      expect(fmt.format(dateOptions), result);
     });
   });
 

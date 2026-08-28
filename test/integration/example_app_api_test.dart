@@ -22,8 +22,7 @@ void main() {
       final String version = plugin.getVersion;
 
       expect(version.isNotEmpty, true);
-      expect(version, equals('2.0.0-beta.1'));
-      debugPrint('  iLib Version: $version');
+      expect(version, equals('2.0.0'));
     });
 
     test('CLDR version', () {
@@ -33,7 +32,6 @@ void main() {
       expect(cldrVersion, isNotNull);
       expect(cldrVersion!.isNotEmpty, true);
       expect(cldrVersion, equals('48.2'));
-      debugPrint('  CLDR Version: $cldrVersion');
     });
   });
 
@@ -71,8 +69,6 @@ void main() {
       expect(currentTimeResult, contains('May 29, 2026'));
       expect(currentTimeResult, contains('2:30'));
       expect(currentTimeResult, contains('PM'));
-      debugPrint('  Current Time (en-US): $currentTimeResult');
-      debugPrint('  DateTime (full) en-US: $dateTimeFullResult');
     });
 
     test('en-US full datetime (now)', () {
@@ -105,8 +101,6 @@ void main() {
 
       // Verify it contains AM or PM (12-hour format for en-US)
       expect(currentTimeResult, matches(RegExp(r'(AM|PM)')));
-      debugPrint('  Current Time (en-US): $currentTimeResult');
-      debugPrint('  DateTime (full) en-US: $dateTimeFullResult');
     });
 
     test('en-US full datetime pattern', () {
@@ -130,7 +124,6 @@ void main() {
 
       // U+202F (Narrow No-Break Space) is used before AM/PM in CLDR data.
       expect(result, equals('September 29, 2011 at 1:45 PM'));
-      debugPrint('  DateTime (full) en-US: $result');
     });
 
     test('en-US vs ko-KR full datetime', () async {
@@ -171,9 +164,6 @@ void main() {
       // U+202F (Narrow No-Break Space) is used before AM/PM in CLDR data.
       expect(currentTimeResult, equals('May 29, 2026 at 2:30 PM'));
       expect(dateTimeFullResult, equals('2026년 5월 29일 오후 2:30'));
-
-      debugPrint('  Current Time (en-US): $currentTimeResult');
-      debugPrint('  DateTime (full) ko-KR: $dateTimeFullResult');
     });
   });
 
@@ -186,7 +176,6 @@ void main() {
       final String result = fmt.format(-111123456.785);
 
       expect(result, equals('-111.123.456,785'));
-      debugPrint('  Number Format (de-DE): $result');
     });
   });
 }

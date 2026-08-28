@@ -91,11 +91,9 @@ void main() {
           second: 0,
           millisecond: 0);
 
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(dateOptions), 'PM ১.৪৫');
-      } else {
-        expect(fmt.format(dateOptions), 'অপৰাহ্ন ১.৪৫');
-      }
+      final String expected =
+          (testPlatform == 'webOS') ? 'PM ১.৪৫' : 'অপৰাহ্ন ১.৪৫';
+      expect(fmt.format(dateOptions), expected);
     });
     test('testDateINSimpleTimeShort_as_IN1', () {
       final ILibDateFmtOptions fmtOptions =
@@ -112,11 +110,9 @@ void main() {
           second: 0,
           millisecond: 0);
 
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(dateOptions), 'PM ১.৪৫');
-      } else {
-        expect(fmt.format(dateOptions), 'অপৰাহ্ন ১.৪৫');
-      }
+      final String expected =
+          (testPlatform == 'webOS') ? 'PM ১.৪৫' : 'অপৰাহ্ন ১.৪৫';
+      expect(fmt.format(dateOptions), expected);
     });
     test('testDateINSimpleTimeMedium_as_IN', () {
       final ILibDateFmtOptions fmtOptions =
@@ -132,11 +128,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(dateOptions), 'PM ১.৪৫');
-      } else {
-        expect(fmt.format(dateOptions), 'অপৰাহ্ন ১.৪৫');
-      }
+      final String expected =
+          (testPlatform == 'webOS') ? 'PM ১.৪৫' : 'অপৰাহ্ন ১.৪৫';
+      expect(fmt.format(dateOptions), expected);
     });
     test('testDateINSimpleTimeLong_as_IN', () {
       final ILibDateFmtOptions fmtOptions =
@@ -152,11 +146,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(dateOptions), 'PM ১.৪৫');
-      } else {
-        expect(fmt.format(dateOptions), 'অপৰাহ্ন ১.৪৫');
-      }
+      final String expected =
+          (testPlatform == 'webOS') ? 'PM ১.৪৫' : 'অপৰাহ্ন ১.৪৫';
+      expect(fmt.format(dateOptions), expected);
     });
     test('testDateINSimpleTimeFull_as_IN', () {
       final ILibDateFmtOptions fmtOptions =
@@ -172,11 +164,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(dateOptions), 'PM ১.৪৫');
-      } else {
-        expect(fmt.format(dateOptions), 'অপৰাহ্ন ১.৪৫');
-      }
+      final String expected =
+          (testPlatform == 'webOS') ? 'PM ১.৪৫' : 'অপৰাহ্ন ১.৪৫';
+      expect(fmt.format(dateOptions), expected);
     });
     test('testDateINDateTimeSimpleShort_as_IN', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -192,11 +182,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(dateOptions), '২৯-৯-২০১১, PM ১.৪৫');
-      } else {
-        expect(fmt.format(dateOptions), '২৯-৯-২০১১, অপৰাহ্ন ১.৪৫');
-      }
+      final String expected = (testPlatform == 'webOS')
+          ? '২৯-৯-২০১১, PM ১.৪৫'
+          : '২৯-৯-২০১১, অপৰাহ্ন ১.৪৫';
+      expect(fmt.format(dateOptions), expected);
     });
     test('testDateINDateTimeSimpleMedium_as_IN', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -212,11 +201,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(dateOptions), '২৯-০৯-২০১১, PM ১.৪৫');
-      } else {
-        expect(fmt.format(dateOptions), '২৯-০৯-২০১১, অপৰাহ্ন ১.৪৫');
-      }
+      final String expected = (testPlatform == 'webOS')
+          ? '২৯-০৯-২০১১, PM ১.৪৫'
+          : '২৯-০৯-২০১১, অপৰাহ্ন ১.৪৫';
+      expect(fmt.format(dateOptions), expected);
     });
     test('testDateINDateTimeSimpleLong_as_IN', () {
       final ILibDateFmtOptions fmtOptions =
@@ -232,11 +220,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(dateOptions), '২৯ ছেপ্তেম্বৰ, ২০১১ at PM ১.৪৫');
-      } else {
-        expect(fmt.format(dateOptions), '২৯ ছেপ্তেম্বৰ, ২০১১ at অপৰাহ্ন ১.৪৫');
-      }
+      final String expected = (testPlatform == 'webOS')
+          ? '২৯ ছেপ্তেম্বৰ, ২০১১ at PM ১.৪৫'
+          : '২৯ ছেপ্তেম্বৰ, ২০১১ at অপৰাহ্ন ১.৪৫';
+      expect(fmt.format(dateOptions), expected);
     });
     test('testDateINDateTimeSimpleFull_as_IN', () {
       final ILibDateFmtOptions fmtOptions =
@@ -252,11 +239,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(dateOptions), '২৯ ছেপ্তেম্বৰ, ২০১১ at PM ১.৪৫');
-      } else {
-        expect(fmt.format(dateOptions), '২৯ ছেপ্তেম্বৰ, ২০১১ at অপৰাহ্ন ১.৪৫');
-      }
+      final String expected = (testPlatform == 'webOS')
+          ? '২৯ ছেপ্তেম্বৰ, ২০১১ at PM ১.৪৫'
+          : '২৯ ছেপ্তেম্বৰ, ২০১১ at অপৰাহ্ন ১.৪৫';
+      expect(fmt.format(dateOptions), expected);
     });
     test('testDateINTypeDate_as_IN', () {
       final ILibDateFmtOptions fmtOptions =
@@ -288,11 +274,9 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(dateOptions), 'PM ১.৪৫');
-      } else {
-        expect(fmt.format(dateOptions), 'অপৰাহ্ন ১.৪৫');
-      }
+      final String expected =
+          (testPlatform == 'webOS') ? 'PM ১.৪৫' : 'অপৰাহ্ন ১.৪৫';
+      expect(fmt.format(dateOptions), expected);
     });
     test('testDateINTypeDateTime_as_IN', () {
       final ILibDateFmtOptions fmtOptions =
@@ -308,11 +292,10 @@ void main() {
           minute: 45,
           second: 0,
           millisecond: 0);
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(dateOptions), '২৯-৯-২০১১, PM ১.৪৫');
-      } else {
-        expect(fmt.format(dateOptions), '২৯-৯-২০১১, অপৰাহ্ন ১.৪৫');
-      }
+      final String expected = (testPlatform == 'webOS')
+          ? '২৯-৯-২০১১, PM ১.৪৫'
+          : '২৯-৯-২০১১, অপৰাহ্ন ১.৪৫';
+      expect(fmt.format(dateOptions), expected);
     });
     test('testDateINShortDateComponentsY_as_IN', () {
       final ILibDateFmtOptions fmtOptions =
@@ -680,11 +663,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(dateOptions), 'PM ১.৪৫');
-      } else {
-        expect(fmt.format(dateOptions), 'অপৰাহ্ন ১.৪৫');
-      }
+      final String expected =
+          (testPlatform == 'webOS') ? 'PM ১.৪৫' : 'অপৰাহ্ন ১.৪৫';
+      expect(fmt.format(dateOptions), expected);
     });
     test('testDateINShortTimeComponentsHMZ_as_IN', () {
       final ILibDateFmtOptions fmtOptions =
@@ -700,11 +681,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(dateOptions), 'PM ১.৪৫.৩৭ IST');
-      } else {
-        expect(fmt.format(dateOptions), 'অপৰাহ্ন ১.৪৫.৩৭ IST');
-      }
+      final String expected =
+          (testPlatform == 'webOS') ? 'PM ১.৪৫.৩৭ IST' : 'অপৰাহ্ন ১.৪৫.৩৭ IST';
+      expect(fmt.format(dateOptions), expected);
     });
     test('testDateINShortTimeComponentsHMAZ_as_IN', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -723,11 +702,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(dateOptions), 'PM ১.৪৫.৩৭ IST');
-      } else {
-        expect(fmt.format(dateOptions), 'অপৰাহ্ন ১.৪৫.৩৭ IST');
-      }
+      final String expected =
+          (testPlatform == 'webOS') ? 'PM ১.৪৫.৩৭ IST' : 'অপৰাহ্ন ১.৪৫.৩৭ IST';
+      expect(fmt.format(dateOptions), expected);
     });
     test('testDateINShortTimeComponentsHMSA_as_IN', () {
       final ILibDateFmtOptions fmtOptions =
@@ -743,11 +720,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(dateOptions), 'PM ১.৪৫.৩৭');
-      } else {
-        expect(fmt.format(dateOptions), 'অপৰাহ্ন ১.৪৫.৩৭');
-      }
+      final String expected =
+          (testPlatform == 'webOS') ? 'PM ১.৪৫.৩৭' : 'অপৰাহ্ন ১.৪৫.৩৭';
+      expect(fmt.format(dateOptions), expected);
     });
     test('testDateINShortTimeComponentsHMSZ_as_IN', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -766,11 +741,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(dateOptions), 'PM ১.৪৫.৩৭ IST');
-      } else {
-        expect(fmt.format(dateOptions), 'অপৰাহ্ন ১.৪৫.৩৭ IST');
-      }
+      final String expected =
+          (testPlatform == 'webOS') ? 'PM ১.৪৫.৩৭ IST' : 'অপৰাহ্ন ১.৪৫.৩৭ IST';
+      expect(fmt.format(dateOptions), expected);
     });
     test('testDateINShortTimeComponentsHMSAZ_as_IN', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -789,11 +762,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(dateOptions), 'PM ১.৪৫.৩৭ IST');
-      } else {
-        expect(fmt.format(dateOptions), 'অপৰাহ্ন ১.৪৫.৩৭ IST');
-      }
+      final String expected =
+          (testPlatform == 'webOS') ? 'PM ১.৪৫.৩৭ IST' : 'অপৰাহ্ন ১.৪৫.৩৭ IST';
+      expect(fmt.format(dateOptions), expected);
     });
     test('testDateINFullTimeComponentsS_as_IN', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -857,11 +828,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(dateOptions), 'PM ১.৪৫');
-      } else {
-        expect(fmt.format(dateOptions), 'অপৰাহ্ন ১.৪৫');
-      }
+      final String expected =
+          (testPlatform == 'webOS') ? 'PM ১.৪৫' : 'অপৰাহ্ন ১.৪৫';
+      expect(fmt.format(dateOptions), expected);
     });
     test('testDateINFullTimeComponentsHMS_as_IN', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -877,11 +846,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(dateOptions), 'PM ১.৪৫.৩৭');
-      } else {
-        expect(fmt.format(dateOptions), 'অপৰাহ্ন ১.৪৫.৩৭');
-      }
+      final String expected =
+          (testPlatform == 'webOS') ? 'PM ১.৪৫.৩৭' : 'অপৰাহ্ন ১.৪৫.৩৭';
+      expect(fmt.format(dateOptions), expected);
     });
     test('testDateINFullTimeComponentsHMA_as_IN', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -897,11 +864,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(dateOptions), 'PM ১.৪৫');
-      } else {
-        expect(fmt.format(dateOptions), 'অপৰাহ্ন ১.৪৫');
-      }
+      final String expected =
+          (testPlatform == 'webOS') ? 'PM ১.৪৫' : 'অপৰাহ্ন ১.৪৫';
+      expect(fmt.format(dateOptions), expected);
     });
     test('testDateINFullTimeComponentsHMAZ_as_IN', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -921,11 +886,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(dateOptions), 'PM ১.৪৫.৩৭ IST');
-      } else {
-        expect(fmt.format(dateOptions), 'অপৰাহ্ন ১.৪৫.৩৭ IST');
-      }
+      final String expected =
+          (testPlatform == 'webOS') ? 'PM ১.৪৫.৩৭ IST' : 'অপৰাহ্ন ১.৪৫.৩৭ IST';
+      expect(fmt.format(dateOptions), expected);
     });
     test('testDateINFullTimeComponentsHMSA_as_IN', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -941,11 +904,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(dateOptions), 'PM ১.৪৫.৩৭');
-      } else {
-        expect(fmt.format(dateOptions), 'অপৰাহ্ন ১.৪৫.৩৭');
-      }
+      final String expected =
+          (testPlatform == 'webOS') ? 'PM ১.৪৫.৩৭' : 'অপৰাহ্ন ১.৪৫.৩৭';
+      expect(fmt.format(dateOptions), expected);
     });
     test('testDateINFullTimeComponentsHMSZ_as_IN', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -965,11 +926,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(dateOptions), 'PM ১.৪৫.৩৭ IST');
-      } else {
-        expect(fmt.format(dateOptions), 'অপৰাহ্ন ১.৪৫.৩৭ IST');
-      }
+      final String expected =
+          (testPlatform == 'webOS') ? 'PM ১.৪৫.৩৭ IST' : 'অপৰাহ্ন ১.৪৫.৩৭ IST';
+      expect(fmt.format(dateOptions), expected);
     });
     test('testDateINFullTimeComponentsHMSAZ_as_IN', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -989,11 +948,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(dateOptions), 'PM ১.৪৫.৩৭ IST');
-      } else {
-        expect(fmt.format(dateOptions), 'অপৰাহ্ন ১.৪৫.৩৭ IST');
-      }
+      final String expected =
+          (testPlatform == 'webOS') ? 'PM ১.৪৫.৩৭ IST' : 'অপৰাহ্ন ১.৪৫.৩৭ IST';
+      expect(fmt.format(dateOptions), expected);
     });
     test('testDateINWithTimeZoneAndNoDST_as_IN', () {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(
@@ -1013,11 +970,9 @@ void main() {
           minute: 45,
           second: 37,
           millisecond: 0);
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(dateOptions), 'PM ১.৪৫.৩৭ IST');
-      } else {
-        expect(fmt.format(dateOptions), 'অপৰাহ্ন ১.৪৫.৩৭ IST');
-      }
+      final String expected =
+          (testPlatform == 'webOS') ? 'PM ১.৪৫.৩৭ IST' : 'অপৰাহ্ন ১.৪৫.৩৭ IST';
+      expect(fmt.format(dateOptions), expected);
     });
 
     test('testDateFmtINTemplateClock12SwitchHH_as_IN', () {

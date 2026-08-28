@@ -573,11 +573,9 @@ void main() {
       expect(li.getCurrencyFormats().common, '{s}{n}');
       expect(li.getCurrencyFormats().commonNegative, '-{s}{n}');
 
-      if (testPlatform == 'webOS') {
-        expect(curfmt.format(57.05), r'HK$57.05'); //HKD
-      } else {
-        expect(curfmt.format(57.05), r'$57.05'); //HKD
-      }
+      final String expected =
+          (testPlatform == 'webOS') ? r'HK$57.05' : r'$57.05';
+      expect(curfmt.format(57.05), expected);
     });
     test('testNumFmt_en_IE', () {
       final ILibLocaleInfo li = ILibLocaleInfo('en-IE');
@@ -2911,11 +2909,9 @@ void main() {
           currency: li.getCurrency()));
       expect(li.getCurrencyFormats().common, '{n} {s}');
       expect(li.getCurrencyFormats().commonNegative, '-{n} {s}');
-      if (testPlatform == 'webOS') {
-        expect(curfmt.format(57.05), '57,05 UZS');
-      } else {
-        expect(curfmt.format(57.05), '57,05 лв'); //UZS
-      }
+      final String expected =
+          (testPlatform == 'webOS') ? '57,05 UZS' : '57,05 лв';
+      expect(curfmt.format(57.05), expected);
     });
     test('testNumFmt_vi_VN', () {
       final ILibLocaleInfo li = ILibLocaleInfo('vi-VN');
@@ -2984,11 +2980,9 @@ void main() {
           currency: li.getCurrency()));
       expect(li.getCurrencyFormats().common, '{s}{n}');
       expect(li.getCurrencyFormats().commonNegative, '-{s}{n}');
-      if (testPlatform == 'webOS') {
-        expect(curfmt.format(57.05), r'HK$57.05'); //HKD
-      } else {
-        expect(curfmt.format(57.05), r'$57.05'); //HKD
-      }
+      final String expected =
+          (testPlatform == 'webOS') ? r'HK$57.05' : r'$57.05';
+      expect(curfmt.format(57.05), expected);
     });
     test('testNumFmt_zh_Hant_TW', () {
       final ILibLocaleInfo li = ILibLocaleInfo('zh-Hant-TW');
@@ -3011,11 +3005,9 @@ void main() {
           currency: li.getCurrency()));
       expect(li.getCurrencyFormats().common, '{s}{n}');
       expect(li.getCurrencyFormats().commonNegative, '-{s}{n}');
-      if (testPlatform == 'webOS') {
-        expect(curfmt.format(57.05), r'NT$57.05'); //TWD
-      } else {
-        expect(curfmt.format(57.05), r'$57.05'); //TWD
-      }
+      final String expected =
+          (testPlatform == 'webOS') ? r'NT$57.05' : r'$57.05';
+      expect(curfmt.format(57.05), expected);
     });
     test('testNumFmt_en_GE', () {
       final ILibLocaleInfo li = ILibLocaleInfo('en-GE');
@@ -3108,11 +3100,9 @@ void main() {
       expect(li.getCurrencyFormats().common, '{s}{n}');
       expect(li.getCurrencyFormats().commonNegative, '-{s}{n}');
 
-      if (testPlatform == 'webOS') {
-        expect(curfmt.format(57.05), r'NT$57.05'); //TWD
-      } else {
-        expect(curfmt.format(57.05), r'$57.05'); //TWD
-      }
+      final String expected =
+          (testPlatform == 'webOS') ? r'NT$57.05' : r'$57.05';
+      expect(curfmt.format(57.05), expected);
     });
     test('testNumFmt_mn_MN', () {
       final ILibLocaleInfo li = ILibLocaleInfo('mn-MN');

@@ -2783,11 +2783,9 @@ void main() {
           ILibNumFmt(ILibNumFmtOptions(locale: 'fa-IR', maxFractionDigits: 2));
 
       expect(fmt, isNotNull);
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(-111123456.785), '‎−۱۱۱٫۱۲۳٫۴۵۶/۷۸');
-      } else {
-        expect(fmt.format(-111123456.785), '‎−۱۱۱٬۱۲۳٬۴۵۶٫۷۸');
-      }
+      final String expected =
+          (testPlatform == 'webOS') ? '‎−۱۱۱٫۱۲۳٫۴۵۶/۷۸' : '‎−۱۱۱٬۱۲۳٬۴۵۶٫۷۸';
+      expect(fmt.format(-111123456.785), expected);
     });
 
     test('testNumFmtCurrencyFormatCorrectCurrencyForLocale_fa_IR', () {
@@ -2795,11 +2793,9 @@ void main() {
           type: 'currency', locale: 'fa-IR', currency: 'IRR'));
 
       expect(fmt, isNotNull);
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(100110.57), '۱۰۰٫۱۱۱ ؜ریال');
-      } else {
-        expect(fmt.format(100110.57), '‎ریال۱۰۰٬۱۱۱');
-      }
+      final String expected =
+          (testPlatform == 'webOS') ? '۱۰۰٫۱۱۱ ؜ریال' : '‎ریال۱۰۰٬۱۱۱';
+      expect(fmt.format(100110.57), expected);
     });
 
     test('testNumFmtCurrencyFormatCorrectNegativeCurrencyForLocale_fa_IR', () {
@@ -2808,11 +2804,9 @@ void main() {
 
       expect(fmt, isNotNull);
 
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(-100110.57), '؜۱۰۰٫۱۱۱- ؜ریال');
-      } else {
-        expect(fmt.format(-100110.57), '‎−‎ریال۱۰۰٬۱۱۱');
-      }
+      final String expected =
+          (testPlatform == 'webOS') ? '؜۱۰۰٫۱۱۱- ؜ریال' : '‎−‎ریال۱۰۰٬۱۱۱';
+      expect(fmt.format(-100110.57), expected);
     });
 
     test('testNumFmtPercentageFormatRegular_fa_IR', () {
@@ -2821,11 +2815,8 @@ void main() {
 
       expect(fmt, isNotNull);
 
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(57.8), '‪۵۷/۸ %');
-      } else {
-        expect(fmt.format(57.8), '۵۷٫۸٪');
-      }
+      final String expected = (testPlatform == 'webOS') ? '‪۵۷/۸ %' : '۵۷٫۸٪';
+      expect(fmt.format(57.8), expected);
     });
 
     test('testNumFmtPercentageFormatNegative_fa_IR', () {
@@ -2833,11 +2824,9 @@ void main() {
           ILibNumFmt(ILibNumFmtOptions(locale: 'fa-IR', type: 'percentage'));
 
       expect(fmt, isNotNull);
-      if (testPlatform == 'webOS') {
-        expect(fmt.format(-57.8), '‪-۵۷/۸ %');
-      } else {
-        expect(fmt.format(-57.8), '‎−۵۷٫۸٪');
-      }
+      final String expected =
+          (testPlatform == 'webOS') ? '‪-۵۷/۸ %' : '‎−۵۷٫۸٪';
+      expect(fmt.format(-57.8), expected);
     });
 
     //test cases for ga-IE
