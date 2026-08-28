@@ -47,7 +47,7 @@ Read the actual hunks, not just the file list — know what each change does.
 - **Commented-out JS** — tests inside JS `/* */` or `//` blocks were not converted.
 - **Calendar/date/tz changes** — shared logic lives in the base class, not
   duplicated across the 9 subclasses; offset/`'local'`/calendar-token rules from
-  [docs/date-calendar-architecture.md](../../../docs/date-calendar-architecture.md)
+  [doc/date-calendar-architecture.md](../../../doc/date-calendar-architecture.md)
   § Critical rules are respected.
 - **Test file hygiene** — each test `main()` opens with
   `debugPrint('Testing [{filename}] file.')` and imports
@@ -56,15 +56,15 @@ Read the actual hunks, not just the file list — know what each change does.
 - **Docs** — the change is reflected in every doc it touches. Match the change
   type to the docs that must be updated:
   - **Behavior / conversion change** → CLAUDE.md (conversion status, rules) and
-    the relevant `docs/*-conversion-plan.md` / `docs/date-calendar-architecture.md`.
+    the relevant `doc/*-conversion-plan.md` / `doc/date-calendar-architecture.md`.
   - **Test coverage change** (new/removed/moved cases, not-converted patterns) →
-    `docs/test-mapping.md`.
+    `doc/test-mapping.md`.
   - **Public API change** (new/renamed class, method, or signature) → README.md,
-    `docs/api.md`, and `docs/quick_reference.md`. (Ties to the Exports rule and
+    `doc/api.md`, and `doc/quick_reference.md`. (Ties to the Exports rule and
     the PR template's "API description" checkbox.)
   - **Any user-facing change** → a new `CHANGELOG.md` entry (never edit frozen
     history; see CLAUDE.md › Source Versions).
-  - **New doc file added** → registered in `docs/INDEX.md` (nav path + Documents
+  - **New doc file added** → registered in `doc/INDEX.md` (nav path + Documents
     table).
   - **Version bump** → the two independent version spots (README intro note,
     CHANGELOG entry) per CLAUDE.md; a full bump is the `bump-upstream` skill's job.

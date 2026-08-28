@@ -152,7 +152,7 @@ test/
 └── datefmt/      # ILibDateFmt per-locale (datefmt_{locale}_test, ~88 files)
 ```
 
-JS↔Dart test file mapping and not-converted cases: `docs/test-mapping.md`.
+JS↔Dart test file mapping and not-converted cases: `doc/test-mapping.md`.
 
 ### Writing Tests
 
@@ -536,18 +536,18 @@ See [benchmark.md](./benchmark.md) for results and methodology.
 ### Updating Docs
 
 1. **API Changes**:
-   - Update `docs/api.md`
+   - Update `doc/api.md`
    - Add example if behavior changed
    - Update CHANGELOG.md
 
 2. **Architecture Changes**:
-   - Update `docs/architecture.md` (or `docs/date-calendar-architecture.md`)
+   - Update `doc/architecture.md` (or `doc/date-calendar-architecture.md`)
    - Add diagrams if helpful
    - Document new patterns
 
 3. **Test conversion / not-converted cases**:
-   - Update `docs/test-mapping.md`
-   - Calendar/date/timezone rules: `docs/date-calendar-architecture.md`
+   - Update `doc/test-mapping.md`
+   - Calendar/date/timezone rules: `doc/date-calendar-architecture.md`
 
 4. **Developer Changes**:
    - Update this file
@@ -575,7 +575,7 @@ Before releasing version X.Y.Z:
 - [ ] Code formatted (`dart format .`)
 - [ ] CHANGELOG.md updated
 - [ ] Version bumped in `pubspec.yaml`
-- [ ] Notable features documented in `docs/`
+- [ ] Notable features documented in `doc/`
 - [ ] README examples work
 - [ ] No breaking changes (or clearly documented)
 - [ ] Git tag created: `vX.Y.Z`
@@ -586,7 +586,7 @@ Before releasing version X.Y.Z:
 ## Resources
 
 - **Dart Docs**: https://dart.dev/guides
-- **Flutter Testing**: https://flutter.dev/docs/testing
+- **Flutter Testing**: https://flutter.dev/doc/testing
 - **BCP-47 Spec**: https://tools.ietf.org/html/bcp47
 - **iLib Docs**: https://github.com/iLib-js/iLib
 - **CMake Guide**: https://cmake.org/cmake/help/latest/
@@ -596,7 +596,7 @@ Before releasing version X.Y.Z:
 ## Getting Help
 
 ### Questions?
-- Check `README.md` and `docs/`
+- Check `README.md` and `doc/`
 - Review existing issues: GitHub Issues
 - Review test examples in `test/`
 

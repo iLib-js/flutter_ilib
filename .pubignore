@@ -1,3 +1,8 @@
 /scripts
 /build
 /benchmark
+
+# Generated Flutter plugin registrant files (checked in but not needed in the package)
+**/flutter/generated_plugin_registrant.cc
+**/flutter/generated_plugin_registrant.h
+**/flutter/generated_plugins.cmake

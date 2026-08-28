@@ -41,4 +41,4 @@ flutter run --profile -d linux -t lib/benchmark.dart
 # When done: git worktree remove ../flutter_ilib-v1.3.0
 ```
 
-Full results and methodology: [`docs/benchmark.md`](../docs/benchmark.md).
+Full results and methodology: [`doc/benchmark.md`](../doc/benchmark.md).

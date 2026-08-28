@@ -6,6 +6,6 @@ pubspec.lock
 
 .dart_tool/
 build/
-doc/
+doc/api/
 
 .vscode/

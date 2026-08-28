@@ -79,8 +79,8 @@ getters and `pubspec.yaml` are the code/package touch points.
 
 Tests were converted 1:1 from iLib JS at the old tag, so a CLDR bump will change
 some expected formatting output. Run the suite and reconcile failures against
-the **new** iLib JS expectations (see [docs/conversion-guide.md](../../../docs/conversion-guide.md)
-and [docs/test-mapping.md](../../../docs/test-mapping.md)):
+the **new** iLib JS expectations (see [doc/conversion-guide.md](../../../doc/conversion-guide.md)
+and [doc/test-mapping.md](../../../doc/test-mapping.md)):
 
 ```bash
 ./execute_test.sh          # or: flutter test

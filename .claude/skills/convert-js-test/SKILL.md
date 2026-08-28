@@ -10,8 +10,8 @@ description: >-
 # Convert iLib JS test to Dart
 
 Port iLib JavaScript test cases to Dart test files.
-Full rules: [docs/conversion-guide.md](../../../docs/conversion-guide.md) § Test Conversion.
-File mapping: [docs/test-mapping.md](../../../docs/test-mapping.md).
+Full rules: [doc/conversion-guide.md](../../../doc/conversion-guide.md) § Test Conversion.
+File mapping: [doc/test-mapping.md](../../../doc/test-mapping.md).
 
 ## Ask first
 
@@ -23,7 +23,7 @@ File mapping: [docs/test-mapping.md](../../../docs/test-mapping.md).
 1. **Scope check** — locale must be in `locales.json`
 2. **Convert** — JS test functions → Dart `test()` blocks. **Skip commented-out JS tests** (`/* */` or `//`) — no JS-verified value; watch for an unclosed `/*` that disables a whole run, and duplicate names (convert only the active one).
 3. **Separate** — JS-mirrored → `*_test.dart`; Dart-only → `*_extra_test.dart`
-4. **Document** — update `docs/test-mapping.md`
+4. **Document** — update `doc/test-mapping.md`
 5. **Verify** — `flutter test <file>` + `flutter analyze`
 
 ## Agent-specific rules
@@ -39,5 +39,5 @@ File mapping: [docs/test-mapping.md](../../../docs/test-mapping.md).
 - [ ] Commented-out JS tests (`/* */` or `//`) skipped — not converted
 - [ ] Tests converted with expected values unchanged
 - [ ] Correct file placement and `*_extra_test.dart` separation
-- [ ] `docs/test-mapping.md` updated
+- [ ] `doc/test-mapping.md` updated
 - [ ] `flutter test <file>` + `flutter analyze` pass

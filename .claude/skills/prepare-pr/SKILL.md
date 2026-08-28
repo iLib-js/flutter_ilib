@@ -71,7 +71,7 @@ formatting output (PR template item 2).
 
 ### 4. Draft the commit / PR title
 
-Conventional Commits, per [docs/development.md](../../../docs/development.md)
+Conventional Commits, per [doc/development.md](../../../doc/development.md)
 § Commit Message Format:
 
 ```

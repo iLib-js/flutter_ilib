@@ -72,7 +72,7 @@ String getClock() {
 - [ ] **Skip tests that are commented out in the JS source** (`/* … */` blocks or `//`-disabled) — they don't run in JS, so there's no JS-verified expected value; converting them yields broken Dart tests. Check each test's `/* */` balance (a `/*` stays open until the first following `*/`). Watch for a **missing closing `*/`** that silently disables a whole run of tests that look active (e.g. an unclosed `/*` swallowing dozens of cases), and for **duplicate test names** where the same test appears once commented (stale value) and once active later — convert only the active one.
 - [ ] **NEVER modify test expected values** — if a test fails, the Dart implementation has a bug, not the test data
 - [ ] Test data (e.g., `testDatesCoptic` reference arrays) must match JS source exactly
-- [ ] If a JS test cannot be converted due to missing Dart features (setters, timezone offset), document it in `docs/test-mapping.md` under "Not Converted" with the reason
+- [ ] If a JS test cannot be converted due to missing Dart features (setters, timezone offset), document it in `doc/test-mapping.md` under "Not Converted" with the reason
 - [ ] **Do NOT convert JS tests for a locale that flutter_ilib does not support.** The authoritative list of supported locales is `scripts/assemble_ilib/locales.json` (the seed used to generate `assets/locale/`) — a per-locale test is in scope only if its locale is in that list.
   - When the data is fully absent, `ILibLocaleInfo`/`ILibTimeZone.fromLocale` fall back to defaults (e.g. `Etc/UTC`) and the JS expected value cannot be reproduced — N/A.
   - **Do not rely on "the value happens to reproduce" to decide.** An unsupported locale can still produce the JS value by language fallback, yet it is out of scope because it is not in `locales.json`. Membership in `locales.json` — not data presence or accidental fallback — is the test.
@@ -103,6 +103,6 @@ Dart API clearer without changing observable behaviour.
   (`git checkout <tag>`; tag = CLAUDE.md › Source Versions)
 - Original JS tests: https://github.com/iLib-js/iLib at the same tag → `js/test/`
 - `assets/locale/` — hierarchical JSON locale data (~251 files), generated from the pinned iLib version (see CLAUDE.md › Source Versions)
-- `docs/architecture.md` — data loading and locale path generation
-- `docs/test-mapping.md` — JS↔Dart test file mapping and not-converted cases
+- `doc/architecture.md` — data loading and locale path generation
+- `doc/test-mapping.md` — JS↔Dart test file mapping and not-converted cases
 - `test/` — existing tests (for post-conversion verification)
