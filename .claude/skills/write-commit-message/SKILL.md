@@ -32,7 +32,7 @@ actually include — never describe changes that won't be in it.
 
 ### 2. Write the message
 
-Follow [docs/development.md](../../../docs/development.md) § Commit Message Format:
+Follow [doc/development.md](../../../doc/development.md) § Commit Message Format:
 
 ```
 type(scope): description

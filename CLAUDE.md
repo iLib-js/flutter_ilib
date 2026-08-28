@@ -24,7 +24,7 @@ point-in-time/public spots listed below).
 
 ## Architecture
 Pure Dart: each class reads JSON locale data and computes natively (the old `flutter_js` interop is
-gone — see [docs/conversion-guide.md](docs/conversion-guide.md) for the before/after pattern).
+gone — see [doc/conversion-guide.md](doc/conversion-guide.md) for the before/after pattern).
 
 ### Data Flow
 ```
@@ -47,17 +47,17 @@ Options → ILibLocaleInfo (determines locale, calendar, clock, meridiems)
 | ILibDateFmt | `lib/ilib_datefmt.dart` | `ilib.data.dateformats` + `sysres` + `zoneinfo` |
 | ILibTimeZone | `lib/ilib_timezone.dart` | `ilib.data.zoneinfo` DST calculation |
 | ILibCalendar | `lib/ilib_calendar.dart` + `lib/calendar/` | Calendar factory + abstract base |
-| 9 calendars | `lib/calendar/{name}_date.dart` + `{name}_rata_die.dart` | gregorian, thaisolar, julian, islamic, hebrew, ethiopic, coptic, persian (astronomical), persian-algo (algorithmic) — see [docs/date-calendar-architecture.md](docs/date-calendar-architecture.md) |
+| 9 calendars | `lib/calendar/{name}_date.dart` + `{name}_rata_die.dart` | gregorian, thaisolar, julian, islamic, hebrew, ethiopic, coptic, persian (astronomical), persian-algo (algorithmic) — see [doc/date-calendar-architecture.md](doc/date-calendar-architecture.md) |
 | ILibAstro | `lib/calendar/ilib_astro.dart` | Astronomical calculation (`ilib.data.astro`) |
 | ILibDateOptions | `lib/ilib_date.dart` | `_toCalendarDate()` delegates per calendar |
 | ILibCurrency | `lib/ilib_currency.dart` | Currency metadata lookup (`ilib.data.currency`) |
 | ILibNumFmt | `lib/ilib_numfmt.dart` | `ilib.data.localeinfo.numfmt` + `ilib.data.currency` |
 | ILibScriptInfo | `lib/ilib_scriptinfo.dart` | `ilib.data.scripts` (root-only, locale-independent) |
 | ILibCountry | `lib/ilib_country.dart` | `ilib.data.ctryreverse` (code↔name, per-locale) |
-| ILibDurationFmt | `lib/ilib_durationfmt.dart` | `ilib.data.sysres` + `ilib.data.plurals` + `ilib.data.dateformats` (clock style) — see [docs/durationfmt-conversion-plan.md](docs/durationfmt-conversion-plan.md) |
+| ILibDurationFmt | `lib/ilib_durationfmt.dart` | `ilib.data.sysres` + `ilib.data.plurals` + `ilib.data.dateformats` (clock style) — see [doc/durationfmt-conversion-plan.md](doc/durationfmt-conversion-plan.md) |
 
 ## Conversion Pattern (How to Convert a Class)
-See [docs/conversion-guide.md](docs/conversion-guide.md) for the full checklist (analyze JS source →
+See [doc/conversion-guide.md](doc/conversion-guide.md) for the full checklist (analyze JS source →
 verify JSON data → Dart implementation → convert tests → verify), the before/after example, and the
 `getLocaleData()` / `_defaultData` template. Test setup: `setUpAll` calls
 `ILibLoader.instance.loadJSON()` (which runs `initILib()` internally) + `loadILibLocaleData('en-US')`;
@@ -147,7 +147,7 @@ lib/
 > `offset: tzOffsetDays` to weekday/onOrBefore calls; format calendar-dependent tokens with the
 > formatter's calendar, not `_toCalendarDate`'s gregorian default; `'local'` = the system timezone;
 > add shared logic to the base class, not the 9 subclasses)
-> — read [docs/date-calendar-architecture.md](docs/date-calendar-architecture.md) §Critical rules
+> — read [doc/date-calendar-architecture.md](doc/date-calendar-architecture.md) §Critical rules
 > (+ `calendar-conversion.md`, `local-timezone-support.md`) **before** changing it.
 
 ### Code Style
@@ -156,7 +156,7 @@ lib/
   `page_width: 80`** (set in `analysis_options.yaml`; short because the package SDK floor is
   < 3.7). Format-on-save is fine; run `dart format .` before committing — a committed pre-commit
   hook enforces this (install once with `scripts/install-git-hooks.sh`; see
-  [docs/development.md](docs/development.md) › Code Style & Formatting). Switching to the modern
+  [doc/development.md](doc/development.md) › Code Style & Formatting). Switching to the modern
   "tall" style would require raising the SDK floor to ≥ 3.7 and a one-time repo-wide reformat in
   its own commit.
 - Explicit type declarations (`always_specify_types`)
@@ -173,7 +173,7 @@ lib/
 - `TestWidgetsFlutterBinding.ensureInitialized()` is required only when a test loads assets
   (`loadJSON`/`loadILibLocaleData`). Pure calculation classes with no data dependency can be
   tested without locale loading or the binding (which classes / the calendar-specific exceptions:
-  [docs/date-calendar-architecture.md](docs/date-calendar-architecture.md)).
+  [doc/date-calendar-architecture.md](doc/date-calendar-architecture.md)).
 - Use exact `expect(value, expected)` for integer dates, JD round-trips, and epoch
   subtraction (these produce exact results). Reserve `closeTo` for calculations with
   genuine floating-point division (e.g. `unixtime / 86400000`) — using it on exact
@@ -181,7 +181,7 @@ lib/
 - **Tests converted 1:1 from an iLib JS test go in the main `*_test.dart`. Tests with no
   JS counterpart (Dart-specific: extra accessors like getDayOfYear/getEra, `'local'`/
   system-tz, offset variants) go in a sibling `*_extra_test.dart`** — never add Dart-only
-  cases to the JS-mirrored file (see docs/conversion-guide.md, docs/test-mapping.md)
+  cases to the JS-mirrored file (see doc/conversion-guide.md, doc/test-mapping.md)
 - **Do NOT convert JS tests for a locale that flutter_ilib does not support.** The authoritative
   list of supported locales is `scripts/assemble_ilib/locales.json` (the seed used to generate
   `assets/locale/` — the 144 bundled iLib locales, see Source Versions); a per-locale test is in
@@ -190,7 +190,7 @@ lib/
   test cannot reproduce the JS expected value — these are N/A.
   **Do not decide by "the value happens to reproduce":** an unsupported locale can still yield the
   JS value by language fallback, yet it is out of scope — only convert the variant that is in
-  `locales.json`. See [docs/conversion-guide.md](docs/conversion-guide.md) › Test Conversion.
+  `locales.json`. See [doc/conversion-guide.md](doc/conversion-guide.md) › Test Conversion.
 - **Script-explicit 3-part locale** (e.g. `pa-Guru-IN`): in scope if its 2-part form (`pa-IN`)
   is in `locales.json` — same asset files, identical data. N/A if neither form is bundled.
 - **Language-only locale** (e.g. `az`, `pa`): in scope if at least one `{lang}-*` locale is in
@@ -206,15 +206,15 @@ lib/
 
 ## Detailed Documentation
 
-For in-depth explanations, see `docs/`:
-- [docs/calendar-conversion.md](docs/calendar-conversion.md) — Cross-calendar conversion logic, JS vs Dart differences
-- [docs/datefmt-conversion-plan.md](docs/datefmt-conversion-plan.md) — DateFmt implementation details (tokens, templates, DST)
-- [docs/durationfmt-conversion-plan.md](docs/durationfmt-conversion-plan.md) — DurationFmt implementation details (plural-choice engine, clock style, RTL)
-- [docs/conversion-guide.md](docs/conversion-guide.md) — General JS→Dart conversion checklist
-- [docs/architecture.md](docs/architecture.md) — System architecture and data loading
-- [docs/api.md](docs/api.md) — Public API reference
-- [docs/local-timezone-support.md](docs/local-timezone-support.md) — system `'local'` timezone (Strategy A, implemented): the resolved DST/offset behavior, the `dst` overlap & spring-forward rules, and the injectable test hooks
-- [docs/date-calendar-architecture.md](docs/date-calendar-architecture.md) — calendar/date layer architecture: Rata Die, the calendar type mapping table, constructor pattern, class relationships
+For in-depth explanations, see `doc/`:
+- [doc/calendar-conversion.md](doc/calendar-conversion.md) — Cross-calendar conversion logic, JS vs Dart differences
+- [doc/datefmt-conversion-plan.md](doc/datefmt-conversion-plan.md) — DateFmt implementation details (tokens, templates, DST)
+- [doc/durationfmt-conversion-plan.md](doc/durationfmt-conversion-plan.md) — DurationFmt implementation details (plural-choice engine, clock style, RTL)
+- [doc/conversion-guide.md](doc/conversion-guide.md) — General JS→Dart conversion checklist
+- [doc/architecture.md](doc/architecture.md) — System architecture and data loading
+- [doc/api.md](doc/api.md) — Public API reference
+- [doc/local-timezone-support.md](doc/local-timezone-support.md) — system `'local'` timezone (Strategy A, implemented): the resolved DST/offset behavior, the `dst` overlap & spring-forward rules, and the injectable test hooks
+- [doc/date-calendar-architecture.md](doc/date-calendar-architecture.md) — calendar/date layer architecture: Rata Die, the calendar type mapping table, constructor pattern, class relationships
 
 ## Deferred Work
 - **Han Calendar**: needs lunar calculations (`_lunarLongitude`, `_newMoonTime`, etc.). Planned as
@@ -222,7 +222,7 @@ For in-depth explanations, see `docs/`:
 - **`'local'` IANA zone name** (optional): the system-tz *behavior* is implemented (Strategy A);
   Strategy B (`flutter_timezone`) is only needed if `getId()` must return the real zone name
   (e.g. `Asia/Seoul`) instead of `'local'`. See
-  [docs/local-timezone-support.md](docs/local-timezone-support.md).
+  [doc/local-timezone-support.md](doc/local-timezone-support.md).
 
 Notes on the locale-state design (see `lib/internal/locale_state.dart`): the single accessor is
 `currentLocale` (the redundant `getLocale()`/`setLocale()` wrappers were removed). Optional future
@@ -236,4 +236,4 @@ flutter test                 # all tests
 flutter test test/calendar/  # one suite (also: date/, root/, number/, basic/)
 flutter analyze              # static analysis
 ```
-See [docs/development.md](docs/development.md) › Testing for single-test / `-k` filter / coverage.
+See [doc/development.md](doc/development.md) › Testing for single-test / `-k` filter / coverage.
