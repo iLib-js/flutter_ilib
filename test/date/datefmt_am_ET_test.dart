@@ -96,7 +96,7 @@ void main() {
           millisecond: 0);
 
       final String result =
-          (testPlatform == 'webOS') ? 'ከሰዓት 1:45' : '1:45 ከምሽቱ';
+          (testPlatform == 'webOS') ? 'ከምሽቱ 1:45' : '1:45 ከምሽቱ';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtSimpleTimeMedium_am_ET', () {
@@ -114,7 +114,7 @@ void main() {
           second: 0,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? 'ከሰዓት 1:45' : '1:45 ከምሽቱ';
+          (testPlatform == 'webOS') ? 'ከምሽቱ 1:45' : '1:45 ከምሽቱ';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtSimpleTimeLong_am_ET', () {
@@ -132,7 +132,7 @@ void main() {
           second: 0,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? 'ከሰዓት 1:45' : '1:45 ከምሽቱ';
+          (testPlatform == 'webOS') ? 'ከምሽቱ 1:45' : '1:45 ከምሽቱ';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtSimpleTimeFull_am_ET', () {
@@ -150,7 +150,7 @@ void main() {
           second: 0,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? 'ከሰዓት 1:45' : '1:45 ከምሽቱ';
+          (testPlatform == 'webOS') ? 'ከምሽቱ 1:45' : '1:45 ከምሽቱ';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtDateTimeSimpleShort_am_ET', () {
@@ -168,7 +168,7 @@ void main() {
           second: 0,
           millisecond: 0);
       final String result = (testPlatform == 'webOS')
-          ? '29/09/2011 ከሰዓት 1:45'
+          ? '29/09/2011 ከምሽቱ 1:45'
           : '29/09/2011 1:45 ከምሽቱ';
       expect(fmt.format(dateOptions), result);
     });
@@ -188,7 +188,7 @@ void main() {
           millisecond: 0);
 
       final String result = (testPlatform == 'webOS')
-          ? '29 ግንቦት 2011 ከሰዓት 1:45'
+          ? '29 ግንቦት 2011 ከምሽቱ 1:45'
           : '29 ግንቦት 2011 1:45 ከምሽቱ';
       expect(fmt.format(dateOptions), result);
     });
@@ -207,7 +207,7 @@ void main() {
           second: 0,
           millisecond: 0);
       final String result = (testPlatform == 'webOS')
-          ? '29 ግንቦት 2011 ከሰዓት 1:45'
+          ? '29 ግንቦት 2011 ከምሽቱ 1:45'
           : '29 ግንቦት 2011 1:45 ከምሽቱ';
       expect(fmt.format(dateOptions), result);
     });
@@ -226,7 +226,7 @@ void main() {
           second: 0,
           millisecond: 0);
       final String result = (testPlatform == 'webOS')
-          ? 'ግንቦት 29 ቀን 2011 ዓ.ም ከሰዓት 1:45'
+          ? 'ግንቦት 29 ቀን 2011 ዓ.ም ከምሽቱ 1:45'
           : '29 ግንቦት 2011 1:45 ከምሽቱ';
       expect(fmt.format(dateOptions), result);
     });
@@ -261,7 +261,7 @@ void main() {
           second: 0,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? 'ከሰዓት 1:45' : '1:45 ከምሽቱ';
+          (testPlatform == 'webOS') ? 'ከምሽቱ 1:45' : '1:45 ከምሽቱ';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtTypeDateTime_am_ET', () {
@@ -279,7 +279,7 @@ void main() {
           second: 0,
           millisecond: 0);
       final String result = (testPlatform == 'webOS')
-          ? '29/09/2011 ከሰዓት 1:45'
+          ? '29/09/2011 ከምሽቱ 1:45'
           : '29/09/2011 1:45 ከምሽቱ';
       expect(fmt.format(dateOptions), result);
     });
@@ -673,7 +673,7 @@ void main() {
           second: 37,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? 'ከሰዓት 1:45' : '1:45 ከምሽቱ';
+          (testPlatform == 'webOS') ? 'ከምሽቱ 1:45' : '1:45 ከምሽቱ';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortTimeComponentsHMZ_am_ET', () {
@@ -713,7 +713,7 @@ void main() {
           second: 37,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? 'ከሰዓት 1:45 EAT' : '1:45 ከምሽቱ EAT';
+          (testPlatform == 'webOS') ? 'ከምሽቱ 1:45 EAT' : '1:45 ከምሽቱ EAT';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortTimeComponentsHMSA_am_ET', () {
@@ -731,7 +731,7 @@ void main() {
           second: 37,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? 'ከሰዓት 1:45:37' : '1:45:37 ከምሽቱ';
+          (testPlatform == 'webOS') ? 'ከምሽቱ 1:45:37' : '1:45:37 ከምሽቱ';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtShortTimeComponentsHMSZ_am_ET', () {
@@ -771,7 +771,7 @@ void main() {
           second: 37,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? 'ከሰዓት 1:45:37 EAT' : '1:45:37 ከምሽቱ EAT';
+          (testPlatform == 'webOS') ? 'ከምሽቱ 1:45:37 EAT' : '1:45:37 ከምሽቱ EAT';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtFullTimeComponentsS_am_ET', () {
@@ -885,7 +885,7 @@ void main() {
           second: 37,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? 'ከሰዓት 1:45' : '1:45 ከምሽቱ';
+          (testPlatform == 'webOS') ? 'ከምሽቱ 1:45' : '1:45 ከምሽቱ';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtFullTimeComponentsHMZ_am_ET', () {
@@ -927,7 +927,7 @@ void main() {
           second: 37,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? 'ከሰዓት 1:45 EAT' : '1:45 ከምሽቱ EAT';
+          (testPlatform == 'webOS') ? 'ከምሽቱ 1:45 EAT' : '1:45 ከምሽቱ EAT';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtFullTimeComponentsHMSA_am_ET', () {
@@ -945,7 +945,7 @@ void main() {
           second: 37,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? 'ከሰዓት 1:45:37' : '1:45:37 ከምሽቱ';
+          (testPlatform == 'webOS') ? 'ከምሽቱ 1:45:37' : '1:45:37 ከምሽቱ';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtFullTimeComponentsHMSZ_am_ET', () {
@@ -987,7 +987,7 @@ void main() {
           second: 37,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? 'ከሰዓት 1:45:37 EAT' : '1:45:37 ከምሽቱ EAT';
+          (testPlatform == 'webOS') ? 'ከምሽቱ 1:45:37 EAT' : '1:45:37 ከምሽቱ EAT';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtWithTimeZoneAndNoDST_am_ET', () {
@@ -1030,7 +1030,7 @@ void main() {
           second: 37,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? 'ከሌሊቱ 1:45' : '1:45 ጥዋት';
+          (testPlatform == 'webOS') ? 'ከጥዋቱ 1:45' : '1:45 ጥዋት';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtTimeMeridiem1_am_ET', () {
@@ -1052,7 +1052,7 @@ void main() {
           second: 37,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? 'ከጥዋቱ 6:00' : '6:00 ቀትር';
+          (testPlatform == 'webOS') ? 'ቀትር 6:00' : '6:00 ቀትር';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtTimeMeridiem2_am_ET', () {
@@ -1074,7 +1074,7 @@ void main() {
           second: 37,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? 'ቀትር 8:22' : '8:22 ከሰዓት';
+          (testPlatform == 'webOS') ? 'ከሰዓት 8:22' : '8:22 ከሰዓት';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtTimeMeridiem3_am_ET', () {
@@ -1096,7 +1096,7 @@ void main() {
           second: 37,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? 'ከሰዓት 1:22' : '1:22 ከምሽቱ';
+          (testPlatform == 'webOS') ? 'ከምሽቱ 1:22' : '1:22 ከምሽቱ';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtTimeMeridiem4_am_ET', () {
@@ -1118,7 +1118,7 @@ void main() {
           second: 37,
           millisecond: 0);
       final String result =
-          (testPlatform == 'webOS') ? 'ከምሽቱ 7:22' : '7:22 ከሌሊቱ';
+          (testPlatform == 'webOS') ? 'ከሌሊቱ 7:22' : '7:22 ከሌሊቱ';
       expect(fmt.format(dateOptions), result);
     });
 
