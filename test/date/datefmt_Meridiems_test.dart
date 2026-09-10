@@ -1146,7 +1146,6 @@ void main() {
         expect(meridiems[0].name, 'ከጥዋቱ');
         expect(meridiems[0].start, '00:00');
         expect(meridiems[0].end, '05:59');
-
       } else {
         expect(meridiems[0].name, 'ጥዋት');
         expect(meridiems[0].start, '00:00');

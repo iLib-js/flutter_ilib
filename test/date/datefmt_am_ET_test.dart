@@ -1051,8 +1051,7 @@ void main() {
           minute: 0,
           second: 37,
           millisecond: 0);
-      final String result =
-          (testPlatform == 'webOS') ? 'ቀትር 6:00' : '6:00 ቀትር';
+      final String result = (testPlatform == 'webOS') ? 'ቀትር 6:00' : '6:00 ቀትር';
       expect(fmt.format(dateOptions), result);
     });
     test('testDateFmtTimeMeridiem2_am_ET', () {

@@ -45,7 +45,7 @@ void main() {
       // JS iLib: "20/10/2016 7:00 ከሰዓት"
       final String result = fmt.format(dateOptions);
       final String expected = (testPlatform == 'webOS')
-          ? '20/10/2016 ቀትር 7:00'
+          ? '20/10/2016 ከሰዓት 7:00'
           : '20/10/2016 7:00 ከሰዓት';
       expect(result, expected);
     });
@@ -85,7 +85,7 @@ void main() {
 
       // JS iLib: both produce "20/10/2016 7:00 ከሰዓት"
       final String expected = (testPlatform == 'webOS')
-          ? '20/10/2016 ቀትር 7:00'
+          ? '20/10/2016 ከሰዓት 7:00'
           : '20/10/2016 7:00 ከሰዓት';
       expect(resultComponents, expected);
       expect(resultUnixtime, expected);
@@ -204,7 +204,7 @@ void main() {
 
       // JS iLib: both produce "20/10/2016 2:00 ከምሽቱ"
       final String expected = (testPlatform == 'webOS')
-          ? '20/10/2016 ከሰዓት 2:00'
+          ? '20/10/2016 ከምሽቱ 2:00'
           : '20/10/2016 2:00 ከምሽቱ';
       expect(resultNY, expected);
       expect(resultUnix, expected);
