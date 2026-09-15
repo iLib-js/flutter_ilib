@@ -2,7 +2,18 @@ name: test-flutterilib
 on: [push, workflow_dispatch]
 jobs:
   drive:
+    name: test (Flutter ${{ matrix.name }})
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: latest stable
+            flutter-version: ''
+            channel: stable
+          - name: '3.38.10'
+            flutter-version: 3.38.10
+            channel: stable
     steps:
     - uses: actions/checkout@v4
     - name: Install Linux desktop dependencies
@@ -17,5 +28,9 @@ jobs:
           pkg-config \
           xvfb
     - uses: subosito/flutter-action@v2
+      with:
+        flutter-version: ${{ matrix.flutter-version }}
+        channel: ${{ matrix.channel }}
+        cache: true
     - run: flutter --version
     - run: ./execute_test.sh
