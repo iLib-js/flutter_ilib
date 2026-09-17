@@ -14,8 +14,8 @@ jobs:
           - name: '3.38.10'
             flutter-version: 3.38.10
             channel: stable
-          - name: '3.3.0 (minimum supported)'
-            flutter-version: 3.3.0
+          - name: '3.13.9 (minimum supported)'
+            flutter-version: 3.13.9
             channel: stable
     steps:
     - uses: actions/checkout@v4
