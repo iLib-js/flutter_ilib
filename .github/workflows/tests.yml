@@ -11,12 +11,21 @@ jobs:
           - name: latest stable
             flutter-version: ''
             channel: stable
+            test-mode: all
           - name: '3.38.10'
             flutter-version: 3.38.10
             channel: stable
+            test-mode: all
           - name: '3.13.9 (minimum supported)'
             flutter-version: 3.13.9
             channel: stable
+            # example/ uses Material 3 APIs newer than this floor (e.g.
+            # ColorScheme.surfaceContainerHighest needs Flutter 3.22+), so the
+            # widget-based integration tests can't build here. The library
+            # itself (lib/) has no Flutter widget dependency, so unit tests
+            # alone verify the floor; integration coverage comes from the
+            # other legs.
+            test-mode: unit
     steps:
     - uses: actions/checkout@v4
     - name: Install Linux desktop dependencies
@@ -36,4 +45,4 @@ jobs:
         channel: ${{ matrix.channel }}
         cache: true
     - run: flutter --version
-    - run: ./execute_test.sh
+    - run: ./execute_test.sh ${{ matrix.test-mode }}
