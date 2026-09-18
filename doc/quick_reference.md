@@ -17,7 +17,7 @@ maintained: true
 | **Purpose** | Internationalization & localization |
 | **Version** | 2.0.0 |
 | **Repository** | https://github.com/iLib-js/flutter_ilib |
-| **Min Requirements** | Flutter 3.3.0+, Dart 3.1.5+ |
+| **Min Requirements** | Flutter 3.13.9+, Dart 3.1.5+ |
 | **Main Language** | Dart |
 | **Platforms** | Linux, WebOS (extensible) |
 

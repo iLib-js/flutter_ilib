@@ -10,7 +10,7 @@ version: 2.0.0
 ## Quick Start
 
 ### Prerequisites
-- Flutter SDK: 3.3.0+
+- Flutter SDK: 3.13.9+
 - Dart SDK: 3.1.5+
 - Git
 
