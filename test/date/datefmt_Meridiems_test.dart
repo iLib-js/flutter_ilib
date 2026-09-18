@@ -1143,46 +1143,30 @@ void main() {
       final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
 
       if (testPlatform == 'webOS') {
-        expect(meridiems[0].name, 'ከሌሊቱ');
+        expect(meridiems[0].name, 'ከጥዋቱ');
         expect(meridiems[0].start, '00:00');
         expect(meridiems[0].end, '05:59');
-
-        expect(meridiems[1].name, 'ከጥዋቱ');
-        expect(meridiems[1].start, '06:00');
-        expect(meridiems[1].end, '06:00');
-
-        expect(meridiems[2].name, 'ቀትር');
-        expect(meridiems[2].start, '06:01');
-        expect(meridiems[2].end, '11:59');
-
-        expect(meridiems[3].name, 'ከሰዓት');
-        expect(meridiems[3].start, '12:00');
-        expect(meridiems[3].end, '17:59');
-
-        expect(meridiems[4].name, 'ከምሽቱ');
-        expect(meridiems[4].start, '18:00');
-        expect(meridiems[4].end, '23:59');
       } else {
         expect(meridiems[0].name, 'ጥዋት');
         expect(meridiems[0].start, '00:00');
         expect(meridiems[0].end, '05:59');
-
-        expect(meridiems[1].name, 'ቀትር');
-        expect(meridiems[1].start, '06:00');
-        expect(meridiems[1].end, '06:00');
-
-        expect(meridiems[2].name, 'ከሰዓት');
-        expect(meridiems[2].start, '06:01');
-        expect(meridiems[2].end, '11:59');
-
-        expect(meridiems[3].name, 'ከምሽቱ');
-        expect(meridiems[3].start, '12:00');
-        expect(meridiems[3].end, '17:59');
-
-        expect(meridiems[4].name, 'ከሌሊቱ');
-        expect(meridiems[4].start, '18:00');
-        expect(meridiems[4].end, '23:59');
       }
+
+      expect(meridiems[1].name, 'ቀትር');
+      expect(meridiems[1].start, '06:00');
+      expect(meridiems[1].end, '06:00');
+
+      expect(meridiems[2].name, 'ከሰዓት');
+      expect(meridiems[2].start, '06:01');
+      expect(meridiems[2].end, '11:59');
+
+      expect(meridiems[3].name, 'ከምሽቱ');
+      expect(meridiems[3].start, '12:00');
+      expect(meridiems[3].end, '17:59');
+
+      expect(meridiems[4].name, 'ከሌሊቱ');
+      expect(meridiems[4].start, '18:00');
+      expect(meridiems[4].end, '23:59');
     });
     test('testMeridiem_ha_Latn_NG', () {
       final ILibDateFmtOptions fmtOptions =
@@ -1513,7 +1497,7 @@ void main() {
       final ILibDateFmtOptions fmtOptions = ILibDateFmtOptions(locale: 'am-ET');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
-      final String expected = (testPlatform == 'webOS') ? 'ከሌሊቱ' : 'ጥዋት';
+      final String expected = (testPlatform == 'webOS') ? 'ከጥዋቱ' : 'ጥዋት';
       expect(meridiems[0].name, expected);
     });
 
@@ -1524,7 +1508,7 @@ void main() {
           ILibDateFmtOptions(locale: 'am-ET', meridiems: 'ethiopic');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
-      final String expected = (testPlatform == 'webOS') ? 'ከሌሊቱ' : 'ጥዋት';
+      final String expected = (testPlatform == 'webOS') ? 'ከጥዋቱ' : 'ጥዋት';
       expect(meridiems[0].name, expected);
     });
 
@@ -1535,7 +1519,7 @@ void main() {
           ILibDateFmtOptions(locale: 'am-ET', meridiems: 'gregorian');
       final ILibDateFmt fmt = ILibDateFmt(fmtOptions);
       final List<MeridiemsInfo> meridiems = fmt.getMeridiemsRange();
-      final String expected = (testPlatform == 'webOS') ? 'ከሌሊቱ' : 'ጥዋት';
+      final String expected = (testPlatform == 'webOS') ? 'ከጥዋቱ' : 'ጥዋት';
       expect(meridiems[0].name, expected);
     });
 

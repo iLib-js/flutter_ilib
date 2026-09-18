@@ -141,7 +141,7 @@ void main() {
         timezone: 'Etc/UTC',
       )).format(e);
       final String expected = (testPlatform == 'webOS')
-          ? '27 ሰኔ 2016 ቀትር 10:00'
+          ? '27 ሰኔ 2016 ከሰዓት 10:00'
           : '27 ሰኔ 2016 10:00 ከሰዓት';
       expect(out, expected);
     });
