@@ -102,13 +102,11 @@ This document consists of the following 8 chapters.
 
 | Role | Stakeholder |
 | --- | --- |
-| Project Leader | TBD |
-| webOS TV Chief Architect | TBD |
+| Project Leader | Yunsik Jang |
+| webOS TV Chief Architect | Seokhee Lee |
 | Developer | Goun Lee |
 | Developer | Seonmi Jin |
-| SDET | TBD |
-| webOS Integration | TBD |
-| Consumer Application (webOS Flutter apps) | TBD |
+| SDET | Yunoh Jeong |
 
 ## 3. Architectural Drivers
 
