@@ -198,39 +198,56 @@ The functional requirements are listed in **[Table 3-3]** .
 This section describes the non-functional requirements (quality attributes) that flutter_ilib must
 satisfy. The performance and memory targets are based on the benchmark app measured on webOS
 (webos4media, Flutter 3.38.10, profile mode, workload over 5 locales: en-US, en-GB, ko-KR, fa-IR,
-am-ET). The measured values are shown in **[Table 3-5]** .
+am-ET). The measured values are shown in **[Table 3-5]** , and the test cases are described in 3.3.1.
 
 **[Table 3-4]** Quality Attributes
 
 | ID | Attribute | Scenario | Test Case | Difficulty | Importance |
 | --- | --- | --- | --- | --- | --- |
-| QA01 | Performance (startup) | In the benchmark app on webOS, the time from initialization to `isILibReady == true` must not exceed **150 ms**. (Measured: 115 ms; v1.9.0: 279 ms) | TBD | Mid | High |
-| QA02 | Performance (date formatting) | In the benchmark app on webOS, a reused `ILibDateFmt.format()` call must take **≤ 500 µs/op** on average. (Measured: 309 µs/op; v1.9.0: 4,060 µs/op) | TBD | Mid | High |
-| QA03 | Performance (locale info) | In the benchmark app on webOS, an `ILibLocaleInfo` lookup must take **≤ 10 µs/op** on average. (Measured: 2.58 µs/op; v1.9.0: 204 µs/op) | TBD | Low | Mid |
-| QA04 | Memory usage (peak) | In the benchmark app on webOS, the maximum RSS during the full workload must not exceed the v1.9.0 baseline (**73.2 MB**). (Measured: 51.7 MB, −29%) | TBD | Mid | High |
-| QA05 | Memory stability | During the sustained workload (6 rounds × 5,000 operations, sampled every 2 s for 5 min), RSS must stay flat after the initial load (no monotonic growth). (Measured: flat; v1.9.0: rising) | TBD | Mid | High |
-| QA06 | Correctness | All unit tests converted 1:1 from the iLib JS tests must pass without changing the expected values (163 test files, about 11,400 test cases). | TBD | High | High |
-| QA07 | Compatibility | The public API must stay source-compatible with v1.x, so that apps can upgrade without code changes, and the package must build and pass the unit tests on the minimum supported Flutter version (3.13.9) as well as on current stable. | TBD | Low | High |
+| QA01 | Performance (startup) | In the benchmark app on webOS, the time from initialization to `isILibReady == true` must not exceed **150 ms**. (Measured: 115 ms; v1.9.0: 279 ms) | [TC-QA01](#331-benchmark-test-cases) | Mid | High |
+| QA02 | Performance (date formatting) | In the benchmark app on webOS, a reused `ILibDateFmt.format()` call must take **≤ 500 µs/op** on average. (Measured: 309 µs/op; v1.9.0: 4,060 µs/op) | [TC-QA02](#331-benchmark-test-cases) | Mid | High |
+| QA03 | Memory (peak and stability) | In the benchmark app on webOS, the maximum RSS must not exceed the v1.9.0 baseline (**73.2 MB**) and must stay flat during the sustained workload (6 rounds × 5,000 operations; **RSS of round 6 − round 1 ≤ 2 MB**, no monotonic growth). (Measured: 51.7 MB, flat; v1.9.0: 73.2 MB, rising) | [TC-QA03](#331-benchmark-test-cases) | Mid | High |
 
-**[Table 3-5]** Benchmark Measurements (v1.9.0 JS interop vs v2.0.0 pure Dart)
+**[Table 3-5]** Benchmark Measurements on webOS (v1.9.0 JS interop vs v2.0.0 pure Dart)
 
-| Metric | webOS v1.9.0 | webOS v2.0.0 | Linux v1.9.0 | Linux v2.0.0 |
-| --- | ---: | ---: | ---: | ---: |
-| Startup (init → ready) | 279 ms | 115 ms | ~196 ms | ~82 ms |
-| Date `format()` (reused) | 4,060 µs/op | 309 µs/op | 4,054 µs/op | 78 µs/op |
-| `NumFmt` (reused) | - | - | 307 µs/op | 1.05 µs/op |
-| `LocaleInfo` lookup | 204 µs/op | 2.58 µs/op | 220 µs/op | 1.04 µs/op |
-| Full workload | 186,262 ms | 13,458 ms | 195,589 ms | 4,337 ms |
-| Max memory (RSS) | 73.2 MB | 51.7 MB | 226 MB | 174 MB |
-| Memory under sustained load | rising | flat | +15 MB | +1 MB |
+| Metric | webOS v1.9.0 | webOS v2.0.0 |
+| --- | ---: | ---: |
+| Startup (init → ready) | 279 ms | 115 ms |
+| Date `format()` (reused) | 4,060 µs/op | 309 µs/op |
+| `LocaleInfo` lookup | 204 µs/op | 2.58 µs/op |
+| Full workload | 186,262 ms | 13,458 ms |
+| Max memory (RSS) | 73.2 MB | 51.7 MB |
+| Memory under sustained load | rising | flat |
 
 > **Note:**
-> Speed is measured with `Stopwatch` in the benchmark app. On webOS, memory is sampled with the
-> memorymanager `getUnitList` API; on Linux with `ProcessInfo.currentRss`. Per-operation values vary
-> ±10–20% between runs, so they are to be read as orders of magnitude, and memory is judged by its
-> trend (flat vs. growing) rather than by absolute values. In real apps (settings date/time screen,
-> screensaver) the idle RSS of v2.0.0 is also lower than v1.x in every measured locale (settings
-> −3 to −5%, screensaver about −11%). Linux numbers are for reference only.
+> Speed is measured with `Stopwatch` in the benchmark app, and memory is sampled with the
+> memorymanager `getUnitList` API. Per-operation values vary ±10–20% between runs, so they are to
+> be read as orders of magnitude, and memory is judged by its trend (flat vs. growing) rather than
+> by absolute values. In real apps (settings date/time screen, screensaver) the idle RSS of v2.0.0
+> is also lower than v1.x in every measured locale (settings −3 to −5%, screensaver about −11%).
+
+#### 3.3.1 Benchmark Test Cases
+
+The benchmark app (`benchmark/lib/benchmark.dart`) prints the measurements that QA01 – QA03 need, so
+these quality attributes are verified by running it on the target device.
+
+Procedure (manual, webOS device, release build):
+
+1. Go to the `benchmark/` directory of the source tree.
+2. Create the webOS platform files: `flutter-webos create --platforms webos .`
+3. Build the IPK: `flutter-webos build webos --ipk --release`
+4. Install and run the app on the target: `flutter-webos run -d <webos_custom_device> --release`.
+   The benchmark runs on the target, and the measurements appear on its screen. Wait until the
+   `RSS peak` row appears.
+5. Repeat step 4 three times and use the median of the runs.
+
+**[Table 3-6]** Benchmark Test Cases
+
+| TC ID | QA | Benchmark output | Pass criterion | Reference result (webOS v2.0.0) |
+| --- | --- | --- | --- | --- |
+| TC-QA01 | QA01 | `init → ready` | ≤ 150 ms | 115 ms |
+| TC-QA02 | QA02 | `format() reused` | ≤ 500 µs/op | 309 µs/op |
+| TC-QA03 | QA03 | `RSS peak`, `RSS sustain r1` – `r6` | peak ≤ 73.2 MB and r6 − r1 ≤ 2 MB | 51.7 MB, flat |
 
 ## 4. System Context
 
@@ -425,12 +442,8 @@ The locale data keys used by each class are listed in **[Table 5-2]** .
 
 | Associated Quality Attribute | Rationale |
 | --- | --- |
-| Performance (QA01–QA03) | All formatting and lookup is done in Dart on Dart maps. Removing the JS bridge round-trip (`evaluate()` per call in v1.x) is the main reason for the 13–79× speed-up measured on webOS. |
-| Memory (QA04, QA05) | Without an embedded JS engine, objects are reclaimed by the Dart GC, so memory stays flat under load. The data is loaded per locale (current locale plus its fallback chain), not all at once. |
-| Correctness (QA06) | Each class is a 1:1 conversion of the corresponding iLib JS class and reads the same `ilib.data.*` keys, so the converted iLib JS tests can be used unchanged as the reference. |
-| Modifiability | Data access is centralized in `ILibLoader`; the other classes only read the merged map. A data update (iLib/CLDR bump) therefore changes the assets, not the loader or the formatters. |
-| Compatibility (QA07) | `FlutterILib` and the class names, options and methods are kept identical to v1.x, so the v2.0 rewrite is transparent to the apps. |
-| Encapsulation | Internal helpers are kept in `lib/internal/` and are not exported, so they can change without breaking the public API. |
+| Performance (QA01, QA02) | All formatting and lookup is done in Dart on Dart maps. Removing the JS bridge round-trip (`evaluate()` per call in v1.x) is the main reason for the 13–79× speed-up measured on webOS. |
+| Memory (QA03) | Without an embedded JS engine, objects are reclaimed by the Dart GC, so memory stays flat under load. The data is loaded per locale (current locale plus its fallback chain), not all at once. |
 
 #### 5.1.2 Second Decomposition Diagram
 
@@ -493,17 +506,6 @@ graph TD
 | `calendar_utils` | Non-negative `mod()` and `floorDiv()` used by all calendar arithmetic. |
 | `ILibTimeZone` | Supplies the UTC offset (including DST) used to convert between wall-clock time and the UTC instant. |
 
-**[Table 5-5]** Rationale Description for Second Decomposition
-
-*Associated Drawings: [Figure 5-2]*
-
-| Associated Quality Attribute | Rationale |
-| --- | --- |
-| Modifiability / extensibility | All calendars convert through one shared pivot (Rata Die / Julian Day). Each calendar only implements "own date ↔ pivot", so conversion between any two calendars works without N×N converters, and adding a calendar (e.g. the planned Han calendar) adds one `Cal`/`Date`/`RataDie` set. |
-| Consistency | Timezone, week and `onOrBefore` logic is implemented once in the `ILibCalendarDate` / `ILibRataDie` base classes and shared by all 9 calendars. |
-| Correctness (QA06) | The class split mirrors iLib JS (`*Cal`, `*Date`, `*RataDie`), so each class is verified against its own converted iLib JS test suite. |
-| Performance | The arithmetic calendars need no data; only the Persian astronomical calendar reads `ilib.data.astro`. The lightweight `persian-algo` variant is provided as an alternative that needs no astronomical calculation. |
-
 ### 5.2 Dynamic Perspectives
 
 This section describes the runtime structure (component-and-connector view) of flutter_ilib.
@@ -550,7 +552,7 @@ graph LR
 > **Notation:** Box = runtime component (object). Cylinder = in-memory cache. Solid arrow =
 > call / data access. Dotted arrow = `ChangeNotifier` notification. Numbers show the typical order.
 
-**[Table 5-6]** Element Responsibility Catalog for First Dynamic Decomposition
+**[Table 5-5]** Element Responsibility Catalog for First Dynamic Decomposition
 
 *Associated Drawings: [Figure 5-3], Perspective: Dynamic*
 
@@ -564,7 +566,7 @@ graph LR
 | `rootBundle` | Flutter asset bundle that reads the packaged JSON files. |
 | Dart runtime | Provides the system UTC offset for the `'local'` timezone. |
 
-**[Table 5-7]** Relationship Responsibility Catalog for First Dynamic Decomposition
+**[Table 5-6]** Relationship Responsibility Catalog for First Dynamic Decomposition
 
 *Associated Drawings: [Figure 5-3], Perspective: Dynamic*
 
@@ -578,16 +580,14 @@ graph LR
 | Objects → `ILibLoader` | Synchronous `getLocaleData(locale)` / `getRootData()`. A merged entry missing from the cache is re-merged from the file cache when all its files are cached. |
 | Objects → Dart runtime | `DateTime(...).timeZoneOffset` for the `'local'` timezone. |
 
-**[Table 5-8]** Rationale Description for First Dynamic Decomposition
+**[Table 5-7]** Rationale Description for First Dynamic Decomposition
 
 *Associated Drawings: [Figure 5-3], Perspective: Dynamic*
 
 | Associated Quality Attribute | Rationale |
 | --- | --- |
-| Performance (QA01–QA03) | Asset I/O is asynchronous and done once per file; all later formatting is synchronous map access, so formatting never waits on I/O. |
-| Memory (QA04, QA05) | Only the current locale and its fallback chain are loaded at startup. Files shared by several locales (e.g. `root.json`, `en.json`) are parsed once. `clearLocaleData()` lets an app release locales it no longer needs. |
-| Usability (API) | Readiness and locale changes are reported through `ChangeNotifier`, which Flutter apps can bind to directly (`addListener`, `ListenableBuilder`). |
-| Simplicity / reliability | Single-isolate design: no locking or message passing is needed for the singletons and caches. |
+| Performance (QA01, QA02) | Asset I/O is asynchronous and done once per file; all later formatting is synchronous map access, so formatting never waits on I/O. |
+| Memory (QA03) | Only the current locale and its fallback chain are loaded at startup. Files shared by several locales (e.g. `root.json`, `en.json`) are parsed once. `clearLocaleData()` lets an app release locales it no longer needs. |
 
 #### 5.2.2 Initialization Sequence
 
@@ -712,7 +712,7 @@ sequenceDiagram
     deactivate DF
 ```
 
-**[Table 5-9]** Date Formatting Steps
+**[Table 5-8]** Date Formatting Steps
 
 *Associated Drawings: [Figure 5-6], Perspective: Dynamic*
 
@@ -787,10 +787,10 @@ An RTL mark (U+200F) is prefixed for RTL scripts.
 
 #### 5.2.7 Readiness State
 
-The readiness of the library is managed by `ILibLoader` as described in **[Table 5-10]** and
+The readiness of the library is managed by `ILibLoader` as described in **[Table 5-9]** and
 **[Figure 5-8]** .
 
-**[Table 5-10]** Readiness State Transition
+**[Table 5-9]** Readiness State Transition
 
 | Current State | Event | Next State |
 | --- | --- | --- |
@@ -816,17 +816,15 @@ stateDiagram-v2
     Ready --> NotReady: clearCache() (tests)
 ```
 
-**[Table 5-11]** Rationale Description for Dynamic Perspectives
+**[Table 5-10]** Rationale Description for Dynamic Perspectives
 
 *Associated Drawings: [Figure 5-4] – [Figure 5-8], Perspective: Dynamic*
 
 | Associated Quality Attribute | Rationale |
 | --- | --- |
 | Performance (QA01) | Startup loads only the manifest, `root.json` and the files of one locale (at most 7 files). |
-| Performance (QA02, QA03) | Template selection and tokenization are done once in the constructor; `format()` only walks the token list. Reusing a formatter avoids the construction cost. |
-| Memory (QA04, QA05) | The two-level cache avoids re-reading shared files and re-merging locales. `clearLocaleData()` releases a merged locale without losing the shared file cache, so a later reload needs no I/O. |
-| Reliability | Missing files are skipped and missing data falls back to defaults, so a locale with incomplete data still produces output instead of an exception. The lazy re-merge in `getLocaleData()` never builds a merged entry from a chain with a bundled file that is not yet cached; it returns null so the caller loads the locale first. |
-| Correctness (QA06) | The data merge order and the formatting steps follow iLib JS, so the converted iLib JS tests reproduce the same results. |
+| Performance (QA02) | Template selection and tokenization are done once in the constructor; `format()` only walks the token list. Reusing a formatter avoids the construction cost. |
+| Memory (QA03) | The two-level cache avoids re-reading shared files and re-merging locales. `clearLocaleData()` releases a merged locale without losing the shared file cache, so a later reload needs no I/O. |
 
 ### 5.3 Physical Perspectives
 
@@ -863,7 +861,7 @@ graph LR
 
 > **Notation:** Box = directory (and its main files). Arrow = *contains*.
 
-**[Table 5-12]** Element Responsibility Catalog for Source Repository Map
+**[Table 5-11]** Element Responsibility Catalog for Source Repository Map
 
 *Associated Drawings: [Figure 5-9], Perspective: Physical*
 
@@ -884,17 +882,6 @@ graph LR
 | `.github/workflows/tests.yml` | CI on every push: Flutter latest stable and 3.38.10 (unit + integration), and 3.13.9 (minimum, unit only). |
 | `doc/` | Design and development documentation (`doc/` rather than `docs/`, following pub's directory layout convention). |
 
-**[Table 5-13]** Rationale Description for Source Repository Map
-
-*Associated Drawings: [Figure 5-9]*
-
-| Associated Quality Attribute | Rationale |
-| --- | --- |
-| Correctness (QA06) | Each `lib/` class has matching tests converted from the corresponding iLib JS tests, so a change can be verified against the golden values at class level. |
-| Modifiability | The locale data is generated by a script from a pinned iLib version and a fixed locale list, so a data update is reproducible and separate from code changes. |
-| Compatibility (QA07) | The CI matrix runs on the minimum supported Flutter version and on current versions on every push. |
-| Deployability | No native library is shipped; the package works on webOS like any Dart-only Flutter plugin, and the data is packaged as normal Flutter assets. |
-
 ## 6. FMEA Review
 
 > **Guide:**
@@ -914,7 +901,7 @@ date/number string, or growing memory.
 | --- | --- | --- | --- | --- | --- |
 | Crash | App throws an uncaught exception while formatting | Invalid input to an API (unknown calendar, unknown currency code, unknown country name/code, non-numeric string to `ILibNumFmt.format()`) | Critical | Most invalid arguments raise documented Dart exceptions at the API boundary (`ArgumentError` for an unknown calendar, currency or country; `UnimplementedError` for the Han calendar) instead of producing corrupted output, so the caller can catch them. One exception: a non-numeric `String` passed to `ILibNumFmt.format()` is not validated and surfaces an undocumented `FormatException` from `double.parse()`, so callers must validate or catch it. Missing or incomplete locale data never raises: each class falls back to built-in defaults. | TBD |
 | Dead lock (live lock) | App hangs while formatting or loading | — | Minor | Not applicable by design: all computation is synchronous and bounded on the main isolate, and loading is a set of `Future`s with no locks or waits between components. | TBD |
-| Memory overuse | App memory grows while formatting repeatedly or switching locales | Accumulated objects or cached locale data | Major | Formatting creates only short-lived Dart objects reclaimed by the GC (flat memory, QA05). Files are cached once and shared between locales; only requested locales are loaded; `clearLocaleData()` releases a locale that is no longer used. | TBD |
+| Memory overuse | App memory grows while formatting repeatedly or switching locales | Accumulated objects or cached locale data | Major | Formatting creates only short-lived Dart objects reclaimed by the GC (flat memory, QA03). Files are cached once and shared between locales; only requested locales are loaded; `clearLocaleData()` releases a locale that is no longer used. | TBD |
 | Formatting before data is ready | Empty or default-format string shown at app start | App formats before the initial asynchronous load has finished | Major | `isILibReady` and `ChangeNotifier` notification let the app wait for readiness and rebuild when ready; until then the classes return default-based output instead of failing. | TBD |
 
 **[Table 6-2]** Feature-Related Questions (i18n-Specific Failure Modes)
