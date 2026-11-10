@@ -194,19 +194,25 @@ The functional requirements are listed in **[Table 3-3]** .
 ### 3.3 Quality Attribute
 
 This section describes the non-functional requirements (quality attributes) that flutter_ilib must
-satisfy. The performance and memory targets are based on the benchmark app measured on webOS
-(webos4media, Flutter 3.38.10, profile mode, workload over 5 locales: en-US, en-GB, ko-KR, fa-IR,
-am-ET). The measured values are shown in **[Table 3-5]** , and the test cases are described in 3.3.1.
+satisfy. The performance and memory targets are based on the benchmark app measured on a webOS
+**O26 high-end device** (Flutter 3.38.10, profile mode, workload over 5 locales: en-US, en-GB, ko-KR,
+fa-IR, am-ET). The measured values are shown in **[Table 3-5]** , and the test cases are described
+in 3.3.1.
+
+> **Note:**
+> All reference results in this document were measured on the O26 high-end device only. Mid-range
+> and low-end devices may give worse results (slower startup and formatting, different memory
+> figures), so the pass criteria must be re-checked on each target device class.
 
 **[Table 3-4]** Quality Attributes
 
 | ID | Attribute | Scenario | Test Case | Difficulty | Importance |
 | --- | --- | --- | --- | --- | --- |
-| QA01 | Performance (startup) | In the benchmark app on webOS, the time from initialization to `isILibReady == true` must not exceed **150 ms**. (Measured: 115 ms; v1.9.0: 279 ms) | [TC-QA01](#331-benchmark-test-cases) | Mid | High |
-| QA02 | Performance (date formatting) | In the benchmark app on webOS, a reused `ILibDateFmt.format()` call must take **≤ 500 µs/op** on average. (Measured: 309 µs/op; v1.9.0: 4,060 µs/op) | [TC-QA02](#331-benchmark-test-cases) | Mid | High |
-| QA03 | Memory (peak and stability) | In the benchmark app on webOS, the maximum RSS must not exceed the v1.9.0 baseline (**73.2 MB**) and must stay flat during the sustained workload (6 rounds × 5,000 operations; **RSS of round 6 − round 1 ≤ 2 MB**, no monotonic growth). (Measured: 51.7 MB, flat; v1.9.0: 73.2 MB, rising) | [TC-QA03](#331-benchmark-test-cases) | Mid | High |
+| QA01 | Performance (startup) | In the benchmark app on webOS, the time from initialization to `isILibReady == true` must not exceed **150 ms**. (Measured on O26: 115 ms; v1.9.0: 279 ms) | [TC-QA01](#331-benchmark-test-cases) | Mid | High |
+| QA02 | Performance (date formatting) | In the benchmark app on webOS, a reused `ILibDateFmt.format()` call must take **≤ 500 µs/op** on average. (Measured on O26: 309 µs/op; v1.9.0: 4,060 µs/op) | [TC-QA02](#331-benchmark-test-cases) | Mid | High |
+| QA03 | Memory (peak and stability) | In the benchmark app on webOS, the maximum RSS must not exceed the v1.9.0 baseline (**73.2 MB**) and must stay flat during the sustained workload (6 rounds × 5,000 operations; **RSS of round 6 − round 1 ≤ 2 MB**, no monotonic growth). (Measured on O26: 51.7 MB, flat; v1.9.0: 73.2 MB, rising) | [TC-QA03](#331-benchmark-test-cases) | Mid | High |
 
-**[Table 3-5]** Benchmark Measurements on webOS (v1.9.0 JS interop vs v2.0.0 pure Dart)
+**[Table 3-5]** Benchmark Measurements on the webOS O26 high-end device (v1.9.0 JS interop vs v2.0.0 pure Dart)
 
 | Metric | webOS v1.9.0 | webOS v2.0.0 |
 | --- | ---: | ---: |
@@ -237,11 +243,12 @@ Procedure (manual, webOS device, release build):
 4. Install and run the app on the target: `flutter-webos run -d <webos_custom_device> --release`.
    The benchmark runs on the target, and the measurements appear on its screen. Wait until the
    `RSS peak` row appears.
-5. Repeat step 4 three times and use the median of the runs.
+5. Repeat step 4 three times and use the median of the runs. Record the device model and build
+   together with the results.
 
 **[Table 3-6]** Benchmark Test Cases
 
-| TC ID | QA | Benchmark output | Pass criterion | Reference result (webOS v2.0.0) |
+| TC ID | QA | Benchmark output | Pass criterion | Reference result (O26 high-end, v2.0.0) |
 | --- | --- | --- | --- | --- |
 | TC-QA01 | QA01 | `init → ready` | ≤ 150 ms | 115 ms |
 | TC-QA02 | QA02 | `format() reused` | ≤ 500 µs/op | 309 µs/op |
