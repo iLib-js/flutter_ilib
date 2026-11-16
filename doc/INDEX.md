@@ -43,6 +43,9 @@ If you're an AI agent (Claude, Copilot, etc.), follow this sequence:
 ### Understand the project
 → [quick_reference.md](./quick_reference.md) + [architecture.md](./architecture.md)
 
+### Review the design (LLD)
+→ [design/LLD_flutter_ilib.md](./design/LLD_flutter_ilib.md)
+
 ### Use the library in my app
 → [quick_reference.md](./quick_reference.md) + [api.md](./api.md)
 
@@ -80,6 +83,7 @@ If you're an AI agent (Claude, Copilot, etc.), follow this sequence:
 | [benchmark.md](./benchmark.md) | Performance & memory: v2.0 (pure Dart) vs v1.3.0 (JS interop) | Developers, AI |
 | [numfmt-conversion-plan.md](./numfmt-conversion-plan.md) | NumFmt & Currency implementation reference (rounding, precision, API differences) | Developers, AI |
 | [durationfmt-conversion-plan.md](./durationfmt-conversion-plan.md) | DurationFmt implementation reference (plural engine, clock style, RTL) | Developers, AI |
+| [design/LLD_flutter_ilib.md](./design/LLD_flutter_ilib.md) | Low-level design (LGE design doc format): constraints, quality attributes, context, static/dynamic/physical architecture, FMEA | Developers, Architects, Reviewers |
 
 ### External Documentation
 
