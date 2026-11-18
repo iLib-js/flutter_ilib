@@ -109,29 +109,35 @@ Selection order in `_formatChoice`:
 4. empty/`other` limit → remembered as default
 Result = plural-class match if any, else default.
 
-`getPluralCategory(rules, n)` evaluates `ilib.data.plurals` for the locale:
-- computes CLDR operands `n, i, v, f, w, t, c, e` (`_operands`); `c`/`e` are the
-  base-10 exponent, used by `es`/`fr`/`it`/`pt`/`pt-PT`
-- walks each non-`other` class rule via `_evalRule`, returns first true class
-- returns `other` if none match, or falls back to `n==1 ? 'one' : 'other'`
-  when the locale has no plural rules loaded
+`getPluralCategory(rules, n)` evaluates `ilib.data.plurals` for the locale
+(loaded via `loadPlurals(locale)`, which falls back to the built-in English
+`pluralsDefault`). `lib/internal/plural_utils.dart` is a 1:1 port of upstream
+`js/lib/PluralUtils.js` (iLib `development`, post-v15.0.0 — the module extracted
+from IString.js together with its rule-evaluation fixes); `PluralFncs` (the
+`fncs` instance) mirrors `PluralUtils._fncs` (JS `is` → `isOp`):
+- `calculateNumberDigits` computes the CLDR operands `n, i, v, f, w, t, c, e` on
+  the absolute value; `c`/`e` are the **signed** base-10 exponent (`0.5` → `-1`),
+  used by `es`/`fr`/`it`/`pt`/`pt-PT`. `w`/`t` equal `v`/`f` (a number carries no
+  trailing zeros).
+- each non-`other` class rule is evaluated via `getValue`; the first truthy class
+  wins, else `other`.
+- `matchRangeContinuous`: nested `[lo, hi]` entries are ranges; top-level numbers
+  are a set, except exactly two numbers (`[2,4]`) form the range `lo..hi`.
 
-`_evalRule` supports the full IString.js rule tree: `and`, `or`, `eq`, `neq`,
-`is`, `isnot`, `inrange`, `within`, `notin`, and the `mod` operand expression.
-The bundled iLib v14.22.0 data only uses `and`/`or`/`eq`/`neq`/`mod` — it emits
-`eq` with a flat `[start, end]` range — so the remaining operators are not
-reached by any bundled locale. They are ported from the JS engine anyway so
-future locale data (or the legacy CLDR `n is 1` / `n within 2..4` forms)
-evaluates correctly:
-- `is`/`isnot` — scalar equality/inequality of two operand values (unlike `eq`,
-  the right side is never a range)
-- `inrange`/`within` — share one range matcher over the nested
-  `[[start, end], ...]` form (`matchRange` and `matchRangeContinuous` are
-  identical in v14.22.0); `notin` is its negation
+The port intentionally keeps the JS fallback evaluator's quirks so results match
+upstream (verified by running `PluralUtils.js` in node):
+- `eq` with a string operand and a list rhs tests **`n`**, not the named operand
+  (e.g. `{"eq":["i",[0,1]]}` checks `n` ∈ 0..1).
+- `neq` with a string operand and a list rhs reads only its first two values as a
+  range (`["n",[2,4,6]]` → `n` ∉ 2..4), asymmetric with `eq`.
+- `es`/`fr`/`it`/`pt`: a value in (0, 1) has `e < 0`, so `neq(e, [0,5])` makes it
+  `many`.
 
-All the non-bundled operators are covered by synthetic-tree tests in
-`test/internal/plural_test.dart`. The bundled `ilib.data.plurals` tree is
-authoritative.
+These only affect fractional or non-bundled shapes; durations use integers.
+Upstream tests are ported 1:1 in `test/internal/plural_utils_test.dart`; the
+Dart-only bundled-locale and synthetic-operator trees live in
+`test/internal/plural_utils_extra_test.dart`. The bundled `ilib.data.plurals` tree
+is authoritative.
 
 ### Step 3: Clock style (reuse `ILibDateFmt`)
 
