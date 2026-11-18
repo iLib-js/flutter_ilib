@@ -91,10 +91,11 @@ Latin, Greek, or Cyrillic. Same check applied in the constructor.
 
 ### Step 2: Plural-choice engine (`_formatChoice` + `internal/plural_utils.dart`)
 
-Plural-rule evaluation lives in `lib/internal/plural_utils.dart` as stateless
-top-level functions (no class — the only input is the rule map). The formatter
-calls `getPluralCategory(rules, n)`; the template-choice logic (`_formatChoice`)
-stays in `ilib_durationfmt.dart`.
+Plural-rule evaluation lives in `lib/internal/plural_utils.dart` (stateless:
+`getPluralCategory`/`loadPlurals` plus the const `fncs` rule primitives). The
+formatter loads its rules with `loadPlurals(locale)` and calls
+`getPluralCategory(rules, n)`; the template-choice logic (`_formatChoice`) stays
+in `ilib_durationfmt.dart`.
 
 Duration templates are choice strings: `"limit1#string1|limit2#string2|..."`.
 - `|` splits choices; the first `#` splits `limit` from `string`.
@@ -226,8 +227,8 @@ Coverage exercised by the ported tests:
 ## Important notes
 
 1. `ilib.data.plurals` is the source of truth for plural selection — do not
-   hardcode English rules; the `n==1?'one':'other'` path is only a last-resort
-   fallback when a locale ships no plural tree.
+   hardcode English rules; `pluralsDefault` (`one` = `i == 1 and v == 0`) is only
+   a last-resort fallback when a locale ships no plural tree.
 2. Clock hours are munged **after** DateFmt construction (default-clock template
    with `replaceFirst hh?→H`), **not** by selecting the `'24'` clock section
    (which is padded in some locales). This mirrors JS. See Step 3.
@@ -240,8 +241,9 @@ Coverage exercised by the ported tests:
 
 ## References
 
-- JS source: `iLib/js/lib/DurationFmt.js`, `iLib/js/lib/IString.js` (`formatChoice`,
-  `_fncs`, `loadPlurals`)
+- JS source: `iLib/js/lib/DurationFmt.js`, `iLib/js/lib/IString.js` (`formatChoice`;
+  `IStringFmt.js` on `development`), `iLib/js/lib/PluralUtils.js` (`_fncs`,
+  `loadPlurals`, `plurals_default`; `development`, post-v15.0.0)
 - Dart source: `lib/ilib_durationfmt.dart`
 - Reused: `lib/ilib_datefmt.dart`, `lib/ilib_scriptinfo.dart`, `lib/ilib_localeinfo.dart`
 - Locale data: `assets/locale/*` (`ilib.data.sysres`, `ilib.data.plurals`,

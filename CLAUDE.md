@@ -12,8 +12,11 @@ point-in-time/public spots listed below).
 - **iLib JS source**: **v15.0.0** — all `lib/` Dart code and `test/` cases were converted
   from the iLib JS at this tag (`js/lib/` and `js/test/` of github.com/iLib-js/iLib;
   `git checkout v15.0.0`).
+  - **Exception**: `lib/internal/plural_utils.dart` (+ `test/internal/plural_utils_test.dart`)
+    tracks `js/lib/PluralUtils.js` / `js/test/root/testpluralutils.js` from iLib
+    `development` (post-v15.0.0; the module was split out of `IString.js` after the tag).
 - **CLDR data**: **48.2** — the bundled `assets/locale/` JSON (144 locales) was generated from
-  iLib v15.0.0, which incorporates CLDR 46.
+  iLib v15.0.0, which incorporates CLDR 48.2.
 - When updating to a newer iLib/CLDR: bump the JS source and the generated locale data
   **together** (a JS-only or data-only bump will diverge), then re-run the converted tests
   against the new JS expectations.
@@ -136,7 +139,7 @@ lib/
 └── internal/
     ├── ilib_utils.dart         # pure stateless helpers: normalizeLocale(), getJSONDataPaths(), isValidLocale(), getSupportedLocales()
     ├── locale_state.dart       # flutter_ilib's library-wide default locale: _currentLocale + currentLocale/getLocale()/setLocale() (owner of the global locale state)
-    ├── plural_utils.dart       # getPluralCategory() — CLDR plural-rule eval (used by ILibDurationFmt)
+    ├── plural_utils.dart       # 1:1 port of iLib PluralUtils.js — getPluralCategory()/loadPlurals() (used by ILibDurationFmt)
     ├── math_utils.dart         # rounding helpers (used by ILibNumFmt)
     └── logger/                 # internal logging (LogAdapter + package:logging); not part of the conversion
 ```

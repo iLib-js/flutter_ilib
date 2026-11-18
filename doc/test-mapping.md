@@ -204,11 +204,9 @@ These tests have no JS counterpart. They verify the Flutter plugin initializatio
 | `test/basic/flutter_ilib_datefmt_test.dart` | — | DateFmt basic behavior check |
 | `test/basic/flutter_ilib_localeinfo_test.dart` | — | LocaleInfo basic behavior check |
 
-## Internal Tests (flutter_ilib-specific)
+## Internal Tests
 
-These cover `lib/internal/` helpers. Most have no direct JS test counterpart;
-the plural engine mirrors upstream `js/lib/PluralUtils.js` (iLib `development`,
-post-v15.0.0) and its `js/test/root/testpluralutils.js` is ported 1:1.
+Tests for `lib/internal/` helpers.
 
 | Dart Test File | iLib JS Source File | Notes |
 |---|---|---|
