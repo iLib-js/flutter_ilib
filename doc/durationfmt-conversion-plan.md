@@ -241,9 +241,9 @@ Coverage exercised by the ported tests:
 
 ## References
 
-- JS source: `iLib/js/lib/DurationFmt.js`, `iLib/js/lib/IString.js` (`formatChoice`;
-  `IStringFmt.js` on `development`), `iLib/js/lib/PluralUtils.js` (`_fncs`,
-  `loadPlurals`, `plurals_default`; `development`, post-v15.0.0)
+- JS source: `iLib/js/lib/DurationFmt.js`, `iLib/js/lib/IString.js` (`formatChoice`
+  → `_formatChoice`; v15.0.0), `iLib/js/lib/PluralUtils.js` (`_fncs`, `loadPlurals`,
+  `plurals_default`; `development`, post-v15.0.0)
 - Dart source: `lib/ilib_durationfmt.dart`
 - Reused: `lib/ilib_datefmt.dart`, `lib/ilib_scriptinfo.dart`, `lib/ilib_localeinfo.dart`
 - Locale data: `assets/locale/*` (`ilib.data.sysres`, `ilib.data.plurals`,
