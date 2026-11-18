@@ -1,186 +1,361 @@
 // CLDR plural-rule evaluation (`ilib.data.plurals`).
 //
-// Selects the plural category (`one`, `two`, `few`, `many`, `other`, ...) for
-// a given number. The rule tree is the parsed CLDR form used by iLib: each
-// category maps to a boolean expression over the CLDR plural operands, built
-// from nested `and`/`or`/`eq`/`neq`/`is`/`isnot`/`inrange`/`within`/`notin`/
-// `mod` nodes. The bundled iLib v14.22.0 data only uses
-// `and`/`or`/`eq`/`neq`/`mod`, but the full operator set is supported so
-// future locale data (or the legacy CLDR `n is 1` / `n within 2..4` forms)
-// evaluates correctly.
+// Port of iLib `js/lib/PluralUtils.js` (development, post-v15.0.0: the module
+// extracted from IString.js plus its plural-rule evaluation fixes). The rule
+// tree is the parsed CLDR form used by iLib: each category maps to a boolean
+// expression over the CLDR plural operands, built from nested
+// `and`/`or`/`eq`/`neq`/`is`/`isnot`/`inrange`/`within`/`notin`/`mod` nodes.
+//
+// [PluralFncs] mirrors `PluralUtils._fncs` one-to-one (JS `is` is a Dart
+// keyword, so it is [PluralFncs.isOp]; JS `fn` is [fncs]), including the JS quirks of the
+// fallback evaluator, so results match iLib's non-Intl plural path.
 
 /// @nodoc
 library;
 
+import '../ilib_init.dart';
+import 'locale_state.dart';
+
+/// The built-in English rule (`one` when `i == 1 and v == 0`), used when a
+/// locale has no plural data.
+const Map<String, dynamic> pluralsDefault = <String, dynamic>{
+  'one': <String, dynamic>{
+    'and': <dynamic>[
+      <String, dynamic>{
+        'eq': <dynamic>['i', 1],
+      },
+      <String, dynamic>{
+        'eq': <dynamic>['v', 0],
+      },
+    ],
+  },
+};
+
+/// The plural rules (`ilib.data.plurals`) of [locale] (default: the current
+/// library locale), or [pluralsDefault] when the locale is not loaded or has
+/// no plural data.
+Map<String, dynamic> loadPlurals([String? locale]) {
+  final Map<String, dynamic>? data =
+      ILibLoader.instance.getLocaleData(locale ?? currentLocale);
+  return (data?['ilib.data.plurals'] as Map<String, dynamic>?) ??
+      pluralsDefault;
+}
+
 /// Returns the CLDR plural class for [n] using [rules].
 ///
-/// Falls back to the English rule (`one` for 1, else `other`) when [rules] is
-/// empty.
+/// Falls back to [pluralsDefault] when [rules] is empty.
 String getPluralCategory(Map<String, dynamic> rules, num n) {
-  if (rules.isEmpty) {
-    return n == 1 ? 'one' : 'other';
-  }
-  final Map<String, num> ops = _operands(n);
-  for (final MapEntry<String, dynamic> entry in rules.entries) {
-    final String cls = entry.key;
-    if (cls == 'other') {
+  final Map<String, dynamic> ruleset = rules.isEmpty ? pluralsDefault : rules;
+  final Map<String, num> ops = fncs.calculateNumberDigits(n);
+  for (final MapEntry<String, dynamic> entry in ruleset.entries) {
+    if (entry.key == 'other') {
       continue;
     }
-    final dynamic rule = entry.value;
-    if (rule is String && rule.isEmpty) {
-      continue;
-    }
-    if (_evalRule(rule, ops)) {
-      return cls;
+    if (_truthy(fncs.getValue(entry.value, ops))) {
+      return entry.key;
     }
   }
   return 'other';
 }
 
-/// Compute CLDR plural operand values for [n].
-/// n=absolute value, i=integer part, v=visible fraction digits,
-/// f=visible fraction digits as integer, c/e=base-10 exponent.
-Map<String, num> _operands(num n) {
-  final double abs = n.abs().toDouble();
-  final int i = abs.truncate();
-  final String str = abs.toString();
-  final int dotIdx = str.indexOf('.');
-  final String fracStr = dotIdx >= 0 ? str.substring(dotIdx + 1) : '';
-  final int v = fracStr == '0' ? 0 : fracStr.length;
-  final int f = v > 0 ? int.parse(fracStr) : 0;
-  // c/e are the base-10 exponent read from the exponential form (0 when
-  // there is none).
-  final String exp = abs.toStringAsExponential();
-  final int eIdx = exp.indexOf('e');
-  final int c = eIdx >= 0 ? int.parse(exp.substring(eIdx + 1)).abs() : 0;
-  return <String, num>{
-    'n': abs,
-    'i': i,
-    'v': v,
-    'f': f,
-    'w': v,
-    't': f,
-    'c': c,
-    'e': c,
-  };
-}
+/// The shared [PluralFncs] instance (JS `PluralUtils._fncs`).
+const PluralFncs fncs = PluralFncs._();
 
-dynamic _evalOperand(dynamic expr, Map<String, num> ops) {
-  if (expr is String) {
-    return ops[expr] ?? 0;
-  }
-  if (expr is num) {
-    return expr;
-  }
-  if (expr is Map<String, dynamic>) {
-    final String op = expr.keys.first;
-    final dynamic args = expr[op];
-    if (op == 'mod') {
-      final List<dynamic> a = args as List<dynamic>;
-      final num left = (_evalOperand(a[0], ops) as num).toDouble();
-      final num right = (_evalOperand(a[1], ops) as num).toDouble();
-      return left % right;
-    }
-  }
-  return 0;
-}
-
-/// [range] is a list whose elements are either a `[start, end]` pair or a
-/// bare number. Returns true if [n] equals one of the bare numbers or falls
-/// within any pair.
-bool _matchRange(num n, List<dynamic> range) {
-  for (final dynamic entry in range) {
-    if (entry is List<dynamic>) {
-      final double s = (entry[0] as num).toDouble();
-      final double e = (entry[1] as num).toDouble();
-      if (n >= s && n <= e) {
-        return true;
-      }
-    } else if (entry is num) {
-      if (n == entry.toDouble()) {
-        return true;
-      }
-    }
-  }
-  return false;
-}
-
-bool _evalRule(dynamic rule, Map<String, num> ops) {
-  if (rule == null) {
+/// JS truthiness of a rule-evaluation result.
+bool _truthy(dynamic v) {
+  if (v == null || v == false) {
     return false;
   }
-  if (rule is String) {
-    return true;
+  if (v is num) {
+    return v != 0 && !v.isNaN;
   }
-  if (rule is Map<String, dynamic>) {
-    final String op = rule.keys.first;
-    final dynamic args = rule[op];
-    switch (op) {
-      case 'and':
-        final List<dynamic> conditions = args as List<dynamic>;
-        for (final dynamic c in conditions) {
-          if (!_evalRule(c, ops)) {
-            return false;
-          }
+  if (v is String) {
+    return v.isNotEmpty;
+  }
+  return true;
+}
+
+/// JS `typeof(x) === 'object'` for decoded JSON (excluding null).
+bool _isObject(dynamic v) => v is Map || v is List;
+
+/// JS `obj[index]` on a list: undefined (null) when out of range.
+dynamic _at(dynamic obj, int index) {
+  if (obj is List && index < obj.length) {
+    return obj[index];
+  }
+  return null;
+}
+
+/// JS `parseInt(str, 10)`: the leading integer of [str], or null.
+num? _parseIntPrefix(String str) {
+  final Match? m = RegExp(r'^[+-]?\d+').firstMatch(str.trim());
+  return m == null ? null : num.parse(m.group(0)!);
+}
+
+/// The rule primitives of iLib `PluralUtils._fncs`; use the [fncs] instance.
+class PluralFncs {
+  const PluralFncs._();
+
+  /// The name of the rule at the top of [obj]: `inrange` for a list, the first
+  /// key with a truthy value for a map, otherwise null.
+  String? firstPropRule(dynamic obj) {
+    if (obj is List) {
+      return 'inrange';
+    } else if (obj is Map) {
+      for (final MapEntry<dynamic, dynamic> e in obj.entries) {
+        final dynamic p = e.key;
+        if (p is String && p.isNotEmpty && _truthy(e.value)) {
+          return p;
         }
-        return true;
-      case 'or':
-        final List<dynamic> conditions = args as List<dynamic>;
-        for (final dynamic c in conditions) {
-          if (_evalRule(c, ops)) {
-            return true;
-          }
-        }
-        return false;
-      case 'eq':
-      case 'neq':
-        final List<dynamic> a = args as List<dynamic>;
-        final num lhs = (_evalOperand(a[0], ops) as num).toDouble();
-        final dynamic rhs = a[1];
-        bool eq;
-        if (rhs is List<dynamic>) {
-          if (rhs.length == 2 && rhs[0] is num && rhs[1] is num) {
-            // flat [start, end] range — the only list shape the bundled data
-            // emits for `eq`/`neq` (e.g. `{"eq": ["i", [2, 4]]}`).
-            final double start = (rhs[0] as num).toDouble();
-            final double end = (rhs[1] as num).toDouble();
-            eq = lhs >= start && lhs <= end;
-          } else {
-            // Set of scalars and/or nested `[[start, end], ...]` ranges. Not
-            // used by any bundled locale, but a list rhs is routed through
-            // matchRange here (guards against a cast crash on future
-            // nested-range data).
-            eq = _matchRange(lhs, rhs);
-          }
-        } else {
-          eq = lhs == (rhs as num).toDouble();
-        }
-        return op == 'eq' ? eq : !eq;
+      }
+    }
+    return null;
+  }
+
+  /// Evaluate [obj] (a rule, an operand name or a literal) against [n] (an
+  /// operand map from [calculateNumberDigits], or a plain number).
+  dynamic getValue(dynamic obj, dynamic n) {
+    if (_isObject(obj)) {
+      final String? subrule = firstPropRule(obj);
+      return subrule == 'inrange'
+          ? inrange(obj, n)
+          : _dispatch(subrule, (obj as Map<dynamic, dynamic>)[subrule], n);
+    } else if (obj is String) {
+      return n is Map ? n[obj] : n;
+    }
+    return obj;
+  }
+
+  dynamic _dispatch(String? name, dynamic rule, dynamic n) {
+    switch (name) {
       case 'is':
+        return isOp(rule, n);
       case 'isnot':
-        // args = [left, right]. Scalar equality of two operand values (the
-        // legacy CLDR `n is 1` form; unlike `eq`, the right side is never a
-        // range).
-        final List<dynamic> a = args as List<dynamic>;
-        final num lhs = (_evalOperand(a[0], ops) as num).toDouble();
-        final num rhs = (_evalOperand(a[1], ops) as num).toDouble();
-        final bool eq = lhs == rhs;
-        return op == 'is' ? eq : !eq;
+        return isnot(rule, n);
       case 'inrange':
+        return inrange(rule, n);
       case 'notin':
+        return notin(rule, n);
       case 'within':
-        // args = [operand, rangeList]. rangeList is a list whose elements are
-        // either a [start, end] pair or a bare number; matches if the operand
-        // value falls in any of them. In iLib v14.22.0 `matchRange` and
-        // `matchRangeContinuous` are identical, so `inrange`/`within` share
-        // one matcher (`notin` is its negation).
-        final List<dynamic> args2 = args as List<dynamic>;
-        final num val = (_evalOperand(args2[0], ops) as num).toDouble();
-        final bool inRange = _matchRange(val, args2[1] as List<dynamic>);
-        return op == 'notin' ? !inRange : inRange;
+        return within(rule, n);
+      case 'mod':
+        return mod(rule, n);
+      case 'n':
+        return this.n(rule, n);
+      case 'or':
+        return or(rule, n);
+      case 'and':
+        return and(rule, n);
+      case 'eq':
+        return eq(rule, n);
+      case 'neq':
+        return neq(rule, n);
       default:
-        return false;
+        return null;
     }
   }
-  return false;
+
+  /// Test whether [n] falls within a CLDR range list. Nested `[lo, hi]`
+  /// entries are continuous ranges; top-level numbers are single values,
+  /// except that a list of exactly two numbers is the range `lo..hi` (so
+  /// `[2,4]` is 2..4 while `[11,71,91]` is the set {11,71,91}).
+  bool matchRangeContinuous(dynamic n, dynamic range) {
+    if (range is! List) {
+      return false;
+    }
+    int topNums = 0;
+    bool hasNested = false;
+    for (final dynamic r in range) {
+      if (r is num) {
+        topNums++;
+      } else if (r is List) {
+        hasNested = true;
+      }
+    }
+    final bool pairIsRange = topNums == 2 && !hasNested;
+    if (n is! num) {
+      return false;
+    }
+    for (final dynamic obj in range) {
+      if (obj is num) {
+        if (n == obj) {
+          return true;
+        }
+        if (pairIsRange && n >= (range[0] as num) && n <= (range[1] as num)) {
+          return true;
+        }
+      } else if (obj is List) {
+        if (n >= (obj[0] as num) && n <= (obj[1] as num)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  /// Compute the CLDR plural operands (n, i, v, w, f, t, c, e) for [number].
+  ///
+  /// Mirrors the JS number-to-string behavior: an integral value has no
+  /// fraction operands, w/t equal v/f (no trailing zeros survive), and c/e
+  /// are the signed base-10 exponent.
+  Map<String, num> calculateNumberDigits(num number) {
+    final num abs = number.abs();
+
+    final String expStr = abs.toStringAsExponential();
+    final int expIdx = expStr.indexOf('e');
+    final int exp = expIdx != -1 ? int.parse(expStr.substring(expIdx + 1)) : 0;
+
+    final bool integral =
+        abs is int || (abs.isFinite && abs == abs.truncateToDouble());
+    final String str = abs.toString();
+    final int dotIdx = str.indexOf('.');
+
+    if (integral || dotIdx == -1) {
+      return <String, num>{
+        'c': exp,
+        'e': exp,
+        'n': abs,
+        'i': abs,
+        'v': 0,
+        'w': 0,
+        'f': 0,
+        't': 0,
+      };
+    }
+
+    final String decStr = str.substring(dotIdx + 1);
+    final num frac = _parseIntPrefix(decStr) ?? double.nan;
+    return <String, num>{
+      'c': exp,
+      'e': exp,
+      'n': abs,
+      'i': _parseIntPrefix(str.substring(0, dotIdx)) ?? double.nan,
+      'v': decStr.length,
+      'w': decStr.length,
+      'f': frac,
+      't': frac,
+    };
+  }
+
+  /// JS `is`: both sides evaluate to the same value.
+  bool isOp(dynamic rule, dynamic n) {
+    return getValue(_at(rule, 0), n) == getValue(_at(rule, 1), n);
+  }
+
+  bool isnot(dynamic rule, dynamic n) {
+    return getValue(_at(rule, 0), n) != getValue(_at(rule, 1), n);
+  }
+
+  bool inrange(dynamic rule, dynamic n) {
+    final dynamic first = _at(rule, 0);
+    if (first is num || first is List) {
+      // the whole rule is a range list (e.g. [2,4] or [[3,4],9])
+      return matchRangeContinuous(n is Map ? n['n'] : n, rule);
+    } else if (rule is Map) {
+      final String? subrule = firstPropRule(rule);
+      return _dispatch(subrule, rule[subrule], n) == true;
+    }
+    // [operand, range] pair (e.g. [{mod:[n,100]}, [3,10]])
+    return matchRangeContinuous(getValue(first, n), _at(rule, 1));
+  }
+
+  bool notin(dynamic rule, dynamic n) {
+    return !matchRangeContinuous(getValue(_at(rule, 0), n), _at(rule, 1));
+  }
+
+  bool within(dynamic rule, dynamic n) {
+    return matchRangeContinuous(getValue(_at(rule, 0), n), _at(rule, 1));
+  }
+
+  /// iLib `MathUtils.mod`: 0 for a zero modulus, otherwise the remainder
+  /// shifted to be non-negative.
+  num? mod(dynamic rule, dynamic n) {
+    final dynamic dividend = getValue(_at(rule, 0), n);
+    final dynamic modulus = getValue(_at(rule, 1), n);
+    if (dividend is! num || modulus is! num) {
+      return double.nan;
+    }
+    if (modulus == 0) {
+      return 0;
+    }
+    final num x = dividend.remainder(modulus);
+    return x < 0 ? x + modulus : x;
+  }
+
+  dynamic n(dynamic rule, dynamic n) {
+    return n;
+  }
+
+  bool or(dynamic rule, dynamic n) {
+    if (rule is List) {
+      for (final dynamic r in rule) {
+        if (_truthy(getValue(r, n))) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  bool and(dynamic rule, dynamic n) {
+    if (rule is List) {
+      for (final dynamic r in rule) {
+        if (!_truthy(getValue(r, n))) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  bool eq(dynamic rule, dynamic n) {
+    final dynamic left = _at(rule, 0);
+    final dynamic right = _at(rule, 1);
+    final dynamic valueLeft = getValue(left, n);
+    dynamic valueRight;
+
+    if (left is String) {
+      if (n is Map) {
+        valueRight = n[left];
+        if (right is num ||
+            (_isObject(right) && firstPropRule(right) == 'inrange')) {
+          valueRight = getValue(right, n);
+        }
+      }
+    } else {
+      valueRight = firstPropRule(right) == 'inrange'
+          ? getValue(right, valueLeft)
+          : getValue(right, n);
+    }
+    return valueRight is bool ? valueRight : valueLeft == valueRight;
+  }
+
+  bool neq(dynamic rule, dynamic n) {
+    final dynamic left = _at(rule, 0);
+    final dynamic right = _at(rule, 1);
+    final dynamic valueLeft = getValue(left, n);
+    dynamic valueRight;
+
+    if (left is String) {
+      if (n is Map) {
+        valueRight = n[left];
+        if (right is num) {
+          valueRight = getValue(right, n);
+        } else if (_isObject(right)) {
+          final dynamic leftRange = _at(right, 0);
+          final dynamic rightRange = _at(right, 1);
+          if (leftRange is num && rightRange is num) {
+            return !(valueLeft is num &&
+                valueLeft >= leftRange &&
+                valueLeft <= rightRange);
+          }
+        }
+      }
+    } else {
+      valueRight = firstPropRule(right) == 'inrange'
+          ? getValue(right, valueLeft)
+          : getValue(right, n);
+    }
+    return valueRight is bool ? !valueRight : valueLeft != valueRight;
+  }
 }

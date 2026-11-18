@@ -204,17 +204,17 @@ These tests have no JS counterpart. They verify the Flutter plugin initializatio
 | `test/basic/flutter_ilib_datefmt_test.dart` | — | DateFmt basic behavior check |
 | `test/basic/flutter_ilib_localeinfo_test.dart` | — | LocaleInfo basic behavior check |
 
-## Internal Tests (flutter_ilib-specific)
+## Internal Tests
 
-These cover `lib/internal/` helpers and have no direct JS test counterpart
-(the plural engine is exercised indirectly in JS via `IString.formatChoice`).
+Tests for `lib/internal/` helpers.
 
 | Dart Test File | iLib JS Source File | Notes |
 |---|---|---|
 | `test/internal/math_utils_test.dart` | `js/test/testutils.js` | Math utils tests extracted from the `math_utils` section |
 | `test/internal/utils_test.dart` | — | Internal pure-helper tests (`isValidLocale`, `getJSONDataPaths`, `normalizeLocale`) |
 | `test/internal/locale_state_test.dart` | — | Library-wide `currentLocale` state (get/set + normalization) |
-| `test/internal/plural_test.dart` | — | CLDR plural-rule engine (`getPluralCategory`) |
+| `test/internal/plural_utils_test.dart` | `js/test/root/testpluralutils.js` | 1:1 port (iLib `development`, post-v15.0.0): `PluralFncs` primitives, operands, range-list forms, `loadPlurals` |
+| `test/internal/plural_utils_extra_test.dart` | — | Dart-only: `getPluralCategory` over bundled-locale rule trees + synthetic operator trees (expected values checked against upstream `PluralUtils.js`) |
 
 ## Currency Tests
 

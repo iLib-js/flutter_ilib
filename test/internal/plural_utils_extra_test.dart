@@ -1,4 +1,5 @@
-// Unit tests for getPluralCategory (lib/internal/plural_utils.dart).
+// Dart-only unit tests for getPluralCategory (lib/internal/plural_utils.dart);
+// the 1:1 port of js/test/root/testpluralutils.js is plural_utils_test.dart.
 //
 // Each rule tree below is the exact parsed CLDR form bundled in
 // assets/locale/{lang}.json (`ilib.data.plurals`). Locales chosen to cover
@@ -15,7 +16,7 @@ Map<String, dynamic> _rules(String json) =>
     jsonDecode(json) as Map<String, dynamic>;
 
 void main() {
-  debugPrint('Testing [plural_test.dart] file.');
+  debugPrint('Testing [plural_utils_extra_test.dart] file.');
   // en: `one` = i == 1 and v == 0; everything else `other`.
   final Map<String, dynamic> en = _rules(
     '{"one":{"and":[{"eq":["i",1]},{"eq":["v",0]}]}}',
@@ -58,28 +59,17 @@ void main() {
   );
 
   // Expected plural categories per CLDR rules for each locale.
+  // The en/ru trees equal plural_utils_test.dart's `pluralsDefault`/
+  // `pluralsRu`; values already covered there are omitted here.
   final Map<String, Map<num, String>> expected = <String, Map<num, String>>{
     'en': <num, String>{
-      0: 'other',
-      1: 'one',
-      2: 'other',
       5: 'other',
       11: 'other',
-      1.5: 'other',
     },
     'ru': <num, String>{
       0: 'many',
-      1: 'one',
-      2: 'few',
-      3: 'few',
-      5: 'many',
       10: 'many',
-      11: 'many',
-      21: 'one',
-      22: 'few',
       25: 'many',
-      100: 'many',
-      101: 'one',
       1000000: 'many',
       0.5: 'other',
       2.0: 'few',
@@ -200,10 +190,9 @@ void main() {
   });
 
   // `is`/`isnot`/`within` are the legacy CLDR operators (`n is 1`,
-  // `n within 2..4`). No bundled iLib v14.22.0 locale emits them — the data
-  // uses `eq`/`neq`/`inrange` instead — but the engine ports them from
-  // IString.js so future/legacy data evaluates. These synthetic trees exercise
-  // the branches directly.
+  // `n within 2..4`). No bundled locale emits them — the data uses `eq`/`neq`
+  // instead — but the engine ports them from PluralUtils.js so future/legacy
+  // data evaluates. These synthetic trees exercise the branches directly.
   group('getPluralCategory is/isnot/within (synthetic trees)', () {
     // `is` = scalar equality (never a range), unlike `eq`.
     final Map<String, dynamic> isTree = _rules(
@@ -238,8 +227,9 @@ void main() {
       });
     }
 
-    // `within` shares the range matcher with `inrange` (identical in
-    // v14.22.0). Nested [[start,end]] range list.
+    // `within` tests an [operand, rangeList] pair with the same matcher as
+    // `inrange`'s pair form (`inrange` additionally accepts a bare range list
+    // as the whole rule). Nested [[start,end]] range list.
     final Map<String, dynamic> withinTree = _rules(
       '{"few":{"within":[{"mod":["n",100]},[[3,10]]]}}',
     );
@@ -257,11 +247,11 @@ void main() {
     }
   });
 
-  // `eq`/`neq` with a list rhs that is NOT a flat [start, end] pair routes
-  // through the range matcher: a scalar set (3+ elements) or a nested
-  // [[start, end], ...] range list. No bundled v14.22.0 locale emits these
-  // shapes, but the engine delegates to `_matchRange` to mirror JS and guard
-  // against a cast crash on future data. Exercise both branches directly.
+  // `eq`/`neq` with a list rhs that is NOT a flat [start, end] pair: a scalar
+  // set (3+ elements) or a nested [[start, end], ...] range list. No bundled
+  // locale emits these shapes. Expected values are those of upstream
+  // PluralUtils.js (run in node): `eq` treats a 3+ list as a set, while `neq`
+  // with a string operand reads the first two values as a range.
   group('getPluralCategory eq/neq list rhs (synthetic trees)', () {
     // Scalar set of 3 values — length != 2, so not a flat range.
     final Map<String, dynamic> setTree = _rules(
@@ -298,7 +288,8 @@ void main() {
       });
     }
 
-    // `neq` = negation of the same set match.
+    // `neq` with a string operand: JS checks only the first two values as
+    // the range 2..4 (asymmetric with `eq`), so 3 is in it and 6 is not.
     final Map<String, dynamic> neqTree = _rules(
       '{"most":{"neq":["n",[2,4,6]]}}',
     );
@@ -306,7 +297,8 @@ void main() {
       2: 'other',
       4: 'other',
       1: 'most',
-      3: 'most',
+      3: 'other',
+      6: 'most',
     };
     for (final MapEntry<num, String> c in neqExpected.entries) {
       test('neq set: ${c.key} => ${c.value}', () {

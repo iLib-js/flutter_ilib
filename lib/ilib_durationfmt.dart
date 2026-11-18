@@ -53,9 +53,7 @@ class ILibDurationFmt {
     final Map<String, dynamic> sysres =
         (localeData?['ilib.data.sysres'] as Map<String, dynamic>?) ??
             <String, dynamic>{};
-    _pluralRules =
-        (localeData?['ilib.data.plurals'] as Map<String, dynamic>?) ??
-            <String, dynamic>{};
+    _pluralRules = plural_utils.loadPlurals(_locale);
 
     _components = _buildComponents(sysres, _length);
 
