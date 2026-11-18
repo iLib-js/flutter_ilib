@@ -1,3 +1,8 @@
+## 2.0.1
+* Sync the internal plural-rule engine with iLib's `PluralUtils.js` (post-v15.0.0),
+  picking up its rule-evaluation fixes. `ILibDurationFmt` plural selection may differ
+  for fractional values (e.g. values below 1 in es/fr/it/pt now select `many`).
+
 ## 2.0.0
 * The 2.0.0 pure-Dart rewrite of flutter_ilib.
 * Remove the `flutter_js` JavaScript interop entirely. flutter_ilib is now a pure-Dart
